@@ -21,6 +21,7 @@ import nemo from './views/nemo.vue';
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/lifeCasino">人生賭場</RouterLink>
       </nav>
     </div>
   </header>
