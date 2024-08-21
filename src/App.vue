@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import lifeCasino from './views/lifeCasino.vue';
+import Wennie from './views/Wennie.vue';
 </script>
 
 <template>
@@ -10,6 +11,8 @@ import lifeCasino from './views/lifeCasino.vue';
 
     <lifeCasino></lifeCasino>
     
+    
+    <Wennie></Wennie>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
