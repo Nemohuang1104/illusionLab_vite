@@ -9,6 +9,11 @@ import nemo from './views/nemo.vue';
 <template>
   <header>
     <nemo></nemo>
+
+      <RouterLink to="/nemo">nemo</RouterLink>
+   
+    
+
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <lifeCasino></lifeCasino>
@@ -21,7 +26,9 @@ import nemo from './views/nemo.vue';
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        
       </nav>
+    
     </div>
   </header>
 
