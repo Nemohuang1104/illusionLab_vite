@@ -14,6 +14,7 @@ import Wennie from './views/Wennie.vue';
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/wennie">Wennie</RouterLink>
       </nav>
     </div>
   </header>
