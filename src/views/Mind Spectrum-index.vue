@@ -1,6 +1,7 @@
 <template>
     <div>
-        <p>mic 123 測試測試</p>
+        <h1>title</h1>
+
     </div>
 </template>
 
