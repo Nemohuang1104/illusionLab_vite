@@ -1,33 +1,30 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import lifeCasino from './views/lifeCasino.vue';
-import Wennie from './views/Wennie.vue';
-import nemo from './views/nemo.vue';
+// import HelloWorld from './components/HelloWorld.vue'
+// import lifeCasino from './views/lifeCasino.vue';
+// import Wennie from './views/Wennie.vue';
+// import nemo from './views/nemo.vue';
+import { ref } from 'vue';
+// import Header from './components/Header.vue';
+// 定義響應式的 logoSrc 變量
+// const logoSrc = ref(require('@/assets/logo.svg').default);
+
+import Header_1 from './components/Header_1.vue';
+
 </script>
 
 <template>
-  <header>
-    <nemo></nemo>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <lifeCasino></lifeCasino>
-    
-    
-    <Wennie></Wennie>
+ 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <Header_1></Header_1>
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/lifeCasino">人生賭場</RouterLink>
-        <RouterLink to="/wennie">Wennie</RouterLink>
+     
       </nav>
     </div>
-  </header>
 
-  <RouterView />
+
+
 </template>
 
 <style scoped>

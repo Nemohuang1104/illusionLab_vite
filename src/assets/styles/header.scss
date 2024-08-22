@@ -1,0 +1,23 @@
+// header.scss
+@import 'variables';
+
+.header {
+  height: $header-height;
+  color: $font-color;
+  
+  .logo img {
+    width: $logo-size;
+  }
+
+  nav ul li a {
+    color: $font-color;
+  }
+
+  &.shop-header {
+    background-color: $primary-color;
+  }
+
+  &.activity-header {
+    background-color: $secondary-color;
+  }
+}
