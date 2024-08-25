@@ -1,15 +1,15 @@
+
 <script setup>
-import Header_1 from './components/Header_1.vue';
+
+// import { onMounted, reactive, ref } from "@vue/runtime-core";
 </script>
 
 <template>
- 
-  <div>
-    <router-view></router-view>
-  </div>
+
+     <RouterView/>
+
+  
 </template>
-
-
 
 <style lang="scss" scoped>
 
