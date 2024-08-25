@@ -1,7 +1,18 @@
 <script setup>
 import Header_1 from '@/components/Header_1.vue';
 import Footer from '@/components/Footer.vue';
-import { ref } from 'vue';
+import ShoppingStep from '@/components/ShoppingStep.vue';
+import { ref, computed} from 'vue';
+
+const cartItems = ref([
+  { name: '繪本風格帆布袋', quantity: 1, price: 590 }
+]);
+
+const totalAmount = computed(() => {
+  return cartItems.value.reduce((total, item) => {
+    return total + item.quantity * item.price;
+  }, 0);
+});
 
 const shippingMethod = ref('');
 const formData = ref({
@@ -11,6 +22,48 @@ const formData = ref({
     store: ''
 });
 
+const acceptorData = ref({
+    name: '',
+    phone: '',
+    address: '',
+    store: ''
+});
+
+function prefillMemberInfo(event) {
+    if (event.target.checked) {
+        // 模擬從資料庫獲取會員資料
+        const memberData = {
+            name: '王小明',
+            phone: '0912345678',
+            address: '台北市信義區'
+        };
+
+        formData.value.name = memberData.name;
+        formData.value.phone = memberData.phone;
+        formData.value.address = memberData.address;
+    } else {
+        // 如果取消勾選，則清空資料
+        formData.value.name = '';
+        formData.value.phone = '';
+        formData.value.address = '';
+    }
+}
+
+function prefillOrdererInfo(e){
+    if(e.target.checked){
+        acceptorData.value.name = formData.value.name;
+        acceptorData.value.phone = formData.value.phone;
+        acceptorData.value.address  = formData.value.address;
+    }else{
+        // 如果取消勾選，則清空資料
+        acceptorData.value.name = '';
+        acceptorData.value.phone = '';
+        acceptorData.value.address = '';
+
+    }
+}
+
+
 </script>
 
 <template>
@@ -18,24 +71,8 @@ const formData = ref({
         <div><Header_1></Header_1></div>
 
         <!--購物車流程數字圖示_組件模板開始線-->
-        <div class="step">
-            <div class="step_item">
-                <div class="number">1</div>
-                <p>商品確認</p>
+        <div><ShoppingStep></ShoppingStep></div>
 
-            </div>
-            <div class="line"></div>
-            <div class="step_item">
-                <div class="number">2</div>
-                <p>付款資訊</p>
-                
-            </div>
-            <div class="line"></div>
-            <div class="step_item">
-                <div class="number">3</div>
-                <p>訂單確認</p>
-            </div>
-        </div>
         <!-- 購物車流程數字圖示_組件模板結束線 -->
 
         <div class="content">
@@ -46,7 +83,7 @@ const formData = ref({
                     <div class="inner0">
                         <p>訂購人資訊</p>
                         <label class="custom-checkbox">
-                            <input type="checkbox" />
+                            <input type="checkbox" @change="prefillMemberInfo"/>
                             <span class="checkmark"></span>
                             <span class="text">同會員資料</span>
                         </label>
@@ -55,7 +92,7 @@ const formData = ref({
                         <p>*姓名:</p>
                         <div class="code-input">
                         <div class="fill">
-                            <input type="text" />
+                            <input type="text" v-model="formData.name"/>
                         </div>
                         </div>
                     </div>
@@ -63,7 +100,7 @@ const formData = ref({
                         <p>*手機:</p>
                         <div class="code-input">
                         <div class="fill">
-                            <input type="text" />
+                            <input type="text" v-model="formData.phone"/>
                         </div>
                         </div>
                     </div>
@@ -71,7 +108,7 @@ const formData = ref({
                         <p>地址:</p>
                         <div class="code-input">
                         <div class="fill">
-                            <input type="text" />
+                            <input type="text" v-model="formData.address"/>
                         </div>
                         </div>
                     </div>
@@ -83,11 +120,23 @@ const formData = ref({
                                 <span class="checkmark"></span>
                                 <span class="text">宅配到府(運費 $100元)</span>
                             </label>
-                            <div v-if="shippingMethod === '宅配到府'" class="delivery-form">
-                                <p>收件人資訊：</p>
-                                <label>*姓名: <input type="text" v-model="formData.name" /></label>
-                                <label>*手機: <input type="text" v-model="formData.phone" /></label>
-                                <label>*地址: <input type="text" v-model="formData.address" /></label>
+                            <div v-if="shippingMethod === '宅配到府'&& shippingMethod !== '現場取貨'" class="delivery-form">
+                                <div class="member_info">
+                                    <span class="text">收件人資訊:</span>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" @change="prefillOrdererInfo"/>
+                                        <span class="checkmark"></span>
+                                        <span class="text">同訂購人資訊</span>
+                                    </label>
+                                </div>
+                                <br>
+                                <label>*姓名: <input type="text" v-model="acceptorData.name" /></label>
+                                <br>
+                                <br>
+                                <label>*手機: <input type="text" v-model="acceptorData.phone" /></label>
+                                <br>
+                                <br>
+                                <label>*地址: <input type="text" v-model="acceptorData.address" /></label>
                             </div>
                             
                             <label class="custom-checkbox">
@@ -95,14 +144,26 @@ const formData = ref({
                                 <span class="checkmark"></span>
                                 <span class="text">7-11取貨(運費 $60元)</span>
                             </label>
-                            <div v-if="shippingMethod === '7-11取貨'" class="pickup-form">
-                                <p>收件人資訊：</p>
-                                <label>選擇門市: <input type="text" v-model="formData.store" /></label>
-                                <label>*姓名: <input type="text" v-model="formData.name" /></label>
-                                <label>*手機: <input type="text" v-model="formData.phone" /></label>
+                            <div v-if="shippingMethod === '7-11取貨'&& shippingMethod !== '現場取貨' " class="pickup-form">
+                                <div class="member_info">
+                                    <span class="text">收件人資訊:</span>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" @change="prefillOrdererInfo"/>
+                                        <span class="checkmark"></span>
+                                        <span class="text">同訂購人資訊</span>
+                                    </label>
+                                </div>
+                                <br>
+                                <label class="store">選擇門市: <input type="text" v-model="formData.store" /></label>
+                                <br>
+                                <br>
+                                <label>*姓名: <input type="text" v-model="acceptorData.name" /></label>
+                                <br>
+                                <br>
+                                <label>*手機: <input type="text" v-model="acceptorData.phone" /></label>
                             </div>
                             <label class="custom-checkbox">
-                                <input type="radio" name="shipping" />
+                                <input type="radio" name="shipping" value="現場取貨" v-model="shippingMethod"/>
                                 <span class="checkmark"></span>
                                 <span class="text">現場取貨</span>
                             </label>
@@ -142,10 +203,10 @@ const formData = ref({
                 <div class="total">
                     <h2>商品明細</h2>
                     <hr>
-                    <div class="item">
+                    <div class="item" v-for="(item, index) in cartItems" :key="index">
                         <img src="../assets/images/product_ex.jpg" alt="">
                         <div class="item_content">
-                            <h3>繪本風格帆布袋</h3>
+                            <h3>{{ item.name }}</h3>
                             <div class="time">
                                     <div class="input">
                                         <select name="" id="">
@@ -157,9 +218,9 @@ const formData = ref({
                                         </select>
                                     </div>
                                     <div class="quantity-input">
-                                        <button class="quantity-button" id="minus6">-</button>
-                                        <input id="input6" type="text" value="1" min="1" max="10" />
-                                        <button class="quantity-button" id="plus6">+</button>
+                                        <button class="quantity-button" id="minus6" @click="item.quantity > 1 && item.quantity--">-</button>
+                                        <input  type="text" v-model="item.quantity" min="1" />
+                                        <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
                                     </div>
                             </div>
                             <i class="fa-regular fa-trash-can"></i>
@@ -171,7 +232,7 @@ const formData = ref({
                     <hr>
                     <div class="count">
                         <h3>商品金額</h3>
-                        <p>$590</p>
+                        <p>${{ totalAmount }}</p>
                     </div>
                     <div class="shipping-fee">
                         <h3>運費</h3>
@@ -184,7 +245,7 @@ const formData = ref({
                     <hr>
                     <div class="total-fee">
                         <h3>總金額</h3>
-                        <p>$650</p>
+                        <p>${{ totalAmount }}</p>
                     </div>
                 </div>
             </div>
@@ -207,61 +268,6 @@ const formData = ref({
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
 }
 
-// 購物車流程數字圖示_組件樣式開始線
-.step{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.line{
-    margin-top: 30.5px;
-    width: 100px;
-    height: 2.8px;
-    background-color: #fff;
-    
-}
-
-.step_item{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.step_item p{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.6rem;
-    color: var(--Color-6, #FFF);
-    font-family: "Noto Sans TC";
-}
-
-
-
-.number{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 2.8px solid var(--Color-6, #FFF);
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 1.6rem;
-    color: var(--Color-6, #FFF);
-    font-family: "Noto Sans TC";
-}
-
-// 我是購物車流程數字組件結束線
-
 .content{
     margin: 0 auto;
     margin-top: 20px;
@@ -274,7 +280,7 @@ const formData = ref({
 
 .order{
     width: 100%;
-    max-width:500px;
+    max-width:520px;
 }
 
 .order h2{
@@ -289,7 +295,7 @@ const formData = ref({
 .content-1{
     /* border: 1px solid red;  */
     width: 100%;
-    max-width: 800px;
+    max-width: 600px;
     padding: 40px 0;
     margin: 0 auto;
     /* display: flex; */
@@ -377,18 +383,19 @@ const formData = ref({
 
 .fill > input{
     /* border: 1px solid red; */
-    width: 100%;
+    width: 96%;
     height: 24px;
     background-color: rgba(255, 255, 0, 0);
     border: 1px solid #FFF;
     border-radius: 10px; 
     padding: 0 8px;
-    font-size: 20px;
+    font-size: 16px;
+    color: #FFF;
     transition: border-color 0.3s ease-in-out;
 }
 
 .fill > input:focus {
-    border-color: #B36243;
+    border-color: #FCB600;
     box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
     outline: none; /* 移除默認的黑框 */
 }
@@ -423,14 +430,15 @@ const formData = ref({
 
 .inner04 > p{
     font-size: 16px;
-    line-height: 1.6rem;
-    flex-basis: 35.1%;
+    line-height: 16px;
+    flex-basis: 20%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 }
 .form-check{
     display: flex;
     flex-direction: column;
+    flex-basis: 80%;
 }
 
 // 運送方式下拉式選單樣式開始
@@ -444,18 +452,56 @@ const formData = ref({
 
 /* 基本樣式 */
 .delivery-form, .pickup-form {
-  background-color: #000354;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+
+    background-color: #000354;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
-// input {
-//   margin: 10px 0;
-//   padding: 8px;
-//   border-radius: 5px;
-//   border: 1px solid #ccc;
-// }
+
+.delivery-form > label{
+    margin-bottom: 28px;
+}
+
+.member_info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pickup-form > label{
+    margin-bottom: 28px;
+}
+
+.delivery-form input, .pickup-form input {
+    width: 82%;
+    height: 24px;
+    background-color: #fff(255, 255, 0, 0);
+    border: 1px solid #FFF;
+    border-radius: 10px; 
+    padding: 0 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.delivery-form input:focus {
+    border-color: #FCB600;
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
+    outline: none; /* 移除默認的黑框 */
+}
+
+.pickup-form input:focus {
+    border-color: #FCB600;
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
+    outline: none; /* 移除默認的黑框 */
+}
+
+.store > input{
+    width: 76%;
+    background-color: #FCB600;
+    border: 1px solid #FCB600;
+}
 
 // 運送方式下拉式選單樣式結束
 
@@ -469,7 +515,7 @@ const formData = ref({
 }
 .inner05 > p{
     font-size: 16px;
-    line-height: 1.6rem;
+    line-height: 16px;
     flex-basis: 20%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
@@ -484,7 +530,7 @@ const formData = ref({
 
 .checkmark{
     font-size: 16px;
-    line-height: 1.6rem;
+    line-height: 16px;
     flex-basis: 20%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
@@ -493,12 +539,15 @@ const formData = ref({
 .custom-checkbox{
     display: flex;
     margin-bottom: 16px;
+   
+    
     
 }
 
 .custom-checkbox .text{
+    vertical-align: auto;
     font-size: 16px;
-    line-height: 1.6rem;
+    line-height: 16px;
     flex-basis: 20%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
