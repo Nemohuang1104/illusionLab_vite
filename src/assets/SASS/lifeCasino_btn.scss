@@ -1,0 +1,10 @@
+.activity_btn{
+    border: double 4px transparent;
+    background-image: 
+    linear-gradient(to right,rgba(0, 0, 0, 0.36) 0%, rgba(0, 0, 0, 0.36) 100%), 
+    linear-gradient(to right, #E6BC38 0%, #FFE880 50%, #E9C54E 70%, #FAE684 84%, #C59B36 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    text-align: center;
+    line-height: 30px
+}
