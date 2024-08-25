@@ -49,6 +49,7 @@
     font-family: "Noto Sans TC";
     border-right: 1px solid #FFF;
     padding: 0 4px;
+    cursor: pointer;
     
 }
 
