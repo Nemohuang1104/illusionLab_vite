@@ -1,14 +1,24 @@
-import './assets/main.css'
+// import { createApp } from "vue"
+// // import "./style.sass"
+// import App from "./App.vue"
+// import router from '@/router/index.js'
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+// createApp(App).use(router).mount("#app")
 
-import App from './App.vue'
-import router from './router'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import "@/assets/css/reset.css"
+// ============fontawsome==================
+//參考網址: https://reurl.cc/4dQ4gD
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// ---以下新增---
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-const app = createApp(App)
+// ---libary也要加---//
+library.add(faChevronDown)
 
-app.use(createPinia())
-app.use(router)
 
-app.mount('#app')
+createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount("#app");
+
