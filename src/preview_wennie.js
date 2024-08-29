@@ -1,7 +1,25 @@
 import { createApp } from 'vue';
 import ShoppingCar3 from './views/ShoppingCar3.vue';
 import ShoppingCar2 from './views/ShoppingCar2.vue';
-import '@fortawesome/fontawesome-free/css/all.css' // 引入Font Awesome的CSS
+import MemberInfo from './views/MemberInfo.vue';
+import PasswordEdit from './views/PasswordEdit.vue';
+import OrderQuery from './views/OrderQuery.vue';
+import RefundQuery from './views/RefundQuery.vue';
+import MemberCenter from './views/MemberCenter.vue';
+import LoginCMS from './views/LoginCMS.vue';
+import MemberCMS from './views/MemberCMS.vue';
+import CenterCMS from './views/CenterCMS.vue';
 
-const app = createApp(ShoppingCar2);
-app.mount('#preview-app');
+/*使用路由preview*/
+// import previewrouter from "./router/preview_wennie_index";
+// const app = createApp(CenterCMS);
+// app.use(previewrouter).mount('#preview-app');
+
+
+import previewrouter from "./router/preview_wennie_index";
+const app = createApp(MemberCenter);
+app.use(previewrouter).mount('#preview-app');
+ 
+/*一般頁面preview*/
+// const app = createApp(ShoppingCar3);
+// app.mount('#preview-app');
