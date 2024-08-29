@@ -240,6 +240,20 @@ p{
     // scale: 1;
     // opacity: 1;
     transition: 1s;
+    animation: enter 1s forwards;
+  }
+
+  @keyframes enter{
+    0%{
+      opacity: 0;
+      transform: scale(1.5);
+
+    }
+    100%{
+      opacity: 1;
+      transform: scale(1);
+
+    }
   }
 
   .movie .bg .line{
@@ -340,11 +354,24 @@ p{
   .movie.step-2 .text{
     transform: scale(0.5);
     opacity: 0;
+    animation: out 1s forwards;
+  }
+
+  @keyframes out{
+    0%{
+      opacity: 1;
+      transform: scale(1);
+    }
+    100%{
+      opacity: 0;
+      transform: scale(1.5);
+    }
   }
 
   .movie.step-3 .text{
     transform: scale(0.5);
     opacity: 0;
+    animation: none;
   }
   .movie.step-2 .story,
   .movie.step-3 .story {

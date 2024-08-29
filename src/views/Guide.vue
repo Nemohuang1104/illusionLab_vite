@@ -2,16 +2,16 @@
 
     <div class="video-background-container">
         <video autoplay muted loop playsinline class="background-video">
-            <source src="../../public/video/smoke.mp4" type="video/mp4">
+            <source src="../assets/video/smoke.mp4" type="video/mp4">
         </video>
         <div class="content-overlay">
 
          <!-- Logo -->
-            <img src="../../public/images/lab_logo.png" alt="Logo" class="logo">
+            <img src="../assets/images/lab_logo.png" alt="Logo" class="logo">
       
       <!-- 按鈕 -->
             <div class="button-container">
-                <button class="btn font-btn"  @click="goToEnter">前台</button>
+                <button class="btn font-btn" @click="goToEnter" >前台</button>
                 <button class="btn back-btn" @click="goToBack">後台</button>
                 <!-- <img src="../../public/image/cloud.png" alt=""> -->
             </div>
@@ -20,16 +20,17 @@
     
 </template>
 
-<script >
-export default {
-  methods: {
-    goToEnter() {
-      this.$router.push('/enter');
-    },
-    goToBack() {
-      this.$router.push('/back');
-    }
-  }
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function goToEnter() {
+  router.push('/enter');
+}
+
+function goToBack() {
+  router.push('/back');
 }
 </script>
 
@@ -37,7 +38,7 @@ export default {
 
 .video-background-container {
   font-family: "Noto Sans TC";
-  background-image: url(../../public/images/cloud_bg.png);
+  background-image: url(../assets/images/cloud_bg.png);
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
@@ -94,7 +95,7 @@ export default {
 }
 
 .font-btn {
-    background-image: url(../../public/images/cloud.png) ;
+    background-image: url(../assets/images/cloud.png) ;
     position: absolute;
     top: 60%;
     left: 4%;
@@ -102,7 +103,7 @@ export default {
 }
 
 .back-btn {
-    background-image: url(../../public/images/cloud.png);
+    background-image: url(../assets/images/cloud.png);
     position: absolute;
     top: 90%;
     right:  4%;

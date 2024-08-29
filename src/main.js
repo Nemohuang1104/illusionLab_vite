@@ -15,10 +15,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // ---以下新增---
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faFaceMeh } from '@fortawesome/free-solid-svg-icons'
+
+
+
 
 // ---libary也要加---//
-library.add(faChevronDown)
-
+library.add(faChevronDown, faFaceMeh)
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount("#app");
 

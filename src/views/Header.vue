@@ -6,6 +6,12 @@
     <div class="header1">
         <div class="logo">
             <img src="../assets/img/illusionLab_logo.png" alt="">
+            <div>
+
+                <font-awesome-icon icon="fa-regular fa-face-meh" />
+            </div>
+            <!-- <font-awesome-icon icon="fa-solid fa-face-meh" /> -->
+            
         </div>
 
     </div>

@@ -1,16 +1,25 @@
 <template>
     <div id="app">
-        <button class="activity_btn">Button</button>
+        <button class="btn">{{ Button }}</button>
     </div>
 </template>
 
 <script setup>
+import { defineProps } from 'vue';
+
+// 定義 props
+const props = defineProps({
+  Button: {
+    type: String,
+    required: true
+  }
+});
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 
-.activity_btn{
+.btn{
     border-radius: 40px;
     border: 4px solid #000;
     background: rgb(255, 255, 255);
