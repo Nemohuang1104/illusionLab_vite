@@ -1,18 +1,48 @@
 <script setup>
-    import header_nina from '../components/header_nina.vue';
+    import Header_1 from '@/components/Header_1.vue';
+    import ShoppingStep from '@/components/ShoppingStep.vue';
+    import Footer from '@/components/Footer.vue';
 </script>
 <template>
     <div class="wrapper">
         <div class="header">
-            <header_nina></header_nina>
+            <Header_1></Header_1>
+        </div>
+        <div class="step">
+            <ShoppingStep></ShoppingStep>
         </div>
         <div class="contanier">
             <div class="order">
                 <p class="title">訂單內容</p>
                 <ul>
                     <li class="card">
-                        <div class="picture">
-                        <input type="checkbox" style="vertical-align:middle;">
+                        <div class="product-info">
+                            <input type="checkbox">
+                            <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image">
+                            <div class="description">
+                                <span class="product-name">繪本風格帆布袋</span>
+                                <div class="input">
+                                    <select name="" id="">
+                                        <option value="0">規格</option>
+                                        <option value="1">可愛動物區</option>
+                                        <option value="2">內心小女孩</option>
+                                        <option value="3">大人釋懷中</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="quantity-input">
+                                <button class="quantity-button" id="minus6">-</button>
+                                <input  type="text"  min="1" />
+                                <button class="quantity-button" id="plus6" >+</button>
+                            </div>
+                            <span>$590</span>
+                            <i class="fa-regular fa-trash-can"></i>
+                        </div>
+                        
+                        <!-- <div class="picture">
+                        <input type="checkbox">
                         <img src="../assets/img/Frame 47.jpg">
                         </div>
                         <p @click="text">繪本風格帆布袋</p>
@@ -24,7 +54,7 @@
                         </div>
                         <div class="price">
                             <span>$590</span>
-                        </div>
+                        </div> -->
                     </li>
                 </ul>
             </div>
@@ -55,7 +85,7 @@
             <p>商品加購</p>
             <ul>
                 <li class="pro">
-                    <img src="../assets/img/Frame 71.jpg" alt="">
+                    <img src="../assets/images/Frame 47.jpg" alt="">
                     <p>繪本風格悠遊卡卡夾</p>
                     <div class="text">
                         <div class="price">
@@ -65,7 +95,7 @@
                     </div>
                 </li>
                 <li class="pro">
-                    <img src="../assets/img/Frame 71.jpg" alt="">
+                    <img src="../assets/imgags/Frame 71.jpg" alt="">
                     <p>繪本風格悠遊卡卡夾</p>
                     <div class="text">
                         <div class="price">
@@ -75,7 +105,7 @@
                     </div>
                 </li>
                 <li class="pro">
-                    <img src="../assets/img/Frame 71.jpg" alt="">
+                    <img src="../assets/images/Frame 71.jpg" alt="">
                     <p>繪本風格悠遊卡卡夾</p>
                     <div class="text">
                         <div class="price">
@@ -85,7 +115,7 @@
                     </div>
                 </li>
                 <li class="pro">
-                    <img src="../assets/img/Frame 71.jpg" alt="">
+                    <img src="../assets/imgags/Frame 71.jpg" alt="">
                     <p>繪本風格悠遊卡卡夾</p>
                     <div class="text">
                         <div class="price">
@@ -95,7 +125,7 @@
                     </div>
                 </li>
                 <li class="pro">
-                    <img src="../assets/img/Frame 71.jpg" alt="">
+                    <img src="../assets/imgags/Frame 71.jpg" alt="">
                     <p>繪本風格悠遊卡卡夾</p>
                     <div class="text">
                         <div class="price">
@@ -105,7 +135,7 @@
                     </div>
                 </li>
                 <li class="pro">
-                    <img src="../assets/img/Frame 71.jpg" alt="">
+                    <img src="../assets/imgags/Frame 71.jpg" alt="">
                     <p>繪本風格悠遊卡卡夾</p>
                     <div class="text">
                         <div class="price">
@@ -116,20 +146,25 @@
                 </li>
             </ul>
         </div>
-        
+        <Footer></Footer>
     </div>
 </template>
 
 
 
 <style lang="scss" scoped>
+
+* {
+    font-family: "Noto Sans TC";
+}
     .wrapper{
         background: linear-gradient(125deg, #22247A 23.82%, #7976BB 101.34%);
     }
+    
     .contanier{
         display: flex;
         width: 1000px;
-        margin: 0 auto;
+        margin: 5% auto 0;
         justify-content: space-between;
     }
     .contanier p, .contanier span{
@@ -144,7 +179,7 @@
         font-weight: 700;
         padding: 10px;
         align-items: center;
-        width: 100%;
+        width: 90%;
     }
     .order input{
         border: 0;
@@ -152,6 +187,7 @@
         height: 20px;
         color: #FFFFFF;
     }
+
     ul{
         list-style: none;
         margin-top: 10px;
@@ -160,8 +196,23 @@
         display: flex;
         align-items: center;
     }
-    .picture img{
+    // ======================
+
+    .product-info{
+        width: 100%;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 1fr;
+        padding: 10px;
+        align-items: center;
+        color: var(--Color-6, #FFF);
+        font-size: 18px;
+        font-family: "Noto Sans TC";
+    }
+    // ========================
+    .product-image{
         border-radius: 10px;
+        // width: 100%;
     }
     .quantity-button {
         display: inline-block;
@@ -184,6 +235,88 @@
         border: 0;
         color: #58596D;
         background: #FFEDBC;
+    }
+
+    .input{
+    width: 100%;
+    position: relative; 
+    margin-bottom: 8px;
+    border: 0
+    }
+
+    .input select{
+        width: 90%;
+        height: 20px;
+        line-height: 20px; 
+        // border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 0 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease-in-out;
+        appearance: none; 
+        background: #FFEDBC; 
+        vertical-align: baseline;
+
+    }
+
+    .input > select > option {
+        line-height: 20px; 
+        vertical-align: middle; 
+        text-align: left; 
+      
+    }
+
+    .input::after {
+        content: "▼";
+        font-size: 16px;
+        color: #B36243;
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .input select:focus {
+        // border-color: #B36243;
+        box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); 
+        outline: none; 
+    }
+
+    .quantity-input {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .quantity-button {
+        display: inline-block;
+        text-align: center;
+        font-size: 1.6rem;
+        width: 40px;
+        height: 20px; 
+        line-height: 20px; 
+        background-color: #FFEDBC; 
+        border: 0;
+    }
+
+    .quantity-input > button:hover {
+        background-color: #B36243;
+        transition: 0.3s;
+    }
+
+    .quantity-input > input {
+        display: inline-block;
+        text-align: center;
+        font-size: 16px;
+        width: 50px; 
+        height: 20px; 
+        line-height: 20px; 
+        background-color: #FFEDBC;
+        margin: 0 2px; 
+        box-sizing: border-box; 
+        border: 0;
+        // margin-bottom: 80px;
     }
     .payment{
         border-radius: 10px;
@@ -245,7 +378,7 @@
     .ProductAdd{
         width: 100%;
         max-width: 1000px;
-        margin: 0 auto;
+        margin: 3% auto;
         padding: 10px;
         color: #FFFFFF;
     }
@@ -260,10 +393,12 @@
     }
     .pro p{
         margin: 20px auto;
+        font-family: "Noto Sans TC";
     }
     .pro img{
         border-radius: 10px;
         width: 100%;
         max-width: 150px;
     }
+
 </style>
