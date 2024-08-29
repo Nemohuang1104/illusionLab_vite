@@ -1,17 +1,14 @@
 <template>
     <!-- <div><MS_main/></div> -->
     <!-- <div><MS_termOfUse/></div> -->
-    <div><MS_privacy_policy/></div>
+    <!-- <div><MS_privacy_policy/></div> -->
+    
+    <div><MS_ticket_into/></div>
+    <div><MS_ticket_customer_info/></div>
+    <div><MS_ticket_reservation/></div>
+
     <!-- <div><MS_com_marquee/></div> -->
     <!-- <div><MS_com_caro/></div> -->
-    <!-- <div><MS_ticket_into/></div> -->
-    <!-- <div><MS_ticket_reservation/></div> -->
-    <!-- <div><MS_ticket_customer_info/></div> -->
-
-    <div>
-        
-    </div>
-
 </template>
 
 <script setup>
@@ -35,11 +32,11 @@
     font-weight: 400;
     font-style: normal;
     }
-    h1{font-size: 48px;}
-    h2{font-size: 32px;}
-    h3{font-size: 24px;}
-    h4{font-size: 20px;}
-    h5{font-size: 18px;}
+    h1{font-size: 30px;}
+    h2{font-size: 28px;}
+    h3{font-size: 18px;}
+    h4{font-size: 16px;}
+    h5{font-size: 14px;}
     h6{font-size: 16px;}
      p{font-size: 14px;}
 

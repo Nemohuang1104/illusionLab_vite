@@ -148,8 +148,8 @@
     width: 100vw;
     height: 100vh;
     // background-color: rgb(201, 201, 255);
-    padding-top: 150px;
-    margin-top: -300px;
+    padding-top: 300px;
+    margin-top: -500px;
 }
 
 .arrow {

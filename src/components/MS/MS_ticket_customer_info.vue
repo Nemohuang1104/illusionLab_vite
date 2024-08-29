@@ -47,7 +47,7 @@
                 </div>
             </form>
         </main>
-        <MS_com_buttons/>
+        <MS_com_buttons mode="two"/>
     </div>
 </template>
 

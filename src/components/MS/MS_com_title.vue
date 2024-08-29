@@ -1,7 +1,7 @@
 <template>
     <div class="title">
-    <h1>{{ mainTitle }}</h1>
-    <h3>{{ subTitle }}</h3>
+      <h1>{{ mainTitle }}</h1>
+      <h3>{{ subTitle }}</h3>
     </div>
     <div class="title">
         <h3>{{ introTitle }}</h3>

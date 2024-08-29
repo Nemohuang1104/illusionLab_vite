@@ -23,30 +23,30 @@
                     <MS_com_ticket_intro 
                     participantNumber="獨自一人"
                     gift="
-                    特製甜點禮盒(小)*1<br>
                     特調飲品(小)*1<br>
-                    神秘禮品(小)*1
+                    神秘禮品(小)*1<br>
+                    特製甜點禮盒(小)*1
                     "/>
                     <MS_com_ticket_intro 
                     participantNumber="兩人以上"
                     gift="
-                    特製甜點禮盒(小)*2<br>
                     特調飲品(中)*2<br>
-                    神秘禮品(中)*2
+                    神秘禮品(中)*2<br>
+                    特製甜點禮盒(小)*2
                     "/>
                     <MS_com_ticket_intro 
                     participantNumber="四人以上"
                     gift="
-                    特製甜點禮盒(中)*4<br>
                     特調飲品(中)*4<br>
-                    神秘禮品(中)*4
+                    神秘禮品(中)*4<br>
+                    特製甜點禮盒(中)*4
                     "/>
                     <MS_com_ticket_intro 
                     participantNumber="六人同行"
                     gift="
-                    特製甜點禮盒(大)*6<br>
                     特調飲品(大)*6<br>
-                    神秘禮品(大)*6
+                    神秘禮品(大)*6<br>
+                    特製甜點禮盒(大)*6
                     "/>
                 </div>
                 <h4>※以上為離場時贈送的周邊好禮，入場時仍有餐點供享用。</h4>

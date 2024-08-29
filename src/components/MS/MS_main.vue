@@ -3,16 +3,16 @@
         <div class="section fp-auto-height" id="section1">
             <div class="section-content">
                 <section id="landingSection">
-                    <img id="land" src="../ms/green_bg.png" alt="">
-                    <img id="tree4" src="../ms/tree4.png" alt="">
-                    <img id="tree3" src="../ms/tree3.png" alt="">
-                    <img id="tree2" src="../ms/tree2.png" alt="">
-                    <img id="tree1" src="../ms/tree1.png" alt="">
-                    <img id="cloud1" src="../ms/cloud.png" alt="">
-                    <img id="cloud2" src="../ms/cloud.png" alt="">
-                    <img id="cloud3" src="../ms/cloud.png" alt="">
-                    <img id="smallTree1" src="../ms/smallTree1.png" alt="">
-                    <img id="smallTree2" src="../ms/smallTree2.png" alt="">
+                    <img id="land" src="../../ms/green_bg.png" alt="">
+                    <img id="tree4" src="../../ms/tree4.png" alt="">
+                    <img id="tree3" src="../../ms/tree3.png" alt="">
+                    <img id="tree2" src="../../ms/tree2.png" alt="">
+                    <img id="tree1" src="../../ms/tree1.png" alt="">
+                    <img id="cloud1" src="../../ms/cloud.png" alt="">
+                    <img id="cloud2" src="../../ms/cloud.png" alt="">
+                    <img id="cloud3" src="../../ms/cloud.png" alt="">
+                    <img id="smallTree1" src="../../ms/smallTree1.png" alt="">
+                    <img id="smallTree2" src="../../ms/smallTree2.png" alt="">
                 </section>
             </div>
         </div>
@@ -21,10 +21,10 @@
         <div class="section" id="section2">
             <div class="section-content">
                 <section id="firstSection">
-                    <img id="road" src="../ms/road_image.png" alt="">
-                    <img id="bookImg" src="../ms/IMG_0141.png" alt="">
-                    <img id="girls" src="../ms/intro_1_girls.png" alt="">
-                    <img id="text" src="../ms/text.png" alt="">
+                    <img id="road" src="../../ms/road_image.png" alt="">
+                    <img id="bookImg" src="../../ms/IMG_0141.png" alt="">
+                    <img id="girls" src="../../ms/intro_1_girls.png" alt="">
+                    <img id="text" src="../../ms/text.png" alt="">
                 </section>
             </div>
         </div>
@@ -32,8 +32,8 @@
         <div class="section" id="section3">
             <div class="section-content">
                 <section id="secSection">
-                <img id="bear" src="../ms/bear.png" alt="">
-                <img id="text2" src="../ms/text2.png" alt="">
+                <img id="bear" src="../../ms/bear.png" alt="">
+                <img id="text2" src="../../ms/text2.png" alt="">
             </section>
             </div>
         </div>
@@ -41,8 +41,8 @@
         <div class="section" id="section4">
             <div class="section-content">
                 <section id="thirdSection">
-                    <img id="text3" src="../ms/text3.png" alt="">
-                    <img id="rihno" src="../ms/rihno.png" alt="">
+                    <img id="text3" src="../../ms/text3.png" alt="">
+                    <img id="rihno" src="../../ms/rihno.png" alt="">
                 </section>
             </div>
         </div>
@@ -50,12 +50,12 @@
         <div class="section" id="section5">
             <div class="section-content">
                 <section id="fourSection">
-                    <img id="text4" src="../ms/text4.png" alt="">
-                    <img id="myGirl" src="../ms/myGirl.png" alt="">
+                    <img id="text4" src="../../ms/text4.png" alt="">
+                    <img id="myGirl" src="../../ms/myGirl.png" alt="">
                 </section>
             </div>
         </div>
-        <img id="bgi2" src="../ms/ms_bgi2.png" alt="">
+        <img id="bgi2" src="../../ms/ms_bgi2.png" alt="">
         <div class="blank"></div>
         <div class="blank"></div>
         <div class="section" id="section6">
@@ -67,25 +67,25 @@
                 <div class="specials">
                     <div class="special">
                         <div class="spBorder">
-                            <img class="sp" src="../ms/sp1.png" alt="">
+                            <img class="sp" src="../../ms/sp1.png" alt="">
                         </div>
                        <h3>融合了光影與創意的尖端科技，模擬出栩栩如生的三維影像。</h3> 
                     </div>
                     <div class="special">
                         <div class="spBorder">
-                            <img class="sp" src="../ms/sp2.png" alt="">
+                            <img class="sp" src="../../ms/sp2.png" alt="">
                         </div>
                        <h3>知名作家DoMeDo合作繪本。</h3> 
                     </div>
                     <div class="special">
                         <div class="spBorder">
-                            <img class="sp" src="../ms/sp3.png" alt="">
+                            <img class="sp" src="../../ms/sp3.png" alt="">
                         </div>
                        <h3>Lazy dessert聯名合作，在體驗期間品嘗六樣甜點。</h3> 
                     </div>
                     <div class="special">
                         <div class="spBorder">
-                            <img class="sp" src="../ms/sp4.png" alt="">
+                            <img class="sp" src="../../ms/sp4.png" alt="">
                         </div>
                        <h3>60分鐘療癒之旅。</h3> 
                     </div>
@@ -101,10 +101,10 @@
                 <div class="books">
                     <MS_com_caro :items="carouselItems" :active="initialActiveIndex" />
                 </div>
-                <img id="foxChan" src="../ms/whatDoesTheFoxSay.png" alt="">
+                <img id="foxChan" src="../../ms/whatDoesTheFoxSay.png" alt="">
             </section>
         </div>
-        <img id="bgi2" src="../ms/ms_bgi3.png" alt="">
+        <img id="bgi2" src="../../ms/ms_bgi3.png" alt="">
         <div class="blank"></div>
         <div class="section" id="section8">
             <section id="sixSection">
@@ -173,7 +173,7 @@
 
 }
     #landingSection{
-        background-image: url(../ms/sky.png);
+        background-image: url(../../ms/sky.png);
     }
 
     #foxChan{
@@ -304,7 +304,7 @@
         
     }
     .page-container{
-        background-image: url(../ms/ms_bgi.jpg);
+        background-image: url(../../ms/ms_bgi.jpg);
         line-height: 150%;
     }
 
@@ -372,6 +372,9 @@
         top:40% ;
         left: 15% ;
     }
-
+h3{
+    margin-top: 30px;
+    width: calc(10vw + 80px);
+}
 </style>
   

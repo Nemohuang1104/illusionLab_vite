@@ -47,5 +47,7 @@
 </script>
 
 <style lang="scss" scoped> 
-
+    .options{
+        text-align: center;
+    }
 </style>

@@ -31,7 +31,7 @@ const showNext = computed(() => props.mode === 'one' || props.mode === 'two');
     margin-right: auto;
 }
 #nextStep{
-    margin-right: auto;
+    margin-left: auto;
 }
 #prevStep, #nextStep {
     width: auto;

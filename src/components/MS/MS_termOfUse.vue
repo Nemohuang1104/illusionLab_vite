@@ -64,6 +64,7 @@
                     感謝您選擇 BELLEU 比露，祝您購物愉快！</h6>
             </div>
         </main>
+        <img src="" alt="">
     </div>
 
 </template>
