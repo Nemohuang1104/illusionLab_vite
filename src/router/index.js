@@ -33,7 +33,7 @@ const routes = [
   },
   {
     path: '/lifecasino',
-    component: () => import('@/views/LifeCasino.vue'),
+    component: () => import('@/views/lifeCasino.vue'),
     meta: {
       title: "人生賭場"
     },
