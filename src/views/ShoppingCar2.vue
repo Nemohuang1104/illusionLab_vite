@@ -1,17 +1,17 @@
 <script setup>
-import Header_1 from '@/components/Header_1.vue';
-import Footer from '@/components/Footer.vue';
+import Header_1 from '@/components/Header_0.vue';
+import Footer from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
-import { ref, computed} from 'vue';
+import { ref, computed } from 'vue';
 
 const cartItems = ref([
-  { name: '繪本風格帆布袋', quantity: 1, price: 590 }
+    { name: '繪本風格帆布袋', quantity: 1, price: 590 }
 ]);
 
 const totalAmount = computed(() => {
-  return cartItems.value.reduce((total, item) => {
-    return total + item.quantity * item.price;
-  }, 0);
+    return cartItems.value.reduce((total, item) => {
+        return total + item.quantity * item.price;
+    }, 0);
 });
 
 const shippingMethod = ref('');
@@ -49,12 +49,12 @@ function prefillMemberInfo(event) {
     }
 }
 
-function prefillOrdererInfo(e){
-    if(e.target.checked){
+function prefillOrdererInfo(e) {
+    if (e.target.checked) {
         acceptorData.value.name = formData.value.name;
         acceptorData.value.phone = formData.value.phone;
-        acceptorData.value.address  = formData.value.address;
-    }else{
+        acceptorData.value.address = formData.value.address;
+    } else {
         // 如果取消勾選，則清空資料
         acceptorData.value.name = '';
         acceptorData.value.phone = '';
@@ -68,10 +68,14 @@ function prefillOrdererInfo(e){
 
 <template>
     <div class="wrapper">
-        <div><Header_1></Header_1></div>
+        <div>
+            <Header_1></Header_1>
+        </div>
 
         <!--購物車流程數字圖示_組件模板開始線-->
-        <div><ShoppingStep></ShoppingStep></div>
+        <div>
+            <ShoppingStep></ShoppingStep>
+        </div>
 
         <!-- 購物車流程數字圖示_組件模板結束線 -->
 
@@ -79,11 +83,11 @@ function prefillOrdererInfo(e){
             <div class="order">
                 <h2>訂單資訊</h2>
                 <div class="content-1">
-                <!--處理重要介紹文在寬度1140px內置中排版-->
+                    <!--處理重要介紹文在寬度1140px內置中排版-->
                     <div class="inner0">
                         <p>訂購人資訊</p>
                         <label class="custom-checkbox">
-                            <input type="checkbox" @change="prefillMemberInfo"/>
+                            <input type="checkbox" @change="prefillMemberInfo" />
                             <span class="checkmark"></span>
                             <span class="text">同會員資料</span>
                         </label>
@@ -91,40 +95,40 @@ function prefillOrdererInfo(e){
                     <div class="inner01">
                         <p>*姓名:</p>
                         <div class="code-input">
-                        <div class="fill">
-                            <input type="text" v-model="formData.name"/>
-                        </div>
+                            <div class="fill">
+                                <input type="text" v-model="formData.name" />
+                            </div>
                         </div>
                     </div>
                     <div class="inner02">
                         <p>*手機:</p>
                         <div class="code-input">
-                        <div class="fill">
-                            <input type="text" v-model="formData.phone"/>
-                        </div>
+                            <div class="fill">
+                                <input type="text" v-model="formData.phone" />
+                            </div>
                         </div>
                     </div>
                     <div class="inner03">
                         <p>地址:</p>
                         <div class="code-input">
-                        <div class="fill">
-                            <input type="text" v-model="formData.address"/>
-                        </div>
+                            <div class="fill">
+                                <input type="text" v-model="formData.address" />
+                            </div>
                         </div>
                     </div>
                     <div class="inner04">
                         <p>*運送方式:</p>
                         <div class="form-check">
                             <label class="custom-checkbox">
-                                <input type="radio" name="shipping" value="宅配到府" v-model="shippingMethod"/>
+                                <input type="radio" name="shipping" value="宅配到府" v-model="shippingMethod" />
                                 <span class="checkmark"></span>
                                 <span class="text">宅配到府(運費 $100元)</span>
                             </label>
-                            <div v-if="shippingMethod === '宅配到府'&& shippingMethod !== '現場取貨'" class="delivery-form">
+                            <div v-if="shippingMethod === '宅配到府' && shippingMethod !== '現場取貨'" class="delivery-form">
                                 <div class="member_info">
                                     <span class="text">收件人資訊:</span>
                                     <label class="custom-checkbox">
-                                        <input type="checkbox" @change="prefillOrdererInfo"/>
+                                        <input type="checkbox" @change="prefillOrdererInfo" />
                                         <span class="checkmark"></span>
                                         <span class="text">同訂購人資訊</span>
                                     </label>
@@ -138,17 +142,17 @@ function prefillOrdererInfo(e){
                                 <br>
                                 <label>*地址: <input type="text" v-model="acceptorData.address" /></label>
                             </div>
-                            
+
                             <label class="custom-checkbox">
                                 <input type="radio" name="shipping" value="7-11取貨" v-model="shippingMethod" />
                                 <span class="checkmark"></span>
                                 <span class="text">7-11取貨(運費 $60元)</span>
                             </label>
-                            <div v-if="shippingMethod === '7-11取貨'&& shippingMethod !== '現場取貨' " class="pickup-form">
+                            <div v-if="shippingMethod === '7-11取貨' && shippingMethod !== '現場取貨'" class="pickup-form">
                                 <div class="member_info">
                                     <span class="text">收件人資訊:</span>
                                     <label class="custom-checkbox">
-                                        <input type="checkbox" @change="prefillOrdererInfo"/>
+                                        <input type="checkbox" @change="prefillOrdererInfo" />
                                         <span class="checkmark"></span>
                                         <span class="text">同訂購人資訊</span>
                                     </label>
@@ -163,14 +167,14 @@ function prefillOrdererInfo(e){
                                 <label>*手機: <input type="text" v-model="acceptorData.phone" /></label>
                             </div>
                             <label class="custom-checkbox">
-                                <input type="radio" name="shipping" value="現場取貨" v-model="shippingMethod"/>
+                                <input type="radio" name="shipping" value="現場取貨" v-model="shippingMethod" />
                                 <span class="checkmark"></span>
                                 <span class="text">現場取貨</span>
                             </label>
-   
+
                         </div>
-                        
-                        
+
+
                     </div>
                     <div class="inner05">
                         <p>*付款方式:</p>
@@ -181,25 +185,25 @@ function prefillOrdererInfo(e){
                                 <span class="text">信用卡/金融卡</span>
                             </label>
                             <label class="custom-checkbox">
-                                <input type="radio" name="pay"  />
+                                <input type="radio" name="pay" />
                                 <span class="checkmark"></span>
                                 <span class="text">轉帳付款(尚未開放)</span>
                             </label>
                             <label class="custom-checkbox">
-                                <input type="radio" name="pay"  />
+                                <input type="radio" name="pay" />
                                 <span class="checkmark"></span>
                                 <span class="text">街口支付(尚未開放)</span>
                             </label>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
 
-            
-            
+
+
             <div class="payment">
-                
+
                 <div class="total">
                     <h2>商品明細</h2>
                     <hr>
@@ -208,26 +212,27 @@ function prefillOrdererInfo(e){
                         <div class="item_content">
                             <h3>{{ item.name }}</h3>
                             <div class="time">
-                                    <div class="input">
-                                        <select name="" id="">
-                                            <option value="0">規格</option>
-                                            <option value="1">可愛動物區</option>
-                                            <option value="2">內心小女孩</option>
-                                            <option value="3">大人釋懷中</option>
+                                <div class="input">
+                                    <select name="" id="">
+                                        <option value="0">規格</option>
+                                        <option value="1">可愛動物區</option>
+                                        <option value="2">內心小女孩</option>
+                                        <option value="3">大人釋懷中</option>
 
-                                        </select>
-                                    </div>
-                                    <div class="quantity-input">
-                                        <button class="quantity-button" id="minus6" @click="item.quantity > 1 && item.quantity--">-</button>
-                                        <input  type="text" v-model="item.quantity" min="1" />
-                                        <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
-                                    </div>
+                                    </select>
+                                </div>
+                                <div class="quantity-input">
+                                    <button class="quantity-button" id="minus6"
+                                        @click="item.quantity > 1 && item.quantity--">-</button>
+                                    <input type="text" v-model="item.quantity" min="1" />
+                                    <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
+                                </div>
                             </div>
                             <i class="fa-regular fa-trash-can"></i>
-                            
+
                         </div>
                     </div>
-                    
+
 
                     <hr>
                     <div class="count">
@@ -249,7 +254,7 @@ function prefillOrdererInfo(e){
                     </div>
                 </div>
             </div>
-       
+
         </div>
         <div class="confirm">
             <button>返回</button>
@@ -264,26 +269,26 @@ function prefillOrdererInfo(e){
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 
-.wrapper{
+.wrapper {
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
 }
 
-.content{
+.content {
     margin: 0 auto;
     margin-top: 20px;
     width: 100%;
-    max-width:1000px;
+    max-width: 1000px;
     display: flex;
     justify-content: space-between;
     // border: 1px solid white;
 }
 
-.order{
+.order {
     width: 100%;
-    max-width:520px;
+    max-width: 520px;
 }
 
-.order h2{
+.order h2 {
     font-size: 20px;
     font-weight: 700;
     line-height: 1.6rem;
@@ -292,7 +297,7 @@ function prefillOrdererInfo(e){
     font-family: "Noto Sans TC";
 }
 
-.content-1{
+.content-1 {
     /* border: 1px solid red;  */
     width: 100%;
     max-width: 600px;
@@ -300,10 +305,10 @@ function prefillOrdererInfo(e){
     margin: 0 auto;
     /* display: flex; */
     // border: 1px solid white;
-    
+
 }
 
-.inner0{
+.inner0 {
     /* border: 1px solid red; */
     display: flex;
     align-items: start;
@@ -311,7 +316,7 @@ function prefillOrdererInfo(e){
 
 }
 
-.inner0 > p{
+.inner0>p {
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 20%;
@@ -320,7 +325,7 @@ function prefillOrdererInfo(e){
 
 }
 
-.inner01{
+.inner01 {
     /* border: 1px solid red; */
     display: flex;
     align-items: start;
@@ -329,7 +334,7 @@ function prefillOrdererInfo(e){
 
 }
 
-.inner01 > p{
+.inner01>p {
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 20%;
@@ -338,16 +343,16 @@ function prefillOrdererInfo(e){
 
 }
 
-.inner02{
+.inner02 {
     display: flex;
     align-items: start;
     justify-content: space-between;
     margin-bottom: 24px;
 
-    
+
 }
 
-.inner02 > p{
+.inner02>p {
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 20%;
@@ -357,16 +362,16 @@ function prefillOrdererInfo(e){
 
 }
 
-.inner03{
+.inner03 {
     display: flex;
     align-items: start;
     justify-content: space-between;
     margin-bottom: 44px;
 
-    
+
 }
 
-.inner03 > p{
+.inner03>p {
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 20%;
@@ -376,32 +381,34 @@ function prefillOrdererInfo(e){
 
 }
 
-.code-input{
+.code-input {
     flex-basis: 80%;
-    
+
 }
 
-.fill > input{
+.fill>input {
     /* border: 1px solid red; */
     width: 96%;
     height: 24px;
     background-color: rgba(255, 255, 0, 0);
     border: 1px solid #FFF;
-    border-radius: 10px; 
+    border-radius: 10px;
     padding: 0 8px;
     font-size: 16px;
     color: #FFF;
     transition: border-color 0.3s ease-in-out;
 }
 
-.fill > input:focus {
+.fill>input:focus {
     border-color: #FCB600;
-    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
-    outline: none; /* 移除默認的黑框 */
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3);
+    /* 暈染效果 */
+    outline: none;
+    /* 移除默認的黑框 */
 }
 
 
-.inner03 > .code-input > .fill > textarea{
+.inner03>.code-input>.fill>textarea {
     /* border: 1px solid red; */
     width: 100%;
     height: 200px;
@@ -413,13 +420,15 @@ function prefillOrdererInfo(e){
     transition: border-color 0.3s ease-in-out;
 }
 
-.inner03 > .code-input > .fill > textarea:focus {
+.inner03>.code-input>.fill>textarea:focus {
     border-color: #B36243;
-    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
-    outline: none; /* 移除默認的黑框 */
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3);
+    /* 暈染效果 */
+    outline: none;
+    /* 移除默認的黑框 */
 }
 
-.inner04{
+.inner04 {
     display: flex;
     align-self: start;
     /* border: 1px solid red; */
@@ -428,14 +437,15 @@ function prefillOrdererInfo(e){
 
 }
 
-.inner04 > p{
+.inner04>p {
     font-size: 16px;
     line-height: 16px;
     flex-basis: 20%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 }
-.form-check{
+
+.form-check {
     display: flex;
     flex-direction: column;
     flex-basis: 80%;
@@ -451,7 +461,8 @@ function prefillOrdererInfo(e){
 // }
 
 /* 基本樣式 */
-.delivery-form, .pickup-form {
+.delivery-form,
+.pickup-form {
 
     background-color: #000354;
     color: white;
@@ -460,26 +471,27 @@ function prefillOrdererInfo(e){
     margin-bottom: 15px;
 }
 
-.delivery-form > label{
+.delivery-form>label {
     margin-bottom: 28px;
 }
 
-.member_info{
+.member_info {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.pickup-form > label{
+.pickup-form>label {
     margin-bottom: 28px;
 }
 
-.delivery-form input, .pickup-form input {
+.delivery-form input,
+.pickup-form input {
     width: 82%;
     height: 24px;
     background-color: #fff(255, 255, 0, 0);
     border: 1px solid #FFF;
-    border-radius: 10px; 
+    border-radius: 10px;
     padding: 0 8px;
     font-size: 16px;
     transition: border-color 0.3s ease-in-out;
@@ -487,17 +499,21 @@ function prefillOrdererInfo(e){
 
 .delivery-form input:focus {
     border-color: #FCB600;
-    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
-    outline: none; /* 移除默認的黑框 */
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3);
+    /* 暈染效果 */
+    outline: none;
+    /* 移除默認的黑框 */
 }
 
 .pickup-form input:focus {
     border-color: #FCB600;
-    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
-    outline: none; /* 移除默認的黑框 */
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3);
+    /* 暈染效果 */
+    outline: none;
+    /* 移除默認的黑框 */
 }
 
-.store > input{
+.store>input {
     width: 76%;
     background-color: #FCB600;
     border: 1px solid #FCB600;
@@ -505,7 +521,7 @@ function prefillOrdererInfo(e){
 
 // 運送方式下拉式選單樣式結束
 
-.inner05{
+.inner05 {
     display: flex;
     align-self: start;
     /* border: 1px solid red; */
@@ -513,7 +529,8 @@ function prefillOrdererInfo(e){
 
 
 }
-.inner05 > p{
+
+.inner05>p {
     font-size: 16px;
     line-height: 16px;
     flex-basis: 20%;
@@ -522,13 +539,13 @@ function prefillOrdererInfo(e){
 }
 
 
-.form-check{
+.form-check {
     display: flex;
     flex-direction: column;
-    
+
 }
 
-.checkmark{
+.checkmark {
     font-size: 16px;
     line-height: 16px;
     flex-basis: 20%;
@@ -536,15 +553,15 @@ function prefillOrdererInfo(e){
     font-family: "Noto Sans TC";
 }
 
-.custom-checkbox{
+.custom-checkbox {
     display: flex;
     margin-bottom: 16px;
-   
-    
-    
+
+
+
 }
 
-.custom-checkbox .text{
+.custom-checkbox .text {
     vertical-align: auto;
     font-size: 16px;
     line-height: 16px;
@@ -555,7 +572,8 @@ function prefillOrdererInfo(e){
 
 /* 調整checkbox的樣式 */
 /* 隱藏預設的 checkbox */
-.custom-checkbox input[type="radio"] ,.custom-checkbox input[type="checkbox"]{
+.custom-checkbox input[type="radio"],
+.custom-checkbox input[type="checkbox"] {
     display: none;
 }
 
@@ -580,11 +598,11 @@ function prefillOrdererInfo(e){
     width: 16px;
     background-color: #ffffff00;
     border: 2px solid #FFF;
-    
+
 }
 
 /* checkbox 被勾選時的樣式 */
-.custom-checkbox input:checked + .checkmark {
+.custom-checkbox input:checked+.checkmark {
     background-color: #b3634300;
 }
 
@@ -596,7 +614,7 @@ function prefillOrdererInfo(e){
 }
 
 /* 勾號的樣式 */
-.custom-checkbox input:checked + .checkmark:after {
+.custom-checkbox input:checked+.checkmark:after {
     display: block;
 }
 
@@ -613,17 +631,17 @@ function prefillOrdererInfo(e){
 
 
 
-.payment{
+.payment {
     background: var(--header-footer, #000354);
     width: 400px;
     height: 400px;
     border-radius: 10px;
     flex-grow: 0;
-    
+
 }
 
 
-.payment h2{
+.payment h2 {
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
     font-size: 18px;
@@ -633,21 +651,22 @@ function prefillOrdererInfo(e){
 }
 
 
-.total{
+.total {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
 
 }
 
-.total hr{
+.total hr {
     height: 2px;
     background-color: #FFF;
     border: none;
-    border-radius: 2.5px; /* 讓線條變得更加圓潤 */
+    border-radius: 2.5px;
+    /* 讓線條變得更加圓潤 */
 }
 
-.item{
+.item {
     display: flex;
     justify-content: space-between;
     font-size: 16px;
@@ -659,54 +678,64 @@ function prefillOrdererInfo(e){
 
 }
 
-.item_content{
+.item_content {
     width: 50%;
     flex-grow: 0%;
 }
 
-.input{
+.input {
     width: 100%;
-    position: relative; /* 為了偽元素定位 */
+    position: relative;
+    /* 為了偽元素定位 */
     margin-bottom: 8px;
     border: 0
 }
 
-.input select{
+.input select {
     width: 100%;
     height: 20px;
-    line-height: 20px; /* 確保游標高度與input框高度一致 */
+    line-height: 20px;
+    /* 確保游標高度與input框高度一致 */
     // border: 1px solid #ccc;
     border-radius: 6px;
     padding: 0 8px;
     font-size: 16px;
     transition: border-color 0.3s ease-in-out;
-    appearance: none; /* 隱藏默認的下拉箭頭 */
-    background: #FFEDBC; 
-   
+    appearance: none;
+    /* 隱藏默認的下拉箭頭 */
+    background: #FFEDBC;
+
 }
 
-.input > select > option {
-    line-height: 20px; /* 讓選項的高度與select框一致 */
-    vertical-align: middle; /* 垂直置中 */
-    text-align: left; /* 水平靠左對齊 */
-     /* 加上內邊距，讓文字與邊框有間隔 */
+.input>select>option {
+    line-height: 20px;
+    /* 讓選項的高度與select框一致 */
+    vertical-align: middle;
+    /* 垂直置中 */
+    text-align: left;
+    /* 水平靠左對齊 */
+    /* 加上內邊距，讓文字與邊框有間隔 */
 }
 
 .input::after {
-    content: "▼"; /* 使用自定義的箭頭符號 */
+    content: "▼";
+    /* 使用自定義的箭頭符號 */
     font-size: 16px;
     color: #B36243;
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; /* 確保偽元素不會干擾選擇操作 */
+    pointer-events: none;
+    /* 確保偽元素不會干擾選擇操作 */
 }
 
 .input select:focus {
     // border-color: #B36243;
-    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
-    outline: none; /* 移除默認的黑框 */
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3);
+    /* 暈染效果 */
+    outline: none;
+    /* 移除默認的黑框 */
 }
 
 .quantity-input {
@@ -720,32 +749,41 @@ function prefillOrdererInfo(e){
     text-align: center;
     font-size: 1.6rem;
     width: 40px;
-    height: 20px; /* 將高度設置為 40px，與輸入框一致 */
-    line-height: 20px; /* 將 line-height 設置為 40px，確保文字垂直居中 */
-    background-color: #FFEDBC; /* 設置背景色，根據需求調整 */
+    height: 20px;
+    /* 將高度設置為 40px，與輸入框一致 */
+    line-height: 20px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: #FFEDBC;
+    /* 設置背景色，根據需求調整 */
     border: 0
 }
 
-.quantity-input > button:hover {
+.quantity-input>button:hover {
     background-color: #B36243;
     transition: 0.3s;
 }
 
-.quantity-input > input {
+.quantity-input>input {
     display: inline-block;
     text-align: center;
     font-size: 16px;
-    width: 50px; /* 適當調整寬度，使其與按鈕相匹配 */
-    height: 20px; /* 將高度設置為 40px，與按鈕一致 */
-    line-height: 20px; /* 將 line-height 設置為 40px，確保文字垂直居中 */
-    background-color: #FFEDBC; /* 設置背景色，根據需求調整 */
-    margin: 0 2px; /* 添加 margin 以確保輸入框與按鈕之間有適當的間距 */
-    box-sizing: border-box; /* 確保 padding 和 border 不會影響元素的寬度 */
+    width: 50px;
+    /* 適當調整寬度，使其與按鈕相匹配 */
+    height: 20px;
+    /* 將高度設置為 40px，與按鈕一致 */
+    line-height: 20px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: #FFEDBC;
+    /* 設置背景色，根據需求調整 */
+    margin: 0 2px;
+    /* 添加 margin 以確保輸入框與按鈕之間有適當的間距 */
+    box-sizing: border-box;
+    /* 確保 padding 和 border 不會影響元素的寬度 */
     border: 0;
     // margin-bottom: 80px;
 }
 
-.item_content i{
+.item_content i {
     display: flex;
     justify-content: end;
     // border: 1px solid #FFF;
@@ -754,18 +792,18 @@ function prefillOrdererInfo(e){
 
 
 
-.count{
+.count {
     /* border: 1px solid blue; */
 
     width: 100%;
     /* padding-left: 40px; */
     display: flex;
     justify-content: space-between;
-    
+
 }
 
-.count > h3{
-    
+.count>h3 {
+
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 20%;
@@ -774,7 +812,7 @@ function prefillOrdererInfo(e){
 
 }
 
-.count > p{
+.count>p {
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 0%;
@@ -783,14 +821,14 @@ function prefillOrdererInfo(e){
 
 }
 
-.shipping-fee{
+.shipping-fee {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.shipping-fee > h3{
-    
+.shipping-fee>h3 {
+
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 20%;
@@ -799,7 +837,7 @@ function prefillOrdererInfo(e){
 
 }
 
-.shipping-fee > p{
+.shipping-fee>p {
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 0%;
@@ -808,14 +846,14 @@ function prefillOrdererInfo(e){
 
 }
 
-.discount-fee{
+.discount-fee {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.discount-fee > h3{
-    
+.discount-fee>h3 {
+
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 20%;
@@ -824,7 +862,7 @@ function prefillOrdererInfo(e){
 
 }
 
-.discount-fee > p{
+.discount-fee>p {
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 0%;
@@ -833,12 +871,12 @@ function prefillOrdererInfo(e){
 
 }
 
-.total-fee{
+.total-fee {
     display: flex;
     justify-content: space-between;
 }
 
-.total-fee > h3{
+.total-fee>h3 {
     /* border: 1px solid blue; */
 
     font-size: 20px;
@@ -849,14 +887,15 @@ function prefillOrdererInfo(e){
 
 }
 
-.total-fee > p{
+.total-fee>p {
     font-size: 20px;
     line-height: 1.6rem;
     flex-basis: 0%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 }
-.confirm{
+
+.confirm {
     display: flex;
     width: 240px;
     margin: 0 auto;
@@ -865,7 +904,7 @@ function prefillOrdererInfo(e){
     justify-content: center;
 }
 
-.confirm button{
+.confirm button {
     font-size: 16px;
     width: 200px;
     height: 40px;
@@ -875,5 +914,4 @@ function prefillOrdererInfo(e){
     background: var(--Color-3, #FFEDBC);
     cursor: pointer;
 }
-
 </style>

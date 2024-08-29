@@ -1,21 +1,29 @@
 <template>
-    <div class="leading">
-        <p class="leadingtext">各位飛行者，請注意，即將進行倒數啟動。請確認安全帶已經繫好，並放鬆心情，準備迎接一段令人難忘的旅程</p>
-        <p class="leadingtext">5... 4... 3... 2... 1...</p>
+
+    <div class="container">
+        <div class="UFOimgout">
+            <img class="UFOimg" src="../assets/images/UFO.png" alt="">
+        </div>
+        <div class="text line1" data-text="各位飛行者，請注意，即將進行倒數啟動。請確認安全帶已經繫好，並放鬆心情，準備迎接一段令人難忘的旅程">
+            各位飛行者，請注意<br>即將進行倒數啟動<br>請確認安全帶已經繫好<br>並放鬆心情，準備迎接一段令人難忘的旅程</div>
     </div>
-    <img class="UFOimg" src="../assets/img/UFO.png" alt="">
+    <!-- <p class="line2">5... 4... 3... 2... 1...</p> -->
+
     <canvas id="myCanvas"></canvas>
 </template>
 
 <script setup>
+//背景canvs
 import { onMounted, onBeforeUnmount } from 'vue';
-
+//myCanvas元素變亮 //ctx 2D 繪圖
 let myCanvas, ctx;
+//控制星星的移動方向和速度
 let xMod = 0;
 let yMod = 0;
 let warpSpeed = 0;
+//存儲所有星星對象的陣列
 let starField = [];
-
+//調整畫布尺寸
 const resizeCanvas = () => {
     myCanvas.width = window.innerWidth;
     myCanvas.height = window.innerHeight;
@@ -134,6 +142,29 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener('resize', resizeCanvas);
 });
+
+
+
+// 打字機
+// document.addEventListener('DOMContentLoaded', function () {
+//     setTimeout(function () {
+//         document.querySelector('.line2').classList.add('typing-active');
+//     }, 6000); // 延遲5秒，與第一行的打字動畫時間匹配
+// });
+
+//前導頁導至主活動頁
+
+// 設置定時器，XX秒後自動跳轉到主頁面
+setTimeout(function () {
+    document.body.style.transition = "opacity 1s";
+    document.body.style.opacity = "0";
+    document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
+    // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
+    setTimeout(function () {
+        window.location.href = "/StrellarFrontierHomepage";// 放置主页面URL
+    }, 1000); // 等待1秒淡出動畫结束
+}, 7000);// 1000毫秒 = 1秒
+
 </script>
 
 <style scoped>
@@ -147,7 +178,7 @@ onBeforeUnmount(() => {
     position: absolute;
     top: 5px;
     left: 5px;
-    z-index: 1000;
+
 }
 
 .desc {
@@ -163,38 +194,318 @@ onBeforeUnmount(() => {
 }
 
 
+/* 幽浮上下浮動 */
 
-/* 打字機 */
+.UFOimgout {
+    width: 80%;
+    display: block;
+    justify-content: center;
+    position: relative;
 
-.leading {
-    padding-top: 40%;
 }
-
-@keyframes typing {
-	from { width: 0 }
-}
-
-@keyframes caret {
-	50% { border-right-color: transparent; }
-}
-
-.leadingtext {
-    color: #fff;
-	font: bold 20% Consolas, Monaco, monospace;
-/* 	width: 8.25em; */
-	width: 100ch;
-	white-space: nowrap;
-	overflow: hidden;
-	border-right: .03em solid;
-	animation: typing 6s steps(100) infinite,
-	           caret 1s steps(1) infinite;
-}
-
-
 
 .UFOimg {
-    width: 600px;
-    height: 700px;
-    ;
+    max-width: 600px;
+    width: 100%;
+    /* width: 40%; */
+    height: 25%;
+    display: block;
+    justify-content: center;
+    margin-left: 35%;
+    animation: balloon_1 3s infinite alternate;
+
+
+}
+
+
+@keyframes balloon_1 {
+    0% {
+        transform: translateY(20px);
+    }
+
+    50% {
+        transform: translateY(50px);
+    }
+
+    100% {
+        transform: translateY(20px);
+    }
+}
+
+/* 文字印在圖上+故障文字 */
+.container {
+    position: relative;
+    display: inline-block;
+    /* 可選：設置容器的寬度和高度，以便適應圖片大小 */
+    max-width: 1440px;
+    width: 100%;
+    animation: ufoGlitch 8s linear;
+
+}
+
+
+
+.text {
+    font-family: "Noto Serif SC";
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    pointer-events: none;
+    /* 可選：使文字無法被點擊 */
+    line-height: 2.0;
+    /* animation: ufoGlitch 8s linear; */
+    text-align: center;
+
+
+}
+
+.text::before {
+    content: attr(data-text);
+    background: black;
+    position: absolute;
+    text-shadow: 2px 0 red;
+    left: -2px;
+    clip-path: inset(0 0 0 0);
+    animation: ani2 1s infinite linear alternate-reverse;
+}
+
+.text::after {
+    content: attr(data-text);
+    background: black;
+    position: absolute;
+    text-shadow: -2px 0 blue;
+    left: -2px;
+    clip-path: inset(0 0 0 0);
+    animation: ani1 1s infinite linear alternate-reverse;
+}
+
+@keyframes ufoGlitch {
+    0% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1);
+    }
+
+    /* 保持大小直到動畫結束前 */
+    100% {
+        transform: scale(0);
+    }
+
+    /* 最後一瞬間縮小 */
+}
+
+
+
+@keyframes ani1 {
+    0% {
+        clip-path: inset(12px 0 92px 0);
+    }
+
+    5% {
+        clip-path: inset(30px 0 37px 0);
+    }
+
+    10% {
+        clip-path: inset(12px 0 4px 0);
+    }
+
+    15% {
+        clip-path: inset(72px 0 20px 0);
+    }
+
+    20% {
+        clip-path: inset(83px 0 11px 0);
+    }
+
+    25% {
+        clip-path: inset(18px 0 67px 0);
+    }
+
+    30% {
+        clip-path: inset(27px 0 43px 0);
+    }
+
+    35% {
+        clip-path: inset(31px 0 81px 0);
+    }
+
+    40% {
+        clip-path: inset(34px 0 5px 0);
+    }
+
+    45% {
+        clip-path: inset(56px 0 49px 0);
+    }
+
+    50% {
+        clip-path: inset(45px 0 1px 0);
+    }
+
+    55% {
+        clip-path: inset(38px 0 49px 0);
+    }
+
+    60% {
+        clip-path: inset(92px 0 50px 0);
+    }
+
+    65% {
+        clip-path: inset(32px 0 34px 0);
+    }
+
+    70% {
+        clip-path: inset(46px 0 100px 0);
+    }
+
+    75% {
+        clip-path: inset(21px 0 10px 0);
+    }
+
+    80% {
+        clip-path: inset(14px 0 56px 0);
+    }
+
+    85% {
+        clip-path: inset(6px 0 82px 0);
+    }
+
+    90% {
+        clip-path: inset(92px 0 4px 0);
+    }
+
+    95% {
+        clip-path: inset(55px 0 22px 0);
+    }
+
+    100% {
+        clip-path: inset(59px 0 42px 0);
+    }
+}
+
+@keyframes ani2 {
+    0% {
+        clip-path: inset(20px 0 97px 0);
+    }
+
+    5% {
+        clip-path: inset(49px 0 19px 0);
+    }
+
+    10% {
+        clip-path: inset(55px 0 88px 0);
+    }
+
+    15% {
+        clip-path: inset(22px 0 26px 0);
+    }
+
+    20% {
+        clip-path: inset(39px 0 56px 0);
+    }
+
+    25% {
+        clip-path: inset(90px 0 37px 0);
+    }
+
+    30% {
+        clip-path: inset(99px 0 100px 0);
+    }
+
+    35% {
+        clip-path: inset(19px 0 44px 0);
+    }
+
+    40% {
+        clip-path: inset(46px 0 70px 0);
+    }
+
+    45% {
+        clip-path: inset(37px 0 77px 0);
+    }
+
+    50% {
+        clip-path: inset(57px 0 85px 0);
+    }
+
+    55% {
+        clip-path: inset(40px 0 73px 0);
+    }
+
+    60% {
+        clip-path: inset(37px 0 82px 0);
+    }
+
+    65% {
+        clip-path: inset(1px 0 27px 0);
+    }
+
+    70% {
+        clip-path: inset(30px 0 53px 0);
+    }
+
+    75% {
+        clip-path: inset(87px 0 46px 0);
+    }
+
+    80% {
+        clip-path: inset(38px 0 26px 0);
+    }
+
+    85% {
+        clip-path: inset(87px 0 59px 0);
+    }
+
+    90% {
+        clip-path: inset(43px 0 80px 0);
+    }
+
+    95% {
+        clip-path: inset(64px 0 32px 0);
+    }
+
+    100% {
+        clip-path: inset(77px 0 25px 0);
+    }
+}
+
+/* 打字機 */
+@keyframes typing2 {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 15h;
+        /* 這裡的寬度是根據 .line2 的數字符號去做調整 */
+    }
+}
+
+.line2 {
+    font-family: "Noto Serif SC";
+    color: #fff;
+    width: 15ch;
+
+    /* width: 100%; */
+    white-space: nowrap;
+    /* 禁止文字換行 */
+    overflow: hidden;
+    /*可以確保文字不會超出父層範圍 */
+    border-right: .03em solid;
+    /*打字動畫 */
+    visibility: hidden;
+    /* 初始時隱藏第二行 */
+    animation: typing2 3s steps(15, end)6s;
+    /* typing2持續時間，确保 steps 數量與字幅匹配 6秒為延遲時間*/
+    padding-left: 46%;
+}
+
+.line2.typing-active {
+    visibility: visible;
 }
 </style>

@@ -1,14 +1,18 @@
 <script setup>
-import Header_1 from '@/components/Header_1.vue';
-import Footer from '@/components/Footer.vue';
+import Header_1 from '@/components/Header_0.vue';
+import Footer from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import { ref } from 'vue';
 </script>
 
 <template>
     <div class="wrapper">
-        <div><Header_1></Header_1></div>
-        <div><ShoppingStep></ShoppingStep></div>
+        <div>
+            <Header_1></Header_1>
+        </div>
+        <div>
+            <ShoppingStep></ShoppingStep>
+        </div>
 
         <div class="content">
             <p class="result">訂單完成!</p>
@@ -66,7 +70,7 @@ import { ref } from 'vue';
                 <hr>
             </div>
             <div class="payment">
-                
+
                 <div class="total">
                     <div class="count">
                         <h3>商品金額</h3>
@@ -97,19 +101,20 @@ import { ref } from 'vue';
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
-.wrapper{
+
+.wrapper {
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
 }
 
-.content{
+.content {
     margin: 0 auto;
     margin-top: 20px;
     width: 100%;
-    max-width:1000px;
+    max-width: 1000px;
     // border: 1px solid white;
 }
 
-.result{
+.result {
     text-align: center;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
@@ -119,7 +124,7 @@ import { ref } from 'vue';
     line-height: normal;
 }
 
-.orderno{
+.orderno {
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
     font-size: 18px;
@@ -130,22 +135,22 @@ import { ref } from 'vue';
     margin-bottom: 20px;
 }
 
-.order_profile{
+.order_profile {
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-   
+
 }
 
-.order_profile > p{
+.order_profile>p {
     margin-bottom: 12px;
-   
+
 }
 
-.inner01{
+.inner01 {
     display: flex;
     text-align: center;
     color: var(--Color-6, #FFF);
@@ -157,23 +162,24 @@ import { ref } from 'vue';
 
 }
 
-.inner01 p{
+.inner01 p {
     flex-basis: 10%;
-    text-align: left ;
+    text-align: left;
 }
 
-.order-summary{
+.order-summary {
     margin-bottom: 32px;
 }
 
-.order-summary hr{
+.order-summary hr {
     height: 2px;
     background-color: #FFF;
     border: none;
-    border-radius: 2.5px; /* 讓線條變得更加圓潤 */
+    border-radius: 2.5px;
+    /* 讓線條變得更加圓潤 */
 }
 
-.order-title{
+.order-title {
     background: var(--header-footer, #000354);
     font-weight: bold;
     color: var(--Color-6, #FFF);
@@ -191,7 +197,7 @@ import { ref } from 'vue';
     font-size: 18px;
 }
 
-.order-item{
+.order-item {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     padding: 10px;
@@ -201,7 +207,7 @@ import { ref } from 'vue';
     font-family: "Noto Sans TC";
 }
 
-.product-info{
+.product-info {
     display: flex;
     gap: 20px;
     align-items: center;
@@ -210,7 +216,7 @@ import { ref } from 'vue';
     font-size: 18px;
 }
 
-.payment{
+.payment {
     background: var(--header-footer, #000354);
     width: 100%;
     max-width: 1000px;
@@ -218,10 +224,10 @@ import { ref } from 'vue';
     border-radius: 10px;
     flex-grow: 0;
     margin-bottom: 40px;
-    
+
 }
 
-.total{
+.total {
     width: 96%;
     margin: 0 auto;
     padding: 20px;
@@ -233,42 +239,43 @@ import { ref } from 'vue';
     margin-bottom: 12px;
 }
 
-.total hr{
+.total hr {
     height: 2px;
     background-color: #FFF;
     border: none;
-    border-radius: 2.5px; /* 讓線條變得更加圓潤 */
+    border-radius: 2.5px;
+    /* 讓線條變得更加圓潤 */
 }
 
-.count{
+.count {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
 }
 
-.shipping-fee{
+.shipping-fee {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
 }
 
-.discount-fee{
+.discount-fee {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
 }
 
-.total-fee{
+.total-fee {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
     font-size: 20px;
 }
 
-.confirm{
+.confirm {
     display: flex;
     width: 240px;
     margin: 0 auto;
@@ -277,7 +284,7 @@ import { ref } from 'vue';
     justify-content: center;
 }
 
-.confirm button{
+.confirm button {
     font-size: 20px;
     width: 160px;
     height: 40px;
@@ -288,8 +295,4 @@ import { ref } from 'vue';
     cursor: pointer;
 
 }
-
-
-
-
 </style>
