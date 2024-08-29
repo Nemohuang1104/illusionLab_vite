@@ -3,7 +3,7 @@
         <p class="leadingtext">各位飛行者，請注意，即將進行倒數啟動。請確認安全帶已經繫好，並放鬆心情，準備迎接一段令人難忘的旅程</p>
         <p class="leadingtext">5... 4... 3... 2... 1...</p>
     </div>
-    <img class="UFOimg" src="../assets/img/UFO.png" alt="">
+    <img class="UFOimg" src="../assets/images/UFO.png" alt="">
     <canvas id="myCanvas"></canvas>
 </template>
 
