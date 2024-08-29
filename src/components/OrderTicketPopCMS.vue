@@ -1,7 +1,6 @@
 <script setup>
 
 </script>
-<<<<<<< HEAD
 <template>
     <div class="wrapper">
         <div class="detail">
@@ -104,13 +103,6 @@
 
         </div>
 
-=======
-
-
-
-<template>
-    <div>
->>>>>>> f997e5236cf370e04e954ca3a392b6560d8a71f5
 
     </div>
 </template>
@@ -118,7 +110,6 @@
 
 
 <style lang="scss" scoped>
-<<<<<<< HEAD
 //popup的外框樣式
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
@@ -333,7 +324,4 @@
     border: none;
     font-size: 20px;
 }
-=======
-
->>>>>>> f997e5236cf370e04e954ca3a392b6560d8a71f5
 </style>
