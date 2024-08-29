@@ -1,6 +1,6 @@
 <script setup>
-import Header_1 from '@/components/Header_1.vue';
-import Footer from '@/components/Footer.vue';
+import Header_0 from '@/components/Header_0.vue';
+import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import { ref, computed} from 'vue';
 
@@ -8,13 +8,34 @@ const cartItems = ref([
   { name: '繪本風格帆布袋', quantity: 1, price: 590 }
 ]);
 
-const totalAmount = computed(() => {
+// const totalAmount = computed(() => {
+//   return cartItems.value.reduce((total, item) => {
+//     return total + item.quantity * item.price;
+//   }, 0);
+// });
+
+const shippingMethod = ref('');
+const shippingFee = computed(() => {
+  if (shippingMethod.value === '7-11取貨') {
+    return 60;
+  } else if (shippingMethod.value === '宅配到府') {
+    return 100;
+  } else {
+    return 0;
+  }
+});
+
+const itemsTotal = computed(() => {
   return cartItems.value.reduce((total, item) => {
     return total + item.quantity * item.price;
   }, 0);
 });
 
-const shippingMethod = ref('');
+const totalAmount = computed(() => {
+  return itemsTotal.value + shippingFee.value;
+});
+
+
 const formData = ref({
     name: '',
     phone: '',
@@ -68,7 +89,7 @@ function prefillOrdererInfo(e){
 
 <template>
     <div class="wrapper">
-        <div><Header_1></Header_1></div>
+        <div><Header_0></Header_0></div>
 
         <!--購物車流程數字圖示_組件模板開始線-->
         <div><ShoppingStep></ShoppingStep></div>
@@ -232,11 +253,11 @@ function prefillOrdererInfo(e){
                     <hr>
                     <div class="count">
                         <h3>商品金額</h3>
-                        <p>${{ totalAmount }}</p>
+                        <p>${{ itemsTotal }}</p>
                     </div>
                     <div class="shipping-fee">
                         <h3>運費</h3>
-                        <p>$60</p>
+                        <p>${{ shippingFee }}</p>
                     </div>
                     <div class="discount-fee">
                         <h3>折扣金額</h3>
@@ -255,7 +276,7 @@ function prefillOrdererInfo(e){
             <button>返回</button>
             <button>結帳</button>
         </div>
-        <Footer></Footer>
+        <Footer_0></Footer_0>
     </div>
 </template>
 
@@ -270,7 +291,7 @@ function prefillOrdererInfo(e){
 
 .content{
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 5%;
     width: 100%;
     max-width:1000px;
     display: flex;
@@ -297,7 +318,7 @@ function prefillOrdererInfo(e){
     width: 100%;
     max-width: 600px;
     padding: 40px 0;
-    margin: 0 auto;
+    margin: 0 auto ;
     /* display: flex; */
     // border: 1px solid white;
     
