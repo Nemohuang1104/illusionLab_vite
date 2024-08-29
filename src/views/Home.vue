@@ -84,7 +84,7 @@
 
 
 <script setup>
-import Header from '@/components/Header_1.vue';
+import Header from '@/components/Header_0.vue';
 import PokerFall from '@/components/PokerFall.vue';
 import StoneFall from '@/components/StoneFall.vue';
 import FlowerFall from '@/components/FlowerFall.vue';
