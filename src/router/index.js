@@ -1,22 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-<<<<<<< HEAD
-import g2 from "../views/Guide.vue";
-import Enter from "../views/Enter.vue";
-import Back from "../views/Back.vue";
-import Home from "../views/Home.vue";
-import StrellarFrontierIntro from "../views/StrellarFrontierIntro.vue";
-import Header_2 from "../components/Header_2.vue";
-import ProductPage from "../views/ProductPage.vue";
-import DetailList from "../views/DetailList.vue";
-import Header_0 from "../components/Header_0.vue";
-import SFHeader_0 from "../components/SFHeader_0.vue";
-import OrderTicketPopCMS from "../components/OrderTicketPopCMS.vue";
-import Footer_0 from "../components/Footer_0.vue";
-import Footer_2 from "../components/Footer_2.vue";
-
-
-=======
->>>>>>> f997e5236cf370e04e954ca3a392b6560d8a71f5
 
 // path → component
 const routes = [
@@ -89,7 +71,6 @@ const routes = [
 // 建立 router
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-<<<<<<< HEAD
   routes: [
     {
       path: '/',
@@ -158,8 +139,7 @@ const router = createRouter({
     }
 
   ]
-=======
-  routes: routes
+  // routes: routes
 });
 
 router.beforeEach((to, from, next) => { // 記得加第三個參數 next
@@ -185,7 +165,6 @@ router.beforeEach((to, from, next) => { // 記得加第三個參數 next
   }
   
 });
->>>>>>> f997e5236cf370e04e954ca3a392b6560d8a71f5
 
 // 匯出 router
 export default router;
