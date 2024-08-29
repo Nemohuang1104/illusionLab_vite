@@ -9,6 +9,7 @@
     </div>
     <!-- <p class="line2">5... 4... 3... 2... 1...</p> -->
 
+    <img class="UFOimg" src="../assets/images/UFO.png" alt="">
     <canvas id="myCanvas"></canvas>
 </template>
 

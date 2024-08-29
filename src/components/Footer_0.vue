@@ -14,7 +14,8 @@
                 <span>製作團隊</span>
                 <span>使用辦法</span>
             </div>
-            <p>@本網站為緯育TibaMe【第93期】前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
+            <p>本網站為緯育TibaMe【第93期】前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
+            <p>Copyright &copy; 2024 幻浸實驗室</p>
 
         </div>
     </div>
@@ -67,7 +68,7 @@
     font-size: 10px;
     line-height: 1.6rem;
     flex-basis: 0%;
-    color: var(--Color-6, #FFF);
+    color: #FFF;
     font-family: "Noto Sans TC";
 }
 

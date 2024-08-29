@@ -1,3 +1,15 @@
+.LifeCasio_btn {
+  border: double 4px white;
+  background: linear-gradient(to right, #E6BC38 0%, #FFE880 50%, #E9C54E 70%, #FAE684 84%, #C59B36 100%);
+  text-align: center;
+  line-height: 30px;
+  transition: 0.5s;
+  color: white;
+}
 
+.LifeCasio_btn:hover {
+  color: black;
+  background: linear-gradient(to left, #E6BC38 0%, #FFE880 50%, #E9C54E 70%, #FAE684 84%, #C59B36 100%);
+}
 
 /*# sourceMappingURL=style.css.map */

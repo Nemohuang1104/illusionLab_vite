@@ -1,18 +1,14 @@
 <script setup>
-import Header_1 from '@/components/Header_0.vue';
-import Footer from '@/components/Footer_0.vue';
+import Header_0 from '@/components/Header_0.vue';
+import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import { ref } from 'vue';
 </script>
 
 <template>
     <div class="wrapper">
-        <div>
-            <Header_1></Header_1>
-        </div>
-        <div>
-            <ShoppingStep></ShoppingStep>
-        </div>
+        <div><Header_0></Header_0></div>
+        <div><ShoppingStep></ShoppingStep></div>
 
         <div class="content">
             <p class="result">訂單完成!</p>
@@ -95,7 +91,7 @@ import { ref } from 'vue';
         <div class="confirm">
             <button>返回首頁</button>
         </div>
-        <Footer></Footer>
+        <Footer_0></Footer_0>
     </div>
 </template>
 

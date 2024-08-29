@@ -192,6 +192,71 @@ p {
   text-shadow: 1px 1px 4.7px rgba(0, 0, 76, 0.25);
 
 }
+ 
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .scroll-wrap {
+    position: relative;
+  }
+  .scroll-wrap li {
+    height: 100vh;
+  }
+  .movie {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background:#111;
+    font-family: "Noto Sans TC";
+  }
+  .movie .bg {
+    width: 100vw;
+    height: 100vh;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  .movie .bg .text{
+    // border: 2px solid red;
+    margin: 0 auto;
+    margin-top: 15%;
+    max-width: 800px;
+    display: block;
+    text-align: center;
+    // scale: 1;
+    // opacity: 1;
+    transition: 1s;
+    animation: enter 1s forwards;
+  }
+
+  @keyframes enter{
+    0%{
+      opacity: 0;
+      transform: scale(1.5);
+
+    }
+    100%{
+      opacity: 1;
+      transform: scale(1);
+
+    }
+  }
 
 ul,
 li {
