@@ -28,11 +28,13 @@ import { ref, computed } from 'vue';
 
 <style lang="scss" scoped>
 
-
 .wrapper{
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
-    height: 100vh;
-    padding-bottom: 12%;
+    min-height: 100vh;
+    background-size: cover;
+    // min-height: 100vh; /* 確保背景至少覆蓋視口高度 */
+    
+    
 }
 
 .content{
@@ -43,6 +45,7 @@ import { ref, computed } from 'vue';
     width: 100%;
     max-width:1140px;
     // border: 1px solid white;
+    // flex: 1; /* 讓內容區域自適應剩餘空間 */
 }
 
 .tab{
@@ -77,6 +80,7 @@ import { ref, computed } from 'vue';
 
 .replace{
     flex-basis: 80%;
+    
 }
 
 

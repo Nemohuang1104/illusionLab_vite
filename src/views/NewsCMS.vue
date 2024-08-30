@@ -125,7 +125,9 @@ const goToPage = (page) => {
         <div class="code-input">
             <p>消息管理</p>
             <div class="add">
-                <button >新增</button>  
+                <button >新增
+                  <img src="../assets/images/flat-color-icons_plus.png" alt="">
+                </button>  
             </div>
         </div>
         <div class="inner">
@@ -284,6 +286,16 @@ const goToPage = (page) => {
     background: var(--Color-2, #FCB600);
     border-radius: 6px;
     cursor: pointer;
+    position: relative;
+    padding-left: 24px;
+}
+
+.add img{
+    position: absolute;
+    left: 12px;
+    top: 4px;
+    width: 22px;
+    height: 22px;
 }
 
 .order-summary{
