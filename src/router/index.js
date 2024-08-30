@@ -54,7 +54,7 @@ const routes = [
   {
     path: '/mindspectrum',
     name: 'mindspectrum',
-    component: () => import('@/views/MindSpectrum-index.vue'),
+    component: () => import('@/components/MS/MS_main.vue'),
     meta: {
       title: "心靈光譜"
     },

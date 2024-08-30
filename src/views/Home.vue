@@ -67,7 +67,7 @@
           <FlowerFall class="slide__content layer2"></FlowerFall>
           <img class="slide__main layer1 duck" src="../assets/images/carousel3_1.png" alt="">
           <div class="text layer3">
-            <img class="logo" src="../assets/images/logo_heart.svg" alt="">
+            <img class="logo" src="../assets/images/logo_MindSpectrum.svg" alt="">
             <p>心靈光譜是為孤獨而痛苦著的你，<br>
               提供一個療癒的旅程，<br>
               進入繪本的世界拋開一切煩惱，<br>
@@ -313,10 +313,10 @@ function goToLittleQuiz(){
 
     .LC_btn{
       // border: 2px solid red;
-      
+      margin: 0 auto;
       margin-top: 30px;
       text-align: center;
-      width: 100%;
+      
     }
   }
 

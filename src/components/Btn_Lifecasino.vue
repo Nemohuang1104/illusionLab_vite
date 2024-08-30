@@ -29,6 +29,7 @@ const props = defineProps({
   background-repeat: no-repeat;
   background-position: center;
   width: 200px;
+
   height: 60px;
   font-size: 20px;
   cursor: pointer;
