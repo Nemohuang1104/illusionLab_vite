@@ -98,52 +98,51 @@ import Footer from '@/components/Footer.vue';
 @import "../assets/SASS/basic/color";
 
 .wrapper{
-  background:linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
+  background:map-get($color_0,bgc_blue);
   background-repeat: no-repeat;
   width: 100%;
   font-family:"Noto Sans TC";
 }
 
 main{
-  width: 670px;
-  height: 790px;
+  width: 520px;
+  height: 510px;
   border-radius: 20px;
   border: 1px solid  #FFF;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 2.33%, rgba(255, 255, 255, 0.50) 97.83%);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12.5px);
   margin: 0 auto;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .form{
-  width: 410px;
+  width: 360px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .form h1{
   color: #FFF;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: "Noto Sans TC";
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
   text-align: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 12px;
 }
 
 .form .id input{
-  width: 390px;
-  height: 40px;
-  font-size: 18px;
+  width: 340px;
+  height: 32px;
+  font-size: 16px;
   border-radius: 80px;
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: transparent;
   padding-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   outline: none;
 }
 
@@ -151,7 +150,7 @@ main{
   display: flex;
   align-items: end;
   padding-left: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .form .gender input{
@@ -168,15 +167,15 @@ main{
 }
 
 .form .name input{
-  width: 390px;
-  height: 40px;
-  font-size: 18px;
+  width: 340px;
+  height: 36px;
+  font-size: 16px;
   border-radius: 80px;
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: transparent;
   padding-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   outline: none;
 }
 
@@ -185,16 +184,26 @@ main{
   justify-content: space-between;
 }
 
+select {
+  width: 100%; /* 根據需要調整寬度 */
+}
+
+/* 針對下拉選單中的選項進行樣式設定 */
+option {
+  max-height: 200px; /* 設置最大高度 */
+  overflow-y: auto;  /* 使其可滾動 */
+}
+
 .city select{
-  width: 180px;
-  height: 40px;
-  font-size: 18px;
+  width: 170px;
+  height: 32px;
+  font-size: 16px;
   border-radius: 80px;
   color: #505050;
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: rgba(255, 255, 255, 0.70);;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   appearance: none; 
   text-align: center;
   cursor: pointer;
@@ -202,26 +211,26 @@ main{
 }
 
 .form .address{
-  width: 390px;
-  height: 40px;
-  font-size: 18px;
+  width: 340px;
+  height: 32px;
+  font-size: 16px;
   border-radius: 80px;
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: transparent;
   padding-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   outline: none;
 }
 
 .form .random{
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .form .random>input{
-  width: 160px;
-  height: 40px;
-  font-size: 18px;
+  width: 156px;
+  height: 32px;
+  font-size: 16px;
   border-radius: 80px;
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
@@ -233,28 +242,29 @@ main{
 .random p{
   display: inline-block;
   width: 132px;
-  height: 40px;
+  height: 32px;
   border: 2px solid #7976BB;
   border-radius: 12px;
-  line-height: 40px;
+  line-height: 32px;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
   color: #505050;
-  margin-left: 36px;
+  margin-left: 8px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .random img{
-  margin-left: 20px;
+  margin-left: 8px;
   cursor: pointer;
 }
 
 .form a{}
 
 .form .button{
-  width: 410px;
-  height: 40px;
-  font-size: 18px;
+  width: 360px;
+  height: 32px;
+  font-size: 16px;
   color: #505050;
   border-radius: 80px;
   border: 1px solid #FFF;
@@ -265,5 +275,6 @@ main{
   cursor: pointer;
   outline: none;
 }
+
 
 </style>
