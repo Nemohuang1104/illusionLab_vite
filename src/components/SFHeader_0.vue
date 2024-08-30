@@ -1,8 +1,8 @@
 <template>
     <div class="header1">
         <div class="logo">
-            <img src="../assets/images/LSlogo.png" alt="" class="LS">
-            <img src="../assets/images/StrellarFrontieLOGO.png" alt="" class="SF">
+            <img src="../assets//images/logo_lifecasino.svg" alt="" class="LS">
+            <img src="../assets/images/logo_StrellarFrontierIntro.svg" alt="" class="SF">
             <img src="../assets//images/LoveLogo.png" alt="" class="LI">
         </div>
         <div class="icons">
@@ -31,36 +31,36 @@
 
 .logo{
     // border: 1px solid red;
-    width: 60%;
+    width: 70%;
     line-height: 80px;
     display: flex;
-    justify-content:space-between;
+    justify-content:flex-end;
     align-items: center;
     padding:10px 20px;
 
 }
 .logo img{
-    height: 60px;
+    // height: 60px;
     flex-shrink: 0;
     padding:10px 20px;
 }
 
 .logo .LS {
+    width: 125px;
     flex-shrink: 0;
-    width: 124px;
-    height: 45px;
+    // height: 45px;
 }
 
 .logo .SF {
+    width: 140px;
     flex-shrink: 0;
-    width: 130px;
-    height: 50px;
+    // height: 50px;
 }
 
 .logo .LI {
-    flex-shrink: 0;
     width: 170px;
-    height: 80px;
+    flex-shrink: 0;
+    
 }
 
 

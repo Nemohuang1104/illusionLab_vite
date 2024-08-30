@@ -1,7 +1,8 @@
 <script setup>
-
+import Header_0 from '@/components/Header_0.vue';
 </script>
 <template>
+    <Header_0 />
     <div class="wrapper">
         <div class="detail">
             <div class="order-summary">
@@ -51,24 +52,27 @@
                     </div>
                 </div>
 
-                <div>
-                    <div class="textdown">
-                        <p>訂單場次明細</p>
-                        <div class="titlename">
-                            <p class="eventname">場次名稱</p>
-                            <p class="quantity">訂票數量</p>
-                            <p class="price">價格</p>
+                <div class="downbox">
+                    <div class="orderlist">
+                        <div class="textdown">
+                            <p>訂單場次明細</p>
+                            <div class="titlename">
+                                <p class="eventname">場次名稱</p>
+                                <p ></p>
+                                <p class="quantity">訂票數量</p>
+                                <p class="price">價格</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="textdetail">
-                        <img src="" alt="">
-                        <div>
-                            <p>人生賭場</p>
-                            <p>2024/08/09</p>
-                            <p>上午場</p>
+                        <div class="textdetail">
+                            <img src="../assets/images/lifecasino.png" alt="">
+                            <div class="detaillist">
+                                <p>人生賭場</p>
+                                <p>2024/08/09</p>
+                                <p>上午場</p>
+                            </div>
+                            <p>8</p>
+                            <p> $17,600</p>
                         </div>
-                        <p>8</p>
-                        <p> $17,600</p>
                     </div>
                     <div class="total">
                         <div class="orderdiv">
@@ -114,23 +118,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 .wrapper {
-    background-color: blue;
+    font-family: Noto Sans TC;
+    font-weight: bold;
+    background-color: #000354;
+
 }
+
 
 .detail {
     // display: flex;
     margin: 0 auto;
     align-items: center;
     justify-content: center;
-    width: 900px;
+    max-width: 900px;
+    width: 100%;
     height: 900px;
     border-radius: 10px;
-    padding: 16px;
-    padding-left: 20px;
-    padding-right: 20px;
-
+    padding: 2%;
     background: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 0.30) 97.6%);
-    margin-bottom: 20px;
+
+
 
 }
 
@@ -193,19 +200,16 @@
 //與輸入框有關
 .inputtext {
     outline: none;
-    padding: 10px;
+    padding: 5px 10px 5px 10px;
     border: 1px solid #FFFFFF;
     border-radius: 8px;
     flex-shrink: 0;
 }
 
 .orderinf1 {
-
     display: flex;
     align-items: center;
-
-    max-width: 800px;
-    width: 100%;
+    max-width: 100%;
     padding: 1%;
     margin-top: 20px;
     // border: 1px solid red;
@@ -217,13 +221,14 @@
     border: 1px solid black;
     display: flex;
     align-items: center;
-    max-width: 800px;
-    width: 100%;
-    padding: 1%;
+    // max-width: 800px;
+    max-width: 100%;
+
     // border: 1px solid red;
     gap: 20%;
     flex-wrap: wrap;
     margin-bottom: 20px;
+    padding: 1%;
 
 }
 
@@ -236,11 +241,11 @@
 
 
 
-// 下表
+// 第二表
 
 
 .textdown>p {
-    margin-bottom: 10px;
+    margin: 10px 0px 10px 0px;
 }
 
 .total {
@@ -260,30 +265,37 @@
     width: 100px;
 }
 
+.orderlist{
+   width: 100%;
+
+}
+
+.detaillist{
+    line-height: 1.6;
+} 
+
+
+
 .titlename {
     background-color: #22247A;
     color: #FFFFFF;
     height: 35px;
-    display: flex;
+    display: grid;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
-    padding-left: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+ 
 }
 
-
-
-.eventname {
-
-    margin-right: 300px;
+.eventname{
+    margin: 0 20px;
 }
 
-.quantity {
-    margin-right: 150px;
-}
 
 .inputtext1 {
     outline: none;
-    padding: 10px;
+    padding: 5px 10px 5px 10px;
     border: 1px solid #FFFFFF;
     border-radius: 8px;
     flex-shrink: 0;
@@ -291,8 +303,30 @@
 }
 
 .textdetail {
-    border: 1px solid red;
+    // border: 1px solid red;
     background: linear-gradient(136deg, #FFFFFF 23.13%, rgba(255, 255, 255, 0.30) 97.6%);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    flex-direction: column;
+    height: 180px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.textdetail img{
+    width: 120px;
+    height: 120px;
+    margin: 10px 20px;
+}
+
+
+
+.downbox {
+    border: 1px solid black;
+    padding: 2%;
+    margin-bottom: 80px;
 }
 
 

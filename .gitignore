@@ -15,6 +15,7 @@ dist-ssr
 coverage
 WeiText
 *.local
+package-lock
 
 /cypress/videos/
 /cypress/screenshots/

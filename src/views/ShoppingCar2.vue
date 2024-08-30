@@ -93,13 +93,7 @@ function prefillOrdererInfo(e) {
 
 <template>
     <div class="wrapper">
-<<<<<<< HEAD
-        <div>
-            <Header_1></Header_1>
-        </div>
-=======
         <div><Header_0></Header_0></div>
->>>>>>> f997e5236cf370e04e954ca3a392b6560d8a71f5
 
         <!--購物車流程數字圖示_組件模板開始線-->
         <div>

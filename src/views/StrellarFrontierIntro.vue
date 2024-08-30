@@ -5,11 +5,10 @@
             <img class="UFOimg" src="../assets/images/UFO.png" alt="">
         </div>
         <div class="text line1" data-text="各位飛行者，請注意，即將進行倒數啟動。請確認安全帶已經繫好，並放鬆心情，準備迎接一段令人難忘的旅程">
-            各位飛行者，請注意<br>即將進行倒數啟動<br>請確認安全帶已經繫好<br>並放鬆心情，準備迎接一段令人難忘的旅程</div>
+            各位飛行者，請注意<br>即將進行倒數啟動<br>請確認安全帶已經繫好<br>並放鬆心情，準備迎接一段令人難忘的旅程
+        </div>
     </div>
     <!-- <p class="line2">5... 4... 3... 2... 1...</p> -->
-
-    <img class="UFOimg" src="../assets/images/UFO.png" alt="">
     <canvas id="myCanvas"></canvas>
 </template>
 
@@ -145,16 +144,7 @@ onBeforeUnmount(() => {
 });
 
 
-
-// 打字機
-// document.addEventListener('DOMContentLoaded', function () {
-//     setTimeout(function () {
-//         document.querySelector('.line2').classList.add('typing-active');
-//     }, 6000); // 延遲5秒，與第一行的打字動畫時間匹配
-// });
-
 //前導頁導至主活動頁
-
 // 設置定時器，XX秒後自動跳轉到主頁面
 setTimeout(function () {
     document.body.style.transition = "opacity 1s";
@@ -164,7 +154,7 @@ setTimeout(function () {
     setTimeout(function () {
         window.location.href = "/StrellarFrontierHomepage";// 放置主页面URL
     }, 1000); // 等待1秒淡出動畫结束
-}, 7000);// 1000毫秒 = 1秒
+}, 6200);// 1000毫秒 = 1秒
 
 </script>
 
@@ -240,7 +230,7 @@ setTimeout(function () {
     /* 可選：設置容器的寬度和高度，以便適應圖片大小 */
     max-width: 1440px;
     width: 100%;
-    animation: ufoGlitch 8s linear;
+    animation: ufoGlitch 7s linear;
 
 }
 
@@ -475,38 +465,4 @@ setTimeout(function () {
     }
 }
 
-/* 打字機 */
-@keyframes typing2 {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 15h;
-        /* 這裡的寬度是根據 .line2 的數字符號去做調整 */
-    }
-}
-
-.line2 {
-    font-family: "Noto Serif SC";
-    color: #fff;
-    width: 15ch;
-
-    /* width: 100%; */
-    white-space: nowrap;
-    /* 禁止文字換行 */
-    overflow: hidden;
-    /*可以確保文字不會超出父層範圍 */
-    border-right: .03em solid;
-    /*打字動畫 */
-    visibility: hidden;
-    /* 初始時隱藏第二行 */
-    animation: typing2 3s steps(15, end)6s;
-    /* typing2持續時間，确保 steps 數量與字幅匹配 6秒為延遲時間*/
-    padding-left: 46%;
-}
-
-.line2.typing-active {
-    visibility: visible;
-}
 </style>

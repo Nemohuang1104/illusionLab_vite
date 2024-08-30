@@ -44,20 +44,6 @@ import { ref } from 'vue';
 
           <div class="pro">
             <a href="">
-              <img src="../assets/images/productsyoyocard.png" alt="">
-              <p>星際邊境卡片</p>
-              <div class="text">
-                <div class="price">
-                  <span>NT$ 100元</span>
-                </div>
-                <div class="icon"></div>
-              </div>
-            </a>
-          </div>
-
-
-          <div class="pro">
-            <a href="">
               <img src="../assets/images/productspillow 1.png" alt="">
               <p>造型抱枕</p>
               <div class="text">
@@ -68,8 +54,6 @@ import { ref } from 'vue';
               </div>
             </a>
           </div>
-
-
           <div class="pro">
             <a href="">
               <img src="../assets/images/productstshirt.png" alt="">
@@ -85,7 +69,7 @@ import { ref } from 'vue';
 
           <div class="pro">
             <a href="">
-              <img src="../assets/images/productsbook.png" alt="">
+              <img src="../assets/images/productsbook_2.png" alt="">
               <p>太空系列筆記本</p>
               <div class="text">
                 <div class="price">
@@ -95,21 +79,6 @@ import { ref } from 'vue';
               </div>
             </a>
           </div>
-
-          <div class="pro">
-            <a href="">
-              <img src="../assets/images/productscup.png" alt="">
-              <p>太空鋼杯</p>
-              <div class="text">
-                <div class="price">
-                  <span>NT$ 450元</span>
-                </div>
-                <div class="icon"></div>
-              </div>
-            </a>
-          </div>
-
-
           <div class="pro">
             <a href="">
               <img src="../assets/images/productsbag.png" alt="">
@@ -117,6 +86,18 @@ import { ref } from 'vue';
               <div class="text">
                 <div class="price">
                   <span>NT$ 660元</span>
+                </div>
+                <div class="icon"></div>
+              </div>
+            </a>
+          </div>
+          <div class="pro">
+            <a href="">
+              <img src="../assets/images/easycard.png" alt="">
+              <p class="easycard">星際邊際悠遊卡</p>
+              <div class="text">
+                <div class="price">
+                  <span>NT$ 200元</span>
                 </div>
                 <div class="icon"></div>
               </div>
@@ -244,7 +225,9 @@ import { ref } from 'vue';
 }
 
 .list {
+  width: 80%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 26px;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
@@ -255,11 +238,15 @@ import { ref } from 'vue';
 .pro {
   // border: 1px solid red;
   width: 160px;
-  margin-bottom: 20px;
+  height: 250px;
+  // margin-bottom: 20px;
   padding: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   /*浮起來及陰影效果 */
   border-radius: 10px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center; /* 確保內容居中 */
 
 }
 
@@ -272,9 +259,13 @@ import { ref } from 'vue';
   /* 懸停時增加邊框颜色 */
 }
 
-.pro a {
-  text-decoration: none;
+.pro img {
+  max-width: 100%;
+  max-height: 150px; /* 限制圖片高度 */
+  object-fit: contain; /* 保持圖片比例 */
+  margin-bottom: 10px;
 }
+
 
 
 .pro p {
@@ -290,7 +281,7 @@ import { ref } from 'vue';
 //商品
 .pagebox img {
   max-width: 150px;
-  height: 160px;
+  flex-shrink: 0;
   margin-bottom: 15px;
 }
 
@@ -300,5 +291,9 @@ import { ref } from 'vue';
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.easycard{
+  
 }
 </style>

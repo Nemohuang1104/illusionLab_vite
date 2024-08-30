@@ -68,7 +68,8 @@ const routes = [
       title: "小測驗"
     },
     requiredLogin: false
-  }
+  },
+  
 ];
 
 // 建立 router
