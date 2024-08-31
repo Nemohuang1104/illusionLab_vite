@@ -1,6 +1,7 @@
 // src/preview.js
 import { createApp } from 'vue';
-import MyComponent from './components/btn_lifecasino.vue';
+// import MyComponent from './components/Btn_Lifecasino.vue';
+import MyComponent from './views/MindSpectrum.vue';
 import "@/assets/css/reset.css";
 
 

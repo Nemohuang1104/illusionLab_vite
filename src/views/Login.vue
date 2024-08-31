@@ -48,44 +48,44 @@ import Footer from '@/components/Footer_0.vue';
 }
 
 main{
-  width: 670px;
-  height: 650px;
+  width: 520px;
+  height: 480px;
   border-radius: 20px;
   border: 1px solid  #FFF;
-  background: map-get($color_0 ,bgc_white);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 2.33%, rgba(255, 255, 255, 0.50) 97.83%);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12.5px);
   margin: 0 auto;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 h1{
-  color: map-get($colorfont_0, white );
+  color: #FFF;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: "Noto Sans TC";
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .form{
-  width: 410px;
+  width: 360px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .form .text{
-  width: 390px;
-  height: 40px;
-  font-size: 18px;
+  width: 340px;
+  height: 36px;
+  font-size: 16px;
   border-radius: 80px;
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: transparent;
   padding-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   outline: none;
 }
 
@@ -96,29 +96,29 @@ h1{
 .form .text+a{
   display: block;
   text-align: right;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
   text-decoration: none;
   font-size: 16px;
-  color: map-get($colorfont_0,black3 );
+  color: #505050;
 }
 
 .form p{
   font-size: 16px;
-  color: map-get($colorfont_0,black3 );
+  color: #505050;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .form .login{
-  width: 410px;
-  height: 40px;
+  width: 360px;
+  height: 36px;
   border-radius: 80px;
   border: 1px solid #FFF;
   background: rgba(255, 255, 255, 0.70);
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
-  font-size: 18px;
-  color: map-get($colorfont_0,black3 );
-  margin-bottom: 40px;
+  font-size: 16px;
+  color: #505050;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -128,21 +128,28 @@ h1{
 }
 
 .form img{
-  margin: 0px 10px 20px;
+  margin: 0px 12px 12px;
 }
 
 .from a{}
 
 .form .signup{
-  width: 410px;
-  height: 40px;
+  width: 360px;
+  height: 36px;
   border-radius: 80px;
   border: 1px solid #FFF;
   background: rgba(255, 255, 255, 0.70);
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
-  font-size: 18px;
-  color: map-get($colorfont_0,black3 );
+  font-size: 16px;
+  color: #505050;
   cursor: pointer;
+}
+
+
+footer{
+  width: 100%;
+  height: 270px;
+  background-color: #22247A;
 }
 
 </style>

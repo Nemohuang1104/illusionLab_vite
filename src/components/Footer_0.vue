@@ -3,6 +3,8 @@
 </script>
 
 <template>
+
+    <!-- 幻境LOGO -->
     <div class="outline">
         <div class="content">
             <img src="../assets/images/illusionLab_logo.png" alt="">
@@ -17,11 +19,14 @@
 
         </div>
     </div>
+
+    
 </template>
 
 
 
 <style lang="scss" scoped>
+// 幻境LOGO
 .outline{
     width: 100%;
     max-width: 1440px;
