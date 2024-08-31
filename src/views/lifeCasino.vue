@@ -1,7 +1,8 @@
 <template>
     <div class="wrapper">
-        <Header v-if = "showHeader" class="header_nav"></Header>
-    <swiper
+    <Header :class="{ 'show-header': showHeader }" class="header-nav"></Header>
+
+    <swiper ref="mySwiper" class="mySwiper"
     :direction="'vertical'"
     :pagination="{
       clickable: false
@@ -10,9 +11,10 @@
     :speed="2000"
     :freemode="true" 
     :modules="modules"
-    class="mySwiper"
     :parallax="true"
-    @slideChange="onSlideChange">
+    @swiper="onSwiperInit"
+   >
+   
 
     <div slot="container-start" class="parallax-bg" data-swiper-parallax="-23%">
         <img src="../assets/images/lifecasino_bg1.png" alt="">
@@ -22,6 +24,7 @@
     </div>
     <!-- ===========section1============= -->
     <swiper-slide>
+
         <section class="slide slide1" data-swiper-parallax="-23%">
             <div class="slide1__contain">
                 <img class="logo" src="../assets/images/logo_lifecasino.svg" alt="">
@@ -33,12 +36,13 @@
     </swiper-slide>
 
     <!-- ===========section2============= -->
-    <swiper-slide>
-        
-        <section class="slide slide2">
-       
 
-    </section>
+
+    <swiper-slide>
+        <section class="slide slide2">
+        
+
+        </section>
     </swiper-slide>
 
 </swiper>
@@ -49,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive } from 'vue';
+// import { ref, onMounted, reactive, computed, } from 'vue';
 
 import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
 import LC_smoke from '@/components/LC_smoke.vue';
@@ -69,18 +73,32 @@ const modules = [Pagination, Mousewheel, Autoplay, Parallax];
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // ============header=============//
-const showHeader = ref(false);
 
-const onSlideChange = (swiper) => {
-    showHeader.value = swiper.activeIndex >= 2;
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const showHeader = ref(false);
+const slide2 = ref(null);
+
+// 檢查 slide2 是否在視口內
+const checkSlide2Visibility = () => {
+  const slide2Rect = slide2.value.getBoundingClientRect();
+  if (slide2Rect.top <= window.innerHeight && slide2Rect.bottom >= 0) {
+    showHeader.value = true;
+  } else {
+    showHeader.value = false;
+  }
 };
 
-onMounted(()=>{
-    return {
-      showHeader,
-      onSlideChange,
-    };
-})
+onMounted(() => {
+  // 當窗口滾動時檢查 slide2 的可見性
+  window.addEventListener('scroll', checkSlide2Visibility);
+  checkSlide2Visibility(); // 初始化檢查
+});
+
+onUnmounted(() => {
+  // 清理滾動事件監聽器
+  window.removeEventListener('scroll', checkSlide2Visibility);
+});
 
 </script>
 
@@ -92,22 +110,34 @@ onMounted(()=>{
 
 
 
+
 .wrapper{
+
     z-index: 0;
-    background-color: black;
+    // background-color: black;
     position: relative;
     height: 100vh;
     overflow: hidden;
     
-    .header-nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 10;
-      transition: opacity 0.5s ease; /* 添加淡入淡出效果 */
-    }
-
 }
+
+.header-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+//   background-color: #fff;
+  z-index: 10;
+//   opacity: 0;
+//   visibility: hidden;
+  transition: opacity 0.5s ease
+}
+
+.show-header {
+  opacity: 1;
+//   visibility: visible;
+}
+
+
 .parallax-bg {
     position: absolute;
     top: 0;
@@ -139,10 +169,19 @@ onMounted(()=>{
     }
     
 }
+@keyframes logoMove{
+    0%{
+        transform: scale(1) translateY(0px);
+    }
+    100%{
+        transform: scale(0.4) translateY(100px);
 
+    }
+}
 
 
 .slide1{
+
 
     &__img{
         // height: 100vh;
@@ -161,6 +200,7 @@ onMounted(()=>{
         
 
     &__contain{
+
         .logo{
             display: block;
             margin: 0 auto;

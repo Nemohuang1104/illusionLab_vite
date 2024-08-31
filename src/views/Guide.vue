@@ -30,7 +30,7 @@ function goToEnter() {
 }
 
 function goToBack() {
-  router.push('/back');
+  router.push('/logincms');
 }
 </script>
 

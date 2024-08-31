@@ -5,8 +5,8 @@
         </div>
         <div class="title">幻浸實驗室後台管理</div>
         <div class="icons">
-            <font-awesome-icon icon="shopping-cart" />
-            <font-awesome-icon icon="user" />
+            <!-- <font-awesome-icon icon="shopping-cart" /> -->
+            <!-- <font-awesome-icon icon="user" /> -->
         </div>
         
     </div>

@@ -1,19 +1,33 @@
 <template>
     <div class="header1">
         <div class="logo">
-           <img src="../assets/images/illusionLab_logo.png" alt="">
+           <img src="../assets/images/illusionLab_logo.png" alt="" @click="goToHome">
           
         </div>
         <div class="icons">
-            <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon"/>
-            <font-awesome-icon icon="fa-regular fa-face-meh"  class="peopleicon"/> 
+            <font-awesome-icon @click="goToShop" icon="fa-solid fa-cart-shopping" class="shoppingicon"/>
+            <font-awesome-icon  @click="goToSignUp" icon="fa-regular fa-face-meh"   class="peopleicon" /> 
         </div>
         
     </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
+function goToSignUp(){
+  router.push('/login');
+}
+
+function goToHome(){
+  router.push('/');
+}
+
+function goToShop(){
+  router.push('/shop');
+}
 </script>
 
 <style lang="scss" scoped>
@@ -28,7 +42,7 @@
 .logo img{
     height: 80px;
     flex-shrink: 0;
-    
+    cursor: pointer;
     
 }
 
@@ -45,11 +59,15 @@
     height: 25px;
     color: #FFF;
     margin-right: 20px;
+    cursor: pointer;
+
 }
 
 .peopleicon{
     width: 35px;
     height: 25px;
     color: #FFF;
+    cursor: pointer;
+
 }
 </style>
