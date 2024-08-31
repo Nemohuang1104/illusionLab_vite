@@ -1,7 +1,7 @@
 <script setup>
-    import Header_1 from '@/components/Header_1.vue';
+    import Header_1 from '@/components/Header_0.vue';
     import ShoppingStep from '@/components/ShoppingStep.vue';
-    import Footer from '@/components/Footer.vue';
+    import Footer from '@/components/Footer_0.vue';
 </script>
 <template>
     <div class="wrapper">

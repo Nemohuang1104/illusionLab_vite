@@ -107,11 +107,6 @@ const router = createRouter({
       path: '/ProductCMS',
       name: 'ProductCMS',
       component: ProductCMS
-      // children: [
-      //   { path: '/order-query', redirect: '/OrderQueryTicket' },
-      //   { path: '/OrderQueryTicket', component: OrderQueryTicket },
-      //   { path: '/OrderQueryProduct', component: OrderQueryProduct },
-      // ],
     },
     {
       path: '/CustomTicketCMS',
@@ -128,11 +123,6 @@ const router = createRouter({
       path: '/NewsCMS',
       name: 'NewsCMS',
       component: NewsCMS
-      // children: [
-      //   { path: '/order-query', redirect: '/OrderQueryTicket' },
-      //   { path: '/OrderQueryTicket', component: OrderQueryTicket },
-      //   { path: '/OrderQueryProduct', component: OrderQueryProduct },
-      // ],
     }
 
 

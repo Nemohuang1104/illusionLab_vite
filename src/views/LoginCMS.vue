@@ -1,4 +1,11 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function goToCenterCMS(){
+    router.push('/CenterCMS');
+}
 
 </script>
 
@@ -24,7 +31,7 @@
                 </div>
             </div>
             <div class="confirm">
-                    <button>登入</button>
+                    <button @click="goToCenterCMS">登入</button>
             </div>
         </div>
     </div>
