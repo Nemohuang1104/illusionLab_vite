@@ -43,7 +43,7 @@ import NewsCMS from "@/views/NewsCMS.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // 會員中心路由配置preview開始
+    // 1.會員中心路由配置preview開始
        // 根路徑為MemberCenter，進入MemberCenter再重定向到 '/Member' (MemberInfo)
     //    {
     //     path: '/preview_wennie.html',
@@ -82,7 +82,7 @@ const router = createRouter({
 
     // 會員中心路由配置preview結束
 
-    // 後台管理中心路由配置preview開始
+    // 2.後台管理中心路由配置preview開始
     // 根路徑為CenterCMS，進入CenterCMS再重定向到 '/Member' (MemberCMS)
     {
       path: '/preview_wennie.html',
