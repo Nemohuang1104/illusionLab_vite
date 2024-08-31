@@ -121,102 +121,108 @@
 
 
 <style lang="scss" scoped>
-     .wrapper{
-        background-image: url(../assets/images/StrellarFrontierBackground.png);
-    }
-    .title{
-        text-align: center;
-        margin-bottom: 5%;
-    }
-   
-    .ticket {
-        // position: fixed;  
-        // top: 20px;            
-        // z-index: 1000;  
-        margin: 5% auto;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 
-    .ticket img{
-        width: 100%;
-        max-width: 800px;
-        // 圖片置中
-        display: block;
-        margin: 0 auto;
-    }
-    hr{
-        border: 1px solid #fff ;
-    }
-    .ticketOptions{
-        padding: 7%;
-    }
+* {
+    font-family: "Noto Serif TC" ;
+}
 
-    .ticket-content {
-        position: absolute;
-        top: 20%;
-        left: 10%;
-        color: white;
-    }
+    .wrapper{
+    background-image: url(../assets/images/StrellarFrontierBackground.png);
+}
+.title{
+    text-align: center;
+    margin-bottom: 5%;
+}
 
-    .tabs {
-        display: flex;
-    }
+.ticket {
+    // position: fixed;  
+    // top: 20px;            
+    // z-index: 1000;  
+    margin: 5% auto;
+}
 
-    .tabs button {
-        padding: 5px 20px;
-        border: none;
-        cursor: pointer;
-        border-radius: 10px 10px 0px 0px;
-        font-size: 16px;
-        background-color: #024A81; 
-        color: white;
-    }
+.ticket img{
+    width: 100%;
+    max-width: 800px;
+    // 圖片置中
+    display: block;
+    margin: 0 auto;
+}
+hr{
+    border: 1px solid #fff ;
+}
+.ticketOptions{
+    padding: 7%;
+}
 
-    .tabs button.active {
-        color: #024A81;
-        background: #7AABD1;
-    }
+.ticket-content {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    color: white;
+}
 
-    .style-options, .sticker-options {
-        // display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        background: linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%);
-    
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        align-items: center;
-        justify-content:center;
-        text-align: center;
-        position: relative;
-        // padding: 30px;
-    }
+.tabs {
+    display: flex;
+}
 
-    .style-options img, .sticker-options img {
-        width: 100%;
-        max-width: 500px;
-        margin:3% auto;
-        cursor: pointer;
-        border: 1px solid transparent;
-    }
+.tabs button {
+    padding: 5px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 16px;
+    background-color: #024A81; 
+    color: white;
+}
 
-    .style-options img.selected {
-        border: 1px dashed#ffffff3f; 
-    }
+.tabs button.active {
+    color: #024A81;
+    background: #7AABD1;
+}
 
-    .section-title {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 18px;
-        padding:10px;
-    }
+.style-options, .sticker-options {
+    // display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%);
 
-    .datetime-options {
-        margin-top: 20px;
-    }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content:center;
+    text-align: center;
+    position: relative;
+    // padding: 30px;
+}
 
-    .datetime-options select {
-        padding: 5px;
-    }
+.style-options img, .sticker-options img {
+    width: 100%;
+    max-width: 500px;
+    margin:3% auto;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.style-options img.selected {
+    border: 1px dashed#ffffff3f; 
+}
+
+.section-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    padding:10px;
+}
+
+.datetime-options {
+    margin-top: 20px;
+}
+
+.datetime-options select {
+    padding: 5px;
+}
 </style>

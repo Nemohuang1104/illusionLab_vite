@@ -1,13 +1,18 @@
 // src / preview.js
 import { createApp } from 'vue';
-// import StrellarFrontier_Homepage from './views/StrellarFrontier_Homepage.vue';
-import StrellarFrontier_TicketDesign from './views/StrellarFrontier_TicketDesign.vue';
+
+// import view from './views/StrellarFrontier_Homepage.vue';
+import view from './views/StrellarFrontier_Homepage.vue';
+import Header from './views/Header.vue';
+import Header_0 from './components/Header_0.vue';
 
 
 
 
 
-const app = createApp(StrellarFrontier_TicketDesign);
+
+
+const app = createApp(Header_0);
 
 
 app.mount('#preview-app');
