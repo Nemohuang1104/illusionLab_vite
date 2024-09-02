@@ -1,5 +1,5 @@
 <script setup>
-import Header_1 from '../components/Header_1.vue'
+import Header_0 from '../components/Header_0.vue'
   
 </script>
 
@@ -7,7 +7,7 @@ import Header_1 from '../components/Header_1.vue'
 <template>
 <div class="wrapper">
 <!-- 頁首 -->
-<Header_1></Header_1>
+<Header_0></Header_0>
 
 <main>
   <!-- 中間圖片區 -->

@@ -1,12 +1,12 @@
 <script setup>
-import Header from './Header.vue';
-import Footer from '@/components/Footer_0.vue';
+import Header_0 from '../components/Header_0.vue';
+import Footer_0 from '../components/Footer_0.vue';
 </script>
 
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-  <Header></Header>
+  <Header_0></Header_0>
 
 <!-- 中間會員登入區塊 -->
 <main>
@@ -31,7 +31,7 @@ import Footer from '@/components/Footer_0.vue';
 </main>
 
 <!-- 頁尾 -->
-<Footer></Footer>
+<Footer_0></Footer_0>
   </div>
   
 </template>
@@ -41,7 +41,7 @@ import Footer from '@/components/Footer_0.vue';
 @import "../assets/SASS/basic/color";
 
 .wrapper{
-  background: map-get($color_0, bgc_blue);
+  background: map-get($color_0,bgc_blue);
   background-repeat: no-repeat;
   width: 100%;
   font-family:"Noto Sans TC";
@@ -51,8 +51,8 @@ main{
   width: 520px;
   height: 480px;
   border-radius: 20px;
-  border: 1px solid  #FFF;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 2.33%, rgba(255, 255, 255, 0.50) 97.83%);
+  border: 1px solid  map-get($colorfont_0,white);
+  background: map-get($color_0,bgc_white);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12.5px);
   margin: 0 auto;
@@ -131,7 +131,6 @@ h1{
   margin: 0px 12px 12px;
 }
 
-.from a{}
 
 .form .signup{
   width: 360px;
@@ -144,12 +143,4 @@ h1{
   color: #505050;
   cursor: pointer;
 }
-
-
-footer{
-  width: 100%;
-  height: 270px;
-  background-color: #22247A;
-}
-
 </style>
