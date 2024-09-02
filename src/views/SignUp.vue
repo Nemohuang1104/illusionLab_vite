@@ -1,6 +1,6 @@
 <script setup>
-import Header from './Header.vue';
-import Footer from '@/components/Footer_0.vue';
+import Header_0 from '../components/Header_0.vue';
+import Footer_0 from '../components/Footer_0.vue';
 </script>
 
 
@@ -8,7 +8,7 @@ import Footer from '@/components/Footer_0.vue';
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-  <Header></Header>
+  <Header_0></Header_0>
 
 <!-- 中間會員註冊區 -->
 <main>
@@ -88,7 +88,7 @@ import Footer from '@/components/Footer_0.vue';
   </div>
 </main>
 
-<Footer></Footer>
+<Footer_0></Footer_0>
 
   </div>
 </template>
@@ -106,14 +106,14 @@ import Footer from '@/components/Footer_0.vue';
 
 main{
   width: 520px;
-  height: 510px;
+  height: 520px;
   border-radius: 20px;
   border: 1px solid  #FFF;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 2.33%, rgba(255, 255, 255, 0.50) 97.83%);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12.5px);
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 30px;
 }
 
@@ -142,7 +142,7 @@ main{
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: transparent;
   padding-left: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   outline: none;
 }
 
@@ -150,7 +150,7 @@ main{
   display: flex;
   align-items: end;
   padding-left: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .form .gender input{
@@ -168,14 +168,14 @@ main{
 
 .form .name input{
   width: 340px;
-  height: 36px;
+  height: 32px;
   font-size: 16px;
   border-radius: 80px;
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: transparent;
   padding-left: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   outline: none;
 }
 
@@ -203,7 +203,7 @@ option {
   border: 1px solid #FFF;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: rgba(255, 255, 255, 0.70);;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   appearance: none; 
   text-align: center;
   cursor: pointer;
@@ -219,7 +219,7 @@ option {
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   background-color: transparent;
   padding-left: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   outline: none;
 }
 

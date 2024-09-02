@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import Header_1 from '../components/Header_0.vue'
+=======
+import Header_0 from '../components/Header_0.vue'
+>>>>>>> Ting
   
 </script>
 
@@ -7,7 +11,7 @@ import Header_1 from '../components/Header_0.vue'
 <template>
 <div class="wrapper">
 <!-- 頁首 -->
-<Header_1></Header_1>
+<Header_0></Header_0>
 
 <main>
   <!-- 中間圖片區 -->

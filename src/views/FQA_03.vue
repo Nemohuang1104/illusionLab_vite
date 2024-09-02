@@ -16,6 +16,7 @@ import Footer_03 from '@/components/Footer_03.vue';
    <!-- 中間區塊 -->
    <main>
     <div class="card">
+      <div class="inside">
         <!-- 卡片正面 -->
         <div class="front">
           <img src="../assets/images/MS-ticket.png" alt="">
@@ -40,9 +41,11 @@ import Footer_03 from '@/components/Footer_03.vue';
           <p>關於退換貨詳細資訊請至 <a href="">票券異動</a>查看，或來信客服信箱: illusionlab@gmail.com ，由專人為您服務</p>
 
         </div> 
+      </div>
     </div>
 
     <div class="card">
+      <div class="inside">
         <!-- 卡片正面 -->
         <div class="front">
           <img src="../assets/images/MS-cake.png" alt="">
@@ -55,9 +58,11 @@ import Footer_03 from '@/components/Footer_03.vue';
           <h3>甜點的食品來源為何？</h3>
           <p>我們非常重視參與者的飲食安全與體驗品質，因此所有甜點均選用天然且新鮮的食材製作。精選本地供應商所提供的食材。無論是使用的水果、乳製品，還是各種配料，我們都採用符合嚴格品質標準的原料，並確保食材的可追溯性，讓您在享受甜點的同時，能夠放心品嚐每一份美味。</p>
         </div>
+      </div>
     </div>
 
       <div class="card">
+        <div class="inside">
           <div class="front">
             <img src="../assets/images/MS-car.png" alt="">
             <h2>交通</h2>
@@ -76,9 +81,11 @@ import Footer_03 from '@/components/Footer_03.vue';
             <h3>開車：</h3>
             <p>沿南京東路三段行駛，於 219 號旁尋找停車場或路邊停車位後，步行即可抵達。</p>
           </div>
+        </div>
     </div>
 
     <div class="card">
+      <div class="inside">
         <!-- 卡片正面 -->
         <div class="front">
           <img src="../assets/images/MS-pet.png" alt="">
@@ -91,9 +98,11 @@ import Footer_03 from '@/components/Footer_03.vue';
           <h3>體驗時是否能攜帶寵物一起參與？</h3>
           <p>很抱歉，活動現場不允許攜帶寵物參與體驗。然而，我們貼心地提供臨時寵物旅館服務，您可以將心愛的毛小孩暫時寄放在寵物旅館中，體驗結束後再將牠們領回。我們會確保您的寵物在您體驗期間獲得良好的照顧。</p>
         </div>
+      </div>
     </div>
 
       <div class="card">
+        <div class="inside">
           <!-- 卡片正面 -->
           <div class="front">
             <img src="../assets/images/MS-dizzy.png" alt="">
@@ -106,10 +115,12 @@ import Footer_03 from '@/components/Footer_03.vue';
             <h3>觀看 3D 投影時會引起暈眩嗎？</h3>
             <p>由於 3D 投影技術透過創造深度和立體感，部分觀眾在觀看時可能會感到輕微的暈眩或不適。為了減少不適感，我們在設計投影內容時特別注重畫面的平穩性和舒適度，提供更自然的視覺體驗。若您在觀看過程中感到不適，建議您暫時閉上眼睛等待感覺緩解後再繼續觀賞。</p>
           </div>
+        </div>
     </div>
 
 
     <div class="card">
+      <div class="inside">
         <!-- 卡片正面 -->
         <div class="front">
           <img src="../assets/images/MS-vegan.png" alt="">
@@ -122,6 +133,7 @@ import Footer_03 from '@/components/Footer_03.vue';
             <h3>甜點是否為素食？</h3>
             <p>我們提供的甜點為蛋奶素食。所有甜點均不含肉類或魚類成分，主要使用蛋類、乳製品、穀物和水果等天然食材製作。如果您有特定的飲食需求或過敏反應，請聯絡客服人員，我們將竭力為您提供更合適的選擇。</p>
         </div>
+      </div>
     </div>
 
    </main>
@@ -145,45 +157,46 @@ import Footer_03 from '@/components/Footer_03.vue';
 header {
   width: 100%;
   height: 80px;
-  background-color:map-get($color_3,header);
+  background-color: #B89977;
 }
 
 .title {
   margin: 0 auto;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 150px;
   margin-bottom: 50px;
 }
 
 .title h1 {
-  font-size: 40px;
-  color: #462C14;
+  font-size: 36px;
+  color:map-get($colofont_3,title);
   font-weight: bold;
-  margin-bottom: 8px;
 }
 
 .title p {
   font-size: 20px;
-  color: #462C14;
+  color:map-get($colofont_3,title);
   font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 main {
   display: flex;
   max-width: 1050px;
   width: 100%;
-  gap: 30px;
+  gap: 2%;
   flex-wrap: wrap;
-  margin: 0 auto;
-  margin-bottom: 100px;
+  margin: 0 auto 50px;
+
 }
 
-.card {
+.inside{}
+
+.inside {
   width: 330px;
   height: 710px;
   border-radius: 12px;
-  background-color: #FFFCF5;
+  background-color:map-get($color_3,card_bg);
   padding: 50px 24px 20px;
   box-sizing: border-box;
   line-height: 1.5;
@@ -195,16 +208,14 @@ main {
   transition: transform 1s;
 }
 
-
-
-.card:hover {
+.card:hover>.inside{
   transform: rotateY(180deg);
 }
 
-.card .front {
+.inside .front {
   width: 100%;
   font-weight: bold;
-  color: #855F49;
+  color:map-get($colofont_3,text);
   text-align: center;
   backface-visibility: hidden;
   margin: 0 auto;
@@ -213,27 +224,26 @@ main {
   left: 0;
 }
 
-.card .front img {
+.inside .front img {
   display: block;
   margin: 80px auto;
   margin-bottom: 20px;
   width: 150px;
-  height: 150px;
 }
 
 
-.card .front h2 {
-  font-size: 32px;
+.inside .front h2 {
+  font-size: 36px;
 }
 
-.card .front p {
+.inside .front p {
   font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-.card .back {
+.inside .back {
   box-sizing: border-box;
-  color: #855F49;
+  color:map-get($colofont_3,text);
   backface-visibility: hidden;
   transform: rotateY(180deg);
   width: 100%;
@@ -241,33 +251,27 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 60px 24px;
+  padding: 80px 24px;
+  box-sizing: border-box;
 }
 
 
-.card .back h3 {
+.inside .back h3 {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 12px;
 }
 
-.card .back p {
+.inside .back p {
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-.card .back a {
+.inside .back a {
   font-size: 16px;
   font-weight: bold;
-  color: #fb9d3c;
+  color:map-get($colofont_3,orange);
   text-decoration: none;
 }
-
-footer {
-  width: 100%;
-  height: 200px;
-}
-
 
 
 </style>

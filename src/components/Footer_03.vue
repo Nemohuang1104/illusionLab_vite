@@ -13,7 +13,7 @@
                 <span>使用辦法</span>
             </div>
             <p>本網站為緯育TibaMe【第93期】前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
-            <p>Copyright &copy; 2024 幻浸實驗室</p>
+            <p>Copyright &copy; 2024 幻浸實驗室 All rights reserved</p>
 
         </div>
     </div>
