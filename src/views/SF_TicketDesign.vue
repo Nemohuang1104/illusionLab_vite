@@ -181,7 +181,7 @@ p{
 }
 
 .ticketOptions button.active{
-    color: #8B4513;
+    color: #C1693B;
     font-weight: bold;
 }
 
