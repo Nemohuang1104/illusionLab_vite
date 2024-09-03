@@ -154,15 +154,15 @@ const routes = [
       title: "購物車"
     },
     requiredLogin: true
-  }
-  
-    path: '/SF_BookingChange',
-  name: 'SF_BookingChange',
-  component: () => import('@/views/SF_BookingChange.vue'),
-  meta: {
-    title: "退換票政策"
   },
-  requiredLogin: false
+  {
+    path: '/SF_BookingChange',
+    name: 'SF_BookingChange',
+    component: () => import('@/views/SF_BookingChange.vue'),
+    meta: {
+      title: "退換票政策"
+    },
+    requiredLogin: false
   },
 
 ];
