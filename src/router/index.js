@@ -42,10 +42,20 @@ const routes = [
     },
     requiredLogin: false
   },
+
   {
     path: '/strellarfrontierintro',
     name: 'strellarfrontierintro',
-    component: () => import('@/views/StrellarFrontierIntro.vue'),
+    component: () => import('@/views/SFIntro.vue'),
+    meta: {
+      title: "星際邊境"
+    },
+    requiredLogin: false,
+  },
+  {
+    path: '/SF_Homepage',
+    name: 'SF_Homepage',
+    component: () => import('@/views/SF_Homepage.vue'),
     meta: {
       title: "星際邊境"
     },
@@ -69,7 +79,16 @@ const routes = [
     },
     requiredLogin: false
   },
-  
+  {
+    path: '/SF_BookingChange',
+    name: 'SF_BookingChange',
+    component: () => import('@/views/SF_BookingChange.vue'),
+    meta: {
+      title: "退換票政策"
+    },
+    requiredLogin: false
+  },
+
 ];
 
 // 建立 router

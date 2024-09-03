@@ -1,5 +1,5 @@
 <script setup>
-    import StrellarFrontierTitle from '@/components/StrellarFrontierTitle.vue';  // 匯入漸層藍色標題樣式
+    import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
     // 客製功能
     import { ref } from 'vue';
@@ -122,13 +122,15 @@
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+@import '@/assets/SASS/basic/_color.scss';
 
 * {
     font-family: "Noto Serif TC" ;
 }
 
     .wrapper{
-    background-image: url(../assets/images/StrellarFrontierBackground.png);
+        background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
+        url(../assets/images/STBackground.png);
 }
 .title{
     text-align: center;
@@ -150,7 +152,7 @@
     margin: 0 auto;
 }
 hr{
-    border: 1px solid #fff ;
+    border: 1px solid #f1f1f1 ;
 }
 .ticketOptions{
     padding: 7%;
@@ -186,7 +188,6 @@ hr{
     // display: flex;
     flex-wrap: wrap;
     width: 100%;
-    background: linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%);
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -206,7 +207,7 @@ hr{
 }
 
 .style-options img.selected {
-    border: 1px dashed#ffffff3f; 
+    border: 1px solid #ffffff3f; 
 }
 
 .section-title {
