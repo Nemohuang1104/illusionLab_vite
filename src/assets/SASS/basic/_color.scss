@@ -1,29 +1,29 @@
-$colorfont_0:(
+$colorfont_0: (
   black1:#313131,
   black3:#505050,
   white:#ffffff
 );
 
-$colofont_1:(
+$colofont_1: (
   white: #ffffff,
   dark-blue: #030101,
 );
 
-$colofont_2:(
+$colofont_2: (
   linear-white: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 0.30) 97.6%),
-  white:#ffffff,
+  text:#e8e8e8,
   linear-blue:linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%),
 
 );
 
-$colofont_3:(
+$colofont_3: (
   title:#462C14,
   text:#855F49,
   orange:#FB9D3C,
   white:#ffffff
 );
 
-$color_0:(
+$color_0: (
   header:linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%),
   bgc_blue:linear-gradient(122deg, #22247A 28.94%, #7976BB 98.44%),
   bgc_white:linear-gradient(135deg, rgba(255, 255, 255, 0.80) 2.33%, rgba(255, 255, 255, 0.50) 97.83%),
@@ -31,18 +31,18 @@ $color_0:(
   btn_purple:#7976BB,
   btn_orange:#FCB600,
   btn_yellow:#FFEDBC,
-  btn_white:rgba(255, 255, 255, 0.70),
+  btn_white:rgba(255, 255, 255, 0.70),  
   btn_page: rgba(255, 255, 255, 0.50)
 );
 
-$color_1:(
+$color_1: (
   btn_gold:rgba(255, 215, 0, 0.36),
   product:linear-gradient(147deg, #1E1E2F 3.26%, rgba(30, 30, 47, 0.60) 97.45%),
 
 
 );
 
-$color_2:(
+$color_2: (
   header: linear-gradient(180deg, #000 26.17%, #505050 99.67%),
   footer: linear-gradient(180deg, #000 26%, #505050 100%),
   banner1:linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%),
@@ -53,7 +53,7 @@ $color_2:(
 );
 
 
-$color_3:(
+$color_3: (
   header:#B89977,
   about:#AD8662,
   simple_btn:rgba(253, 194, 116, 0.50),
@@ -61,7 +61,12 @@ $color_3:(
   product:#FEDCAA,
   ticket:#CFBCA2,
   order_bg:rgba(184, 153, 119, 0.20),
+<<<<<<< HEAD
   tab_bg:#FFFAF4
+);
+=======
+  tab_bg:#FFFAF4,
+  card_bg:#FFFCF5
 );
 
 
@@ -120,3 +125,4 @@ $color_3:(
 
 
 
+>>>>>>> Ting

@@ -2,7 +2,6 @@
 import Header_0 from '@/components/Header_0.vue';
 </script>
 <template>
-    <Header_0 />
     <div class="wrapper">
         <div class="detail">
             <div class="order-summary">

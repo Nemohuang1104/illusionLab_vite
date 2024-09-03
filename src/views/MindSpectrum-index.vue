@@ -14,7 +14,4 @@
 <style lang="scss" scoped>
   @import "../assets/SASS/basic/color";
 
-  h1{
-    color: map-get($colofont_3, orange);
-  }
 </style>

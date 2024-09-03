@@ -129,11 +129,18 @@ const goToPage = (page) => {
 <template>
 <div class="info">
     <div class="info-title">
-        <p>客製化票券管理</p>
+      <div class="code-input">
+            <p>客製化票券管理</p>
+            <div class="add">
+                <button >新增
+                  <img src="../assets/images/flat-color-icons_plus.png" alt="">
+                </button>  
+            </div>
+        </div>
         <div class="sub-tab">
                 <RouterLink tag="div" to="/CustomTicketCasinoCMS" class="sub-tab-item">人生賭場</RouterLink>
                 <RouterLink tag="div" to="/CustomTicketStrellaCMS" class="sub-tab-item">星際邊境</RouterLink>
-                <RouterLink tag="div" to="/CustomTicketMindSpectrumCMS" class="sub-tab-item">心靈光譜</RouterLink>
+                <RouterLink tag="div" to="/CustomTicketMindCMS" class="sub-tab-item">心靈光譜</RouterLink>
         </div>
 
         <div class="replace">
@@ -150,10 +157,12 @@ const goToPage = (page) => {
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
-
+.info{
+  height: 400vh;
+}
 
 .info-title{
-    width: 100%;
+    width: 37%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -163,6 +172,46 @@ const goToPage = (page) => {
 .code-input{
     display: flex;
     justify-content: right;
+}
+
+.code-input{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+
+.code-input > p{
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.6rem;
+    color: var(--Color-6, #FFF);
+    font-family: "Noto Sans TC";
+    margin-bottom: 20px;
+}
+
+.add button{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #505050;
+    width: 100px;
+    height: 29.48px;
+    line-height: 29.48px;
+    border: none;
+    background: var(--Color-2, #FCB600);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    padding-left: 24px;
+}
+
+.add img{
+    position: absolute;
+    left: 12px;
+    top: 4px;
+    width: 22px;
+    height: 22px;
 }
 
 .fill{
@@ -268,9 +317,9 @@ const goToPage = (page) => {
 
 .replace{
     position: absolute;
-    top: 46px;
+    top: 93.5px;
     left: 0;
-    width: 100%;
+    width: 920px;
     z-index: 5;
 }
 

@@ -18,14 +18,72 @@ const routes = [
     },
     requiredLogin: false
   },
+
+  // ====================後台=====================
   {
-    path: '/back',
-    component: () => import('@/views/Back.vue'),
+    path: '/logincms',
+    component: () => import('@/views/LoginCMS.vue'),
     meta: {
-      title: "後台"
+      title: "後台登入"
     },
-    requiredLogin: false
+    requiredLogin: true,
   },
+
+  {
+    path: '/CenterCMS',
+    component: () => import('@/views/CenterCMS.vue'),
+    meta: {
+      title: "後台中心"
+    },
+    requiredLogin: true,
+    redirect: '/MemberCMS',
+
+    children: [
+      {
+        path: '/MemberCMS',
+        name: 'MemberCMS',
+        component: () => import('@/views/MemberCMS.vue')
+      },
+
+      {
+        path: '/OrderCMS',
+        name: 'OrderCMS',
+        component: () => import('@/views/OrderCMS.vue'),
+        children: [
+          { path: '/OrderCMS', redirect: '/OrderTicketCMS' },
+          { path: '/OrderTicketCMS', component: () => import('@/views/OrderTicketCMS.vue') },
+          { path: '/OrderProductCMS', component: () => import('@/views/OrderProductCMS.vue') },
+        ],
+      },
+
+      {
+        path: '/ProductCMS',
+        name: 'ProductCMS',
+        component: () => import('@/views/ProductCMS.vue')
+      },
+
+      {
+        path: '/CustomTicketCMS',
+        name: 'CustomTicketCMS',
+        component: () => import('@/views/CustomTicketCMS.vue'),
+        children: [
+          { path: '/CustomTicketCMS', redirect: '/CustomTicketCasinoCMS' },
+          { path: '/CustomTicketCasinoCMS', component: () => import('@/views/CustomTicketCasinoCMS.vue') },
+          { path: '/CustomTicketMindCMS', component: () => import('@/views/CustomTicketMindCMS.vue') },
+          { path: '/CustomTicketStrellaCMS', component: () => import('@/views/CustomTicketStrellaCMS.vue') },
+        ]
+      },
+      {
+        path: '/NewsCMS',
+        name: 'NewsCMS',
+        component: () => import('@/views/NewsCMS.vue')
+      }
+    ]
+  },
+
+
+  // ====================後台=====================
+
   {
     path: '/home',
     component: () => import('@/views/Home.vue'),
@@ -42,10 +100,20 @@ const routes = [
     },
     requiredLogin: false
   },
+
   {
     path: '/strellarfrontierintro',
     name: 'strellarfrontierintro',
-    component: () => import('@/views/StrellarFrontierIntro.vue'),
+    component: () => import('@/views/SFIntro.vue'),
+    meta: {
+      title: "星際邊境"
+    },
+    requiredLogin: false,
+  },
+  {
+    path: '/SF_Homepage',
+    name: 'SF_Homepage',
+    component: () => import('@/views/SF_Homepage.vue'),
     meta: {
       title: "星際邊境"
     },
@@ -54,7 +122,7 @@ const routes = [
   {
     path: '/mindspectrum',
     name: 'mindspectrum',
-    component: () => import('@/views/MindSpectrum-index.vue'),
+    component: () => import('@/components/MS/MS_main.vue'),
     meta: {
       title: "心靈光譜"
     },
@@ -63,14 +131,39 @@ const routes = [
   {
     path: '/littlequiz',
     name: 'littlequiz',
-    component: () => import('@/views/LittleQuiz.vue'),
+    component: () => import('@/views/LittleQuizEnter.vue'),
     meta: {
       title: "小測驗"
     },
     requiredLogin: false
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login.vue'),
+    meta: {
+      title: "會員登入"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/shop',
+    name: 'shop',
+    component: () => import('@/views/ShoppingCar1.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
+   {path: '/SF_BookingChange',
+  name: 'SF_BookingChange',
+  component: () => import('@/views/SF_BookingChange.vue'),
+  meta: {
+    title: "退換票政策"
+  },
+  requiredLogin: false
+  },
 
-  
 ];
 
 // 建立 router

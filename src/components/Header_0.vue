@@ -1,8 +1,15 @@
 
 <template>
-  <header :class="headerClass">
-    <div class="logo">
-      <img :src="logoSrc" alt="Logo" class="logo" />
+    <div class="header1">
+        <div class="logo">
+           <img src="../assets/images/illusionLab_logo.png" alt="" @click="goToHome">
+          
+        </div>
+        <div class="icons">
+            <font-awesome-icon @click="goToShop" icon="fa-solid fa-cart-shopping" class="shoppingicon"/>
+            <font-awesome-icon  @click="goToSignUp" icon="fa-regular fa-face-meh"   class="peopleicon" /> 
+        </div>
+        
     </div>
     <div class="icons">
       <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
@@ -39,7 +46,21 @@ const logoSrc = computed(() => {
   return logoMap[props.mode] || logoMap['one'];
 });
 
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
+function goToSignUp(){
+  router.push('/login');
+}
+
+function goToHome(){
+  router.push('/');
+}
+
+function goToShop(){
+  router.push('/shop');
+}
 </script>
 
 <style lang="scss" scoped>
@@ -51,13 +72,11 @@ header{
   max-width: 1440px;
   height: 80px;
 }
-
-
-
-.logo img {
-  width: 145px;
-  flex-shrink: 0;
-  padding: 10px 20px;
+.logo img{
+    height: 80px;
+    flex-shrink: 0;
+    cursor: pointer;
+    
 }
 
 
