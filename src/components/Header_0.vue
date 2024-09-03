@@ -1,15 +1,9 @@
-
 <template>
-    <div class="header1">
-        <div class="logo">
-           <img src="../assets/images/illusionLab_logo.png" alt="" @click="goToHome">
-          
-        </div>
-        <div class="icons">
-            <font-awesome-icon @click="goToShop" icon="fa-solid fa-cart-shopping" class="shoppingicon"/>
-            <font-awesome-icon  @click="goToSignUp" icon="fa-regular fa-face-meh"   class="peopleicon" /> 
-        </div>
-        
+  <header :class="headerClass">
+    <div class="logo">
+    <router-link :to="logoLink">
+      <img :src="logoSrc" alt="Logo" class="logo" />
+    </router-link>
     </div>
     <div class="icons">
       <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
@@ -24,7 +18,7 @@ import { computed, defineProps } from 'vue';
 const props = defineProps({
   mode: {
     type: String,
-    default: 'one',
+    default: 'three',
     validator: value => ['one', 'two', 'three', 'four'].includes(value)
   }
 });
@@ -46,24 +40,25 @@ const logoSrc = computed(() => {
   return logoMap[props.mode] || logoMap['one'];
 });
 
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
+// 根據 mode 設置不同的路由鏈接 //當點擊img時他會導到下面的頁面
+const logoLinkMap = {
+  'one': '/Home',
+  'two': '/lifecasino',
+  'three': '/SF_Homepage',
+  'four': '/mindspectrum'
+};
 
-function goToSignUp(){
-  router.push('/login');
-}
+const logoLink = computed(() => {
+  return logoLinkMap[props.mode] || logoLinkMap['one'];
+});
 
-function goToHome(){
-  router.push('/');
-}
 
-function goToShop(){
-  router.push('/shop');
-}
+
 </script>
 
 <style lang="scss" scoped>
+
 header{
   display: flex;
   justify-content: space-between;
@@ -72,11 +67,13 @@ header{
   max-width: 1440px;
   height: 80px;
 }
-.logo img{
-    height: 80px;
-    flex-shrink: 0;
-    cursor: pointer;
-    
+
+
+
+.logo img {
+  width: 145px;
+  flex-shrink: 0;
+  padding: 10px 20px;
 }
 
 
@@ -110,62 +107,47 @@ header{
 .header-one {
   background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
   height: 80px;/* 添加高度 */
+  cursor: pointer;
 }
 
 //活動一人生賭場(two)
 .header-two {
   background-color: rgba(217,217,217, 0); /* 透明度為100% */
   height: 80px;/* 添加高度 */
+  cursor: pointer;
+  
 }
 
 //活動二星際邊境(three)
 
 .header-three {
-  background: linear-gradient(360deg, #000 26%, #505050 100%);
+  background-image: url(../assets/images/STBackground.png);
   height: 80px;/* 添加高度 */
+  cursor: pointer;
+  
 }
 
 //活動三心靈光譜(four)
 .header-four {
   background-color: #B89977;
   height: 80px;/* 添加高度 */
+  cursor: pointer;
 }
 </style>
 
 
-<!-- 以下是各活動複製過去更改
-const currentMode = ref('');
-填上 各組別的活動編號  -->
+
+<!-- 以下是各活動複製過去更改 -->
 
 <!-- <template>
     <div>
-    使用 Header 組件並傳遞 mode 屬性
-    
-    <Header :mode="currentMode" />
-    
-    切换活动模式的按钮
-    <button @click="switchMode('one')">活动一</button>
-    <button @click="switchMode('two')">活动二</button>
-    <button @click="switchMode('three')">活动三</button>
-
-
-    //於頁面顯示當前 mode 值，來確認資料有無錯誤
- <p>目前顯示的活動頁: {{ currentMode }} </p>  
-  </div>
+    <Header :mode="currentMode"> 
+    </div>
 </template>
   
 <script setup>
-import Header from './WeiText.vue'; // 引入 Header 组件
-import { ref } from 'vue';
-  
-// 使用 ref 定義  currentMode 狀態 
-const currentMode = ref('');
-  
-// 切換個活動頁的函式
-const switchMode = (mode) => {
-  // console.log('切换到模式:', mode); 
-  currentMode.value = mode;
-};
+const currentMode = ref('');  //公版LOGO 為 one 人生賭場 為 two  星際邊境 為 three 心靈光譜 為 four
+
 </script>
  -->
 

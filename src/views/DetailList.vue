@@ -79,7 +79,7 @@ import Footer_2 from '@/components/Footer_2.vue';
     height: 600px;
     margin: 0 auto;
     // border: 1px solid red;
-    background-image: url(../assets/images/SFbg.png);
+    background-image: url(../assets/images/STBackground.png);
     // border: 1px solid red;
  
     text-align: center;

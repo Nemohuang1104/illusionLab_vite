@@ -153,8 +153,8 @@ setTimeout(function () {
     // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
     setTimeout(function () {
         window.location.href = "/SF_Homepage";// 放置主页面URL
-    }, 500); // 等待1秒淡出動畫结束
-}, 6200);// 1000毫秒 = 1秒
+    }, 300); // 等待1秒淡出動畫结束
+}, 6400);// 1000毫秒 = 1秒
 
 </script>
 
@@ -224,13 +224,15 @@ setTimeout(function () {
 }
 
 /* 文字印在圖上+故障文字 */
+
+/* 文字及飛碟變小 */
 .container {
     position: relative;
     display: inline-block;
     /* 可選：設置容器的寬度和高度，以便適應圖片大小 */
     max-width: 1440px;
     width: 100%;
-    animation: ufoGlitch 7s linear;
+    animation: ufoGlitch 6.75s linear;
 
 }
 

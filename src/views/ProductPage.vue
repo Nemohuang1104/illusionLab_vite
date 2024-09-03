@@ -1,28 +1,34 @@
 <script setup>
 import { ref } from 'vue';
-import Header_2 from '@/components/Header_2.vue';
+
+// 頁首頁尾
+import Header_0 from '@/components/Header_0.vue';
+// 使用 ref 定義  currentMode 狀態 
+const currentMode = ref('three');
+
 import Footer_2 from '@/components/Footer_2.vue';
 
-
+  
 
 </script>
 
 <template>
   <div>
-    <Header_2></Header_2>
+   <Header_0 :mode="currentMode" ></Header_0 >
   </div>
+  
   <div class="warpper">
 
     <div class="center">
       <h1>精選商品</h1>
       <p>PRODUCTS</p>
       <div class="producttitle">
-        <div class="arrowlift">
+        <div class="arrowleft">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
-          <P>人生賭場</P>
+          <router-link to="/lifeCasino"><P>人生賭場</P></router-link>
         </div>
         <div class="arrowright">
-          <P>心靈光譜</P>
+          <router-link to="/mindspectrum"><P>心靈光譜</P></router-link>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
       </div>
@@ -98,7 +104,7 @@ import Footer_2 from '@/components/Footer_2.vue';
       </div>
     </div>
     <div>
-      <Footer_2></Footer_2>
+    <Footer_2></Footer_2>
     </div>
   </div>
 </template>
@@ -106,6 +112,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 
 <style lang="scss" scoped>
+
 .warpper {
   font-family: "Noto Serif SC";
   max-width: 1440px;
@@ -115,7 +122,7 @@ import Footer_2 from '@/components/Footer_2.vue';
   background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
     url(../assets/images/STBackground.png);
 
-  background-image: url(../assets/images/SFbg.png);
+  background-image: url(../assets/images/STBackground.png);
 
 }
 
@@ -181,12 +188,18 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 }
 
-.arrowlift {
+// 全域性將router-link的底線刪除 
+*{
+  text-decoration: none;
+}
+
+.arrowleft {
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #fff;
+  
 }
 
 .arrowright {

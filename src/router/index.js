@@ -77,7 +77,8 @@ const routes = [
         path: '/NewsCMS',
         name: 'NewsCMS',
         component: () => import('@/views/NewsCMS.vue')
-      }
+      },
+     
     ]
   },
 
@@ -163,6 +164,31 @@ const routes = [
   },
   requiredLogin: false
   },
+  { path: '/ProductPage',
+    name: 'ProductPage',
+    component: () => import('@/views/ProductPage.vue'),
+    meta: {
+      title: "商品頁面"
+    },
+    requiredLogin: false
+  },
+  { path: '/Header_0',
+    name: 'Header_0',
+    component: () => import('@/components/Header_0.vue'),
+    meta: {
+      title: "公版頁首"
+    },
+    requiredLogin: false
+  },
+  { path: '/DetailList',
+    name: 'DetailList',
+    component: () => import('@/views/DetailList.vue'),
+    meta: {
+      title: "星際邊際商品一細項"
+    },
+    requiredLogin: false
+  }
+
 
 ];
 

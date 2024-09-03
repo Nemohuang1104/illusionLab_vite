@@ -12,8 +12,8 @@ import { createApp } from 'vue';
 // import SFHeader_0 from './components/SFHeader_0.vue';
 // import OrderTicketPopCMS from './components/OrderTicketPopCMS.vue';
 // import MindSpectrum from './views/MindSpectrum.vue';
-// import weitext2 from './views/weitext2.vue';
-import WeiText from './views/WeiText.vue';
+import weitext2 from './views/weitext2.vue';
+// import WeiText from './views/WeiText.vue';
 
 // import Home_4 from './views/Home_4.vue';
 
@@ -45,5 +45,5 @@ library.add(faCartShopping, faFaceSmile, faArrowRightLong, faArrowLeftLong, faFa
 
 /*使用路由preview*/
 import previewrouter from "./router/wei";
-const app = createApp(WeiText);
+const app = createApp(weitext2);
 app.component('font-awesome-icon', FontAwesomeIcon).use(previewrouter).mount('#preview-app');

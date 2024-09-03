@@ -3,13 +3,13 @@
     <div class="divnull"></div>
     <div class="logo">
       <!-- 人生賭場 LOGO  @click="handleClick('two')"  -->
-      <router-link  to='/LoginCMS'>
+      <router-link  to='/lifeCasino' @click="handleClick('two')" >
         <img :src="logos['two']" :class="['LS', { 'inactive': !isActive('two'), 'active': isActive('two') }]"
           alt="人生賭場" />
       </router-link>
 
       <!-- 星際邊境 LOGO  @click="handleClick('three')" -->
-      <router-link to="/strellarfrontierintro">
+      <router-link to="/strellarfrontierintro"  @click="handleClick('three')" >
         <img :src="logos['three']" :class="['SF', { 'inactive': !isActive('three'), 'active': isActive('three') }]"
           alt="星際邊境" />
       </router-link>
