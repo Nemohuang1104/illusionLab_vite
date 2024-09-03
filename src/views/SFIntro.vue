@@ -149,11 +149,11 @@ onBeforeUnmount(() => {
 setTimeout(function () {
     document.body.style.transition = "opacity 1s";
     document.body.style.opacity = "0";
-    document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
+    // document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
     // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
     setTimeout(function () {
-        window.location.href = "/StrellarFrontierHomepage";// 放置主页面URL
-    }, 1000); // 等待1秒淡出動畫结束
+        window.location.href = "/SF_Homepage";// 放置主页面URL
+    }, 500); // 等待1秒淡出動畫结束
 }, 6200);// 1000毫秒 = 1秒
 
 </script>

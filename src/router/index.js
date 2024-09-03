@@ -68,20 +68,20 @@ const routes = [
         component: () => import('@/views/CustomTicketCMS.vue'),
         children: [
           { path: '/CustomTicketCMS', redirect: '/CustomTicketCasinoCMS' },
-          { path: '/CustomTicketCasinoCMS', component:() => import('@/views/CustomTicketCasinoCMS.vue') },
-          { path: '/CustomTicketMindCMS', component:() => import('@/views/CustomTicketMindCMS.vue') },
-          { path: '/CustomTicketStrellaCMS', component:() => import('@/views/CustomTicketStrellaCMS.vue') },
+          { path: '/CustomTicketCasinoCMS', component: () => import('@/views/CustomTicketCasinoCMS.vue') },
+          { path: '/CustomTicketMindCMS', component: () => import('@/views/CustomTicketMindCMS.vue') },
+          { path: '/CustomTicketStrellaCMS', component: () => import('@/views/CustomTicketStrellaCMS.vue') },
         ]
       },
       {
         path: '/NewsCMS',
         name: 'NewsCMS',
-        component:() => import('@/views/NewsCMS.vue')
+        component: () => import('@/views/NewsCMS.vue')
       }
     ]
   },
 
- 
+
   // ====================後台=====================
 
   {
@@ -100,10 +100,20 @@ const routes = [
     },
     requiredLogin: false
   },
+
   {
     path: '/strellarfrontierintro',
     name: 'strellarfrontierintro',
-    component: () => import('@/views/StrellarFrontierIntro.vue'),
+    component: () => import('@/views/SFIntro.vue'),
+    meta: {
+      title: "星際邊境"
+    },
+    requiredLogin: false,
+  },
+  {
+    path: '/SF_Homepage',
+    name: 'SF_Homepage',
+    component: () => import('@/views/SF_Homepage.vue'),
     meta: {
       title: "星際邊境"
     },
@@ -146,6 +156,15 @@ const routes = [
     requiredLogin: true
   }
   
+    path: '/SF_BookingChange',
+  name: 'SF_BookingChange',
+  component: () => import('@/views/SF_BookingChange.vue'),
+  meta: {
+    title: "退換票政策"
+  },
+  requiredLogin: false
+  },
+
 ];
 
 // 建立 router

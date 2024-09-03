@@ -1,7 +1,7 @@
 <script setup>
+import { ref } from 'vue';
 import Header_2 from '@/components/Header_2.vue';
 import Footer_2 from '@/components/Footer_2.vue';
-import { ref } from 'vue';
 
 
 
@@ -123,7 +123,8 @@ import { ref } from 'vue';
 
   margin: 0 auto;
   // border: 1px solid red;
-  background-image: url(../assets/images/SFbg.png);
+  background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
+    url(../assets/images/STBackground.png);
 
 
 }
@@ -214,14 +215,14 @@ import { ref } from 'vue';
   width: 90%;
   height: 750px;
   overflow: hidden;
-  background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+  // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   padding: 70px 80px 100px 80px;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
-  // border: 1px solid #fff;
+  border: 1px solid #f1f1f1;
 }
 
 .list {

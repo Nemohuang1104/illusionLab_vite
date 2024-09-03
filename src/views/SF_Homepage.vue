@@ -1,8 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import StrellarFrontierTitle from '@/components/StrellarFrontierTitle.vue';  // 匯入漸層藍色標題樣式
+import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 // 旅行心得頁面
 import SF_Comments from './SF_Comments.vue';
+
+// 頁首頁尾
+import Header_2 from '@/components/Header_2.vue';
+import Footer_2 from '@/components/Footer_2.vue';
 
 // 商品
 import 'swiper/css';
@@ -11,7 +15,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay} from 'swiper/modules';
 
 
-// import 'swiper/css/mousewheel'
+// 體驗活動字體
+import SFAdventuresTitle from '@/components/SFAdventuresTitle.vue';
 
 const modules = [Pagination,  Autoplay];
 
@@ -35,13 +40,28 @@ const toggleAccordion = (index) => {
     }
 };
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function gotoTicketChange() {
+  router.push('/SF_BookingChange');
+};
+
 </script>
 
 
-
 <template>
+    <Header_2></Header_2>
     <div class="wrapper">
-        <div class="Intro"></div>
+        <!-- 星球運轉 -->
+        <div class="intro">
+            <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video>
+        </div>
+        <!-- 歡迎文字 -->
+        <div class="introText">
+           <SFAdventuresTitle h2="歡迎來到星際邊境，一起踏上這場前所未有的冒險吧！"></SFAdventuresTitle>
+        </div>
         <!-- 體驗內容 -->
         <div class="adventures">
             <div class="Title">
@@ -55,7 +75,6 @@ const toggleAccordion = (index) => {
                 <StrellarFrontierTitle h1="旅行心得" p="COMMENTS"></StrellarFrontierTitle>
             </div>
             <SF_Comments></SF_Comments>
-        
         </div>
 
         <!-- 票價 -->
@@ -85,19 +104,19 @@ const toggleAccordion = (index) => {
                     clickable: true,
                     }"
                     :modules="modules"
-                 
-                    class="mySwiper">
-                    <!-- :autoplay="{
+                    :autoplay="{
                     delay: 4000,
                     disableOnInteraction: false,
-                    }" -->
+                    }"
+                    class="mySwiper">
+                   
                     <swiper-slide>
                     <div class="carousel" >
                         <div class="carousel-item" >
                             <img id="tshirt" src="../assets/images/StrellarFrontier_tShirt.png">
                             <div class="product-info">
                                 <h3>T-shirt</h3>
-                                <p>穿上UV透氣感的上衣和夥伴並肩作戰。</p>
+                                <p>穿上UV透氣感的上衣和夥伴<br>並肩作戰。</p>
                             </div>
                         </div>
                     </div>
@@ -105,10 +124,10 @@ const toggleAccordion = (index) => {
                     <swiper-slide>
                     <div class="carousel" >
                         <div class="carousel-item" >
-                            <img src="../assets/images/StrellarFrontier_book.png">
+                            <img src="../assets/images/StrellarFrontier_notobook.png">
                             <div class="product-info">
                                 <h3>筆記本</h3>
-                                <p>開啟星際冒險，記錄下每一段屬於你的<br>璀璨時刻。</p>
+                                <p>開啟星際冒險，記錄下每一段屬於<br>你的璀璨時刻。</p>
                             </div>
                         </div>
                     </div>
@@ -136,15 +155,19 @@ const toggleAccordion = (index) => {
             </div>
             <div class="infoText">
                 <div class="left">
-                    <p class="time">時間 :</p>
-                    <span>
-                        週一、週二 | 公休日 <br>
-                        週三至週五 | 17 : 00 - 22 : 00 <br>
-                        週六、週日 | 12 : 00 - 22 : 00 <br>
-                        連假期間與週末營業時間相同
-                    </span>
-                    <p class="time">地址 : </p>
-                    <span>104 台北市中山區南京東路三段219號5F</span>
+                    <div class="worktime">
+                        <p class="time">時間 :</p>
+                        <span>
+                            週一、週二 | 公休日 <br>
+                            週三至週五 | 17 : 00 - 22 : 00 <br>
+                            週六、週日 | 12 : 00 - 22 : 00 <br>
+                            連假期間與週末營業時間相同
+                        </span>
+                    </div>
+                    <div class="address">
+                        <p class="time">地址 : </p>
+                        <span>104 台北市中山區南京東路三段219號5F</span>
+                    </div>
                 </div>
                 <div class="right">
                     <img src="../assets/images/infoPic.svg">
@@ -158,7 +181,7 @@ const toggleAccordion = (index) => {
                 <StrellarFrontierTitle h1="航站規則" p="RULES"></StrellarFrontierTitle>
             </div>
             <div class="mainSel">
-                <button class="changeRules">
+                <button class="changeRules" @click="gotoTicketChange">
                     退換票政策
                 </button>
                 <div class="accordion">
@@ -201,11 +224,11 @@ const toggleAccordion = (index) => {
             <p id="text">我們非常重視您的意見與建議。如果您有任何問題、建議或需要幫助，請隨時與我們聯繫。<br>我們的團隊將盡快回覆您的訊息。</p>
             <p>有任何問題，歡迎寄信到下方Email</p>
             <p style="font-weight: bold;">illusionlab@gmail.com</p>
-        </div>
-        <div class="contactTime">
             <p>週一到週五 10:00 ~ 20:00 會由專人回覆訊息</p>
         </div>
+        <Footer_2></Footer_2>
     </div>
+   
 </template>
 
 
@@ -222,25 +245,30 @@ const toggleAccordion = (index) => {
 .wrapper {
     background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
     url(../assets/images/STBackground.png);
-    // background-image: url(../assets/images/STBackground.png);
-    // background: #000;
 }
 
-.Title {
+.Title { //大標題
     text-align: center;
 }
 
+.introText{ //歡迎文字
+    font-family: ToronoGlitchSerif H1;
+    font-size: 36px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 5%;
+}
 
 // 票價資訊
 .ticketInfo {
-    margin: 3%;
+    margin: 5%;
 }
 
 .ticketInfo img {
     display: block;
     margin: 0 auto;
     width: 100%;
-    max-width: 600px;
+    max-width: 550px;
 }
 
 // 熱門商品
@@ -266,22 +294,16 @@ const toggleAccordion = (index) => {
 }
 
 .carousel-container {
-    height: 600px;
-
-}
-
-.carousel-container #tshirt{
-    width: 100%;
-    max-width: 250px;
+    height: 500px;
 }
 
 .carousel-container img {
     width: 100%;
-    max-width: 200px;
+    max-width: 250px;
 }
 
 .product-info{
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .product-info h3{ //商品名稱
@@ -292,6 +314,8 @@ const toggleAccordion = (index) => {
 
 .product-info p{
     font-weight: normal;
+    text-align: left;
+    line-height: 1.5;
 }
 
 
@@ -299,22 +323,25 @@ const toggleAccordion = (index) => {
 .infoText {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 5%;
     line-height: 2;
 }
-
+.left .worktime{
+    margin-bottom: 20px;
+}
 .infoText .right{
-    margin-left: 50px;
+    margin-left: 30px;
 }
 
 .infoText .right img {
     width: 100%;
-    max-width: 350px;
-    // height: 200px;
+    max-width: 320px;
 }
 
 .infoText .time {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 
@@ -359,7 +386,7 @@ const toggleAccordion = (index) => {
     height: 30px;
     flex-shrink: 0;
     cursor: pointer;
-    // 讓+號靠右
+    
     display: flex;
     justify-content: space-between;
 }
@@ -397,7 +424,7 @@ const toggleAccordion = (index) => {
     background: none;
 }
 
-// + button  
+//  button  
 .accordion-toggle {
     background: none;
     border: none;
@@ -416,45 +443,24 @@ const toggleAccordion = (index) => {
 
 .accordion-toggle .up {
     transform: rotate(-90deg); /* 向上 */
+    color:#0FF;
 }
 
 .accordion-toggle .down {
     transform: rotate(90deg); /* 向下 */
+    color: #ffffff;
 }
 
 .accordion-toggle span::before {
     content: '<';
     position: absolute;
-    font-size: 18px;
-    // left: 0;
-    // right: 0;
-    // top: 50%;
-    // transform: translateY(-50%);
+    font-size: 20px;
+    right: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-// .accordion-toggle span::before,
-// .accordion-toggle span::after {
-//     content: '';
-//     position: absolute;
-//     width: 80%;
-//     height: 5%;
-//     background-color: #f1f1f1;
-//     left: 0;
-//     top: 50%;
-//     transform: translateY(-50%);
-//     transition: transform 0.3s ease;
-// }
 
-// .accordion-toggle .plus::after {
-//     transform: rotate(90deg) translateY(-50%);
-// }
-
-// .accordion-toggle .minus::after {
-//     transform: rotate(0deg) translateY(-50%);
-//     background-color: transparent;
-// }
 
 // 合作廠商
 .logo {
@@ -486,7 +492,7 @@ const toggleAccordion = (index) => {
 
 // 聯絡我們
 .contact {
-    margin-bottom: 100px;
+    margin: 5%;
 }
 .contact #text {
 
@@ -498,14 +504,7 @@ const toggleAccordion = (index) => {
 .contact p, .contactTime p
  {
     text-align: center;
-    line-height: 2;
+    line-height: 1.6;
 }
 
-// 圖片
-.contactTime  {
-    padding-bottom: 20%;
-    // background:linear-gradient(rgba(23, 23, 23, 0), rgba(0, 0, 0, 0)) ,url(../assets/images/StrellarFrontierBackground.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 </style>
