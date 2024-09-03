@@ -1,9 +1,11 @@
 <template>
     <div class="header1">
+        <div class="divnull"></div>
         <div class="logo">
+            
             <img src="../assets//images/logo_lifecasino.svg" alt="" class="LS">
             <img src="../assets/images/logo_StrellarFrontierIntro.svg" alt="" class="SF">
-            <img src="../assets//images/LoveLogo.png" alt="" class="LI">
+            <img src="../assets/images/logo_heartlight_1.svg" alt="" class="LI">
         </div>
         <div class="icons">
             <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon"/>
@@ -31,14 +33,22 @@
 
 .logo{
     // border: 1px solid red;
-    width: 70%;
+    width: 700px;
     line-height: 80px;
     display: flex;
-    justify-content:flex-end;
+    width: calc(100% - 330px);
+    justify-content:space-between;
     align-items: center;
     padding:10px 20px;
 
 }
+
+.divnull{
+  width: 150px;
+    
+}
+
+
 .logo img{
     // height: 60px;
     flex-shrink: 0;
@@ -58,7 +68,7 @@
 }
 
 .logo .LI {
-    width: 170px;
+    width: 145px;
     flex-shrink: 0;
     
 }
@@ -68,11 +78,9 @@
 .icons{
     // border: 1px solid red;
     margin: 10px;
-    padding: 15px 10px 15px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-   
     padding:10px 20px;
 }
 .shoppingicon{

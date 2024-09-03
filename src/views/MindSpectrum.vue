@@ -3,12 +3,12 @@
     <!-- <div><MS_termOfUse/></div> -->
     <!-- <div><MS_privacy_policy/></div> -->
     
-    <div><MS_ticket_into/></div>
+    <!-- <div><MS_ticket_into/></div>
     <div><MS_ticket_customer_info/></div>
-    <div><MS_ticket_reservation/></div>
+    <div><MS_ticket_reservation/></div> -->
 
-    <!-- <div><MS_com_marquee/></div> -->
-    <!-- <div><MS_com_caro/></div> -->
+    <div><MS_com_marquee/></div>
+    <div><MS_com_caro/></div>
 </template>
 
 <script setup>

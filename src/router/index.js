@@ -69,6 +69,7 @@ const routes = [
     },
     requiredLogin: false
   },
+
   
 ];
 

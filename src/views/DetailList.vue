@@ -1,8 +1,7 @@
 <script setup>
-
-import Footer_2 from '@/components/Footer_2.vue';
 import { ref } from 'vue';
 import Header_2 from '@/components/Header_2.vue';
+import Footer_2 from '@/components/Footer_2.vue';
 
 
 
@@ -18,40 +17,45 @@ import Header_2 from '@/components/Header_2.vue';
             <h1>精選商品</h1>
             <p>PRODUCTS</p>
         </div>
-        <div class="breadcrumbList">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li><a href="#">上一頁</a></li>
-                    <li><a href="#">商品</a></li>
-                </ol>
-            </div>
+        <div aria-label="Breadcrumb">
+            <ul class="breadcrumb">
+                <li><a href="#">星際邊境</a></li>
+                <li><a href="#">星際邊境商品頁</a></li>
+            </ul>
         </div>
-        <div class="pbox">
-            <div class="pimg"><img src="../assets/images/productscup.png" alt=""></div>
-            <div>
-                <div class="textbox">
-                    <h3>太空金屬杯</h3>
-                    <p>NT$ 299 元</p>
-                    <p>材質：雙層鈦金屬</p>
-                    <p>尺寸 : 寬 7.5 cm x 高 10 cm</p>
-                </div>
-                <div class="rightdown">
-                    <div class="but">
-                        <input type="button" value=" - " class="sub">
-                        <div class="counter" id="counter">1</div>
-                        <input type="button" value=" + " class="add">
+        <div class="pboxout">
+            <div class="pbox">
+                <div class="pimg"><img src="../assets/images/productscup.png" alt=""></div>
+                <div>
+                    <div class="textbox">
+                        <p>商品編號 : MS001</p>
+                        <h3>太空金屬杯</h3>
+                        <p>NT $ 299 </p>
+                        <div class="leftlight">
+                            <p>作者 : Dandy · Syike </p>
+                            <p>與知名插畫家DoMeDo聯名推出</p>
+                        </div>
+                        <p>材質：雙層鈦金屬</p>
+                        <p>商品規格 : 寬 7.5 cm x 高 10 cm</p>
                     </div>
-                    <div class="size">
-                        <select name="size-select" id="">
-                            <option value="----- 商品尺寸 -----">----- 商品尺寸 -----</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
+                    <div class="rightdown">
+                        <div class="but">
+                            <input type="button" value=" - " class="sub">
+                            <div class="counter" id="counter">1</div>
+                            <input type="button" value=" + " class="add">
+                        </div>
+                        <div class="size">
+                            <select name="size-select" id="">
+                                <option value="----- 商品尺寸 -----">----- 商品尺寸 -----</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </select>
+                        </div>
 
-                    <p>加入購物車</p>
+                        <p>加入購物車</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,18 +69,19 @@ import Header_2 from '@/components/Header_2.vue';
 
 
 <style lang="scss" scoped>
+
+
+
 .warpper {
     font-family: "Noto Serif SC";
     max-width: 1440px;
     width: 100%;
-    height: 800px;
+    height: 600px;
     margin: 0 auto;
     // border: 1px solid red;
     background-image: url(../assets/images/SFbg.png);
     // border: 1px solid red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+ 
     text-align: center;
 
 
@@ -87,14 +92,15 @@ import Header_2 from '@/components/Header_2.vue';
     max-width: 1440px;
     width: 100%;
     padding-top: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+
 
 
 }
 
 
 .title h1 {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
     margin-bottom: 5px;
 
@@ -104,6 +110,8 @@ import Header_2 from '@/components/Header_2.vue';
     color: transparent;
 
 }
+
+
 
 
 .title p {
@@ -116,88 +124,90 @@ import Header_2 from '@/components/Header_2.vue';
 }
 
 //麵包屑
-.breadcrumbList {
-    // border: 1px solid red;
+
+.breadcrumb {
+    list-style: none;
     display: flex;
-    box-shadow: inset 0 0 11px 3px rgba(#000000, 0.6);
+    padding-left: 22%;
 
-    .breadcrumb {
-        display: flex;
-        // justify-content: flex-start;
-        // border: 1px solid red;
-
-        li {
-            padding: 20px 20px 20px 0px;
-
-            &+li {
-                padding-left: 0;
-            }
-
-            &+li::before {
-                content: "/"; //+選取器，選到自己的下一層元素
-                color: #fff;
-                padding-right: 20px;
-            }
-
-            &:last-child a {
-                color: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%); //選取到最後一個元素
-            }
-
-            a {
-                color: #ffffff;
-                font-weight: 100;
-                font-size: 16px;
-                cursor: pointer;
-
-                &:hover {
-                    color:linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-                }
-            }
-        }
-    }
 }
 
+.breadcrumb li {
+    margin-right: 8px;
+    color: #FFFFFF;
+}
+
+.breadcrumb li a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.breadcrumb li::after {
+    content: '>';
+    margin-left: 8px;
+}
+
+.breadcrumb li:last-child::after {
+    content: '';
+    /* Remove the last separator */
+}
 
 //商品照片及價格框
+.pboxout{
+    // border: 1px solid red;
+    max-width: 1440px;
+    width: 100%;
+    // height: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .pbox {
     // border: 1px solid red;
-    max-width: 800px;
+    max-width: 700px;
     width: 100%;
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
 }
 
 //左側商品照片
 .pimg img {
-    width: 300px;
-    height: 400px;
+    width: 250px;
+    height: 330px;
+    border-radius: 12px;
 }
 
 //右側上方文字框
 .textbox {
     // border: 1px solid red;
     width: 240px;
-    height: 150px;
-    border-radius: 20px;
+    // height: 150px;
+
     // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
     color: #fff;
-    padding: 50px 0px 50px 0px;
     overflow: hidden;
-    line-height: 40px;
+    line-height: 30px;
     text-align: left;
-    margin-bottom: 20px;
+}
 
+.leftlight{
+    border-left:5px solid #132C79;
+    line-height: 20px;
+    padding-left: 10px;
 }
 
 .textbox h3 {
-    font-size: 20px;
-
+    font-size: 32px;
+    color:#C1693B;
+    font-weight: bold;
 }
 
 .textbox p {
     font-size: 16px;
-
+    color: #FFFFFF;
 }
 
 .btn {
@@ -210,9 +220,9 @@ import Header_2 from '@/components/Header_2.vue';
     display: flex;
     justify-content: space-between;
     line-height: 50px;
-    width: 400px;
-    height: 50px;
-    line-height: 50px;
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
 
     margin-bottom: 20px;
     border-radius: 12px;
@@ -228,14 +238,14 @@ import Header_2 from '@/components/Header_2.vue';
 
 .counter {
     color: #FFFFFF;
-    font-size: 28px;
+    font-size: 25px;
 }
 
 .sub {
     border-radius: 40px 0px 0px 40px;
     color: #ffffff;
     background-color: transparent;
-    font-size: 40px;
+    font-size: 30px;
     border: none;
 }
 
@@ -243,20 +253,20 @@ import Header_2 from '@/components/Header_2.vue';
     border-radius: 40px 0px 0px 40px;
     color: #ffffff;
     background-color: transparent;
-    font-size: 40px;
+    font-size: 30px;
     border: none;
 }
 
 //尺寸下拉式選單
 .size select {
-    width: 400px;
-    height: 50px;
+    width: 300px;
+    height: 40px;
     border-radius: 12px;
     display: block;
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: 20px;
     color: #fff;
     outline: none;
     background-color: black;
@@ -279,7 +289,7 @@ import Header_2 from '@/components/Header_2.vue';
 
 //加入購物車
 .rightdown p {
-    width: 400px;
+    width: 300px;
     height: 50px;
     border-radius: 40px;
     display: block;
