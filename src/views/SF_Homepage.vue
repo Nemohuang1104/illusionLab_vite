@@ -1,11 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
+
 // 旅行心得頁面
+
+
 import SF_Comments from './SF_Comments.vue';
 
 // 頁首頁尾
-import Header_2 from '@/components/Header_2.vue';
+import SFHeader_0 from  '@/components/SFHeader_0.vue'; 
 import Footer_2 from '@/components/Footer_2.vue';
 
 // 商品
@@ -52,7 +55,7 @@ function gotoTicketChange() {
 
 
 <template>
-    <Header_2></Header_2>
+    <SFHeader_0></SFHeader_0>
     <div class="wrapper">
         <!-- 星球運轉 -->
         <div class="intro">

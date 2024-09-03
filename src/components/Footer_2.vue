@@ -27,7 +27,8 @@
     width: 100%;
     max-width: 1440px;
     height: 200px;
-    background: linear-gradient(180deg, #000 26%, #505050 100%);
+    background-image: url(../assets/images/STBackground.png);
+    // background: linear-gradient(180deg, #000 26%, #505050 100%);
     display: flex;
     justify-content: center;
 }
