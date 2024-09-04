@@ -24,7 +24,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // import RefundQueryTicket from "@/views/RefundQueryTicket.vue";
 
 /*後台管理頁面vue註冊*/
-import LoginCMS from "@/views/LoginCMS.vue";
+// import LoginCMS from "@/views/LoginCMS.vue";
 // import CenterCMS from "@/views/CenterCMS.vue";
 // import MemberCMS from "@/views/MemberCMS.vue";
 // import OrderCMS from "@/views/OrderCMS.vue";
@@ -44,7 +44,7 @@ import LoginCMS from "@/views/LoginCMS.vue";
 // import LC_TicketChange from "@/views/LC_TicketChange.vue";
 
 /*LC商品頁面vue註冊*/
-import LC_ProductPage from "@/views/LC_ProductPage.vue";
+// import LC_ProductPage from "@/views/LC_ProductPage.vue";
 
 
 
@@ -168,17 +168,17 @@ const router = createRouter({
     // 
   
    
-  {
-      path: '/LC_ProductPage',
-      name: 'LC_ProductPage',
-      component: LC_ProductPage
-    },
-    {
-      path: '/LoginCMS',
-      name: 'LoginCMS',
-      component: LoginCMS,
+  // {
+  //     path: '/LC_ProductPage',
+  //     name: 'LC_ProductPage',
+  //     component: LC_ProductPage
+  //   },
+  //   {
+  //     path: '/LoginCMS',
+  //     name: 'LoginCMS',
+  //     component: LoginCMS,
       
-    },
+  //   },
   // {
   //     path: '/SF_ProductPage',
   //     name: 'SF_ProductPage',

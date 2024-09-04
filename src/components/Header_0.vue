@@ -18,7 +18,7 @@ import { computed, defineProps } from 'vue';
 const props = defineProps({
   mode: {
     type: String,
-    default: 'three',
+    default: 'one',
     validator: value => ['one', 'two', 'three', 'four'].includes(value)
   }
 });
