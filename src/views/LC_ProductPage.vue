@@ -1,10 +1,10 @@
 <script setup>
-import Header_2 from '@/components/Header_2.vue';
+import Header from '@/components/Header_0.vue';
 import Footer_2 from '@/components/Footer_2.vue';
 import LC_ProductInfo from './LC_ProductInfo.vue';
 import { ref } from 'vue';
 
-
+const currentMode = ref('two');
 
 const productInfo = ref([
   {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
@@ -27,10 +27,12 @@ function goToLoginCMS(){
 </script>
 
 <template>
-  <div>
-    <Header_2></Header_2>
-  </div>
+  
+  
   <div class="warpper">
+    <div>
+      <Header :mode="currentMode"/> 
+    </div>
     
     <div class="center">
       <h1>精選商品</h1>
@@ -47,9 +49,10 @@ function goToLoginCMS(){
       </div>
       <div class="pagebox">
         <!-- 放置一個商品列的外框 -->
+         <router-link to="LC_ProductInfo">
         <div class="list">
           <div  v-for="(item,index) in productInfo" class="pro"  :key="item.id" >
-            <a href="">
+           
               <img :src="item.cardImage" alt="">
               <p>{{ item.productName }}</p>
               <div class="text">
@@ -58,11 +61,9 @@ function goToLoginCMS(){
                 </div>
                 <div class="icon"></div>
               </div>
-            </a>
           </div>
-
         </div>
-
+      </router-link>
       </div>
     </div>
   </div>
@@ -78,6 +79,10 @@ function goToLoginCMS(){
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 
 @import "../assets/style";
+*{
+text-decoration: none;
+
+}
 
 .warpper {
   font-family: "Noto Serif SC";
@@ -86,8 +91,8 @@ function goToLoginCMS(){
 
   margin: 0 auto;
   // border: 1px solid red;
-  background-image: url(../assets/images/SFbg.png);
-
+  // background-image: url(../assets/images/SFbg.png);
+  background-color: #1E1E2F;
 
 }
 

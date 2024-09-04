@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from "vue";
-import Header_0 from "../components/Header_0.vue";
-import Header_2 from "@/components/Header_2.vue";
-import Footer_0 from "@/components/Footer_0.vue";
+import Header from "../components/Header_0.vue";
+// import Header_2 from "@/components/Header_2.vue";
+import Footer_1 from "@/components/Footer_1.vue";
 import Btn_Lifecasino from "@/components/Btn_Lifecasino.vue";
 
-
+const currentMode = ref('two'); 
 // 問題數據
 const questions = ref([
   { id: 1, title: "Q.什麼是沉浸式體驗？", info: "沉浸式體驗是一種互動活動，讓參與者完全沉浸在虛擬或現實的環境中，感覺自己是體驗的一部分。", expanded: false },
@@ -47,7 +47,9 @@ const getInfoStyle = (question) => {
 <template>
 
     <div class="template">
-      <Header_0></Header_0>
+      <div>
+        <Header :mode="currentMode"/> 
+      </div>
         <div class="tab">
           
           <RouterLink tag="div" to="/LC_Question" class="tab-item" replace><Btn_Lifecasino Button="常見問題"></Btn_Lifecasino></RouterLink>
@@ -67,7 +69,7 @@ const getInfoStyle = (question) => {
             <img src="../assets/images/simple-icons_facebook.svg" alt="">
             <img src="../assets/images/bi_instagram.svg" alt="">
         </div>
-        <Footer_0></Footer_0>
+        <Footer_1></Footer_1>
     </div>
     
   </template>
@@ -84,6 +86,10 @@ const getInfoStyle = (question) => {
         // height: 180vh;
     }
 
+    a{
+      text-decoration: none;
+      font-family: map-get($fontStyle, style_2);
+    }
     .icons{
       margin-top: 80px;
       display: flex;

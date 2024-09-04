@@ -93,6 +93,7 @@ const routes = [
     },
     requiredLogin: false
   },
+  // ====================人生賭場================//
   {
     path: '/lifecasino',
     component: () => import('@/views/lifeCasino.vue'),
@@ -101,6 +102,52 @@ const routes = [
     },
     requiredLogin: false
   },
+  {
+    path: '/LC_ProductPage',
+    component: () => import('@/views/LC_ProductPage.vue'),
+    meta: {
+      title: "人生賭場-精選商品"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/LC_ProductInfo',
+    component: () => import('@/views/LC_ProductInfo.vue'),
+    meta: {
+      title: "人生賭場-商品細項"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/LC_QuestionIntro',
+    component: () => import('@/views/LC_QuestionIntro.vue'),
+    meta: {
+      title: "人生賭場-入場須知"
+    },
+    redirect: '/LC_Question',
+    requiredLogin: false,
+    children:[
+      {
+        path: '/LC_Question',
+        name: 'LC_Question',
+        component: () => import('@/views/LC_Question.vue'),
+      },
+    {
+        path: '/LC_TicketRule',
+        name: 'LC_TicketRule',
+        component: () => import('@/views/LC_TicketRule.vue'),
+        
+      },
+      {
+        path: '/LC_TicketChange',
+        name: 'LC_TicketChange',
+        component: () => import('@/views/LC_TicketChange.vue')
+      }
+    ]
+  },
+  
+
+// =================星際邊境===============//
 
   {
     path: '/strellarfrontierintro',

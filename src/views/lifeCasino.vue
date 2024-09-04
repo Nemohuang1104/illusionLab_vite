@@ -1,24 +1,27 @@
 <template>
     <div class="wrapper">
-    <!-- <Header :class="{ 'show-header': showHeader }" class="header-nav"></Header> -->
-
-    <swiper ref="mySwiper" class="mySwiper"
+        
+        
+    <swiper ref="swiper1" class="mySwiper1"
+    :modules="[Pagination, Mousewheel, Parallax]"
+    :mousewheel="true"
     :direction="'vertical'"
     :pagination="{
-      el:'.swiper-pagination',
+    //   el:'.swiper-pagination',
+      pagination,
       clickable: true
     }"
-    :mousewheel= "true"
     :speed="1500"
     :freemode="true" 
-    :modules="modules"
     :parallax="true"
     @swiper="onSwiperInit"
-    
    >
-   
-
-    <div slot="container-start" class="parallax-bg" data-swiper-parallax="-50%">
+  
+         <Header class="header" :mode="currentMode"/> 
+       
+      
+     
+    <div slot="container-start" class="parallax-bg" data-swiper-parallax="-90%">
         <img src="../assets/images/lifecasino_bg1.png" alt="">
        <!-- ===background animation=== -->
     </div>
@@ -193,14 +196,17 @@
                     <p>秀出這張，你就是牌桌勝者 !  </p>
                 </div>
             </li>
-
+            
         </ul>
-        <Btn_Lifecasino class="LC_btn2" Button="前往商品專區"></Btn_Lifecasino>
+        <router-link to="/LC_ProductPage">
+        
+            <Btn_Lifecasino class="LC_btn2" Button="前往商品專區"></Btn_Lifecasino>
+        </router-link>
     </section>
-    </swiper-slide>
+</swiper-slide>
 
-    <!-- ============slide8 位置=============-->
-    <swiper-slide>
+<!-- ============slide8 位置=============-->
+<swiper-slide>
         <section class="slide slide8">
             <div class="slide8__title">
                 <LC_Text2
@@ -215,7 +221,7 @@
         </section>
     </swiper-slide>
 
-    <!-- ============slide9 顧客回饋=============-->
+    <!-- ============slide9 入場須知=============-->
     <swiper-slide>
         <section class="slide slide9">
             <div class="slide6__title">
@@ -233,8 +239,11 @@
                 <img src="../assets/images/LC_coin.svg" alt="">
                 <p >本活動提供酒精飲料，18歲以下請勿參加</p>
             </span>
-            <Btn_Lifecasino Button="查看須知" class="LC_btn3"></Btn_Lifecasino>
-            <h4>常見問題 / 票務規則 / 退換票相關政策</h4>
+            <router-link to="/LC_QuestionIntro">
+                <Btn_Lifecasino Button="查看須知" class="LC_btn3"></Btn_Lifecasino>
+                <h4>常見問題 / 票務規則 / 退換票相關政策</h4>
+
+            </router-link>
         </section>
     </swiper-slide>
 
@@ -336,12 +345,13 @@ import { ref, onMounted, reactive, computed, } from 'vue';
 import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
 import LC_smoke from '@/components/LC_smoke.vue';
 import PokerFall from '@/components/PokerFall.vue';
-import Header from '@/components/Header_0.vue';
+// import Header from '@/components/Header_0.vue';
 import LC_text from '@/components/LC_text.vue';
 import LC_h2Text from '@/components/LC_h2Text.vue';
 import SlotMachine from '@/components/SlotMachine.vue';
 import LC_Text2 from '@/components/LC_Text2.vue';
 import LC_Reviews from '@/components/LC_Reviews.vue';
+// import Header from '@/components/Header_0.vue' 
 import Footer_1 from '@/components/Footer_1.vue'
 
 // ===============swiper============//
@@ -352,26 +362,37 @@ import { Pagination, Mousewheel, Autoplay, Parallax} from 'swiper/modules';
 
 import 'swiper/css/mousewheel'
 
-const modules = [Pagination, Mousewheel, Autoplay, Parallax];
+// const modules = [Pagination, Mousewheel, Autoplay, Parallax];
 
 // =============gsap============//
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // ============header=============//
+import Header from '@/components/SFHeader_0.vue'
+const currentMode = ref('two');
 
-
+// ===========nav===============//
+const pagination = {
+  el: '.swiper-pagination',
+  clickable: true,
+  renderBullet: (index, className) => {
+    const textMap = ['ABOUT', 'BOOKING', 'REVIEWS', 'PRODUCT', 'LOCATION'];
+    return `<span class="${'.bot'}">${textMap[index]}</span>`;
+  }
+};
 
 
 
 
 </script>
 
+
 <style lang="scss" scoped>
 @import "../assets/style";
 
 *{
     font-family: map-get($fontStyle, style_2);
-    
+    text-decoration: none
 };
 
 h2{
@@ -405,6 +426,12 @@ p{
     overflow: hidden;
     // border: 2px solid blue;
 
+}
+.header{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    
 }
 
 
@@ -515,6 +542,7 @@ p{
         }
 
         .LC_btn{
+            z-index:10;
             margin: 0 auto;
             margin-top: 60px;
 
@@ -1002,7 +1030,7 @@ p{
 }
 
 .swiper-slide {
-  
+  z-index: -1;
 
   /* Center slide text vertically */
   display: flex;
@@ -1010,4 +1038,41 @@ p{
   align-items: center;
 }
 
+
+
+</style>
+
+<style>
+
+.swiper-pagination {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* 將文字向右對齊 */
+}
+
+.swiper-pagination-bullet {
+  /* background: none !important; 移除預設的圓點 */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  color: #f5a623; /* 設置激活狀態的顏色 */
+}
+
+.swiper-pagination-bullet:hover {
+  color: #f5a623; /* 設置懸停狀態的顏色 */
+}
+
+.bot{
+    width: 50px;
+}
 </style>

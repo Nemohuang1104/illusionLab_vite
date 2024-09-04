@@ -3,16 +3,13 @@
 
  
 <swiper
+    ref="swiper2"
     :effect="'flip'"
     :grabCursor="true"
-    :pagination="{
-      el:'.swiper-pagination',
-      clickable: false
-    }"
     :navigation="true"
     :modules="modules"
     :loop="true"
-    class="mySwiper"
+    class="mySwiper2"
   >
   <!-- <div class="swiper-button-prev swiper-button-black" slot="button-prev" @click="prev">
     <img src="../assets/images/LC_btn_prev.svg" alt="">
@@ -87,6 +84,7 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { EffectFlip, Pagination, Navigation} from 'swiper/modules';
 import 'swiper/css/mousewheel'
+import { ref } from 'vue';
 
 const modules = [EffectFlip, Pagination, Navigation];
 
@@ -94,7 +92,7 @@ import 'swiper/css/effect-flip';
 import 'swiper/css/navigation';
 
 
-
+const swiper2 = ref(null);
 
 
 </script>
@@ -163,7 +161,7 @@ section{
 
 // ==========================
 
-.swiper {
+.mySwiper2 {
   // background-color: #333;
   // border: 2px solid red;
   width: 300px;
@@ -171,7 +169,7 @@ section{
   padding: 20px 100px;
 }
 
-.swiper-slide {
+.mySwiper2 .swiper-slide {
   // border: 2px solid rgb(0, 255, 4);
   background-color: white;
   border-radius: 10px;
@@ -185,7 +183,7 @@ section{
 </style>
 
 <style>
-.swiper-pagination-current,
+.mySwiper2 .swiper-pagination-current,
 .swiper-pagination-total,
 .swiper-pagination-fraction {
     display: none;

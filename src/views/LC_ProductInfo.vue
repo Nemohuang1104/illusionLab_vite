@@ -1,10 +1,9 @@
 <script setup>
-import Header_2 from '@/components/Header_2.vue';
+import Header from '@/components/Header_0.vue';
 import Footer_2 from '@/components/Footer_2.vue';
 import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
 import { defineProps, ref, defineEmits } from 'vue';
-
-
+const currentMode = ref('two');
 const props = defineProps({
     productInfo: Object
 })
@@ -24,10 +23,10 @@ const productInfo = ref([
 </script>
 
 <template>
-  <div>
-    <Header_2></Header_2>
-  </div>
   <div class="warpper">
+    <div>
+        <Header :mode="currentMode"/> 
+    </div>
     
     <div class="center">
       <h1>精選商品</h1>
@@ -95,7 +94,8 @@ const productInfo = ref([
 
   margin: 0 auto;
   // border: 1px solid red;
-  background-image: url(../assets/images/SFbg.png);
+  // background-image: url(../assets/images/SFbg.png);'
+  background-color: #1E1E2F;
 
 
 }

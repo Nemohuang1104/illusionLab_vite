@@ -150,7 +150,7 @@ const getInfoStyle = (question) => {
         background-color: var(--clr-white);
         font-family: map-get($fontStyle, style_2);
         border-radius: 24px;
-        font-weight: bold;
+        // font-weight: bold;
         background: #1E1E2F;
     }
 
