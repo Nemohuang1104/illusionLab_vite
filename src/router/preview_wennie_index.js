@@ -24,18 +24,29 @@ import { createRouter, createWebHistory } from "vue-router";
 // import RefundQueryTicket from "@/views/RefundQueryTicket.vue";
 
 /*後台管理頁面vue註冊*/
-// import LoginCMS from "@/views/LoginCMS.vue";
-import CenterCMS from "@/views/CenterCMS.vue";
-import MemberCMS from "@/views/MemberCMS.vue";
-import OrderCMS from "@/views/OrderCMS.vue";
-import OrderTicketCMS from "@/views/OrderTicketCMS.vue";
-import OrderProductCMS from "@/views/OrderProductCMS.vue";
-import ProductCMS from "@/views/ProductCMS.vue";
-import CustomTicketCMS from "@/views/CustomTicketCMS.vue";
-import CustomTicketCasinoCMS from "@/views/CustomTicketCasinoCMS.vue";
-import CustomTicketMindCMS from "@/views/CustomTicketMindCMS.vue";
-import CustomTicketStrellaCMS from "@/views/CustomTicketStrellaCMS.vue";
-import NewsCMS from "@/views/NewsCMS.vue";
+import LoginCMS from "@/views/LoginCMS.vue";
+// import CenterCMS from "@/views/CenterCMS.vue";
+// import MemberCMS from "@/views/MemberCMS.vue";
+// import OrderCMS from "@/views/OrderCMS.vue";
+// import OrderTicketCMS from "@/views/OrderTicketCMS.vue";
+// import OrderProductCMS from "@/views/OrderProductCMS.vue";
+// import ProductCMS from "@/views/ProductCMS.vue";
+// import CustomTicketCMS from "@/views/CustomTicketCMS.vue";
+// import CustomTicketCasinoCMS from "@/views/CustomTicketCasinoCMS.vue";
+// import CustomTicketMindCMS from "@/views/CustomTicketMindCMS.vue";
+// import CustomTicketStrellaCMS from "@/views/CustomTicketStrellaCMS.vue";
+// import NewsCMS from "@/views/NewsCMS.vue";
+
+
+/*LC入場須知頁面vue註冊*/
+// import LC_Question from "@/views/LC_Question.vue";
+// import LC_TicketRule from "@/views/LC_TicketRule.vue";
+// import LC_TicketChange from "@/views/LC_TicketChange.vue";
+
+/*LC商品頁面vue註冊*/
+import LC_ProductPage from "@/views/LC_ProductPage.vue";
+
+
 
 
 // 記得有在以下配置出的所有組件路由，都要記得在上面import對應組件的路徑，以下沒有配置到的，也不允許在上面import，不然絕對預覽不出來
@@ -84,50 +95,102 @@ const router = createRouter({
 
     // 2.後台管理中心路由配置preview開始
     // 根路徑為CenterCMS，進入CenterCMS再重定向到 '/Member' (MemberCMS)
-    {
-      path: '/preview_wennie.html',
-      redirect: '/MemberCMS'
-    },
-  {
-      path: '/MemberCMS',
-      name: 'MemberCMS',
-      component: MemberCMS
-    },
-  {
-      path: '/OrderCMS',
-      name: 'OrderCMS',
-      component: OrderCMS,
-      children: [
-        { path: '/OrderCMS', redirect: '/OrderTicketCMS' },
-        { path: '/OrderTicketCMS', component: OrderTicketCMS },
-        { path: '/OrderProductCMS', component: OrderProductCMS },
-      ],
-    },
-    {
-      path: '/ProductCMS',
-      name: 'ProductCMS',
-      component: ProductCMS
-    },
-    {
-      path: '/CustomTicketCMS',
-      name: 'CustomTicketCMS',
-      component: CustomTicketCMS,
-      children: [
-        { path: '/CustomTicketCMS', redirect: '/CustomTicketCasinoCMS' },
-        { path: '/CustomTicketCasinoCMS', component: CustomTicketCasinoCMS },
-        { path: '/CustomTicketMindCMS', component: CustomTicketMindCMS },
-        { path: '/CustomTicketStrellaCMS', component: CustomTicketStrellaCMS },
-      ]
-    },
-    {
-      path: '/NewsCMS',
-      name: 'NewsCMS',
-      component: NewsCMS
-    }
+  //   {
+  //     path: '/preview_wennie.html',
+  //     redirect: '/MemberCMS'
+  //   },
+  // {
+  //     path: '/MemberCMS',
+  //     name: 'MemberCMS',
+  //     component: MemberCMS
+  //   },
+  // {
+  //     path: '/OrderCMS',
+  //     name: 'OrderCMS',
+  //     component: OrderCMS,
+  //     children: [
+  //       { path: '/OrderCMS', redirect: '/OrderTicketCMS' },
+  //       { path: '/OrderTicketCMS', component: OrderTicketCMS },
+  //       { path: '/OrderProductCMS', component: OrderProductCMS },
+  //     ],
+  //   },
+  //   {
+  //     path: '/ProductCMS',
+  //     name: 'ProductCMS',
+  //     component: ProductCMS
+  //   },
+  //   {
+  //     path: '/CustomTicketCMS',
+  //     name: 'CustomTicketCMS',
+  //     component: CustomTicketCMS,
+  //     children: [
+  //       { path: '/CustomTicketCMS', redirect: '/CustomTicketCasinoCMS' },
+  //       { path: '/CustomTicketCasinoCMS', component: CustomTicketCasinoCMS },
+  //       { path: '/CustomTicketMindCMS', component: CustomTicketMindCMS },
+  //       { path: '/CustomTicketStrellaCMS', component: CustomTicketStrellaCMS },
+  //     ]
+  //   },
+  //   {
+  //     path: '/NewsCMS',
+  //     name: 'NewsCMS',
+  //     component: NewsCMS
+  //   }
 
 
     // 後台管理中心路由配置preview結束
     
+    // 3.LC入場須知頁面路由配置preview開始
+    // 根路徑為LC_QuestionIntro，進入LC_QuestionIntro再重定向到 '/LC_Question' (LC_Question)
+  
+  //     {
+  //     path: '/preview_wennie.html',
+  //     redirect: '/LC_Question'
+  //   },
+  // {
+  //     path: '/LC_Question',
+  //     name: 'LC_Question',
+  //     component: LC_Question
+  //   },
+  // {
+  //     path: '/LC_TicketRule',
+  //     name: 'LC_TicketRule',
+  //     component: LC_TicketRule,
+      
+  //   },
+  //   {
+  //     path: '/LC_TicketChange',
+  //     name: 'LC_TicketChange',
+  //     component: LC_TicketChange
+  //   },
+
+
+    // 4.LC商品頁面路由配置preview開始
+    // 
+  
+   
+  {
+      path: '/LC_ProductPage',
+      name: 'LC_ProductPage',
+      component: LC_ProductPage
+    },
+    {
+      path: '/LoginCMS',
+      name: 'LoginCMS',
+      component: LoginCMS,
+      
+    },
+  // {
+  //     path: '/SF_ProductPage',
+  //     name: 'SF_ProductPage',
+  //     component: SF_ProductPage,
+      
+  //   },
+  //   {
+  //     path: '/MS_ProductPage',
+  //     name: 'MS_ProductPage',
+  //     component: MS_ProductPage
+  //   },
+  
     
   ]
 

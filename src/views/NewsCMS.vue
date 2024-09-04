@@ -1,46 +1,147 @@
 <script setup>
 import Header_CMS from '@/components/Header_CMS.vue';
+import NewsPopCMS from '@/components/NewsPopCMS.vue';
 import { ref, computed } from 'vue';
 
-// import axios from 'axios'; // 註解掉 axios 的引入
+import axios from 'axios'; // 註解掉 axios 的引入
 
-// 搜尋資料功能
+
+/* 搜尋資料功能============================*/
 const searchQuery = ref('');
-const allItems = ref([
-{ id: '1', postDate: '2024-08-10', title: '聖誕節雙人同行優惠', status: '上架', updateDate: '2024-08-28' },
-  { id: '2', postDate: '2024-08-12', title: '新年快樂大促銷', status: '下架', updateDate: '2024-08-28' },
-  { id: '3', postDate: '2024-08-14', title: '夏日清涼特賣會', status: '上架', updateDate: '2024-08-28' },
-  { id: '4', postDate: '2024-08-16', title: '感恩節限時折扣', status: '上架', updateDate: '2024-08-28' },
-  { id: '5', postDate: '2024-08-18', title: '萬聖節恐怖優惠', status: '上架', updateDate: '2024-08-28' },
-  { id: '6', postDate: '2024-08-20', title: '母親節特別促銷', status: '下架', updateDate: '2024-08-28' },
-  { id: '7', postDate: '2024-08-22', title: '黑色星期五大減價', status: '上架', updateDate: '2024-08-28' },
-  { id: '8', postDate: '2024-08-24', title: '父親節專屬優惠', status: '上架', updateDate: '2024-08-28' },
-  { id: '9', postDate: '2024-08-26', title: '兒童節快樂大禮包', status: '上架', updateDate: '2024-08-28' },
-  { id: '10', postDate: '2024-08-28', title: '開學季特別活動', status: '上架', updateDate: '2024-08-28' },
-  { id: '11', postDate: '2024-08-30', title: '情人節浪漫套餐', status: '下架', updateDate: '2024-08-28' },
-  { id: '12', postDate: '2024-09-01', title: '國慶日大優惠', status: '上架', updateDate: '2024-08-28' }
+
+const orders = ref([
+{
+    news_id: '1',
+    news_title: '聖誕節雙人同行優惠',
+    news_content: '聖誕節一定要記得耶穌愛你唷!一起來心靈光譜活動，讓耶穌安慰修復你受傷的心吧!雙人同行，限時特價1200元!',
+    post_date: '2024-08-10',
+    news_status: 2,
+    update_date: '2024-08-28',
+    cardimage: ''
+  },
+  {
+    news_id: '2',
+    news_title: '中秋烤肉大作戰',
+    news_content: '今年中秋節不只有烤肉活動，還有月餅DIY體驗，讓你在過節的同時享受美食樂趣!',
+    post_date: '2024-09-01',
+    news_status: 1,
+    update_date: '2024-09-10',
+    cardimage: ''
+  },
+  {
+    news_id: '3',
+    news_title: '新年倒數派對',
+    news_content: '2025年即將來臨，快來參加我們的新年倒數派對，享受音樂、舞蹈和美食的盛宴!',
+    post_date: '2024-12-20',
+    news_status: 2,
+    update_date: '2024-12-25',
+    cardimage: ''
+  },
+  {
+    news_id: '4',
+    news_title: '夏日海灘音樂節',
+    news_content: '迎接炎炎夏日，來參加我們的海灘音樂節，享受陽光、海浪和無盡的音樂!',
+    post_date: '2024-06-15',
+    news_status: 1,
+    update_date: '2024-07-01',
+    cardimage: ''
+  },
+  {
+    news_id: '5',
+    news_title: '春季花卉展覽',
+    news_content: '春暖花開，快來參觀我們的春季花卉展覽，感受大自然的美麗與生機!',
+    post_date: '2024-03-10',
+    news_status: 2,
+    update_date: '2024-03-20',
+    cardimage: ''
+  },
+  {
+    news_id: '6',
+    news_title: '萬聖節南瓜燈籠製作',
+    news_content: '今年萬聖節，不妨來製作屬於自己的南瓜燈籠，為節日增添一份獨特的氛圍!',
+    post_date: '2024-10-10',
+    news_status: 1,
+    update_date: '2024-10-15',
+    cardimage: ''
+  },
+  {
+    news_id: '7',
+    news_title: '情人節特別套餐',
+    news_content: '情人節當天，享受我們為你準備的浪漫套餐，讓你和你的另一半度過一個難忘的夜晚!',
+    post_date: '2024-02-01',
+    news_status: 2,
+    update_date: '2024-02-14',
+    cardimage: ''
+  },
+  {
+    news_id: '8',
+    news_title: '端午節龍舟競賽',
+    news_content: '端午節怎麼能少了龍舟競賽？來參加我們的龍舟競賽活動，為你的隊伍加油打氣!',
+    post_date: '2024-05-05',
+    news_status: 1,
+    update_date: '2024-05-20',
+    cardimage: ''
+  },
+  {
+    news_id: '9',
+    news_title: '感恩節感恩聚餐',
+    news_content: '感恩節是感謝的時刻，來參加我們的感恩聚餐，與家人朋友一同分享美好的時光!',
+    post_date: '2024-11-10',
+    news_status: 2,
+    update_date: '2024-11-15',
+    cardimage: ''
+  },
+  {
+    news_id: '10',
+    news_title: '兒童節親子活動',
+    news_content: '兒童節當天，我們為孩子們準備了一系列有趣的親子活動，讓孩子們玩得開心，家長們也能輕鬆一日!',
+    post_date: '2024-04-01',
+    news_status: 1,
+    update_date: '2024-04-05',
+    cardimage: ''
+  },
+  {
+    news_id: '11',
+    news_title: '母親節康乃馨義賣',
+    news_content: '母親節快到了，快來我們的康乃馨義賣活動，為母親獻上一份最真摯的心意!',
+    post_date: '2024-05-01',
+    news_status: 2,
+    update_date: '2024-05-10',
+    cardimage: ''
+  },
+  {
+    news_id: '12',
+    news_title: '復活節彩蛋尋寶活動',
+    news_content: '復活節來了，參加我們的彩蛋尋寶活動，尋找隱藏的彩蛋，贏取豐富的獎品!',
+    post_date: '2024-03-30',
+    news_status: 1,
+    update_date: '2024-04-01',
+    cardimage: ''
+  }
  
+  
+  // 更多訂單數據...
 ]);
 
-const initialItems = ref([...allItems.value]); // 保存初始資料的副本
 
-// 過濾後的搜尋數據
+const initialItems = ref([...orders.value]); // 保存初始資料的副本
+
+// 过滤后的数据
 const filteredItems = computed(() => {
   if (!searchQuery.value) {
-    return allItems.value;
+    return orders.value;
   }
-  return allItems.value.filter(item =>
-    item.id.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.postDate.toLowerCase().includes(searchQuery.value.toLowerCase())
-    ||
-    item.title.toLowerCase().includes(searchQuery.value.toLowerCase())
+  return orders.value.filter(item =>
+    item.news_id.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.news_title.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
 // 恢復顯示所有資料
 const resetSearch = () => {
   searchQuery.value = '';
-  allItems.value = [...initialItems.value];
+  initialItems.value = [...orders.value]; // 更新 initialItems 以包含最新的訂單資料
+  orders.value = [...initialItems.value];
   currentPage.value = 1;
 };
 
@@ -116,6 +217,98 @@ const goToPage = (page) => {
     currentPage.value = page;
   }
 };
+
+
+/*點擊編輯按鈕彈出編輯內容====================*/
+// 0.配置項數據材料
+const editOpacity = ref(1)
+const dbcheck = ref(false)
+const current_edit = ref(null);
+const select_number = ref('');
+
+
+const order_list = ref([
+  // 這裡可以填入初始的訂單商品列表
+  // 例如:
+  // [
+  //   { product_name: '商品A', quantity: 2, order_detail_price: 456 },
+  //   { product_name: '商品B', quantity: 3, order_detail_price: 234 },
+  //   { product_name: '商品C', quantity: 4, order_detail_price: 444 }
+  // ]
+])
+
+const total_cost = ref(0)
+const order_cost = ref(0)
+
+const o_pay = ref('')
+const o_form = ref('')
+const o_ship = ref('')
+
+// 1.點擊編輯按鈕彈出v-if內容(@click="edit(key)")
+const edit = (index) => {
+  // 使用 filteredItems 的索引來查找對應的 orders 項目
+  const filteredItem = displayedItems.value[index];
+  const originalIndex = orders.value.findIndex(item => item.order_list === filteredItem.order_list);
+  
+  if (originalIndex !== -1) {
+    current_edit.value = originalIndex;
+    editOpacity.value = 1;
+    select_number.value = orders.value[originalIndex].order_list;
+
+    const tot = order_list.value[originalIndex];
+    total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
+
+    order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
+
+    o_pay.value = orders.value[originalIndex].payment_status;
+    o_form.value = orders.value[originalIndex].order_status;
+    o_ship.value = orders.value[originalIndex].shipping_status;
+  }
+};
+// 2.當子組件 OrderTicketPopCMS 中的 f_close及f_save 被觸發時，會通過 emit 通知父組件，從而更新父組件中的 editOpacity 值，達到控制彈出視窗顯示或隱藏的效果。
+// 2.1 @close-edit事件回調函式
+const handleCloseEdit = ({ opacity, edit }) => {
+  editOpacity.value = opacity; // 更新 editOpacity 的值
+  current_edit.value = edit;   // 更新 current_edit 的值
+};
+
+// 2.2 @save-edit事件回調函式
+const handleSaveEdit = async (updatedOrder) => {
+  if (current_edit.value !== null) {
+    orders.value[current_edit.value] = updatedOrder;
+    initialItems.value = [...orders.value]; // 編輯後更新 initialItems
+  }
+  editOpacity.value = 0;
+  current_edit.value = null;
+  }
+  // 小春堂範例開始
+  // if (current_edit.value === null) return
+
+  // const nIndex = current_edit.value
+  // orders.value[nIndex].payment_status = o_pay.value
+  // orders.value[nIndex].order_status = o_form.value
+  // orders.value[nIndex].shipping_status = o_ship.value
+
+  // current_edit.value = null
+  // total_cost.value = 0
+  // order_cost.value = 0
+  // 小春堂範例結束
+
+
+
+// 3.發送 AJAX 請求更新訂單 (帶串接資料庫後再嘗試)
+  // try {
+  //   const response = await axios.post('../php/n-order_update.php', {
+  //     order_list: orders.value[nIndex].order_list,
+  //     payment_status: orders.value[nIndex].payment_status,
+  //     order_status: orders.value[nIndex].order_status,
+  //     shipping_status: orders.value[nIndex].shipping_status,
+  //   })
+  //   alert("儲存成功")
+  // } catch (error) {
+  //   alert("儲存失敗: " + error.response.status)
+  // }
+
 </script>
 
 
@@ -154,13 +347,13 @@ const goToPage = (page) => {
             <hr>
 
             
-            <div v-for="item in displayedItems" :key="item.id" class="order-text">
-            <span>{{ item.id }}</span>
-            <span>{{ item.postDate }}</span>
-            <span>{{ item.title }}</span>
-            <span>{{ item.status }}</span>
-            <span>{{ item.updateDate }}</span>
-            <span>編輯</span>
+            <div v-for="(item, index) in displayedItems" :key="item.id" class="order-text">
+            <span>{{ item.news_id }}</span>
+            <span>{{ item.post_date }}</span>
+            <span>{{ item.news_title }}</span>
+            <span>{{ item.news_status }}</span>
+            <span>{{ item.update_date }}</span>
+            <span @click="edit(index)">編輯</span>
             </div>
         </div> 
         </div> 
@@ -176,6 +369,22 @@ const goToPage = (page) => {
             {{ page }}
             </button>
         </div>
+       <!-- 編輯視窗 -->
+       <div class="n-order_edit" v-if="current_edit !== null" :style="{ opacity: editOpacity }">
+            <!-- 0.a  在 template 中使用 @close-edit="handleCloseEdit" 來監聽子組件的關閉按鈕的事件，並在 handleCloseEdit 函式中更新 editOpacity 的值。 -->
+
+            <!-- 0.b  在 template 中使用 @save-edit="handleSaveEdit" 來監聽子組件的儲存按鈕的事件，並在 handleSaveEdit 函式中更新 editOpacity 的值。 -->
+              <NewsPopCMS
+              :order="orders[current_edit]"
+              @close-edit="handleCloseEdit"
+              @save-edit="handleSaveEdit"/>
+            </div>
+
+            <div id="hide" v-if="current_edit !== null"></div>
+
+
+            <!-- 1.點擊視窗的儲存或關閉按鈕，畫面要隱藏或持續顯示v-if -->
+            <!-- <double-check v-if="dbcheck" @save="sss" @cancel="ccc"></double-check> -->
     </div>
 </template>
 
@@ -427,5 +636,34 @@ const goToPage = (page) => {
 .pagination button.active {
   background-color: #F9A825; /* 深黃色背景 */
   color: #000; /* 黑色字體 */
+}
+
+/*編輯視窗*/
+// 1.彈出視窗樣式
+.n-order_edit{
+  width: 800px;
+  height: 90%;
+  max-height: 1150px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: fixed;
+  left: 54%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  // background-color: #ffffff;
+  overflow-y: auto;
+}
+
+// 2.彈出視窗後，背景加上灰階濾鏡(使用V-if判斷濾鏡顯示狀況)
+#hide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
 }
 </style>
