@@ -1,6 +1,7 @@
 <script setup>
 import Header_2 from '@/components/Header_2.vue';
 import Footer_2 from '@/components/Footer_2.vue';
+import Header_0 from '@/components/Header_0.vue';
 import LC_ProductInfo from './LC_ProductInfo.vue';
 import { ref } from 'vue';
 
@@ -28,7 +29,7 @@ function goToLoginCMS(){
 
 <template>
   <div>
-    <Header_2></Header_2>
+    <Header_0></Header_0>
   </div>
   <div class="warpper">
     
