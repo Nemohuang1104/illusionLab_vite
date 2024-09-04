@@ -1,6 +1,8 @@
 <script setup>
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
+import SF_planetButton  from "@/components/SF_planetButton.vue";
+
 import { ref } from 'vue';
 //票券圖片
 import defaultImage from '../assets/images/SFticketDesign_01.svg';  // 預設圖片
@@ -10,13 +12,13 @@ import image4 from '../assets/images/SFticketDesign_04.svg';
 import image5 from '../assets/images/SFticketDesign_05.svg';
 
 //飛航小物
-import sticker1 from '../assets/images/STicon_astronaut.svg';
+import defaultSticker from '../assets/images/STicon-space.svg';
 import sticker2 from '../assets/images/STicon_earth.svg';
 import sticker3 from '../assets/images/STicon_moon.svg';
 import sticker4 from '../assets/images/STicon_saturn-02.svg';
 import sticker5 from '../assets/images/STicon_telescope.svg';
 import sticker6 from '../assets/images/STicon_Vector.svg';
-import sticker7 from '../assets/images/STicon-space.svg';
+import sticker7 from '../assets/images/STicon_astronaut.svg';
 
 
 
@@ -26,7 +28,9 @@ const styles = ref([defaultImage, image2, image3, image4, image5]);
 const selectedStyle = ref(styles.value[0]);
 
 //飛航小物
-const stickers = ref([sticker1, sticker2, sticker3,sticker4,sticker5,sticker6,sticker7]);
+const stickers = ref([defaultSticker, sticker2, sticker3,sticker4,sticker5,sticker6,sticker7]);
+const selectedSticker = ref(stickers.value[0]);
+
 
 //時間&日期
 const times = ref(['20:00', '21:00', '22:00']);
@@ -35,13 +39,13 @@ const selectedTime = ref(times.value[0]);
 const selectedDate = ref(dates.value[0]);
 
 function selectStyle(style) {
-    selectedStyle.value = style;
+    selectedStyle.value = style; // 選取票券樣式
 }
 
 function selectSticker(sticker) {
-    // 處理選擇貼紙後的邏輯
-    console.log('Selected sticker:', sticker);
+    selectedSticker.value = sticker; // 選取飛航小物
 }
+
 
 function selectTime(time) {
     selectedTime.value = time;
@@ -69,11 +73,10 @@ function selectDate(date) {
                 <div class="date-selected">
                     <p @click="selectDate('Aug 31')">{{ selectedTime }} {{ selectedDate }}</p>
                 </div>
-                
+               
             </div>
 
-            <!-- 小圖選項 -->
-            <!-- <img src="你的右側小圖路徑" alt="Small Icon" @click="selectStyle(image2)" /> -->
+    
 
             <!-- 底下的選項卡 -->
             <div class="ticketOptions">
@@ -83,21 +86,26 @@ function selectDate(date) {
                 </div>
 
                 <div class="choose-section">
-                  <!-- 動態顯示 section-title
-                    <p class="section-title">
-                        {{ currentTab === 'style' ? '選擇樣式' : '飛航幸運小物' }}
-                    </p> -->
-
                     <!-- Style 選項 -->
                     <div  v-if="currentTab === 'style'" class="style-options">
-                        <div class="selectStyle" v-for="(style, index) in styles" :key="index" @click="selectStyle(style)">
-                            <img :src="style" alt="Style Option" :class="{ selected: style === selectedStyle }" />
+                        <div class="selectStyle" 
+                        v-for="(style, index) in styles" 
+                        :key="index" 
+                        @click="selectStyle(style)"
+                        :class="{ selected: style === selectedStyle }" 
+                        >
+                            <img :src="style" alt="Style Option"/>
                         </div>
                     </div>
 
                     <!-- Sticker 選項 -->
                     <div v-if="currentTab === 'sticker'" class="sticker-options">
-                        <div v-for="(sticker, index) in stickers" :key="index" @click="selectSticker(sticker)">
+                        <div class="selectSticker" 
+                        v-for="(sticker, index) in stickers" 
+                        :key="index" 
+                        @click="selectSticker(sticker)"
+                        :class="{ selected: sticker === selectedSticker}"
+                        >
                             <img :src="sticker" alt="Sticker Option" />
                         </div>
                     </div>
@@ -118,6 +126,23 @@ function selectDate(date) {
                 </div>
             </div>
         </div>
+
+        <!-- 當 currentTab 為 'sticker' 時顯示 checkInfo -->
+        <div v-if="currentTab === 'sticker'">
+            <div class="checkInfo">
+                <label class="custom-checkbox">
+                    <input class="checkbox" type="checkbox" />
+                    <span>我了解 送出後即無法修改。</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input class="checkbox" type="checkbox" />
+                    <span>我了解 活動當日憑訂單QR-CODE換實體票卷入場。</span>
+                </label>
+            </div>
+            <div class="nextStep" >
+                <SF_planetButton></SF_planetButton>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -134,7 +159,7 @@ function selectDate(date) {
 }
 .wrapper {
     background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
-    url(../assets/images/STBackground.png);
+    url(../assets/images/STBackground.png) !important;
 }
 p{
     font-weight: normal;
@@ -145,26 +170,16 @@ p{
 .ticket{
     margin: 5% auto;
 }
+
 .ticket img{
     width: 100%;
     max-width: 50%;
     display: block;
     margin: 0 auto;
 }
-// .time-selected {  //boardingTime
-//     position: absolute; 
-//     top: 58%;  
-//     left: 46%;
-// }
-
-// .date-selected{
-//     position: absolute;  /* 時間&日期 */
-//     top: 54%;  
-//     left: 63%;
-// }
 
 
-.tabs, .choose-section{
+.tabs, .choose-section, .datetime-options{
     width: 100%;
     max-width: 80%;
     display: block;
@@ -177,18 +192,11 @@ p{
     border: none;
     font-size: 18px;
     margin-right: 1%;
-
 }
 
 .ticketOptions button.active{
     color: #C1693B;
     font-weight: bold;
-}
-
-
-.section-title{ //選項文字
-    text-align: left;
-    margin: 3% auto;
 }
 
 .style-options{  // 票券樣式
@@ -201,7 +209,6 @@ p{
 
 .style-options img{
     width: 100%;
-    // max-width: 90%;
     cursor: pointer;
 }
 
@@ -209,8 +216,78 @@ p{
 .sticker-options{
     display: flex;
     cursor: pointer;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 3%;
 }
 
+.sticker-options img{
+    width: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+/* 選取時的框線樣式 */
+.selected {  
+    outline: 1px solid #ffffff; 
+    outline-offset: 5px;
+}
+
+// 日期
+.datetime-options{
+    margin-top: 5%;
+}
+
+select{
+    color: #000000;
+}
+
+// 票券確認
+.checkInfo {
+    display:block;                
+    width: 100%;
+    max-width: 28%;
+    margin: 5% auto;               
+}
+
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 15px; // 調整文字和 checkbox 之間的間距
+    font-size: 16px; // 可根據需要調整字體大小
+    cursor: pointer;
+
+
+    .checkbox {
+        appearance: none; /* 隱藏原始 checkbox */
+        width: 100px;
+        max-width: 20px;
+        height: 20px;
+        border-radius: 2px; /* 圓角效果，可選 */
+        border: 2px solid #e8e8e8; /* 自定義背景色 */
+        transition: background-color 0.3s, border-color 0.3s;
+        cursor: pointer;
+
+        &:checked {
+            background-color: #e8e8e8; /* 選中後背景顏色 */
+        }
+
+
+        /* 打勾標記 */
+        &:checked::after {
+            content: '✔'; /* 選中後顯示的符號 */
+            display: block;
+            text-align: center;
+            line-height: 15px;
+            color: #000000; /* 勾勾的顏色 */
+            font-size: 16px;
+        }
+    }
+}
+
+// 送出按鈕
+
+.nextStep{
+    margin: 0 auto;
+}
 </style>
