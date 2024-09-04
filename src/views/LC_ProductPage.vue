@@ -1,6 +1,7 @@
 <script setup>
 import Header from '@/components/Header_0.vue';
 import Footer_2 from '@/components/Footer_2.vue';
+import Header_0 from '@/components/Header_0.vue';
 import LC_ProductInfo from './LC_ProductInfo.vue';
 import { ref } from 'vue';
 
