@@ -259,8 +259,7 @@ const upload_img_pro = (event, index) => {
                                 
                                 
                                 <div class="n-customized_editbtn">
-                                    <!-- <button class="n-customized_close">關閉</button>
-                                    <button class="n-customized_save">儲存</button> -->
+                                    
                                     <input type="button" class="n-customized_close" value='關閉'>
                                     <input type="button" class="n-customized_save" value='儲存' onclick='cardSave()'>
                                 </div>
