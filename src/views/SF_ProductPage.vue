@@ -8,6 +8,7 @@ const currentMode = ref('three');
 
 import Footer_2 from '@/components/Footer_2.vue';
 
+import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
   
 
 </script>
@@ -20,8 +21,8 @@ import Footer_2 from '@/components/Footer_2.vue';
   <div class="warpper">
 
     <div class="center">
-      <h1>精選商品</h1>
-      <p>PRODUCTS</p>
+      <StrellarFrontierTitle h1="體驗內容" p="ADVENTURES"></StrellarFrontierTitle>
+
       <div class="producttitle">
         <div class="arrowleft">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
@@ -82,7 +83,7 @@ import Footer_2 from '@/components/Footer_2.vue';
           <div class="pro">
             <img src="../assets/images/productspillow 1.png" alt="">
             <div>
-              <p>星際抱枕</p>
+              <p>抱枕</p>
               <div class="price">
                 <p>NT$ 600元</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
@@ -93,7 +94,7 @@ import Footer_2 from '@/components/Footer_2.vue';
           <div class="pro">
             <img src="../assets/images/productstshirt.png" alt="">
             <div>
-              <p>星際邊境T-shirt</p>
+              <p>T-shirt</p>
               <div class="price">
                 <p>NT$ 880元</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
@@ -112,9 +113,14 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+@import '@/assets/SASS/basic/_color.scss';
+* {
+    font-family: "Noto Serif TC" ;
+    color:map-get($colofont_2 , text);
+}
 
 .warpper {
-  font-family: "Noto Serif SC";
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
@@ -139,33 +145,10 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 }
 
-.center h1 {
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 5px;
-  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-
-}
-
-
-.center p {
-  font-size: 20px;
-  font-weight: 700;
-  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-
 
 .producttitle {
   max-width: 700px;
   width: 100%;
-  font-family: "Noto Serif SC";
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -178,7 +161,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 .producttitle p {
   width: 110px;
-  color: #fff;
+  // color: #fff;
   padding: 10px 0px;
 
 }
@@ -194,7 +177,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 }
 
 .arrowleft {
-  color: #fff;
+  // color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,7 +186,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 }
 
 .arrowright {
-  color: #fff;
+  // color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -212,7 +195,6 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 //商品外框
 .pagebox {
-  font-family: "Noto Serif SC";
   max-width: 800px;
   width: 90%;
   height: 750px;
@@ -224,7 +206,7 @@ import Footer_2 from '@/components/Footer_2.vue';
   padding: 70px 80px 100px 80px;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
-  border: 1px solid #f1f1f1;
+  border: 1px solid #e8e8e8;
 }
 
 .pagebox img {
@@ -251,7 +233,7 @@ import Footer_2 from '@/components/Footer_2.vue';
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   /*浮起來及陰影效果 */
   border-radius: 10px;
-
+  cursor: pointer;
 }
 
 .pro:hover {
@@ -269,7 +251,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 .pro p {
   font-weight: normal;
   font-size: 18px;
-  color: #fff;
+  // color: #fff;
   text-align: left;
   margin-bottom: 10px;
 }
@@ -278,7 +260,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 //商品價格
 .price{
-  color: #fff;
+  // color: #fff;
   font-size: 16px;
   display: flex;
   justify-content: space-between;
