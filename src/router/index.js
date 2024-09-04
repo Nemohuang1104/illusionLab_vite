@@ -166,9 +166,9 @@ const routes = [
     requiredLogin: false
   },
   {
-    path: '/ProductPage',
-    name: 'ProductPage',
-    component: () => import('@/views/ProductPage.vue'),
+    path: '/SF_ProductPage',
+    name: 'SF_ProductPage',
+    component: () => import('@/views/SF_ProductPage.vue'),
     meta: {
       title: "商品頁面"
     },
