@@ -22,7 +22,7 @@ function goToSignUp(){
 }
 
 function goToHome(){
-  router.push('/');
+  router.push('/home');
 }
 
 function goToShop(){
