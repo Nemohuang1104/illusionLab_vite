@@ -34,7 +34,7 @@
 <div class="actor">
 <ul>
   <li>
-    <img src="@/assets/images/lab_logo.png" alt="">
+    <img src="../assets/images/illusionLabLOGO.svg" alt="">
   </li>
 </ul>
 </div>
@@ -310,6 +310,7 @@ text-align: center;
 opacity: 0;
 transition: 1s;
 }
+
 .story:before,
 .actor:before {
 content: "";

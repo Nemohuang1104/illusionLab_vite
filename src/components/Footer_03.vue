@@ -5,7 +5,7 @@
 <template>
     <div class="outline">
         <div class="content">
-            <img src="../assets/images/illusionLab_logo.png" alt="">
+            <img src="../assets/images/illusionLabLOGO.SVG" alt="">
             <div class="items">
                 <span>隱私權政策</span>
                 <span>最新消息</span>
@@ -26,7 +26,6 @@
 
 .outline{
     width: 100%;
-    max-width: 1440px;
     height: 200px;
     background: map-get($color_3,header);
     display: flex;
@@ -40,6 +39,7 @@
 }
 
 .content img{
+    width: 38%;
     margin-top: 12px;
     margin-bottom: 12px;
 }
@@ -63,7 +63,7 @@
 
 .content p{
     font-size: 10px;
-    line-height: 1.6rem;
+    line-height: 1.6;
     flex-basis: 0%;
     color: #FFF;
     font-family: "Noto Sans TC";

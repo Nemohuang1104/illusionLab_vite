@@ -1,7 +1,7 @@
 <template>
     <div class="header1">
         <div class="logo">
-           <img src="../assets/images/illusionLab_logo.png" alt="" @click="goToHome">
+           <img src="../assets/images/illusionLabLOGO.SVG" alt="" @click="goToHome">
           
         </div>
         <div class="icons">
@@ -40,10 +40,9 @@ function goToShop(){
     background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
 }
 .logo img{
-    height: 80px;
+    height: 60px;
     flex-shrink: 0;
-    cursor: pointer;
-    
+    cursor: pointer;    
 }
 
 //右側ICON

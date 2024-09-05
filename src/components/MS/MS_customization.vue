@@ -385,7 +385,7 @@ export default {
     .ticket_bgs, .ticket_colors ,.ticket_stickers,.ticket_morebangs{
         padding:40px 0;
         align-items: center;
-        background-color: white;
+        background-color: #ffffff;
         height: 55vh;
         display: flex;
         flex-direction: row;

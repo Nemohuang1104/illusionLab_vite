@@ -1,5 +1,6 @@
 <script setup>
   import Footer_03 from '@/components/Footer_03.vue';
+  import TicketChangeSwiper from '@/components/TicketChangeSwiper.vue';
 </script>
 
 
@@ -79,104 +80,13 @@
   </ul>
 </div>
 
-<div class="rule">
-  <h1>票券退票規則</h1>
-
-  <div class="cardlist">
-    <div class="card">
-      <div class="Refund">
-      <!-- 卡片正面 -->
-        <div class="front">
-          <h4>體驗當天</h4>
-        </div>
-
-        <!-- 卡片背面 -->
-        <div class="back">
-          <h5>體驗當天<br>
-            退票NO !</h5>
-          <p>但票卷可轉讓</p>
-          <img src="../assets/images/no-bear.png" alt="" class="pic1">
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="Refund">
-      <!-- 卡片正面 -->
-        <div class="front">
-        <h4>體驗前三天</h4>
-        </div>
-
-        <!-- 卡片背面 -->
-      <div class="back">
-        <h5>體驗前三天<br>
-          退票NO !</h5>
-        <p>但票卷可轉讓</p>
-        <img src="../assets/images/no-rabbit.png" alt="" class="pic2">
-      </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="Refund">
-      <!-- 卡片正面 -->
-        <div class="front">
-        <h4>體驗前六天</h4>
-        </div>
-
-        <!-- 卡片背面 -->
-      <div class="back">
-        <h5>
-          體驗前六天<br>
-          可退費50%
-        </h5>
-        <p>且票卷可轉讓</p>
-        <img src="../assets/images/ok-cat.png" alt="" class="pic3">
-      </div>
-    </div>
-    </div>
-
-    <div class="card">
-      <div class="Refund">
-      <!-- 卡片正面 -->
-        <div class="front">
-        <h4>體驗前九天</h4>
-        </div>
-
-        <!-- 卡片背面 -->
-        <div class="back">
-        <h5>體驗前九天<br>
-          可退費90%</h5>
-        <p>且票卷可轉讓</p>
-        <img src="../assets/images/ok-bear.png" alt="" class="pic4">
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="Refund">
-      <!-- 卡片正面 -->
-        <div class="front">
-        <h4>訂購完成後</h4>
-        </div>
-
-        <!-- 卡片背面 -->
-        <div class="back">
-          <h5>訂購完成後<br>
-            可退票90%</h5>
-          <p>且票卷可轉讓</p>
-          <img src="../assets/images/ok-rabbit.png" alt=""
-          class="pic5">
-        </div>
-      </div>
-    </div>
+  <div class="rule">
+    <h1>票券退票規則</h1>
+    <TicketChangeSwiper></TicketChangeSwiper>
   </div>
 </div>
-
+</div>
 <Footer_03></Footer_03>
-</div>
-</div>
-
 </template>
 
 
@@ -187,6 +97,7 @@
   background-image: url(../assets/images/MS_paperbg.jpg);
   width: 100%;
   font-family:"Noto Sans TC";
+  padding-bottom: 1%;
 }
 
 header{
@@ -194,6 +105,8 @@ header{
   height: 80px;
   background-color:#B89977 ;
 }
+
+
 
 
 .wrapper h1{
@@ -291,9 +204,6 @@ header{
   margin-bottom: 50px;
 }
 
-
-
-
 .text li{
   font-size: 16px;
   color:map-get($colofont_3,text);
@@ -320,6 +230,7 @@ header{
   display: flex;
   justify-content: space-between;
 }
+
  
 
 .Refund{
@@ -332,6 +243,10 @@ header{
   transform-style: preserve-3d;
   transition: transform 1s;
   text-align: center;
+}
+
+.card{
+  width: 200px;
 }
 
 .card:hover>.Refund {
@@ -407,5 +322,74 @@ header{
   margin: 15px auto 0px;
 }
 
+.swiper {
+  width: 86vw;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  width: 100%;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.swiper-slide img {
+  display: block;
+  object-fit: cover;
+}
+
+
+
+.swiper-pagination-bullet-active{
+  background:#FDC274;
+  }
+
+/* ====================RWD斷點=========================== */
+@media screen and (max-width:1000px){
+  .change{
+    flex-flow: column;
+  }
+
+  .change .inside{
+    width: 100%;
+    max-width: 440px;
+    height: 300px;
+    margin: 2% auto;
+  }
+
+  .change .inside .front img{
+    width: 40%;
+    margin: 10% auto 0px;
+    margin-bottom: 4%;
+  }
+
+  .change .inside .back{
+    padding: 50px 24px;
+  }
+
+}
+
+/* ======================螢幕430========================== */
+@media screen and (max-width:500px){
+  .change .inside{
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .change .inside .front img{
+    width: 40%;
+    margin: 20% auto 0px;
+    margin-bottom: 4%;
+  }
+
+  .change .inside .back{
+    padding: 24px;
+  }
+
+}
 
 </style>
