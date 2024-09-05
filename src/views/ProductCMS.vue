@@ -1,38 +1,70 @@
 <script setup>
 import Header_CMS from '@/components/Header_CMS.vue';
 import { ref, computed } from 'vue';
+import ProductPopCMS from '@/components/ProductPopCMS.vue';
 
-// import axios from 'axios'; // 註解掉 axios 的引入
+import axios from 'axios'; // 註解掉 axios 的引入
 
-// 搜尋資料功能
+/* 搜尋資料功能============================*/
 const searchQuery = ref('');
-const allItems = ref([
-{ id: '1', eventName: '人生賭場', name: '奢華金杯', price: '599', status: '上架' },
-{ id: '2', eventName: '人生賭場', name: '賭城帆布袋', price: '299', status: '下架' },
-{ id: '3', eventName: '星際邊境', name: '太空鋼杯', price: '350', status: '上架' },
-{ id: '4', eventName: '心靈光譜', name: '繪本風格帆布袋', price: '590', status: '上架' },
+
+const orders = ref([
+  {
+    product_id: '1',
+    event_name: '心靈光譜',
+    product_name: '繪本風格帆布袋',
+    product_status: 2,
+    product_price: 599,
+    cardimage: ''
+  },
+  {
+    product_id: '2',
+    event_name: '人生賭場',
+    product_name: '奢華金杯',
+    product_status: 2,
+    product_price: 599,
+    cardimage: ''
+  },
+  {
+    product_id: '3',
+    event_name: '星際邊境',
+    product_name: '太空鋼杯',
+    product_status: 2,
+    product_price: 599,
+    cardimage: ''
+  },
+  {
+    product_id: '4',
+    event_name: '人生賭場',
+    product_name: '賭城帆布袋',
+    product_status: 2,
+    product_price: 299,
+    cardimage: ''
+  },
  
+  
+  // 更多訂單數據...
 ]);
 
-const initialItems = ref([...allItems.value]); // 保存初始資料的副本
 
-// 過濾後的搜尋數據
+const initialItems = ref([...orders.value]); // 保存初始資料的副本
+
+// 过滤后的数据
 const filteredItems = computed(() => {
   if (!searchQuery.value) {
-    return allItems.value;
+    return orders.value;
   }
-  return allItems.value.filter(item =>
-    item.id.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-    ||
-    item.eventName.toLowerCase().includes(searchQuery.value.toLowerCase())
+  return orders.value.filter(item =>
+    item.product_id.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.product_name.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
 // 恢復顯示所有資料
 const resetSearch = () => {
   searchQuery.value = '';
-  allItems.value = [...initialItems.value];
+  initialItems.value = [...orders.value]; // 更新 initialItems 以包含最新的訂單資料
+  orders.value = [...initialItems.value];
   currentPage.value = 1;
 };
 
@@ -108,6 +140,98 @@ const goToPage = (page) => {
     currentPage.value = page;
   }
 };
+
+
+/*點擊編輯按鈕彈出編輯內容====================*/
+// 0.配置項數據材料
+const editOpacity = ref(1)
+const dbcheck = ref(false)
+const current_edit = ref(null);
+const select_number = ref('');
+
+
+const order_list = ref([
+  // 這裡可以填入初始的訂單商品列表
+  // 例如:
+  // [
+  //   { product_name: '商品A', quantity: 2, order_detail_price: 456 },
+  //   { product_name: '商品B', quantity: 3, order_detail_price: 234 },
+  //   { product_name: '商品C', quantity: 4, order_detail_price: 444 }
+  // ]
+])
+
+const total_cost = ref(0)
+const order_cost = ref(0)
+
+const o_pay = ref('')
+const o_form = ref('')
+const o_ship = ref('')
+
+// 1.點擊編輯按鈕彈出v-if內容(@click="edit(key)")
+const edit = (index) => {
+  // 使用 filteredItems 的索引來查找對應的 orders 項目
+  const filteredItem = displayedItems.value[index];
+  const originalIndex = orders.value.findIndex(item => item.order_list === filteredItem.order_list);
+  
+  if (originalIndex !== -1) {
+    current_edit.value = originalIndex;
+    editOpacity.value = 1;
+    select_number.value = orders.value[originalIndex].order_list;
+
+    const tot = order_list.value[originalIndex];
+    total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
+
+    order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
+
+    o_pay.value = orders.value[originalIndex].payment_status;
+    o_form.value = orders.value[originalIndex].order_status;
+    o_ship.value = orders.value[originalIndex].shipping_status;
+  }
+};
+// 2.當子組件 OrderTicketPopCMS 中的 f_close及f_save 被觸發時，會通過 emit 通知父組件，從而更新父組件中的 editOpacity 值，達到控制彈出視窗顯示或隱藏的效果。
+// 2.1 @close-edit事件回調函式
+const handleCloseEdit = ({ opacity, edit }) => {
+  editOpacity.value = opacity; // 更新 editOpacity 的值
+  current_edit.value = edit;   // 更新 current_edit 的值
+};
+
+// 2.2 @save-edit事件回調函式
+const handleSaveEdit = async (updatedOrder) => {
+  if (current_edit.value !== null) {
+    orders.value[current_edit.value] = updatedOrder;
+    initialItems.value = [...orders.value]; // 編輯後更新 initialItems
+  }
+  editOpacity.value = 0;
+  current_edit.value = null;
+  }
+  // 小春堂範例開始
+  // if (current_edit.value === null) return
+
+  // const nIndex = current_edit.value
+  // orders.value[nIndex].payment_status = o_pay.value
+  // orders.value[nIndex].order_status = o_form.value
+  // orders.value[nIndex].shipping_status = o_ship.value
+
+  // current_edit.value = null
+  // total_cost.value = 0
+  // order_cost.value = 0
+  // 小春堂範例結束
+
+
+
+// 3.發送 AJAX 請求更新訂單 (帶串接資料庫後再嘗試)
+  // try {
+  //   const response = await axios.post('../php/n-order_update.php', {
+  //     order_list: orders.value[nIndex].order_list,
+  //     payment_status: orders.value[nIndex].payment_status,
+  //     order_status: orders.value[nIndex].order_status,
+  //     shipping_status: orders.value[nIndex].shipping_status,
+  //   })
+  //   alert("儲存成功")
+  // } catch (error) {
+  //   alert("儲存失敗: " + error.response.status)
+  // }
+
 </script>
 
 <template>
@@ -145,13 +269,13 @@ const goToPage = (page) => {
             <hr>
 
             
-            <div v-for="item in displayedItems" :key="item.id" class="order-text">
-            <span>{{ item.id }}</span>
-            <span>{{ item.eventName }}</span>
-            <span>{{ item.name }}</span>
-            <span>{{ item.price }}</span>
-            <span>{{ item.status }}</span>
-            <span>編輯</span>
+            <div v-for="(item, index) in displayedItems" :key="item.id" class="order-text">
+            <span>{{ item.product_id }}</span>
+            <span>{{ item.event_name }}</span>
+            <span>{{ item.product_name }}</span>
+            <span>{{ item.product_price }}</span>
+            <span>{{ item.product_status }}</span>
+            <span @click="edit(index)">編輯</span>
             </div>
         </div> 
         </div> 
@@ -167,6 +291,22 @@ const goToPage = (page) => {
             {{ page }}
             </button>
         </div>
+        <!-- 編輯視窗 -->
+        <div class="n-order_edit" v-if="current_edit !== null" :style="{ opacity: editOpacity }">
+            <!-- 0.a  在 template 中使用 @close-edit="handleCloseEdit" 來監聽子組件的關閉按鈕的事件，並在 handleCloseEdit 函式中更新 editOpacity 的值。 -->
+
+            <!-- 0.b  在 template 中使用 @save-edit="handleSaveEdit" 來監聽子組件的儲存按鈕的事件，並在 handleSaveEdit 函式中更新 editOpacity 的值。 -->
+              <ProductPopCMS
+              :order="orders[current_edit]"
+              @close-edit="handleCloseEdit"
+              @save-edit="handleSaveEdit"/>
+            </div>
+
+            <div id="hide" v-if="current_edit !== null"></div>
+
+
+            <!-- 1.點擊視窗的儲存或關閉按鈕，畫面要隱藏或持續顯示v-if -->
+            <!-- <double-check v-if="dbcheck" @save="sss" @cancel="ccc"></double-check> -->
     </div>
 </template>
 
@@ -418,5 +558,34 @@ const goToPage = (page) => {
 .pagination button.active {
   background-color: #F9A825; /* 深黃色背景 */
   color: #000; /* 黑色字體 */
+}
+
+/*編輯視窗*/
+// 1.彈出視窗樣式
+.n-order_edit{
+  width: 800px;
+  height: 90%;
+  max-height: 1150px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: fixed;
+  left: 54%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  // background-color: #ffffff;
+  overflow-y: auto;
+}
+
+// 2.彈出視窗後，背景加上灰階濾鏡(使用V-if判斷濾鏡顯示狀況)
+#hide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
 }
 </style>

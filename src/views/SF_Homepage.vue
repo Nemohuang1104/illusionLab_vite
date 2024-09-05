@@ -226,8 +226,13 @@ function gotoTicketChange() {
                 <StrellarFrontierTitle h1="聯絡我們" p="CONTACT"></StrellarFrontierTitle>
             </div>
             <p id="text">我們非常重視您的意見與建議。如果您有任何問題、建議或需要幫助，請隨時與我們聯繫。<br>我們的團隊將盡快回覆您的訊息。</p>
-            <p>有任何問題，歡迎寄信到下方Email</p>
+            <p>有任何問題，歡迎寄信到客服信箱：</p>
             <p style="font-weight: bold;">illusionlab@gmail.com</p>
+            <div class="icons">
+                <img src="../assets/images/SF_line-Icon.svg">
+                <img src="../assets/images/SF_FB-Icon.svg">
+                <img src="../assets/images/SF_IG-Icon.svg">
+            </div>
             <p>週一到週五 10:00 ~ 20:00 會由專人回覆訊息</p>
         </div>
         <Footer_2></Footer_2>
@@ -447,12 +452,12 @@ function gotoTicketChange() {
 
 .accordion-toggle .up {
     transform: rotate(-90deg); /* 向上 */
-    color:#0FF;
+    color:#C1693B;
 }
 
 .accordion-toggle .down {
     transform: rotate(90deg); /* 向下 */
-    color: #ffffff;
+    color: #e8e8e8;
 }
 
 .accordion-toggle span::before {
@@ -499,14 +504,27 @@ function gotoTicketChange() {
     margin: 5%;
 }
 .contact #text {
-
     text-align: center;
-    margin: 3%;
+    margin: 3% auto 7% auto;
     line-height: 1.6;
 }
 
-.contact p, .contactTime p
- {
+.icons{
+    width: 100%;
+    max-width: 30%;
+    display: flex;
+    margin: 3% auto;
+    justify-content: space-evenly;
+
+}
+
+.icons img{
+    width: 100%;
+    max-width: 40px;
+    cursor: pointer;
+}
+
+.contact p, .contactTime p{
     text-align: center;
     line-height: 1.6;
 }

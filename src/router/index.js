@@ -78,12 +78,12 @@ const routes = [
         name: 'NewsCMS',
         component: () => import('@/views/NewsCMS.vue')
       },
-     
+
     ]
   },
 
-
-  // ====================後台=====================
+ 
+  // ====================後台end=====================
 
   {
     path: '/home',
@@ -93,6 +93,7 @@ const routes = [
     },
     requiredLogin: false
   },
+  // ====================人生賭場================//
   {
     path: '/lifecasino',
     component: () => import('@/views/lifeCasino.vue'),
@@ -101,6 +102,52 @@ const routes = [
     },
     requiredLogin: false
   },
+  {
+    path: '/LC_ProductPage',
+    component: () => import('@/views/LC_ProductPage.vue'),
+    meta: {
+      title: "人生賭場-精選商品"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/LC_ProductInfo',
+    component: () => import('@/views/LC_ProductInfo.vue'),
+    meta: {
+      title: "人生賭場-商品細項"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/LC_QuestionIntro',
+    component: () => import('@/views/LC_QuestionIntro.vue'),
+    meta: {
+      title: "人生賭場-入場須知"
+    },
+    redirect: '/LC_Question',
+    requiredLogin: false,
+    children:[
+      {
+        path: '/LC_Question',
+        name: 'LC_Question',
+        component: () => import('@/views/LC_Question.vue'),
+      },
+    {
+        path: '/LC_TicketRule',
+        name: 'LC_TicketRule',
+        component: () => import('@/views/LC_TicketRule.vue'),
+        
+      },
+      {
+        path: '/LC_TicketChange',
+        name: 'LC_TicketChange',
+        component: () => import('@/views/LC_TicketChange.vue')
+      }
+    ]
+  },
+  
+
+// =================星際邊境===============//
 
   {
     path: '/strellarfrontierintro',
@@ -156,15 +203,17 @@ const routes = [
     },
     requiredLogin: true
   },
-   {path: '/SF_BookingChange',
-  name: 'SF_BookingChange',
-  component: () => import('@/views/SF_BookingChange.vue'),
-  meta: {
-    title: "退換票政策"
+  {
+    path: '/SF_BookingChange',
+    name: 'SF_BookingChange',
+    component: () => import('@/views/SF_BookingChange.vue'),
+    meta: {
+      title: "退換票政策"
+    },
+    requiredLogin: false
   },
-  requiredLogin: false
-  },
-  { path: '/SF_ProductPage',
+  {
+    path: '/SF_ProductPage',
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
     meta: {
@@ -172,7 +221,8 @@ const routes = [
     },
     requiredLogin: false
   },
-  { path: '/Header_0',
+  {
+    path: '/Header_0',
     name: 'Header_0',
     component: () => import('@/components/Header_0.vue'),
     meta: {

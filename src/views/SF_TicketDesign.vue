@@ -1,57 +1,60 @@
 <script setup>
-    import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
+import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
-    // 客製功能
-    import { ref } from 'vue';
-    import defaultImage from '../assets/images/StrellarFrontierTicketDesign_01.png';  //預設圖片
-    import image2 from '../assets/images/StrellarFrontierTicketDesign_02.svg';
-    import image3 from '../assets/images/StrellarFrontierTicketDesign_03.svg';
-    import image4 from '../assets/images/StrellarFrontierTicketDesign_04.svg';
-    import image5 from '../assets/images/StrellarFrontierTicketDesign_05.svg';
+import SF_planetButton  from "@/components/SF_planetButton.vue";
 
-    // 當前選中的頁籤
-    const currentTab = ref('style');
+import { ref } from 'vue';
+//票券圖片
+import defaultImage from '../assets/images/SFticketDesign_01.svg';  // 預設圖片
+import image2 from '../assets/images/SFticketDesign_02.svg';
+import image3 from '../assets/images/SFticketDesign_03.svg';
+import image4 from '../assets/images/SFticketDesign_04.svg';
+import image5 from '../assets/images/SFticketDesign_05.svg';
 
-    // 樣式選項
-    const styles = ref([
-    defaultImage,
-    image2,
-    image3,
-    image4,
-    image5,
-    ]);
+//飛航小物
+import defaultSticker from '../assets/images/STicon-space.svg';
+import sticker2 from '../assets/images/STicon_earth.svg';
+import sticker3 from '../assets/images/STicon_moon.svg';
+import sticker4 from '../assets/images/STicon_saturn-02.svg';
+import sticker5 from '../assets/images/STicon_telescope.svg';
+import sticker6 from '../assets/images/STicon_Vector.svg';
+import sticker7 from '../assets/images/STicon_astronaut.svg';
 
-    // 貼紙選項（未來可用）
-    const stickers = ref([
-    '/path/to/sticker1.png',
-    '/path/to/sticker2.png',
-    '/path/to/sticker3.png',
-    // 其他貼紙路徑
-    ]);
 
-    // 選中的樣式和貼紙
-    const selectedStyle = ref(styles.value[0]);
-    const selectedSticker = ref(null); // 尚未使用
 
-    // 時間和日期選項
-    const times = ref(['20:00', '21:00', '22:00']);
-    const dates = ref(['Aug 31', 'Sep 1', 'Sep 2']);
+// 票券樣式
+const currentTab = ref('style');
+const styles = ref([defaultImage, image2, image3, image4, image5]);
+const selectedStyle = ref(styles.value[0]);
 
-    // 選中的時間和日期
-    const selectedTime = ref(times.value[0]);
-    const selectedDate = ref(dates.value[0]);
+//飛航小物
+const stickers = ref([defaultSticker, sticker2, sticker3,sticker4,sticker5,sticker6,sticker7]);
+const selectedSticker = ref(stickers.value[0]);
 
-    // 選擇樣式
-    function selectStyle(style) {
-    selectedStyle.value = style;
-    }
 
-    // 選擇貼紙（未來可用）
-    function selectSticker(sticker) {
-    selectedSticker.value = sticker;
-    }
+//時間&日期
+const times = ref(['20:00', '21:00', '22:00']);
+const dates = ref(['Aug 31', 'Sep 1', 'Sep 2']);
+const selectedTime = ref(times.value[0]);
+const selectedDate = ref(dates.value[0]);
+
+function selectStyle(style) {
+    selectedStyle.value = style; // 選取票券樣式
+}
+
+function selectSticker(sticker) {
+    selectedSticker.value = sticker; // 選取飛航小物
+}
+
+
+function selectTime(time) {
+    selectedTime.value = time;
+}
+
+function selectDate(date) {
+    selectedDate.value = date;
+}
 </script>
-
 
 
 <template>
@@ -61,44 +64,53 @@
         </div>
 
         <div class="ticket-creator">
-        <!-- 顯示票券 -->
-        <hr>
+            <!-- 票券 -->
             <div class="ticket">
                 <img :src="selectedStyle" alt="Ticket Background" class="ticket-background" />
-                <div class="ticket-content">
-                    <h2>星際邊境</h2>
-                    <p>Earth --✧-- Space</p>
-                    <p>Business Class</p>
-                    <p>GATE: S125</p>
-                    <p>BRARDING TIME: {{ selectedTime }}</p>
-                    <p>ZONE: 1</p>
-                    <p>{{ selectedTime }} {{ selectedDate }}</p>
+                <div class="time-selected">
+                    <p @click="selectTime('20:00')">{{ selectedTime }}</p>
                 </div>
+                <div class="date-selected">
+                    <p @click="selectDate('Aug 31')">{{ selectedTime }} {{ selectedDate }}</p>
+                </div>
+               
             </div>
-            <hr>
+
+    
 
             <!-- 底下的選項卡 -->
             <div class="ticketOptions">
                 <div class="tabs">
-                <button :class="{ active: currentTab === 'style' }" @click="currentTab = 'style'">Style</button>
-                <button :class="{ active: currentTab === 'sticker' }" @click="currentTab = 'sticker'">Sticker</button>
+                    <button :class="{ active: currentTab === 'style' }" @click="currentTab = 'style'">票券樣式</button>
+                    <button :class="{ active: currentTab === 'sticker' }" @click="currentTab = 'sticker'">飛航小物</button>
                 </div>
 
-                <!-- Style 選項 -->
-                <div v-if="currentTab === 'style'" class="style-options">
-                    <p class="section-title">選擇樣式</p>
-                    <div v-for="(style, index) in styles" :key="index" @click="selectStyle(style)">
-                        <img :src="style" alt="Style Option" :class="{ selected: style === selectedStyle }" />
+                <div class="choose-section">
+                    <!-- Style 選項 -->
+                    <div  v-if="currentTab === 'style'" class="style-options">
+                        <div class="selectStyle" 
+                        v-for="(style, index) in styles" 
+                        :key="index" 
+                        @click="selectStyle(style)"
+                        :class="{ selected: style === selectedStyle }" 
+                        >
+                            <img :src="style" alt="Style Option"/>
+                        </div>
+                    </div>
+
+                    <!-- Sticker 選項 -->
+                    <div v-if="currentTab === 'sticker'" class="sticker-options">
+                        <div class="selectSticker" 
+                        v-for="(sticker, index) in stickers" 
+                        :key="index" 
+                        @click="selectSticker(sticker)"
+                        :class="{ selected: sticker === selectedSticker}"
+                        >
+                            <img :src="sticker" alt="Sticker Option" />
+                        </div>
                     </div>
                 </div>
 
-                <!-- Sticker 選項 -->
-                <div v-if="currentTab === 'sticker'" class="sticker-options">
-                    <p class="section-title">飛航幸運小物</p>
-                    <div v-for="(sticker, index) in stickers" :key="index" @click="selectSticker(sticker)">
-                        <img :src="sticker" alt="Sticker Option" />
-                    </div>
-                </div>
 
                 <!-- 時間和日期選項 -->
                 <div class="datetime-options">
@@ -115,115 +127,167 @@
             </div>
         </div>
 
-</div>
+        <!-- 當 currentTab 為 'sticker' 時顯示 checkInfo -->
+        <div v-if="currentTab === 'sticker'">
+            <div class="checkInfo">
+                <label class="custom-checkbox">
+                    <input class="checkbox" type="checkbox" />
+                    <span>我了解 送出後即無法修改。</span>
+                </label>
+                <label class="custom-checkbox">
+                    <input class="checkbox" type="checkbox" />
+                    <span>我了解 活動當日憑訂單QR-CODE換實體票卷入場。</span>
+                </label>
+            </div>
+            <div class="nextStep" >
+                <SF_planetButton></SF_planetButton>
+            </div>
+        </div>
+    </div>
 </template>
 
 
 
 <style lang="scss" scoped>
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 @import '@/assets/SASS/basic/_color.scss';
 
 * {
     font-family: "Noto Serif TC" ;
+    color:map-get($colofont_2 , text);
 }
-
-    .wrapper{
-        background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
-        url(../assets/images/STBackground.png);
+.wrapper {
+    background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
+    url(../assets/images/STBackground.png) !important;
 }
-.title{
+p{
+    font-weight: normal;
+}
+.title {
     text-align: center;
-    margin-bottom: 5%;
 }
-
-.ticket {
-    // position: fixed;  
-    // top: 20px;            
-    // z-index: 1000;  
+.ticket{
     margin: 5% auto;
 }
 
 .ticket img{
     width: 100%;
-    max-width: 800px;
-    // 圖片置中
+    max-width: 50%;
     display: block;
     margin: 0 auto;
 }
-hr{
-    border: 1px solid #f1f1f1 ;
-}
-.ticketOptions{
-    padding: 7%;
-}
 
-.ticket-content {
-    position: absolute;
-    top: 20%;
-    left: 10%;
-    color: white;
-}
 
-.tabs {
-    display: flex;
+.tabs, .choose-section, .datetime-options{
+    width: 100%;
+    max-width: 80%;
+    display: block;
+    margin: 0 auto;
 }
-
-.tabs button {
-    padding: 5px 20px;
+//  頁籤選項
+.ticketOptions button{
+    background: none;
+    cursor: pointer;
     border: none;
-    cursor: pointer;
-    border-radius: 10px 10px 0px 0px;
-    font-size: 16px;
-    background-color: #024A81; 
-    color: white;
-}
-
-.tabs button.active {
-    color: #024A81;
-    background: #7AABD1;
-}
-
-.style-options, .sticker-options {
-    // display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    justify-content:center;
-    text-align: center;
-    position: relative;
-    // padding: 30px;
-}
-
-.style-options img, .sticker-options img {
-    width: 100%;
-    max-width: 500px;
-    margin:3% auto;
-    cursor: pointer;
-    border: 1px solid transparent;
-}
-
-.style-options img.selected {
-    border: 1px solid #ffffff3f; 
-}
-
-.section-title {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 18px;
-    padding:10px;
+    margin-right: 1%;
 }
 
-.datetime-options {
-    margin-top: 20px;
+.ticketOptions button.active{
+    color: #C1693B;
+    font-weight: bold;
 }
 
-.datetime-options select {
-    padding: 5px;
+.style-options{  // 票券樣式
+    display: grid;
+    grid-template-columns: repeat(2,2fr) ;
+    gap: 30px;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.style-options img{
+    width: 100%;
+    cursor: pointer;
+}
+
+//飛航小物
+.sticker-options{
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    margin: 3%;
+}
+
+.sticker-options img{
+    width: 100%;
+    width: 40px;
+    height: 40px;
+}
+
+/* 選取時的框線樣式 */
+.selected {  
+    outline: 1px solid #ffffff; 
+    outline-offset: 5px;
+}
+
+// 日期
+.datetime-options{
+    margin-top: 5%;
+}
+
+select{
+    color: #000000;
+}
+
+// 票券確認
+.checkInfo {
+    display:block;                
+    width: 100%;
+    max-width: 28%;
+    margin: 5% auto;               
+}
+
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 15px; // 調整文字和 checkbox 之間的間距
+    font-size: 16px; // 可根據需要調整字體大小
+    cursor: pointer;
+
+
+    .checkbox {
+        appearance: none; /* 隱藏原始 checkbox */
+        width: 100px;
+        max-width: 20px;
+        height: 20px;
+        border-radius: 2px; /* 圓角效果，可選 */
+        border: 2px solid #e8e8e8; /* 自定義背景色 */
+        transition: background-color 0.3s, border-color 0.3s;
+        cursor: pointer;
+
+        &:checked {
+            background-color: #e8e8e8; /* 選中後背景顏色 */
+        }
+
+
+        /* 打勾標記 */
+        &:checked::after {
+            content: '✔'; /* 選中後顯示的符號 */
+            display: block;
+            text-align: center;
+            line-height: 15px;
+            color: #000000; /* 勾勾的顏色 */
+            font-size: 16px;
+        }
+    }
+}
+
+// 送出按鈕
+
+.nextStep{
+    margin: 0 auto;
 }
 </style>

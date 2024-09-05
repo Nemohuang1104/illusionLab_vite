@@ -8,7 +8,6 @@ const currentMode = ref('three');
 
 import Footer_2 from '@/components/Footer_2.vue';
 
-
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
   
 // 螢幕寬高度
@@ -46,7 +45,8 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
   <div class="warpper">
 
     <div class="center">
-      <StrellarFrontierTitle h1="精選商品" p="PRODUCTS"></StrellarFrontierTitle> 
+      <StrellarFrontierTitle h1="體驗內容" p="ADVENTURES"></StrellarFrontierTitle>
+
       <div class="producttitle">
         <div class="arrowleft">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
@@ -107,7 +107,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           <div class="pro">
             <router-link><img src="../assets/images/SF_Pillow.png" alt=""></router-link>
             <div>
-              <p>星際抱枕</p>
+              <p>抱枕</p>
               <div class="price">
                 <p>NT$ 600元</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
@@ -115,7 +115,16 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
             </div>
           </div>
 
-         
+          <div class="pro">
+            <img src="../assets/images/productstshirt.png" alt="">
+            <div>
+              <p>T-shirt</p>
+              <div class="price">
+                <p>NT$ 880元</p>
+                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,6 +137,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 @import '@/assets/SASS/basic/_color.scss';
 * {
     font-family: "Noto Serif TC" ;
@@ -185,7 +195,6 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 .producttitle {
   max-width: 700px;
   width: 100%;
-  font-family: "Noto Serif SC";
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -198,7 +207,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 .producttitle p {
   width: 110px;
-  color: #fff;
+  // color: #fff;
   padding: 10px 0px;
 
 }
@@ -211,7 +220,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 
 .arrowleft {
-  color: #fff;
+  // color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -220,7 +229,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 }
 
 .arrowright {
-  color: #fff;
+  // color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -229,7 +238,6 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 //商品外框
 .pagebox {
-  font-family: "Noto Serif SC";
   max-width: 800px;
   width: 90%;
   height: auto;
@@ -243,7 +251,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
   padding: 3%;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
-  border: 1px solid #f1f1f1;
+  border: 1px solid #e8e8e8;
 }
 
 .pagebox img {
@@ -270,7 +278,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   /*浮起來及陰影效果 */
   border-radius: 10px;
-
+  cursor: pointer;
 }
 
 .pro:hover {
@@ -288,7 +296,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 .pro p {
   font-weight: normal;
   font-size: 18px;
-  color: #fff;
+  // color: #fff;
   text-align: left;
   margin-bottom: 10px;
 }
@@ -297,7 +305,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 //商品價格
 .price{
-  color: #fff;
+  // color: #fff;
   font-size: 16px;
   display: flex;
   justify-content: space-between;

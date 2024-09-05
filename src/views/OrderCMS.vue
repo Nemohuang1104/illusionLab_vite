@@ -232,7 +232,7 @@ const goToPage = (page) => {
     width: 402px;
     display: flex;
     justify-content: space-between;
-    z-index: 10;
+    z-index: 5;
     
     
 }
@@ -269,10 +269,11 @@ const goToPage = (page) => {
 
 .replace{
     position: absolute;
-    top: 46px;
+    top: 0px;
     left: 0;
     width: 100%;
     z-index: 5;
+    position: relative;
 }
 
 
