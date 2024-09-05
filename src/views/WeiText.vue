@@ -1,66 +1,129 @@
-<script setup>
-// 等待8秒後觸發UFO縮小並跳轉到另一頁
-setTimeout(() => {
-    document.getElementById("ufo").style.animation = "ufoGlitch 2s forwards"; // 觸發縮小動畫
-    setTimeout(() => {
-        window.location.href = "next_page.html"; // 替換成你的跳轉頁面
-    }, 2000); // 延遲2秒以便播放完整動畫
-}, 8000);
-
-</script>
-
 <template>
-    <div class="color">
-        <div id="ufo" class="ufo">幽浮上的故障字體特效</div>
-    </div>
+    <swiper :style="{
+        '--swiper-navigation-color': '#fff',
+        '--swiper-pagination-color': '#fff',
+    }" :spaceBetween="10" :navigation="true" :thumbs="{ swiper: thumbsSwiper }" :modules="modules" class="mySwiper2">
+        <swiper-slide><img src="../assets/images/productstshirt.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/productspostcard.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/productspillow 1.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/easycard_1.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/productsbook_2.svg" /></swiper-slide>
+    </swiper>
+    <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="4" :freeMode="true" :watchSlidesProgress="true"
+        :modules="modules" class="mySwiper">
+        <swiper-slide><img src="../assets/images/productstshirt.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/productspostcard.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/productspillow 1.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/easycard_1.png" /></swiper-slide><swiper-slide><img
+                src="../assets/images/productsbook_2.svg" /></swiper-slide>
+    </swiper>
 </template>
+<script>
+import { ref } from 'vue';
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+import 'swiper/css';
+
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
 
 
-<style lang="scss" scoped>
-.color{
-    background-color: black;
-    color: #ffffff;
+// import required modules
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+
+export default {
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    setup() {
+        const thumbsSwiper = ref(null);
+
+        const setThumbsSwiper = (swiper) => {
+            thumbsSwiper.value = swiper;
+        };
+
+        return {
+            thumbsSwiper,
+            setThumbsSwiper,
+            modules: [FreeMode, Navigation, Thumbs],
+        };
+    },
+};
+</script>
+<style>
+.swiper {
+    width: 20%;
+    height: 20%;
 }
-.ufo {
-    width: 100px;
-    height: 100px;
-    background: url('../assets/img/UFO.png') no-repeat center center;
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 400px;
+    height: 400px;
+    /* width: 100%;
+    height: 100%; */
+    object-fit: cover;
+}
+
+body {
+    background: #000;
+    color: #000;
+}
+
+.swiper {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.swiper-slide {
     background-size: cover;
-    animation: ufoGlitch 8s linear;
-    position: relative;
+    background-position: center;
 }
 
-@keyframes ufoGlitch {
-    0% {
-        transform: scale(1);
-    }
-
-    90% {
-        transform: scale(1);
-    }
-
-    /* 保持大小直到動畫結束前 */
-    100% {
-        transform: scale(0);
-    }
-
-    /* 最後一瞬間縮小 */
+.mySwiper2 {
+    height: 30%;
+    width: 30%;
 }
 
-@keyframes glitchEffect {
+.mySwiper {
+    height: 20%;
+    width: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
 
-    /* 可以放一些簡單的字體故障效果，例如： */
-    0% {
-        transform: translate(0, 0);
-    }
+.mySwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+}
 
-    50% {
-        transform: translate(-5px, -5px);
-    }
+.mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+}
 
-    100% {
-        transform: translate(5px, 5px);
-    }
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>

@@ -1,0 +1,432 @@
+<script setup>
+import Header from '@/components/Header_0.vue';
+import Footer_2 from '@/components/Footer_2.vue';
+import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
+import { defineProps, ref, defineEmits } from 'vue';
+const currentMode = ref('two');
+const props = defineProps({
+    productInfo: Object
+})
+
+const productInfo = ref([
+    {id:'1',productList:'20240904001', cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:599,material:'銅鍍合金',size:'直徑6.5cm，高6cm',quantity: 1},
+])
+
+
+// function goToLoginCMS(){
+//   router.push('/LoginCMS');
+
+// }
+
+
+
+</script>
+
+<template>
+  <div class="warpper">
+    <div>
+        <Header :mode="currentMode"/> 
+    </div>
+    
+    <div class="center">
+      <h1>精選商品</h1>
+      <p>PRODUCTS</p>
+      <div class="producttitle">
+        <div class="arrowlift">
+          <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
+          <p >上一頁</p>
+        </div>
+        
+      </div>
+      <div v-for="(item,index) in productInfo"   :key="item.id" class="pagebox">
+        <!-- 放置一個商品列的外框 -->
+        <img :src="item.cardImage" alt="">
+        <div class="list">
+          <div class="pro">
+                <p>商品編號 : {{ item.productList }}</p>
+                <p>{{ item.productName }}</p>
+                <p>NT $ {{item.price }}</p>
+                <p>材質 : {{ item.material }}</p>
+                <p>規格 : {{ item.size }}</p>
+                <div class="input">
+                    <select name="" id="">
+                        <option value="0">商品規格</option>
+                        <option value="1">可愛動物區</option>
+                        <option value="2">內心小女孩</option>
+                        <option value="3">大人釋懷中</option>
+
+                    </select>
+                </div>
+                <div class="quantity-input">
+                    <button class="quantity-button" id="minus6"
+                        @click="item.quantity > 1 &&item.quantity--">-</button>
+                    <input type="text" v-model="item.quantity" min="1" />
+                    <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
+                </div>
+                
+                <div class="icon"><Btn_Lifecasino Button="加入購物車"></Btn_Lifecasino></div>
+              </div>
+            
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  
+  <div>
+    <Footer_2></Footer_2>
+  </div>
+</template>
+
+
+
+<style lang="scss" scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
+@import "../assets/style";
+
+.warpper {
+  font-family: "Noto Serif SC";
+  max-width: 1440px;
+  width: 100%;
+
+  margin: 0 auto;
+  // border: 1px solid red;
+  // background-image: url(../assets/images/SFbg.png);'
+  background-color: #1E1E2F;
+
+
+}
+
+
+
+.center {
+   color: map-get($colorfont_0, white);
+  font-weight: 500;
+  font-family: map-get($fontStyle, style_2);
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 20px;
+
+}
+
+.center h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 5px;
+
+  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+}
+
+
+.center p {
+  font-size: 20px;
+  font-weight: 700;
+  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+
+
+.producttitle {
+  max-width: 700px;
+  width: 100%;
+  font-family: "Noto Serif SC";
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  // border: 1px solid red;
+
+
+}
+
+.producttitle p {
+  width: 110px;
+  color: #fff;
+  padding: 10px 0px;
+
+}
+
+.producttitle h1 {
+  font-size: 48px;
+
+}
+
+.arrowlift {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+}
+
+.arrowright {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+}
+
+//商品外框
+.pagebox {
+  font-family: "Noto Serif SC";
+  max-width: 800px;
+  width: 90%;
+  overflow: hidden;
+  background: linear-gradient(147deg, #1E1E2F 3.26%, rgba(30, 30, 47, 0.60) 97.45%);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  padding: 70px 80px 100px 80px;
+  margin-bottom: 50px;
+  box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
+  // border: 1px solid #fff;
+  justify-content: space-between;
+  align-items: start;
+  gap: 8%;
+  
+}
+
+.list {
+  width: 80%;
+  flex-basis: 50%;
+
+  // justify-content: center;
+  
+  gap: 26px;
+  /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
+  /* 商品換行 */
+
+}
+
+.pro {
+  // border: 1px solid red;
+  width: 200px;
+  height: 250px;
+  // margin-bottom: 20px;
+  padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  /*浮起來及陰影效果 */
+  border-radius: 10px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center; /* 確保內容居中 */
+
+}
+
+// .pro:hover {
+//   transform: translateY(-5px);
+//   /* 往上是負，輕微浮起 */
+//   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+//   /* 明顯的阴影效果 */
+//   border-color: rgba(255, 255, 255, 0.5);
+//   /* 懸停時增加邊框颜色 */
+// }
+
+.pro img {
+  max-width: 100%;
+  max-height: 150px; /* 限制圖片高度 */
+  object-fit: contain; /* 保持圖片比例 */
+  margin-bottom: 10px;
+}
+
+
+
+.pro p {
+  font-weight: 600;
+  font-size: 24px;
+  color: #fff;
+  text-align: left;
+  margin-bottom: 10px;
+  font-family: map-get($fontStyle, style_2);
+}
+
+.pro p:first-child{
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.pro p:nth-child(3){
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.pro p:nth-child(4){
+  font-size: 16px;
+  font-weight: 300;
+  border-left: 3px solid map-get($color_0 , btn_orange );
+  padding-left: 8px;
+  
+}
+
+.pro p:nth-child(5){
+  font-size: 12px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+//商品
+.pagebox img {
+  object-fit: cover;
+  width:  80%;
+  
+  
+  border-radius: 12px;
+  margin-bottom: 15px;
+  flex-grow: 2;
+  justify-self: right;
+}
+
+.price span {
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  
+  font-family: map-get($fontStyle, style_2);
+}
+
+.input {
+    width: 100%;
+    position: relative;
+    /* 為了偽元素定位 */
+    margin-bottom: 8px;
+    border: 0
+}
+
+.input select {
+    width: 100%;
+    height: 20px;
+    line-height: 28px;
+    /* 確保游標高度與input框高度一致 */
+    // border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+    appearance: none;
+    /* 隱藏默認的下拉箭頭 */
+    background: #ffedbc00;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    height: 28px;
+    color: #fff;
+    text-align: center;
+
+}
+
+.input>select>option {
+    line-height: 20px;
+    /* 讓選項的高度與select框一致 */
+    vertical-align: middle;
+    /* 垂直置中 */
+    text-align: center;
+    /* 水平靠左對齊 */
+    /* 加上內邊距，讓文字與邊框有間隔 */
+    color: #313131;
+}
+
+
+
+
+
+.input::after {
+    content: "▼";
+    /* 使用自定義的箭頭符號 */
+    font-size: 16px;
+    color: map-get($color_0 , btn_orange );
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* 確保偽元素不會干擾選擇操作 */
+}
+
+.input select:focus {
+    // border-color: #B36243;
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3);
+    /* 暈染效果 */
+    outline: none;
+    /* 移除默認的黑框 */
+}
+
+.quantity-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: px;
+    width: 100%;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    height: 28px;
+    margin-bottom: 20px;
+
+}
+
+.quantity-button {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    width: 40px;
+    height: 28px;
+    /* 將高度設置為 40px，與輸入框一致 */
+    line-height: 28px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: #ffedbc00;
+    /* 設置背景色，根據需求調整 */
+    border: 0;
+    color: #fff;
+}
+
+.quantity-input>button:last-child:hover {
+    background-color: map-get($color_0 , btn_orange );
+    transition: 0.3s;
+    border-radius:  0 8px 8px 0;
+}
+
+.quantity-input>button:first-child:hover {
+    background-color: map-get($color_0 , btn_orange );
+    transition: 0.3s;
+    border-radius: 8px 0 0 8px;
+}
+
+.quantity-input>input {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    width: 50px;
+    /* 適當調整寬度，使其與按鈕相匹配 */
+    height: 20px;
+    /* 將高度設置為 40px，與按鈕一致 */
+    line-height: 20px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: #ffedbc00;
+    /* 設置背景色，根據需求調整 */
+    margin: 0 2px;
+    /* 添加 margin 以確保輸入框與按鈕之間有適當的間距 */
+    box-sizing: border-box;
+    /* 確保 padding 和 border 不會影響元素的寬度 */
+    border: 0;
+    // margin-bottom: 80px;
+    color: #fff;
+}
+
+
+</style>

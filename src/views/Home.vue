@@ -1,9 +1,11 @@
 <template>
   <Header class="header"></Header>
-  <div class="littleQuiz" @click="goToLittleQuiz">
-    <h2>小測驗</h2>
-    <p>選擇障礙專區</p>
-  </div>
+  <RouterLink to="/littlequiz">
+    <div class="littleQuiz" >
+      <h2>小測驗</h2>
+      <p>選擇障礙專區</p>
+    </div>             
+  </RouterLink>
   <swiper
     :pagination="{
       dynamicBullets: true,
@@ -31,7 +33,9 @@
             <p>歡迎來到人生賭場，在這裡，<br>
               每一次下注都是對命運的挑戰，體驗人生選擇的風險與回報。<br>
               準備迎接命運的賭局嗎？</p>
-            <Btn_Lifecasino class="LC_btn" Button="ENTER" @click="goToActivity1"></Btn_Lifecasino>
+             <RouterLink to="/lifecasino">
+              <Btn_Lifecasino class="LC_btn" Button="ENTER" ></Btn_Lifecasino>
+             </RouterLink>
           </div>
         </div>
       </div>
@@ -44,15 +48,11 @@
     <div >
       <StoneFall class="slide__content layer2" 
                   ></StoneFall>
-      <img class="slide__main layer1" src="../assets/images/carousel2_1.png" alt="" 
-      
-      >
+      <img class="slide__main layer1 " src="../assets/images/carousel_1.png" alt="">
       <div class="text layer3">
         <img class="logo" src="../assets/images/logo_StrellarFrontierIntro.svg" alt="">
-        <p>各位飛行者，請注意，<br>
-            即將進行倒數啟動。<br>
-            請確認安全帶已經繫好，<br>
-            並放鬆心情，準備迎接一段令人難忘的旅程</p>
+        <p>體驗前所未有的奇幻冒險<br>
+          揭開宇宙的神秘面紗</p>
         <ActivityButton class="LC_btn" Button="ENTER" @click="goToActivity2"></ActivityButton>
       </div>
     </div>
@@ -73,7 +73,9 @@
               進入繪本的世界拋開一切煩惱，<br>
               沉浸在充滿代入感的世界。
             </p>
-            <ActivityButton class="LC_btn" Button="ENTER" @click="goToActivity3"></ActivityButton>
+            <RouterLink to="/mindspectrum">
+              <ActivityButton class="LC_btn" Button="ENTER"></ActivityButton>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -130,39 +132,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 //   });
 // });
 
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';
 
-const router = useRouter();
-
-function goToActivity1() {
-  router.push('/lifecasino');
-};
-
-function goToActivity2() {
-  router.push('/strellarfrontierintro');
-};
-
-function goToActivity3() {
-  router.push('/mindspectrum');
-}
-
-function goToLittleQuiz(){
-  router.push('/littlequiz');
-
-}
-
-
-
-
-
-
-
+// const router = useRouter();
 
 
 </script>
 
 <style lang="scss" scoped>
   // @import "../assets/style";
+*{
+  text-decoration: none;
+}
 
 
 .header{
@@ -195,7 +176,7 @@ function goToLittleQuiz(){
 
 
 .slide2{
-  background-image: url(../assets/images/carousel2.png);
+  background-image: url(../assets/images/STBackground.png);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;

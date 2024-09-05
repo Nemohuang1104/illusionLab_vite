@@ -8,15 +8,15 @@ const cartItems = ref([
     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
 ]);
 
-const totalAmount = computed(() => {
-    return cartItems.value.reduce((total, item) => {
-        return total + item.quantity * item.price;
-    }, 0);
 // const totalAmount = computed(() => {
-//   return cartItems.value.reduce((total, item) => {
-//     return total + item.quantity * item.price;
-//   }, 0);
-// });
+//     return cartItems.value.reduce((total, item) => {
+//         return total + item.quantity * item.price;
+//     }, 0);
+// // const totalAmount = computed(() => {
+// //   return cartItems.value.reduce((total, item) => {
+// //     return total + item.quantity * item.price;
+// //   }, 0);
+// // });
 
 const shippingMethod = ref('');
 const shippingFee = computed(() => {
@@ -87,7 +87,6 @@ function prefillOrdererInfo(e) {
 
     }
 }
-
 
 </script>
 

@@ -1,5 +1,29 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
+import { defineProps, ref, defineEmits } from 'vue';
+
+
+/*定義 父組件prop 事件的原始夾帶資訊*/
+const props = defineProps({
+  order: Object,
+});
+
+/*定義 儲存和關閉按鈕emit 事件的夾帶資訊*/
+const emit = defineEmits(['close-edit', 'save-edit']);
+// 0.創建本地狀態來保存父組件的原始數據，以利後續編輯的數據
+const localOrder = ref({ ...props.order });
+// 1.處理關閉按鈕emit夾帶的透明度及編輯狀態(讓父組件的編輯視窗消失)
+const f_close = () => {
+  emit('close-edit', { opacity: 0, edit: null }); // 發出 'close-edit' 事件並傳遞 editOpacity 值
+};
+
+// 2.處理儲存按鈕emit夾帶的編輯狀態，並傳回父組件
+const f_save = () => {
+  emit('save-edit', localOrder.value); // 將本地編輯的數據傳遞回父組件
+  f_close(); // 儲存後關閉編輯視窗
+};
+
+
 </script>
 <template>
     <div class="wrapper">
@@ -12,34 +36,34 @@ import Header_0 from '@/components/Header_0.vue';
                 <div class="orderinf1">
                     <div class="orderdiv">
                         <p class="ptext">訂購日期 : </p>
-                        <input class="inputtext" type="text" value="2024/08/28">
+                        <input class="inputtext" type="text" v-model="localOrder.order_date">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">訂單編號 : </p>
-                        <input class="inputtext" type="text" value="TC202408281522">
+                        <input class="inputtext" type="text" v-model="localOrder.order_list">
                     </div>
                 </div>
 
                 <div class="orderinf">
                     <div class="orderdiv">
                         <p class="ptext">會員帳號 : </p>
-                        <input class="inputtext" type="text" value="ping@gmail.com">
+                        <input class="inputtext" type="text" v-model="localOrder.account">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext"> 收件人姓名 : </p>
-                        <input class="inputtext" type="text" value="Doremi">
+                        <input class="inputtext" type="text" v-model="localOrder.receiver_name">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">收件人手機 : </p>
-                        <input class="inputtext" type="text" value="0918989889">
+                        <input class="inputtext" type="text" v-model="localOrder.receiver_phone">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">收件人地址 : </p>
-                        <input class="inputtext" type="text" value="台北市中山區南京東路三段219號4F">
+                        <input class="inputtext" type="text" v-model="localOrder.shipping_address">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">付款方式 : </p>
-                        <input class="inputtext" type="text" value="信用卡">
+                        <input class="inputtext" type="text" v-model="localOrder.payment">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">公司抬頭 : </p>
@@ -89,9 +113,9 @@ import Header_0 from '@/components/Header_0.vue';
                     </div>
 
                 </div>
-                <div class="fill">
-                    <button class="butleft">儲存</button>
-                    <button class="butright">顯示全部</button>
+                <div class="n-order_editbtn">
+                    <button class="n-order_close" @click="f_close">關閉</button>
+                    <button class="n-order_save" @click="f_save">儲存</button>
                 </div>
 
                 <!-- <div v-for="item in displayedItems" :key="item.id" class="order-text">
@@ -119,7 +143,7 @@ import Header_0 from '@/components/Header_0.vue';
 .wrapper {
     font-family: Noto Sans TC;
     font-weight: bold;
-    background-color: #000354;
+    // background-color: #000354;
 
 }
 
@@ -130,11 +154,11 @@ import Header_0 from '@/components/Header_0.vue';
     align-items: center;
     justify-content: center;
     max-width: 900px;
-    width: 100%;
+    width: 95.5%;
     height: 900px;
     border-radius: 10px;
     padding: 2%;
-    background: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 0.30) 97.6%);
+    background: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 1) 97.6%);
 
 
 
@@ -203,6 +227,7 @@ import Header_0 from '@/components/Header_0.vue';
     border: 1px solid #FFFFFF;
     border-radius: 8px;
     flex-shrink: 0;
+    background: #FFEDBC;
 }
 
 .orderinf1 {
@@ -303,7 +328,7 @@ import Header_0 from '@/components/Header_0.vue';
 
 .textdetail {
     // border: 1px solid red;
-    background: linear-gradient(136deg, #FFFFFF 23.13%, rgba(255, 255, 255, 0.30) 97.6%);
+    background: #F7F7F7;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     align-items: center;
@@ -330,31 +355,42 @@ import Header_0 from '@/components/Header_0.vue';
 
 
 //按鈕
-.fill {
+.n-order_editbtn{
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 20px;
+    
 }
 
-.butleft {
+.n-order_editbtn .n-order_save {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #505050;
     width: 100px;
-    height: 35px;
-    background-color: #FCB600;
-    color: block;
-    font-weight: bold;
-    border-radius: 8px;
+    height: 29.48px;
+    line-height: 29.48px;
     border: none;
-    font-size: 20px;
+    background: var(--Color-2, #FCB600);
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-.butright {
+.n-order_editbtn .n-order_close {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #505050;
     width: 100px;
-    height: 35px;
-    background-color: #FFEDBC;
-    color: block;
-    font-weight: bold;
-    border-radius: 8px;
+    height: 29.48px;
+    line-height: 29.48px;
     border: none;
-    font-size: 20px;
+    background-color: #a3a3a3;
+    border: 1px solid #a3a3a3;
+    border-radius: 6px;
+    cursor: pointer;
 }
+
+
 </style>

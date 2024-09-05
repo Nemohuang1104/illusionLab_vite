@@ -68,21 +68,22 @@ const routes = [
         component: () => import('@/views/CustomTicketCMS.vue'),
         children: [
           { path: '/CustomTicketCMS', redirect: '/CustomTicketCasinoCMS' },
-          { path: '/CustomTicketCasinoCMS', component:() => import('@/views/CustomTicketCasinoCMS.vue') },
-          { path: '/CustomTicketMindCMS', component:() => import('@/views/CustomTicketMindCMS.vue') },
-          { path: '/CustomTicketStrellaCMS', component:() => import('@/views/CustomTicketStrellaCMS.vue') },
+          { path: '/CustomTicketCasinoCMS', component: () => import('@/views/CustomTicketCasinoCMS.vue') },
+          { path: '/CustomTicketMindCMS', component: () => import('@/views/CustomTicketMindCMS.vue') },
+          { path: '/CustomTicketStrellaCMS', component: () => import('@/views/CustomTicketStrellaCMS.vue') },
         ]
       },
       {
         path: '/NewsCMS',
         name: 'NewsCMS',
-        component:() => import('@/views/NewsCMS.vue')
-      }
+        component: () => import('@/views/NewsCMS.vue')
+      },
+
     ]
   },
 
  
-  // ====================後台=====================
+  // ====================後台end=====================
 
   {
     path: '/home',
@@ -92,6 +93,7 @@ const routes = [
     },
     requiredLogin: false
   },
+  // ====================人生賭場================//
   {
     path: '/lifecasino',
     component: () => import('@/views/lifeCasino.vue'),
@@ -101,9 +103,65 @@ const routes = [
     requiredLogin: false
   },
   {
+    path: '/LC_ProductPage',
+    component: () => import('@/views/LC_ProductPage.vue'),
+    meta: {
+      title: "人生賭場-精選商品"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/LC_ProductInfo',
+    component: () => import('@/views/LC_ProductInfo.vue'),
+    meta: {
+      title: "人生賭場-商品細項"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/LC_QuestionIntro',
+    component: () => import('@/views/LC_QuestionIntro.vue'),
+    meta: {
+      title: "人生賭場-入場須知"
+    },
+    redirect: '/LC_Question',
+    requiredLogin: false,
+    children:[
+      {
+        path: '/LC_Question',
+        name: 'LC_Question',
+        component: () => import('@/views/LC_Question.vue'),
+      },
+    {
+        path: '/LC_TicketRule',
+        name: 'LC_TicketRule',
+        component: () => import('@/views/LC_TicketRule.vue'),
+        
+      },
+      {
+        path: '/LC_TicketChange',
+        name: 'LC_TicketChange',
+        component: () => import('@/views/LC_TicketChange.vue')
+      }
+    ]
+  },
+  
+
+// =================星際邊境===============//
+
+  {
     path: '/strellarfrontierintro',
     name: 'strellarfrontierintro',
-    component: () => import('@/views/StrellarFrontierIntro.vue'),
+    component: () => import('@/views/SFIntro.vue'),
+    meta: {
+      title: "星際邊境"
+    },
+    requiredLogin: false,
+  },
+  {
+    path: '/SF_Homepage',
+    name: 'SF_Homepage',
+    component: () => import('@/views/SF_Homepage.vue'),
     meta: {
       title: "星際邊境"
     },
@@ -144,8 +202,61 @@ const routes = [
       title: "購物車"
     },
     requiredLogin: true
+  },
+  {
+    path: '/SF_BookingChange',
+    name: 'SF_BookingChange',
+    component: () => import('@/views/SF_BookingChange.vue'),
+    meta: {
+      title: "退換票政策"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/SF_ProductPage',
+    name: 'SF_ProductPage',
+    component: () => import('@/views/SF_ProductPage.vue'),
+    meta: {
+      title: "星際邊境全部商品"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/Header_0',
+    name: 'Header_0',
+    component: () => import('@/components/Header_0.vue'),
+    meta: {
+      title: "公版頁首"
+    },
+    requiredLogin: false
+  },
+  { path: '/SF_DetailList',
+    name: 'SF_DetailList',
+    component: () => import('@/views/SF_DetailList.vue'),
+    meta: {
+      title: "星際邊際商品細項"
+    },
+    requiredLogin: false
+  },
+  { path: '/WeiText',
+    name: 'WeiText',
+    component: () => import('@/views/WeiText.vue'),
+    meta: {
+      title: "測試用的"
+    },
+    requiredLogin: false
+  },
+  {path: '/SFHeader_0',
+    name: 'SFHeader_0',
+    component: () => import('@/components/SFHeader_0.vue'),
+    meta: {
+      title: "公版頁首"
+    },
+    requiredLogin: false
+
   }
-  
+
+
 ];
 
 // 建立 router

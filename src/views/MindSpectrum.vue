@@ -8,8 +8,8 @@
     <!-- <div><MS_ticket_reservation/></div> -->
     <div><MS_customization/></div>
 
-    <!-- <div><MS_com_marquee/></div> -->
-    <!-- <div><MS_com_caro/></div> -->
+    <div><MS_com_marquee/></div>
+    <div><MS_com_caro/></div>
 </template>
 
 <script setup>

@@ -27,6 +27,7 @@
     width: 100%;
     max-width: 1440px;
     height: 200px;
+    // background-image: url(../assets/images/STBackground.png);
     background: linear-gradient(180deg, #000 26%, #505050 100%);
     display: flex;
     justify-content: center;
@@ -44,7 +45,7 @@
 }
 
 .items span{
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.6rem;
     flex-basis: 0%;
     color: var(--Color-6, #FFF);

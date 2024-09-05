@@ -2,7 +2,6 @@
   
   <div class="LifeCasio_btn">
     <p>{{ Button }}</p>
-    
   </div>
 </template>
 
