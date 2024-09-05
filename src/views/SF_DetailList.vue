@@ -1,36 +1,72 @@
 <script setup>
 import { ref } from 'vue';
-import Header_2 from '@/components/Header_2.vue';
+import Header_0 from '@/components/Header_0.vue';
+const currentMode = ref('three');
+
 import Footer_2 from '@/components/Footer_2.vue';
 
 
+//輪播圖
+// Import Swiper and modules
+// import { Swiper, SwiperSlide } from 'swiper/vue';
+// import 'swiper/css';
+// import 'swiper/css/free-mode';
+// import 'swiper/css/navigation';
+// import 'swiper/css/thumbs';
+
+// Import required modules
+// import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+
+
+// Define the thumbsSwiper reference
+// const thumbsSwiper = ref(null);
+
+// Function to set the thumbsSwiper instance
+// const setThumbsSwiper = (swiper) => {
+//   thumbsSwiper.value = swiper;
+// };
+
+// Swiper modules used
+// const modules = [FreeMode, Navigation, Thumbs];
 
 
 </script>
 
 <template>
     <div>
-        <Header_2></Header_2>
+        <Header_0 :mode="currentMode"></Header_0>
     </div>
+
     <div class="warpper">
         <div class="title">
             <h1>精選商品</h1>
             <p>PRODUCTS</p>
         </div>
-        <div aria-label="Breadcrumb">
-            <ul class="breadcrumb">
-                <li><a href="#">星際邊境</a></li>
-                <li><a href="#">星際邊境商品頁</a></li>
-            </ul>
-        </div>
+
         <div class="pboxout">
+            <div aria-label="Breadcrumb">
+                <ul class="breadcrumb">
+                    <li><router-link to="/SF_ProductPage">全部商品 </router-link></li>
+                    <li><a href="#">太空金屬杯</a></li>
+                </ul>
+            </div>
             <div class="pbox">
-                <div class="pimg"><img src="../assets/images/productscup.png" alt=""></div>
+                <!-- <swiper :style="{
+                    '--swiper-navigation-color': '#fff',
+                    '--swiper-pagination-color': '#fff',
+                }" :spaceBetween="20" :navigation="flase" :thumbs="{ swiper: thumbsSwiper }" :modules="modules"
+                    class="mySwiper2">
+                    <swiper-slide><img src="../assets/images/SF_bag.png" /></swiper-slide><swiper-slide><img
+                            src="../assets/images/SF_cup.png" /></swiper-slide><swiper-slide><img
+                            src="../assets/images/SF_Pillow.png" /></swiper-slide><swiper-slide><img
+                            src="../assets/images/SF_easycard_1.png" /></swiper-slide>
+                </swiper> -->
+                <div class="pimg"><img src="../assets/images/SF_cup.png" alt=""></div>
                 <div>
                     <div class="textbox">
-                        <p>商品編號 : MS001</p>
+                        <p>商品編號 : SF001</p>
                         <h3>太空金屬杯</h3>
-                        <p>NT $ 299 </p>
+                        <h4>NT $ 299 </h4>
                         <div class="leftlight">
                             <p>作者 : Dandy · Syike </p>
                             <p>與知名插畫家DoMeDo聯名推出</p>
@@ -38,6 +74,13 @@ import Footer_2 from '@/components/Footer_2.vue';
                         <p>材質：雙層鈦金屬</p>
                         <p>商品規格 : 寬 7.5 cm x 高 10 cm</p>
                     </div>
+                    <!-- <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="4" :freeMode="true"
+                        :watchSlidesProgress="true" :modules="modules" class="mySwiper">
+                        <swiper-slide><img src="../assets/images/SF_bag.png" /></swiper-slide>
+                        <swiper-slide><img src="../assets/images/SF_cup.png" /></swiper-slide>
+                        <swiper-slide><img src="../assets/images/SF_Pillow.png" /></swiper-slide>
+                        <swiper-slide><img src="../assets/images/SF_easycard_1.png" /></swiper-slide>
+                    </swiper> -->
                     <div class="rightdown">
                         <div class="but">
                             <input type="button" value=" - " class="sub">
@@ -70,18 +113,22 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 <style lang="scss" scoped>
 
-
+*{
+text-decoration: none;
+}
 
 .warpper {
     font-family: "Noto Serif SC";
     max-width: 1440px;
     width: 100%;
-    height: 600px;
+
+    height: 100%;
+    min-height: 600px;
     margin: 0 auto;
     // border: 1px solid red;
     background-image: url(../assets/images/STBackground.png);
     // border: 1px solid red;
- 
+
     text-align: center;
 
 
@@ -91,11 +138,8 @@ import Footer_2 from '@/components/Footer_2.vue';
 .title {
     max-width: 1440px;
     width: 100%;
-    padding-top: 10px;
-    margin-bottom: 20px;
-
-
-
+    // padding-top: 10px;
+    margin-bottom: 10px;
 }
 
 
@@ -123,12 +167,37 @@ import Footer_2 from '@/components/Footer_2.vue';
     color: transparent;
 }
 
+
+
+//商品照片及價格框
+.pboxout {
+    // border: 1px solid red;
+    max-width: 800px;
+    width: 100%;
+    // height: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+}
+
+.pbox {
+    // border: 1px solid red;
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+}
+
 //麵包屑
 
 .breadcrumb {
     list-style: none;
     display: flex;
-    padding-left: 22%;
+    // padding-left: 22%;
 
 }
 
@@ -152,31 +221,10 @@ import Footer_2 from '@/components/Footer_2.vue';
     /* Remove the last separator */
 }
 
-//商品照片及價格框
-.pboxout{
-    // border: 1px solid red;
-    max-width: 1440px;
-    width: 100%;
-    // height: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.pbox {
-    // border: 1px solid red;
-    max-width: 700px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 //左側商品照片
 .pimg img {
-    width: 250px;
-    height: 330px;
+    width: 400px;
+    height: 400px;
     border-radius: 12px;
 }
 
@@ -189,26 +237,31 @@ import Footer_2 from '@/components/Footer_2.vue';
     // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
     color: #fff;
     overflow: hidden;
-    line-height: 30px;
+    line-height: 35px;
     text-align: left;
 }
 
-.leftlight{
-    border-left:5px solid #132C79;
+.leftlight {
+    border-left: 5px solid #132C79;
     line-height: 20px;
     padding-left: 10px;
 }
 
 .textbox h3 {
     font-size: 32px;
-    color:#C1693B;
+    color: #C1693B;
     font-weight: bold;
 }
+.textbox h4{
+    font-size: 22px;
+}
+
 
 .textbox p {
     font-size: 16px;
     color: #FFFFFF;
 }
+
 
 .btn {
     flex-direction: row;
@@ -230,7 +283,8 @@ import Footer_2 from '@/components/Footer_2.vue';
 
     color: #fff;
     outline: none;
-    background-color: black;
+    // background-color: black;
+    opacity: 1;
     border: 1px solid #ffffff;
     outline: none;
 
@@ -269,13 +323,13 @@ import Footer_2 from '@/components/Footer_2.vue';
     font-size: 20px;
     color: #fff;
     outline: none;
-    background-color: black;
-    border: 1px solid #fff;
+    background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    // border: 1px solid ;
     border: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
 
 }
 
-//將select箭頭刪掉 
+//將下拉式選單select箭頭刪掉 
 .size select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -284,7 +338,8 @@ import Footer_2 from '@/components/Footer_2.vue';
 }
 
 .size option {
-    color: #fff;
+    color: black;
+    
 }
 
 //加入購物車
@@ -304,5 +359,87 @@ import Footer_2 from '@/components/Footer_2.vue';
     font-size: 28px;
     color: #fff;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+}
+
+//小圖換大圖
+.swiper {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+
+}
+
+.swiper-slide {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+}
+
+//大圖
+.mySwiper2 {
+    height: 70%;
+    width: 70%;
+    // border-radius: 12px;
+    object-fit: cover;
+    box-sizing: border-box;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+//小圖
+.mySwiper {
+    height: 70%;
+    width: 85%;
+    box-sizing: border-box;
+    padding: 5px 0;
+    // border-radius: 12px;
+    object-fit: cover;
+    // border: 5px solid #122A74;
+    
+}
+
+
+
+
+.mySwiper .swiper-slide {
+    width: 30%;
+    height: 100%;
+    opacity: 0.6;
+}
+
+.mySwiper .swiper-slide img{
+    border: 3px solid #C1693B;
+    border-radius: 12px;
+    margin-right: 5px;
+    box-sizing: border-box;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    // border: 5px solid #122A74;
+}
+
+// RWD
+
+@media(max-width: 920px) {
+    .producttitle {
+        width: 80%;
+    }
+
+    .pagebox {
+        padding: 0px;
+        height: auto;
+    }
+
 }
 </style>

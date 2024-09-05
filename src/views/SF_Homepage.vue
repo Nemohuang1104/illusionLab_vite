@@ -9,6 +9,7 @@ import SF_Comments from './SF_Comments.vue';
 
 // 頁首頁尾
 import SFHeader_0 from  '@/components/SFHeader_0.vue'; 
+const currentMode = ref('three');
 import Footer_2 from '@/components/Footer_2.vue';
 
 // 商品
@@ -55,7 +56,7 @@ function gotoTicketChange() {
 
 
 <template>
-    <SFHeader_0></SFHeader_0>
+    <SFHeader_0 :mode="currentMode"></SFHeader_0>
     <div class="wrapper">
         <!-- 星球運轉 -->
         <div class="intro">

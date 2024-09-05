@@ -44,15 +44,11 @@
     <div >
       <StoneFall class="slide__content layer2" 
                   ></StoneFall>
-      <img class="slide__main layer1" src="../assets/images/carousel2_1.png" alt="" 
-      
-      >
+      <img class="slide__main layer1 " src="../assets/images/carousel_1.png" alt="">
       <div class="text layer3">
         <img class="logo" src="../assets/images/logo_StrellarFrontierIntro.svg" alt="">
-        <p>各位飛行者，請注意，<br>
-            即將進行倒數啟動。<br>
-            請確認安全帶已經繫好，<br>
-            並放鬆心情，準備迎接一段令人難忘的旅程</p>
+        <p>體驗前所未有的奇幻冒險<br>
+          揭開宇宙的神秘面紗</p>
         <ActivityButton class="LC_btn" Button="ENTER" @click="goToActivity2"></ActivityButton>
       </div>
     </div>
@@ -195,7 +191,7 @@ function goToLittleQuiz(){
 
 
 .slide2{
-  background-image: url(../assets/images/carousel2.png);
+  background-image: url(../assets/images/STBackground.png);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;

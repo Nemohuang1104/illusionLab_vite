@@ -45,7 +45,7 @@
 }
 
 .items span{
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 0%;
     color: var(--Color-6, #FFF);

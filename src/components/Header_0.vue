@@ -1,9 +1,7 @@
 <template>
   <header :class="headerClass">
     <div class="logo">
-    <router-link :to="logoLink">
-      <img :src="logoSrc" alt="Logo" class="logo" />
-    </router-link>
+    <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
       <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
@@ -18,7 +16,7 @@ import { computed, defineProps } from 'vue';
 const props = defineProps({
   mode: {
     type: String,
-    default: 'three',
+    default: 'one',
     validator: value => ['one', 'two', 'three', 'four'].includes(value)
   }
 });

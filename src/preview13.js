@@ -35,15 +35,15 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCartShopping, faFaceSmile, faArrowRightLong, faArrowLeftLong, faFaceMeh, faCartArrowDown);
 
-// const app = createApp(WeiText);
+const app = createApp(weitext2);
 
 
-// app.component('font-awesome-icon', FontAwesomeIcon).mount("#preview-app");
+app.component('font-awesome-icon', FontAwesomeIcon).mount("#preview-app");
 
-// // app.mount('#preview-app');
+// app.mount('#preview-app');
 
 
 /*使用路由preview*/
-import previewrouter from "./router/wei";
-const app = createApp(weitext2);
-app.component('font-awesome-icon', FontAwesomeIcon).use(previewrouter).mount('#preview-app');
+// import previewrouter from "./router/index";
+// const app = createApp(weitext2);
+// app.component('font-awesome-icon', FontAwesomeIcon).use(previewrouter).mount('#preview-app');

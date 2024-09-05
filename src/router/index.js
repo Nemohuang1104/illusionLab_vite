@@ -164,11 +164,11 @@ const routes = [
   },
   requiredLogin: false
   },
-  { path: '/ProductPage',
-    name: 'ProductPage',
-    component: () => import('@/views/ProductPage.vue'),
+  { path: '/SF_ProductPage',
+    name: 'SF_ProductPage',
+    component: () => import('@/views/SF_ProductPage.vue'),
     meta: {
-      title: "商品頁面"
+      title: "星際邊境全部商品"
     },
     requiredLogin: false
   },
@@ -180,13 +180,30 @@ const routes = [
     },
     requiredLogin: false
   },
-  { path: '/DetailList',
-    name: 'DetailList',
-    component: () => import('@/views/DetailList.vue'),
+  { path: '/SF_DetailList',
+    name: 'SF_DetailList',
+    component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊際商品一細項"
+      title: "星際邊際商品細項"
     },
     requiredLogin: false
+  },
+  { path: '/WeiText',
+    name: 'WeiText',
+    component: () => import('@/views/WeiText.vue'),
+    meta: {
+      title: "測試用的"
+    },
+    requiredLogin: false
+  },
+  {path: '/SFHeader_0',
+    name: 'SFHeader_0',
+    component: () => import('@/components/SFHeader_0.vue'),
+    meta: {
+      title: "公版頁首"
+    },
+    requiredLogin: false
+
   }
 
 

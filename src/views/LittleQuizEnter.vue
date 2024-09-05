@@ -1,9 +1,5 @@
 <script setup>
-<<<<<<< HEAD
-import Header_1 from '../components/Header_0.vue'
-=======
 import Header_0 from '../components/Header_0.vue'
->>>>>>> Ting
   
 </script>
 
