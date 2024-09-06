@@ -6,8 +6,12 @@
     </router-link>
     </div>
     <div class="icons">
-      <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
-      <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" />
+      <router-link to="/shop">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+      </router-link>
+      <router-link to="/login">
+        <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" />
+      </router-link>
     </div>
   </header>
 </template>

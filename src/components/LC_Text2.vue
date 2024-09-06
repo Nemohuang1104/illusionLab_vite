@@ -44,7 +44,7 @@ const props = defineProps({
   align-content: center;
   border-bottom: 1px solid white;
   padding-bottom: 30px;
-  margin-top: 80px;
+  margin-top: 90px;
 }
 
 .text2{

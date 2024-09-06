@@ -18,14 +18,16 @@ import Footer_0 from '../components/Footer_0.vue';
     <input type="password" placeholder="請輸入您的密碼" class="text">
     <!--忘記密碼 -->
     <a href="#" class="forgot">忘記密碼 ?</a>
-    <input type="submit" value="登入" class="login">
+    <router-link to="/MemberCenter">
+      <input type="submit" value="登入" class="login">
+    </router-link>
     <p>其他登入方式</p>
     <div class="other">
       <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
       <a href=""><img src="../assets/images/icon-google.svg" alt=""></a>
     </div>
     <p>還不是會員? 前往註冊</p>
-    <a href="SignUp.html"><input type="submit" value="註冊" class="signup"></a>
+    <router-link to="/SignUp"><input type="submit" value="註冊" class="signup"></router-link>
   </div>
 
 </main>

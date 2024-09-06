@@ -38,7 +38,7 @@ const props = defineProps({
   color: white;
 }
 .LifeCasio_btn:hover{
-    color: map-get($colofont_1, dark-blue);
+    color: map-get($colofont_1, gold);
 }
 
 p{
