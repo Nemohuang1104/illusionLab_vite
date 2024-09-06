@@ -69,13 +69,11 @@ header{
   max-width: 1440px;
   height: 80px;
 }
-
-
-
-.logo img {
-  width: 145px;
-  flex-shrink: 0;
-  padding: 10px 20px;
+.logo img{
+    height: 60px;
+    flex-shrink: 0;
+    cursor: pointer;    
+    padding: 10px 20px;
 }
 
 
@@ -107,7 +105,7 @@ header{
 
 //公版(one)
 .header-one {
-  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
+  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0) 99.67%);
   height: 80px;/* 添加高度 */
   cursor: pointer;
 }
