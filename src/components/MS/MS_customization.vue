@@ -1,7 +1,7 @@
 <template>
     <div class="template">
-        <div class="customization">
-            <div class="show">
+        <div  class="customization" >
+            <div  :class="{'show': true, 'new-position': isMoved}">
                 <div class="ticket">
                     <div class="subTit">
                         <div class="TST"
@@ -73,7 +73,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="choosen">
+            <div v-if="!isChoosenHidden" class="choosen">
                 <div class="theButtons">
                     <button class="theButton" 
                         @click="selectedArea = 'ticket_bgs'"
@@ -97,7 +97,7 @@
                     </button>
                 </div>
                 <div class="theChosenArea">
-                    <div v-if="selectedArea === 'ticket_bgs'" class="ticket_bgs">
+                    <div v-if="selectedArea === 'ticket_bgs'" class="ticket_bgs selector">
                         <img class="ticket_bg" src="../../ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png')">
                         <img class="ticket_bg" src="../../ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_2.png','../src/ms/ticket_barcode_2.png')">
                         <img class="ticket_bg" src="../../ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_3.png','../src/ms/ticket_barcode_3.png')">
@@ -105,7 +105,7 @@
                         <img class="ticket_bg" src="../../ms/ticket_bg_style_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/ms/real_sticker_5.png','../src/ms/ticket_barcode_5.png')">
                         <img class="ticket_bg" src="../../ms/ticket_bg_style_6.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#','#','#','#','#','#')">
                     </div>
-                    <div v-if="selectedArea === 'ticket_colors'" class="ticket_colors">
+                    <div v-if="selectedArea === 'ticket_colors'" class="ticket_colors selector" >
                         <img class="ticket_color" src="../../ms/ticket_colors_1.png" alt="" @click="changeColors('#FB9D3C','#AD8662','#FDC274')">
                         <img class="ticket_color" src="../../ms/ticket_colors_2.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')">
                         <img class="ticket_color" src="../../ms/ticket_colors_3.png" alt="" @click="changeColors('#FFE382','#875E47','#FD6F6C')">
@@ -113,7 +113,7 @@
                         <img class="ticket_color" src="../../ms/ticket_colors_5.png" alt="" @click="changeColors('#FFFFFF','#FFF3C6','#DFDFDF')">
                         <img class="ticket_color" src="../../ms/ticket_colors_6.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')">
                     </div>
-                    <div v-if="selectedArea === 'ticket_stickers'" class="ticket_stickers">
+                    <div v-if="selectedArea === 'ticket_stickers'" class="ticket_stickers selector">
                         <img class="ticket_sticker" src="../../ms/ticket_stickers_1.png" alt="" @click="changeColors('../src/ms/ticket_stickers_1.png')">
                         <img class="ticket_sticker" src="../../ms/ticket_stickers_2.png" alt="" @click="changeColors('../src/ms/ticket_stickers_2.png')">
                         <img class="ticket_sticker" src="../../ms/ticket_stickers_3.png" alt="" @click="changeColors('../src/ms/ticket_stickers_3.png')">
@@ -121,7 +121,7 @@
                         <img class="ticket_sticker" src="../../ms/ticket_stickers_5.png" alt="" @click="changeColors('../src/ms/ticket_stickers_5.png')">
                         <img class="ticket_sticker" src="../../ms/ticket_stickers_6.png" alt="" @click="changeColors('../src/ms/ticket_stickers_6.png')">
                     </div>
-                    <div v-if="selectedArea === 'ticket_morebangs'" class="ticket_morebangs">
+                    <div v-if="selectedArea === 'ticket_morebangs'" class="ticket_morebangs selector">
                         <img class="ticket_morebang" src="../../ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/ms/ticket_stickers_1.png')">
                         <img class="ticket_morebang" src="../../ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_2.png','../src/ms/ticket_barcode_2.png','#FB9D3C','#875E47','#FFFAEF','../src/ms/ticket_stickers_2.png')">
                         <img class="ticket_morebang" src="../../ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_3.png','../src/ms/ticket_barcode_3.png','#FFE382','#875E47','#FD6F6C','../src/ms/ticket_stickers_3.png')">
@@ -132,8 +132,16 @@
                 </div>
             </div>
         </div>
+        <div class="finishMyTicket">
+            <button v-if="!isChoosenHidden" @click="hideChoosen" class="CTbtn btnColor2" id="FMTbtn">完成</button>
+        </div>
+        <div ref="sentMyTicketBTN" class="sentMyTicket">
+            <button v-if="isChoosenHidden" @click="wantToChoose" class="CTbtn btnColor1" id="RMTbtn">重新製作</button>
+            <button v-if="isChoosenHidden" class="CTbtn btnColor2" id="CMTbtn">確認送出</button>
+        </div>
     </div>
 </template>
+
 
 <script>
 export default {
@@ -147,18 +155,29 @@ export default {
       subsubTitColor: '#AD8662',    
       TitColor: '#FDC274',         
       DSTTColor: '#FFDE59',
-      RSTTColor: '#FFE382',
-      RSTMColor: '#F9F0DB',
       DSTBColor:'#FFA2A0' ,
       DSTBRColor:'#80BD6B' ,
+      RSTTColor: '#FFE382',
+      RSTMColor: '#F9F0DB',
       SColor:'#F9F0DB',
       realStickerRoad:'../src/ms/real_sticker_1.png',
       bigStickerRoad:'../src/ms/ticket_stickers_1.png',
       barcode:'../src/ms/ticket_barcode_1.png',
-      gradientCounter: 0  
+      gradientCounter: 0  ,
+      isChoosenHidden: false,
+      IwantToChoose:false,
     };
   },
   methods: {
+    hideChoosen() {
+      this.isChoosenHidden = true;
+      this.isMoved = true; 
+    },
+    wantToChoose() {
+      this.IwantToChoose = true;
+      this.isChoosenHidden = false;
+      this.isMoved = false; 
+    },
     changeColors(...colors) {
       if (colors.length === 15) {
         const [
@@ -260,12 +279,6 @@ export default {
 };
 </script>
 
-
-
-
-
-
-  
 <script setup>
     import { ref, onMounted } from 'vue'
 
@@ -304,14 +317,82 @@ export default {
 </script>
 
 <style lang="scss">
+.finishMyTicket{
+    position: absolute;
+    bottom: 7%;
+}
+.theRock{
+    position: relative;
+    height: 899px;
+}
+.theRock > svg{
+    transform: scale(0.5);
+    position: absolute;
+    transition: transform 0.7 ease ;
+}
+.touchMyBody{
+    position: absolute;
+    width: 880px;
+    height: 899px;
+}
+
+.Boom1{
+    position: absolute !important;
+    transform: translateX(200px)scale(0.7) !important;
+    transition: transform 0.7s ease !important; /* 添加单位 's' 以指定过渡时间 */
+}
+
+
+
+.sentMyTicket{
+    margin-top: 280px;
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+    transition: gap 0.8s ease;
+}
+    .CTbtn{
+        font-family: 'Noto Sans TC';
+        font-weight: bold;
+        width: 150px;
+        height: 40px;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+    }
+    $btnColor1-1: #FFEDBC;
+    $btnColor1-2: #FFC94A;
+    $btnColor2-1: #FDC274;
+    $btnColor2-2: #FB9D3C;
+
+    .CTbtn {
+    &.btnColor1 {
+        background-color: $btnColor1-1;
+        color: #855F49;
+        &:hover {
+            color: #FFFFFF;
+            background-color: $btnColor1-2;
+        }
+    }
+
+    &.btnColor2 {
+        background-color: $btnColor2-1;
+        color: #855F49;
+        &:hover {
+        background-color: $btnColor2-2;
+        color: #FFFFFF;
+        }
+    }
+    }
+
     .barcode{
         position: absolute;
-        width: 8vw;
+        width: 102px;
         right: 0;
     }
 .bigSticker{
     position: absolute;
-    width: 18vw;
+    width: 230px;
     bottom: 0%;
     left: 28.5%;
 }
@@ -321,16 +402,29 @@ export default {
         left: 5%;
     }
     .show{
+        transform: scale(1);
         display: flex;
         flex-direction: row;
-        width: 50vw;
+        position: absolute;
+        top: 35%;
+        right: calc(73% - (455px /2));
+        transition: right 0.6s ease ,top 0.6s ease,transform 0.6s ease;
 
     }
+    .new-position {
+        transform: scale(1.2);
+        top: 30%;
+        right: calc(50% - (455px /2));
+        transition: right 0.6s ease ,top 0.6s ease,transform 0.6s ease;
+        }
     .ticket{
         margin: 0 auto;
         position: relative;
+        width: 455px;
+
     }
     .choosen{
+        margin-left: 50vw;
         width: 40vw;
     }
     .theButtons{
@@ -380,29 +474,40 @@ export default {
     .customization{
         display: flex;
         flex-direction: row;
-        align-items: center;
+        // align-items: center;
+        gap: 50px;
     }
-    .ticket_bgs, .ticket_colors ,.ticket_stickers,.ticket_morebangs{
-        padding:40px 0;
-        align-items: center;
-        background-color: white;
-        height: 55vh;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2vw 20px;
+    .theChosenArea{
+        background-color: #FFFAF4;
+        border: 1px solid #FDC274;
+        box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.15);
+        border-radius: 0px 0px 12px 12px;
+        height: 350px;
     }
-    .ticket_bg ,.ticket_color  ,.ticket_morebang{
-        width: 18vw;
+    .ticket_bgs, .ticket_colors, .ticket_stickers, .ticket_morebangs {
+    padding: 4vh 2vw;
+    /* align-items: center; */
+
+    /* height: 100%; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2vw;
+    }
+    .ticket_bg ,.ticket_color  ,.ticket_morebang {
+    width: 16vw;
     }
     .ticket_sticker{
         width: 10vw;
     }
+
     .template{
         font-family:'Noto Sans TC';
         font-weight: bold;
-        padding:100px 150px !important;
+        padding:100px 0px !important;
+        gap: 50px !important;
+        min-height: 100vh !important;
     }
     .TST{
         margin-top: 5px;
@@ -438,9 +543,78 @@ export default {
     }
     .realSticker{
         position: absolute;
-        width: 12vw;
+        width: 155px;
         bottom: 6%;
         left: 3%;
+    }
+    @media screen and (max-width:920px) {
+        .ticket_bg, .ticket_color, .ticket_morebang {
+            width: 20vw;
+        }
+        .finishMyTicket{
+            position: relative;
+            margin-top: 50px;
+        }
+        .customization {
+            flex-direction: column; 
+        }
+        .show{
+            top: 20%;
+            right: calc(50% - (455px /2));
+        }
+        .choosen{
+            width: 70vw;
+            margin-left: 0;
+            margin-top: 250px;
+        }
+        .ticket_sticker {
+        width: 18vw;
+        }
+        .ticket{
+            transform: scale(0.9);
+        }
+        .theChosenArea {
+            height: auto;
+        }
+        .sentMyTicket{
+        margin-top: 180px;
+        }
+    }
+    @media screen and (max-width:600px) {
+
+        .ticket{
+            transform: scale(0.7);
+        }
+        .ticket_bg, .ticket_color, .ticket_morebang {
+            width: 30vw
+        }
+        .choosen{
+            margin-top: 230px;
+        }
+        .sentMyTicket{
+        margin-top: 150px;
+        }
+    }
+    @media screen and (max-width:450px) {
+        .ticket{
+            transform: scale(0.6);
+        }
+        .ticket_bg, .ticket_color, .ticket_morebang {
+            width: 50vw
+        }
+        h6{
+            font-size: 12px !important;
+        }
+        .sentMyTicket{
+        margin-top: 130px;
+        gap: 30px;  
+        }
+
+    }
+    @media screen and (max-width:450px) {
+        .sentMyTicket{
+        gap: 20px;  
+        }
     }
 </style>
   
