@@ -34,6 +34,7 @@ import CenterCMS from './views/CenterCMS.vue';
 // import ProductPage from './views/ProductPage.vue';
 // import LC_ProductPage from './views/LC_ProductPage.vue';
 import LC_ProductInfo from './views/LC_ProductInfo.vue';
+import LC_Customization from './views/LC_Customization.vue';
 /*使用路由preview*/
 
 //1.後臺管理路由========================
@@ -59,6 +60,6 @@ import LC_ProductInfo from './views/LC_ProductInfo.vue';
 
  
 /*一般頁面preview*/
-const app = createApp(LC_ProductInfo);
+const app = createApp(LC_Customization);
 // app.use(ElementPlus)
 app.mount('#preview-app');
