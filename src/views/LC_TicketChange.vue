@@ -1,13 +1,15 @@
 <script setup>
-
+import LC_Text3 from '@/components/LC_Text3.vue';
 </script>
 
 <template>
 
     <div class="wrapper">
       <div class="title">
-        <h1>退換票政策</h1>
-        <h3>Change Your Booking</h3>
+        <LC_Text3
+          Title1="退換票政策"
+          English="Change Your Booking">
+        </LC_Text3> 
       </div>
       <section class="info">
         <div class="text_offset">
@@ -63,10 +65,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 
 @import "../assets/style";
-.template{
-  background: #313131;
-  // height: 180vh;
+
+.wrapper{
+  z-index: 10;
 }
+
 
 .top_img{
   width: 100%;
@@ -135,7 +138,7 @@
   font-family: map-get($fontStyle, style_2);
   border-radius: 24px;
   font-weight: bold;
-  background: #1E1E2F;
+  // background: #1E1E2F;
 }
 
 .question:last-child {

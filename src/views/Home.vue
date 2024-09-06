@@ -17,11 +17,11 @@
     :freemode="true" 
 
     :modules="modules"
-    
+    :autoplay="{delay: 4000, disableOnInteraction: false}"
 
     class="mySwiper"
     >
-    <!-- :autoplay="{delay: 4000, disableOnInteraction: false}" -->
+    <!-- " -->
   <!-- =================activity1=================== -->
     <swiper-slide>
       <div class="slide slide1">
@@ -65,7 +65,7 @@
       <div class="slide slide3">
         <div >
           <FlowerFall class="slide__content layer2"></FlowerFall>
-          <img class="slide__main layer1 duck" src="../assets/images/carousel3_1.png" alt="">
+          <img class="slide__main layer1 duck" src="../assets/images/carousel3_1_1.png" alt="">
           <div class="text layer3">
             <img class="logo" src="../assets/images/logo_MindSpectrum.svg" alt="">
             <p>心靈光譜是為孤獨而痛苦著的你，<br>

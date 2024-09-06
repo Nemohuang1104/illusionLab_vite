@@ -185,6 +185,7 @@ const routes = [
     },
     requiredLogin: false
   },
+  // ============會員專區============//
   {
     path: '/login',
     name: 'login',
@@ -194,6 +195,75 @@ const routes = [
     },
     requiredLogin: true
   },
+  {
+    path: '/SignUp',
+    name: 'SignUp',
+    component: () => import('@/views/SignUp.vue'),
+    meta: {
+      title: "會員註冊"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MemberCenter',
+    name: 'MemberCenter',
+    component: () => import('@/views/MemberCenter.vue'),
+    meta: {
+      title: "會員中心"
+    },
+    requiredLogin: true,
+    redirect: '/Member',
+
+      children:[
+        {
+          path: '/Member',
+          name: 'MemberInfo',
+          component:() => import('@/views/MemberInfo.vue'),
+        },
+        {
+          path: '/change-password',
+          name: 'PasswordEdit',
+          component: () => import('@/views/PasswordEdit.vue'),
+        },
+        {
+          path: '/order-query',
+          name: 'OrderQuery',
+          component: () => import('@/views/OrderQuery.vue'),
+          redirect: '/OrderQueryTicket',
+
+            children: [
+              { 
+                path: '/OrderQueryTicket', 
+                component: () => import('@/views/OrderQueryTicket.vue'), 
+              },
+              { 
+                path: '/OrderQueryProduct', component: () => import('@/views/OrderQueryProduct.vue'),  
+              },
+            ],
+        },
+        {
+          path: '/refund-query',
+          name: 'RefundQuery',
+          component: () => import('@/views/RefundQuery.vue'),
+          redirect: '/RefundQueryTicket',
+
+          children: [
+            { 
+              path: '/RefundQueryTicket', 
+              component: () => import('@/views/RefundQueryTicket.vue'), 
+            },
+            { 
+              path: '/RefundQueryProduct', 
+              component:() => import('@/views/RefundQueryProduct.vue'), 
+            },
+          ],
+        },
+    ]
+  },
+
+  // =============會員專區end=============//
+
+  // ================購物車===============//
   {
     path: '/shop',
     name: 'shop',
@@ -226,7 +296,7 @@ const routes = [
     name: 'Header_0',
     component: () => import('@/components/Header_0.vue'),
     meta: {
-      title: "公版頁首"
+      title: "頁首"
     },
     requiredLogin: false
   },
@@ -254,7 +324,19 @@ const routes = [
     },
     requiredLogin: false
 
-  }
+  },
+
+  // ==========footer=============//
+  {
+    path: '/News',
+    name: 'News',
+    component: () => import('@/views/NewsView.vue'),
+    meta: {
+      title: "最新消息"
+    },
+    requiredLogin: false
+  },
+
 
 
 ];

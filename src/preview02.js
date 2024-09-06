@@ -22,7 +22,9 @@ import { faFaceMeh } from '@fortawesome/free-regular-svg-icons';
 // import SlotMachine from './components/SlotMachine.vue';
 // import MindSpectrum from './views/MindSpectrum.vue';
 // import LC_Reviews from './components/LC_Reviews.vue';
-import LC_Nav from './components/LC_Nav.vue';
+// import LC_Nav from './components/LC_Nav.vue';
+import NewsView from './views/NewsView.vue';
+// import NewsSwiper from './components/NewsSwiper.vue';
 // import Gift from './components/Gift.vue';
 
 
@@ -30,7 +32,7 @@ import LC_Nav from './components/LC_Nav.vue';
 library.add(faFaceMeh);
 
 
-const app = createApp(LC_Nav);
+const app = createApp(NewsView);
 // app.mount('#preview-app');
 
 app.component('font-awesome-icon', FontAwesomeIcon).mount("#preview-app");

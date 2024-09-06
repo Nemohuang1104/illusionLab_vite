@@ -2,39 +2,39 @@
     <div class="wrapper">
         
         
-    <swiper ref="swiper1" class="mySwiper1"
+        <swiper
+    ref="mySwiper"
+    class="mySwiper1"
     :modules="[Pagination, Mousewheel, Parallax]"
     :mousewheel="true"
     :direction="'vertical'"
-    :pagination="{
-    //   el:'.swiper-pagination',
-      pagination,
-      clickable: true
-    }"
+    :pagination="pagination"
     :speed="1500"
-    :freemode="true" 
+    :freemode="true"
     :parallax="true"
-    @swiper="onSwiperInit"
-   >
+    
+    :slides-per-view="1" 
+    @swiper="onSwiper"
+  >
   
          <Header class="header" :mode="currentMode"/> 
        
       
      
-    <div slot="container-start" class="parallax-bg" data-swiper-parallax="-90%">
-        <img src="../assets/images/lifecasino_bg1.png" alt="">
+    <div  slot="container-start" class="parallax-bg" data-swiper-parallax="-90%">
+        <img src="../assets/images/lifecasino_bg2.png" alt="">
        <!-- ===background animation=== -->
     </div>
     <LC_smoke class="smoke"></LC_smoke>
     <PokerFall class="poker"></PokerFall>
     <!-- ===========slide1 圖============= -->
-    <swiper-slide>
+    <swiper-slide >
 
-        <section class="slide slide1" data-swiper-parallax="-23%">
+        <section class="slide slide1" data-swiper-parallax="-23%" >
             <div class="slide1__contain">
                 <img class="logo" src="../assets/images/logo_lifecasino.svg" alt="">
                 <p>放下名字和身分，參加不能回頭的賭局，你願意為了勝利賭上多少？ </p>
-                <Btn_Lifecasino class="LC_btn" Button = "進入賭場"></Btn_Lifecasino>
+                <Btn_Lifecasino class="LC_btn" Button = "進入賭場" @click="goToSecondSlide"></Btn_Lifecasino>
             </div>
             <img class="slide1__img" src="../assets/images/lifecasino_p3.png" alt="">
         </section>
@@ -71,7 +71,7 @@
                     <p>用贏得的點數參加終極挑戰，總結人生教訓。</p>
                 </li>
                 <li class="slide2__contain__item">
-                    <LC_h2Text Title="最後賭徒" class="slide2__contain__title"></LC_h2Text>
+                    <LC_h2Text Title="人生回顧" class="slide2__contain__title"></LC_h2Text>
                     <img src="../assets/images/LC_slide2_p5.png" class="slide2__contain__image">
                     <p>紀錄參加者在活動中的精彩瞬間。</p>
                 </li>
@@ -316,7 +316,7 @@
                     <img src="../assets/images/logo_02.png">
                 </a>
             </div>
-            <Footer_1></Footer_1>
+            <Footer_1 class="footer"></Footer_1>
     </section>
     </swiper-slide>
 
@@ -340,7 +340,7 @@ import icon8 from '../assets/images/LC_icon8.svg'
 import icon9 from '../assets/images/LC_icon9.svg'
 
 
-import { ref, onMounted, reactive, computed, } from 'vue';
+import { ref, onMounted, reactive, computed, onBeforeMount, } from 'vue';
 
 import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
 import LC_smoke from '@/components/LC_smoke.vue';
@@ -358,28 +358,48 @@ import Footer_1 from '@/components/Footer_1.vue'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination, Mousewheel, Autoplay, Parallax} from 'swiper/modules';
+import { Pagination, Mousewheel, Parallax} from 'swiper/modules';
 
 import 'swiper/css/mousewheel'
 
+
 // const modules = [Pagination, Mousewheel, Autoplay, Parallax];
 
-// =============gsap============//
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// ============首頁按鈕===========//
+const mySwiper = ref(null);
+// 當 Swiper 實例初始化後，將其保存到 mySwiper
+const onSwiper = (swiperInstance) => {
+  mySwiper.value = swiperInstance;
+};
+
+// 切換到第二張幻燈片的函數
+const goToSecondSlide = () => {
+  if (mySwiper.value && mySwiper.value.slideTo) {
+    mySwiper.value.slideTo(1); // 切換到第二張幻燈片，索引從 0 開始
+  } else if (mySwiper.value?.swiper?.slideTo) {
+    mySwiper.value.swiper.slideTo(1); // Swiper 6.x/7.x 版本使用這個
+  }
+};
 
 // ============header=============//
 import Header from '@/components/SFHeader_0.vue'
 const currentMode = ref('two');
 
 // ===========nav===============//
-const pagination = {
-  el: '.swiper-pagination',
-  clickable: true,
-  renderBullet: (index, className) => {
-    const textMap = ['ABOUT', 'BOOKING', 'REVIEWS', 'PRODUCT', 'LOCATION'];
-    return `<span class="${'.bot'}">${textMap[index]}</span>`;
-  }
-};
+// Define menu for pagination bullets
+const menu = ['HOME','ABOUT', 'SERVE','GAME', 'BOOKING','REVIEWS', 'PRODUCT', 'LOCATION', 'RULE', 'CONTACT', 'VIP', 'SPONSOR'];
+
+
+    
+    // Pagination configuration
+    var pagination = {
+        clickable: true,
+      renderBullet: (index, className) => {
+        console.log(`Rendering bullet for index ${index}: ${menu[index]}`);
+        // Return custom bullet with text from the `menu` array
+        return `<span class="${className}">${menu[index]}</span>`;
+      },
+    }
 
 
 
@@ -392,7 +412,7 @@ const pagination = {
 
 *{
     font-family: map-get($fontStyle, style_2);
-    text-decoration: none
+    // text-decoration: none
 };
 
 h2{
@@ -560,7 +580,7 @@ p{
         content: "";
         position: absolute;
         left: 0;
-        top: 0;
+        top: 0px;
         width: 100%;
         height: 100vh;
         background-color: black;
@@ -684,7 +704,7 @@ p{
         content: "";
         position: absolute;
         left: 0;
-        top: -100px;
+        top: 0px;
         width: 100%;
         height: 100vh;
         background-color: black;
@@ -783,6 +803,7 @@ p{
 
 .slide7{
     position: relative;
+    z-index: 10;
 
     &::before{
         z-index: -1;
@@ -836,7 +857,7 @@ p{
     }
    .LC_btn2{
         margin: 0 auto;
-        margin-top: 20px;
+        margin-top: 10px;
    }
 }
 
@@ -844,7 +865,7 @@ p{
     position: relative;
 
     &::before{
-        z-index: -1;
+        z-index: -2;
         content: "";
         position: absolute;
         left: 0;
@@ -898,8 +919,8 @@ p{
         margin: 0 auto;
         margin-top: 100px;
     }
-    > h4{
-        margin-top: 20px;
+    h4{
+        padding-top: 20px;
 
     }
     .span2{
@@ -973,6 +994,7 @@ p{
 }
 
 .slide12{
+    position: relative;
     text-align: center;
     &::before{
         z-index: -1;
@@ -1010,7 +1032,12 @@ p{
     .logo img {
         width: 100%;
         max-width: 350px;
+    }
 
+    .footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
     }
 }
 
@@ -1042,37 +1069,83 @@ p{
 
 </style>
 
-<style>
-
+<style lang="scss">
 .swiper-pagination {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* 將文字向右對齊 */
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: auto !important;
+	left: auto !important;
+	margin: 0;
+   
 }
-
 .swiper-pagination-bullet {
-  /* background: none !important; 移除預設的圓點 */
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0;
-  cursor: pointer;
-  transition: color 0.3s;
-}
+	padding: 5px 0px;
+	border-radius: 0;
+	width: 100px;
+	height: 25px;
+	text-align: left;
+	line-height: 30px;
+	font-size: 12px;
+    font-weight: 500;
+	color:#ffffff;
+	opacity: 1;
+	background: rgba(0, 0, 0, 0);
+    transition: .3s;
 
+    &:hover{
+    text-shadow: 0px 0px 10px  #ffd900d0;
+
+	color:#FFD700;
+        
+    }
+}
 .swiper-pagination-bullet-active {
-  color: #f5a623; /* 設置激活狀態的顏色 */
+	color:#FFD700;
+	/* background: #007aff; */
+    // border-bottom: 1px solid #FFD700;
+    position: relative;
+    text-shadow: 0px 0px 15px  #ffd900d0;
+
+
+    &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 0.5px;
+        background-color: #FFD700;
+        width: 100px;
+        animation: line .5s, light 2s infinite linear;
+       
+        transform-origin: (right bottom);
+        // box-shadow: 0px 0px 15px 4px #ffd900d0;
+    }
 }
 
-.swiper-pagination-bullet:hover {
-  color: #f5a623; /* 設置懸停狀態的顏色 */
+@keyframes line{
+    0%{
+        transform: scalex(0);
+        
+    }
+    100%{
+        transform: scalex(1);
+    }
 }
 
-.bot{
-    width: 50px;
+@keyframes light{
+    0%{
+        box-shadow: 0px 0px 15px 1px #ffd900d0;
+    }
+    50%{
+        box-shadow: 0px 0px 12px 4px #ffd900d0;
+
+    }
+    100%{
+        box-shadow: 0px 0px 15px 1px #ffd900d0;
+
+    }
 }
+
+
 </style>

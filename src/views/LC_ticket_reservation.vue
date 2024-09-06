@@ -3,6 +3,8 @@
     import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
     import Footer_0 from '@/components/Footer_0.vue';
     import Header_2 from '@/components/Header_2.vue';
+
+    
 </script>
 
 <template>

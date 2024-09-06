@@ -1,21 +1,21 @@
 <template>
   <div id="flower">
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
-    <i><img src="../assets/images/duck.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
+    <i><img src="../assets/images/flower1.png" alt=""></i>
 
 
   </div>
