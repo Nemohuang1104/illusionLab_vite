@@ -1,20 +1,7 @@
 <template>
-<<<<<<< HEAD
-    <div class="header1">
-        <div class="logo">
-           <img src="../assets/images/illusionLabLOGO.SVG" alt="" @click="goToHome">
-          
-        </div>
-        <div class="icons">
-            <font-awesome-icon @click="goToShop" icon="fa-solid fa-cart-shopping" class="shoppingicon"/>
-            <font-awesome-icon  @click="goToSignUp" icon="fa-regular fa-face-meh"   class="peopleicon" /> 
-        </div>
-        
-=======
   <header :class="headerClass">
     <div class="logo">
     <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
->>>>>>> fcef70e6a7942abd0691198b2304a157ab24229b
     </div>
     <div class="icons">
       <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
@@ -78,20 +65,11 @@ header{
   max-width: 1440px;
   height: 80px;
 }
-<<<<<<< HEAD
 .logo img{
     height: 60px;
     flex-shrink: 0;
     cursor: pointer;    
-=======
-
-
-
-.logo img {
-  width: 145px;
-  flex-shrink: 0;
-  padding: 10px 20px;
->>>>>>> fcef70e6a7942abd0691198b2304a157ab24229b
+    padding: 10px 20px;
 }
 
 
@@ -123,7 +101,7 @@ header{
 
 //公版(one)
 .header-one {
-  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
+  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0) 99.67%);
   height: 80px;/* 添加高度 */
   cursor: pointer;
 }

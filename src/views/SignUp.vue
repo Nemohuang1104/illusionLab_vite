@@ -4,7 +4,6 @@ import Footer_0 from '../components/Footer_0.vue';
 </script>
 
 
-
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
@@ -41,7 +40,7 @@ import Footer_0 from '../components/Footer_0.vue';
         </div>
 
         <!-- 選擇地址 -->
-        <div class="city">
+        <!-- <div class="city">
           <select name="city">
             <option>請選擇縣市</option>
             <option value="基隆市">基隆市</option>
@@ -75,7 +74,31 @@ import Footer_0 from '../components/Footer_0.vue';
             <option value="苗栗縣">苗栗縣</option>
             <option value="彰化縣">彰化縣</option>
           </select>
-        </div>
+        </div> -->
+        
+        
+        </div><v-select
+          label="name"
+          :reduce="
+            (option) => {
+              citySelect = option.districts;
+              selected =
+                option.districts[0] === '臺北市' ? option.districts[0].name : '';
+            }
+          "
+          placeholder="請選擇縣市"
+          :options="cities"
+        ></v-select>
+      </div>
+      <div>
+        <v-select
+          label="name"
+          placeholder="請選擇鄉鎮"
+          v-model="selected"
+          :options="citySelect"
+        >
+        </v-select>
+	    </div>
 
         <input type="text" placeholder="請輸入地址" class="address">
 
@@ -96,9 +119,22 @@ import Footer_0 from '../components/Footer_0.vue';
   </div>
 </template>
 
+<script>
+  import { ref } from 'vue'
+import cities from '@/data/TwCities.json'
+
+export default {
+  setup () {
+    const citySelect = ref([])
+    const selected = ref('')
+    return { citySelect, cities, selected }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import "../assets/SASS/basic/color";
+
 
 .wrapper {
   background: map-get($color_0, bgc_blue);

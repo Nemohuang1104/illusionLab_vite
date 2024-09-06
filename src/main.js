@@ -8,7 +8,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "@/assets/css/reset.css"
+import "@/assets/css/reset.css";
 
 
 // ============fontawsome==================
@@ -24,6 +24,9 @@ import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { faFaceMeh } from '@fortawesome/free-regular-svg-icons'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
+
+
+
 
 
 
