@@ -2,22 +2,68 @@ import { createRouter, createWebHistory } from "vue-router";
 
 // path → component
 const routes = [
-  {
-    path: '/',
-    component: () => import('@/views/Guide.vue'),
-    meta: {
-      title: "Illusion Lab"
-    },
-    requiredLogin: false  //判斷要不要登入
+// ====================前台公版=====================
+{
+  path: '/',
+  component: () => import('@/views/Guide.vue'),
+  meta: {
+    title: "Illusion Lab"
   },
-  {
-    path: '/enter',
-    component: () => import('@/views/Enter.vue'),
-    meta: {
-      title: "前導頁"
-    },
-    requiredLogin: false
+  requiredLogin: false  //判斷要不要登入
+},
+{
+  path: '/enter',
+  component: () => import('@/views/Enter.vue'),
+  meta: {
+    title: "前導頁"
   },
+  requiredLogin: false
+},
+{
+  path: '/home',
+  component: () => import('@/views/Home.vue'),
+  meta: {
+    title: "Illusion Lab首頁"
+  },
+  requiredLogin: false
+},
+{
+  path: '/Header_0',
+  name: 'Header_0',
+  component: () => import('@/components/Header_0.vue'),
+  meta: {
+    title: "公版頁首"
+  },
+  requiredLogin: false
+},
+{
+  path: '/login',
+  name: 'login',
+  component: () => import('@/views/Login.vue'),
+  meta: {
+    title: "會員登入"
+  },
+  requiredLogin: true
+},
+{
+  path: '/shop',
+  name: 'shop',
+  component: () => import('@/views/ShoppingCar1.vue'),
+  meta: {
+    title: "購物車"
+  },
+  requiredLogin: true
+},
+{path: '/SFHeader_0',
+  name: 'SFHeader_0',
+  component: () => import('@/components/SFHeader_0.vue'),
+  meta: {
+    title: "公版三個LOGO頁首"
+  },
+  requiredLogin: false
+},
+
+  
 
   // ====================後台=====================
   {
@@ -28,8 +74,7 @@ const routes = [
     },
     requiredLogin: true,
   },
-
-  {
+{
     path: '/CenterCMS',
     component: () => import('@/views/CenterCMS.vue'),
     meta: {
@@ -83,16 +128,8 @@ const routes = [
   },
 
  
-  // ====================後台end=====================
-
-  {
-    path: '/home',
-    component: () => import('@/views/Home.vue'),
-    meta: {
-      title: "Illusion Lab首頁"
-    },
-    requiredLogin: false
-  },
+  
+ 
   // ====================人生賭場================//
   {
     path: '/lifecasino',
@@ -146,6 +183,7 @@ const routes = [
     ]
   },
   
+  
 
 // =================星際邊境===============//
 
@@ -154,7 +192,7 @@ const routes = [
     name: 'strellarfrontierintro',
     component: () => import('@/views/SFIntro.vue'),
     meta: {
-      title: "星際邊境"
+      title: "星際邊境跳轉頁"
     },
     requiredLogin: false,
   },
@@ -163,70 +201,17 @@ const routes = [
     name: 'SF_Homepage',
     component: () => import('@/views/SF_Homepage.vue'),
     meta: {
-      title: "星際邊境"
+      title: "星際邊境-活動頁"
     },
     requiredLogin: false
   },
-  {
-    path: '/mindspectrum',
-    name: 'mindspectrum',
-    component: () => import('@/components/MS/MS_main.vue'),
-    meta: {
-      title: "心靈光譜"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/littlequiz',
-    name: 'littlequiz',
-    component: () => import('@/views/LittleQuizEnter.vue'),
-    meta: {
-      title: "小測驗"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/Login.vue'),
-    meta: {
-      title: "會員登入"
-    },
-    requiredLogin: true
-  },
-  {
-    path: '/shop',
-    name: 'shop',
-    component: () => import('@/views/ShoppingCar1.vue'),
-    meta: {
-      title: "購物車"
-    },
-    requiredLogin: true
-  },
+
   {
     path: '/SF_BookingChange',
     name: 'SF_BookingChange',
     component: () => import('@/views/SF_BookingChange.vue'),
     meta: {
-      title: "退換票政策"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/SF_ProductPage',
-    name: 'SF_ProductPage',
-    component: () => import('@/views/SF_ProductPage.vue'),
-    meta: {
-      title: "星際邊境全部商品"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/Header_0',
-    name: 'Header_0',
-    component: () => import('@/components/Header_0.vue'),
-    meta: {
-      title: "公版頁首"
+      title: "星際邊際-退換票政策"
     },
     requiredLogin: false
   },
@@ -237,27 +222,50 @@ const routes = [
       title: "星際邊際商品細項"
     },
     requiredLogin: false
-  },
-  { path: '/WeiText',
+  }, 
+  { path: '/SF_ProductPage',
+    name: 'SF_ProductPage',
+    component: () => import('@/views/SF_ProductPage.vue'),
+    meta: {
+      title: "星際邊際全部商品"
+    },
+    requiredLogin: false
+  }, 
+  { path: '/WeiText2',
+    name: 'WeiText2',
+    component: () => import('@/views/WeiText2.vue'),
+    meta: {
+      title: "測試"
+    },
+    requiredLogin: false
+  },{ path: '/WeiText',
     name: 'WeiText',
     component: () => import('@/views/WeiText.vue'),
     meta: {
-      title: "測試用的"
+      title: "測試"
     },
     requiredLogin: false
   },
-  {path: '/SFHeader_0',
-    name: 'SFHeader_0',
-    component: () => import('@/components/SFHeader_0.vue'),
+
+
+  
+
+    
+  
+  // =================心靈光譜===============//
+  {
+    path: '/mindspectrum',
+    name: 'mindspectrum',
+    component: () => import('@/components/MS/MS_main.vue'),
     meta: {
-      title: "公版頁首"
+      title: "心靈光譜"
     },
     requiredLogin: false
-
-  }
+  },
 
 
 ];
+
 
 // 建立 router
 const router = createRouter({

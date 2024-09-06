@@ -25,7 +25,7 @@
 // 幻境LOGO
 .outline{
     width: 100%;
-    max-width: 1440px;
+    // max-width: 1440px;
     height: 200px;
     // background-image: url(../assets/images/STBackground.png);
     background: linear-gradient(180deg, #000 26%, #505050 100%);

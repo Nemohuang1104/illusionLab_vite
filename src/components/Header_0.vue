@@ -4,10 +4,12 @@
     <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-      <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
-      <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" />
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'login'}"> <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" /></router-link>
     </div>
   </header>
+
+  <!-- <font-awesome-icon icon="fa-solid fa-bars" /> 這是漢堡線 -->
 </template>
 
 <script setup>
@@ -62,7 +64,7 @@ header{
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1440px;
+  // max-width: 1440px;
   height: 80px;
 }
 
@@ -72,6 +74,7 @@ header{
   width: 145px;
   flex-shrink: 0;
   padding: 10px 20px;
+  cursor: pointer;
 }
 
 

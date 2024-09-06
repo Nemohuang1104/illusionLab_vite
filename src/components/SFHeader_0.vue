@@ -15,15 +15,14 @@
       </router-link>
 
       <!-- 心靈光譜 LOGO  @click="handleClick('four')"-->
-      <router-link to="/mindspectrum" >
+      <router-link to="/mindspectrum" @click="handleClick('four')"  >
         <img :src="logos['four']" :class="['LI', { 'inactive': !isActive('four'), 'active': isActive('four') }]"
           alt="心靈光譜" />
       </router-link>
     </div>
     <div class="icons">
-      <router-link>
-      <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" /> </router-link>
-      <router-link><font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" /></router-link>
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'login'}"> <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" /></router-link>
     </div>
   </header>
 </template>

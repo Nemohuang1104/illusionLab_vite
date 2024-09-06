@@ -29,7 +29,7 @@
 // 幻境LOGO
 .outline{
     width: 100%;
-    max-width: 1440px;
+    // max-width: 1440px;
     height: 200px;
     background: var(--header-footer, #000354);
     display: flex;
