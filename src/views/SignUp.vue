@@ -78,17 +78,17 @@ import Footer_0 from '../components/Footer_0.vue';
         
         
         <div><v-select
-          label="name"
-          :reduce="
-            (option) => {
-              citySelect = option.districts;
-              selected =
-                option.districts[0] === '臺北市' ? option.districts[0].name : '';
-            }
-          "
-          placeholder="請選擇縣市"
-          :options="cities"
-        ></v-select>
+            label="name"
+            :reduce="
+              (option) => {
+                citySelect = option.districts;
+                selected =
+                  option.districts[0] === '臺北市' ? option.districts[0].name : '';
+              }
+            "
+            placeholder="請選擇縣市"
+            :options="cities"
+          ></v-select>
         </div>
         <div>
           <v-select
@@ -97,7 +97,7 @@ import Footer_0 from '../components/Footer_0.vue';
             v-model="selected"
             :options="citySelect"
           >
-        </v-select>
+          </v-select>
 	      </div>
         <div>
           <input type="text" placeholder="請輸入地址" class="address">
@@ -110,7 +110,8 @@ import Footer_0 from '../components/Footer_0.vue';
             <img src="../assets/images/icon-change.svg" alt="">
           </div>
 
-        <a href="#"><input type="submit" value="註冊" class="button"></a>
+          <a href="#"><input type="submit" value="註冊" class="button"></a>
+        </div>
       </div>
     </main>
 
