@@ -1,4 +1,5 @@
 <script setup>
+import LC_Text3 from '@/components/LC_Text3.vue';
 
 </script>
 
@@ -7,8 +8,10 @@
 
           <div class="wrapper">
             <div class="title">
-              <h1>票務規則</h1>
-              <h3>Q & A</h3>
+            <LC_Text3
+                Title1="票務規則"
+                English="Presale Rules">
+            </LC_Text3>
             </div>
             <section class="info">
                 <div class="img_offset">

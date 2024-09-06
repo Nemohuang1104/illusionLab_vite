@@ -1,5 +1,10 @@
 <script setup>
-
+    function goToPage (){
+        window.scrollTo({
+        top: 0,  // 頁面的頂部
+        behavior: 'auto'  // 平滑滾動
+    });
+    } 
 </script>
 
 <template>
@@ -7,10 +12,18 @@
         <div class="content">
             <img src="../assets/images/illusionLab_logo.png" alt="">
             <div class="items">
-                <span>隱私權政策</span>
-                <span>最新消息</span>
-                <span>製作團隊</span>
-                <span>使用辦法</span>
+                <router-link  to="">
+                    <span>隱私權政策</span>
+                </router-link>
+                <router-link to="">
+                    <span>製作團隊</span>
+                </router-link>
+                <router-link @click="goToPage" to="/News">
+                    <span>最新消息</span>
+                </router-link>
+                <router-link to="">
+                    <span>使用辦法</span>
+                </router-link>
             </div>
             <p>本網站為緯育TibaMe【第93期】前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
             <p>Copyright &copy; 2024 幻浸實驗室 All rights reserved</p>
@@ -44,8 +57,9 @@
     margin-bottom: 12px;
 }
 
-.items span{
-    font-size: 18px;
+
+a{
+    font-size: 20px;
     line-height: 1.6rem;
     flex-basis: 0%;
     color: var(--Color-6, #FFF);
@@ -56,7 +70,7 @@
     
 }
 
-.items span:last-child{
+a:last-child{
     border-right: none;
 }
 

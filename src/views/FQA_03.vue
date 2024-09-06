@@ -26,6 +26,7 @@ import Footer_03 from '@/components/Footer_03.vue';
 
         <!-- 卡片背面 -->
         <div class="back">
+        <span class="pc_text">
           <h3>票卷退換貨規則</h3>
           <p>本活動僅提供退票服務，無法進行票卷交換，如需更改日期，須取消原訂單並重新下單。</p>
 
@@ -39,7 +40,18 @@ import Footer_03 from '@/components/Footer_03.vue';
           <p>請於活動當天持電子票卷至櫃台兌換實體票卷，並憑實體票卷入場。本活動的驗證僅憑票券進行，請務必妥善保管您的票卷。</p>
           
           <p>關於退換貨詳細資訊請至 <a href="">票券異動</a>查看，或來信客服信箱: illusionlab@gmail.com ，由專人為您服務</p>
+        </span>
 
+        <span class="rwd_text">
+            <h3>票卷退換貨規則</h3>
+            <p>本活動僅提供退票服務，無法進行票卷交換，如需更改日期，須取消原訂單並重新下單。</p>
+          
+            <h3>訂單完成後：</h3>
+            <p>將發送一個網址到您的電子信箱中，可透過該網址進行客製票卷。
+              客製票卷有效期為7天，當天持電子票卷至櫃台兌換實體票卷
+              請務必妥善保管您的票卷。更多詳細資訊請至 <a href="">票券異動</a>查看。
+            </p>
+        </span>
         </div> 
       </div>
     </div>
@@ -71,15 +83,26 @@ import Footer_03 from '@/components/Footer_03.vue';
 
           <!-- 卡片背面 -->
           <div class="back">
-            <h3>捷運：</h3>
-            <p>搭乘台北捷運松山新店線（綠線），在 南京復興站 下車，從 8 號出口步行約 3 分鐘即可抵達。</p>
+            <span class="pc_text">
+              <h3>捷運：</h3>
+              <p>搭乘台北捷運松山新店線（綠線），在 南京復興站 下車，從 8 號出口步行約 3 分鐘即可抵達。</p>
 
-            <h3>公車：</h3>
-            <p>可搭乘公車至 捷運南京復興 公車站站牌，步行3分鐘即可抵達。
-              主要公車路線包括 306、307、南京幹線 等。</p>
+              <h3>公車：</h3>
+              <p>可搭乘公車至 捷運南京復興 公車站站牌，步行3分鐘即可抵達。
+                主要公車路線包括 306、307、南京幹線 等。</p>
 
-            <h3>開車：</h3>
-            <p>沿南京東路三段行駛，於 219 號旁尋找停車場或路邊停車位後，步行即可抵達。</p>
+              <h3>開車：</h3>
+              <p>沿南京東路三段行駛，於 219 號旁尋找停車場或路邊停車位後，步行即可抵達。</p>
+            </span>
+            <!-- ----------------手機板文字------------------ -->
+            <span class="rwd_text">
+              <h3>捷運：</h3>
+                <p>搭乘台北捷運松山新店線（綠線），在 南京復興站 下車，從 8 號出口步行約 3 分鐘即可抵達。</p>
+    
+                <h3>公車：</h3>
+                <p>可搭乘公車至 捷運南京復興 公車站站牌，步行3分鐘即可抵達。
+                  主要公車路線包括 306、307、南京幹線 等。</p>
+            </span>
           </div>
         </div>
     </div>
@@ -156,38 +179,37 @@ import Footer_03 from '@/components/Footer_03.vue';
 
 header {
   width: 100%;
-  height: 80px;
+  height: 100px;
   background-color: #B89977;
 }
 
 .title {
   margin: 0 auto;
   text-align: center;
-  margin-top: 150px;
-  margin-bottom: 50px;
+  margin-top: 8%;
+  margin-bottom: 5%;
 }
 
 .title h1 {
   font-size: 36px;
-  color:map-get($colofont_3,title);
+  color: #462C14;
   font-weight: bold;
 }
 
 .title p {
   font-size: 20px;
-  color:map-get($colofont_3,title);
+  color: #462C14;
   font-weight: bold;
   font-family:Arial, Helvetica, sans-serif;
 }
 
 main {
   display: flex;
-  max-width: 1050px;
   width: 100%;
-  gap: 2%;
+  gap: 2vw;
   flex-wrap: wrap;
-  margin: 0 auto 50px;
-
+  justify-content: center;
+  margin-bottom: 10%;
 }
 
 .inside{}
@@ -196,17 +218,19 @@ main {
   width: 330px;
   height: 710px;
   border-radius: 12px;
-  background-color:map-get($color_3,card_bg);
+  background-color: #FFFCF5;
   padding: 50px 24px 20px;
   box-sizing: border-box;
   line-height: 1.5;
   box-shadow: 8px 8px 12px 0px rgba(0, 0, 0, 0.20);
-  margin-bottom: 30px;
+  margin-bottom: 3%;
   perspective: 1000px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 1s;
 }
+
+
 
 .card:hover>.inside{
   transform: rotateY(180deg);
@@ -215,7 +239,7 @@ main {
 .inside .front {
   width: 100%;
   font-weight: bold;
-  color:map-get($colofont_3,text);
+  color: #855F49;
   text-align: center;
   backface-visibility: hidden;
   margin: 0 auto;
@@ -226,9 +250,9 @@ main {
 
 .inside .front img {
   display: block;
-  margin: 80px auto;
-  margin-bottom: 20px;
-  width: 150px;
+  margin: 24% auto;
+  margin-bottom: 3%;
+  width: 50%;
 }
 
 
@@ -243,7 +267,7 @@ main {
 
 .inside .back {
   box-sizing: border-box;
-  color:map-get($colofont_3,text);
+  color: #855F49;
   backface-visibility: hidden;
   transform: rotateY(180deg);
   width: 100%;
@@ -251,7 +275,7 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 80px 24px;
+  padding: 20% 8%;
   box-sizing: border-box;
 }
 
@@ -269,8 +293,37 @@ main {
 .inside .back a {
   font-size: 16px;
   font-weight: bold;
-  color:map-get($colofont_3,orange);
+  color: #fb9d3c;
   text-decoration: none;
+}
+
+.back .rwd_text{
+  display: none;
+}
+
+/* ========================RWD=========================== */
+
+@media screen and (max-width: 430px) { 
+  .inside{
+    height: 300px;
+  }
+
+  .inside .front img{
+    margin: 10% auto 2%;
+    width: 45%;
+  }
+
+  .pc_text{
+    display: none;
+  }
+
+  .back .rwd_text{
+    display:block;
+  }
+
+  .inside .back{
+    padding: 6% 6%;
+  }
 }
 
 

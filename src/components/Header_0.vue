@@ -4,8 +4,17 @@
     <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
+<<<<<<< HEAD
       <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" /></router-link>
       <router-link :to="{ name: 'login'}"> <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" /></router-link>
+=======
+      <router-link to="/shop">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+      </router-link>
+      <router-link to="/login">
+        <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" />
+      </router-link>
+>>>>>>> 538892f8bc465a996c013d40c232816de93fb0f2
     </div>
   </header>
 
@@ -67,6 +76,7 @@ header{
   // max-width: 1440px;
   height: 80px;
 }
+<<<<<<< HEAD
 
 
 
@@ -75,6 +85,13 @@ header{
   flex-shrink: 0;
   padding: 10px 20px;
   cursor: pointer;
+=======
+.logo img{
+    height: 60px;
+    flex-shrink: 0;
+    cursor: pointer;    
+    padding: 10px 20px;
+>>>>>>> 538892f8bc465a996c013d40c232816de93fb0f2
 }
 
 
@@ -106,7 +123,7 @@ header{
 
 //公版(one)
 .header-one {
-  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
+  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0) 99.67%);
   height: 80px;/* 添加高度 */
   cursor: pointer;
 }

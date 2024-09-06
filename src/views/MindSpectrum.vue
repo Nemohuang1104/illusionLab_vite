@@ -1,16 +1,44 @@
 <template>
-    <!-- <div><MS_main/></div> -->
-    <!-- <div><MS_termOfUse/></div> -->
-    <!-- <div><MS_privacy_policy/></div> -->
-    
-    <!-- <div><MS_ticket_into/></div> -->
-    <!-- <div><MS_ticket_customer_info/></div> -->
-    <!-- <div><MS_ticket_reservation/></div> -->
-    <div><MS_customization/></div>
-
-    <div><MS_com_marquee/></div>
-    <div><MS_com_caro/></div>
+    <div>
+        <MS_main />
+        <!-- <MS_Enter /> -->
+        <!-- <MS_customization /> -->
+        <!-- <MS_ticket_reservation :mode="bangSu" />
+        <MS_ticket_customer_info :mode="bangSu" />
+        <MS_ticket_confirmation :mode="bangSu" /> -->
+    </div>
 </template>
+  
+<script>
+export default {
+  data() {
+    return {
+      mobang: '2', 
+      bangSu: '',
+    };
+  },
+  methods: {
+    switchBang(number) {
+      switch (number) {
+        case '1':
+          return 'one';
+        case '2': 
+          return 'two';
+        case '3':
+          return 'three';
+        default:
+          return 'Invalid input';
+      }
+    }
+  },
+  mounted() {
+    this.bangSu = this.switchBang(this.mobang);
+  }
+};
+</script>
+
+
+  
 
 <script setup>
     import MS_main from '@/components/MS/MS_main.vue';
@@ -23,6 +51,7 @@
     import MS_com_caro from '@/components/MS/MS_com_caro.vue';
     import MS_termOfUse from '@/components/MS/MS_termOfUse.vue';
     import MS_privacy_policy from '@/components/MS/MS_privacy_policy.vue';
+    import MS_Enter from '@/components/MS/MS_Enter.vue';
 
 </script>
 
@@ -34,6 +63,8 @@
     font-weight: 400;
     font-style: normal;
     }
+
+
     h1{font-size: 30px;}
     h2{font-size: 28px;}
     h3{font-size: 18px;}

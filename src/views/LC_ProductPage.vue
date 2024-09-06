@@ -1,8 +1,11 @@
 <script setup>
 import Header from '@/components/Header_0.vue';
-import Footer_2 from '@/components/Footer_2.vue';
-import Header_0 from '@/components/Header_0.vue';
+import Footer_2 from '@/components/Footer_1.vue';
 import LC_ProductInfo from './LC_ProductInfo.vue';
+import CoinFall2 from '@/components/CoinFall2.vue';
+import LC_Text2 from '@/components/LC_Text2.vue';
+import icon3 from '../assets/images/LC_icon3.svg' 
+
 import { ref } from 'vue';
 
 const currentMode = ref('two');
@@ -25,6 +28,7 @@ function goToLoginCMS(){
 
 
 
+
 </script>
 
 <template>
@@ -36,8 +40,13 @@ function goToLoginCMS(){
     </div>
     
     <div class="center">
-      <h1>精選商品</h1>
-      <p>PRODUCTS</p>
+      <div class="warp">
+      <LC_Text2 class="title"
+            Title1="精選"
+            :icon= "icon3"
+            Title2="商品"
+            English="PRODUCT">
+      </LC_Text2>   
       <div class="producttitle">
         <div class="arrowlift">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
@@ -69,6 +78,10 @@ function goToLoginCMS(){
     </div>
   </div>
   <div>
+
+  </div>
+  <CoinFall2 class="coin"></CoinFall2>
+
     <Footer_2></Footer_2>
   </div>
 </template>
@@ -85,19 +98,69 @@ text-decoration: none;
 
 }
 
+.title{
+  margin-top: 10px;
+  width: 400px;
+}
+
 .warpper {
   font-family: "Noto Serif SC";
-  max-width: 1440px;
+  // max-width: 1440px;
   width: 100%;
-
+  // height: 100vh;
   margin: 0 auto;
   // border: 1px solid red;
   // background-image: url(../assets/images/SFbg.png);
-  background-color: #1E1E2F;
+  // background-color: #1E1E2F;
+  background:url(../assets/images/lifecasino_bg1.png);
+        // height: 180vh;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background-repeat: no-repeat;
+
+        &::before{
+          z-index: -2;
+          content: "";
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 80%;
+          background-color: rgba(0, 0, 0, 0.689);
+          mask: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 1.5%, #000 26.17%, #000 40.67%, rgba(102, 102, 102, 0.00) 100%);
+        }
 
 }
 
+.coin{
+  // border: 2px solid red;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -5;
+      // max-height: 100%;
+      // width: 50px;
+      // overflow: hidden;
+      opacity: .5;
+      animation: opacity 8s linear;
 
+    }
+    @keyframes opacity{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity:.5;
+    }
+  }
+
+.warp{
+  position: relative;
+//  border: 2px solid red;
+ height: 100vh;
+}
 
 .center {
    color: map-get($colorfont_0, white);
@@ -110,7 +173,8 @@ text-decoration: none;
   align-items: center;
   text-align: center;
   padding-top: 20px;
-
+  // position: relative;
+  z-index:0;
 }
 
 .center h1 {
@@ -138,7 +202,7 @@ text-decoration: none;
 
 
 .producttitle {
-  max-width: 700px;
+  // max-width: 700px;
   width: 100%;
   font-family: "Noto Serif SC";
   font-size: 20px;

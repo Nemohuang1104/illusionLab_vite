@@ -4,6 +4,8 @@ import Header_0 from "../components/Header_0.vue";
 import Header_2 from "@/components/Header_2.vue";
 import Footer_0 from "@/components/Footer_0.vue";
 import Btn_Lifecasino from "@/components/Btn_Lifecasino.vue";
+import LC_Text3 from '@/components/LC_Text3.vue';
+
 
 
 // 問題數據
@@ -48,8 +50,10 @@ const getInfoStyle = (question) => {
 
   <div class="wrapper">
       <div class="title">
-        <h1>常見問題</h1>
-        <h3>Q & A</h3>
+        <LC_Text3
+            Title1="常見問題"
+            English="Q & A">
+        </LC_Text3> 
       </div>
       <section class="info">
           <article v-for="question in questions" :key="question.id" class="question">

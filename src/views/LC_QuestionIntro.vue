@@ -1,9 +1,19 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Header from "../components/Header_0.vue";
 // import Header_2 from "@/components/Header_2.vue";
 import Footer_1 from "@/components/Footer_1.vue";
-import Btn_Lifecasino from "@/components/Btn_Lifecasino.vue";
+import Btn3_Lifecasino from "@/components/Btn3_Lifecasino.vue";
+import Btn2_Lifecasino from "@/components/Btn2_Lifecasino.vue";
+import CoinFall from '@/components/CoinFall.vue';
+
+const currentButton = ref('btn1');
+
+// 根據當前選中的頁籤來選擇顯示的組件
+const currentComponent = computed(() => {
+  return currentButton.value === 'btn1' ? Btn2_Lifecasino : Btn3_Lifecasino;
+  ;
+});
 
 const currentMode = ref('two'); 
 // 問題數據
@@ -50,18 +60,32 @@ const getInfoStyle = (question) => {
       <div>
         <Header :mode="currentMode"/> 
       </div>
+
         <div class="tab">
           
-          <RouterLink tag="div" to="/LC_Question" class="tab-item" replace><Btn_Lifecasino Button="常見問題"></Btn_Lifecasino></RouterLink>
-          <RouterLink tag="div" to="/LC_TicketRule" class="tab-item" replace><Btn_Lifecasino Button="票務規則"></Btn_Lifecasino></RouterLink>
-          <RouterLink tag="div" to="/LC_TicketChange" class="tab-item" replace><Btn_Lifecasino Button="退換票政策"></Btn_Lifecasino></RouterLink>
+          <RouterLink tag="div" to="/LC_Question" class="tab-item" replace >
+            <Btn2_Lifecasino Button="常見問題"></Btn2_Lifecasino>
+             
+           
+          </RouterLink>
+          <RouterLink tag="div" to="/LC_TicketRule" class="tab-item" replace>
+            <Btn3_Lifecasino Button="票務規則"></Btn3_Lifecasino>
+            <!-- <component :is="currentComponent" @click="currentButton.value = 'tab3'" Button="票務規則"/> -->
+
+          </RouterLink>
+          <RouterLink tag="div" to="/LC_TicketChange" class="tab-item" replace>
+            <Btn3_Lifecasino Button="退換票政策"></Btn3_Lifecasino></RouterLink>
         </div>
+    
         <div class="top_img">
           <img src="../assets/images/Line 24.png" alt="">
         </div>
           
         <div class="replace">
-          <RouterView></RouterView>
+          <RouterView class="view">
+
+          </RouterView>
+      <CoinFall class="coin"></CoinFall>
           
       </div>
         <div class="icons">
@@ -82,20 +106,69 @@ const getInfoStyle = (question) => {
 
     @import "../assets/style";
     .template{
-        background: #313131;
+        background:url(../assets/images/lifecasino_bg1.png);
         // height: 180vh;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        z-index: 0;
+        background-repeat: no-repeat;
+
+        &::before{
+          z-index: -1;
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 80%;
+          background-color: rgba(0, 0, 0, 0.689);
+          mask: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 1.5%, #000 26.17%, #000 40.67%, rgba(102, 102, 102, 0.00) 100%);
+        }
+    }
+    .coin{
+      position: fixed;
+      right: 0;
+      top: -100;
+      z-index: -1;
+      // max-height: 100%;
+      // width: 50px;
+      // overflow: hidden;
+      opacity: .5;
+      animation: opacity 8s linear;
+
+    }
+    @keyframes opacity{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity:.5;
+    }
+}
+
+    .replace{
+      height: 100vh;
+    }
+    .tab{
+      z-index: 12;
+    }
+    .view{
+      z-index: 10;
     }
 
     a{
       text-decoration: none;
       font-family: map-get($fontStyle, style_2);
     }
+
     .icons{
-      margin-top: 80px;
+      margin-top: 150px;
       display: flex;
       justify-content: center;
       margin-bottom: 80px;
       gap: 32px;
+     
     }
 
     .icons img{
@@ -224,6 +297,7 @@ const getInfoStyle = (question) => {
     margin-bottom: 2%;
     }
 
+    
     
 </style>
   

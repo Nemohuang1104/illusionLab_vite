@@ -189,7 +189,7 @@ section{
     display: none;
 }
 
-.swiper .swiper-button-next, .swiper .swiper-button-prev{
+.mySwiper2 .swiper-button-next, .mySwiper2 .swiper-button-prev{
     --swiper-theme-color: #ff990000;
     background-image: url('../assets/images/LC_btn_prev.svg');
     background-repeat: no-repeat;
@@ -202,7 +202,7 @@ section{
 
 
 
-.swiper-button-next{
+.mySwiper2 .swiper-button-next{
     
     transform: rotateY(180deg);
 }

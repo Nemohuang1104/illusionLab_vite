@@ -62,6 +62,24 @@ const routes = [
   },
   requiredLogin: false
 },
+{
+  path: '/littlequiz',
+  name: 'littlequiz',
+  component: () => import('@/views/LittleQuizEnter.vue'),
+  meta: {
+    title: "小測驗"
+  },
+  requiredLogin: false
+},
+{
+  path: '/Header_0',
+  name: 'Header_0',
+  component: () => import('@/components/Header_0.vue'),
+  meta: {
+    title: "頁首"
+  },
+  requiredLogin: false
+},
 
   
 
@@ -206,15 +224,26 @@ const routes = [
     requiredLogin: false
   },
 
+ 
   {
     path: '/SF_BookingChange',
     name: 'SF_BookingChange',
     component: () => import('@/views/SF_BookingChange.vue'),
     meta: {
-      title: "星際邊際-退換票政策"
+      title: "退換票政策"
     },
     requiredLogin: false
   },
+  {
+    path: '/SF_ProductPage',
+    name: 'SF_ProductPage',
+    component: () => import('@/views/SF_ProductPage.vue'),
+    meta: {
+      title: "星際邊境全部商品"
+    },
+    requiredLogin: false
+  },
+
   { path: '/SF_DetailList',
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
@@ -247,6 +276,96 @@ const routes = [
     requiredLogin: false
   },
 
+  // ============會員專區============//
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login.vue'),
+    meta: {
+      title: "會員登入"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/SignUp',
+    name: 'SignUp',
+    component: () => import('@/views/SignUp.vue'),
+    meta: {
+      title: "會員註冊"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MemberCenter',
+    name: 'MemberCenter',
+    component: () => import('@/views/MemberCenter.vue'),
+    meta: {
+      title: "會員中心"
+    },
+    requiredLogin: true,
+    redirect: '/Member',
+
+      children:[
+        {
+          path: '/Member',
+          name: 'MemberInfo',
+          component:() => import('@/views/MemberInfo.vue'),
+        },
+        {
+          path: '/change-password',
+          name: 'PasswordEdit',
+          component: () => import('@/views/PasswordEdit.vue'),
+        },
+        {
+          path: '/order-query',
+          name: 'OrderQuery',
+          component: () => import('@/views/OrderQuery.vue'),
+          redirect: '/OrderQueryTicket',
+
+            children: [
+              { 
+                path: '/OrderQueryTicket', 
+                component: () => import('@/views/OrderQueryTicket.vue'), 
+              },
+              { 
+                path: '/OrderQueryProduct', component: () => import('@/views/OrderQueryProduct.vue'),  
+              },
+            ],
+        },
+        {
+          path: '/refund-query',
+          name: 'RefundQuery',
+          component: () => import('@/views/RefundQuery.vue'),
+          redirect: '/RefundQueryTicket',
+
+          children: [
+            { 
+              path: '/RefundQueryTicket', 
+              component: () => import('@/views/RefundQueryTicket.vue'), 
+            },
+            { 
+              path: '/RefundQueryProduct', 
+              component:() => import('@/views/RefundQueryProduct.vue'), 
+            },
+          ],
+        },
+    ]
+  },
+
+  // =============會員專區end=============//
+
+  // ================購物車===============//
+  {
+    path: '/shop',
+    name: 'shop',
+    component: () => import('@/views/ShoppingCar1.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
+  
+
 
   
 
@@ -261,7 +380,21 @@ const routes = [
       title: "心靈光譜"
     },
     requiredLogin: false
+
   },
+ 
+
+  // ==========footer=============//
+  {
+    path: '/News',
+    name: 'News',
+    component: () => import('@/views/NewsView.vue'),
+    meta: {
+      title: "最新消息"
+    },
+    requiredLogin: false
+  },
+
 
 
 ];
