@@ -71,15 +71,7 @@ const routes = [
   },
   requiredLogin: false
 },
-{
-  path: '/Header_0',
-  name: 'Header_0',
-  component: () => import('@/components/Header_0.vue'),
-  meta: {
-    title: "頁首"
-  },
-  requiredLogin: false
-},
+
 
   
 
@@ -234,24 +226,6 @@ const routes = [
     },
     requiredLogin: false
   },
-  {
-    path: '/SF_ProductPage',
-    name: 'SF_ProductPage',
-    component: () => import('@/views/SF_ProductPage.vue'),
-    meta: {
-      title: "星際邊境全部商品"
-    },
-    requiredLogin: false
-  },
-
-  { path: '/SF_DetailList',
-    name: 'SF_DetailList',
-    component: () => import('@/views/SF_DetailList.vue'),
-    meta: {
-      title: "星際邊際商品細項"
-    },
-    requiredLogin: false
-  }, 
   { path: '/SF_ProductPage',
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
@@ -259,7 +233,15 @@ const routes = [
       title: "星際邊際全部商品"
     },
     requiredLogin: false
-  }, 
+  },
+{ path: '/SF_DetailList',
+    name: 'SF_DetailList',
+    component: () => import('@/views/SF_DetailList.vue'),
+    meta: {
+      title: "星際邊際商品細項"
+    },
+    requiredLogin: false
+  },
   { path: '/WeiText2',
     name: 'WeiText2',
     component: () => import('@/views/WeiText2.vue'),

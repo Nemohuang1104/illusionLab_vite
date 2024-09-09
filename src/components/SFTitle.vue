@@ -28,7 +28,7 @@ h1 {
   -webkit-background-clip: text;
   color: transparent;
   margin-bottom: 0.5%;
-  <<<<<<< HEAD=======
+
 }
 
 p {
@@ -39,19 +39,8 @@ p {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  >>>>>>>538892f8bc465a996c013d40c232816de93fb0f2
+ 
 }
 
 
-<<<<<<< HEAD font-weight: 700;
-
-background-clip: text;
--webkit-background-clip: text;
-color: transparent;
-}
 </style>
-
-
-=======
-</style>
->>>>>>> 538892f8bc465a996c013d40c232816de93fb0f2

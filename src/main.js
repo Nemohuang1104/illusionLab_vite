@@ -25,15 +25,14 @@ import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { faFaceMeh } from '@fortawesome/free-regular-svg-icons'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-
-
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 
 
 
 
 
 // ---libary也要加---//
-library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars )
+library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark )
 
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount("#app");

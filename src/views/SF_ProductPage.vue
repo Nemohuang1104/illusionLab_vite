@@ -61,9 +61,9 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
       <div class="pagebox">
         <div class="list">
           <div class="pro">
-            <router-link><img src="../assets/images/SF_cup.png" alt=""></router-link>
+            <router-link to="./SF_DetailList"><img src="../assets/images/SF_cup.png" alt=""></router-link>
             <div>
-              <p>太空鋼杯</p>
+              <p>太空金屬杯</p>
               <div class="price">
                 <span>NT$ 350元</span>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
@@ -72,7 +72,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SF_bag.png" alt=""></router-link>
+            <router-link  to="./SF_DetailList"><img src="../assets/images/SF_bag.png" alt=""></router-link>
             <div>
               <p>帆布袋</p>
               <div class="price">
@@ -83,7 +83,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SF_easycard_1.png" alt=""></router-link>
+            <router-link  to="./SF_DetailList"><img src="../assets/images/SF_easycard_1.png" alt=""></router-link>
             <div>
               <p>悠遊卡</p>
               <div class="price">
@@ -94,7 +94,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SFbook.svg" alt=""></router-link>
+            <router-link  to="./SF_DetailList"><img src="../assets/images/SFbook.svg" alt=""></router-link>
             <div>
               <p>筆記本</p>
               <div class="price">
@@ -105,7 +105,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SF_Pillow.png" alt=""></router-link>
+            <router-link  to="./SF_DetailList"><img src="../assets/images/SF_Pillow.png" alt=""></router-link>
             <div>
               <p>抱枕</p>
               <div class="price">
@@ -116,7 +116,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <img src="../assets/images/SF_Tshirt.png" alt="">
+           <router-link  to="./SF_DetailList"><img src="../assets/images/SF_Tshirt.png" alt=""></router-link>
             <div>
               <p>T-shirt</p>
               <div class="price">
