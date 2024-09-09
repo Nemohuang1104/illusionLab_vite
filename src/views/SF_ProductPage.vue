@@ -45,7 +45,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
   <div class="warpper">
 
     <div class="center">
-      <StrellarFrontierTitle h1="體驗內容" p="ADVENTURES"></StrellarFrontierTitle>
+      <StrellarFrontierTitle h1="精選商品" p="PRODUCTS"></StrellarFrontierTitle>
 
       <div class="producttitle">
         <div class="arrowleft">
@@ -116,7 +116,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <img src="../assets/images/productstshirt.png" alt="">
+            <img src="../assets/images/SF_Tshirt.png" alt="">
             <div>
               <p>T-shirt</p>
               <div class="price">

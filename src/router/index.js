@@ -82,7 +82,7 @@ const routes = [
     ]
   },
 
- 
+
   // ====================後台end=====================
 
   {
@@ -126,17 +126,17 @@ const routes = [
     },
     redirect: '/LC_Question',
     requiredLogin: false,
-    children:[
+    children: [
       {
         path: '/LC_Question',
         name: 'LC_Question',
         component: () => import('@/views/LC_Question.vue'),
       },
-    {
+      {
         path: '/LC_TicketRule',
         name: 'LC_TicketRule',
         component: () => import('@/views/LC_TicketRule.vue'),
-        
+
       },
       {
         path: '/LC_TicketChange',
@@ -145,9 +145,9 @@ const routes = [
       }
     ]
   },
-  
 
-// =================星際邊境===============//
+
+  // =================星際邊境===============//
 
   {
     path: '/strellarfrontierintro',
@@ -214,50 +214,50 @@ const routes = [
     requiredLogin: true,
     redirect: '/Member',
 
-      children:[
-        {
-          path: '/Member',
-          name: 'MemberInfo',
-          component:() => import('@/views/MemberInfo.vue'),
-        },
-        {
-          path: '/change-password',
-          name: 'PasswordEdit',
-          component: () => import('@/views/PasswordEdit.vue'),
-        },
-        {
-          path: '/order-query',
-          name: 'OrderQuery',
-          component: () => import('@/views/OrderQuery.vue'),
-          redirect: '/OrderQueryTicket',
+    children: [
+      {
+        path: '/Member',
+        name: 'MemberInfo',
+        component: () => import('@/views/MemberInfo.vue'),
+      },
+      {
+        path: '/change-password',
+        name: 'PasswordEdit',
+        component: () => import('@/views/PasswordEdit.vue'),
+      },
+      {
+        path: '/order-query',
+        name: 'OrderQuery',
+        component: () => import('@/views/OrderQuery.vue'),
+        redirect: '/OrderQueryTicket',
 
-            children: [
-              { 
-                path: '/OrderQueryTicket', 
-                component: () => import('@/views/OrderQueryTicket.vue'), 
-              },
-              { 
-                path: '/OrderQueryProduct', component: () => import('@/views/OrderQueryProduct.vue'),  
-              },
-            ],
-        },
-        {
-          path: '/refund-query',
-          name: 'RefundQuery',
-          component: () => import('@/views/RefundQuery.vue'),
-          redirect: '/RefundQueryTicket',
+        children: [
+          {
+            path: '/OrderQueryTicket',
+            component: () => import('@/views/OrderQueryTicket.vue'),
+          },
+          {
+            path: '/OrderQueryProduct', component: () => import('@/views/OrderQueryProduct.vue'),
+          },
+        ],
+      },
+      {
+        path: '/refund-query',
+        name: 'RefundQuery',
+        component: () => import('@/views/RefundQuery.vue'),
+        redirect: '/RefundQueryTicket',
 
-          children: [
-            { 
-              path: '/RefundQueryTicket', 
-              component: () => import('@/views/RefundQueryTicket.vue'), 
-            },
-            { 
-              path: '/RefundQueryProduct', 
-              component:() => import('@/views/RefundQueryProduct.vue'), 
-            },
-          ],
-        },
+        children: [
+          {
+            path: '/RefundQueryTicket',
+            component: () => import('@/views/RefundQueryTicket.vue'),
+          },
+          {
+            path: '/RefundQueryProduct',
+            component: () => import('@/views/RefundQueryProduct.vue'),
+          },
+        ],
+      },
     ]
   },
 
@@ -268,6 +268,25 @@ const routes = [
     path: '/shop',
     name: 'shop',
     component: () => import('@/views/ShoppingCar1.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/shop2',
+    name: 'shop2',
+    component: () => import('@/views/ShoppingCar2.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
+
+  {
+    path: '/shop3',
+    name: 'shop3',
+    component: () => import('@/views/ShoppingCar3.vue'),
     meta: {
       title: "購物車"
     },
@@ -300,7 +319,8 @@ const routes = [
     },
     requiredLogin: false
   },
-  { path: '/SF_DetailList',
+  {
+    path: '/SF_DetailList',
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
@@ -308,7 +328,8 @@ const routes = [
     },
     requiredLogin: false
   },
-  { path: '/WeiText',
+  {
+    path: '/WeiText',
     name: 'WeiText',
     component: () => import('@/views/WeiText.vue'),
     meta: {
@@ -316,7 +337,8 @@ const routes = [
     },
     requiredLogin: false
   },
-  {path: '/SFHeader_0',
+  {
+    path: '/SFHeader_0',
     name: 'SFHeader_0',
     component: () => import('@/components/SFHeader_0.vue'),
     meta: {

@@ -584,7 +584,7 @@ function prefillOrdererInfo(e) {
 }
 
 .custom-checkbox .text {
-    vertical-align: auto;
+    vertical-align: text-top;
     font-size: 16px;
     line-height: 16px;
     flex-basis: 20%;
@@ -603,6 +603,7 @@ function prefillOrdererInfo(e) {
 .custom-checkbox {
     /* border: 1px solid red; */
 
+
     display: inline-block;
     position: relative;
     padding-left: 35px;
@@ -619,7 +620,7 @@ function prefillOrdererInfo(e) {
     height: 16px;
     width: 16px;
     background-color: #ffffff00;
-    border: 2px solid #FFF;
+    border: 1px solid #FFF;
 
 }
 
@@ -645,7 +646,7 @@ function prefillOrdererInfo(e) {
     left: 4px;
     top: 0px;
     width: 5px;
-    height: 10px;
+    height: 9px;
     border: solid white;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
@@ -674,7 +675,8 @@ function prefillOrdererInfo(e) {
 
 
 .total {
-    width: 80%;
+    width: 100%;
+    max-width: 350px;
     margin: 0 auto;
     padding: 20px;
 
@@ -706,7 +708,7 @@ function prefillOrdererInfo(e) {
 }
 
 .input {
-    width: 100%;
+    width: 88%;
     position: relative;
     /* 為了偽元素定位 */
     margin-bottom: 8px;
@@ -828,7 +830,7 @@ function prefillOrdererInfo(e) {
 
     font-size: 16px;
     line-height: 1.6rem;
-    flex-basis: 20%;
+    flex-basis: 23%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 
@@ -878,7 +880,7 @@ function prefillOrdererInfo(e) {
 
     font-size: 16px;
     line-height: 1.6rem;
-    flex-basis: 20%;
+    flex-basis: 23%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 
@@ -903,7 +905,7 @@ function prefillOrdererInfo(e) {
 
     font-size: 20px;
     line-height: 1.6rem;
-    flex-basis: 20%;
+    flex-basis: 23%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 

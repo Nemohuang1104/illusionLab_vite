@@ -1,10 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { ref , onMounted, onUnmounted } from 'vue';
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
 // 旅行心得頁面
-
-
 import SF_Comments from './SF_Comments.vue';
 
 // 頁首頁尾
@@ -52,6 +50,25 @@ function gotoTicketChange() {
   router.push('/SF_BookingChange');
 };
 
+// to top按鈕
+const showTopButton = ref(false);
+
+const handleScroll = () => {
+  showTopButton.value = window.scrollY > 1000;
+};
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
 </script>
 
 
@@ -63,6 +80,7 @@ function gotoTicketChange() {
             <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video>
         </div>
         <!-- 歡迎文字 -->
+
         <div class="introText">
            <SFAdventuresTitle h2="歡迎來到星際邊境，一起踏上這場前所未有的冒險吧！"></SFAdventuresTitle>
         </div>
@@ -117,7 +135,7 @@ function gotoTicketChange() {
                     <swiper-slide>
                     <div class="carousel" >
                         <div class="carousel-item" >
-                            <img id="tshirt" src="../assets/images/StrellarFrontier_tShirt.png">
+                            <img id="tshirt" src="../assets/images/SF_Tshirt.png">
                             <div class="product-info">
                                 <h3>T-shirt</h3>
                                 <p>穿上UV透氣感的上衣和夥伴<br>並肩作戰。</p>
@@ -128,7 +146,7 @@ function gotoTicketChange() {
                     <swiper-slide>
                     <div class="carousel" >
                         <div class="carousel-item" >
-                            <img src="../assets/images/StrellarFrontier_notobook.png">
+                            <img src="../assets/images/SF_notobook.png">
                             <div class="product-info">
                                 <h3>筆記本</h3>
                                 <p>開啟星際冒險，記錄下每一段屬於<br>你的璀璨時刻。</p>
@@ -139,9 +157,9 @@ function gotoTicketChange() {
                     <swiper-slide>
                     <div class="carousel" >
                         <div class="carousel-item">
-                            <img src="../assets/images/StrellarFrontier_cup.png">
+                            <img src="../assets/images/SF_cup.png">
                             <div class="product-info">
-                                <h3>鋼杯</h3>
+                                <h3>太空金屬杯</h3>
                                 <p>可愛的太空人，人人都該擁有！</p>
                             </div>
                         </div>
@@ -235,6 +253,8 @@ function gotoTicketChange() {
             </div>
             <p>週一到週五 10:00 ~ 20:00 會由專人回覆訊息</p>
         </div>
+        <!-- to top按鈕 -->
+        <button v-if="showTopButton" @click="scrollToTop" class="top-button">TOP↑</button>
         <Footer_2></Footer_2>
     </div>
    
@@ -266,6 +286,7 @@ function gotoTicketChange() {
     font-weight: 500;
     text-align: center;
     margin-bottom: 5%;
+
 }
 
 // 票價資訊
@@ -300,6 +321,7 @@ function gotoTicketChange() {
     display:flex;
     align-items:center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .carousel-container {
@@ -409,7 +431,6 @@ function gotoTicketChange() {
 }
 
 .accordion-answer {
-    // border-radius: 10px;
     width: 500px;
     justify-content: center;
     align-items: center;
@@ -527,6 +548,36 @@ function gotoTicketChange() {
 .contact p, .contactTime p{
     text-align: center;
     line-height: 1.6;
+}
+
+// to top 按鈕
+.top-button {
+  position: fixed;
+  bottom: 2vw;
+  right: 1vw;
+  padding: 6px;
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: bold;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  animation: slide-in 0.8s forwards;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+@keyframes slide-in {
+  from {
+    transform: translateY(100%); /* 初始位置在畫面下方 */
+    opacity: 0; /* 初始透明 */
+  }
+  to {
+    transform: translateY(0); /* 移動至最終位置 */
+    opacity: 1; /* 完全顯示 */
+  }
 }
 
 </style>
