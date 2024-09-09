@@ -28,7 +28,7 @@ h1 {
   -webkit-background-clip: text;
   color: transparent;
   margin-bottom: 0.5%;
-
+  
 }
 
 p {
@@ -40,6 +40,7 @@ p {
   -webkit-background-clip: text;
   color: transparent;
  
+  
 }
 
 

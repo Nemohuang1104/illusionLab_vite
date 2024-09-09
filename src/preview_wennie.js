@@ -60,6 +60,6 @@ import LC_Customization from './views/LC_Customization.vue';
 
  
 /*一般頁面preview*/
-const app = createApp(LC_Customization);
+const app = createApp(ShoppingCar2);
 // app.use(ElementPlus)
 app.mount('#preview-app');

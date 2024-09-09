@@ -155,7 +155,7 @@ const f_save = () => {
     justify-content: center;
     max-width: 900px;
     width: 95.5%;
-    height: 900px;
+    // height: 900px;
     border-radius: 10px;
     padding: 2%;
     background: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 1) 97.6%);

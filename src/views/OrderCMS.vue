@@ -229,7 +229,8 @@ const goToPage = (page) => {
 
 .sub-tab{
     // border: 1px solid white;
-    width: 402px;
+    width: 100%;
+    max-width: 386px;
     display: flex;
     justify-content: space-between;
     z-index: 5;

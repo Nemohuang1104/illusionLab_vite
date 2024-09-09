@@ -158,7 +158,12 @@ const goToPage = (page) => {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 .info{
-  height: 400vh;
+  height: 450vh;
+}
+
+.detail[data-v-218a99c9] {
+  width: 100%;
+  
 }
 
 .info-title{
@@ -277,10 +282,12 @@ const goToPage = (page) => {
 
 .sub-tab{
     // border: 1px solid white;
-    width: 606px;
+    width: 100vw;
+    max-width: 440px;
     display: flex;
     justify-content: space-between;
     z-index: 10;
+    gap: 1%;
     
     
 }
@@ -317,7 +324,7 @@ const goToPage = (page) => {
 
 .replace{
     position: absolute;
-    top: 93.5px;
+    top: 85.5px;
     left: 0;
     width: 920px;
     z-index: 5;

@@ -391,12 +391,17 @@ const handleSaveEdit = async (updatedOrder) => {
 <style lang="scss" scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+
+.info{
+  height: 100vh;
+}
+
 .detail{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95.5%;
-    height: 440px;
+    width: 100%;
+    height: 470px;
     border-radius: 10px;
     padding: 16px;
     padding-left: 20px;
@@ -535,6 +540,12 @@ const handleSaveEdit = async (updatedOrder) => {
     font-size: 18px;
     margin-top: 18px;
     font-family: "Noto Sans TC";
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+.order-text:hover{
+  background-color: #FCB600;
+  border-radius: 5px;
+
 }
 
 .order-text span:last-child{

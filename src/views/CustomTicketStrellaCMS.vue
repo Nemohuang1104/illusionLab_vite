@@ -431,7 +431,7 @@ const upload_img_pro = (event, index) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95.5%;
+    width: 100%;
     height: 100%;
     border-radius: 0 10px 10px 10px;
     padding: 20px;

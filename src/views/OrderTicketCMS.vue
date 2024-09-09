@@ -472,6 +472,11 @@ const handleSaveEdit = async (updatedOrder) => {
   top: -17.5%;
 }
 
+.detail[data-v-a5f04cf0] {
+    width: 100%;
+    height: 470px;
+}
+
 .code-input{
     display: flex;
     justify-content: right;
@@ -571,7 +576,14 @@ const handleSaveEdit = async (updatedOrder) => {
     font-size: 18px;
     margin-top: 18px;
     font-family: "Noto Sans TC";
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
 }
+.order-text:hover{
+  background-color: #FCB600;
+  border-radius: 5px;
+
+}
+
 
 .order-text span:last-child{
     text-align: center;
@@ -676,6 +688,8 @@ const handleSaveEdit = async (updatedOrder) => {
 
 /*編輯視窗*/
 // 1.彈出視窗樣式
+
+
 .n-order_edit{
   width: 800px;
   height: 90%;

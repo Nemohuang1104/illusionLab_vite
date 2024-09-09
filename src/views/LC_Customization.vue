@@ -1,8 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue';
 import Header from "../components/Header_0.vue";
+// import Header_2 from "@/components/Header_2.vue";
 import Footer_1 from "@/components/Footer_1.vue";
 import Btn_Lifecasino from "@/components/Btn_Lifecasino.vue";
+import html2canvas from 'html2canvas'; // 使用 html2canvas 來將票券轉成圖片
 
 // 導入圖片
 import defaultTicket from '../assets/images/lc_custom_blank1.svg'; // 預設圖片
@@ -120,6 +122,70 @@ const updateIcon = (src) => {
 watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], () => {
   // 這裡可以添加更多邏輯來處理預覽區域的更新
 });
+
+//人生賭場header
+const currentMode = ref('two'); 
+
+//切換顯示客製票券完成頁
+const currentpage = ref(1); //預設顯示第一頁製作頁
+const updatepage = () => {  //點擊送出按鈕之後顯示第二頁製作完成頁
+  currentpage.value = 2
+//=================不依賴後端下載開始
+
+// 1. 使用 html2canvas 將票券區域轉換為圖片
+const ticketPreviewElement = document.querySelector('.ticket-preview');
+  
+  // 使用 html2canvas 來截取票券區域為圖片
+  html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+    // 2. 將圖片轉為 Base64 格式
+    const imageData = canvas.toDataURL('image/png');
+
+    // 3. 創建一個隱藏的下載連結
+    const downloadLink = document.createElement('a');
+    downloadLink.href = imageData;
+    downloadLink.download = 'custom_ticket.png'; // 設定下載的圖片名稱
+
+    // 4. 自動點擊下載連結，觸發下載
+    downloadLink.click();
+  });
+
+
+//=================依賴後端存取開始
+  // // 1. 使用 html2canvas 將票券區域轉換為圖片
+  // const ticketPreviewElement = document.querySelector('.ticket-preview');
+  
+  // // 這裡利用 html2canvas 來截取票券區域為圖片
+  // html2canvas(ticketPreviewElement).then(canvas => {
+  //   // 2. 將圖片轉為 Base64 格式
+  //   const imageData = canvas.toDataURL('image/png');
+
+  //   // 3. 發送 AJAX 請求，將圖片發送到後端進行存儲
+  //   $.ajax({
+  //     url: 'save_ticket.php', // PHP 後端處理圖片存儲的路徑
+  //     type: 'POST',
+  //     data: {
+  //       image: imageData
+  //     },
+  //     success: function(response) {
+  //       console.log('圖片儲存成功:', response);
+  //     },
+  //     error: function(error) {
+  //       console.error('圖片儲存失敗:', error);
+  //     }
+  //   });
+
+  //   // 4. 添加下載圖片的功能
+  //   const downloadLink = document.createElement('a');  // 建立一個 <a> 元素
+  //   downloadLink.href = imageData;  // 將 Base64 格式的圖片設定為 href 屬性
+  //   downloadLink.download = 'ticket.png';  // 設定下載的檔案名
+  //   downloadLink.click();  // 模擬點擊來觸發下載
+  // });
+
+  //=================依賴後端存取結束
+
+}
+
+
 </script>
 
 
@@ -129,13 +195,13 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     <div>
       <Header :mode="currentMode"/> 
     </div>
-    <div class="customization">
+    <div v-if="currentpage === 1" class="customization">
       <div class="show">
         <div class="content">
           <h1>票券製作</h1>
           <hr>
           <!-- 動態生成預覽圖 -->
-          <div class="ticket-preview" :style="{ backgroundColor }">
+          <div class="ticket-preview" >
             <img v-if="templateImage" :src="templateImage" alt="Template" class="template-image">
             <img v-if="profileImage" :src="profileImage" alt="Profile" class="profile-image">
             <img v-if="borderImage" :src="borderImage" alt="Border" class="border-image">
@@ -203,8 +269,7 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
           <!-- 添加更多圖示 -->
         </div>
       </div>
-    </div>
-    <!-- 確認區域 -->
+      <!-- 確認區域 -->
     <div class="confirm">
       <label class="custom-checkbox">
         <input type="checkbox">
@@ -218,9 +283,40 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
       </label>
     </div>
     <!-- 送出按鈕 -->
-    <div class="submit_btn">
+    <div class="submit_btn" @click="updatepage">
       <Btn_Lifecasino Button="送出"></Btn_Lifecasino>
     </div>
+    </div>
+    
+
+    <!-- 顯示票券製作完成頁面 -->
+    <div v-if="currentpage === 2" class="customization_complete">
+      <h1>製作完成!</h1>
+      <div class="show_complete">
+        <div class="content">
+          <!-- 動態生成預覽圖 -->
+          <div class="ticket-preview" :style="{ backgroundColor }">
+            <img v-if="templateImage" :src="templateImage" alt="Template" class="template-image">
+            <img v-if="profileImage" :src="profileImage" alt="Profile" class="profile-image">
+            <img v-if="borderImage" :src="borderImage" alt="Border" class="border-image">
+            <img v-if="iconImage" :src="iconImage" alt="Icon" class="icon-image">
+          </div>
+        </div>
+        <!-- 右上角的亮點 -->
+        <!-- <div class="blink"></div> -->
+      </div>
+      <p>收到您訂製的票卷!<br>期待活動當天您的蒞臨!</p>
+
+      <!-- 新增一個下載按鈕
+      <button @click="updatepage" class="download-btn">下載票券</button> -->
+
+      <RouterLink to="/lifecasino">
+        <div class="submit_btn" >
+        <Btn_Lifecasino Button="完成"></Btn_Lifecasino>
+        </div>
+      </RouterLink>
+    </div>
+
     
   </div>
   <Footer_1></Footer_1>
@@ -236,6 +332,7 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     .template{
         background: #313131;
         padding-bottom: 80px;
+        
         // height: 180vh;
     }
 
@@ -247,25 +344,29 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     //CSS 部分（設置預覽區域的樣式）============
 
     .ticket-preview {
-  position: relative;
-  width: 60%;
-  margin: 0 auto;
-  text-align: center;
-  height: 280px;
+      position: relative;
+      width: 60%;
+      max-width: 768px;
+      margin: 0 auto;
+      text-align: center;
+      // height: 280px;
+      padding-bottom: 22.2%; // 16:9 比例的高度（可以根据需要调整）
+      
   
-  
-}
+  }
 
 .template-image,
 .profile-image,
 .border-image,
 .icon-image {
   position: absolute;
-  top: -15px;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: auto;
   pointer-events: none; /* 確保圖層不會阻擋點擊事件 */
+  object-fit: contain; // 确保图像保持比例并适应容器
 }
 
 .template-image {
@@ -275,30 +376,37 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
 
 .profile-image {
   /* 頭貼 */
-  top: 60px; /* 根據需要調整 */
-  left: 170px; /* 根據需要調整 */
+  top: 43.5%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  // top: 60px; /* 根據需要調整 */
+  // left: 170px; /* 根據需要調整 */
   z-index: 3; /* 位於模板上方 */
-  width: 120px; /* 調整這裡來控制頭貼的寬度 */
+  width: 15%; /* 調整這裡來控制頭貼的寬度 */
   height: auto; /* 自動調整高度，保持圖片比例 */
 }
 
 .border-image {
   /* 邊框 */
+
+
   z-index: 2; /* 位於頭貼和其他元素上方 */
-  width: 492px; /* 調整這裡來控制頭貼的寬度 */
+  width: 65%; /* 調整這裡來控制頭貼的寬度 */
   height: auto; /* 自動調整高度，保持圖片比例 */
-  top: 39px; /* 根據需要調整 */
-  left: 132px; /* 根據需要調整 */
+  top: 50.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   
 }
 
 .icon-image {
   /* 小圖示 */
   z-index: 4; /* 位於所有元素上方 */
-  width: 3%; /* 調整這裡來控制頭貼的寬度 */
+  width: 2.7%; /* 調整這裡來控制頭貼的寬度 */
   height: auto; /* 自動調整高度，保持圖片比例 */
-  top: 80px; /* 根據需要調整 */
-  left: 460px; /* 根據需要調整 */
+  top: 32.5%;
+  left: 62.4%;
+  transform: translate(-50%, -50%);
 }
 
 
@@ -362,6 +470,8 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     }
 
     .profile img{
+        max-width:14%;
+        object-fit: cover;
         margin-right: 20px;
         margin-bottom: 20px;
         
@@ -401,7 +511,7 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
         // padding:40px 0;
         align-items: center;
         // background-color: white;
-        height: 16vh;
+        
         border: 1px solid #FFF;
         border-radius: 12px;
         
@@ -490,8 +600,8 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     /* checkbox 的方塊 */
     .custom-checkbox .checkmark {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 2px;
+        left: 8px;
         height: 16px;
         width: 16px;
         background-color: #ffffff00;
@@ -519,8 +629,8 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     /* 勾號的圖案 */
     .custom-checkbox .checkmark:after {
         left: 4px;
-        top: 0px;
-        width: 5px;
+        top: -2px;
+        width: 3px;
         height: 10px;
         border: solid white;
         border-width: 0 3px 3px 0;
@@ -577,7 +687,7 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     .click_border {
       box-shadow: 0 0 0 3px rgb(253, 231, 120); /* 模擬 outline 並支持圓角 */
       border-radius: 8px; /* 圓角 */
-      // padding: 4px;
+      // padding: 4px; 
     }
 
     .click_icon {
@@ -587,9 +697,181 @@ watch([profileImage, templateImage, backgroundColor, borderImage, iconImage], ()
     }
 
 
+    //票券製作完成====================
 
-   
+    /* 定義票券完成動畫 */
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      10% { transform: rotate(5deg); }
+      20% { transform: rotate(-5deg); }
+      30% { transform: rotate(4deg); }
+      40% { transform: rotate(-4deg); }
+      50% { transform: rotate(3deg); }
+      60% { transform: rotate(-3deg); }
+      70% { transform: rotate(2deg); }
+      80% { transform: rotate(-2deg); }
+      90% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* 調整亮點彈出動畫，讓其在扭動後出現 */
+    @keyframes sparkle {
+      0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1) rotate(360deg);
+      }
+    }
+
+
+    /* 給票券容器增加扭動效果 */
+    .show_complete {
+      width: 100%;
+      animation: shake 1.5s ease-in-out;
+      position: relative; /* 為亮點彈出效果定位 */
+    }
+
+    /* 亮點的樣式，使用 CSS 畫出火花效果 */
+    .blink {
+      position: absolute;
+      top: 25px;
+      right: 360px;
+      width: 40px;
+      height: 40px;
+      background-color: transparent;
+      opacity: 0; /* 初始狀態隱藏亮點 */
+      animation: sparkle 0.5s ease-in-out forwards;
+      animation-delay: 1.5s; /* 延遲2秒後出現，與扭動結束時間相同 */
+    }
+
+    /* 火花的形狀 */
+    .blink::before,
+    .blink::after {
+      content: '';
+      position: absolute;
+      background: gold;
+      border-radius: 50%;
+    }
+
+    /* 外圈火花 */
+    .blink::before {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      box-shadow:
+        0 0 10px 5px rgba(255, 215, 0, 0.8),
+        0 0 20px 10px rgba(255, 215, 0, 0.6),
+        0 0 30px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    /* 內圈火花 */
+    .blink::after {
+      width: 50%;
+      height: 50%;
+      top: 25%;
+      left: 25%;
+      box-shadow:
+        0 0 5px 2px rgba(255, 255, 255, 0.9),
+        0 0 10px 5px rgba(255, 255, 255, 0.7);
+    }
+
     
+    .customization_complete h1{
+      font-family: map-get($fontStyle, style_2);
+      color: map-get($colorfont_0, white);
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      line-height: 40px;
+      text-align: center;
+    }
+
+    .customization_complete p{
+      font-family: map-get($fontStyle, style_2);
+      color: map-get($colorfont_0, white);
+      font-size: 16px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      line-height: 40px;
+      text-align: center;
+    }
+
+
+    /* ==========RWD斷點============== */
+
+    @media screen and (max-width: 780px) { 
+
+      .ticket-preview {
+        position: relative;
+        width: 100vw;
+        max-width: 768px;
+        margin: 0 auto;
+        text-align: center;
+        // height: 280px;
+        padding-bottom: 28%; // 16:9 比例的高度（可以根据需要调整）
+        
+  
+      }
+      .choosen{
+        width: 80vw;
+        max-width: 1000px;
+        margin: 0 auto;
+
+      }
+
+      .profile img{
+        max-width:20%;
+        object-fit: cover;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        
+      }
+      .theChosenTemplate img{
+        max-width:100%;
+        object-fit: cover;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .ticket_color{
+        width: 8vw;
+        margin: 12px;
+      }
+
+      .icon-image {
+        /* 小圖示 */
+        z-index: 4; /* 位於所有元素上方 */
+        width: 2.7%; /* 調整這裡來控制頭貼的寬度 */
+        height: auto; /* 自動調整高度，保持圖片比例 */
+        top: 28%;
+        left: 62.4%;
+        transform: translate(-50%, -50%);
+      }
+
+      .confirm{
+        width: 80vw;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        font-family: map-get($fontStyle, style_2);
+        color: map-get($colorfont_0, white);
+        font-weight: bold;
+        
+      }
+
+      
+    }
+
 
     
 </style>
