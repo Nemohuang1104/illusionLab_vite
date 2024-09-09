@@ -114,13 +114,20 @@ section{
   display: flex;
   flex-direction: column;
   align-content: center;
+
+    
   .poker{
-    width: 24px;
-    padding:15px 10px;
+    width: 28px;
+    
+
   }
   .poker_right{
     // border: 2px solid red;
     align-self: flex-end;
+    margin: 10px 15px 10px;
+    
+    // margin: 18px 15px;
+    
   }
 
   .wraper_R{
@@ -145,13 +152,18 @@ section{
   }
 
   .poker_left{
+    // border: 2px solid red;
+
     transform: rotateX(180deg);
+    margin: 10px 15px 10px;
+    
     // border: 2px solid red;
   }
 }
 
 .heart{
-  padding:18px 10px !important;
+  margin: 15px 15px 15px !important;
+
 }
 
 // =========箭頭============//
@@ -164,7 +176,7 @@ section{
 .mySwiper2 {
   // background-color: #333;
   // border: 2px solid red;
-  width: 300px;
+  width: 500px;
   height: 520px;
   padding: 20px 100px;
 }
@@ -176,8 +188,8 @@ section{
 
   background-position: center;
   background-size: cover;
-  width: 300px;
-  height: 520px;
+  width: 400px;
+  height: 515px;
 }
 
 </style>

@@ -2,7 +2,7 @@
 import Header from '@/components/Header_0.vue';
 import Footer_2 from '@/components/Footer_1.vue';
 import LC_ProductInfo from './LC_ProductInfo.vue';
-import CoinFall2 from '@/components/CoinFall2.vue';
+import CoinFall2 from '@/components/CoinFall.vue';
 import LC_Text2 from '@/components/LC_Text2.vue';
 import icon3 from '../assets/images/LC_icon3.svg' 
 
@@ -50,10 +50,10 @@ function goToLoginCMS(){
       <div class="producttitle">
         <div class="arrowlift">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
-          <P @click="goToLoginCMS">星際邊境</P>
+          <P @click="goToLoginCMS" class="link">星際邊境</P>
         </div>
         <div class="arrowright">
-          <P>心靈光譜</P>
+          <P class="link">心靈光譜</P>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
       </div>
@@ -93,10 +93,7 @@ function goToLoginCMS(){
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 
 @import "../assets/style";
-*{
-text-decoration: none;
 
-}
 
 .title{
   margin-top: 10px;
@@ -158,8 +155,7 @@ text-decoration: none;
 
 .warp{
   position: relative;
-//  border: 2px solid red;
- height: 100vh;
+  padding: 0 50px;
 }
 
 .center {
@@ -177,30 +173,6 @@ text-decoration: none;
   z-index:0;
 }
 
-.center h1 {
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 5px;
-
-  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-
-}
-
-
-.center p {
-  font-size: 20px;
-  font-weight: 700;
-  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-
-
 .producttitle {
   // max-width: 700px;
   width: 100%;
@@ -215,10 +187,14 @@ text-decoration: none;
 
 }
 
-.producttitle p {
+.link {
   width: 110px;
   color: #fff;
   padding: 10px 0px;
+
+  font-family: map-get($fontStyle, style_2);
+
+
 
 }
 
@@ -246,28 +222,27 @@ text-decoration: none;
 //商品外框
 .pagebox {
   font-family: "Noto Serif SC";
-  max-width: 800px;
-  width: 90%;
-  height: 750px;
+  width: 100%;
+  // height: 750px;
   overflow: hidden;
   background: linear-gradient(147deg, #1E1E2F 3.26%, rgba(30, 30, 47, 0.60) 97.45%);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding: 70px 80px 100px 80px;
+  padding: 50px ;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   // border: 1px solid #fff;
 }
 
 .list {
-  width: 80%;
+  width: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   // justify-content: center;
   
-  gap: 26px;
+  gap: 18px;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
 
@@ -275,8 +250,8 @@ text-decoration: none;
 
 .pro {
   // border: 1px solid red;
-  width: 160px;
-  height: 250px;
+  // max-width: 160px;
+  // max-height: 250px;
   // margin-bottom: 20px;
   padding: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;

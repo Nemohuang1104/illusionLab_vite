@@ -48,7 +48,7 @@
     <div >
       <StoneFall class="slide__content layer2" 
                   ></StoneFall>
-      <img class="slide__main layer1 " src="../assets/images/carousel_1.png" alt="">
+      <img class="slide__main layer1 " src="../assets/images/carousel2_1.png" alt="">
       <div class="text layer3">
         <img class="logo" src="../assets/images/logo_StrellarFrontierIntro.svg" alt="">
         <p>體驗前所未有的奇幻冒險<br>
