@@ -4,14 +4,12 @@
     <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-      <router-link to="/shop">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
-      </router-link>
-      <router-link to="/login">
-        <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" />
-      </router-link>
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'login'}"> <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" /></router-link>
     </div>
   </header>
+
+  <!-- <font-awesome-icon icon="fa-solid fa-bars" /> 這是漢堡線 -->
 </template>
 
 <script setup>
@@ -66,16 +64,14 @@ header{
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1440px;
+  // max-width: 1440px;
   height: 80px;
 }
-
-
-
-.logo img {
-  width: 145px;
-  flex-shrink: 0;
-  padding: 10px 20px;
+.logo img{
+    height: 60px;
+    flex-shrink: 0;
+    cursor: pointer;    
+    padding: 10px 20px;
 }
 
 
@@ -107,7 +103,7 @@ header{
 
 //公版(one)
 .header-one {
-  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
+  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0) 99.67%);
   height: 80px;/* 添加高度 */
   cursor: pointer;
 }

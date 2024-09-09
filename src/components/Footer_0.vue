@@ -43,8 +43,8 @@ function goToPage (){
 // 幻境LOGO
 .outline{
     width: 100%;
-    max-width: 1440px;
-    height: 200px;
+    // max-width: 1440px;
+    //height: 200px; //高度無法寫死，會有空白留在下面
     background: var(--header-footer, #000354);
     display: flex;
     justify-content: center;

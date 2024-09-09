@@ -1,9 +1,7 @@
 <template>
-    <h1>{{ h1 }}</h1>
-    <p>{{ p }}</p>
+  <h1>{{ h1 }}</h1>
+  <p>{{ p }}</p>
 </template>
-  
-  
 
 <script setup>
 defineProps({
@@ -18,6 +16,7 @@ defineProps({
 });
 </script>
 
+
 <style lang="scss" scoped>
 h1 {
   font-size: 28px;
@@ -29,16 +28,18 @@ h1 {
   -webkit-background-clip: text;
   color: transparent;
   margin-bottom: 0.5%;
-
+  
 }
-  p{
-    background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-    
-    font-weight: 700;
-    padding-top: .5%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+
+p {
+  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
+
+  font-weight: 700;
+  padding-top: .5%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  
 }
 
 

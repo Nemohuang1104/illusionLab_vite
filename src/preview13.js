@@ -2,7 +2,7 @@
 import { createApp } from 'vue';
 // import StrellarFrontierIntro from './views/StrellarFrontierIntro.vue';
 // import StrellarFrontier from './views/StrellarFrontierHomepage.vue';
-// import ProductPage from './views/ProductPage.vue';
+// import SF_ProductPage from './views/SF_ProductPage.vue';
 // import StrellarFrontierAdventuresTitle from './views/StrellarFrontierAdventuresTitle.vue';
 // import Header_0 from './components/Header_0.vue';
 // import Header_2 from './components/Header_2.vue';
@@ -12,8 +12,8 @@ import { createApp } from 'vue';
 // import SFHeader_0 from './components/SFHeader_0.vue';
 // import OrderTicketPopCMS from './components/OrderTicketPopCMS.vue';
 // import MindSpectrum from './views/MindSpectrum.vue';
-import weitext2 from './views/weitext2.vue';
-// import WeiText from './views/WeiText.vue';
+// import weitext2 from './views/weitext2.vue';
+import WeiText from './views/WeiText.vue';
 
 // import Home_4 from './views/Home_4.vue';
 
@@ -35,7 +35,7 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCartShopping, faFaceSmile, faArrowRightLong, faArrowLeftLong, faFaceMeh, faCartArrowDown);
 
-const app = createApp(weitext2);
+const app = createApp(WeiText);
 
 
 app.component('font-awesome-icon', FontAwesomeIcon).mount("#preview-app");

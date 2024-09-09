@@ -119,7 +119,7 @@ text-decoration: none;
 
 .warpper {
     font-family: "Noto Serif SC";
-    max-width: 1440px;
+    // max-width: 1440px;
     width: 100%;
 
     height: 100%;
@@ -139,7 +139,7 @@ text-decoration: none;
     max-width: 1440px;
     width: 100%;
     // padding-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 
@@ -432,6 +432,10 @@ text-decoration: none;
 // RWD
 
 @media(max-width: 920px) {
+   .breadcrumb{
+    padding-left:5%;
+    }
+    
     .producttitle {
         width: 80%;
     }
@@ -439,6 +443,10 @@ text-decoration: none;
     .pagebox {
         padding: 0px;
         height: auto;
+    }
+
+    .pbox{
+        flex-direction: column;
     }
 
 }

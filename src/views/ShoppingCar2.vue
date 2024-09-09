@@ -88,6 +88,16 @@ function prefillOrdererInfo(e) {
     }
 }
 
+
+// ============ShoppingStep=============//
+const highlight = ref({
+    1:{  background : 'transparent', fontcolor : '#fff', fontsize : '12px'  },
+    2:{  background : '#fff', fontcolor : '#22247A', fontsize : '12px' },
+    3:{  background : 'transparent', fontcolor : '#fff', fontsize : '12px' }
+
+    }
+  );
+
 </script>
 
 <template>
@@ -95,8 +105,8 @@ function prefillOrdererInfo(e) {
         <div><Header_0></Header_0></div>
 
         <!--購物車流程數字圖示_組件模板開始線-->
-        <div>
-            <ShoppingStep></ShoppingStep>
+        <div class="ShoppingStep">
+            <ShoppingStep :styles="highlight"></ShoppingStep>
         </div>
 
         <!-- 購物車流程數字圖示_組件模板結束線 -->
@@ -279,8 +289,9 @@ function prefillOrdererInfo(e) {
 
         </div>
         <div class="confirm">
-            <button>返回</button>
-            <button>結帳</button>
+            <RouterLink to="/shop"><button>返回</button></RouterLink>
+            <RouterLink to="/shop3"><button>結帳</button></RouterLink>
+            
         </div>
         <Footer_0></Footer_0>
     </div>
@@ -302,6 +313,7 @@ function prefillOrdererInfo(e) {
     max-width: 1000px;
     display: flex;
     justify-content: space-between;
+    gap: 4%;
     // border: 1px solid white;
 }
 
@@ -340,7 +352,7 @@ function prefillOrdererInfo(e) {
 
 .inner0>p {
     font-size: 16px;
-    line-height: 1.6rem;
+    line-height: 16px;
     flex-basis: 20%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
@@ -500,7 +512,7 @@ function prefillOrdererInfo(e) {
 .member_info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    // align-items: center;
 }
 
 .pickup-form>label {
@@ -938,4 +950,133 @@ function prefillOrdererInfo(e) {
     background: var(--Color-3, #FFEDBC);
     cursor: pointer;
 }
+
+/* ==========RWD斷點============== */
+
+@media screen and (max-width: 1040px) { 
+.content {
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 80%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    // border: 1px solid white;
+    gap: 4%;
+}
+
+.inner0 > p {
+    font-size: 16px;
+    line-height: 16px;
+    flex-basis: 48%;
+    color: var(--Color-6, #FFF);
+    font-family: "Noto Sans TC";
+}
+
+.inner04 > p {
+    font-size: 16px;
+    line-height: 16px;
+    flex-basis: 32%;
+    color: var(--Color-6, #FFF);
+    font-family: "Noto Sans TC";
+}
+
+.inner05 > p {
+    font-size: 16px;
+    line-height: 16px;
+    flex-basis: 32%;
+    color: var(--Color-6, #FFF);
+    font-family: "Noto Sans TC";
+}
+
+}
+
+@media screen and (max-width: 780px) {
+
+.ShoppingStep{
+    width: 70%;
+    margin: 0 auto;
+}
+
+
+
+.content {
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 88%;
+    max-width: 624px;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+    }
+}
+
+.order {
+    width: 100%;
+    max-width: 624px;
+}
+
+.fill > input {
+    /* border: 1px solid red; */
+    width: 92%;
+}
+
+.delivery-form input, .pickup-form input {
+    width: 65%;
+}
+
+
+
+.inner04 {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    margin-bottom: 24px;
+}
+
+.inner04 p, .inner05 p{
+    margin-bottom: 24px;
+}
+
+.inner05 {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    margin-bottom: 24px;
+}
+
+.payment {
+    background: var(--header-footer, #000354);
+    width: 100%;
+    max-width: 624px;
+    height: 100%;
+    border-radius: 10px;
+    flex-grow: 0;
+    margin-bottom: 40px;
+}
+
+.total {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    
+}
+
+.item img{
+    width:40%;
+    object-fit: contain;
+    margin: 12px;
+}
+
+.confirm {
+    width: 90vw;
+}
+.confirm button{
+    font-size: 16px;
+    max-width: 120px;
+    width: 90vw;
+}
+
+
 </style>

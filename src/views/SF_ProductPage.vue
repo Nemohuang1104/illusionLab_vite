@@ -146,9 +146,13 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 }
 
 .warpper {
-  max-width: 1440px;
+  // max-width: 1440px;
   width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   // border: 1px solid red;
   // background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0));
 
@@ -159,7 +163,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 
 .center {
-  max-width: 1440px;
+  // max-width: 1440px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -320,6 +324,9 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 @media(max-width: 920px) {
   .producttitle{
     width: 80%;
+  }
+  .list{  
+    // width: 665PX;
   }
   .pagebox {
         padding: 0px;

@@ -1,10 +1,13 @@
 <script setup>
-
+import Header_0 from '@/components/Header_0.vue';
+import Quizfinal01 from '@/assets/images/Quizch4.png'
 </script>
 
 
 <template>
-  <header></header>
+
+  <Header_0 class="header"></Header_0>
+
   <div class="container">
     <!-- {{ data }} -->
     <template v-for="(question, key) in data">
@@ -25,17 +28,21 @@
         <div class="title">{{ question.label }}</div>
         <div class="answer_flex">
           <div class="answer" v-for="(answer, subkey) in question.values" :key="subkey">
-            <div class="btn" @click="next(question, answer)" v-html="answer.name">
-              
-            </div>
+            <div class="btn" @click="next(question, answer)" v-html="answer.name"></div>
           </div>
         </div>
+
+          <div class="progress-bar">
+            <div v-for="(item, index) in data.length-2" :key="index" 
+                :class="{'progress-segment': true, 'active': index < activeIndex }">
+            </div>
+          </div>
       </div>
 
       <div v-if="activeIndex === key && key === data.length - 1 && final_answer" :key="key" class="result">
         <div v-if="start_animation === true" class="start_animation">
           <img src="../assets/images/quiz_middlebluesmoke.png" alt="" class="middlebluesmoke">
-          <img src="../assets/images/Quizfinalcircleshine.png" alt="" class="finalcircleshine">
+            <img src="../assets/images/Quizfinalcircleshine.png" alt="" class="finalcircleshine">
           <img src="../assets/images/Quizfinalhand.png" alt="" class="finalhand">
           <img src="../assets/images/Quizfinallongcloud.png" alt="" class="finallongcloud">
           <img src="../assets/images/Quizlittleshine.png" alt="" class="littleshine1">
@@ -45,9 +52,9 @@
         </div>
         <div v-else class="finalanswer">
           <h1>結果出爐</h1>
-          <img :src="result.image" alt="" class="finalanswer-image">
+          <img :src="result[1].image" alt="" class="finalanswer-image">
           <div class="answer_text" v-if="result[final_answer] && result[final_answer].text" v-html="result[final_answer].text"></div>
-          <router-link><button>領取折價卷</button></router-link>
+          <button>領取折價卷</button>
         </div>
 
       </div>
@@ -63,10 +70,10 @@ export default {
       imgPath: '',
       start_animation: false,
       activeIndex: 0,
-      final_answer: 3,
+      final_answer: 1,
       result: {
         1: {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
+          image: new URL('../assets/images/carousel1_1_1.png', import.meta.url).href,
           text: '你適合參加刺激的人生賭場<br>這是一個充滿挑戰和策略的活動<br>讓你感受到生活中的刺激和選擇的重要性。'
         },
         2: {
@@ -74,7 +81,7 @@ export default {
           text: '你適合參加新奇的星際邊際<br>這是一場太空探險<br>適合喜愛探索未知和挑戰自我的人'
         },
         3: {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
+          image: new URL('../assets/images/duck.png', import.meta.url).href,
           text: '你適合參加療癒的心靈光譜<br>這個活動專注於心靈療癒和自我反思<br>幫助你找到內心的平靜和力量'
         }
       },
@@ -93,17 +100,17 @@ export default {
           ]
         },
         {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
+          image: new URL('../assets/images/Quizch2.png', import.meta.url).href,
           label: '2.你更喜歡哪種類型的環境？',
           value: '',
           values: [
             { name: '放鬆而療癒的咖啡廳', value: 'C' },
-            { name: '充滿探險和未知的神秘秘境', value: 'A' },
+            { name: '充滿探險<br>和未知的神秘秘境', value: 'A' },
             { name: '廣闊而無邊的大草原', value: 'B' }
           ]
         },
         {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
+          image: new URL('../assets/images/Quizch3.png', import.meta.url).href,
           label: '3. 當你面對一個未知的挑戰時，你會選擇怎麼做？',
           value: '',
           values: [
@@ -113,17 +120,17 @@ export default {
           ]
         },
         {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
-          label: '4.你對未知的態度是?',
+          image: new URL('../assets/images/Quizch4.png', import.meta.url).href,
+          label: '4.當你想到一次難忘的體驗時，你最記得的是什麼？',
           value: '',
           values: [
-            { name: '興奮和充滿動力<br>準備迎接任何挑戰', value: 'A' },
-            { name: '好奇和探索精神<br>渴望了解更多', value: 'B' },
-            { name: '需要時間適應<br>但希望從中學習和成長', value: 'C' }
+            { name: '當時做出的每一個重要決定', value: 'A' },
+            { name: '置身於那個<br>與眾不同的場景中', value: 'B' },
+            { name: '內心的感受<br>與那次體驗的深度連結', value: 'C' }
           ]
         },
         {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
+          image: new URL('../assets/images/Quizch5.png', import.meta.url).href,
           label: '5.如果你能擁有一種超能力，你會選擇哪種？',
           value: '',
           values: [
@@ -134,7 +141,7 @@ export default {
         },
         {
 
-        }
+        },
       ]
     }
   },
@@ -146,10 +153,10 @@ export default {
       if (this.activeIndex === this.data.length - 1) {
         this.start_animation = true
 
-        // setTimeout(() => {
-        //   this.start_animation = false
+        setTimeout(() => {
+          this.start_animation = false
 
-        // }, 3000);
+        }, 2500);
       }
       // question.value = this.answer.value;
       // activeIndex ++
@@ -162,20 +169,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-header {
-  width: 100%;
-  height: 80px;
-  background-color: #7976BB;
-}
-
 .enter_title {
-  padding-top: 50px;
+  padding-top: 110px;
   background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
   box-sizing: border-box;
   padding-bottom: 50px;
   min-height: 100vh;
 }
+
+.header{
+  position: fixed;
+}
+
 
 .enter_title p {
   font-size: 20px;
@@ -266,7 +271,7 @@ header {
   background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
   box-sizing: border-box;
   min-height: 100vh;
-  padding-top: 30px;
+  padding-top: 100px;
 }
 
 .question-image {
@@ -291,18 +296,23 @@ header {
 
 
 .btn {
+  display: flex;
   font-size: 16px;
   font-weight: bold;
   display: inline-block;
-  width: 210px;
+  width: 240px;
+  height: 88px;
   padding: 20px;
   text-align: center;
   color: #606060;
   background: #FFEDBC;
   border-radius: 12px;
   border: none;
-  margin: 30px 10px;
-  line-height: 1.5;
+  margin: 20px 10px;
+  line-height:1.5;
+  user-select: none;
+  box-sizing: border-box;
+  align-content: center;
 }
 
 
@@ -310,14 +320,16 @@ header {
 .start_animation{
   box-sizing: border-box;
   padding-top: 3%;
+  min-height: 100vh;
+  padding-top: 100px;
 }
 
 .middlebluesmoke{
-  width: 32%;
+  width: 400px;
   display: block;
   margin: 0 auto;
   position: relative;
-  animation: smoke1 3s linear infinite;
+  animation: middlebluesmoke 3s linear infinite;
 }
 
 @keyframes middlebluesmoke {
@@ -334,50 +346,56 @@ header {
   }
 }
 
+
 .finalcircleshine{
-  width: 25%;
+  width: 300px;
   position: absolute;
-  top: 24%;
-  left: 38%;
+  left: 50%;
+  transform: translate(-50%, -108%);
   z-index: 5;
-  animation: circleshine 2s linear infinite;
 }
 
-@keyframes circleshine{
-  0%{
-
-  };
-  100%{};
+@keyframes circleshine {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .finalhand{
-  width: 17%;
+  width: 210px;
   position: absolute;
-  top: 31%;
-  left: 42%;
+  left: 50vw;
+  transform: translate(-50%, -133%);
   z-index: 6;
 }
 
 .finallongcloud{
-  width: 50%;
+  width: 620px;
   position: absolute;
-  top: 48%;
-  left: 25%;
+  left: 50%;
+  transform: translate(-50%, -70%);
 }
 
 .littleshine1{
-  width: 4%;
+  width: 50px;
   position: absolute;
-  top: 43%;
-  left: 59%;
+  left: 50%;
+  transform: translate(200%, -520%);
+  animation: littleshine1 3s linear infinite;
 }
 
+
 .littleshine2{
-  width: 4%;
+  width: 50px;
   position: absolute;
-  top: 57%;
-  left: 39%;
+  left: 50%;
+  transform: translate(-260%, -290%);
+  animation: littleshine2 3s  linear infinite;
 }
+
 
 .start_animation p{
   font-size: 28px;
@@ -394,6 +412,10 @@ header {
   min-height: 100vh;
 }
 
+.finalanswer{
+  padding-top: 120px;
+}
+
 .finalanswer h1 {
   font-size: 32px;
   color: #fff;
@@ -403,6 +425,8 @@ header {
 
 .finalanswer img{
   width: 400px;
+  display: block;
+  margin: 10px auto;
 }
 
 .answer_text{
@@ -411,7 +435,7 @@ header {
   font-weight: bold;
   text-align: center;
   line-height: 1.5;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .finalanswer button{
@@ -426,6 +450,26 @@ header {
   border: none;
   margin: 0 auto;
   cursor: pointer;
+}
+
+//==================================進度條=========================================
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.progress-segment {
+  width: 50px;
+  height: 10px;
+  background-color: lightgray;
+  margin: 0 5px;
+  border-radius: 12px;
+  transition: background-color 0.3s;
+}
+
+.progress-segment.active {
+  background-color: #768BFF;
 }
 
 

@@ -6,21 +6,22 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 import SF_Comments from './SF_Comments.vue';
 
 // 頁首頁尾
-import SFHeader_0 from  '@/components/SFHeader_0.vue'; 
+import SFHeader_0 from '@/components/SFHeader_0.vue';
 const currentMode = ref('three');
 import Footer_2 from '@/components/Footer_2.vue';
+
 
 // 商品
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination, Autoplay} from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 
 
 // 體驗活動字體
 import SFAdventuresTitle from '@/components/SFAdventuresTitle.vue';
 
-const modules = [Pagination,  Autoplay];
+const modules = [Pagination, Autoplay];
 
 
 // 規則問答功能
@@ -47,7 +48,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 function gotoTicketChange() {
-  router.push('/SF_BookingChange');
+    router.push('/SF_BookingChange');
 };
 
 // to top按鈕
@@ -79,17 +80,23 @@ onUnmounted(() => {
         <div class="intro">
             <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video>
         </div>
+
         <!-- 歡迎文字 -->
 
         <div class="introText">
-           <SFAdventuresTitle h2="歡迎來到星際邊境，一起踏上這場前所未有的冒險吧！"></SFAdventuresTitle>
+            <SFAdventuresTitle h2="歡迎來到星際邊境，一起踏上這場前所未有的冒險吧！"></SFAdventuresTitle>
         </div>
+
+
         <!-- 體驗內容 -->
         <div class="adventures">
             <div class="Title">
                 <StrellarFrontierTitle h1="體驗內容" p="ADVENTURES"></StrellarFrontierTitle>
             </div>
         </div>
+        
+
+
 
         <!-- 心得 -->
         <div class="comments">
@@ -117,21 +124,13 @@ onUnmounted(() => {
             </div>
 
             <div class="carousel-container">
-                <swiper
-                    :direction="'vertical'"
-                    :slidesPerView="1"
-                    :spaceBetween="50"
-                    :mousewheel="true"
-                    :pagination="{
+                <swiper :direction="'vertical'" :slidesPerView="1" :spaceBetween="50" :mousewheel="true" :pagination="{
                     clickable: true,
-                    }"
-                    :modules="modules"
-                    :autoplay="{
+                }" :modules="modules" :autoplay="{
                     delay: 4000,
                     disableOnInteraction: false,
-                    }"
-                    class="mySwiper">
-                   
+                }" class="mySwiper">
+
                     <swiper-slide>
                     <div class="carousel" >
                         <div class="carousel-item" >
@@ -141,7 +140,6 @@ onUnmounted(() => {
                                 <p>穿上UV透氣感的上衣和夥伴<br>並肩作戰。</p>
                             </div>
                         </div>
-                    </div>
                     </swiper-slide>
                     <swiper-slide>
                     <div class="carousel" >
@@ -152,7 +150,6 @@ onUnmounted(() => {
                                 <p>開啟星際冒險，記錄下每一段屬於<br>你的璀璨時刻。</p>
                             </div>
                         </div>
-                    </div>
                     </swiper-slide>
                     <swiper-slide>
                     <div class="carousel" >
@@ -163,11 +160,10 @@ onUnmounted(() => {
                                 <p>可愛的太空人，人人都該擁有！</p>
                             </div>
                         </div>
-                    </div>
                     </swiper-slide>
-                
+
                 </swiper>
-            </div>            
+            </div>
         </div>
 
         <!-- 航站資訊 -->
@@ -211,7 +207,7 @@ onUnmounted(() => {
                         <div class="accordion-question" @click="toggleAccordion(index)">
                             <span>{{ item.question }}</span>
                             <button class="accordion-toggle"><span
-                                    :class="{'up': activeIndex === index, 'down': activeIndex !== index}"></span></button>
+                                    :class="{ 'up': activeIndex === index, 'down': activeIndex !== index }"></span></button>
                         </div>
                         <div class="accordion-answer" :class="{ active: activeIndex === index }">
                             <p class="answer">{{ item.answer }}</p>
@@ -257,30 +253,32 @@ onUnmounted(() => {
         <button v-if="showTopButton" @click="scrollToTop" class="top-button">TOP↑</button>
         <Footer_2></Footer_2>
     </div>
-   
+
 </template>
 
 
 
 <style lang="scss" scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 @import '@/assets/SASS/basic/_color.scss';
+
 * {
-    font-family: "Noto Serif TC" ;
-    color:map-get($colofont_2 , text);
+    font-family: "Noto Serif TC";
+    color: map-get($colofont_2 , text);
 }
 
 .wrapper {
-    background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
-    url(../assets/images/STBackground.png);
+    background: linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)),
+        url(../assets/images/STBackground.png);
 }
 
-.Title { //大標題
+.Title {
+    //大標題
     text-align: center;
 }
 
-.introText{ //歡迎文字
+.introText {
+    //歡迎文字
     font-family: ToronoGlitchSerif H1;
     font-size: 36px;
     font-weight: 500;
@@ -288,6 +286,8 @@ onUnmounted(() => {
     margin-bottom: 5%;
 
 }
+
+
 
 // 票價資訊
 .ticketInfo {
@@ -303,23 +303,23 @@ onUnmounted(() => {
 
 // 熱門商品
 .swiper {
-  width: 50%;
-  height: 100%;
-  --swiper-theme-color: #f1f1f1; // 點點顏色
+    width: 50%;
+    height: 100%;
+    --swiper-theme-color: #f1f1f1; // 點點顏色
 }
 
 .swiper-slide {
-  text-align: center;
-  
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    text-align: center;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.carousel-item{
-    display:flex;
-    align-items:center;
+.carousel-item {
+    display: flex;
+    align-items: center;
     justify-content: center;
     cursor: pointer;
 }
@@ -333,17 +333,18 @@ onUnmounted(() => {
     max-width: 250px;
 }
 
-.product-info{
+.product-info {
     margin-left: 20px;
 }
 
-.product-info h3{ //商品名稱
+.product-info h3 {
+    //商品名稱
     font-size: 24px;
     margin-bottom: 50px;
     font-weight: bold;
 }
 
-.product-info p{
+.product-info p {
     font-weight: normal;
     text-align: left;
     line-height: 1.5;
@@ -358,10 +359,12 @@ onUnmounted(() => {
     margin: 5%;
     line-height: 2;
 }
-.left .worktime{
+
+.left .worktime {
     margin-bottom: 20px;
 }
-.infoText .right{
+
+.infoText .right {
     margin-left: 30px;
 }
 
@@ -403,9 +406,10 @@ onUnmounted(() => {
     justify-content: center;
     transition: .5s ease-out;
 }
-.changeRules:hover{
+
+.changeRules:hover {
     transform: scale(1.1);
-    
+
 }
 
 .accordion-item {
@@ -417,7 +421,7 @@ onUnmounted(() => {
     height: 30px;
     flex-shrink: 0;
     cursor: pointer;
-    
+
     display: flex;
     justify-content: space-between;
 }
@@ -467,17 +471,19 @@ onUnmounted(() => {
     width: 20px;
     height: 20px;
     position: relative;
-       
+
     transition: transform 0.3s ease;
 }
 
 .accordion-toggle .up {
-    transform: rotate(-90deg); /* 向上 */
-    color:#C1693B;
+    transform: rotate(-90deg);
+    /* 向上 */
+    color: #C1693B;
 }
 
 .accordion-toggle .down {
-    transform: rotate(90deg); /* 向下 */
+    transform: rotate(90deg);
+    /* 向下 */
     color: #e8e8e8;
 }
 
@@ -524,13 +530,14 @@ onUnmounted(() => {
 .contact {
     margin: 5%;
 }
+
 .contact #text {
     text-align: center;
     margin: 3% auto 7% auto;
     line-height: 1.6;
 }
 
-.icons{
+.icons {
     width: 100%;
     max-width: 30%;
     display: flex;
@@ -539,13 +546,14 @@ onUnmounted(() => {
 
 }
 
-.icons img{
+.icons img {
     width: 100%;
     max-width: 40px;
     cursor: pointer;
 }
 
-.contact p, .contactTime p{
+.contact p,
+.contactTime p {
     text-align: center;
     line-height: 1.6;
 }

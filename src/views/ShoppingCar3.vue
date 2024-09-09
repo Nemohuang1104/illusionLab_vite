@@ -3,12 +3,21 @@ import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import { ref } from 'vue';
+
+// ============ShoppingStep=============//
+const highlight = ref({
+    1:{  background : 'transparent', fontcolor : '#fff'  },
+    2:{  background : 'transparent', fontcolor : '#fff' },
+    3:{  background : '#fff', fontcolor : '#22247A' }
+
+    }
+  );
 </script>
 
 <template>
     <div class="wrapper">
         <div><Header_0></Header_0></div>
-        <div><ShoppingStep></ShoppingStep></div>
+        <div class="ShoppingStep"><ShoppingStep :styles="highlight"></ShoppingStep></div>
 
         <div class="content">
             <p class="result">訂單完成!</p>
@@ -89,7 +98,7 @@ import { ref } from 'vue';
             </div>
         </div>
         <div class="confirm">
-            <button>返回首頁</button>
+            <RouterLink to="/home"><button>返回首頁</button></RouterLink>
         </div>
         <Footer_0></Footer_0>
     </div>
@@ -281,14 +290,87 @@ import { ref } from 'vue';
 }
 
 .confirm button {
-    font-size: 20px;
-    width: 160px;
+    font-size: 16px;
+    width: 120px;
     height: 40px;
     padding: 4px;
     border: none;
     border-radius: 50px;
     background: var(--Color-3, #FFEDBC);
     cursor: pointer;
+  
 
+}
+
+
+/* ==========RWD斷點============== */
+
+@media screen and (max-width: 1040px) { 
+    .content {
+        width: 90%;
+        max-width: 1000px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+
+    .ShoppingStep{
+        width: 70%;
+        margin: 0 auto;
+    }
+    .inner01 p {
+        flex-basis: 25%;
+        text-align: left;
+    }
+
+    .code-input{
+        text-align: left;
+        flex-basis: 75%;
+    }
+
+    .order-item img{
+        width:50%;
+        object-fit: contain;
+        margin: 12px;
+    }
+
+    .order-header {
+        display: grid;
+        grid-template-columns: 4fr 1fr 1fr;
+        padding: 10px;
+        background-color: #7976BB;
+        font-weight: bold;
+        color: var(--Color-6, #FFF);
+        font-size: 16px;
+    }
+
+    .order-item {
+        display: grid;
+        grid-template-columns: 4fr 1fr 1fr;
+        padding: 1%;
+        align-items: center;
+        color: var(--Color-6, #FFF);
+        font-size: 16px;
+        font-family: "Noto Sans TC";
+        gap: 1%;
+    }
+
+    .product-info[data-v-7b3db10d] {
+        display: flex;
+        gap: 0.5%;
+    }
+
+    .product-name{
+        font-size: 16px;
+    }
+
+    .confirm {
+        width: 90vw;
+    }
+    .confirm button{
+        font-size: 16px;
+        max-width: 120px;
+        width: 90vw;
+    }
 }
 </style>

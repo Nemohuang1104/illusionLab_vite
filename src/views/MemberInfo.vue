@@ -16,7 +16,10 @@ import { ref, computed} from 'vue';
                 <RouterLink tag="div" to="" class="tab-item">退款查詢</RouterLink>
             </div> -->
             <div class="detail">
-                <img src="../assets/images/member_card_final.jpg" alt="">
+                <!-- <div class="membercard_rwd">
+                    <img src="../assets/images/member_card_final.jpg" alt="">
+                </div> -->
+                <img  src="../assets/images/member_card_final.jpg" alt="">
                 <div class="info">
                     <div class="inner01">
                         <p>姓名:</p>
@@ -68,10 +71,22 @@ import { ref, computed} from 'vue';
                         <div class="code-input">
                             <div class="address-1">
                                 <div class="fill">
-                                    <input type="text" />
+                                    <select name="" id="">
+                                        <option value="0">縣市</option>
+                                        <option value="1">台南市</option>
+                                        <option value="2">桃園市</option>
+                                        <option value="3">台北市</option>
+
+                                    </select>
                                 </div>
                                 <div class="fill">
-                                    <input type="text" />
+                                    <select name="" id="">
+                                        <option value="0">鄉鎮</option>
+                                        <option value="1">南區</option>
+                                        <option value="2">中壢區</option>
+                                        <option value="3">中山區</option>
+
+                                    </select>
                                 </div>
                             </div>
                             
@@ -300,6 +315,25 @@ import { ref, computed} from 'vue';
     transition: border-color 0.3s ease-in-out;
 }
 
+.fill > select{
+    /* border: 1px solid red; */
+    width: 90.5%;
+    height: 28px;
+    background-color: #F7F7F7;
+    border: 1px solid #F7F7F7;
+    border-radius: 6px; 
+    padding: 0 8px;
+    font-size: 16px;
+    color: #313131;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.fill > select:focus {
+    border-color: #FCB600;
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
+    outline: none; /* 移除默認的黑框 */
+}
+
 .fill > input:focus {
     border-color: #FCB600;
     box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); /* 暈染效果 */
@@ -344,8 +378,8 @@ import { ref, computed} from 'vue';
 
     display: inline-block;
     position: relative;
-    padding-left: 28px;
-    padding-right: 36px;
+    padding-left: 8%;
+    padding-right: 5%;
     cursor: pointer;
     font-size: 16px;
     color: #313131;
@@ -366,6 +400,7 @@ import { ref, computed} from 'vue';
     border: 2px solid #FFEDBC;
     
 }
+
 
 /* checkbox 被勾選時的樣式 */
 .custom-checkbox input:checked + .checkmark {
@@ -397,6 +432,9 @@ import { ref, computed} from 'vue';
     transform: rotate(45deg);
 }
 
+.text{
+    padding-left: 3px;
+}
 
 
 .confirm{
@@ -410,16 +448,100 @@ import { ref, computed} from 'vue';
 
 .confirm button{
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: #505050;
     width: 140px;
-    height: 28px;
-    line-height: 28px;
+    padding: 8px;
     border: none;
     background: var(--Color-2, #FCB600);
-    border-radius: 6px;
+    border-radius: 20px;
     cursor: pointer;
 }
+
+
+/* ==========RWD斷點============== */
+
+@media screen and (max-width: 1040px) { 
+    .content{
+        width: 85%;
+    }
+
+    .detail img{
+        width:50%;
+        object-fit: contain;
+        margin: 12px;
+    }
+}
+
+@media screen and (max-width: 780px) { 
+
+    
+    .detail{
+        flex-direction: column;
+        height: 100%;
+        padding-bottom: 10%;
+        padding-top: 4%;
+    }
+
+    .detail img{
+        width:100%;
+        // height: 200px;
+        object-fit: cover;
+        margin-bottom: 12%;
+        // margin: 12px;
+    }
+
+    .info {
+        flex-basis: 90%;
+        margin: 0 auto;
+        width: 76vw;
+    }
+
+    .code-input {
+        flex-basis: 80%;
+        width: 100%;
+    }
+
+    .fill{
+        width: 100%;
+    }
+
+    .fill input{
+        width: 96%;
+        padding: 0px;
+        padding-left: 8px;
+    }
+
+    .inner01 > p, .inner02 > p,.inner03 > p,.inner04 > p, .inner05 > p {
+        font-size: 16px;
+        flex-basis: 30%;
+    }
+
+   
+
+    .address-1 {
+        flex-basis: 80%;
+        width: 54.5vw;
+        display: flex;
+        // gap: 10px;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .address-1 .fill {
+        width: 27vw;
+    }
+
+
+    .address-1 .fill:last-child{
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: end;
+    }
+
+}
+
+
 
 </style>
