@@ -4,7 +4,7 @@ import Footer_2 from '@/components/Footer_1.vue';
 import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
 import LC_Text2 from '@/components/LC_Text2.vue';
 import icon3 from '../assets/images/LC_icon3.svg' 
-import CoinFall2 from '@/components/CoinFall2.vue';
+import CoinFall2 from '@/components/CoinFall.vue';
 
 
 import { defineProps, ref, defineEmits } from 'vue';
@@ -104,7 +104,7 @@ const productInfo = ref([
   font-family: "Noto Serif SC";
   // max-width: 1440px;
   width: 100%;
-height: 100%;
+  // height: 100%;
   margin: 0 auto;
   // border: 1px solid red;
   // background-image: url(../assets/images/SFbg.png);'
@@ -158,14 +158,14 @@ height: 100%;
 }
 .warp{
   position: relative;
-  height: 100vh;
+  // height: 100vh;
 //  border: 2px solid red;
 }
 
 .center {
   box-sizing: border-box;
 
-   color: map-get($colorfont_0, white);
+    color: map-get($colorfont_0, white);
   font-weight: 500;
   font-family: map-get($fontStyle, style_2);
   max-width: 800px;
@@ -178,27 +178,6 @@ height: 100%;
   margin: 0 auto
 }
 
-.center h1 {
-  font-size: 40px;
-  font-weight: 700;
-  margin-bottom: 5px;
-
-  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-
-}
-
-
-.center p {
-  font-size: 20px;
-  font-weight: 700;
-  background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
 
 
 
@@ -220,6 +199,7 @@ height: 100%;
   width: 110px;
   color: #fff;
   padding: 10px 0px;
+  font-family: map-get($fontStyle, style_2);
 
 }
 
@@ -266,7 +246,7 @@ height: 100%;
 }
 
 .list {
-  width: 80%;
+  // width: 80%;
   flex-basis: 50%;
 
   // justify-content: center;
@@ -303,7 +283,7 @@ height: 100%;
 
 .pro img {
   max-width: 100%;
-  max-height: 150px; /* 限制圖片高度 */
+  max-height: 150px  ; /* 限制圖片高度 */
   object-fit: contain; /* 保持圖片比例 */
   margin-bottom: 10px;
 }

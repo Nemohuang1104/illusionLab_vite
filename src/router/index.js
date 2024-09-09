@@ -145,6 +145,38 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/LC_Ticket_step0',
+    component: () => import('@/views/LC_Ticket_reservation2.vue'),
+    meta: {
+      title: "人生賭場-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/LC_Ticket_step1',
+    component: () => import('@/views/LC_ticket_customer_info.vue'),
+    meta: {
+      title: "人生賭場-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/LC_Ticket_step2',
+    component: () => import('@/views/LC_ticket_confirmation.vue'),
+    meta: {
+      title: "人生賭場-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/LC_Customization',
+    component: () => import('@/views/LC_Customization.vue'),
+    meta: {
+      title: "人生賭場-客製票卷"
+    },
+    requiredLogin: true
+  },
   
 
 // =================星際邊境===============//
@@ -179,7 +211,7 @@ const routes = [
   {
     path: '/littlequiz',
     name: 'littlequiz',
-    component: () => import('@/views/LittleQuizEnter.vue'),
+    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
       title: "小測驗"
     },
@@ -344,7 +376,9 @@ const routes = [
 // 建立 router
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: routes
+  routes: routes,
+
+
 });
 
 router.beforeEach((to, from, next) => { // 記得加第三個參數 next

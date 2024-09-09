@@ -1,4 +1,4 @@
-<template>
+<template >
   <div id="coin">
     <i><img src="../assets/images/coin.png" alt=""></i>
     <i><img src="../assets/images/coin.png" alt=""></i>
@@ -28,15 +28,16 @@
 <style lang="scss" scoped>
 
 #coin{
-  position:relative;
-  top:-1050px;
-  width:100%;
+  position:absolute;
+  top:-100px;
+  // width: 100%;
+  // height: 100%;
   text-align: right;
 
   i{
     display: inline-block;
-    width: 200px;
-    height: 150px;
+    // max-width: 100px;
+    // max-height: 150px;
     // background: linear-gradient(to bottom right, #309900, #005600);
     transform: skew(20deg);
     // border-radius: 5% 40% 70%;
@@ -57,11 +58,11 @@
     }
 
     
-    :nth-of-type(n)    { height:230px; width:300px; }
+    :nth-of-type(n)    {  width:300px; }
     // :nth-of-type(n):before { width:7px; height:5px; top:17px; right:10px; }
     // :nth-of-type(n):after { width:2px; height:17px; left: 12px; top:0px; }
 
-    :nth-of-type(2n+1)    { height:230px; width:300px; }
+    :nth-of-type(2n+1)    {  width:300px; }
     // :nth-of-type(2n+1):before { width:4px; height:3px; top:7px; right:0px; }
     // :nth-of-type(2n+1):after { width:2px; height:6px; left: 5px; top:1px; }
 

@@ -37,12 +37,22 @@
                 活動當天請持訂單QRCODE至櫃台月換實體票卷</p>
         </div>
     <MS_com_buttons 
+      :mode="currentMode" :currentStep="currentStep"
         mode="two1" :step="modeSelect"
     />
     </div>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      currentMode: 'three1', // 当前的模式
+      currentStep: 2        // 当前的步骤
+    };
+  },
+  components: {
+    MS_com_buttons
+  },
   props: {
     mode: {
       type: String,
@@ -166,7 +176,7 @@ export default {
         text-align: center;
     }
     .template_mobangOne{
-        background-image: url('../src/ms/modeBGI1.png');
+        // background-image: url('../src/ms/modeBGI1.png');
         background-size:contain;  
     }
     .template_mobangTwo{

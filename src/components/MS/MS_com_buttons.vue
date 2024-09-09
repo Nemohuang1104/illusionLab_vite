@@ -1,23 +1,29 @@
 <template>
     <div class="buttons">
+
+    <router-link :to="previousPage"  @click.native="scrollToTop">
       <div  v-if="showPrev" :class="{ weNeedAStarlight: step === 'two' }">
-        <button 
-          v-if="showPrev" 
-          id="prevStep" 
-          @mouseover="hoveringPrev = true" 
-          @mouseleave="hoveringPrev = false">
-          <h6 :style="{ color: hoveringPrev ? buttonHoverColor : buttonColor }">← PREVIOUS STEP<span>　</span></h6>
-        </button>
+          <button 
+            v-if="showPrev" 
+            id="prevStep" 
+            @mouseover="hoveringPrev = true" 
+            @mouseleave="hoveringPrev = false">
+            <h6 :style="{ color: hoveringPrev ? buttonHoverColor : buttonColor }">← PREVIOUS STEP<span>　</span></h6>
+          </button>
       </div>
+    </router-link>
+    <router-link :to="nextPage"  @click.native="scrollToTop">
       <div class="theOriginal" :class="{ weNeedAStarlight: step === 'two' }">
       <button 
         v-if="showNext" 
         id="nextStep" 
         @mouseover="hoveringNext = true" 
         @mouseleave="hoveringNext = false">
-        <h6 :style="{ color: hoveringNext ? buttonHoverColor : buttonColor }"><span>　</span>NEXT STEP →</h6>
+        <h6 :style="{ color: hoveringNext ? buttonHoverColor : buttonColor }"><span>　</span>{{ isLastStep ? 'Pay Now →' : 'NEXT STEP →' }}</h6>
       </button>
     </div>
+  </router-link>
+
     </div>
   </template>
   
@@ -36,6 +42,10 @@
         default: 'one',
         validator: value => ['one', 'two', 'three'].includes(value),
       },
+      currentStep: {
+      type: Number,
+      required: true
+    }
     },
     data() {
       return {
@@ -68,9 +78,44 @@
         return this.mode === 'two1' || this.mode === 'three1';
       },
       showNext() {
-        return this.mode === 'one1' || this.mode === 'two1';
+        return this.mode === 'one1' || this.mode === 'two1' || this.mode === 'three1';
       },
+
+      isLastStep() {
+      return this.currentStep === 2;
     },
+    previousPage() {
+      if (this.mode === 'two1' || this.mode === 'three1') {
+        return `/LC_Ticket_step${this.currentStep - 1}`; // mode1 回上一步的页面
+      } else if (this.mode === 'mode2') {
+        return `/mode2-step${this.currentStep - 1}`; // mode2 回上一步的页面
+      }
+      return `/default-step${this.currentStep - 1}`; // 默认的回上一步页面
+    },
+    nextPage() {
+      if (this.isLastStep || this.mode === 'two3'){
+        return `/LC_Customization`;
+      }else if (this.mode === 'one1' || this.mode === 'two1') {
+        return `/LC_Ticket_step${this.currentStep + 1}`; // mode1 下一步的页面
+      } else if (this.mode === 'mode2') {
+        return `/mode2-step${this.currentStep + 1}`; // mode2 下一步的页面
+      }else if (this.mode === 'mode2') {
+        return `/mode3-step${this.currentStep + 1}`; // mode3 下一步的页面
+      }
+    },
+      
+   
+
+    },
+    methods: {
+    // 手动滚动到页面顶部
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto' // 平滑滚动
+      });
+    }
+  }
   };
   </script>
   

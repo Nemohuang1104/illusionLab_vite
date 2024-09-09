@@ -141,8 +141,10 @@
                     <p>場內提供酒精飲料、點心無限暢飲。</p>
                 </span>
             </div>
-            <Btn_Lifecasino Button="立即預約" class="LC_btn" ></Btn_Lifecasino>
-            
+            <router-link to="/LC_Ticket_step0">
+                <Btn_Lifecasino Button="立即預約" class="LC_btn" ></Btn_Lifecasino>
+            </router-link>
+                
          
         </section>
     </swiper-slide>
@@ -345,13 +347,11 @@ import { ref, onMounted, reactive, computed, onBeforeMount, } from 'vue';
 import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
 import LC_smoke from '@/components/LC_smoke.vue';
 import PokerFall from '@/components/PokerFall.vue';
-// import Header from '@/components/Header_0.vue';
 import LC_text from '@/components/LC_text.vue';
 import LC_h2Text from '@/components/LC_h2Text.vue';
 import SlotMachine from '@/components/SlotMachine.vue';
 import LC_Text2 from '@/components/LC_Text2.vue';
 import LC_Reviews from '@/components/LC_Reviews.vue';
-// import Header from '@/components/Header_0.vue' 
 import Footer_1 from '@/components/Footer_1.vue'
 
 // ===============swiper============//
@@ -478,7 +478,7 @@ p{
     width: 100%;
     height: 100%;
     // background-image: url('../assets/images/lifecasino_bg1.png');
-    background-image: url('../assets/images/lifecasino_bg1.png');
+    background-image: url('../assets/images/lifecasino_bg3.jpg');
     // background: linear-gradient(180deg, #110338 0%, #30099E 100%);
     // background-size: cover;
     // background-position: center;
@@ -1080,7 +1080,7 @@ p{
    
 }
 .swiper-pagination-bullet {
-	padding: 5px 0px;
+	padding: 15px 0px;
 	border-radius: 0;
 	width: 100px;
 	height: 25px;
@@ -1112,7 +1112,7 @@ p{
         content: "";
         position: absolute;
         left: 0;
-        bottom: 0;
+        bottom: -15px;
         height: 0.5px;
         background-color: #FFD700;
         width: 100px;

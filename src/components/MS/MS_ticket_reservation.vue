@@ -3,8 +3,8 @@
     <div class="top">
         <MS_com_title 
         :mode="modeSelect"  
-        mainTitle="會員資料" 
-        subTitle="Customer Info"
+        mainTitle="門票購入" 
+        subTitle="Reservation"
         :intro="OurIntro" />
     </div>
     <main>
@@ -35,15 +35,27 @@
         </div>
         </form>
     </main>
+    
     <MS_com_buttons 
+    :mode="currentMode" :currentStep="currentStep"
         mode="one1" :step="modeSelect"
     />
+ 
     </div>
 </template>
   
   
 <script>
 export default {
+  data() {
+    return {
+      currentMode: 'one1', // 当前的模式
+      currentStep: 0        // 当前的步骤
+    };
+  },
+  components: {
+    MS_com_buttons
+  },
   props: {
     mode: {
       type: String,
@@ -103,13 +115,23 @@ export default {
           return '未知模式';
       }
     },
+    dynamicRoute() {
+      if (this.mode === 'one') {
+        return '/LC_ticket_customer_info'; 
+      } else if (this.mode === 'mode2') {
+        return '/page2';
+      }else if (this.mode === 'mode3') {
+        return '/page3';
+      }
+     
+    }
   },
 };
 </script>
 
   
 
-<script setup>
+<script setup >
     import MS_com_title from '@/components/MS/MS_com_title.vue';
     import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
 </script>
@@ -122,6 +144,7 @@ export default {
     font-weight: 400;
     font-style: normal;
     }
+   
     h1{font-size: 30px;}
     h2{font-size: 28px;}
     h3{font-size: 18px;}
@@ -194,7 +217,7 @@ export default {
         text-align: center;
     }
     .template_mobangOne{
-        background-image: url('../src/ms/modeBGI1.png');
+        // background-image: url('../src/ms/modeBGI1.png');
         background-size:contain;  
     }
     .template_mobangTwo{
@@ -205,3 +228,4 @@ export default {
         background-image: url('../src/ms/modeBGI3.jpg');
     }
 </style>
+

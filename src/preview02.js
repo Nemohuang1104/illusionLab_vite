@@ -23,7 +23,10 @@ import { faFaceMeh } from '@fortawesome/free-regular-svg-icons';
 // import MindSpectrum from './views/MindSpectrum.vue';
 // import LC_Reviews from './components/LC_Reviews.vue';
 // import LC_Nav from './components/LC_Nav.vue';
-import NewsView from './views/NewsView.vue';
+// import NewsView from './views/NewsView.vue';
+// import LC_Reviews from './components/LC_Reviews.vue';
+import MS_Ticket from './components/MS/MS_Ticket.vue';
+import LC_Ticket_reservation2 from './views/LC_Ticket_reservation2.vue';
 // import NewsSwiper from './components/NewsSwiper.vue';
 // import Gift from './components/Gift.vue';
 
@@ -32,7 +35,7 @@ import NewsView from './views/NewsView.vue';
 library.add(faFaceMeh);
 
 
-const app = createApp(NewsView);
+const app = createApp(LC_Ticket_reservation2);
 // app.mount('#preview-app');
 
 app.component('font-awesome-icon', FontAwesomeIcon).mount("#preview-app");
