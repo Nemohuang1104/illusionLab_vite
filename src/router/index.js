@@ -200,6 +200,14 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/LC_Customization',
+    component: () => import('@/views/LC_Customization.vue'),
+    meta: {
+      title: "人生賭場-客製票券"
+    },
+    requiredLogin: false
+  },
   
   
 
@@ -365,11 +373,27 @@ const routes = [
     requiredLogin: true
   },
   
+  {
+    path: '/shop2',
+    name: 'shop2',
+    component: () => import('@/views/ShoppingCar2.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
+
+  {
+    path: '/shop3',
+    name: 'shop3',
+    component: () => import('@/views/ShoppingCar3.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
 
 
-  
-
-    
   
   // =================心靈光譜===============//
   {

@@ -1,22 +1,31 @@
 <script setup>
+const props = defineProps({
+   
+    styles: {
+        type: Object,
+        required: true
+    },
+   
+});
+
 
 </script>
 <template>
     <div class="step">
         <div class="step_item">
-            <div class="number">1</div>
-            <p>商品確認</p>
+            <div class="number" :style="{ background: styles[1].background, color: styles[1].fontcolor }">1</div>
+            <p >商品確認</p>
 
         </div>
         <div class="line"></div>
         <div class="step_item">
-            <div class="number">2</div>
+            <div class="number" :style="{ background: styles[2].background, color: styles[2].fontcolor }">2</div>
             <p>付款資訊</p>
             
         </div>
         <div class="line"></div>
         <div class="step_item">
-            <div class="number">3</div>
+            <div class="number" :style="{ background: styles[3].background, color: styles[3].fontcolor }" >3</div>
             <p>訂單確認</p>
         </div>
     </div>
@@ -53,7 +62,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     line-height: 1.6rem;
     color: var(--Color-6, #FFF);

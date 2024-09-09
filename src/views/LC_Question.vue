@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import Header_0 from "../components/Header_0.vue";
-import Header_2 from "@/components/Header_2.vue";
+
 import Footer_0 from "@/components/Footer_0.vue";
 import Btn_Lifecasino from "@/components/Btn_Lifecasino.vue";
 import LC_Text3 from '@/components/LC_Text3.vue';

@@ -2,6 +2,8 @@
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
 import { ref, computed} from 'vue';
+
+
 </script>
 
 <template>
@@ -137,7 +139,8 @@ import { ref, computed} from 'vue';
 
 .sub-tab{
     // border: 1px solid white;
-    width: 402px;
+    width: 100%;
+    max-width: 386px;
     display: flex;
     justify-content: space-between;
     
@@ -259,5 +262,13 @@ import { ref, computed} from 'vue';
 }
 
 // ============訂單票券tab樣式結束
+
+
+@media screen and (max-width: 454px) { 
+
+    .sub-tab-item{
+        width: 42vw;
+    }
+}
 
 </style>

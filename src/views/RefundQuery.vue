@@ -22,7 +22,8 @@
 
 .sub-tab{
     // border: 1px solid white;
-    width: 402px;
+    width: 100%;
+    max-width: 386px;
     display: flex;
     justify-content: space-between;
     
@@ -54,5 +55,14 @@
   font-weight: bold ; /* 選中狀態下的樣式 */
   background: #FCB600 ; /* 選中時的文字顏色 */
 }
+
+/* ==========RWD斷點============== */
+@media screen and (max-width: 454px) { 
+
+.sub-tab-item{
+    width: 42vw;
+}
+}
+
 
 </style>

@@ -4,17 +4,8 @@
     <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-<<<<<<< HEAD
       <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" /></router-link>
       <router-link :to="{ name: 'login'}"> <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" /></router-link>
-=======
-      <router-link to="/shop">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
-      </router-link>
-      <router-link to="/login">
-        <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" />
-      </router-link>
->>>>>>> 538892f8bc465a996c013d40c232816de93fb0f2
     </div>
   </header>
 
@@ -76,22 +67,11 @@ header{
   // max-width: 1440px;
   height: 80px;
 }
-<<<<<<< HEAD
-
-
-
-.logo img {
-  width: 145px;
-  flex-shrink: 0;
-  padding: 10px 20px;
-  cursor: pointer;
-=======
 .logo img{
     height: 60px;
     flex-shrink: 0;
     cursor: pointer;    
     padding: 10px 20px;
->>>>>>> 538892f8bc465a996c013d40c232816de93fb0f2
 }
 
 

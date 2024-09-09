@@ -473,6 +473,11 @@ const handleSaveEdit = async (updatedOrder) => {
   top: -17.5%;
 }
 
+.detail[data-v-18691004] {
+    width: 100%;
+    height: 470px;
+}
+
 .code-input{
     display: flex;
     justify-content: right;
@@ -572,6 +577,12 @@ const handleSaveEdit = async (updatedOrder) => {
     font-size: 18px;
     margin-top: 18px;
     font-family: "Noto Sans TC";
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+.order-text:hover{
+  background-color: #FCB600;
+  border-radius: 5px;
+
 }
 
 .order-text span:last-child{

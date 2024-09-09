@@ -2,15 +2,24 @@
     import Header_1 from '@/components/Header_0.vue';
     import ShoppingStep from '@/components/ShoppingStep.vue';
     import Footer from '@/components/Footer_0.vue';
+    import { ref } from 'vue';
+
+// ============ShoppingStep=============//
+const highlight = ref({
+    1:{  background : '#fff', fontcolor : '#22247A' },
+    2:{  background : 'transparent', fontcolor : '#fff' },
+    3:{  background : 'transparent', fontcolor : '#fff' }
+
+    }
+  );
 </script>
 <template>
     <div class="wrapper">
         <div class="header">
             <Header_1></Header_1>
         </div>
-        <div class="step">
-            <ShoppingStep></ShoppingStep>
-        </div>
+            <ShoppingStep :styles="highlight"></ShoppingStep>
+        
         <div class="contanier">
             <div class="order">
                 <p class="title">訂單內容</p>
