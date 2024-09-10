@@ -7,7 +7,7 @@ import SF_TicketDesign from './views/SF_TicketDesign.vue';
 
 
 // import ProductPage from './views/ProductPage.vue';
-
+import ShoppingCar1 from './views/ShoppingCar1.vue'
 
 
 

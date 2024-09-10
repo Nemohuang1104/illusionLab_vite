@@ -6,7 +6,7 @@ import Footer_0 from '../components/Footer_0.vue';
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-  <Header_0></Header_0>
+  <Header_0 :mode="currentMode" class="header"></Header_0>
 
 <!-- 中間會員登入區塊 -->
 <main>
@@ -46,7 +46,16 @@ import Footer_0 from '../components/Footer_0.vue';
   background: map-get($color_0,bgc_blue);
   background-repeat: no-repeat;
   width: 100%;
+  min-height: 100vh;
   font-family:"Noto Sans TC";
+  padding-top: 80px;
+}
+
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
 }
 
 main{
@@ -124,9 +133,13 @@ h1{
   cursor: pointer;
 }
 
+.form .login:hover{
+  color: #505050;
+  background-color: #fff;
+}
+
 .form .other{
   text-align: center;
-  
 }
 
 .form img{
@@ -144,5 +157,10 @@ h1{
   font-size: 16px;
   color: #505050;
   cursor: pointer;
+}
+
+.form .signup:hover{
+  color: #505050;
+  background-color:#fff;
 }
 </style>

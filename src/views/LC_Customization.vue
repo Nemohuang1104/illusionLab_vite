@@ -143,27 +143,30 @@ const updatepage = () => {  //點擊送出按鈕之後顯示第二頁製作完�
     behavior: 'auto'  // 平滑滾動
   });
   currentpage.value = 2
-//=================不依賴後端下載開始
+
+//=================不依賴後端下載開始 // =================使用 html2canvas(base64) 來截取票券區域為圖片，提供使用者下載(開始)
 
 // 1. 使用 html2canvas 將票券區域轉換為圖片
 const ticketPreviewElement = document.querySelector('.ticket-preview');
   
-  // 使用 html2canvas 來截取票券區域為圖片
-  html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
-    // 2. 將圖片轉為 Base64 格式
-    const imageData = canvas.toDataURL('image/png');
+ 
+  // html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+  //   // 2. 將圖片轉為 Base64 格式
+  //   const imageData = canvas.toDataURL('image/png');
 
-    // 3. 創建一個隱藏的下載連結
-    const downloadLink = document.createElement('a');
-    downloadLink.href = imageData;
-    downloadLink.download = 'custom_ticket.png'; // 設定下載的圖片名稱
+  //   // 3. 創建一個隱藏的下載連結
+  //   const downloadLink = document.createElement('a');
+  //   downloadLink.href = imageData;
+  //   downloadLink.download = 'custom_ticket.png'; // 設定下載的圖片名稱
 
-    // 4. 自動點擊下載連結，觸發下載
-    downloadLink.click();
-  });
+  //   // 4. 自動點擊下載連結，觸發下載
+  //   downloadLink.click();
+  // });
+
+  // =================使用 html2canvas (base64) 來截取票券區域為圖片，提供使用者下載(結束)
 
 
-//=================依賴後端存取開始
+//=================依賴後端存取開始(base64)
   // // 1. 使用 html2canvas 將票券區域轉換為圖片
   // const ticketPreviewElement = document.querySelector('.ticket-preview');
   
@@ -194,7 +197,28 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
   //   downloadLink.click();  // 模擬點擊來觸發下載
   // });
 
-  //=================依賴後端存取結束
+  //=================依賴後端存取結束(base64)
+
+  //=================依賴後端存取開始(圖片相對路徑)
+  html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+  canvas.toBlob(blob => {
+    const formData = new FormData();
+    formData.append('image', blob, 'LC_ticket.png');
+
+    fetch('http://illusionlab.local/PDO/TicketOrder/save_custom_ticket.php', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('圖片路徑儲存成功:', data);
+    })
+    .catch(error => {
+      console.error('圖片儲存失敗:', error);
+    });
+  }, 'image/png');
+});
+  //=================依賴後端存取結束(圖片相對路徑)
 
 }
 

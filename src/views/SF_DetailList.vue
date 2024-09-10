@@ -68,8 +68,8 @@ import Footer_2 from '@/components/Footer_2.vue';
                         <h3>太空金屬杯</h3>
                         <h4>NT $ 299 </h4>
                         <div class="leftlight">
-                            <p>作者 : Dandy · Syike </p>
-                            <p>與知名插畫家DoMeDo聯名推出</p>
+                            <p>作者 : Nemo  </p>
+                            <p>與知名插畫家 Nina 聯名推出</p>
                         </div>
                         <p>材質：雙層鈦金屬</p>
                         <p>商品規格 : 寬 7.5 cm x 高 10 cm</p>
@@ -130,8 +130,9 @@ text-decoration: none;
     // border: 1px solid red;
 
     text-align: center;
+    padding-top: 120px;
 
-
+    
 }
 
 //標題
@@ -144,7 +145,7 @@ text-decoration: none;
 
 
 .title h1 {
-    font-size: 40px;
+    font-size: 28px;
     font-weight: 700;
     margin-bottom: 5px;
 
@@ -159,7 +160,7 @@ text-decoration: none;
 
 
 .title p {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
     background-clip: text;
@@ -248,7 +249,7 @@ text-decoration: none;
 }
 
 .textbox h3 {
-    font-size: 32px;
+    font-size: 28px;
     color: #C1693B;
     font-weight: bold;
 }
@@ -356,7 +357,7 @@ text-decoration: none;
 
 
     text-decoration: none;
-    font-size: 28px;
+    font-size: 22px;
     color: #fff;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
 }

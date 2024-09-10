@@ -2,86 +2,89 @@ import { createRouter, createWebHistory } from "vue-router";
 
 // path → component
 const routes = [
-// ====================前台公版=====================
-{
-  path: '/',
-  component: () => import('@/views/Guide.vue'),
-  meta: {
-    title: "Illusion Lab"
+  // ====================前台公版=====================
+  {
+    path: '/',
+    component: () => import('@/views/Guide.vue'),
+    meta: {
+      title: "Illusion Lab"
+    },
+    requiredLogin: false  //判斷要不要登入
   },
-  requiredLogin: false  //判斷要不要登入
-},
-{
-  path: '/enter',
-  component: () => import('@/views/Enter.vue'),
-  meta: {
-    title: "前導頁"
+  {
+    path: '/enter',
+    component: () => import('@/views/Enter.vue'),
+    meta: {
+      title: "前導頁"
+    },
+    requiredLogin: false
   },
-  requiredLogin: false
-},
-{
-  path: '/home',
-  component: () => import('@/views/Home.vue'),
-  meta: {
-    title: "Illusion Lab首頁"
+  {
+    path: '/home',
+    component: () => import('@/views/Home.vue'),
+    meta: {
+      title: "Illusion Lab首頁"
+    },
+    requiredLogin: false
   },
-  requiredLogin: false
-},
-{
-  path: '/Header_0',
-  name: 'Header_0',
-  component: () => import('@/components/Header_0.vue'),
-  meta: {
-    title: "公版頁首"
+  {
+    path: '/Header_0',
+    name: 'Header_0',
+    component: () => import('@/components/Header_0.vue'),
+    meta: {
+      title: "公版頁首"
+    },
+    requiredLogin: false
   },
-  requiredLogin: false
-},
-{
-  path: '/login',
-  name: 'login',
-  component: () => import('@/views/Login.vue'),
-  meta: {
-    title: "會員登入"
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login.vue'),
+    meta: {
+      title: "會員登入"
+    },
+    requiredLogin: true
   },
-  requiredLogin: true
-},
-{
-  path: '/shop',
-  name: 'shop',
-  component: () => import('@/views/ShoppingCar1.vue'),
-  meta: {
-    title: "購物車"
+  {
+    path: '/shop',
+    name: 'shop',
+    component: () => import('@/views/ShoppingCar1.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
   },
-  requiredLogin: true
-},
-{path: '/SFHeader_0',
-  name: 'SFHeader_0',
-  component: () => import('@/components/SFHeader_0.vue'),
-  meta: {
-    title: "公版三個LOGO頁首"
+  {
+    path: '/SFHeader_0',
+    name: 'SFHeader_0',
+    component: () => import('@/components/SFHeader_0.vue'),
+    meta: {
+      title: "公版三個LOGO頁首"
+    },
+    requiredLogin: false
   },
-  requiredLogin: false
-},
-{
-  path: '/littlequiz',
-  name: 'littlequiz',
-  component: () => import('@/views/LittleQuizEnter.vue'),
-  meta: {
-    title: "小測驗"
+  {
+    path: '/littlequiz',
+    name: 'littlequiz',
+    component: () => import('@/views/LittleQuiz.vue'),
+    meta: {
+      title: "小測驗"
+    },
+    requiredLogin: false
   },
-  requiredLogin: false
-},
-{
-  path: '/Header_0',
-  name: 'Header_0',
-  component: () => import('@/components/Header_0.vue'),
-  meta: {
-    title: "頁首"
-  },
-  requiredLogin: false
-},
 
-  
+
+  {
+    path: '/Header_0',
+    name: 'Header_0',
+    component: () => import('@/components/Header_0.vue'),
+    meta: {
+      title: "頁首"
+    },
+    requiredLogin: false
+  },
+
+
 
   // ====================後台=====================
   {
@@ -92,7 +95,7 @@ const routes = [
     },
     requiredLogin: true,
   },
-{
+  {
     path: '/CenterCMS',
     component: () => import('@/views/CenterCMS.vue'),
     meta: {
@@ -145,9 +148,17 @@ const routes = [
     ]
   },
 
- 
-  
- 
+
+  // ====================後台end=====================
+
+  {
+    path: '/home',
+    component: () => import('@/views/Home.vue'),
+    meta: {
+      title: "Illusion Lab首頁"
+    },
+    requiredLogin: false
+  },
   // ====================人生賭場================//
   {
     path: '/lifecasino',
@@ -181,17 +192,17 @@ const routes = [
     },
     redirect: '/LC_Question',
     requiredLogin: false,
-    children:[
+    children: [
       {
         path: '/LC_Question',
         name: 'LC_Question',
         component: () => import('@/views/LC_Question.vue'),
       },
-    {
+      {
         path: '/LC_TicketRule',
         name: 'LC_TicketRule',
         component: () => import('@/views/LC_TicketRule.vue'),
-        
+
       },
       {
         path: '/LC_TicketChange',
@@ -235,7 +246,8 @@ const routes = [
   },
   
 
-// =================星際邊境===============//
+
+  // =================星際邊境===============//
 
   {
     path: '/strellarfrontierintro',
@@ -265,16 +277,46 @@ const routes = [
     },
     requiredLogin: false
   },
-  {
-    path: '/SF_ProductPage',
+  { path: '/SF_ProductPage',
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
+  },
+  {
+    path: '/MS_ProductPage',
+    name: '心靈光譜商品頁',
+    component: () => import('@/views/MS_ProductPage.vue'),
     meta: {
-      title: "星際邊境全部商品"
+      title: "心靈光譜商品頁"
     },
     requiredLogin: false
   },
-
+  {
+    path: '/FQA_03',
+    name: '常見問題',
+    component: () => import('@/views/FQA_03.vue'),
+    meta: {
+      title: "心靈光譜常見問題"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/TicketChange_03',
+    name: '票務資訊',
+    component: () => import('@/views/TicketChange_03.vue'),
+    meta: {
+      title: "心靈光譜票務資訊"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/littleQuiz',
+    name: 'littleQuiz',
+    component: () => import('@/views/LittleQuiz.vue'),
+    meta: {
+      title: "星際邊際全部商品"
+    },
+    requiredLogin: false
+  },
   { path: '/SF_DetailList',
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
@@ -287,15 +329,7 @@ const routes = [
       title: "星際邊際商品細項"
     },
     requiredLogin: false
-  }, 
-  { path: '/SF_ProductPage',
-    name: 'SF_ProductPage',
-    component: () => import('@/views/SF_ProductPage.vue'),
-    meta: {
-      title: "星際邊際全部商品"
-    },
-    requiredLogin: false
-  }, 
+  },
   { path: '/WeiText2',
     name: 'WeiText2',
     component: () => import('@/views/WeiText2.vue'),
@@ -303,7 +337,8 @@ const routes = [
       title: "測試"
     },
     requiredLogin: false
-  },{ path: '/WeiText',
+  }, {
+    path: '/WeiText',
     name: 'WeiText',
     component: () => import('@/views/WeiText.vue'),
     meta: {
@@ -388,6 +423,15 @@ const routes = [
       },
       requiredLogin: true
     },
+  {
+    path: '/LittleQuizResult',
+    name: 'LittleQuizResult',
+    component: () => import('@/views/LittleQuizResult.vue'),
+    meta: {
+      title: "小測驗結果頁"
+    },
+    requiredLogin: true
+  },
 
 
   // ============會員專區============//
@@ -419,50 +463,50 @@ const routes = [
     requiredLogin: true,
     redirect: '/Member',
 
-      children:[
-        {
-          path: '/Member',
-          name: 'MemberInfo',
-          component:() => import('@/views/MemberInfo.vue'),
-        },
-        {
-          path: '/change-password',
-          name: 'PasswordEdit',
-          component: () => import('@/views/PasswordEdit.vue'),
-        },
-        {
-          path: '/order-query',
-          name: 'OrderQuery',
-          component: () => import('@/views/OrderQuery.vue'),
-          redirect: '/OrderQueryTicket',
+    children: [
+      {
+        path: '/Member',
+        name: 'MemberInfo',
+        component: () => import('@/views/MemberInfo.vue'),
+      },
+      {
+        path: '/change-password',
+        name: 'PasswordEdit',
+        component: () => import('@/views/PasswordEdit.vue'),
+      },
+      {
+        path: '/order-query',
+        name: 'OrderQuery',
+        component: () => import('@/views/OrderQuery.vue'),
+        redirect: '/OrderQueryTicket',
 
-            children: [
-              { 
-                path: '/OrderQueryTicket', 
-                component: () => import('@/views/OrderQueryTicket.vue'), 
-              },
-              { 
-                path: '/OrderQueryProduct', component: () => import('@/views/OrderQueryProduct.vue'),  
-              },
-            ],
-        },
-        {
-          path: '/refund-query',
-          name: 'RefundQuery',
-          component: () => import('@/views/RefundQuery.vue'),
-          redirect: '/RefundQueryTicket',
+        children: [
+          {
+            path: '/OrderQueryTicket',
+            component: () => import('@/views/OrderQueryTicket.vue'),
+          },
+          {
+            path: '/OrderQueryProduct', component: () => import('@/views/OrderQueryProduct.vue'),
+          },
+        ],
+      },
+      {
+        path: '/refund-query',
+        name: 'RefundQuery',
+        component: () => import('@/views/RefundQuery.vue'),
+        redirect: '/RefundQueryTicket',
 
-          children: [
-            { 
-              path: '/RefundQueryTicket', 
-              component: () => import('@/views/RefundQueryTicket.vue'), 
-            },
-            { 
-              path: '/RefundQueryProduct', 
-              component:() => import('@/views/RefundQueryProduct.vue'), 
-            },
-          ],
-        },
+        children: [
+          {
+            path: '/RefundQueryTicket',
+            component: () => import('@/views/RefundQueryTicket.vue'),
+          },
+          {
+            path: '/RefundQueryProduct',
+            component: () => import('@/views/RefundQueryProduct.vue'),
+          },
+        ],
+      },
     ]
   },
 
@@ -478,7 +522,7 @@ const routes = [
     },
     requiredLogin: true
   },
-  
+
   {
     path: '/shop2',
     name: 'shop2',
@@ -497,6 +541,67 @@ const routes = [
       title: "購物車"
     },
     requiredLogin: true
+  },
+  {
+    path: '/SF_BookingChange',
+    name: 'SF_BookingChange',
+    component: () => import('@/views/SF_BookingChange.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
+
+  {
+    path: '/shop3',
+    name: 'shop3',
+    component: () => import('@/views/ShoppingCar3.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
+  },
+
+
+
+  // =================心靈光譜===============//
+  {
+    path: '/mindspectrum',
+    name: 'mindspectrum',
+    component: () => import('@/components/MS/MS_main.vue'),
+    meta: {
+      title: "頁首"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/SF_DetailList',
+    name: 'SF_DetailList',
+    component: () => import('@/views/SF_DetailList.vue'),
+    meta: {
+      title: "星際邊際商品細項"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/WeiText',
+    name: 'WeiText',
+    component: () => import('@/views/WeiText.vue'),
+    meta: {
+      title: "測試用的"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/SFHeader_0',
+    name: 'SFHeader_0',
+    component: () => import('@/components/SFHeader_0.vue'),
+    meta: {
+      title: "公版頁首"
+
+    },
+    requiredLogin: false
+
   },
 
 

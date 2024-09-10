@@ -160,10 +160,15 @@ setTimeout(function () {
 
 <style scoped>
 /* 背景穿梭 */
-@import url('https://fonts.googleapis.com/css?family=Audiowide');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
+* {
+    font-family: "Noto Serif TC";
+
+}
 
 .title {
-    font-family: Audiowide;
+    font-family: "Noto Serif TC";
     font-size: 24px;
     color: #eed6fe;
     position: absolute;
