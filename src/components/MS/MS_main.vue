@@ -51,7 +51,11 @@
             <div class="section-content">
                 <section id="fourSection">
                     <img id="text4" src="../../ms/text4.png" alt="">
-                    <img id="myGirl" src="../../ms/myGirl.png" alt="">
+
+                    <!-- ====購票頁面連結==== -->
+                    <router-link to="/MS_Ticket_step0">
+                        <img id="myGirl" src="../../ms/myGirl.png" alt="">
+                    </router-link>
                 </section>
             </div>
         </div>

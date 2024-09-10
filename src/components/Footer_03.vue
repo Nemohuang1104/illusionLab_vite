@@ -12,7 +12,7 @@
         <div class="content">
             <img src="../assets/images/illusionLabLOGO.SVG" alt="">
             <div class="items">
-                <<router-link  to="">
+                <router-link  to="">
                     <span>隱私權政策</span>
                 </router-link>
                 <router-link to="">

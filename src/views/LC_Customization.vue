@@ -46,8 +46,15 @@ import lc_custom_icon17 from '../assets/images/lc_custom_icon17.svg';
 import lc_custom_icon18 from '../assets/images/lc_custom_icon18.svg';
 
 
+import LC_Text3 from '@/components/LC_Text3.vue';
 
 
+const scrollToTOP = () => {
+  window.scrollTo({
+    top: 0,  // 頁面的頂部
+    behavior: 'smooth'  // 平滑滾動
+  });
+};
 
 
 
@@ -114,7 +121,9 @@ const updateIcon = (src) => {
   selectedTemplate.value = src; // 設置當前選中的模板
   if(!isTemplateLocked.value){
     iconImage.value = src;
-  }
+  };
+
+  
   
 };
 
@@ -129,28 +138,35 @@ const currentMode = ref('two');
 //切換顯示客製票券完成頁
 const currentpage = ref(1); //預設顯示第一頁製作頁
 const updatepage = () => {  //點擊送出按鈕之後顯示第二頁製作完成頁
+  window.scrollTo({
+    top: 0,  // 頁面的頂部
+    behavior: 'auto'  // 平滑滾動
+  });
   currentpage.value = 2
-//=================不依賴後端下載開始
+
+//=================不依賴後端下載開始 // =================使用 html2canvas(base64) 來截取票券區域為圖片，提供使用者下載(開始)
 
 // 1. 使用 html2canvas 將票券區域轉換為圖片
 const ticketPreviewElement = document.querySelector('.ticket-preview');
   
-  // 使用 html2canvas 來截取票券區域為圖片
-  html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
-    // 2. 將圖片轉為 Base64 格式
-    const imageData = canvas.toDataURL('image/png');
+ 
+  // html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+  //   // 2. 將圖片轉為 Base64 格式
+  //   const imageData = canvas.toDataURL('image/png');
 
-    // 3. 創建一個隱藏的下載連結
-    const downloadLink = document.createElement('a');
-    downloadLink.href = imageData;
-    downloadLink.download = 'custom_ticket.png'; // 設定下載的圖片名稱
+  //   // 3. 創建一個隱藏的下載連結
+  //   const downloadLink = document.createElement('a');
+  //   downloadLink.href = imageData;
+  //   downloadLink.download = 'custom_ticket.png'; // 設定下載的圖片名稱
 
-    // 4. 自動點擊下載連結，觸發下載
-    downloadLink.click();
-  });
+  //   // 4. 自動點擊下載連結，觸發下載
+  //   downloadLink.click();
+  // });
+
+  // =================使用 html2canvas (base64) 來截取票券區域為圖片，提供使用者下載(結束)
 
 
-//=================依賴後端存取開始
+//=================依賴後端存取開始(base64)
   // // 1. 使用 html2canvas 將票券區域轉換為圖片
   // const ticketPreviewElement = document.querySelector('.ticket-preview');
   
@@ -181,7 +197,28 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
   //   downloadLink.click();  // 模擬點擊來觸發下載
   // });
 
-  //=================依賴後端存取結束
+  //=================依賴後端存取結束(base64)
+
+  //=================依賴後端存取開始(圖片相對路徑)
+  html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+  canvas.toBlob(blob => {
+    const formData = new FormData();
+    formData.append('image', blob, 'LC_ticket.png');
+
+    fetch('http://illusionlab.local/PDO/TicketOrder/save_custom_ticket.php', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('圖片路徑儲存成功:', data);
+    })
+    .catch(error => {
+      console.error('圖片儲存失敗:', error);
+    });
+  }, 'image/png');
+});
+  //=================依賴後端存取結束(圖片相對路徑)
 
 }
 
@@ -195,10 +232,14 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
     <div>
       <Header :mode="currentMode"/> 
     </div>
+    <LC_Text3
+      Title1="票卷製作"
+      English="BOOKING"
+            ></LC_Text3> 
     <div v-if="currentpage === 1" class="customization">
       <div class="show">
         <div class="content">
-          <h1>票券製作</h1>
+           
           <hr>
           <!-- 動態生成預覽圖 -->
           <div class="ticket-preview" >
@@ -214,14 +255,14 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
       <div class="choosen">
         <!-- 頭貼選擇 -->
         <div class="profile">
-          <h2>頭貼選擇</h2>
+          <p>頭貼選擇</p>
           <img src="../assets/images/lc_custom_profile1.svg" alt="" :class="{ click_profile: selectedTemplate === lc_custom_profile1 }" @click="updateProfile(lc_custom_profile1)">
           <img src="../assets/images/lc_custom_profile2.svg" alt="" :class="{ click_profile: selectedTemplate === lc_custom_profile2 }" @click="updateProfile(lc_custom_profile2)">
           <img src="../assets/images/lc_custom_profile3.svg" alt="" :class="{ click_profile: selectedTemplate === lc_custom_profile3 }" @click="updateProfile(lc_custom_profile3)">
         </div>
         <!-- 模板樣式 -->
         <div class="theChosenTemplate">
-          <h2>公版樣式</h2>
+          <p>公版樣式</p>
           <img src="../assets/images/lc_custom_ticket1.svg" :class="{ click_public: selectedTemplate === lc_custom_ticket1 }" alt="" @click="updateTemplate(lc_custom_ticket1)">
           <img src="../assets/images/lc_custom_ticket2.svg" :class="{ click_public: selectedTemplate === lc_custom_ticket2 }" alt="" @click="updateTemplate(lc_custom_ticket2)">
           <img src="../assets/images/lc_custom_ticket3.svg" :class="{ click_public: selectedTemplate === lc_custom_ticket3 }" alt="" @click="updateTemplate(lc_custom_ticket3)">
@@ -283,14 +324,14 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
       </label>
     </div>
     <!-- 送出按鈕 -->
-    <div class="submit_btn" @click="updatepage">
-      <Btn_Lifecasino Button="送出"></Btn_Lifecasino>
+    <div class="submit_btn" @click="updatepage" >
+      <Btn_Lifecasino Button="送出" ></Btn_Lifecasino>
     </div>
     </div>
     
 
     <!-- 顯示票券製作完成頁面 -->
-    <div v-if="currentpage === 2" class="customization_complete">
+    <div v-if="currentpage === 2"  class="customization_complete">
       <h1>製作完成!</h1>
       <div class="show_complete">
         <div class="content">
@@ -310,9 +351,9 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
       <!-- 新增一個下載按鈕
       <button @click="updatepage" class="download-btn">下載票券</button> -->
 
-      <RouterLink to="/lifecasino">
+      <RouterLink to="/lifecasino" >
         <div class="submit_btn" >
-        <Btn_Lifecasino Button="完成"></Btn_Lifecasino>
+        <Btn_Lifecasino Button="完成" ></Btn_Lifecasino>
         </div>
       </RouterLink>
     </div>
@@ -330,10 +371,16 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
 
     @import "../assets/style";
     .template{
-        background: #313131;
+      background-image: url(../assets/images/lifecasino_bg2.png);
+
         padding-bottom: 80px;
         
         // height: 180vh;
+    }
+
+    .line[data-v-231aa63d]{
+      margin-top: 20px;
+      margin-bottom: 30px;
     }
 
     a{
@@ -420,8 +467,10 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
         // justify-content: center;
         position: sticky;
         top: 0; /* 固定在頁面頂部 */
-        background-color: #313131; /* 背景顏色，防止滾動時內容重疊 */
+        // background-color: white;
+        background-image:map-get($map: $color_1, $key: product); /* 背景顏色，防止滾動時內容重疊 */
         z-index: 10; /* 確保在其他元素之上 */
+        
 
     }
 
@@ -461,7 +510,7 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
     .profile{
         font-family: map-get($fontStyle, style_2);
         color: map-get($colorfont_0, white);
-        font-size: 16px;
+        font-size: 16px !important;
         width: 100%;
         margin-top: 40px;
         margin-bottom: 20px;
@@ -477,7 +526,8 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
         
     }
 
-    .profile h2{
+    p{
+        font-weight: 800;
         margin-bottom: 20px;
     }
 
@@ -519,6 +569,8 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
 
     .ticket_colors h2{
         font-family: map-get($fontStyle, style_2);
+        font-size: 16px;
+
         font-weight: bold;
         padding: 4px;
         text-align: center;
@@ -552,6 +604,8 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
         text-align: center;
         background: #FFF;
         border-radius: 10px 10px 0px 0px;
+        font-size: 16px;
+
     }
 
 
@@ -568,6 +622,8 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
         text-align: center;
         background: #FFF;
         border-radius: 10px 10px 0px 0px;
+        font-size: 16px;
+
     }
 
     .icon img{

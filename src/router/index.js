@@ -66,12 +66,14 @@ const routes = [
   {
     path: '/littlequiz',
     name: 'littlequiz',
-    component: () => import('@/views/LittleQuizEnter.vue'),
+    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
       title: "小測驗"
     },
     requiredLogin: false
   },
+
+
   {
     path: '/Header_0',
     name: 'Header_0',
@@ -209,6 +211,40 @@ const routes = [
       }
     ]
   },
+  {
+
+    path: '/LC_Ticket_step0',
+    component: () => import('@/views/LC_Ticket_reservation2.vue'),
+    meta: {
+      title: "人生賭場-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/LC_Ticket_step1',
+    component: () => import('@/views/LC_ticket_customer_info.vue'),
+    meta: {
+      title: "人生賭場-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/LC_Ticket_step2',
+    component: () => import('@/views/LC_ticket_confirmation.vue'),
+    meta: {
+      title: "人生賭場-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/LC_Customization',
+    component: () => import('@/views/LC_Customization.vue'),
+    meta: {
+      title: "人生賭場-客製票卷"
+    },
+    requiredLogin: true
+  },
+
 
 
   // =================星際邊境===============//
@@ -232,7 +268,6 @@ const routes = [
     requiredLogin: false
   },
 
-
   {
     path: '/SF_BookingChange',
     name: 'SF_BookingChange',
@@ -246,8 +281,40 @@ const routes = [
     path: '/SF_ProductPage',
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
+  },
+  {
+    path: '/MS_ProductPage',
+    name: '心靈光譜商品頁',
+    component: () => import('@/views/MS_ProductPage.vue'),
     meta: {
-      title: "星際邊境全部商品"
+      title: "心靈光譜商品頁"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/FQA_03',
+    name: '常見問題',
+    component: () => import('@/views/FQA_03.vue'),
+    meta: {
+      title: "心靈光譜常見問題"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/TicketChange_03',
+    name: '票務資訊',
+    component: () => import('@/views/TicketChange_03.vue'),
+    meta: {
+      title: "心靈光譜票務資訊"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/littleQuiz',
+    name: 'littleQuiz',
+    component: () => import('@/views/LittleQuiz.vue'),
+    meta: {
+      title: "星際邊際全部商品"
     },
     requiredLogin: false
   },
@@ -255,8 +322,13 @@ const routes = [
     path: '/SF_DetailList',
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
+  },
+  {
+    path: '/littlequiz',
+    name: 'littlequiz',
+    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
-      title: "星際邊境商品細項"
+      title: "星際邊際商品細項"
     },
     requiredLogin: false
   },
@@ -285,6 +357,95 @@ const routes = [
       title: "星際邊境客製票券"
     },
     requiredLogin: false
+  },
+
+
+  // -----購票頁--------//
+
+  {
+    path: '/SF_Ticket_step0',
+    component: () => import('@/views/SF_Ticket_reservation.vue'),
+    meta: {
+      title: "星際邊境-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/SF_Ticket_step1',
+    component: () => import('@/views/SF_ticket_customer_info.vue'),
+    meta: {
+      title: "星際邊境-購票"
+    },
+    requiredLogin: true
+  },
+
+  {
+    path: '/SF_Ticket_step2',
+    component: () => import('@/views/SF_ticket_confirmation.vue'),
+    meta: {
+      title: "星際邊境-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/SF_TicketDesign',
+    component: () => import('@/views/SF_TicketDesign.vue'),
+    meta: {
+      title: "星際邊境-客製票卷"
+    },
+    requiredLogin: true
+  },
+
+  // =================心靈光譜===============//
+  {
+    path: '/mindspectrum',
+    name: 'mindspectrum',
+    component: () => import('@/components/MS/MS_main.vue'),
+    meta: {
+      title: "心靈光譜"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/MS_Ticket_step0',
+    component: () => import('@/views/MS_Ticket_reservation.vue'),
+    meta: {
+      title: "心靈光譜-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MS_Ticket_step1',
+    component: () => import('@/views/MS_ticket_customer_info.vue'),
+    meta: {
+      title: "心靈光譜-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MS_Ticket_step2',
+    component: () => import('@/views/MS_ticket_confirmation.vue'),
+    meta: {
+      title: "心靈光譜-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MS_customization',
+    component: () => import('@/components/MS/MS_customization.vue'),
+    meta: {
+      title: "心靈光譜-客製票卷"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/LittleQuizResult',
+    name: 'LittleQuizResult',
+    component: () => import('@/views/LittleQuizResult.vue'),
+    meta: {
+      title: "小測驗結果頁"
+    },
+    requiredLogin: true
   },
 
 
@@ -478,7 +639,17 @@ const routes = [
 // 建立 router
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: routes
+  routes: routes,
+
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // 如果有保存的滚动位置，返回到保存的位置
+      return savedPosition;
+    } else {
+      // 否则默认滚动到顶部
+      return { top: 0 };
+    }
+  },
 });
 
 router.beforeEach((to, from, next) => { // 記得加第三個參數 next

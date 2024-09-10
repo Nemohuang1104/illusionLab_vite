@@ -166,7 +166,7 @@ const finalTicket = computed(() => ({
                     </label>
                 </div>
                 <div class="nextStep">
-                    <SF_planetButton @click="completeTicket"></SF_planetButton>
+                        <SF_planetButton @click="completeTicket"></SF_planetButton>
                 </div>
             </div>
         </div>

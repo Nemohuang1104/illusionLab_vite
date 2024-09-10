@@ -1,13 +1,55 @@
 <script setup>
 import Header_0 from '../components/Header_0.vue';
+const currentMode = ref('one');
 import Footer_0 from '../components/Footer_0.vue';
-</script>
+import vSelect from 'vue-select';
 
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import tw_cities from '../data/TwCities.json';
+
+const citySelect = ref([]);
+const selected = ref('');
+const isRotating = ref(false);
+const router = useRouter();
+
+const cities = tw_cities;
+
+const generateCaptcha = () => {
+  return Math.floor(1000 + Math.random() * 9000).toString(); // 確保是四位數字
+};
+
+const captcha = ref(generateCaptcha());  // 初始生成驗證碼
+const userInput = ref('');               // 存放使用者輸入的驗證碼
+
+const refreshCaptcha = () => {
+  isRotating.value = true;              // 啟動旋轉效果
+
+  setTimeout(() => {
+    captcha.value = generateCaptcha();  // 更新驗證碼
+    isRotating.value = false;           // 停止旋轉效果
+    userInput.value = '';               // 清空使用者輸入
+  }, 500); // 旋轉1秒後更新
+};
+
+const register = () => {
+  // 檢查驗證碼是否正確
+  if (userInput.value === captcha.value) {
+    // 驗證碼正確，顯示註冊成功訊息
+    alert('註冊成功！歡迎加入！');
+    router.push('/home');
+    // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
+  } else {
+    // 驗證碼錯誤，彈出錯誤訊息
+    alert('驗證碼錯誤，請重新輸入。');
+  }
+};
+</script>
 
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-    <Header_0></Header_0>
+    <Header_0 :mode="currentMode" class="header"></Header_0>
 
     <!-- 中間會員註冊區 -->
     <main>
@@ -39,99 +81,41 @@ import Footer_0 from '../components/Footer_0.vue';
           <input type="text" placeholder="請輸入連絡電話">
         </div>
 
-        <!-- 選擇地址 -->
-        <!-- <div class="city">
-          <select name="city">
-            <option>請選擇縣市</option>
-            <option value="基隆市">基隆市</option>
-            <option value="臺北市">臺北市</option>
-            <option value="新北市">新北市</option>
-            <option value="桃園市">桃園市</option>
-            <option value="新竹縣">新竹縣</option>
-            <option value="苗栗縣">苗栗縣</option>
-            <option value="彰化縣">彰化縣</option>
-            <option value="臺中市">臺中市</option>
-            <option value="雲林縣">雲林縣</option>
-            <option value="嘉義市">嘉義市</option>
-            <option value="臺南市">臺南市</option>
-            <option value="高雄市">高雄市</option>
-            <option value="屏東縣">屏東縣</option>
-            <option value="臺東縣">臺東縣</option>
-            <option value="花蓮縣">花蓮縣</option>
-            <option value="宜蘭縣">宜蘭縣</option>
-            <option value="澎湖縣">澎湖縣</option>
-            <option value="金門縣">金門縣</option>
-            <option value="連江縣">連江縣</option>
-          </select>
-
-          <select name="city">
-            <option>請選擇鄉鎮</option>
-            <option value="基隆市">基隆市</option>
-            <option value="臺北市">臺北市</option>
-            <option value="新北市">新北市</option>
-            <option value="桃園市">桃園市</option>
-            <option value="新竹縣">新竹縣</option>
-            <option value="苗栗縣">苗栗縣</option>
-            <option value="彰化縣">彰化縣</option>
-          </select>
-        </div> -->
-        
-        
-        <div><v-select
-            label="name"
-            :reduce="
-              (option) => {
-                citySelect = option.districts;
-                selected =
-                  option.districts[0] === '臺北市' ? option.districts[0].name : '';
-              }
-            "
-            placeholder="請選擇縣市"
-            :options="cities"
-          ></v-select>
+        <div class="city">
+          <div>
+            <v-select label="name"
+              :reduce="(option) => { citySelect = option.districts; selected = option.districts[0] ? option.districts[0].name : ''; }"
+              placeholder="請選擇縣市" :options="cities" class="custom-v-select"></v-select>
+          </div>
+          <div>
+            <v-select class="custom-v-select" label="name" placeholder="請選擇鄉鎮" v-model="selected"
+              :options="citySelect"></v-select>
+          </div>
         </div>
-        <div>
-          <v-select
-            label="name"
-            placeholder="請選擇鄉鎮"
-            v-model="selected"
-            :options="citySelect"
-          >
-          </v-select>
-	      </div>
+
         <div>
           <input type="text" placeholder="請輸入地址" class="address">
 
           <!-- 輸入驗證碼 -->
           <div class="random">
-            <input type="text" placeholder="請輸入右方認證碼">
+            <input v-model="userInput" type="text" placeholder="請輸入右方認證碼">
             <!-- <span class="number">3456</span> -->
-            <p>3456</p>
-            <img src="../assets/images/icon-change.svg" alt="">
+            <p>{{ captcha }}</p>
+            <img @click="refreshCaptcha" :class="{ rotating: isRotating }" src="../assets/images/icon-change.svg"
+              alt="">
           </div>
 
-          <a href="#"><input type="submit" value="註冊" class="button"></a>
+          <router-link><input type="submit" value="註冊" class="button" @click="register"></router-link>
         </div>
       </div>
     </main>
 
     <Footer_0></Footer_0>
- 
+
   </div>
 </template>
 
-<script>
-  import { ref } from 'vue'
-import cities from '@/data/TwCities.json'
 
-export default {
-  setup () {
-    const citySelect = ref([])
-    const selected = ref('')
-    return { citySelect, cities, selected }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 @import "../assets/SASS/basic/color";
@@ -142,6 +126,14 @@ export default {
   background-repeat: no-repeat;
   width: 100%;
   font-family: "Noto Sans TC";
+  padding-top: 80px;
+}
+
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
 }
 
 main {
@@ -219,40 +211,7 @@ main {
   outline: none;
 }
 
-.city {
-  display: flex;
-  justify-content: space-between;
-}
 
-select {
-  width: 100%;
-  /* 根據需要調整寬度 */
-}
-
-/* 針對下拉選單中的選項進行樣式設定 */
-option {
-  max-height: 200px;
-  /* 設置最大高度 */
-  overflow-y: auto;
-  /* 使其可滾動 */
-}
-
-.city select {
-  width: 170px;
-  height: 32px;
-  font-size: 16px;
-  border-radius: 80px;
-  color: #505050;
-  border: 1px solid #FFF;
-  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
-  background-color: rgba(255, 255, 255, 0.70);
-  ;
-  margin-bottom: 10px;
-  appearance: none;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-}
 
 .form .address {
   width: 340px;
@@ -302,6 +261,12 @@ option {
 .random img {
   margin-left: 8px;
   cursor: pointer;
+  transition: transform 1s ease;
+}
+
+.random img.rotating {
+  transform: rotate(270deg);
+  /* 旋轉360度 */
 }
 
 .form a {}
@@ -314,11 +279,51 @@ option {
   border-radius: 80px;
   border: 1px solid #FFF;
   background-color: rgba(255, 255, 255, 0.70);
-  ;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   padding-left: 20px;
   margin-bottom: 20px;
   cursor: pointer;
   outline: none;
+}
+
+.form .button:hover {
+  background-color: #fff;
+  color: #505050;
+}
+</style>
+<!-- =================================縣市下拉選單======================================== -->
+<style lang="scss">
+.city {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vs__selected {
+  color: #505050 !important;
+}
+
+.custom-v-select {
+  width: 170px;
+  height: 32px;
+  font-size: 16px;
+  border-radius: 80px;
+  color: #505050;
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
+  background-color: rgba(255, 255, 255, 0.70);
+  margin-bottom: 10px;
+  appearance: none;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #fff;
+}
+
+.vs__dropdown-toggle{
+  border: none;
+}
+
+.vs__search,
+.vs__search:focus {
+  text-align: center;
 }
 </style>

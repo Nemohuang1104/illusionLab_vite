@@ -3,8 +3,8 @@
     <div class="top">
         <MS_com_title 
         :mode="modeSelect"  
-        mainTitle="會員資料" 
-        subTitle="Customer Info"
+        mainTitle="門票購入" 
+        subTitle="Reservation"
         :intro="OurIntro" />
     </div>
     <main>
@@ -35,20 +35,29 @@
         </div>
         </form>
     </main>
+<!--     
     <MS_com_buttons 
-        mode="one1" :step="modeSelect"
-    />
+     :currentStep="currentStep"
+        :mode="mode" :step="modeSelect" :activityMode="activityMode"
+    /> -->
+ 
     </div>
 </template>
   
   
 <script>
 export default {
+
   props: {
     mode: {
       type: String,
       default: 'one',
       validator: value => ['one', 'two', 'three'].includes(value),
+    },
+    currentStep: {
+      type: Number,
+      required: true,
+      validator: value => ['mode1', 'mode2', 'mode3'].includes(value),
     },
   },
   computed: {
@@ -103,13 +112,14 @@ export default {
           return '未知模式';
       }
     },
+
   },
 };
 </script>
 
   
 
-<script setup>
+<script setup >
     import MS_com_title from '@/components/MS/MS_com_title.vue';
     import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
 </script>
@@ -122,6 +132,7 @@ export default {
     font-weight: 400;
     font-style: normal;
     }
+   
     h1{font-size: 30px;}
     h2{font-size: 28px;}
     h3{font-size: 18px;}
@@ -194,7 +205,7 @@ export default {
         text-align: center;
     }
     .template_mobangOne{
-        background-image: url('../src/ms/modeBGI1.png');
+        // background-image: url('../src/ms/modeBGI1.png');
         background-size:contain;  
     }
     .template_mobangTwo{
@@ -205,3 +216,4 @@ export default {
         background-image: url('../src/ms/modeBGI3.jpg');
     }
 </style>
+

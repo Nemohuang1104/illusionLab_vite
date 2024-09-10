@@ -110,7 +110,7 @@ import LC_Text3 from '@/components/LC_Text3.vue';
         margin: 0 auto;
         width: 32%;
         margin-bottom: 32px;
-        border-bottom: 1px solid #eae6eb;
+        // border-bottom: 1px solid #eae6eb;
     }
 
     .title h1{

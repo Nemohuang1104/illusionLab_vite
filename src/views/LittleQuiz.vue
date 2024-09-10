@@ -1,87 +1,110 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
-import Quizfinal01 from '@/assets/images/Quizch4.png'
+import Quizfinal01 from '@/assets/images/Quizch4.png';
+import Loginpopup from '@/components/Loginpopup.vue'
 </script>
 
 
 <template>
 
-  <Header_0 class="header"></Header_0>
+  <Header_0 :mode="currentMode" class="header"></Header_0>
 
   <div class="container">
+
+
+
     <!-- {{ data }} -->
     <template v-for="(question, key) in data">
-      <div v-if="activeIndex === 0 && key === 0" :key="key" class="enter_title">
-        <div class="smoke">
-          <img src="../assets/images/quiz_middlebluesmoke.png" alt="" class="pic1">
-          <img src="../assets/images/quiz-enter_hand.png" alt="" class="pic2">
-          <img src="../assets/images/quiz_longsmoke.png" alt="" class="pic3">
-        </div>
-        <p>準備好踏入奇幻世界，探索最適合你的沉浸式體驗活動嗎？<br>
-          透過這個簡單的小測驗，我們將引導你找到最適合你的沉浸式體驗，<br>
-          讓我們一起尋找那個能讓你全心投入的夢幻之地吧！</p>
-        <button @click="activeIndex = 1" class="enter"> START! </button>
-      </div>
-
-      <div v-if="activeIndex === key && key !== 0 && key !== data.length - 1" :key="key" class="question">
-        <img :src="question.image" alt="" class="question-image">
-        <div class="title">{{ question.label }}</div>
-        <div class="answer_flex">
-          <div class="answer" v-for="(answer, subkey) in question.values" :key="subkey">
-            <div class="btn" @click="next(question, answer)" v-html="answer.name"></div>
+      <transition name="fade">
+        <div v-if="activeIndex === 0 && key === 0" :key="key" class="enter_title">
+          <div class="smoke">
+            <img src="../assets/images/quiz_middlebluesmoke.png" alt="" class="pic1">
+            <img src="../assets/images/quiz-enter_hand.png" alt="" class="pic2">
+            <img src="../assets/images/quiz_longsmoke.png" alt="" class="pic3">
           </div>
+          <p>準備好踏入奇幻世界，探索最適合你的沉浸式體驗活動嗎？<br>
+            透過這個簡單的小測驗，我們將引導你找到最適合你的沉浸式體驗，<br>
+            讓我們一起尋找那個能讓你全心投入的夢幻之地吧！</p>
+          <button @click="activeIndex = 1" class="enter"> START! </button>
         </div>
+      </transition>
 
-          <div class="progress-bar">
-            <div v-for="(item, index) in data.length-2" :key="index" 
-                :class="{'progress-segment': true, 'active': index < activeIndex }">
+      <transition name="fade">
+
+        <div v-if="activeIndex === key && key !== 0 && key !== data.length - 1" :key="key" class="question">
+          <img :src="question.image" alt="" class="question-image">
+          <div class="title">{{ question.label }}</div>
+          <div class="answer_flex">
+            <div class="answer" v-for="(answer, subkey) in question.values" :key="subkey">
+              <div class="btn" @click="next(question, answer)" v-html="answer.name"></div>
             </div>
           </div>
-      </div>
 
-      <div v-if="activeIndex === key && key === data.length - 1 && final_answer" :key="key" class="result">
-        <div v-if="start_animation === true" class="start_animation">
-          <img src="../assets/images/quiz_middlebluesmoke.png" alt="" class="middlebluesmoke">
+          <div class="progress-bar">
+            <div v-for="(item, index) in data.length - 2" :key="index"
+              :class="{ 'progress-segment': true, 'active': index < activeIndex }">
+            </div>
+          </div>
+        </div>
+      </transition>
+
+      <transition name="fade">
+
+        <div v-if="activeIndex === key && key === data.length - 1 && final_answer" :key="key" class="result">
+          <div v-if="start_animation === true" class="start_animation">
+            <img src="../assets/images/quiz_middlebluesmoke.png" alt="" class="middlebluesmoke">
             <img src="../assets/images/Quizfinalcircleshine.png" alt="" class="finalcircleshine">
-          <img src="../assets/images/Quizfinalhand.png" alt="" class="finalhand">
-          <img src="../assets/images/Quizfinallongcloud.png" alt="" class="finallongcloud">
-          <img src="../assets/images/Quizlittleshine.png" alt="" class="littleshine1">
-          <img src="../assets/images/Quizlittleshine.png" alt="" class="littleshine2">
+            <img src="../assets/images/Quizfinalhand.png" alt="" class="finalhand">
+            <img src="../assets/images/Quizfinallongcloud.png" alt="" class="finallongcloud">
+            <img src="../assets/images/Quizlittleshine.png" alt="" class="littleshine1">
+            <img src="../assets/images/Quizlittleshine.png" alt="" class="littleshine2">
+            <p>結果計算中...</p>
 
-          <p>結果計算中...</p>
-        </div>
-        <div v-else class="finalanswer">
-          <h1>結果出爐</h1>
-          <img :src="result[1].image" alt="" class="finalanswer-image">
-          <div class="answer_text" v-if="result[final_answer] && result[final_answer].text" v-html="result[final_answer].text"></div>
-          <button>領取折價卷</button>
-        </div>
+          </div>
+          <div v-else class="finalanswer">
+            <h1>結果出爐</h1>
+            <img :src="result[final_answer].image" alt="" class="finalanswer-image">
+            <div class="answer_text" v-if="result[final_answer] && result[final_answer].text"
+              v-html="result[final_answer].text"></div>
+            <button @click="popshow">領取折價卷</button>
 
-      </div>
+            <div class="popup" v-if="login == true">
+            <Loginpopup></Loginpopup>
+            </div>
+          </div>
+
+         
+
+        </div>
+      </transition>
     </template>
   </div>
 
 </template>
 
 <script>
+
+// const currentMode = ref('one');
+
 export default {
   data() {
     return {
       imgPath: '',
       start_animation: false,
+      login:false,
       activeIndex: 0,
       final_answer: 1,
       result: {
         1: {
-          image: new URL('../assets/images/carousel1_1_1.png', import.meta.url).href,
+          image: new URL('../assets/images/Quiz_LCresult.png', import.meta.url).href,
           text: '你適合參加刺激的人生賭場<br>這是一個充滿挑戰和策略的活動<br>讓你感受到生活中的刺激和選擇的重要性。'
         },
         2: {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
+          image: new URL('../assets/images/Quiz_SFresult.png', import.meta.url).href,
           text: '你適合參加新奇的星際邊際<br>這是一場太空探險<br>適合喜愛探索未知和挑戰自我的人'
         },
         3: {
-          image: new URL('../assets/images/duck.png', import.meta.url).href,
+          image: new URL('../assets/images/Quiz_MSresult.png', import.meta.url).href,
           text: '你適合參加療癒的心靈光譜<br>這個活動專注於心靈療癒和自我反思<br>幫助你找到內心的平靜和力量'
         }
       },
@@ -94,9 +117,9 @@ export default {
           label: '1.你認為哪種生活哲學最適合你？',
           value: '',
           values: [
-            { name: `人生是一場遊戲<br>每一步都要謹慎`, value: 'A' },
-            { name: '人生是一段旅程<br>每次經歷都是成長', value: 'B' },
-            { name: '人生是一個自我發現的過程<br>重要的是理解自己', value: 'C' }
+            { name: `人生是一場遊戲<br>每一步都要謹慎`, value: '1' },
+            { name: '人生是一段旅程<br>每次經歷都是成長', value: '2' },
+            { name: '人生是一個自我發現的過程<br>重要的是理解自己', value: '3' }
           ]
         },
         {
@@ -104,9 +127,9 @@ export default {
           label: '2.你更喜歡哪種類型的環境？',
           value: '',
           values: [
-            { name: '放鬆而療癒的咖啡廳', value: 'C' },
-            { name: '充滿探險<br>和未知的神秘秘境', value: 'A' },
-            { name: '廣闊而無邊的大草原', value: 'B' }
+            { name: '放鬆而療癒的咖啡廳', value: '3' },
+            { name: '充滿探險<br>和未知的神秘秘境', value: '1' },
+            { name: '廣闊而無邊的大草原', value: '2' }
           ]
         },
         {
@@ -114,9 +137,9 @@ export default {
           label: '3. 當你面對一個未知的挑戰時，你會選擇怎麼做？',
           value: '',
           values: [
-            { name: '好奇心驅使<br>我勇敢邁出第一步', value: 'B' },
-            { name: '我會先觀察內心的感受<br>再決定如何應對', value: 'C' },
-            { name: '仔細計劃<br>並衡量所有可能的結果', value: 'A' }
+            { name: '好奇心驅使<br>我勇敢邁出第一步', value: '2' },
+            { name: '我會先觀察內心的感受<br>再決定如何應對', value: '3' },
+            { name: '仔細計劃<br>並衡量所有可能的結果', value: '1' }
           ]
         },
         {
@@ -124,9 +147,9 @@ export default {
           label: '4.當你想到一次難忘的體驗時，你最記得的是什麼？',
           value: '',
           values: [
-            { name: '當時做出的每一個重要決定', value: 'A' },
-            { name: '置身於那個<br>與眾不同的場景中', value: 'B' },
-            { name: '內心的感受<br>與那次體驗的深度連結', value: 'C' }
+            { name: '當時做出的每一個重要決定', value: '1' },
+            { name: '置身於那個<br>與眾不同的場景中', value: '2' },
+            { name: '內心的感受<br>與那次體驗的深度連結', value: '3' }
           ]
         },
         {
@@ -134,9 +157,9 @@ export default {
           label: '5.如果你能擁有一種超能力，你會選擇哪種？',
           value: '',
           values: [
-            { name: '讀懂他人的心思<br>並預測他們的行動', value: 'A' },
-            { name: '治癒他人的情感傷痛<br>並帶來安慰', value: 'C' },
-            { name: '能夠在任何環境下<br>都保持冷靜與沉著', value: 'B' }
+            { name: '讀懂他人的心思<br>並預測他們的行動', value: '1' },
+            { name: '治癒他人的情感傷痛<br>並帶來安慰', value: '3' },
+            { name: '能夠在任何環境下<br>都保持冷靜與沉著', value: '2' }
           ]
         },
         {
@@ -146,6 +169,9 @@ export default {
     }
   },
   methods: {
+    popshow(){
+      this.login = true
+    },
     next(question, answer) {
       question.value = answer.value
       this.activeIndex++
@@ -153,32 +179,104 @@ export default {
       if (this.activeIndex === this.data.length - 1) {
         this.start_animation = true
 
+
+        console.log(this.data);
+
+        let final_point = 0
+
+        for (let index = 0; index < this.data.length; index++) {
+          const point = this.data[index].value ? this.data[index].value : 0;
+          final_point += Number(point)
+
+        }
+
+        console.log(final_point);
+
+       if(final_point <= 8){
+        this.final_answer = 1
+       }else if(final_point >= 9 && final_point <= 11 ){
+        this.final_answer = 2
+       }else{
+        this.final_answer = 3
+       };
+
+
+
         setTimeout(() => {
           this.start_animation = false
 
         }, 2500);
       }
-      // question.value = this.answer.value;
-      // activeIndex ++
     }
-
   }
 }
 
 
 </script>
-
-<style lang="scss" scoped>
-.enter_title {
-  padding-top: 110px;
-  background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
-  box-sizing: border-box;
-  padding-bottom: 50px;
-  min-height: 100vh;
+<style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 
-.header{
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  // position: absolute !important;
+  // top: 0;
+  // left: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+</style>
+<style lang="scss" scoped>
+.container {
+  background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
+  height: 100vh;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-family: "Noto Sans TC";
+  position: relative;
+  padding-top: 80px;
+}
+
+.enter_title,
+.question,
+.result {
+  padding-top: 110px;
+  box-sizing: border-box;
+  padding-bottom: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+// .question {
+//   // background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
+//   box-sizing: border-box;
+//   // min-height: 100vh;
+//   padding-top: 100px;
+// }
+
+// .result {
+//   // background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
+//   box-sizing: border-box;
+//   // min-height: 100vh;
+// }
+
+// .enter_title,
+
+.header {
   position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
 }
 
 
@@ -190,6 +288,7 @@ export default {
   line-height: 1.5;
   margin-bottom: 20px;
   margin-top: 30px;
+  user-select: none;
 }
 
 .smoke img {
@@ -241,11 +340,7 @@ export default {
 }
 
 
-.container {
-  background-repeat: no-repeat;
-  width: 100%;
-  font-family: "Noto Sans TC";
-}
+
 
 .enter {
   display: block;
@@ -267,12 +362,7 @@ export default {
   border: 2px solid #FFEDBC;
 }
 
-.question {
-  background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
-  box-sizing: border-box;
-  min-height: 100vh;
-  padding-top: 100px;
-}
+.question {}
 
 .question-image {
   display: block;
@@ -309,7 +399,7 @@ export default {
   border-radius: 12px;
   border: none;
   margin: 20px 10px;
-  line-height:1.5;
+  line-height: 1.5;
   user-select: none;
   box-sizing: border-box;
   align-content: center;
@@ -317,14 +407,12 @@ export default {
 
 
 //=====================結果轉場動畫=================================
-.start_animation{
+.start_animation {
   box-sizing: border-box;
-  padding-top: 3%;
-  min-height: 100vh;
-  padding-top: 100px;
+  // min-height: 100vh;
 }
 
-.middlebluesmoke{
+.middlebluesmoke {
   width: 400px;
   display: block;
   margin: 0 auto;
@@ -347,7 +435,7 @@ export default {
 }
 
 
-.finalcircleshine{
+.finalcircleshine {
   width: 300px;
   position: absolute;
   left: 50%;
@@ -359,12 +447,13 @@ export default {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.finalhand{
+.finalhand {
   width: 210px;
   position: absolute;
   left: 50vw;
@@ -372,14 +461,14 @@ export default {
   z-index: 6;
 }
 
-.finallongcloud{
+.finallongcloud {
   width: 620px;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -70%);
 }
 
-.littleshine1{
+.littleshine1 {
   width: 50px;
   position: absolute;
   left: 50%;
@@ -388,16 +477,16 @@ export default {
 }
 
 
-.littleshine2{
+.littleshine2 {
   width: 50px;
   position: absolute;
   left: 50%;
   transform: translate(-260%, -290%);
-  animation: littleshine2 3s  linear infinite;
+  animation: littleshine2 3s linear infinite;
 }
 
 
-.start_animation p{
+.start_animation p {
   font-size: 28px;
   color: #fff;
   font-weight: bold;
@@ -406,14 +495,10 @@ export default {
 }
 
 //==================結果頁============================================
-.result {
-  background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
-  box-sizing: border-box;
-  min-height: 100vh;
-}
 
-.finalanswer{
-  padding-top: 120px;
+
+.finalanswer {
+  // padding-top: 120px;
 }
 
 .finalanswer h1 {
@@ -423,22 +508,23 @@ export default {
   font-weight: bold;
 }
 
-.finalanswer img{
+.finalanswer img {
   width: 400px;
   display: block;
   margin: 10px auto;
 }
 
-.answer_text{
+.answer_text {
   font-size: 20px;
   color: #fff;
   font-weight: bold;
   text-align: center;
   line-height: 1.5;
   margin-bottom: 20px;
+  user-select: none;
 }
 
-.finalanswer button{
+.finalanswer button {
   display: block;
   font-size: 20px;
   font-weight: bold;
@@ -471,11 +557,5 @@ export default {
 .progress-segment.active {
   background-color: #768BFF;
 }
-
-
 </style>
 
-
-
-
-<style lang="scss" scoped></style>

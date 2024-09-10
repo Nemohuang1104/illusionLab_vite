@@ -27,7 +27,8 @@ const props = defineProps({
   background-size:contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 200px;
+  max-width: 200px;
+  width: 100%;
 
   height: 60px;
   font-size: 20px;

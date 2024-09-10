@@ -4,7 +4,8 @@
 .header {
   height: $header-height;
   color: $font-color;
-  
+  z-index: $header-index;
+
   .logo img {
     width: $logo-size;
   }

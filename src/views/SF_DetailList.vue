@@ -68,8 +68,8 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
                         <h3>太空金屬杯</h3>
                         <h4>NT $ 299 </h4>
                         <div class="leftlight">
-                            <p>作者 : Dandy · Syike </p>
-                            <p>與知名插畫家DoMeDo聯名推出</p>
+                            <p>作者 : Nemo  </p>
+                            <p>與知名插畫家 Nina 聯名推出</p>
                         </div>
                         <p>材質：雙層鈦金屬</p>
                         <p>商品規格 : 寬 7.5 cm x 高 10 cm</p>
@@ -134,8 +134,9 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     // border: 1px solid red;
 
     text-align: center;
+    padding-top: 120px;
 
-
+    
 }
 
 //標題
@@ -227,7 +228,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 }
 
 .textbox h3 {
-    font-size: 32px;
+    font-size: 28px;
     color: #C1693B;
     font-weight: bold;
 }
@@ -335,7 +336,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 
     text-decoration: none;
-    font-size: 28px;
+    font-size: 22px;
     color: #fff;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
 }
