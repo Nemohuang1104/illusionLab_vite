@@ -251,22 +251,12 @@ const routes = [
     },
     requiredLogin: false
   },
-
   {
     path: '/SF_DetailList',
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊際商品細項"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/SF_ProductPage',
-    name: 'SF_ProductPage',
-    component: () => import('@/views/SF_ProductPage.vue'),
-    meta: {
-      title: "星際邊際全部商品"
+      title: "星際邊境商品細項"
     },
     requiredLogin: false
   },
@@ -287,6 +277,16 @@ const routes = [
     },
     requiredLogin: false
   },
+  {
+    path: '/SF_TicketDesign',
+    name: 'SF_TicketDesign',
+    component: () => import('@/views/SF_TicketDesign.vue'),
+    meta: {
+      title: "星際邊境客製票券"
+    },
+    requiredLogin: false
+  },
+
 
   // ============會員專區============//
   {

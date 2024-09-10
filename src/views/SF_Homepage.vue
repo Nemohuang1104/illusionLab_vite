@@ -18,9 +18,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper/modules';
 
 
-// 體驗活動字體
-import SFAdventuresTitle from '@/components/SFAdventuresTitle.vue';
-
 const modules = [Pagination, Autoplay];
 
 
@@ -51,11 +48,42 @@ function gotoTicketChange() {
     router.push('/SF_BookingChange');
 };
 
+// 打字機
+const fullText = '歡迎來到星際邊境，一起踏上這場前所未有的冒險吧！';
+// 用於顯示的部分文字
+const displayedText = ref('');
+
+const typeWriterEffect = () => {
+  let index = 0;
+  const typingSpeed = 150; // 打字速度
+
+ // 使用 requestAnimationFrame 進行打字效果
+ const type = () => {
+    if (index < fullText.length) {
+      displayedText.value += fullText[index];
+      index++;
+      setTimeout(() => {
+        requestAnimationFrame(type);
+      }, typingSpeed);
+    }
+  };
+
+// 延遲 ? 秒後啟動打字效果
+setTimeout(() => {
+    requestAnimationFrame(type);
+  }, 3000); 
+};
+
+// 當元件掛載時啟動打字機效果
+onMounted(() => {
+  typeWriterEffect();
+});
+
 // to top按鈕
 const showTopButton = ref(false);
 
 const handleScroll = () => {
-  showTopButton.value = window.scrollY > 1000;
+  showTopButton.value = window.scrollY > 1800;
 };
 
 const scrollToTop = () => {
@@ -82,11 +110,9 @@ onUnmounted(() => {
         </div>
 
         <!-- 歡迎文字 -->
-
-        <div class="introText">
-            <SFAdventuresTitle h2="歡迎來到星際邊境，一起踏上這場前所未有的冒險吧！"></SFAdventuresTitle>
+        <div class="typewriter-container">
+            <h2>{{ displayedText }}</h2>
         </div>
-
 
         <!-- 體驗內容 -->
         <div class="adventures">
@@ -95,8 +121,6 @@ onUnmounted(() => {
             </div>
         </div>
         
-
-
 
         <!-- 心得 -->
         <div class="comments">
@@ -140,6 +164,7 @@ onUnmounted(() => {
                                 <p>穿上UV透氣感的上衣和夥伴<br>並肩作戰。</p>
                             </div>
                         </div>
+                    </div>
                     </swiper-slide>
                     <swiper-slide>
                     <div class="carousel" >
@@ -150,6 +175,7 @@ onUnmounted(() => {
                                 <p>開啟星際冒險，記錄下每一段屬於<br>你的璀璨時刻。</p>
                             </div>
                         </div>
+                    </div>
                     </swiper-slide>
                     <swiper-slide>
                     <div class="carousel" >
@@ -160,6 +186,7 @@ onUnmounted(() => {
                                 <p>可愛的太空人，人人都該擁有！</p>
                             </div>
                         </div>
+                    </div>
                     </swiper-slide>
 
                 </swiper>
@@ -250,7 +277,7 @@ onUnmounted(() => {
             <p>週一到週五 10:00 ~ 20:00 會由專人回覆訊息</p>
         </div>
         <!-- to top按鈕 -->
-        <button v-if="showTopButton" @click="scrollToTop" class="top-button">TOP↑</button>
+        <button v-if="showTopButton" @click="scrollToTop" class="top-button">TOP ↑</button>
         <Footer_2></Footer_2>
     </div>
 
@@ -261,6 +288,14 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 @import '@/assets/SASS/basic/_color.scss';
+
+// 匯入打字機字體
+@font-face {
+    font-family: '瀞ノグリッチ明朝 H1'; /* 字體名稱 */
+    src: url('/src/assets/fonts/瀞ノグリッチ明朝H1.otf') format('opentype'); /* 使用 .otf 格式 */
+    font-weight: normal;
+    font-style: normal;
+}
 
 * {
     font-family: "Noto Serif TC";
@@ -277,17 +312,27 @@ onUnmounted(() => {
     text-align: center;
 }
 
-.introText {
-    //歡迎文字
-    font-family: ToronoGlitchSerif H1;
-    font-size: 36px;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 5%;
+// 打字機
+.typewriter-container {
+  white-space: nowrap; /* 確保文字不換行 */
+  overflow: hidden; /* 隱藏超出範圍的文字 */
+  text-align: center;
+  margin: 4% auto;
 
 }
 
-
+// 打字機文字
+.typewriter-container h2{
+    background: linear-gradient(136deg, #FFF 10.13%, rgba(255, 255, 255, 0.30) 88.6%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: '瀞ノグリッチ明朝 H1', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+    
+}
 
 // 票價資訊
 .ticketInfo {
@@ -325,7 +370,7 @@ onUnmounted(() => {
 }
 
 .carousel-container {
-    height: 500px;
+    height: 400px;
 }
 
 .carousel-container img {
@@ -356,7 +401,7 @@ onUnmounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5%;
+    margin: 5% auto;
     line-height: 2;
 }
 
@@ -370,7 +415,7 @@ onUnmounted(() => {
 
 .infoText .right img {
     width: 100%;
-    max-width: 320px;
+    max-width: 400px;
 }
 
 .infoText .time {
@@ -381,30 +426,29 @@ onUnmounted(() => {
 
 
 //常見規則
-.rules {
-    margin-bottom: 5%;
-}
 
 .mainSel {
     display: block;
     width: 100%;
     max-width: 500px;
-    margin: 3% auto;
+    margin: 5% auto;
 }
 
 .changeRules {
     // 退換票政策
     background: none;
     border: none;
-
-    margin: 2% auto 5% auto;
+    border-bottom: 1px solid;
+    margin: 8% auto;
     cursor: pointer;
     font-size: 20px;
+
     // 讓按鈕置中
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    // align-items: center;
+    // justify-content: center;
     transition: .5s ease-out;
+    padding: 0;
 }
 
 .changeRules:hover {
@@ -533,7 +577,7 @@ onUnmounted(() => {
 
 .contact #text {
     text-align: center;
-    margin: 3% auto 7% auto;
+    margin: 5% auto 7% auto;
     line-height: 1.6;
 }
 
@@ -564,28 +608,151 @@ onUnmounted(() => {
   bottom: 2vw;
   right: 1vw;
   padding: 6px;
-  background-color: #ffffff;
-  color: #000000;
-  font-weight: bold;
-  border: none;
-  border-radius: 2px;
+  background: none;
+  color: #ffffff;
+  border: 1px solid;
+  border-radius: 5px;
   cursor: pointer;
   animation: slide-in 0.8s forwards;
-  &:hover {
-    opacity: 1;
-  }
+  font-size: 16px;
 }
 
 
 @keyframes slide-in {
   from {
-    transform: translateY(100%); /* 初始位置在畫面下方 */
-    opacity: 0; /* 初始透明 */
+    transform: translateX(100%);
   }
   to {
-    transform: translateY(0); /* 移動至最終位置 */
-    opacity: 1; /* 完全顯示 */
+    transform: translateX(0); /* 移動至最終位置 */
   }
 }
 
+
+
+// === RWD ===
+
+@media screen and (max-width: 1100px) {
+    // 熱門商品
+    .carousel-item{
+        display: inline-block;
+    }
+    .product-info{
+        margin-left: 0px;
+    }
+    .product-info h3{
+        margin-bottom: 10px;
+    }
+    .product-info p{
+        br{
+        display: none;
+        }
+        text-align: center;
+    }
+   
+}
+
+@media screen and (max-width: 768px) {
+    .logo{
+        gap: 10px;
+    }
+    .left .worktime{
+        margin-bottom: 10px;
+    }
+
+}
+
+@media screen and (max-width: 600px){
+    .typewriter-container h2{
+        font-size: 20px;
+        white-space: normal; //自動換行
+    }
+
+    .ticketInfo img{
+        max-width: 400px;
+    }
+
+    .carousel-container img{
+        max-width: 200px;
+    }
+
+    .product-info h3{
+        font-size: 20px;
+    }
+
+    .swiper-slide{
+        height: 200px;
+    }
+
+    .infoText{
+        display: flex;
+        flex-direction: column;
+        gap:30px;
+    }
+    
+    .logo a{
+        max-width: 100px;
+    }
+    .logo .first{
+        max-width: 80px;
+    }
+    .accordion-question span{
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 430px){
+    .typewriter-container h2{
+        font-size: 16px;
+    }
+
+    .swiper{
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .ticketInfo{
+        margin: 12% 8% ;
+    }
+
+    .product-info h3{
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .infoText .right img{
+        max-width: 300px;
+    }
+
+    .accordion-question{
+        width: auto;
+        height: auto;
+    }
+
+    .accordion-answer .answer{
+        width: 77%;
+        text-align: justify;
+    }
+
+    .logo{
+        grid-template-columns:repeat(2, 1fr);
+        gap:30px;
+    }
+
+    .rules,.sponsor,.contact{
+        margin: 12% auto;
+    }
+
+    .contact #text{
+        margin: 5% ;
+    }
+
+    .contact p{
+        line-height: 2;
+    }
+
+    .icons{
+        max-width: 55%;
+        margin: 5% auto;
+    }
+}
 </style>

@@ -5,6 +5,7 @@ const currentMode = ref('three');
 
 import Footer_2 from '@/components/Footer_2.vue';
 
+import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
 //輪播圖
 // Import Swiper and modules
@@ -39,8 +40,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 
     <div class="warpper">
         <div class="title">
-            <h1>精選商品</h1>
-            <p>PRODUCTS</p>
+            <StrellarFrontierTitle h1="精選商品" p="PRODUCTS"></StrellarFrontierTitle>
         </div>
 
         <div class="pboxout">
@@ -113,12 +113,16 @@ import Footer_2 from '@/components/Footer_2.vue';
 
 <style lang="scss" scoped>
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
+
 *{
-text-decoration: none;
+    text-decoration: none;
+    font-family: "Noto Serif TC";
+
 }
 
 .warpper {
-    font-family: "Noto Serif SC";
     // max-width: 1440px;
     width: 100%;
 
@@ -139,32 +143,7 @@ text-decoration: none;
     max-width: 1440px;
     width: 100%;
     // padding-top: 10px;
-    margin-bottom: 15px;
-}
-
-
-.title h1 {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 5px;
-
-    background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-
-}
-
-
-
-
-.title p {
-    font-size: 20px;
-    font-weight: 700;
-    background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+    margin-bottom: 30px;
 }
 
 
@@ -244,7 +223,7 @@ text-decoration: none;
 .leftlight {
     border-left: 5px solid #132C79;
     line-height: 20px;
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 .textbox h3 {
