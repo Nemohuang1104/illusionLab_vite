@@ -41,7 +41,7 @@ const getContentStyle = (question) => {
 
 // 根據展開狀態設定信息的透明度樣式
 const getInfoStyle = (question) => {
-  return { opacity: question.expanded ? 1 : 0 };
+  return { "transform": question.expanded ? "scale(1 ,1)" : "scale(1 ,0)" };
 };
 </script>
 
@@ -57,10 +57,13 @@ const getInfoStyle = (question) => {
       </div>
       <section class="info">
           <article v-for="question in questions" :key="question.id" class="question">
-              <header>
-              <h4 @click="toggle(question)" class="question-title">
-                  {{ question.title }}
-              </h4>
+              <header class="question-title">
+                <div class="q_warp" @click="toggle(question)">
+                  <h4  >
+                      {{ question.title }}
+                  </h4>
+                  
+                </div>
               <button class="btn" @click="toggle(question)">
                   <svg
                   v-show="question.expanded"
@@ -128,24 +131,31 @@ const getInfoStyle = (question) => {
         margin-bottom: 32px;
     }
 
-    .title h1{
-        width: 100%;
-        text-align: center;
-        font-size: map-get($fontSize, h1);
-        font-weight: bold;
-        font-family: map-get($fontStyle, style_2);
-        color: map-get($color_0, btn_orange);
-    }
-    .title h3{
-        width: 100%;
-        text-align: center;
-        font-size: map-get($fontSize, h3);
-        font-weight: bold;
-        font-family: map-get($fontStyle, style_2);
-        color: map-get($color_0, btn_orange);
+    // .title h1{
+    //     width: 100%;
+    //     text-align: center;
+    //     font-size: map-get($fontSize, h1);
+    //     font-weight: bold;
+    //     font-family: map-get($fontStyle, style_2);
+    //     color: map-get($color_0, btn_orange);
+    // }
+    // .title h3{
+    //     width: 100%;
+    //     text-align: center;
+    //     font-size: map-get($fontSize, h3);
+    //     font-weight: bold;
+    //     font-family: map-get($fontStyle, style_2);
+    //     color: map-get($color_0, btn_orange);
+    // }
+    .q_warp{
+      // border: 2px solid rgb(0, 60, 255);
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
     }
 
     .question {
+      // border: 2px solid rgb(0, 255, 0);
         // padding: 1rem 1.5rem;
         // border: 2px solid hsl(209, 34%, 30%); /* --clr-grey-3 */
         margin-bottom: 1rem;
@@ -169,7 +179,6 @@ const getInfoStyle = (question) => {
         color: map-get($colorfont_0, white);
         text-transform: none;
         line-height: 1.5;
-        cursor: pointer;
     }
 
     .question p {
@@ -177,7 +186,7 @@ const getInfoStyle = (question) => {
         // margin-top: 0.5rem;
         margin-left: 0;
         margin-right: 0;
-        width: 98%;
+        width: 100%;
         background: map-get($colorfont_0, white);
         // padding: 1rem 0 1rem 1.5rem ;
         padding: 2% 0;
@@ -194,6 +203,8 @@ const getInfoStyle = (question) => {
         // background: #1E1E2F;
         padding: 8px 20px;
         // border-radius: 20px 20px ;
+        // cursor: pointer;
+        // border: 2px solid red
 
     }
 
@@ -223,11 +234,17 @@ const getInfoStyle = (question) => {
 
     .info {
         margin: 0 auto;
-        width: 70%;
+        max-width: 800px;
+        padding: 0 5%;
         z-index: -1;
         opacity: 1;
-        transition: opacity 0.2s ease-out;
-        
+        // transition: opacity 0.2s ease-out;
+        transform-origin: top left;
+        transition: transform 0.1s ease-out;
+        p{
+          line-height: 1.2;
+          font-size: map-get($map: $fontSize, $key:p );
+        }
     }
 
     .tab{

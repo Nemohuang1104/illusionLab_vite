@@ -137,7 +137,9 @@
         </div>
         <div ref="sentMyTicketBTN" class="sentMyTicket">
             <button v-if="isChoosenHidden" @click="wantToChoose" class="CTbtn btnColor1" id="RMTbtn">重新製作</button>
-            <button v-if="isChoosenHidden" class="CTbtn btnColor2" id="CMTbtn">確認送出</button>
+            <router-link to="/mindspectrum">
+             <button v-if="isChoosenHidden" class="CTbtn btnColor2" id="CMTbtn">確認送出</button>
+            </router-link>
         </div>
     </div>
 </template>

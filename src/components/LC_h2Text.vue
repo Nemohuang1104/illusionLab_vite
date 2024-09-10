@@ -62,4 +62,9 @@ img{
 }
 
 
+@media screen and (max-width:712px){
+  .title{
+  margin: 20px 10% 20px;
+}
+}
 </style>

@@ -3,8 +3,8 @@
   <div class="top">
       <MS_com_title 
       :mode="modeSelect"  
-      mainTitle="門票購入" 
-      subTitle="Reservation"
+      mainTitle="賓客資料" 
+      subTitle="Customer Info"
       :intro="OurIntro" />
   </div>
     <main>
@@ -45,9 +45,12 @@
         </div>
       </form>
     </main>
-    <MS_com_buttons 
-        mode="two1" :step="modeSelect"
-    />
+    <!-- <router-link :to="dynamicRoute"> -->
+    <!-- <MS_com_buttons 
+      :mode="currentMode" :currentStep="currentStep"
+        mode="two1" :step="modeSelect" 
+    /> -->
+  <!-- </router-link> -->
   </div>
 </template>
 
@@ -58,6 +61,15 @@
 
 <script>
 export default {
+  data() {
+    return {
+      currentMode: 'two1', // 当前的模式
+      currentStep: 1        // 当前的步骤
+    };
+  },
+  components: {
+    MS_com_buttons
+  },
   props: {
     mode: {
       type: String,
@@ -106,6 +118,16 @@ export default {
           return '未知模式';
       }
     },
+    dynamicRoute() {
+      if (this.mode === 'one1') {
+        return '/LC_Ticket_reservation2'; 
+      } else if (this.mode === 'mode2') {
+        return '/page2';
+      }else if (this.mode === 'mode3') {
+        return '/page3';
+      }
+     
+    }
   },
 };
 </script>
@@ -199,7 +221,7 @@ export default {
         text-align: center;
     }
     .template_mobangOne{
-        background-image: url('../src/ms/modeBGI1.png');
+        // background-image: url('../src/ms/modeBGI1.png');
         background-size:contain;  
     }
     .template_mobangTwo{

@@ -1,13 +1,19 @@
 <script setup>
 const props = defineProps({
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9785ce268821d11b795c989bbe80222444a80024
    
     styles: {
         type: Object,
         required: true
     },
+<<<<<<< HEAD
+=======
 
    
+>>>>>>> 9785ce268821d11b795c989bbe80222444a80024
 });
 
 
