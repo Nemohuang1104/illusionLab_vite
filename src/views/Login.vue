@@ -6,7 +6,7 @@ import Footer_0 from '../components/Footer_0.vue';
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-  <Header_0></Header_0>
+  <Header_0 :mode="currentMode"></Header_0>
 
 <!-- 中間會員登入區塊 -->
 <main>
@@ -46,6 +46,7 @@ import Footer_0 from '../components/Footer_0.vue';
   background: map-get($color_0,bgc_blue);
   background-repeat: no-repeat;
   width: 100%;
+  min-height: 100vh;
   font-family:"Noto Sans TC";
 }
 

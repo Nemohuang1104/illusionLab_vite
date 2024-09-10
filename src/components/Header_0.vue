@@ -123,20 +123,11 @@ header {
   z-index: 1000;
 }
 
-<<<<<<< HEAD
-
-
-.logo img {
-  width: 145px;
-  flex-shrink: 0;
-  cursor: pointer;
-=======
 .logo img {
   height: 60px;
   flex-shrink: 0;
   cursor: pointer;
   padding: 10px 20px;
->>>>>>> Ting
 }
 
 
@@ -168,11 +159,7 @@ header {
 
 //公版(one)
 .header-one {
-<<<<<<< HEAD
-  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
-=======
   background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0) 99.67%);
->>>>>>> Ting
   height: 80px;
   /* 添加高度 */
   cursor: pointer;
@@ -190,11 +177,8 @@ header {
   height: 80px;
   /* 添加高度 */
   cursor: pointer;
-<<<<<<< HEAD
   font-family: "Noto Serif TC";
-=======
 
->>>>>>> Ting
 }
 
 
@@ -210,15 +194,12 @@ header {
   height: 80px;
   /* 添加高度 */
   cursor: pointer;
-<<<<<<< HEAD
  font-family: "Noto Serif TC";
 }
 
 .menu-three{
   background-color: #03030171;
-=======
 
->>>>>>> Ting
 }
 
 //活動三心靈光譜(four)
@@ -350,13 +331,10 @@ header {
   // <script setup>
   // const currentMode = ref('');  //公版LOGO 為 one 人生賭場 為 two  星際邊境 為 three 心靈光譜 為 four
   
-<<<<<<< HEAD
   // </script>
-  //  -->
-=======
+ 
 <script setup>
 const currentMode = ref('');  //公版LOGO 為 one 人生賭場 為 two  星際邊境 為 three 心靈光譜 為 four
 
 </script>
  -->
->>>>>>> Ting

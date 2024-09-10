@@ -242,11 +242,10 @@ const routes = [
     },
     requiredLogin: false
   },
-<<<<<<< HEAD
   { path: '/SF_ProductPage',
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
-=======
+  },
   {
     path: '/MS_ProductPage',
     name: '心靈光譜商品頁',
@@ -260,14 +259,12 @@ const routes = [
     path: '/littleQuiz',
     name: 'littleQuiz',
     component: () => import('@/views/LittleQuiz.vue'),
->>>>>>> Ting
     meta: {
       title: "星際邊際全部商品"
     },
     requiredLogin: false
   },
-<<<<<<< HEAD
-{ path: '/SF_DetailList',
+  { path: '/SF_DetailList',
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
@@ -292,7 +289,6 @@ const routes = [
     requiredLogin: false
   },
 
-=======
   {
     path: '/LittleQuizResult',
     name: 'LittleQuizResult',
@@ -304,7 +300,6 @@ const routes = [
   },
 
 
->>>>>>> Ting
   // ============會員專區============//
   {
     path: '/login',

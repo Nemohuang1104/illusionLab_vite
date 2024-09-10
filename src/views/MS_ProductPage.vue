@@ -6,7 +6,7 @@ import Header_0 from '@/components/Header_0.vue';
 // 使用 ref 定義  currentMode 狀態 
 const currentMode = ref('four');
 
-import Footer_3 from '@/components/Footer_3.vue';
+import Footer_03 from '@/components/Footer_03.vue';
   
 // 螢幕寬高度
 // import { ref, onMounted, onUnmounted } from 'vue';
@@ -31,7 +31,7 @@ import Footer_3 from '@/components/Footer_3.vue';
 
 <template>
   <div>
-   <Header_0 :mode="currentMode"></Header_0 >
+   <Header_0 :mode="currentMode" class="header"></Header_0 >
   </div>
 
   <!--  螢幕寬度高度-->
@@ -43,82 +43,86 @@ import Footer_3 from '@/components/Footer_3.vue';
   <div class="warpper">
 
     <div class="center">
-      <StrellarFrontierTitle h1="周邊商品" p="PRODUCT"></StrellarFrontierTitle>
+
+      <div class="title">
+        <h1>周邊商品</h1>
+        <p>PRODUCT</p>
+      </div>
 
       <div class="producttitle">
         <div class="arrowleft">
-          <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
-          <router-link to="/lifeCasino"><P>人生賭場</P></router-link>
+          <font-awesome-icon icon="fa-solid fa-arrow-left-long" class="arrow"/>
+          <router-link to="/LC_ProductPage"><P>人生賭場</P></router-link>
         </div>
         <div class="arrowright">
-          <router-link to="/mindspectrum"><P>星際邊際</P></router-link>
-          <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
+          <router-link to="/SF_ProductPage"><P>星際邊際</P></router-link>
+          <font-awesome-icon icon="fa-solid fa-arrow-right-long" class="arrow"/>
         </div>
       </div>
       <!-- 放置一個商品列的外框 -->
       <div class="pagebox">
         <div class="list">
           <div class="pro">
-            <router-link><img src="../assets/images/MS" alt=""></router-link>
+            <router-link><img src="../assets/images/MS_bearnotebook.png" alt=""></router-link>
             <div>
-              <p>太空鋼杯</p>
+              <p>繪本風格筆記本</p>
               <div class="price">
-                <span>NT$ 350元</span>
+                <span>NT$ 180</span>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SF_bag.png" alt=""></router-link>
+            <router-link><img src="../assets/images/MS_littlebag.png" alt=""></router-link>
             <div>
-              <p>帆布袋</p>
+              <p>小女孩帆布袋</p>
               <div class="price">
-                <p>NT$ 660元</p>
+                <p>NT$ 590</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SF_easycard_1.png" alt=""></router-link>
+            <router-link><img src="../assets/images/MS_YOYOcard.png" alt=""></router-link>
             <div>
-              <p>悠遊卡</p>
+              <p>小蜥蜴悠遊卡</p>
               <div class="price">
-                <p>NT$ 200元</p>
+                <p>NT$ 300</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SFbook.svg" alt=""></router-link>
+            <router-link><img src="../assets/images/MS_productphone.jpg" alt=""></router-link>
             <div>
-              <p>筆記本</p>
+              <p>防摔手機殼</p>
               <div class="price">
-                <p>NT$ 200元</p>
+                <p>NT$ 1280</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/SF_Pillow.png" alt=""></router-link>
+            <router-link><img src="../assets/images/MS_productcard.jpg" alt=""></router-link>
             <div>
-              <p>抱枕</p>
+              <p>繪本風格卡片</p>
               <div class="price">
-                <p>NT$ 600元</p>
+                <p>NT$ 80</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
           </div>
 
           <div class="pro">
-            <img src="../assets/images/productstshirt.png" alt="">
+            <img src="../assets/images/MS_productsticker.jpg" alt="">
             <div>
-              <p>T-shirt</p>
+              <p>繪本風貼紙</p>
               <div class="price">
-                <p>NT$ 880元</p>
+                <p>NT$ 80</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
@@ -127,7 +131,7 @@ import Footer_3 from '@/components/Footer_3.vue';
       </div>
     </div>
     <div>
-    <Footer_3></Footer_3>
+    <Footer_03></Footer_03>
     </div>
   </div>
 </template>
@@ -138,8 +142,8 @@ import Footer_3 from '@/components/Footer_3.vue';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 @import '@/assets/SASS/basic/_color.scss';
 * {
-    font-family: "Noto Serif TC" ;
-    color:map-get($colofont_2 , text);
+    font-family: "Noto Sans TC" ;
+    color:map-get($colofont_3 , text);
     text-decoration: none;
 }
 
@@ -149,12 +153,14 @@ import Footer_3 from '@/components/Footer_3.vue';
   margin: 0 auto;
   // border: 1px solid red;
   // background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0));
-
-  background-image: url(../assets/images/STBackground.png);
-
+  background-image: url(../assets/images/MS_paperbg.jpg);
+  padding-top: 150px;
 }
 
-
+.header{
+  position: fixed;
+  z-index: 20;
+}
 
 .center {
   max-width: 1440px;
@@ -167,28 +173,20 @@ import Footer_3 from '@/components/Footer_3.vue';
 
 }
 
-// .center h1 {
-//   font-size: 38px;
-//   font-weight: 700;
-//   margin-bottom: 5px;
-//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-//   background-clip: text;
-//   -webkit-background-clip: text;
-//   color: transparent;
+.title{}
 
-// }
+.title h1{
+  font-size: 36px;
+  color: #855F49;
+  font-weight: bold;
+}
 
-
-// .center p {
-//   font-size: 20px;
-//   font-weight: 700;
-//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-//   background-clip: text;
-//   -webkit-background-clip: text;
-//   color: transparent;
-// }
-
-
+.title p{
+  font-size: 20px;
+  color: #855F49;
+  font-weight: bold;
+  margin-top: 8px;
+}
 
 .producttitle {
   max-width: 700px;
@@ -217,27 +215,27 @@ import Footer_3 from '@/components/Footer_3.vue';
 
 
 
-.arrowleft {
-  // color: #fff;
+.arrowleft,.arrowright {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #fff;
-  
+  border-bottom: 2px solid #FB9D3C;
 }
 
-.arrowright {
-  // color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #fff;
+
+
+.arrowleft p ,.arrowright p{
+  color: #FB9D3C;
+  font-weight: bold;
+}
+
+.arrow{
+  color: #FB9D3C;
 }
 
 //商品外框
 .pagebox {
-  max-width: 800px;
-  width: 90%;
+  width: 63%;
   height: auto;
   // height: 750px;
   overflow: hidden;
@@ -254,17 +252,17 @@ import Footer_3 from '@/components/Footer_3.vue';
 
 .pagebox img {
   max-width: 150px;
-  height: 150px;
   margin-bottom: 15px;
+  background-size: cover;
+  border-radius: 12px;
 }
 
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 26px;
+  gap: 2vw;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
-
 }
 
 .pro {
@@ -278,16 +276,6 @@ import Footer_3 from '@/components/Footer_3.vue';
   border-radius: 10px;
   cursor: pointer;
 }
-
-.pro:hover {
-  transform: scale(1.1,1.1);
-  /* 往上是負，輕微浮起 */
-  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
-  /* 明顯的阴影效果 */
-  border-color: rgba(255, 255, 255, 0.5);
-  /* 懸停時增加邊框颜色 */
-}
-
 
 
 
@@ -307,7 +295,6 @@ import Footer_3 from '@/components/Footer_3.vue';
   font-size: 16px;
   display: flex;
   justify-content: space-between;
-  
 }
 
 
