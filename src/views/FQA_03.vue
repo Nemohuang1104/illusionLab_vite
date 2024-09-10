@@ -42,7 +42,7 @@ const currentMode = ref('four');
           <h3>票卷兌換：</h3>
           <p>請於活動當天持電子票卷至櫃台兌換實體票卷，並憑實體票卷入場。本活動的驗證僅憑票券進行，請務必妥善保管您的票卷。</p>
           
-          <p>關於退換貨詳細資訊請至 <a href="">票券異動</a>查看，或來信客服信箱: illusionlab@gmail.com ，由專人為您服務</p>
+          <p>關於退換貨詳細資訊請至 <router-link to="/TicketChange_03" ><a href="">票券異動</a></router-link>查看，或來信客服信箱: illusionlab@gmail.com ，由專人為您服務</p>
         </span>
 
         <span class="rwd_text">
