@@ -66,7 +66,7 @@ const routes = [
   {
     path: '/littlequiz',
     name: 'littlequiz',
-    component: () => import('@/views/LittleQuizEnter.vue'),
+    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
       title: "小測驗"
     },
@@ -252,6 +252,24 @@ const routes = [
     component: () => import('@/views/MS_ProductPage.vue'),
     meta: {
       title: "心靈光譜商品頁"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/FQA_03',
+    name: '常見問題',
+    component: () => import('@/views/FQA_03.vue'),
+    meta: {
+      title: "心靈光譜常見問題"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/TicketChange_03',
+    name: '票務資訊',
+    component: () => import('@/views/TicketChange_03.vue'),
+    meta: {
+      title: "心靈光譜票務資訊"
     },
     requiredLogin: false
   },
