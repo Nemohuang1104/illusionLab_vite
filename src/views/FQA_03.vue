@@ -1,11 +1,14 @@
 <script setup>
 import Footer_03 from '@/components/Footer_03.vue';
+import SFHeader_0 from '@/components/SFHeader_0.vue';
+import { ref } from 'vue';
+const currentMode = ref('four');
 </script>
 
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-    <header></header>
+    <SFHeader_0 :mode="currentMode" class="header"></SFHeader_0>
 
   <!-- 標題&英文 -->
    <div class="title">
@@ -175,18 +178,19 @@ import Footer_03 from '@/components/Footer_03.vue';
   background-image: url(../assets/images/MS_paperbg.jpg);
   width: 100%;
   font-family: "Noto Sans TC";
+  padding-top: 120px;
 }
 
 header {
-  width: 100%;
-  height: 100px;
-  background-color: #B89977;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .title {
   margin: 0 auto;
   text-align: center;
-  margin-top: 8%;
+  // margin-top: 8%;
   margin-bottom: 5%;
 }
 
@@ -201,6 +205,7 @@ header {
   color: #462C14;
   font-weight: bold;
   font-family:Arial, Helvetica, sans-serif;
+  padding-top: 8px;
 }
 
 main {

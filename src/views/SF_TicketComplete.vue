@@ -93,28 +93,29 @@ const props = defineProps({
     margin:3% auto;
   }
     
-  .ticket-image{
+  .ticket{
     z-index: 2;
+    animation: slideIn 2.5s ease-in-out forwards; /* 動畫名稱及參數 */
+
   }
 
 // 票券動畫效果
   .ticket-image .style {
     position: absolute;
-    top: -200px;
-    left: 30px;
+    top: -500px;
+    left: 17px;
     width: 100%;
-    max-width: 24vw; 
-    animation: slideIn 2.5s ease-in-out forwards; /* 動畫名稱及參數 */
+    max-width: 320px; 
+    // animation: slideIn 2.5s ease-in-out forwards; /* 動畫名稱及參數 */
   }
 
   // 飛航小物
   .ticket-image .sticker{
     position: absolute;
-    top: -13vw;
-    left: 22vw;
+    top: -441px;
+    left: 277px;
     width: 100%;
-    max-width: 2vw; 
-    animation: slideIn 2.5s ease-in-out forwards; /* 動畫名稱及參數 */
+    max-width: 30px; 
 
   }
 
@@ -170,7 +171,7 @@ const props = defineProps({
 
   @keyframes slideIn {
   0% {
-    transform: translateY(33vh) rotate(15deg); /* 初始狀態 */
+    transform: translateY(28vh) rotate(8deg); /* 初始狀態 */
   }
 
   100% {

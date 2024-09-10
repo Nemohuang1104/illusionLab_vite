@@ -1,13 +1,16 @@
 <script setup>
   import Footer_03 from '@/components/Footer_03.vue';
   import TicketChangeSwiper from '@/components/TicketChangeSwiper.vue';
+  import SFHeader_0 from '@/components/SFHeader_0.vue';
+  import { ref } from 'vue';
+  const currentMode = ref('four');
 </script>
 
 
 <template>
 <div class="frame">
 
-<header></header>
+<SFHeader_0 :mode="currentMode" class="header" :class="header"></SFHeader_0>
 
 <div class="wrapper">
   <h1>票券異動</h1>
@@ -98,12 +101,13 @@
   width: 100%;
   font-family:"Noto Sans TC";
   padding-bottom: 1%;
+  padding-top: 80px;
 }
 
 header{
-  width: 100%;
-  height: 80px;
-  background-color:#B89977 ;
+ position: fixed;
+ top: 0;
+ left: 0;
 }
 
 
@@ -124,6 +128,7 @@ header{
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   margin-bottom: 30px;
+  padding-top: 8px;
 }
 
 .change{

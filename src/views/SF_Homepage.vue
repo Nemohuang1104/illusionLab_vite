@@ -1,16 +1,19 @@
 <script setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
+//隕石及popup
+import SF_Stone from '../components/SF_Stone.vue';
+
 // 旅行心得頁面
-
-
 import SF_Comments from './SF_Comments.vue';
 
 // 頁首頁尾
 import SFHeader_0 from '@/components/SFHeader_0.vue';
 const currentMode = ref('three');
 import Footer_2 from '@/components/Footer_2.vue';
+
 
 
 // 商品
@@ -47,17 +50,52 @@ const toggleAccordion = (index) => {
 
 import { useRouter } from 'vue-router';
 
+
 const router = useRouter();
 
 function gotoTicketChange() {
     router.push('/SF_BookingChange');
 };
 
+//購票去
+
+const scrollCount = ref(0);
+const showImage = ref(false);
+
+
+const handleScroll = () => {
+  scrollCount.value++;
+  if (scrollCount.value >= 7) {
+    showImage.value = true;
+  }
+};
+
+
+onMounted(() => {
+  window.addEventListener('wheel', handleScroll);
+});
+
+
+onBeforeUnmount(() => {
+  window.removeEventListener('wheel', handleScroll);
+});
+
+
+
 </script>
 
 
 <template>
     <SFHeader_0 :mode="currentMode"></SFHeader_0>
+    <div class="image-container">
+        <div v-if="showImage">
+            <!-- 圖片與文字同時顯示 -->
+            <img src="../assets/images/SF_moontoticket.png" alt="Your Image" class="moonticket" />
+            <div class="moonp">
+                <p>購票去</p>
+            </div>
+        </div>
+    </div>
     <div class="wrapper">
         <!-- 星球運轉 -->
         <div class="intro">
@@ -70,15 +108,16 @@ function gotoTicketChange() {
         </div>
 
 
+
         <!-- 體驗內容 -->
         <div class="adventures">
             <div class="Title">
                 <StrellarFrontierTitle h1="體驗內容" p="ADVENTURES"></StrellarFrontierTitle>
             </div>
         </div>
-        
 
-
+        <!-- 隕石及popup -->
+        <SF_Stone></SF_Stone>
 
         <!-- 心得 -->
         <div class="comments">
@@ -114,37 +153,43 @@ function gotoTicketChange() {
                 }" class="mySwiper">
 
                     <swiper-slide>
-                        <div class="carousel">
-                            <div class="carousel-item">
-                                <img id="tshirt" src="../assets/images/SF_Tshirt.png">
-                                <div class="product-info">
-                                    <h3>T-shirt</h3>
-                                    <p>穿上UV透氣感的上衣和夥伴<br>並肩作戰。</p>
+                        <router-link to="./SF_DetailList">
+                            <div class="carousel">
+                                <div class="carousel-item">
+                                    <img id="tshirt" src="../assets/images/SF_Tshirt.png">
+                                    <div class="product-info">
+                                        <h3>T-shirt</h3>
+                                        <p>穿上UV透氣感的上衣和夥伴<br>並肩作戰。</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </router-link>
                     </swiper-slide>
                     <swiper-slide>
-                        <div class="carousel">
-                            <div class="carousel-item">
-                                <img src="../assets/images/SFbook.svg">
-                                <div class="product-info">
-                                    <h3>筆記本</h3>
-                                    <p>開啟星際冒險，記錄下每一段屬於<br>你的璀璨時刻。</p>
+                        <router-link to="./SF_DetailList">
+                            <div class="carousel">
+                                <div class="carousel-item">
+                                    <img src="../assets/images/SFbook.svg">
+                                    <div class="product-info">
+                                        <h3>筆記本</h3>
+                                        <p>開啟星際冒險，記錄下每一段屬於<br>你的璀璨時刻。</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </router-link>
                     </swiper-slide>
                     <swiper-slide>
-                        <div class="carousel">
-                            <div class="carousel-item">
-                                <img src="../assets/images/SF_cup.png">
-                                <div class="product-info">
-                                    <h3>鋼杯</h3>
-                                    <p>可愛的太空人，人人都該擁有！</p>
+                        <router-link to="./SF_DetailList">
+                            <div class="carousel">
+                                <div class="carousel-item">
+                                    <img src="../assets/images/SF_cup.png">
+                                    <div class="product-info">
+                                        <h3>鋼杯</h3>
+                                        <p>可愛的太空人，人人都該擁有！</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </router-link>
                     </swiper-slide>
 
                 </swiper>
@@ -268,7 +313,6 @@ function gotoTicketChange() {
     text-align: center;
     margin-bottom: 5%;
 }
-
 
 
 // 票價資訊
@@ -538,5 +582,27 @@ function gotoTicketChange() {
 .contactTime p {
     text-align: center;
     line-height: 1.6;
+}
+
+
+//購票去
+
+.image-container {
+  position: fixed; /* 改为 fixed 让图片固定在视窗中 */
+  top: 1240px; /* 固定在距離頂部 1400px 的位置 */
+  right: 0;
+  margin: 20px;
+}
+
+img {
+  width: 100px; /* 根据需要调整图片大小 */
+}
+
+.moonp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
 </style>

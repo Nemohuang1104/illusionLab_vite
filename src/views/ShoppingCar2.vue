@@ -842,7 +842,7 @@ const highlight = ref({
 
     font-size: 16px;
     line-height: 1.6rem;
-    flex-basis: 26%;
+    flex-basis: 23%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 
@@ -892,7 +892,7 @@ const highlight = ref({
 
     font-size: 16px;
     line-height: 1.6rem;
-    flex-basis: 26%;
+    flex-basis: 23%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 

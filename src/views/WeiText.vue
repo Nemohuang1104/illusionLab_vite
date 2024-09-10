@@ -1,279 +1,206 @@
 <template>
-  <header :class="headerClass">
-    <div class="logo">
-      <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
+  <div class="bg">
+    <!-- 彈出框 -->
+    <div v-if="activePopup === 1" class="popup" >
+      <div class="popup-content  popupone">
+        <span class="popup-title">星球探索</span>
+        <div><img src="../assets/images/icon-xmark.svg" alt="" class="icon-xmark"  @click="closePopup"></div>
+        <!-- <font-awesome-icon icon="fa-regular fa-circle-xmark" class="icon-xmark" /> -->
+        <p>虛擬行星探索: 創建虛擬現實或擴增實境體驗，讓體驗者“登陸”，探索不同的地形、生物和環境。</p>
+      </div>
     </div>
-    <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
-      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-meh"
-          class="peopleicon" /></router-link>
-      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
-    </div>
-    <!-- 半圓形菜單 -->
-    <div class="menunone">
-      <ul :class="{ 'menu-open': isMenuOpen }" class="menu">
-        <li class="one"> <router-link :to="{ name: 'shop' }">會員登入</router-link>
-        </li>
-        <li class="two">
-          <router-link to="{ name: 'login'}">購物車</router-link>
-        </li>
-        <li class="three">
-          <router-link to="/lifeCasino">人生賭場</router-link>
-        </li>
-        <li class="four">
-          <router-link to="/SF_Homepage">星際邊境</router-link>
-        </li>
-        <li class="five">
-          <router-link to="/mindspectrum">心靈光譜</router-link>
-        </li>
-      </ul>
-    </div>
-  </header>
 
-  <!-- <font-awesome-icon icon="fa-solid fa-bars" /> 這是漢堡線 -->
+    <div  v-if="activePopup === 2" class="popup ">
+      <div class="popup-content popuptwo">
+        <span class="popup-title">太空人生活</span>
+        <div><img src="../assets/images/icon-xmark.svg" alt="" class="icon-xmark"  @click="closePopup"></div>
+        <!-- <font-awesome-icon icon="fa-regular fa-circle-xmark" class="icon-xmark" /> -->
+        <p>從服裝到飲食，日常活動到駕駛飛行船，一次體驗宇航者生活!</p>
+      </div>
+    </div>
+
+    <div  v-if="activePopup === 3" class="popup ">
+      <div class="popup-content popupthree">
+        <span class="popup-title">外星文明</span>
+        <div><img src="../assets/images/icon-xmark.svg" alt="" class="icon-xmark"  @click="closePopup"></div>
+        <!-- <font-awesome-icon icon="fa-regular fa-circle-xmark" class="icon-xmark" /> -->
+        <p>探索神秘的外星文化，另一個地球。銀河系中至少有36個與地球相似的、活躍的、科技發達的智慧文明。或者說外星文明。</p>
+      </div>
+    </div>
+
+    <div  v-if="activePopup === 4" class="popup ">
+      <div class="popup-content popupfour">
+        <span class="popup-title">互動體驗</span>
+        <div><img src="../assets/images/icon-xmark.svg" alt="" class="icon-xmark"  @click="closePopup"></div>
+        <!-- <font-awesome-icon icon="fa-regular fa-circle-xmark" class="icon-xmark" /> -->
+        <p>交互式星圖，可以探索星座、行星和其他天體。</p>
+      </div>
+    </div>
+
+    <div  v-if="activePopup === 5" class="popup">
+      <div class="popup-content  popupfive">
+        <span class="popup-title">視聽覺饗宴</span>
+        <div><img src="../assets/images/icon-xmark.svg" alt="" class="icon-xmark"  @click="closePopup"></div>
+        <!-- <font-awesome-icon icon="fa-regular fa-circle-xmark" class="icon-xmark" /> -->
+        <p>360度的宇宙全景影片，感受身臨其境的星際旅行。</p>
+      </div>
+    </div>
+
+    <!-- 觸發按鈕 -->
+
+    <button @click="togglePopup(1)">顯示 POPUP 1</button>
+    <button @click="togglePopup(2)">顯示 POPUP 2</button>
+    <button @click="togglePopup(3)">顯示 POPUP 3</button>
+    <button @click="togglePopup(4)">顯示 POPUP 4</button>
+    <button @click="togglePopup(5)">顯示 POPUP 5</button>
+  </div>
 </template>
 
 <script setup>
-import { computed, defineProps, ref } from 'vue';
-import SF_Homepage from './SF_Homepage.vue';
+import { ref } from 'vue';
 
-const props = defineProps({
-  mode: {
-    type: String,
-    default: 'one',
-    validator: value => ['one', 'two', 'three', 'four'].includes(value)
-  }
-});
+// 定義 activePopup 狀態
+const activePopup = ref(null);
 
-// 計算動態類名
-const headerClass = computed(() => {
-  return `header-${props.mode}`; //確保使用反引號來拼接字符串 
-});
+// 切換對應的 Popup 顯示狀態
+function togglePopup(popupNumber) {
+  activePopup.value = popupNumber;
+}
 
-// 使用 import.meta.url 動態導入資源
-const logoMap = {
-  'one': new URL('@/assets/images/logo_lab.svg', import.meta.url).href,
-  'two': new URL('@/assets/images/logo_lifecasino.svg', import.meta.url).href,
-  'three': new URL('@/assets/images/logo_StrellarFrontierIntro.svg', import.meta.url).href,
-  'four': new URL('@/assets/images/logo_heartlight_1.svg', import.meta.url).href
-};
-
-const logoSrc = computed(() => {
-  return logoMap[props.mode] || logoMap['one'];
-});
-
-
-// 根據 mode 設置不同的路由鏈接 //當點擊img時他會導到下面的頁面
-const logoLinkMap = {
-  'one': '/Home',
-  'two': '/lifecasino',
-  'three': '/SF_Homepage',
-  'four': '/mindspectrum'
-};
-
-const logoLink = computed(() => {
-  return logoLinkMap[props.mode] || logoLinkMap['one'];
-});
-
-
-// 控制菜單顯示狀態
-const isMenuOpen = ref(false);
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
-
+// 關閉 Popup
+function closePopup() {
+  activePopup.value = null;
+}
 </script>
 
-<style lang="scss" scoped>
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+<style scoped>
+.bg {
+  background-color: black;
   width: 100%;
-  // max-width: 1440px;
-  height: 80px;
+  height: 2000px;
 }
 
-
-
-.logo img {
-  width: 145px;
-  flex-shrink: 0;
-  padding: 10px 20px;
-  cursor: pointer;
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  /* background-color: white; */
+  border: none;
+  z-index: 1000;
 }
 
-
-//右側ICON
-.icons {
-  display: inline-block;
-  justify-content: end;
-  align-items: center;
-  padding: 10px 20px;
-  // border: 1px solid red;
-}
-
-.shoppingicon {
-  width: 35px;
-  height: 25px;
-  color: #fff;
-  margin-right: 20px;
-}
-
-.peopleicon {
-  width: 35px;
-  height: 25px;
-  color: #fff;
-}
-
-
-
-//公版及各活動的背景顏色
-
-//公版(one)
-.header-one {
-  background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
-  height: 80px;
-  /* 添加高度 */
-  cursor: pointer;
-}
-
-//活動一人生賭場(two)
-.header-two {
-  background-color: rgba(217, 217, 217, 0);
-  /* 透明度為100% */
-  height: 80px;
-  /* 添加高度 */
-  cursor: pointer;
-
-}
-
-//活動二星際邊境(three)
-
-.header-three {
-  background-image: url(../assets/images/STBackground.png);
-  height: 80px;
-  /* 添加高度 */
-  cursor: pointer;
-
-}
-
-//活動三心靈光譜(four)
-.header-four {
-  background-color: #B89977;
-  height: 80px;
-  /* 添加高度 */
-  cursor: pointer;
-}
-
-
-/* 漢堡按鈕 */
-.hamburger {
-  font-size: 35px;
-  color: white;
-  cursor: pointer;
-  display: none;
-  /* 在大螢幕上隱藏 */
-}
-
-
-/* 半圓形菜單樣式 */
-.menunone{
-  display: none;
-  position: absolute;
-  right: -100px;
-  top: 78px;
-}
-.menu {
-  /* 讓菜單在初始狀態下隱藏 */
-  right: 0px;
-  width: 250px;
-  height: 300px;
-  background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
-  border-radius: 0 0 0 100%;
-  /* 使其成為半圓形 */
-  transform: translateX(100%);
-  /* 隱藏在右側外部 */
-  transition: transform 0.5s ease;
+.popup-content {
+  position: relative;
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-  text-align: left;
-  padding-top: 20px;
+  align-items: end;
+  /* 確保子元素居中 */
+  width: 350px;
+  height: 200px;
+  border: 5px solid #2668C866;
+  border-radius: 12px;
+  padding:20px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  /* 確保背景透明 */
+  animation: draw-border 3s forwards;
+  /* 邊框動畫 */
 }
 
-.menu ul {
-  list-style-type: none;
-  padding: 0;
+
+
+.popup-title {
+  font-weight: bold;
+  font-size: 24px;
+
+  background: black;
+  /* background-color: red; */
+  /* 黑色背景 */
+  background: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 0.30) 97.6%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 文字在邊框上 */
+  position: fixed;
+  top: -13px;
+  left: 21px;
+
 }
 
-.menu li {
-  margin: 10px 0;
+
+
+@keyframes draw-border {
+  0% {
+    border-color: transparent;
+  }
+
+  25% {
+    border-top-color: #2668C866;
+  }
+
+  50% {
+    border-top-color: #2668C866;
+    border-right-color: #2668C866;
+  }
+
+  75% {
+    border-top-color: #2668C866;
+    border-right-color: #2668C866;
+    border-bottom-color: #2668C866;
+  }
+
+  100% {
+    border-color: #2668C866;
+  }
 }
 
-.menu a {
+.icon-xmark{
+  margin-bottom: 10px;
+}
+
+
+.popup-content p {
   color: white;
-  text-decoration: none;
+  line-height: 1.6;
 }
 
-.menu .one {
-  padding-left: 20px;
+/* 控制位置的 */
+.popupone{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-170%, -150%);
 }
 
-.menu .two {
-  padding-left: 40px;
+.popuptwo{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-155%, -25%);
 }
 
-.menu .three {
-  padding-left: 53px;
+.popupthree{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, 55%);
 }
 
-.menu .four {
-  padding-left: 68px;
+.popupfour{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(55%, -130%);
 }
 
-.menu .five {
-  padding-left: 82px;
-}
 
-/* 打開菜單時，從右側滑入 */
-.menu-open {
-  transform: translateX(0);
-  /* 滑入畫面 */
-}
-
-/* RWD：小螢幕時顯示漢堡按鈕 */
-@media (max-width: 768px) {
-  .menunone{
-    display:block;
-  }
-  .shoppingicon{
-    display: none;
-  }
-  .peopleicon{
-    display: none;
-  }
-  .hamburger {
-    display: block;
-  }
+.popupfive{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(65%, 5%);
 }
 </style>
-
-
-
-<!-- 以下是各活動複製過去更改 -->
-
-<!-- <template>
-  //     <div>
-  //     <Header :mode="currentMode"> 
-  //     </div>
-  // </template>
-    
-  // <script setup>
-  // const currentMode = ref('');  //公版LOGO 為 one 人生賭場 為 two  星際邊境 為 three 心靈光譜 為 four
-  
-  // </script>
-  //  -->

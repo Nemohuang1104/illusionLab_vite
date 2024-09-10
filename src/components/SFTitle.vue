@@ -39,6 +39,7 @@ p {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+ 
   
 }
 

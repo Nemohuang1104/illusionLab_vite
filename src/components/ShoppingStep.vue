@@ -1,10 +1,12 @@
 <script setup>
 const props = defineProps({
+
    
     styles: {
         type: Object,
         required: true
     },
+
    
 });
 
@@ -21,7 +23,7 @@ const props = defineProps({
         <div class="step_item">
             <div class="number" :style="{ background: styles[2].background, color: styles[2].fontcolor }">2</div>
             <p>付款資訊</p>
-            
+
         </div>
         <div class="line"></div>
         <div class="step_item">
@@ -45,7 +47,7 @@ const props = defineProps({
     width: 100px;
     height: 2.8px;
     background-color: #fff;
-    
+
 }
 
 .step_item{

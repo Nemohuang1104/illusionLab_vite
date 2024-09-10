@@ -9,7 +9,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "@/assets/css/reset.css";
-
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 
 // ============fontawsome==================
 //參考網址: https://reurl.cc/4dQ4gD
@@ -25,7 +26,7 @@ import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { faFaceMeh } from '@fortawesome/free-regular-svg-icons'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 
 
 
@@ -33,8 +34,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 
 // ---libary也要加---//
-library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars )
+library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark )
 
 
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount("#app");
+createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router).mount("#app");
 
