@@ -1,7 +1,7 @@
 <template>
   <header :class="headerClass">
     <div class="logo">
-    <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
+      <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
       <router-link to="/shop">
@@ -60,8 +60,7 @@ const logoLink = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-
-header{
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,11 +68,12 @@ header{
   max-width: 1440px;
   height: 80px;
 }
-.logo img{
-    height: 60px;
-    flex-shrink: 0;
-    cursor: pointer;    
-    padding: 10px 20px;
+
+.logo img {
+  height: 60px;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 10px 20px;
 }
 
 
@@ -106,31 +106,36 @@ header{
 //公版(one)
 .header-one {
   background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0) 99.67%);
-  height: 80px;/* 添加高度 */
+  height: 80px;
+  /* 添加高度 */
   cursor: pointer;
 }
 
 //活動一人生賭場(two)
 .header-two {
-  background-color: rgba(217,217,217, 0); /* 透明度為100% */
-  height: 80px;/* 添加高度 */
+  background-color: rgba(217, 217, 217, 0);
+  /* 透明度為100% */
+  height: 80px;
+  /* 添加高度 */
   cursor: pointer;
-  
+
 }
 
 //活動二星際邊境(three)
 
 .header-three {
   background-image: url(../assets/images/STBackground.png);
-  height: 80px;/* 添加高度 */
+  height: 80px;
+  /* 添加高度 */
   cursor: pointer;
-  
+
 }
 
 //活動三心靈光譜(four)
 .header-four {
   background-color: #B89977;
-  height: 80px;/* 添加高度 */
+  height: 80px;
+  /* 添加高度 */
   cursor: pointer;
 }
 </style>
@@ -150,4 +155,3 @@ const currentMode = ref('');  //公版LOGO 為 one 人生賭場 為 two  星際�
 
 </script>
  -->
-

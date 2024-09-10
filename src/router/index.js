@@ -177,14 +177,34 @@ const routes = [
     requiredLogin: false
   },
   {
-    path: '/littlequiz',
-    name: 'littlequiz',
-    component: () => import('@/views/LittleQuizEnter.vue'),
+    path: '/MS_ProductPage',
+    name: '心靈光譜商品頁',
+    component: () => import('@/views/MS_ProductPage.vue'),
+    meta: {
+      title: "心靈光譜商品頁"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/littleQuiz',
+    name: 'littleQuiz',
+    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
       title: "小測驗"
     },
     requiredLogin: false
   },
+  {
+    path: '/LittleQuizResult',
+    name: 'LittleQuizResult',
+    component: () => import('@/views/LittleQuizResult.vue'),
+    meta: {
+      title: "小測驗結果頁"
+    },
+    requiredLogin: true
+  },
+
+
   // ============會員專區============//
   {
     path: '/login',
