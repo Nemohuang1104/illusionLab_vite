@@ -1,29 +1,31 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_reservation mode="one" activityMode="activity1" class="reservation">
+      <MS_ticket_reservation mode="three" activityMode="activity3" class="reservation">
         
       </MS_ticket_reservation>
       <MS_com_buttons
         class="actitvyBtn"
         :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
-      <CoinFall class="coin"/>
-  <Footer_1 class="footer"></Footer_1>
+        :mode="mode" 
+        :step="modeSelect" 
+        :activityMode="activityMode">
+      </MS_com_buttons>
+      
+  <Footer_3 class="footer"></Footer_3>
 
 </div>
 </template>
 
 <script setup>
     import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
-    import Footer_1 from '@/components/Footer_1.vue'
+    import Footer_3 from '@/components/Footer_03.vue'
     import Header from '@/components/Header_0.vue';
     import { ref }from 'vue';
-    import CoinFall from '@/components/CoinFall.vue';
     import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
     
 
-    const currentMode = ref('two');
+    const currentMode = ref('four');
 
     
     
@@ -33,14 +35,17 @@ export default {
   data() {
     return {
       currentStep: 0, // 当前步骤
-      activityMode: 'activity1', // 初始活动模式
-      mode: 'one1' // 初始 mode
+      activityMode: 'activity3', // 初始活动模式
+      mode: 'one1', // 初始 mode
+      modeSelect: 'three',
+
     };
   },
 }
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/style";
 .actitvyBtn{
   // border: 2px solid red;
   margin: 0 auto;
@@ -48,28 +53,9 @@ export default {
   margin-bottom: 50px;
 }
 
-@import "../assets/style";
 .warpper{
-  position: relative;
-  background-image: url(../assets/images/lifecasino_bg2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  z-index: 0;
-  // border: 2px solid rgb(0, 255, 17);
-
-  &::before{
-        z-index: -1;
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0px;
-        width: 100%;
-        height: 100vh;
-        background-color: black;
-        mask: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 1.5%, #000 26.17%, #000 40.67%, rgba(102, 102, 102, 0.00) 100%);
-        
-    }
+  background-image: url('../src/ms/modeBGI3.jpg');
+  
   
 }
 
@@ -80,18 +66,7 @@ export default {
   z-index: 10;
 }
 
-.coin{
-  position: fixed;
-  left: 0;
-  top: -100;
-  z-index: -1;
-  // border: 2px solid rgb(47, 0, 255);
-  height: 100%;
-  // max-width:800px;
-  overflow: hidden;
-  opacity: .3;
-  animation: opacity 10s linear;
-}
+
 
 @keyframes opacity{
     0%{
@@ -102,12 +77,6 @@ export default {
     }
 }
 
-.reservation{
-  // border: 2px solid red;
-
-}
-
-
 
 
 </style>
@@ -115,12 +84,14 @@ export default {
 <style lang="scss">
 @import "../assets/style";
 
-.title{
+.title[data-v-3d5d2ec6]{
   text-align: center;
+  color: rgb(133, 95, 73);
+
 }
 
 body{
-  font-family: map-get($map: $fontStyle, $key: style_2);
+  font-family: map-get($map: $fontStyle, $key: style_1);
 };
 
 h1{
@@ -140,13 +111,13 @@ h3{
 }
 
 h4{
-  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+  font-family: map-get($map: $fontStyle, $key: style_1) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
 }
 
 h6{
-  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+  font-family: map-get($map: $fontStyle, $key: style_1) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
   transition: .3s;

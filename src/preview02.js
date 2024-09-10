@@ -27,6 +27,7 @@ import { faFaceMeh } from '@fortawesome/free-regular-svg-icons';
 // import LC_Reviews from './components/LC_Reviews.vue';
 import MS_Ticket from './components/MS/MS_Ticket.vue';
 import LC_Ticket_reservation2 from './views/LC_Ticket_reservation2.vue';
+import LC_ServeSwiper from './components/LC_ServeSwiper.vue';
 // import NewsSwiper from './components/NewsSwiper.vue';
 // import Gift from './components/Gift.vue';
 
@@ -35,7 +36,7 @@ import LC_Ticket_reservation2 from './views/LC_Ticket_reservation2.vue';
 library.add(faFaceMeh);
 
 
-const app = createApp(LC_Ticket_reservation2);
+const app = createApp(LC_ServeSwiper);
 // app.mount('#preview-app');
 
 app.component('font-awesome-icon', FontAwesomeIcon).mount("#preview-app");

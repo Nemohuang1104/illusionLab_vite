@@ -310,5 +310,16 @@ function goToLoginCMS(){
   font-family: map-get($fontStyle, style_2);
 }
 
+@media screen and (max-width: 430px){
+
+.list{
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr  ;
+}
+.pagebox{
+  padding: 10px;
+  
+}
+}
 
 </style>

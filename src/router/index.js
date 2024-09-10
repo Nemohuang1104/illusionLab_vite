@@ -255,7 +255,6 @@ const routes = [
     },
     requiredLogin: false
   },
-
  
   {
     path: '/SF_BookingChange',
@@ -312,6 +311,84 @@ const routes = [
     },
     requiredLogin: false
   },
+
+    // -----購票頁--------//
+
+    {path: '/SF_Ticket_step0',
+      component: () => import('@/views/SF_Ticket_reservation.vue'),
+      meta: {
+        title: "星際邊境-購票"
+      },
+      requiredLogin: true
+      },
+      {
+        path: '/SF_Ticket_step1',
+        component: () => import('@/views/SF_ticket_customer_info.vue'),
+        meta: {
+          title: "星際邊境-購票"
+        },
+        requiredLogin: true
+      },
+
+      {
+        path: '/SF_Ticket_step2',
+        component: () => import('@/views/SF_ticket_confirmation.vue'),
+        meta: {
+          title: "星際邊境-購票"
+        },
+        requiredLogin: true
+      },
+      {
+        path: '/SF_TicketDesign',
+        component: () => import('@/views/SF_TicketDesign.vue'),
+        meta: {
+          title: "星際邊境-客製票卷"
+        },
+        requiredLogin: true
+      },
+
+  // =================心靈光譜===============//
+  {
+    path: '/mindspectrum',
+    name: 'mindspectrum',
+    component: () => import('@/components/MS/MS_main.vue'),
+    meta: {
+      title: "心靈光譜"
+    },
+    requiredLogin: false
+  },
+  {path: '/MS_Ticket_step0',
+    component: () => import('@/views/MS_Ticket_reservation.vue'),
+    meta: {
+      title: "心靈光譜-購票"
+    },
+    requiredLogin: true
+    },
+    {
+      path: '/MS_Ticket_step1',
+      component: () => import('@/views/MS_ticket_customer_info.vue'),
+      meta: {
+        title: "心靈光譜-購票"
+      },
+      requiredLogin: true
+    },
+    {
+      path: '/MS_Ticket_step2',
+      component: () => import('@/views/MS_ticket_confirmation.vue'),
+      meta: {
+        title: "心靈光譜-購票"
+      },
+      requiredLogin: true
+    },
+    {
+      path: '/MS_customization',
+      component: () => import('@/components/MS/MS_customization.vue'),
+      meta: {
+        title: "心靈光譜-客製票卷"
+      },
+      requiredLogin: true
+    },
+
 
   // ============會員專區============//
   {
@@ -423,20 +500,6 @@ const routes = [
   },
 
 
-  
-  // =================心靈光譜===============//
-  {
-    path: '/mindspectrum',
-    name: 'mindspectrum',
-    component: () => import('@/components/MS/MS_main.vue'),
-    meta: {
-      title: "心靈光譜"
-    },
-    requiredLogin: false
-
-  },
- 
-
   // ==========footer=============//
   {
     path: '/News',
@@ -458,7 +521,15 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes,
 
-
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // 如果有保存的滚动位置，返回到保存的位置
+      return savedPosition;
+    } else {
+      // 否则默认滚动到顶部
+      return { top: 0 };
+    }
+  },
 });
 
 router.beforeEach((to, from, next) => { // 記得加第三個參數 next

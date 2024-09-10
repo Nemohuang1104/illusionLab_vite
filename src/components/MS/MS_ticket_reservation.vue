@@ -35,11 +35,11 @@
         </div>
         </form>
     </main>
-    
+<!--     
     <MS_com_buttons 
-    :mode="currentMode" :currentStep="currentStep"
-        mode="one1" :step="modeSelect"
-    />
+     :currentStep="currentStep"
+        :mode="mode" :step="modeSelect" :activityMode="activityMode"
+    /> -->
  
     </div>
 </template>
@@ -47,20 +47,17 @@
   
 <script>
 export default {
-  data() {
-    return {
-      currentMode: 'one1', // 当前的模式
-      currentStep: 0        // 当前的步骤
-    };
-  },
-  components: {
-    MS_com_buttons
-  },
+
   props: {
     mode: {
       type: String,
       default: 'one',
       validator: value => ['one', 'two', 'three'].includes(value),
+    },
+    currentStep: {
+      type: Number,
+      required: true,
+      validator: value => ['mode1', 'mode2', 'mode3'].includes(value),
     },
   },
   computed: {
@@ -115,16 +112,7 @@ export default {
           return '未知模式';
       }
     },
-    dynamicRoute() {
-      if (this.mode === 'one') {
-        return '/LC_ticket_customer_info'; 
-      } else if (this.mode === 'mode2') {
-        return '/page2';
-      }else if (this.mode === 'mode3') {
-        return '/page3';
-      }
-     
-    }
+
   },
 };
 </script>

@@ -36,23 +36,15 @@
                 完成付款後，Email信箱中會收到訂單QRCODE與客製票卷連結，請前往確認。<br>
                 活動當天請持訂單QRCODE至櫃台月換實體票卷</p>
         </div>
-    <MS_com_buttons 
+    <!-- <MS_com_buttons 
       :mode="currentMode" :currentStep="currentStep"
         mode="two1" :step="modeSelect"
-    />
+    /> -->
     </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
-      currentMode: 'three1', // 当前的模式
-      currentStep: 2        // 当前的步骤
-    };
-  },
-  components: {
-    MS_com_buttons
-  },
+
   props: {
     mode: {
       type: String,
@@ -180,7 +172,7 @@ export default {
         background-size:contain;  
     }
     .template_mobangTwo{
-        background-image: url('../src/ms/modeBGI2.png');
+        // background-image: url('../src/ms/modeBGI2.png');
 
     }
     .template_mobangThree{

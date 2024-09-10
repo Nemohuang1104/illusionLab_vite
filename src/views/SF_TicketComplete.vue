@@ -54,7 +54,9 @@ const props = defineProps({
 
     <!-- 點選跳轉回首頁 -->
     <div class="finish"> 
-      <SF_planetButton p="完成"></SF_planetButton>
+      <router-link to="/SF_Homepage">
+        <SF_planetButton p="完成"></SF_planetButton>
+      </router-link>
     </div>
   </div>
   </template>

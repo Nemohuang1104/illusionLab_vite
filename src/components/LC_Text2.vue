@@ -87,6 +87,10 @@ h4{
   
 
 }
-
+@media screen and (max-width: 820px) {
+  .line{
+    margin-top: 150px;
+  }
+}
 
 </style>

@@ -103,7 +103,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
 .machine{
@@ -117,7 +117,10 @@ export default {
 }
 
 #SlotMachine {
-  
+
+
+  transform: rotate(90deg);
+  justify-content: center;
   //
   $red:linear-gradient(90deg, (#E6BC38) 0%, (#FFE880) 50%, (#E9C54E)70%, (#FAE684)84%, (#C59B36)100%);
   $dark-red: #8f4343;
@@ -125,14 +128,13 @@ export default {
   $white: #f4f2e0;
   $border-size: 5px;
   //
-  width: 100vw;
-  height: 100vh;
+  // width: 100vw;
+  // height: 100vh;
   max-width: 900px;
   max-height: 700px;
   background-color: transparent;
   position: relative;
   display: flex;
-  
   align-items: center;
   flex-direction: column;
   // justify-content: center;

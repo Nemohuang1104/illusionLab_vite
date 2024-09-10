@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
 // 旅行心得頁面
@@ -53,6 +53,16 @@ function gotoTicketChange() {
     router.push('/SF_BookingChange');
 };
 
+// ======點選到下一頁最上面==========
+
+function scrollTop (){
+    window.scrollTo({
+    top: 0,
+    behavior: 'auto' // 平滑滚动
+    });
+}
+
+
 </script>
 
 
@@ -93,8 +103,10 @@ function gotoTicketChange() {
             <div class="Title">
                 <StrellarFrontierTitle h1="票券資訊" p="TICKET"></StrellarFrontierTitle>
             </div>
-            <div class="ticketInfo">
+            <div class="ticketInfo" @click="scrollTop">
+                <router-link to="/SF_Ticket_step0">
                 <img src="../assets/images/StrellarFrontierTicket.png">
+            </router-link>
             </div>
         </div>
 

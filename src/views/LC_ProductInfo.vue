@@ -236,12 +236,12 @@ const productInfo = ref([
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   padding: 70px 80px 100px 80px;
-  margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   // border: 1px solid #fff;
   justify-content: space-between;
   align-items: start;
   gap: 8%;
+  margin: 0 20px 50px;
   
 }
 
@@ -285,7 +285,9 @@ const productInfo = ref([
   max-width: 100%;
   max-height: 150px  ; /* 限制圖片高度 */
   object-fit: contain; /* 保持圖片比例 */
-  margin-bottom: 10px;
+  margin: 0 auto;
+  text-align: center;
+
 }
 
 
@@ -469,6 +471,18 @@ const productInfo = ref([
     // margin-bottom: 80px;
     color: #fff;
 }
+@media screen and (max-width: 820px){
+  .pagebox{
+    padding: 70px 40px 80px ;
 
+  }
+}
+
+@media screen and (max-width: 430px){
+  .pagebox{
+    padding: 20px 10px 60px ;
+    gap: 2%;
+  }
+}
 
 </style>

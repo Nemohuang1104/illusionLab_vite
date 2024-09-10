@@ -53,7 +53,9 @@
         <img class="logo" src="../assets/images/logo_StrellarFrontierIntro.svg" alt="">
         <p>體驗前所未有的奇幻冒險<br>
           揭開宇宙的神秘面紗</p>
-        <ActivityButton class="LC_btn" Button="ENTER" @click="goToActivity2"></ActivityButton>
+          <router-link to="SF_Homepage">
+            <ActivityButton class="LC_btn" Button="ENTER" ></ActivityButton>
+          </router-link>
       </div>
     </div>
   </div>

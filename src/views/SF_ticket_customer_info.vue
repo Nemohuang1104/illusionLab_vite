@@ -1,76 +1,49 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_reservation mode="one" activityMode="activity1" class="reservation">
+      <MS_ticket_customer_info mode="two" class="customer_info">
         
-      </MS_ticket_reservation>
+      </MS_ticket_customer_info>
       <MS_com_buttons
         class="actitvyBtn"
         :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
-      <CoinFall class="coin"/>
-  <Footer_1 class="footer"></Footer_1>
-
+        :mode="mode" :step="modeSelect" :activityMode="activityMode">
+      </MS_com_buttons>
+  <Footer_2 class="footer"></Footer_2>
 </div>
 </template>
 
-<script setup>
-    import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
-    import Footer_1 from '@/components/Footer_1.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import CoinFall from '@/components/CoinFall.vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
-
-    const currentMode = ref('two');
-
-    
-    
-</script>
 <script>
 export default {
   data() {
     return {
-      currentStep: 0, // 当前步骤
-      activityMode: 'activity1', // 初始活动模式
-      mode: 'one1' // 初始 mode
+      currentStep: 1, // 当前步骤
+      activityMode: 'activity2', // 初始活动模式
+      mode: 'two1', // 初始 mode
+      modeSelect: 'two'
     };
   },
 }
 </script>
+<script setup>
+    import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
+    import Footer_2 from '@/components/Footer_2.vue'
+    import Header from '@/components/Header_0.vue';
+    import { ref }from 'vue';
+    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
+    
+
+    const currentMode = ref('three');
+    
+</script>
 
 <style lang="scss" scoped>
-.actitvyBtn{
-  // border: 2px solid red;
-  margin: 0 auto;
-  margin-top: -50px;
-  margin-bottom: 50px;
-}
-
 @import "../assets/style";
-.warpper{
-  position: relative;
-  background-image: url(../assets/images/lifecasino_bg2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  z-index: 0;
-  // border: 2px solid rgb(0, 255, 17);
 
-  &::before{
-        z-index: -1;
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0px;
-        width: 100%;
-        height: 100vh;
-        background-color: black;
-        mask: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 1.5%, #000 26.17%, #000 40.67%, rgba(102, 102, 102, 0.00) 100%);
-        
-    }
-  
+.warpper{
+  background-image: url('../src/ms/modeBGI2.png');
+
 }
 
 .header{
@@ -102,11 +75,11 @@ export default {
     }
 }
 
-.reservation{
+.actitvyBtn{
   // border: 2px solid red;
-
+  margin: 0 auto;
+  margin-top: -50px;
 }
-
 
 
 

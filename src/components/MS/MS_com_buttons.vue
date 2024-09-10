@@ -34,17 +34,25 @@
     props: {
       mode: {
         type: String,
-        default: 'one1',
-        validator: value => ['one1', 'two1', 'three1'].includes(value),
+        required: true,
+
+        // default: 'one1',
+        // validator: value => ['one1', 'two1', 'three1'].includes(value),
       },
+      activityMode: {
+      type: String, // 控制活动路由的模式，例如 'activity1', 'activity2', 'activity3'
+      required: true,
+      // validator: value => ['activity1', 'activity2', 'activity3'].includes(value),
+    },
       step: {
         type: String,
         default: 'one',
-        validator: value => ['one', 'two', 'three'].includes(value),
+        // validator: value => ['one', 'two', 'three'].includes(value),
       },
       currentStep: {
       type: Number,
-      required: true
+      required: true,
+     
     }
     },
     data() {
@@ -80,27 +88,57 @@
       showNext() {
         return this.mode === 'one1' || this.mode === 'two1' || this.mode === 'three1';
       },
+       // 控制是否显示 "上一步" 按钮
+    // showPrevious() {
+    //   return this.mode !== 'one1'; // 例如，mode 为 'one1' 时不显示
+    // },
+    // // 控制是否显示 "下一步" 按钮
+    // showNext() {
+    //   return this.mode !== 'three1'; // 例如，mode 为 'three1' 时不显示
+    // },
+    // 判断是否是最后一步
 
       isLastStep() {
       return this.currentStep === 2;
     },
-    previousPage() {
-      if (this.mode === 'two1' || this.mode === 'three1') {
-        return `/LC_Ticket_step${this.currentStep - 1}`; // mode1 回上一步的页面
-      } else if (this.mode === 'mode2') {
-        return `/mode2-step${this.currentStep - 1}`; // mode2 回上一步的页面
-      }
-      return `/default-step${this.currentStep - 1}`; // 默认的回上一步页面
+    // previousPage() {
+    //   if (this.mode === 'two1' || this.mode === 'three1') {
+    //     return `/LC_Ticket_step${this.currentStep - 1}`; // mode1 回上一步的页面
+    //   } else if (this.mode === 'mode2') {
+    //     return `/mode2-step${this.currentStep - 1}`; // mode2 回上一步的页面
+    //   }
+    //   return `/default-step${this.currentStep - 1}`; // 默认的回上一步页面
+    // },
+    // nextPage() {
+    //   if (this.isLastStep || this.mode === 'two3'){
+    //     return `/LC_Customization`;
+
+    //   }else if (this.mode === 'one1' || this.mode === 'two1') {
+    //     return `/LC_Ticket_step${this.currentStep + 1}`; // mode1 下一步的页面
+
+    //   } else if (this.mode === 'two') {
+    //     return `/SF_Ticket_step${this.currentStep + 1}`; // mode2 下一步的页面
+
+    //   }else if (this.mode === 'mode3') {
+    //     return `/mode3-step${this.currentStep + 1}`; // mode3 下一步的页面
+    //   }
+     // 根据 activityMode 和 currentStep 生成 "上一步" 路径
+     previousPage() {
+      return this.getPreviousPageForActivity();
     },
+    // 根据 activityMode 和 currentStep 生成 "下一步" 路径
     nextPage() {
-      if (this.isLastStep || this.mode === 'two3'){
-        return `/LC_Customization`;
-      }else if (this.mode === 'one1' || this.mode === 'two1') {
-        return `/LC_Ticket_step${this.currentStep + 1}`; // mode1 下一步的页面
-      } else if (this.mode === 'mode2') {
-        return `/mode2-step${this.currentStep + 1}`; // mode2 下一步的页面
-      }else if (this.mode === 'mode2') {
-        return `/mode3-step${this.currentStep + 1}`; // mode3 下一步的页面
+      if (this.isLastStep && this.activityMode === 'activity1') {
+        return '/LC_Customization'; // 客製票卷
+      } else if (this.isLastStep && this.activityMode === 'activity2'){
+        return '/SF_TicketDesign'; // 客製票卷
+
+      }else if (this.isLastStep && this.activityMode === 'activity3'){
+        return '/MS_customization'; // 客製票卷
+
+      }
+      else {
+        return this.getNextPageForActivity();
       }
     },
       
@@ -108,6 +146,29 @@
 
     },
     methods: {
+     // 根据 activityMode 生成 "上一步" 的路径
+     getPreviousPageForActivity() {
+      if (this.activityMode === 'activity1') {
+        return `/LC_Ticket_step${this.currentStep - 1}`;
+      } else if (this.activityMode === 'activity2') {
+        return `/SF_Ticket_step${this.currentStep - 1}`;
+      } else if (this.activityMode === 'activity3') {
+        return `/MS_Ticket_step${this.currentStep - 1}`;
+      }
+      return '/default';
+    },
+    // 根据 activityMode 生成 "下一步" 的路径
+    getNextPageForActivity() {
+      if (this.activityMode === 'activity1') {
+        return `/LC_Ticket_step${this.currentStep + 1}`;
+      } else if (this.activityMode === 'activity2') {
+        return `/SF_Ticket_step${this.currentStep + 1}`;
+      } else if (this.activityMode === 'activity3') {
+        return `/MS_Ticket_step${this.currentStep + 1}`;
+      }
+      return '/default';
+    },
+
     // 手动滚动到页面顶部
     scrollToTop() {
       window.scrollTo({

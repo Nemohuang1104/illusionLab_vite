@@ -4,10 +4,25 @@
       <MS_ticket_confirmation mode="one" class="customer_info">
         
       </MS_ticket_confirmation>
+      <MS_com_buttons
+      class="actitvyBtn"
+      :currentStep="currentStep"
+        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
       <CoinFall class="coin"/>
   <Footer_1 class="footer"></Footer_1>
 </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      currentStep: 2, // 当前步骤
+      activityMode: 'activity1', // 初始活动模式
+      mode: 'three1' // 初始 mode
+    };
+  },
+}
+</script>
 
 <script setup>
     import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
@@ -15,6 +30,7 @@
     import Header from '@/components/Header_0.vue';
     import { ref }from 'vue';
     import CoinFall from '@/components/CoinFall.vue';
+    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
     
 
     const currentMode = ref('two');
@@ -23,6 +39,12 @@
 
 <style lang="scss" scoped>
 @import "../assets/style";
+.actitvyBtn{
+  // border: 2px solid red;
+  margin: 0 auto;
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
 .warpper{
   position: relative;
   background-image: url(../assets/images/lifecasino_bg2.png);

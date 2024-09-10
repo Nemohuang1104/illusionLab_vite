@@ -46,10 +46,10 @@
       </form>
     </main>
     <!-- <router-link :to="dynamicRoute"> -->
-    <MS_com_buttons 
+    <!-- <MS_com_buttons 
       :mode="currentMode" :currentStep="currentStep"
         mode="two1" :step="modeSelect" 
-    />
+    /> -->
   <!-- </router-link> -->
   </div>
 </template>
