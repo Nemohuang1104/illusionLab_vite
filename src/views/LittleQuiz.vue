@@ -240,6 +240,7 @@ export default {
   width: 100%;
   font-family: "Noto Sans TC";
   position: relative;
+  padding-top: 80px;
 }
 
 .enter_title,
@@ -273,6 +274,8 @@ export default {
 
 .header {
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 50;
 }
 

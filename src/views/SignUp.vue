@@ -1,5 +1,6 @@
 <script setup>
 import Header_0 from '../components/Header_0.vue';
+const currentMode = ref('one');
 import Footer_0 from '../components/Footer_0.vue';
 import vSelect from 'vue-select';
 
@@ -48,7 +49,7 @@ const register = () => {
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-    <Header_0></Header_0>
+    <Header_0 :mode="currentMode" class="header"></Header_0>
 
     <!-- 中間會員註冊區 -->
     <main>
@@ -125,6 +126,14 @@ const register = () => {
   background-repeat: no-repeat;
   width: 100%;
   font-family: "Noto Sans TC";
+  padding-top: 80px;
+}
+
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
 }
 
 main {
