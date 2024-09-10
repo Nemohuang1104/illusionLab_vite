@@ -124,9 +124,13 @@ h1{
   cursor: pointer;
 }
 
+.form .login:hover{
+  color: #505050;
+  background-color: #fff;
+}
+
 .form .other{
   text-align: center;
-  
 }
 
 .form img{
@@ -144,5 +148,10 @@ h1{
   font-size: 16px;
   color: #505050;
   cursor: pointer;
+}
+
+.form .signup:hover{
+  color: #505050;
+  background-color:#fff;
 }
 </style>

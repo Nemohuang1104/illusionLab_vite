@@ -9,7 +9,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "@/assets/css/reset.css";
-
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 
 // ============fontawsome==================
 //參考網址: https://reurl.cc/4dQ4gD
@@ -31,9 +32,10 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 
 
 
+
 // ---libary也要加---//
 library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark )
 
 
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(router).mount("#app");
+createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router).mount("#app");
 
