@@ -28,7 +28,7 @@
     grid-template-columns: 0.5fr 3.5fr 0.4fr 0.4fr;
     justify-content: left;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     
     // height: 80px;
     background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
