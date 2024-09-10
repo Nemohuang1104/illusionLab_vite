@@ -38,7 +38,7 @@
 @import "../assets/SASS/basic/color";
 
 .outline{
-    width: 100%;
+    width: 100vw;
     height: 200px;
     background: map-get($color_3,header);
     display: flex;
@@ -81,6 +81,12 @@ a:last-child{
     flex-basis: 0%;
     color: #FFF;
     font-family: "Noto Sans TC";
+}
+
+@media (max-width: 768px){
+    .content p{
+        font-size: 8px;
+    }
 }
 
 </style>

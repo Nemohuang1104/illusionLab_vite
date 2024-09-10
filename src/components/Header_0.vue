@@ -1,40 +1,3 @@
-<template>
-  <header :class="headerClass">
-    <div class="logo">
-      <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
-    </div>
-    <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
-      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-meh"
-          class="peopleicon" /></router-link>
-      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
-    </div>
-    <!-- 半圓形菜單 -->
-    <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
-      <ul  class="menu">
-        <li class="one"> <router-link :to="{ name: 'shop' }">會員登入</router-link>
-        </li>
-        <li class="two">
-          <router-link :to="{ name: 'login'}">購物車</router-link>
-        </li>
-        <li class="three">
-          <router-link to="/lifeCasino">人生賭場</router-link>
-        </li>
-        <li class="four">
-          <router-link to="/SF_Homepage">星際邊境</router-link>
-        </li>
-        <li class="five">
-          <router-link to="/mindspectrum">心靈光譜</router-link>
-        </li>
-      </ul>
-    </div>
-  </header>
- 
-
-  <!-- <font-awesome-icon icon="fa-solid fa-bars" /> 這是漢堡線 -->
-</template>
-
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
@@ -111,13 +74,51 @@ onUnmounted(() => {
 
 </script>
 
+<template>
+  <header :class="headerClass">
+    <div class="logo">
+      <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
+    </div>
+    <div class="icons">
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
+          class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-meh"
+          class="peopleicon" /></router-link>
+      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
+    </div>
+    <!-- 半圓形菜單 -->
+    <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
+      <ul class="menu">
+        <li class="one"> <router-link :to="{ name: 'shop' }">會員登入</router-link>
+        </li>
+        <li class="two">
+          <router-link :to="{ name: 'login' }">購物車</router-link>
+        </li>
+        <li class="three">
+          <router-link to="/lifeCasino">人生賭場</router-link>
+        </li>
+        <li class="four">
+          <router-link to="/SF_Homepage">星際邊境</router-link>
+        </li>
+        <li class="five">
+          <router-link to="/mindspectrum">心靈光譜</router-link>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- <font-awesome-icon icon="fa-solid fa-bars" /> 這是漢堡線 -->
+</template>
+
+
 <style lang="scss" scoped>
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  // max-width: 1440px;
+  width: 100vw;
+
   height: 80px;
   position: absolute;
   z-index: 1000;
@@ -167,8 +168,8 @@ header {
   font-family: "Noto sans TC";
 }
 
-.menu-one{
-  background:linear-gradient(180deg, #22247A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
+.menu-one {
+  background: linear-gradient(180deg, #22247A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
 }
 
 //活動一人生賭場(two)
@@ -182,7 +183,7 @@ header {
 }
 
 
-.menu-two{
+.menu-two {
   background-color: rgba(217, 217, 217, 0);
 }
 
@@ -194,10 +195,10 @@ header {
   height: 80px;
   /* 添加高度 */
   cursor: pointer;
- font-family: "Noto Serif TC";
+  font-family: "Noto Serif TC";
 }
 
-.menu-three{
+.menu-three {
   background-color: #03030171;
 }
 
@@ -210,7 +211,7 @@ header {
   font-family: "Noto sans TC";
 }
 
-.menu-four{
+.menu-four {
   background-color: #B89977;
 }
 
@@ -234,7 +235,7 @@ header {
 
 
 
-.MenuClass{
+.MenuClass {
   position: fixed;
   top: 80px;
   right: 0px;
@@ -242,12 +243,13 @@ header {
   height: 300px;
   // background:linear-gradient(180deg, #22247A 26.17%, rgba(42, 36, 106, 0.00) 99.67%);
   border-radius: 0 0 0 100%;
-  
-  transform: translateX(100%); 
+
+  transform: translateX(100%);
   transition: transform 0.5s ease;
   z-index: 1000;
   overflow-x: hidden
 }
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -284,7 +286,7 @@ header {
 
 .menu .four {
   padding-left: 100px;
-  
+
 }
 
 .menu .five {
@@ -299,18 +301,22 @@ header {
 
 /* RWD：小螢幕時顯示漢堡按鈕 */
 @media (max-width: 768px) {
-  .menunone{
-    display:block;
+  .menunone {
+    display: block;
   }
-  .header-one{
+
+  .header-one {
     background-color: #22247A;
   }
-  .shoppingicon{
+
+  .shoppingicon {
     display: none;
   }
-  .peopleicon{
+
+  .peopleicon {
     display: none;
   }
+
   .hamburger {
     display: block;
   }

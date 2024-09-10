@@ -41,7 +41,7 @@ function goToPage (){
 <style lang="scss" scoped>
 // 幻境LOGO
 .outline{
-    width: 100%;
+    width: 100vw;
     max-width: 1440px;
     // height: 200px; //footer的高度不能寫死，會有空白跑出來
     background-image: url(../assets/images/LC_Footer.jpg);
@@ -85,6 +85,12 @@ a:last-child{
     flex-basis: 0%;
     color: #FFF;
     font-family: "Noto Sans TC";
+}
+
+@media (max-width: 768px){
+    .content p{
+        font-size: 8px;
+    }
 }
 
 </style>
