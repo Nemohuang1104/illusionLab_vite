@@ -538,7 +538,9 @@ const handleSaveEdit = async (updatedOrder) => {
     font-weight: normal;
     color: #313131;
     font-size: 18px;
-    margin-top: 18px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    cursor: default;
     font-family: "Noto Sans TC";
     transition: background-color 0.3s ease, border-radius 0.3s ease;
 }

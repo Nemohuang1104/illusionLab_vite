@@ -5,58 +5,73 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 import SF_planetButton  from "@/components/SF_planetButton.vue";
 
+// 頁首頁尾
+import SFHeader_0 from '@/components/Header_0.vue';
+const currentMode = ref('three');
+import Footer_2 from '@/components/Footer_2.vue';
+
 // 票券完成畫面
 import  SF_TicketComplete  from "./SF_TicketComplete.vue";
 
 //票券圖片
-import defaultTicket from '../assets/images/SFticketDesign_01.svg';  // 預設圖片
+import ticket1 from '../assets/images/SFticketDesign_01.svg'; 
 import ticket2 from '../assets/images/SFticketDesign_02.svg';
 import ticket3 from '../assets/images/SFticketDesign_03.svg';
 import ticket4 from '../assets/images/SFticketDesign_04.svg';
 import ticket5 from '../assets/images/SFticketDesign_05.svg';
 
 //飛航小物
-import defaultSticker from '../assets/images/STicon-space.svg';
+import sticker1 from '../assets/images/STicon-space.svg';
 import sticker2 from '../assets/images/STicon_earth.svg';
 import sticker3 from '../assets/images/STicon_moon.svg';
 import sticker4 from '../assets/images/STicon_saturn-02.svg';
 import sticker5 from '../assets/images/STicon_telescope.svg';
 import sticker6 from '../assets/images/STicon_Vector.svg';
 import sticker7 from '../assets/images/STicon_astronaut.svg';
-
-//公版圖片
-import template1 from '../assets/images/SFticketTemplate01.svg';
-import template2 from '../assets/images/SFticketTemplate03.svg';
-import template3 from '../assets/images/SFticketTemplate04.svg';
+import sticker8 from '../assets/images/STicon_shuttle.svg';
+import sticker9 from '../assets/images/ST_space-shuttle.svg';
 
 
 
-// 頁籤狀態預設 : 公版
-const currentTab = ref('template');
-const templates = ref([template1, template2, template3]);
+
+// 公版樣式
+const templates = ref([
+    { style:ticket2, sticker:sticker2, },
+    { style:ticket5, sticker:sticker5, },
+    { style:ticket4, sticker:sticker4, }
+])
+
 const selectedTemplate = ref(templates.value[0]);
+const selectedStyle = ref(selectedTemplate.value.style); // 預設為公版的第一張票券樣式
+const selectedSticker = ref(selectedTemplate.value.sticker); // 預設為公版的第一張飛航小物
+
+const clickItem = ref('');
 
 // 票券樣式
-const styles = ref([defaultTicket, ticket2, ticket3, ticket4, ticket5]);
-const selectedStyle = ref(styles.value[0]);
+const styles = ref([ticket1, ticket2, ticket3, ticket4, ticket5]);
 
 //飛航小物
-const stickers = ref([defaultSticker, sticker2, sticker3,sticker4,sticker5,sticker6,sticker7]);
-const selectedSticker = ref(stickers.value[0]);
+const stickers = ref([sticker1, sticker2, sticker3,sticker4,sticker5,sticker6,sticker7,sticker8,sticker9]);
 
 // 先隱藏票券完成畫面
 const isComplete = ref(false);
 
 
 function selectTemplate(template){
+    clickItem.value = template;
+
     selectedTemplate.value = template; // 公版樣式
+    selectedStyle.value = template.style;
+    selectedSticker.value = template.sticker; // 選取飛航小物
 }
 
 function selectStyle(style) {
+    clickItem.value = style;
     selectedStyle.value = style; // 選取票券樣式
 }
 
 function selectSticker(sticker) {
+    clickItem.value = sticker;
     selectedSticker.value = sticker; // 選取飛航小物
 }
 
@@ -66,7 +81,6 @@ function completeTicket() {
 
 // 計算最終票券的屬性
 const finalTicket = computed(() => ({
-    template: selectedTemplate.value, // 公版票券圖
     style: selectedStyle.value,       // 自選票券樣式
     sticker: selectedSticker.value    // 自選飛航小物
 }));
@@ -75,6 +89,8 @@ const finalTicket = computed(() => ({
 
 
 <template>
+    <SFHeader_0 :mode="currentMode"></SFHeader_0>
+
     <div class="wrapper">
         <div v-if="!isComplete">
             <div class="fixed-header">
@@ -83,56 +99,62 @@ const finalTicket = computed(() => ({
                 </div>
                 <div class="ticket">
                     <div class="finalTicket">
-                        <img :src="currentTab === 'template' ? selectedTemplate : selectedStyle" alt="Ticket Background" class="ticket-background" />
-                        <div v-if="currentTab === 'sticker'" class="selected-sticker">
+                        <img :src="selectedStyle" alt="Ticket Background" class="ticket-background" />
+                        <div v-if="selectedSticker" class="selected-sticker">
                             <img :src="selectedSticker" alt="Selected Sticker" class="selected-sticker-img" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="ticket-creator">
-                <div class="ticketOptions">
-                    <div class="tabs">
-                        <button :class="{ active: currentTab === 'template' }" @click="currentTab = 'template'">公版</button>
-                        <button :class="{ active: currentTab === 'style' }" @click="currentTab = 'style'">票券樣式</button>
-                        <button :class="{ active: currentTab === 'sticker' }" @click="currentTab = 'sticker'">飛航小物</button>
-                    </div>
-                    <div class="choose-section">
-                        <div v-if="currentTab === 'template'" class="template-options">
-                            <div class="selectTemplate" 
+        
+            <div class="choose-section">
+                <div class="template">
+                    <p>公版</p>
+                    <div class="template-options">
+                        <div class="selectTemplate" 
                             v-for="(template, index) in templates" 
                             :key="index" 
                             @click="selectTemplate(template)"
-                            :class="{ selected: template === selectedTemplate}" 
+                            :class="{ selected: clickItem === template }"
                             >
-                                <img :src="template" alt="Template Option"/>
+                            <div class="finalTicket">
+                                <img :src="template.style" alt="Ticket Background" class="ticket-background" />
+                                <div  class="selected-sticker">
+                                <img :src="template.sticker" alt="Selected Sticker" class="selected-sticker-img" />
+                                </div>
                             </div>
                         </div>
-                        <div v-if="currentTab === 'style'" class="style-options">
-                            <div class="selectStyle" 
-                            v-for="(style, index) in styles" 
-                            :key="index" 
-                            @click="selectStyle(style)"
-                            :class="{ selected: style === selectedStyle }" 
-                            >
-                                <img :src="style" alt="Style Option"/>
-                            </div>
+                    </div>
+                </div>
+                <div class="style">
+                    <p>票券樣式</p>
+                    <div class="style-options">
+                        <div class="selectStyle" 
+                        v-for="(style, index) in styles" 
+                        :key="index" 
+                        @click="selectStyle(style)"
+                        :class="{ selected: clickItem === style }"
+                        >
+                        <img :src="style" alt="Style Option"/>
                         </div>
-                        <div v-if="currentTab === 'sticker'" class="sticker-options">
-                            <div class="selectSticker" 
-                            v-for="(sticker, index) in stickers" 
-                            :key="index" 
-                            @click="selectSticker(sticker)"
-                            :class="{ selected: sticker === selectedSticker}"
-                            >
-                                <img :src="sticker" alt="Sticker Option" />
-                            </div>
+                    </div>
+                </div>
+                <div class="sticker">
+                    <p>飛航小物</p>
+                    <div class="sticker-options">
+                        <div class="selectSticker" 
+                        v-for="(sticker, index) in stickers" 
+                        :key="index" 
+                        @click="selectSticker(sticker)"
+                        :class="{ selected: clickItem === sticker  }"
+                        >
+                            <img :src="sticker" alt="Sticker Option" />
                         </div>
-                        
                     </div>
                 </div>
             </div>
-            <div v-if="currentTab != 'style'">  <!--頁籤如果在公版&飛航小物再顯示以下區塊-->
+        
+            <div>
                 <div class="checkInfo">
                     <label class="custom-checkbox">
                         <input class="checkbox" type="checkbox" />
@@ -144,11 +166,13 @@ const finalTicket = computed(() => ({
                     </label>
                 </div>
                 <div class="nextStep">
-                    <SF_planetButton @click="completeTicket"></SF_planetButton>
+                        <SF_planetButton @click="completeTicket"></SF_planetButton>
                 </div>
             </div>
         </div>
         <SF_TicketComplete v-if="isComplete" :ticketData="finalTicket"></SF_TicketComplete>
+
+        <Footer_2></Footer_2>
     </div>
 </template>
 
@@ -163,60 +187,61 @@ const finalTicket = computed(() => ({
     color:map-get($colofont_2 , text);
 }
 .wrapper {
-    background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
-    url(../assets/images/STBackground.png) !important;
- 
+    background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(0, 0, 0, 0.63)) ,
+    url(../assets/images/STBackground.png);
 }
 
 .fixed-header {
-  position:static;
-
+  position:sticky;
+  top:0;
+  z-index: 10;
+  background:#000000;
+  border-top: 1px solid #303030;
+  border-bottom: 1px solid #303030;
 }
 
 .title {
     text-align: center;
-    
+    margin-top: 8px;
 }
+
 .ticket{ // 上方票券區
-    margin: 2% auto;
-    position: relative;
+    margin: 1% auto;
 }
 
 .ticket img{
     width: 100%;
-    max-width: 600px;
+    max-width: 470px;
     display: block;
     margin: 0 auto;
 }
 
+.finalTicket{
+    max-width: 470px;
+    aspect-ratio: 100 / 44;
+    position: relative;
+    margin:auto;
+}
 
-.tabs, .choose-section{
+.choose-section{
     width: 100%;
-    max-width: 80%;
+    max-width: 60%;
     display: block;
-    margin: 0 auto;
-}
-//  頁籤選項
-.ticketOptions button{
-    background: none;
-    cursor: pointer;
-    border: none;
-    font-size: 18px;
-    margin-right: 1%;
-}
-
-.ticketOptions button.active{
-    color: #C1693B;
-    font-weight: bold;
+    margin: 3% auto;
 }
 
 // 公版
-.template-options{
+.template{
+    margin: 3% auto;
+}
+
+// 公版選項&票券選項
+.template-options,.style-options{
     display: grid;
-    grid-template-columns: repeat(2,2fr) ;
-    gap: 30px;
+    grid-template-columns: repeat(3,2fr) ;
+    gap: 10px;
     text-align: center;
-    margin-top: 3%;
+    margin-top: 2%;
 }
 
 .selectTemplate img{
@@ -225,12 +250,8 @@ const finalTicket = computed(() => ({
 }
 
 // 票券樣式
-.style-options{  
-    display: grid;
-    grid-template-columns: repeat(2,2fr) ;
-    gap: 30px;
-    text-align: center;
-    margin-top: 3%;
+.style{
+    margin: 3% auto;
 }
 
 .style-options img{
@@ -243,41 +264,33 @@ const finalTicket = computed(() => ({
     display: flex;
     cursor: pointer;
     justify-content: space-between;
-    margin: 3%;
+    margin: 2% auto;
 }
-// 小圖&被選取的圖
-.sticker-options img, .selected-sticker-img{
-    width: 100%;
-    max-width: 40px;
-    height: 40px;
-}
+
+
 .selected-sticker{
     display: block;
     width: 100%;
-    max-width: 40px;
-    height: 40px;
+    max-width: 8%;
+    height: auto;
 
     position: absolute;
-    top: 10vw;
-    right: 31.2vw;
+    top: 45%;
+    right: 11%;
 }
 
 /* 選取時的框線樣式 */
-.selected {  
-    outline: 1px solid rgba(239, 239, 239, 0.842); 
-    outline-offset: 4px;
-}
-
-select{
-    color: #000000;
+.selected {
+    outline: 1px solid rgba(239, 239, 239, 0.842);
+    outline-offset: 2px;
 }
 
 // 票券確認
 .checkInfo {
-    display:block;                
-    width: 100%;
-    max-width: 28%;
-    margin: 5% auto;               
+    display:flex;                
+    width: 35%;
+    margin: 5% auto;   
+    flex-direction: column;
 }
 
 
@@ -287,7 +300,8 @@ select{
     gap: 15px; // 調整文字和 checkbox 之間的間距
     font-size: 16px; // 可根據需要調整字體大小
     cursor: pointer;
-    margin-top: 3%;
+    margin-top: 5%;
+    line-height: 1.3;
 
     .checkbox {
         appearance: none; /* 隱藏原始 checkbox */
@@ -321,4 +335,21 @@ select{
 .nextStep{
     margin: 0 auto;
 }
+
+
+
+
+// === RWD ===
+
+@media screen and (max-width: 768px) {
+
+    .template-options , .style-options{
+        grid-template-columns:repeat(1, 1fr)
+    }
+}
+
+
+// @media screen and (max-width: 600px){
+
+// }
 </style>

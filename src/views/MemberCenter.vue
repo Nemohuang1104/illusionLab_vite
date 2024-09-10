@@ -392,7 +392,7 @@ const updateToggle = () => {
         top: 50%;
         transform: translateY(-50%);
         transition: transform 0.3s ease;
-        width: 8%;
+        width: 5.5%;
     }
 
     /* 狀態變化樣式 */

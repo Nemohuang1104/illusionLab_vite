@@ -30,8 +30,10 @@ import { ref, computed } from 'vue';
 
 .wrapper{
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
-    min-height: 100vh;
+    // min-height: 100vh;
     background-size: cover;
+    width: 100%;
+    // max-width: 1440px;
     // min-height: 100vh; /* 確保背景至少覆蓋視口高度 */
     
     

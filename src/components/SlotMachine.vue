@@ -109,14 +109,15 @@ export default {
 .machine{
   border: 2px solid red;
   z-index: 10;
-  min-width: 800px;
-  min-height: 1000px;
+  max-width: 800px;
+  max-height: 1000px;
   // object-fit: cover;
   margin-top: 60px;
   
 }
 
 #SlotMachine {
+  
   //
   $red:linear-gradient(90deg, (#E6BC38) 0%, (#FFE880) 50%, (#E9C54E)70%, (#FAE684)84%, (#C59B36)100%);
   $dark-red: #8f4343;
@@ -126,11 +127,12 @@ export default {
   //
   width: 100vw;
   height: 100vh;
-  min-width: 900px;
-  min-height: 700px;
+  max-width: 900px;
+  max-height: 700px;
   background-color: transparent;
   position: relative;
   display: flex;
+  
   align-items: center;
   flex-direction: column;
   // justify-content: center;

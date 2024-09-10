@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 
 import SF_planetButton  from "@/components/SF_planetButton.vue";
 
@@ -23,28 +23,29 @@ const props = defineProps({
       <p>票券完成!</p>
     </div>
 
-    <div class="envelope">
-      <!-- 信封口 -->
-      <div class="top">
-        <img src="../assets/images/SF_ticketEnvolope_top.svg"  alt="Envelope" class="envelope-image top">
-      </div>
-      <!-- 背後的信封 -->
-      <img src="@/assets/images/SF_ticketEnvolope.svg" alt="Envelope" class="envelope-image back" />
-      <!-- 中間的票券 -->
-    <div class="ticket">
-      <div class="ticket-image">
-        <!-- 如果選擇公版，只顯示公版圖 -->
-        <img v-if="ticketData.template && !ticketData.style && !ticketData.sticker" :src="ticketData.template" alt="Template" />
-        <!-- 如果使用者選了票券樣式和飛航小物，則顯示自選的圖 -->
-        <template v-else>
-          <img class="style" v-if="ticketData.style" :src="ticketData.style" alt="Style" />
-          <img class="sticker" v-if="ticketData.sticker" :src="ticketData.sticker" alt="Sticker" />
-        </template>     
-      </div>
-    </div>
+    <div class="envolope-outside">
 
-      <!-- 前面的信封 -->
-      <img src="@/assets/images/SF_ticketEnvolope2.svg" alt="Envelope" class="envelope-image front" />
+      <div class="envelope">
+        <!-- 信封口 -->
+        <div class="top">
+          <img src="../assets/images/SF_ticketEnvolope_top.svg"  alt="Envelope" class="envelope-image top">
+        </div>
+        <!-- 背後的信封 -->
+        <img src="@/assets/images/SF_ticketEnvolope.svg" alt="Envelope" class="envelope-image back" />
+        <!-- 中間的票券 -->
+        <div class="ticket">
+          <div class="finalTicket">
+            <img class="style" v-if="ticketData.style" :src="ticketData.style" alt="Style" />
+            <div class="selected-sticker">
+              <img class="sticker" v-if="ticketData.sticker" :src="ticketData.sticker" alt="Sticker" />
+            </div>
+          </div>
+        </div>
+        
+        <!-- 前面的信封 -->
+        <img src="@/assets/images/SF_ticketEnvolope2.svg" alt="Envelope" class="envelope-image front" />
+      </div>
+
     </div>
 
     <div class="info">
@@ -54,7 +55,9 @@ const props = defineProps({
 
     <!-- 點選跳轉回首頁 -->
     <div class="finish"> 
-      <SF_planetButton p="完成"></SF_planetButton>
+      <router-link to="/SF_Homepage">
+        <SF_planetButton p="完成"></SF_planetButton>
+      </router-link>
     </div>
   </div>
   </template>
@@ -71,7 +74,7 @@ const props = defineProps({
   }
 
   .wrapper {
-    background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
+    background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(0, 0, 0, 0.63)) ,
     url(../assets/images/STBackground.png);
   }
   
@@ -79,45 +82,52 @@ const props = defineProps({
     text-align: center;
   }
   .title{
-    padding-top: 4%;
+    padding: 4%;
   }
   .title p{
     font-size: 20px;
   }
 
-  .envelope{
+  .envolope-outside{
     position: relative;
     width: 100%;
     max-width: 28%;
     display: block;
-    margin:3% auto;
+    margin: auto;
   }
     
   .ticket{
     z-index: 2;
-    animation: slideIn 2.5s ease-in-out forwards; /* 動畫名稱及參數 */
+    animation: slideIn 2s ease-in-out forwards; /* 動畫名稱及參數 */
 
-  }
-
-// 票券動畫效果
-  .ticket-image .style {
     position: absolute;
-    top: -500px;
-    left: 17px;
-    width: 100%;
-    max-width: 320px; 
-    // animation: slideIn 2.5s ease-in-out forwards; /* 動畫名稱及參數 */
-  }
-
-  // 飛航小物
-  .ticket-image .sticker{
-    position: absolute;
-    top: -441px;
-    left: 277px;
-    width: 100%;
-    max-width: 30px; 
+    top: 38%;
 
   }
+
+.finalTicket {
+  max-width: 470px;
+  aspect-ratio: 100 / 44;
+  position: relative;
+  margin: auto;
+}
+
+.finalTicket img {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.selected-sticker {
+  display: block;
+  width: 100%;
+  max-width: 8%;
+  height: auto;
+  position: absolute;
+  top: 45%;
+  right: 11%;
+}
 
 
   // 信封口
@@ -141,7 +151,6 @@ const props = defineProps({
     z-index: 1; /* 背後的信封在最底層 */
     width: 100%;
     max-width: 250vw; 
-
   }
 
 
@@ -160,26 +169,23 @@ const props = defineProps({
   .info{
     margin: 6% auto;
   }
+
   .info p {
     line-height: 3;
   }
 
-  // .finish{
-  //   margin: 5% auto;
-  // }
-
 
   @keyframes slideIn {
   0% {
-    transform: translateY(28vh) rotate(8deg); /* 初始狀態 */
+    transform: translateY(-50px) rotate(10deg); /* 初始狀態 */
   }
 
   100% {
-    transform: translateY(55vh) rotate(0deg); /* 最終狀態 */
+    transform: translateY(10px) rotate(0deg); /* 最終狀態 */
   }
 }
 
-
+// 信封口
 @keyframes Down {
   0% {
     transform: rotateX(0deg); /* 初始打開狀態 */
