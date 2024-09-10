@@ -256,6 +256,15 @@ const routes = [
     requiredLogin: false
   },
   {
+    path: '/MS_ProductList',
+    name: '心靈光譜商品細項頁',
+    component: () => import('@/views/MS_ProductList.vue'),
+    meta: {
+      title: "心靈光譜商品頁細項頁"
+    },
+    requiredLogin: false
+  },
+  {
     path: '/FQA_03',
     name: '常見問題',
     component: () => import('@/views/FQA_03.vue'),
