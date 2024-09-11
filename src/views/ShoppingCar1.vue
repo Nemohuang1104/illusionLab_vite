@@ -133,9 +133,13 @@ const highlight = ref({
     .wrapper{
         background: linear-gradient(125deg, #22247A 23.82%, #7976BB 101.34%);
     }
+
+  
+    
     .step{
         padding-top: 50px;
-    }
+}
+
     .contanier{
         display: flex;
         width: 100%;
