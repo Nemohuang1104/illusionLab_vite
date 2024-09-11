@@ -11,12 +11,12 @@
 
 
 const productInfo = ref([
-  {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
-  {id:'2',cardImage: '../src/assets/images/LC_Product_item2.svg',productName:'賭聖帽T',price:'1099'},
-  {id:'3',cardImage: '../src/assets/images/LC_Product_item3.svg',productName:'暗黑撲克牌組',price:'299'},
-  {id:'4',cardImage: '../src/assets/images/LC_Product_item4.svg',productName:'幸運骰子',price:'99'},
-  {id:'5',cardImage: '../src/assets/images/LC_Product_item5.svg',productName:'必勝籌碼',price:'199'},
-  {id:'6',cardImage: '../src/assets/images/LC_Product_item6.svg',productName:'賭城帆布袋',price:'599'},
+  {id:'1',cardImage: '../src/assets/images/MS_Product1.svg',productName:'繪本風格悠遊卡卡夾',price:'300'},
+  {id:'2',cardImage: '../src/assets/images/MS_Product2.svg',productName:'繪本風格筆記本',price:'180'},
+  {id:'3',cardImage: '../src/assets/images/MS_Product3.svg',productName:'繪本風格帆布袋',price:'590'},
+  {id:'4',cardImage: '../src/assets/images/MS_Product4.svg',productName:'繪本風格小貼紙',price:'100'},
+  {id:'5',cardImage: '../src/assets/images/MS_Product5.svg',productName:'繪本風格悠遊抱枕',price:'990'},
+  {id:'6',cardImage: '../src/assets/images/MS_Product6.svg',productName:'繪本風格防摔手機殼',price:'1280'},
 
 
 ]) 
@@ -44,7 +44,7 @@ const highlight = ref({
                 <ul>
                     <li class="card">
                         <div class="product-info">
-                            <input type="checkbox">
+                            <input class="checkbox" type="checkbox">
                             <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image">
                             <div class="description">
                                 <span class="product-name">繪本風格帆布袋</span>
@@ -65,7 +65,7 @@ const highlight = ref({
                                 <input type="text" v-model="item.quantity" min="1" />
                                 <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
                             </div>
-                            <span>$590</span>
+                            <span class="des_span" >$590</span>
                             <img class="trash-can" src="../assets/images/trashcan.svg">
                         </div>
                      
@@ -93,10 +93,10 @@ const highlight = ref({
                     </div>
                 </div>
                 <div class="checkbutton">
-                    <Routerlink to="/shop2">
+                    <RouterLink to="/shop2">
                         <button class="check">商品確認
                         </button>
-                    </Routerlink>
+                    </RouterLink>
                 </div>
             </div>
         </div>
@@ -133,10 +133,17 @@ const highlight = ref({
     .wrapper{
         background: linear-gradient(125deg, #22247A 23.82%, #7976BB 101.34%);
     }
+
+  
     
+    .step{
+        padding-top: 50px;
+}
+
     .contanier{
         display: flex;
-        width: 1000px;
+        width: 100%;
+        max-width: 1000px;
         margin: 5% auto 0;
         justify-content: space-between;
     }
@@ -155,13 +162,7 @@ const highlight = ref({
         font-size: 20px;
         font-style: normal;
         padding: 10px;
-        width: 90%;
-    }
-    .order input{
-        border: 0;
-        background-color: none;
-        height: 20px;
-        // color: #FFFFFF;
+        width: 95%;
     }
 
     ul{
@@ -175,24 +176,55 @@ const highlight = ref({
 
     .trash-can{
         cursor: pointer;
+        width: 100%;
+        max-width: 20px;
     }
     // ======================
 
     .product-info{
         width: 100%;
         display: grid;
-        gap: 10px;
         grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 1fr;
         padding: 10px;
         align-items: center;
+        justify-items: center;
         color: var(--Color-6, #FFF);
-        font-size: 18px;
         font-family: "Noto Sans TC";
     }
+
+    .product-name{
+        line-height: 1.2;
+    }
+
+    .checkbox {
+        appearance: none; /* 隱藏原始 checkbox */
+        width: 100px;
+        max-width: 16px;
+        height: 16px;
+        border: 1px solid #ffffff; /* 自定義背景色 */
+        cursor: pointer;
+
+        &:checked {
+            background-color: rgba(255, 255, 255, 0); /* 選中後背景顏色 */
+        }
+
+        /* 打勾標記 */
+        &:checked::after {
+            // content: '✔'; /* 選中後顯示的符號 */
+            content: '✓'; 
+            display: block;
+            text-align: center;
+            line-height: 13px;
+            color: #ffffff; /* 勾勾的顏色 */
+            font-size: 16px;
+        }
+    }
+
     // ========================
     .product-image{
         border-radius: 10px;
         // width: 100%;
+        max-width: 120px;
     }
 
     .quantity-input {
@@ -327,7 +359,8 @@ const highlight = ref({
     .payment{
         border-radius: 10px;
         background:#000354;
-        width: 400px;
+        width: 100%;
+        max-width: 400px;
         padding: 30px;
         flex-grow: 0;
         color: #FFFFFF;
@@ -347,10 +380,11 @@ const highlight = ref({
     }
     
     .payment input{
-        border-radius: 5px;
-        border: #FFFFFF;
+        border-radius: 8px;
+        border: 1px solid #FFFFFF;
         outline: none;
         /* 移除默認的黑框 */
+        background: none;
     }
 
 
@@ -391,7 +425,6 @@ const highlight = ref({
         border-radius: 2.5px;
         width: 100%;
         max-width: 1000px;
-        margin: 20px auto;
     }
     // 下方加購
     .ProductAdd{
@@ -400,10 +433,14 @@ const highlight = ref({
         margin: 3% auto;
         padding: 10px;
         color: #FFFFFF;
+
+        position: relative;
     }
+
     .addProduct_grid{
-        display: flex;
+        display: grid;
         gap:20px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
     }
     .ProductAdd p{
@@ -422,12 +459,144 @@ const highlight = ref({
     .pro p{
         margin: 20px auto;
         font-family: "Noto Sans TC";
+        height: 4vh;
     }
+
     .pro img{
         border-radius: 10px;
         width: 100%;
         max-width: 150px;
     }
 
-   
+
+// =====  RWD  =====
+
+@media screen and (max-width: 1024px){
+    .contanier{
+        width: 80%;
+        gap:20px;
+    }
+    .ProductAdd{
+        width: 80%;
+    }
+    
+    .payment{
+        max-width: 300px;
+        padding: 20px;
+    }
+    .input select{
+        width: 80%;
+        font-size: 14px;
+    }
+    .input::after{
+        font-size: 14px;
+    }
+    .quantity-input > input{
+        width: 40px;
+    }
+    .quantity-button{
+        width: 30px;
+    }
+
+}
+
+
+@media screen and (max-width: 900px){
+    // .step{
+    // width: 70%;
+    // margin: 0 auto;
+    // }
+
+    .contanier{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-image{
+        grid-column: 2/3;
+        grid-row: 1/4;
+    }
+
+
+    .product-info {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 0.2fr 1.5fr 1.5fr 0.2fr;
+        padding: 10px;
+        align-items: center;
+        justify-items: center;
+        color: var(--Color-6, #FFF);
+        font-family: "Noto Sans TC";
+        grid-template-rows: 1fr 1fr 1fr;
+
+    }
+
+    .quantity-input{
+        grid-column: 3/4;
+        grid-row: 2/3;
+        justify-self: start;
+    }
+
+    .des_span{
+        grid-column: 3/4;
+        grid-row: 3/4;
+        align-self: start;
+        justify-self: start;
+    }
+
+    .trash-can{
+        grid-column: 4/5;
+        grid-row: 3/4;
+        justify-self: start;
+    }
+
+    .checkbox{
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+
+    .description{
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+    }
+}
+
+@media screen and (max-width: 430px){
+
+    .quantity-input > input{
+        width: 30px;
+    }
+
+    .quantity-button{
+        width: 15px;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .product-info{
+        padding: 0;
+        gap: 5px;
+    }
+
+    .order .title{
+        width: 100%;
+    }
+    .payment input{
+        width: 100%;
+        max-width: 90%;
+    }
+
+    .input::after{
+        font-size: 12px;
+    }
+
+    .payment{
+        max-width: 300px;
+    }
+
+    .addProduct_grid{
+        grid-template-columns:repeat(auto-fit, minmax(100px, 1fr))
+    }
+}
+
 </style>

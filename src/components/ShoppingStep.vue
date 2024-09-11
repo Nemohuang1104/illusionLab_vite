@@ -87,4 +87,11 @@ const props = defineProps({
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 }
+
+@media screen and (max-width: 900px){
+    .step{
+    width: 70%;
+    margin: 0 auto;
+    }
+}
 </style>
