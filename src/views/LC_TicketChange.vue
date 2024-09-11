@@ -1,10 +1,31 @@
 <script setup>
 import LC_Text3 from '@/components/LC_Text3.vue';
+import Btn3_Lifecasino from "@/components/Btn3_Lifecasino.vue";
+import Btn2_Lifecasino from "@/components/Btn2_Lifecasino.vue";
 </script>
 
 <template>
 
     <div class="wrapper">
+      <div class="tab">
+
+        <RouterLink tag="div" to="/LC_Question" class="tab-item" replace >
+        <Btn3_Lifecasino Button="常見問題"></Btn3_Lifecasino>
+        </RouterLink>
+
+        <RouterLink tag="div" to="/LC_TicketRule" class="tab-item" replace>
+        <Btn3_Lifecasino Button="票務規則"></Btn3_Lifecasino>
+        <!-- <component :is="currentComponent" @click="currentButton.value = 'tab3'" Button="票務規則"/> -->
+        </RouterLink>
+
+        <RouterLink tag="div" to="/LC_TicketChange" class="tab-item" replace>
+        <Btn2_Lifecasino Button="退換票政策"></Btn2_Lifecasino>
+        </RouterLink>
+        </div>
+
+        <div class="top_img">
+        <img src="../assets/images/Line 24.png" alt="">
+        </div>
       <div class="title">
         <LC_Text3
           Title1="退換票政策"
@@ -72,9 +93,15 @@ import LC_Text3 from '@/components/LC_Text3.vue';
 
 
 .top_img{
+  img{
+    max-width: 800px;
   width: 100%;
+
+  }
+  
   display: flex;
   justify-content: center;
+  margin: 0 10px;
   margin-bottom: 4%;
 
 }
@@ -180,23 +207,7 @@ import LC_Text3 from '@/components/LC_Text3.vue';
 
 }
 
-.btn {
-  background: transparent;
-  border-color: transparent;
-  width: 2rem;
-  height: 2rem;
-  background: #eae6eb; /* --clr-grey-special */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #b4345c; /* --clr-red-special */
-  cursor: pointer;
-  margin-left: 1rem;
-  align-self: center;
-  min-width: 2rem;
-  z-index: 1;
-}
+
 
 .content {
   max-height: 0;
@@ -213,11 +224,26 @@ import LC_Text3 from '@/components/LC_Text3.vue';
   
 }
 
-.tab{
-display: flex;
-gap: 8px;
-justify-content: center;
-margin-bottom: 2%;
+.tab-item{
+      max-width: 200px;
+      width: 100%;
+      
+    }
+
+    .tab{
+    display: flex;
+    gap: 2%;
+    max-width: 660px;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-bottom: 2%;
+    padding: 0 20px;
+    }
+
+  @media (max-width: 430px) {
+    .tab{
+      gap: 8px;
+    }
 }
 
 

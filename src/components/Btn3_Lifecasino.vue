@@ -27,8 +27,9 @@ const props = defineProps({
   background-size:contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 200px;
-
+  max-width: 180px;
+  width: 100%;
+  
   height: 60px;
   font-size: 20px;
   cursor: pointer;
@@ -44,12 +45,20 @@ const props = defineProps({
 
 p{
   line-height: 60px;
+  font-family: map-get($map: $fontStyle, $key: style_2);
 }
 
 .pokerIcon{
   position: absolute;
   left: -23px;
   top: -28px;
+}
+
+@media (max-width: 430px) {
+
+  p{
+      font-size: 16px;
+    }
 }
 
 </style>

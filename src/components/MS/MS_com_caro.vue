@@ -52,14 +52,14 @@
   if (element && element.classList.contains('enlarged')) {
     const book = element.querySelector('.book');
 
-    book.querySelector('.front').style.transform = 'rotateY(0deg)';
-    book.querySelector('.page1').style.transform = 'rotateY(0deg)';
-    book.querySelector('.page2').style.transform = 'rotateY(0deg)';
-    book.querySelector('.page3').style.transform = 'rotateY(0deg)';
-    book.querySelector('.page4').style.transform = 'rotateY(0deg)';
-    book.querySelector('.page5').style.transform = 'rotateY(0deg)';
-    book.querySelector('.page6').style.transform = 'rotateY(0deg)';
-    book.querySelector('.back').style.transform = 'rotateY(0deg)';
+    book.querySelector('.front').style.transform = 'rotateY(-7deg)';
+    book.querySelector('.page1').style.transform = 'rotateY(-6deg)';
+    book.querySelector('.page2').style.transform = 'rotateY(-5deg)';
+    book.querySelector('.page3').style.transform = 'rotateY(-4deg)';
+    book.querySelector('.page4').style.transform = 'rotateY(-3deg)';
+    book.querySelector('.page5').style.transform = 'rotateY(-2deg)';
+    book.querySelector('.page6').style.transform = 'rotateY(-1deg)';
+    book.querySelector(' .back').style.transform = 'rotateY( 0deg)';
         book.style.transform = 'translateX(0px)'
 
 
@@ -134,9 +134,6 @@
   }
   </script>
   
-  <style>
-  /* Add your CSS styles here */
-  </style>
   
 
 <style lang="scss" scoped>
@@ -148,8 +145,8 @@
     width: 100vw;
     height: 100vh;
     // background-color: rgb(201, 201, 255);
-    padding-top: 300px;
-    margin-top: -500px;
+    padding-top: 100px;
+    margin-top: -220px;
 }
 
 .arrow {
@@ -187,7 +184,7 @@
     opacity: 1;
     width: 200px;
     height: 250px;
-    margin-top: -120px;
+    margin-top: -150px;
     line-height: 200px;
 }
 
@@ -338,11 +335,11 @@ $gap2: 14vw;
 
 .enlarged {
     transform: translateY(-10px);
-    width: 600px;
-    top: 30%;
+    // width: 600px;
+    top: 50%;
     z-index: 10;
     transform-style: preserve-3d;
     transform: scale(2);
-    left: calc(50% - 300px);
+    left: calc(50% - 100px);
 }
 </style>

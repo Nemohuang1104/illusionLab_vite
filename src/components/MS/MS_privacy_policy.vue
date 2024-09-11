@@ -2,10 +2,11 @@
   <div class="template">
     <div class="top">
       <MS_com_title 
+        mode="four"
         mainTitle="隱私權政策" 
         subTitle="PRIVACY POLICY"
         intro="
-        <span>BELLEU 比露時尚</span>（以下簡稱「我們」）非常重視您的個人資料保護。<br>
+        <span>幻浸實驗室</span>（以下簡稱「我們」）非常重視您的個人資料保護。<br>
         本隱私政策旨在說明我們如何收集、使用、披露、保存及保護您的個人資料。<br>
         請仔細閱讀以下內容，以了解我們對您個人資料的處理方式。
         "/>
@@ -62,14 +63,14 @@
       title: '三、我們如何披露您的個人資料',
       contentTitle: '我們在以下情況下可能會披露您的個人資料：',
       content: [
-        { title: '1. 服務提供商：', text: '我們可能會將您的資料提供給協助我們運營網站及提供服務的第三方，如支付處理公司、物流公司等。' },
+        { title: '1. 提供商：', text: '我們可能會將您的資料提供給協助我們運營網站及提供服務的第三方，如支付處理公司、物流公司等。' },
         { title: '2. 法律要求：', text: '當我們有義務披露您的資料以遵守法律規定或應政府機關要求時。' },
       ],
     },
     {
       title: '四、我們如何保護您的個人資料',
       contentTitle: '我們採取適當的技術和管理措施來保護您的個人資料，防止未經授權的訪問、使用或披露。然而，互聯網上的資料傳輸無法保證絕對安全，因此我們無法保證您的資料在傳輸過程中的安全性。',
-      content: [],
+      content: [{ }],
     },
     {
       title: '五、您的權利',
@@ -84,13 +85,13 @@
     {
       title: '六、隱私政策的變更',
       contentTitle: '我們保留隨時修改本隱私政策的權利。修改後的政策將在我們的網站上公佈，並自公佈之日起生效。請定期查閱本頁面以了解最新政策。',
-      content: [],
+      content: [{ }],
     },
     {
       title: '七、聯絡我們',
       contentTitle: '如果您對本隱私政策有任何疑問或希望行使您的權利，請通過以下方式聯繫我們：',
       content: [
-        { title: '電子郵件：', text: 'service@belleu.com.tw' },
+        { title: '電子郵件：', text: 'service@幻浸實驗室.com.tw' },
         { title: '電話：', text: '(TID)102-11-8939。' },
         { title: '地址：', text: '新北市啵啵區嘻嘻路102街11號。' },
       ],
@@ -113,8 +114,10 @@
 </script>
   
 <style lang="scss" scoped>
+  @import "../../assets/SASS/component/ms";
+
 .accordion {
-  background-color: #eee;
+  background-color: #000354;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -126,7 +129,7 @@
 }
 
 .active, .accordion:hover {
-  background-color: #ccc;
+  background-color: #000354;
 }
 .panel > h4{
   padding-top:30px;
@@ -134,7 +137,7 @@
 .panel {
   padding: 0 18px;
   box-sizing: border-box;
-  background-color: white;
+  // background-color: white;
   max-height: 0;
   overflow: hidden;
   display: flex;
@@ -164,7 +167,13 @@ h3,h4 {
     padding: 60px 20px;
   }
 }
+
 .template{
-  gap: 40px;
+  position: relative;
+  // gap: 40px;
+  background: linear-gradient(146deg, #22247A 1.3%, #7976BB 98.32%);
 }
+h1,h2,h3,h4,h5,h6,p{
+    color: #FFFFFF !important;
+  }
 </style>

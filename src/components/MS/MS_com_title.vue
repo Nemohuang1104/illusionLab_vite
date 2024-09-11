@@ -25,7 +25,7 @@ export default {
     mode: {
       type: String,
       default: 'one',
-      validator: value => ['one', 'two', 'three'].includes(value),
+      validator: value => ['one', 'two', 'three' , 'four'].includes(value),
     },
     mainTitle: {
       type: String,
@@ -59,13 +59,15 @@ export default {
     modeColor1() {
       if (this.mode === 'one') {
         return '#F2D45C';
-      }
+      } else if (this.mode === 'four'){
+      return '#FFFFFF';
+    }
       return '#FB9D3C';
     },
     modeColor2() {
       if (this.mode === 'one') {
         return '#FFFFFF';
-      } else if (this.mode === 'two' || this.mode === 'one') {
+      } else if (this.mode === 'two' || this.mode === 'four') {
         return '#FFFFFF';
       }
       return '#855F49';
@@ -77,6 +79,8 @@ export default {
   
 
 <style lang="scss" scoped>
+  @import "../../assets/SASS/component/ms";
+
   .title{
   margin: 0 auto;
   display: flex;

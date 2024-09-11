@@ -146,15 +146,15 @@ onBeforeUnmount(() => {
 
 //前導頁導至主活動頁
 // 設置定時器，XX秒後自動跳轉到主頁面
-setTimeout(function () {
-    document.body.style.transition = "opacity 1s";
-    document.body.style.opacity = "0";
-    // document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
-    // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
-    setTimeout(function () {
-        window.location.href = "/SF_Homepage";// 放置主页面URL
-    }, 300); // 等待1秒淡出動畫结束
-}, 6400);// 1000毫秒 = 1秒
+// setTimeout(function () {
+//     document.body.style.transition = "opacity 1s";
+//     document.body.style.opacity = "0";
+//     // document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
+//     // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
+//     setTimeout(function () {
+//         window.location.href = "/SF_Homepage";// 放置主页面URL
+//     }, 300); // 等待1秒淡出動畫结束
+// }, 6400);// 1000毫秒 = 1秒
 
 </script>
 
@@ -470,6 +470,48 @@ setTimeout(function () {
     100% {
         clip-path: inset(77px 0 25px 0);
     }
+
+
 }
 
+@media(max-width: 820px) {
+    .UFOimg {
+        margin-left: 19vw;
+        max-width: 550px;
+        font-size: 16px;
+    }
+
+    .text {
+        top: 60%;
+    }
+}
+
+
+@media(max-width: 430px) {
+    .UFOimg {
+        font-size: 12px;
+        margin-left: 15vw;
+    }
+
+    .text {
+        top: 85%;
+        width: 90%;
+    }
+}
+
+
+@media(max-width: 390px) {
+    .UFOimg {
+    font-size: 12px;
+    margin-left: 16vw;
+    }
+    .text{
+        top: 110%;
+        width: 90%;
+}
+
+
+
+
+}
 </style>

@@ -634,9 +634,9 @@ p{
 
 }
 .header{
-    position: fixed;
-    top: 0;
-    z-index: 100;
+    // position: fixed;
+    // top: 0;
+    // z-index: 100;
     // opacity: 0;
     // visibility: hidden;
     // transition: opacity 0.5s ease, visibility 0.5s ease;
@@ -1019,7 +1019,7 @@ margin: 0 auto;
         content: "";
         position: absolute;
         left: 0;
-        top: -80px;
+        top: -40px;
         width: 100%;
         height: 100vh;
         background-color: black;
@@ -1027,9 +1027,11 @@ margin: 0 auto;
     }
 
     &__Reviews{
-        transform: scale(0.8);
+        
         transform: translateY(-40px) scale(0.87);
         // width: 500px;
+        overflow: visible;
+        margin: 0 auto;
     }
 
 }
@@ -1227,6 +1229,9 @@ margin: 0 auto;
     .LC_btn3{
         margin: 0 auto;
         margin-top: 50px;
+    }
+    .line{
+        margin-top: 180px;
     }
 }
 

@@ -37,7 +37,7 @@
 <style lang="scss" scoped>
 // 幻境LOGO
 .outline{
-    width: 100%;
+    width: 100vw;
     // max-width: 1440px;
     height: 200px;
     // background-image: url(../assets/images/STBackground.png);
@@ -83,4 +83,9 @@ a:last-child{
     font-family: "Noto Sans TC";
 }
 
+@media (max-width: 768px){
+    .content p{
+        font-size: 8px;
+    }
+}
 </style>
