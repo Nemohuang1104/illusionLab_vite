@@ -17,17 +17,29 @@
       <!-- Logo -->
         <img src="../assets/images/illusionLabLOGO.svg" alt="Logo" class="logo">
   
-  <div class="cloud">
+  <!-- <div class="cloud">
     <img src="../assets/images/cloudbutton.png" alt="" class="cloud_left">
     <img src="../assets/images/cloudbutton.png" alt="" class="cloud_right">
-  </div>
+  </div> -->
 
   <!-- 按鈕 -->
-        <div class="button-container">
+        <!-- <div class="button-container">
             <button class="btn font-btn"  @click="goToEnter">前台</button>
             <button class="btn back-btn" @click="goToBack">後台</button>
-            <!-- <img src="../../public/image/cloud.png" alt=""> -->
-        </div>
+        </div> -->
+  </div>
+
+
+  <!-- ============================================= -->
+
+  <div class="leftCloud">
+    <img src="../assets/images/cloudbutton.png" alt="" class="cloud_left">
+    <button class="btn font-btn"  @click="goToEnter">前台</button>
+  </div>
+
+  <div class="rightCloud"> 
+    <img src="../assets/images/cloudbutton.png" alt="" class="cloud_right">
+    <button class="btn back-btn" @click="goToBack">後台</button>
   </div>
 </div>
     
@@ -156,12 +168,13 @@ function goToBack() {
 
 
 .logo {
-  width: 590px;
+  max-width: 590px;
+  width: 100%;
   display: block;
   margin: 0 auto;
   margin-top: 70px;
   animation: logo 8s 0.5 ease-out forwards;
-  z-index: 15;
+  z-index: 150;
 }
 
 @keyframes logo {
@@ -199,13 +212,18 @@ function goToBack() {
   
 }
 
-.cloud_left{
-  width: 70%;
+.leftCloud{
   position: absolute;
-  top: 44%;
-  left: -8%;
+  top: 35%;
+  right: 47%;
   z-index: 10;
   animation: cloud_left 3s linear infinite;
+}
+
+.cloud_left{
+  max-width: 600px;
+  width: 100%;
+  position: relative;
 }
 
 @keyframes cloud_left {
@@ -221,13 +239,24 @@ function goToBack() {
 }
 
 
-.cloud_right{
+.rightCloud{
+  // border: 2px solid rgb(0, 255, 0);
+
   position: absolute;
-  width: 64%;
-  top: 70%;
-  right:-4%;
+  top:50%;
+  left: 47%;
   z-index: 10;
   animation: cloud_right 3s 0.5s linear infinite;
+}
+
+.cloud_right{
+  // border: 2px solid red;
+  // width: 64%;
+  max-width: 600px;
+  width: 100%;
+  position : relative;
+  object-fit: cover;
+ 
 }
 
 @keyframes cloud_right {
@@ -243,17 +272,75 @@ function goToBack() {
 }
 
 .font-btn {
+    // border: 2px solid red;
+    max-width: 200px;
+    max-height: 100px;
     position: absolute;
-    top: 60%;
-    left: 4%;
+    top: 30%;
+    right: 35%;
     z-index: 12;
 }
 
 .back-btn {
     position: absolute;
-    top: 80%;
-    right:  4%;
+    top: 23%;
+    left: 35%;
     z-index: 12;
+    max-width: 200px;
+    max-height: 100px;
+}
+
+@media screen and (max-width: 820px){
+  .leftCloud{
+ 
+    top: 25%;
+    right: 47%;
+    z-index: 10;
+    
+  }
+
+  .rightCloud{
+    position: absolute;
+    top: 28%;
+    left: 47%;
+
+  }
+
+}
+
+@media screen and (max-width: 430px){
+  
+  .bg_cloudright{
+    width: 70%;
+    top: 15%;
+    right: -10%;
+  }
+
+  .bg_cloudleft[data-v-9b68c88b] {
+
+    top: 5%;
+    left: -8%;
+  }
+
+  .btn{
+    font-size:36px;
+    max-width: 100px;
+    max-height: 50px;
+  }
+
+  .font-btn{
+    top: 22%;
+    right: 27%;
+  }
+
+  .leftCloud{
+    top: 22%;
+    right: 47%;
+  }
+
+  .rightCloud{
+    top: 26%;
+  }
 }
 
 </style>

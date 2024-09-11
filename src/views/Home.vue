@@ -17,26 +17,26 @@
     :freemode="true" 
 
     :modules="modules"
+    
     :autoplay="{delay: 4000, disableOnInteraction: false}"
-
     class="mySwiper"
     >
-    <!-- " -->
+    <!-- :autoplay="{delay: 4000, disableOnInteraction: false}" -->
   <!-- =================activity1=================== -->
     <swiper-slide>
       <div class="slide slide1">
-        <div >
+        
           <PokerFall class="slide__content layer2"></PokerFall>
           <img class="slide__main layer1 woman" src="../assets/images/carousel1_1_1.png" alt="">
           <div class="text layer3" >
-            <img class="logo" src="../assets/images/logo_lifecasino.svg" alt="">
+            <img class="logo LC_logo" src="../assets/images/logo_lifecasino2.svg" alt="">
             <p>歡迎來到人生賭場，在這裡，<br>
               每一次下注都是對命運的挑戰，體驗人生選擇的風險與回報。<br>
               準備迎接命運的賭局嗎？</p>
              <RouterLink to="/lifecasino">
               <Btn_Lifecasino class="LC_btn" Button="ENTER" ></Btn_Lifecasino>
              </RouterLink>
-          </div>
+         
         </div>
       </div>
     </swiper-slide>
@@ -54,7 +54,7 @@
         <p>體驗前所未有的奇幻冒險<br>
           揭開宇宙的神秘面紗</p>
           <router-link to="SF_Homepage">
-            <ActivityButton class="LC_btn" Button="ENTER" ></ActivityButton>
+            <ActivityButton class="SF_btn" Button="ENTER" ></ActivityButton>
           </router-link>
       </div>
     </div>
@@ -76,7 +76,7 @@
               沉浸在充滿代入感的世界。
             </p>
             <RouterLink to="/mindspectrum">
-              <ActivityButton class="LC_btn" Button="ENTER"></ActivityButton>
+              <MS_Button class="LC_btn" Button="ENTER"></MS_Button>
             </RouterLink>
           </div>
         </div>
@@ -94,6 +94,8 @@ import StoneFall from '@/components/StoneFall.vue';
 import FlowerFall from '@/components/FlowerFall.vue';
 import ActivityButton from '@/components/ActivityButton.vue';
 import Btn_Lifecasino from '@/components/Btn_Lifecasino.vue';
+import SF_planetButton from '@/components/SF_planetButton.vue';
+import MS_Button from '@/components/MS_Button.vue';
 // import "@/assets/css/style.css"
 
 
@@ -260,8 +262,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
     }
   .woman{
+    max-width: 1440px;
+    width: 100%;
     left: 0;
-    bottom: -15px;
     bottom: 95px;
     transform: scale(1.4);
   }
@@ -271,16 +274,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
     position: absolute;
     left: 0;
     right: 0;
-    bottom:15%;
+    bottom:calc(50vh - (465px/2));
     width: 100%;
 
 
     .logo{
-      width: 40%;
+      max-width: 700px;
+      width: 100%;
       display: block;
       margin: 0 auto;
-      margin-bottom: 30px;
-      filter:drop-shadow(0px 0px 10px rgba(0,0,0,.5));
+      // -webkit-backdrop-filter:drop-shadow(0px 0px 10px rgba(0,0,0,.5));
     }
 
     p{
@@ -294,12 +297,23 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
     }
 
+    .LC_logo{
+      margin-bottom: 30px;
+
+    }
+
     .LC_btn{
       // border: 2px solid red;
       margin: 0 auto;
       margin-top: 30px;
       text-align: center;
       
+    }
+
+    .SF_btn{
+      margin: 0 auto;
+      margin-top: 30px;
+      text-align: center;
     }
   }
 
@@ -343,4 +357,5 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   }
 }
 
+@media screen and (max-width: 430px){}
 </style>

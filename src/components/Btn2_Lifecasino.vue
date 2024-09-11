@@ -28,15 +28,16 @@ const props = defineProps({
   background-size:contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 200px;
-
+  max-width: 180px;
+  width: 100%;
+  
   height: 60px;
   font-size: 20px;
   cursor: pointer;
 
   text-align: center;
   transition: .5s;
-  color: white;
+  color: map-get($colofont_1,gold);
   position: relative;
 }
 .LifeCasio_btn:hover{
@@ -45,12 +46,27 @@ const props = defineProps({
 
 p{
   line-height: 60px;
+  font-family: map-get($map: $fontStyle, $key: style_2);
 }
+
 
 .pokerIcon{
   position: absolute;
   left: -23px;
-  top: -28px;
+  top: -20px;
+  max-width: 50px;
+  width: 100%;
 }
 
+@media (max-width: 430px) {
+  .pokerIcon{
+  max-width: 30px;
+  left: -12px;
+  top: 0px;
+  }
+
+  p{
+      font-size: 16px;
+    }
+}
 </style>
