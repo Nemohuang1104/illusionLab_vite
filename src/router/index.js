@@ -557,25 +557,7 @@ const routes = [
     },
     requiredLogin: true
   },
-  {
-    path: '/SF_BookingChange',
-    name: 'SF_BookingChange',
-    component: () => import('@/views/SF_BookingChange.vue'),
-    meta: {
-      title: "購物車"
-    },
-    requiredLogin: true
-  },
 
-  {
-    path: '/shop3',
-    name: 'shop3',
-    component: () => import('@/views/ShoppingCar3.vue'),
-    meta: {
-      title: "購物車"
-    },
-    requiredLogin: true
-  },
 
 
 

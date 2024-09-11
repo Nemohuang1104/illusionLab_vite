@@ -306,6 +306,10 @@ const highlight = ref({
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
 }
 
+.step{
+    padding-top: 100px;
+}
+
 .content {
     margin: 0 auto;
     margin-top: 5%;

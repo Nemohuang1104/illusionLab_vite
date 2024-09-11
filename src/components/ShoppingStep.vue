@@ -1,19 +1,13 @@
 <script setup>
 const props = defineProps({
-<<<<<<< HEAD
-=======
 
->>>>>>> 9785ce268821d11b795c989bbe80222444a80024
    
     styles: {
         type: Object,
         required: true
     },
-<<<<<<< HEAD
-=======
 
    
->>>>>>> 9785ce268821d11b795c989bbe80222444a80024
 });
 
 
@@ -92,5 +86,12 @@ const props = defineProps({
     line-height: 1.6rem;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
+}
+
+@media screen and (max-width: 900px){
+    .step{
+    width: 70%;
+    margin: 0 auto;
+    }
 }
 </style>

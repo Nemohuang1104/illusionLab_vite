@@ -37,12 +37,7 @@ p {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-<<<<<<< HEAD
   font-size: 14px;
-=======
- 
-  
->>>>>>> 9785ce268821d11b795c989bbe80222444a80024
 }
 
 @media screen and (max-width: 430px){

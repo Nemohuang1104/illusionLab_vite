@@ -66,7 +66,7 @@
         if (this.step === 'one') {
           return '#FFFFFF';
         } else if (this.step === 'two') {
-          return '#FFFFFF';
+          return '#000000';
         } else if (this.step === 'three') {
           return '#FDC274';
         }
@@ -76,7 +76,7 @@
         if (this.step === 'one') {
           return '#FFD700';
         } else if (this.step === 'two') {
-          return '#FFFFFF';
+          return '#122a74';
         } else if (this.step === 'three') {
           return '#855F49';
         }
