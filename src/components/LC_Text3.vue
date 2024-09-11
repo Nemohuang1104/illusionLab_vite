@@ -25,15 +25,18 @@ const props = defineProps({
 @import "../assets/style";
 
 .line{
-  max-width: 400px;
+  max-width: 360px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   border-bottom: 1px solid white;
+  padding: 0 10px;
   padding-bottom: 30px;
   margin-top: 60px;
+  // margin-bottom: 60px;
 }
 
 .text2{
@@ -71,11 +74,24 @@ h4{
   margin: 0 auto;
 }
 
-.icon{
-  max-width: 40px;
-  // font-size: 40px;
-  
 
+@media (max-width: 430px) {
+  .line{
+    margin-top: 20px;
+    padding-bottom: 10px;
+
+    max-width: 260px;
+
+  }
+  h4{
+  font-size: map-get($map: $fontSize, $key: 6);
+  }
+
+  h1{
+ font-size: map-get($map: $fontSize, $key: h3);
+
+  }
+    
 }
 
 

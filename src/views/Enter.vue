@@ -13,7 +13,8 @@
 <div class="img">
   <div class="text ">
     <div class="line ">
-      <h1>沉浸式體驗  Immersive Experience</h1>
+      <h1>沉浸式體驗</h1>  
+      <h1>Immersive Experience</h1>
     </div>
     <h3>是一種讓參與者完全投入於特定環境或故事中的感官體驗，<br>
         打破傳統觀眾和表演者之間的界限，使參與者成為體驗的一部分，<br>
@@ -202,6 +203,7 @@ position: relative;
 }
 .scroll-wrap li {
 height: 100vh;
+
 }
 .movie {
 position: fixed;
@@ -232,8 +234,8 @@ align-items: center;
 }
 .movie .bg .text{
 // border: 2px solid red;
-margin: 0 auto;
-margin-top: 15%;
+margin: auto auto;
+margin-top: 130px;
 max-width: 800px;
 display: block;
 text-align: center;
@@ -241,6 +243,11 @@ text-align: center;
 // opacity: 1;
 transition: 1s;
 animation: enter 1s forwards;
+padding: 0 20px;
+
+  h1{
+    margin-bottom: 10px;
+  }
 }
 
 @keyframes enter{
@@ -311,18 +318,18 @@ opacity: 0;
 transition: 1s;
 }
 
-.story:before,
-.actor:before {
-content: "";
-display: inline-block;
-height: 100%;
-vertical-align: bottom;
-}
+// .story:before,
+// .actor:before {
+// content: "";
+// display: inline-block;
+// height: 100%;
+// vertical-align: bottom;
+// }
 .story-content,
 .actor ul {
 display: inline-block;
 // text-align: left;
-margin-bottom: 20%;
+// margin-bottom: 20%;
 font-size: 20px;
 color: #7976BB;
 font-weight: 300;
@@ -332,9 +339,16 @@ line-height: 2;
 transform: scale(2);
 transition: 1s;
 }
+.story-content{
+  margin-top: 200px;
+  padding: 0 20px;
+}
+
 .actor ul{
-margin-bottom: 20%;
+// margin-bottom: 20%;
 width: 100%;
+margin-top: calc(50vh - (800px/2));
+
 
 }
 .actor ul li {
@@ -390,5 +404,12 @@ opacity: 1;
 }
 .movie.step-3 .actor ul {
 transform: scale(1);
+}
+
+@media screen and (max-width: 430px){
+  .actor ul{
+    margin-top: 200px;
+  }
+
 }
 </style>
