@@ -63,69 +63,91 @@ import Footer_03 from '@/components/Footer_03.vue';
       <div class="pagebox">
         <div class="list">
           <div class="pro">
-            <router-link><img src="../assets/images/MS_bearnotebook.png" alt=""></router-link>
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_bearnotebook.png" alt="">
             <div>
               <p>繪本風格筆記本</p>
               <div class="price">
                 <span>NT$ 180</span>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
-            </div>
+            </div></router-link>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/MS_littlebag.png" alt=""></router-link>
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_littlebag.png" alt="">
             <div>
               <p>小女孩帆布袋</p>
               <div class="price">
                 <p>NT$ 590</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
-            </div>
+            </div></router-link>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/MS_YOYOcard.png" alt=""></router-link>
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_YOYOcard.png" alt="">
             <div>
               <p>小蜥蜴悠遊卡</p>
               <div class="price">
                 <p>NT$ 300</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
-            </div>
+            </div></router-link>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/MS_productphone.jpg" alt=""></router-link>
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productphone.jpg" alt="">
             <div>
               <p>防摔手機殼</p>
               <div class="price">
                 <p>NT$ 1280</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
-            </div>
+            </div></router-link>
           </div>
 
           <div class="pro">
-            <router-link><img src="../assets/images/MS_productcard.jpg" alt=""></router-link>
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productcard.jpg" alt="">
             <div>
               <p>繪本風格卡片</p>
               <div class="price">
                 <p>NT$ 80</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
-            </div>
+            </div></router-link>
           </div>
 
           <div class="pro">
-            <img src="../assets/images/MS_productsticker.jpg" alt="">
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productcup.jpg" alt="">
+            <div>
+              <p>繪本風格馬克杯</p>
+              <div class="price">
+                <p>NT$ 250</p>
+                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+              </div>
+            </div></router-link>
+          </div>
+          
+          <div class="pro">
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_product_t_shirt.jpg" alt="">
+            <div>
+              <p>童趣造型長袖大學T</p>
+              <div class="price">
+                <p>NT$ 580</p>
+                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+              </div>
+            </div></router-link>
+          </div>
+
+          <div class="pro">
+            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productsticker.jpg" alt="">
             <div>
               <p>繪本風貼紙</p>
               <div class="price">
                 <p>NT$ 80</p>
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
-            </div>
+            </div></router-link>
           </div>
         </div>
       </div>
@@ -158,7 +180,6 @@ import Footer_03 from '@/components/Footer_03.vue';
 }
 
 .header{
-  position: fixed;
   z-index: 20;
 }
 
@@ -170,7 +191,6 @@ import Footer_03 from '@/components/Footer_03.vue';
   align-items: center;
   text-align: center;
   padding-top: 20px;
-
 }
 
 .title{}
@@ -189,8 +209,8 @@ import Footer_03 from '@/components/Footer_03.vue';
 }
 
 .producttitle {
-  max-width: 700px;
-  width: 100%;
+  // max-width: 700px;
+  width: 61vw;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -235,7 +255,7 @@ import Footer_03 from '@/components/Footer_03.vue';
 
 //商品外框
 .pagebox {
-  width: 63%;
+  width: 61vw;
   height: auto;
   // height: 750px;
   overflow: hidden;
@@ -244,7 +264,7 @@ import Footer_03 from '@/components/Footer_03.vue';
   display: flex;
   flex-direction: column;
   // padding: 70px 80px 100px 80px;
-  padding: 3%;
+  padding: 20px;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   border: 1px solid #e8e8e8;
@@ -260,15 +280,13 @@ import Footer_03 from '@/components/Footer_03.vue';
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2vw;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
+  gap: 1vw;
 }
 
 .pro {
   // border: 1px solid red;
-  width: 160px;
-  height: 220px;
   margin-bottom: 20px;
   padding: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -297,20 +315,30 @@ import Footer_03 from '@/components/Footer_03.vue';
   justify-content: space-between;
 }
 
-
-
-
-// RWD
-
-@media(max-width: 920px) {
-  .producttitle{
-    width: 80%;
+// ==================RWD============================================
+@media screen and (max-width:820px){
+  .pagebox{
+    width: 80vw;
   }
-  .pagebox {
-        padding: 0px;
-        height: auto;
-    }
- 
+
+  .list{
+    justify-content: center;
+    flex-grow: 1;
+  }
+}
+
+@media screen and (max-width:430px){
+  .producttitle{
+    width: 76vw;
+  }
+
+  .pagebox img{
+    width: 110px;
+  }
+
+  .pro p {
+    font-size: 16px;
+  }
 }
 
 </style>

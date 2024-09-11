@@ -11,7 +11,7 @@ const highlight = ref({
     3:{  background : '#fff', fontcolor : '#22247A' }
 
     }
-  );
+  ); 
 </script>
 
 <template>
@@ -109,6 +109,10 @@ const highlight = ref({
 
 .wrapper {
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
+}
+
+.ShoppingStep{
+    padding-top: 100px;
 }
 
 .content {
@@ -229,7 +233,17 @@ const highlight = ref({
     border-radius: 10px;
     flex-grow: 0;
     margin-bottom: 40px;
+    font-family: "Noto Sans TC";
 
+}
+
+.payment h2 {
+    color: var(--Color-6, #FFF);
+    font-family: "Noto Sans TC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .total {
@@ -280,6 +294,14 @@ const highlight = ref({
     font-size: 20px;
 }
 
+.total-fee h3 {
+    font-size: 20px;
+    line-height: 1.6rem;
+    flex-basis: 23%;
+    color: var(--Color-6, #FFF);
+    font-family: "Noto Sans TC";
+}
+
 .confirm {
     display: flex;
     width: 240px;
@@ -314,10 +336,7 @@ const highlight = ref({
 
 @media screen and (max-width: 780px) {
 
-    .ShoppingStep{
-        width: 70%;
-        margin: 0 auto;
-    }
+    
     .inner01 p {
         flex-basis: 25%;
         text-align: left;
