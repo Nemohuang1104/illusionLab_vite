@@ -50,6 +50,7 @@ export default {
   // border: 2px solid red;
   margin: 0 auto;
   margin-top: -50px;
+  
 }
 
 .header{
@@ -63,7 +64,7 @@ export default {
 
 </style>
 
-<style lang="scss">
+<style lang="scss" >
 @import "../assets/style";
 
 .title{
@@ -76,6 +77,7 @@ body{
 
 h1{
   font-size: map-get($map: $fontSize , $key: h1);
+  // font-size: 28px;
   font-weight: 800;
   // z-index: 1;
 }
@@ -112,6 +114,36 @@ h6{
 
 .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
-  
+//  background: linear-gradient(180deg, rgba(19, 44, 121, 0.8) 44.5%, rgba(7, 143, 242, 0.7) 100%)!important;
+ color: white !important;
+
+//  outline: unset ;
 }
+
+.options:hover{
+  // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+}
+
+.options option{
+  // background-color: black;
+}
+
+
+// .options{
+// //  background-color:rgba(255, 255, 255, 0.5) !important;
+//  background: linear-gradient(180deg, rgba(19, 44, 121, 0.8) 44.5%, rgba(7, 143, 242, 0.7) 100%)!important;
+//  color: white !important;
+
+//  outline: unset ;
+// }
+
+// .options:hover{
+//   background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+// }
+
+// .options option{
+//   background-color: black;
+// }
+
+
 </style>

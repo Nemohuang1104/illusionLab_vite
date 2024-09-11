@@ -122,19 +122,18 @@ header {
   width: 100%;
 
   height: 80px;
-  position: absolute;
+  // position: fixed;
+  
   z-index: 1000;
 }
 
 
 
 .logo img {
-  height: 60px;
+  width: 145px;
   flex-shrink: 0;
   cursor: pointer;
-  padding: 10px 20px;
 }
-
 
 //右側ICON
 .icons {
@@ -195,7 +194,8 @@ header {
 //活動二星際邊境(three)
 
 .header-three {
-  background-image: url(../assets/images/STBackground.png);
+  // background-image: url(../assets/images/STBackground.png);
+  background: linear-gradient(360deg, #000 26%, #505050 100%);
   height: 80px;
   /* 添加高度 */
   cursor: pointer;

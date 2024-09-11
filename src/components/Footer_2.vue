@@ -37,9 +37,9 @@
 <style lang="scss" scoped>
 // 幻境LOGO
 .outline{
-    width: 100vw;
+    // width: 100vw;
     // max-width: 1440px;
-    height: 200px;
+    // height: 200px;//footer的高度不能寫死，會有空白跑出來
     // background-image: url(../assets/images/STBackground.png);
     background: linear-gradient(180deg, #000 26%, #505050 100%);
     display: flex;
@@ -88,4 +88,11 @@ a:last-child{
         font-size: 8px;
     }
 }
+
+@media (max-width: 390px){
+    .content p{
+        font-size: 8px;
+    }
+}
+
 </style>

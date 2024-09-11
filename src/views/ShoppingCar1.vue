@@ -93,10 +93,10 @@ const highlight = ref({
                     </div>
                 </div>
                 <div class="checkbutton">
-                    <Routerlink to="/shop2">
+                    <RouterLink to="/shop2">
                         <button class="check">商品確認
                         </button>
-                    </Routerlink>
+                    </RouterLink>
                 </div>
             </div>
         </div>
@@ -127,13 +127,19 @@ const highlight = ref({
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 
-* {
-    font-family: "Noto Sans TC";
-}
+    * {
+        font-family: "Noto Sans TC";
+    }
     .wrapper{
         background: linear-gradient(125deg, #22247A 23.82%, #7976BB 101.34%);
     }
+
+  
     
+    .step{
+        padding-top: 50px;
+}
+
     .contanier{
         display: flex;
         width: 100%;
@@ -431,34 +437,10 @@ const highlight = ref({
         position: relative;
     }
 
-    .ProductAdd::before{
-        content: '<'; 
-        position: absolute;
-        left: -10px; /* 調整位置 */
-        top: 50%;
-        transform: translateY(-50%);
-        color: #ffffff; /* 字體顏色 */
-        font-size: 25px;
-        display: none;
-        cursor: pointer;
-    }
-
-    .ProductAdd::after{
-        content: '>'; 
-        position: absolute;
-        right: -10px; /* 調整位置 */
-        top: 50%;
-        transform: translateY(-50%);
-        color: #ffffff; /* 字體顏色 */
-        font-size: 25px; /* 調整字體大小 */
-        display: none;
-        cursor: pointer;
-    }
-   
-
     .addProduct_grid{
-        display: flex;
+        display: grid;
         gap:20px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
     }
     .ProductAdd p{
@@ -477,7 +459,9 @@ const highlight = ref({
     .pro p{
         margin: 20px auto;
         font-family: "Noto Sans TC";
+        height: 4vh;
     }
+
     .pro img{
         border-radius: 10px;
         width: 100%;
@@ -529,9 +513,6 @@ const highlight = ref({
         grid-row: 1/4;
     }
 
-    .payment{
-        max-width: 400px;
-    }
 
     .product-info {
         width: 100%;
@@ -544,10 +525,6 @@ const highlight = ref({
         font-family: "Noto Sans TC";
         grid-template-rows: 1fr 1fr 1fr;
 
-    }
-
-    .ProductAdd::before, .ProductAdd::after{
-        display: block;
     }
 
     .quantity-input{
@@ -607,6 +584,14 @@ const highlight = ref({
 
     .input::after{
         font-size: 12px;
+    }
+
+    .payment{
+        max-width: 300px;
+    }
+
+    .addProduct_grid{
+        grid-template-columns:repeat(auto-fit, minmax(100px, 1fr))
     }
 }
 

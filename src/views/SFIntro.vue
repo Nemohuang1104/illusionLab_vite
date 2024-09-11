@@ -146,15 +146,15 @@ onBeforeUnmount(() => {
 
 //前導頁導至主活動頁
 // 設置定時器，XX秒後自動跳轉到主頁面
-// setTimeout(function () {
-//     document.body.style.transition = "opacity 1s";
-//     document.body.style.opacity = "0";
-//     // document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
-//     // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
-//     setTimeout(function () {
-//         window.location.href = "/SF_Homepage";// 放置主页面URL
-//     }, 300); // 等待1秒淡出動畫结束
-// }, 6400);// 1000毫秒 = 1秒
+setTimeout(function () {
+    document.body.style.transition = "opacity 1s";
+    document.body.style.opacity = "0";
+    // document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
+    // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
+    setTimeout(function () {
+        window.location.href = "/SF_Homepage";// 放置主页面URL
+    }, 300); // 等待1秒淡出動畫结束
+}, 6400);// 1000毫秒 = 1秒
 
 </script>
 

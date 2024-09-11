@@ -77,4 +77,21 @@ main{
   cursor: pointer;
 }
 
+//=========================RWD=================================
+@media screen and (max-width:820px){
+  .coupon{
+    width: 80%;
+  }
+
+  .coupon h2{
+    font-size: 24px;
+  }
+
+
+
+
+
+
+}
+
 </style>

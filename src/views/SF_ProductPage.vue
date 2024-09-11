@@ -50,10 +50,10 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
       <div class="producttitle">
         <div class="arrowleft">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
-          <router-link to="/lifeCasino"><P>人生賭場</P></router-link>
+          <router-link to="/LC_ProductPage"><P>人生賭場</P></router-link>
         </div>
         <div class="arrowright">
-          <router-link to="/mindspectrum"><P>心靈光譜</P></router-link>
+          <router-link to="/MS_ProductPage"><P>心靈光譜</P></router-link>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
       </div>

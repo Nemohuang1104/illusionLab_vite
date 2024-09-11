@@ -1,13 +1,16 @@
 <script setup>
     import StrellarFrontierTitle from '@/components/SFTitle.vue';
-    import Header_2 from '@/components/Header_2.vue';
+    import SFHeader_0 from '@/components/SFHeader_0.vue';
+    import { ref } from 'vue' ;
+    const currentMode = ref('three');
     import Footer_2 from '@/components/Footer_2.vue';
 </script>
 
 
 
 <template>
-    <Header_2></Header_2>
+    <SFHeader_0 :mode="currentMode"></SFHeader_0>
+
     <div class="wrapper">
         <div class="bookingChange">
             <div class="Title">
@@ -17,7 +20,7 @@
         <hr>
         <div class="directions">
             <div class="method">
-                <span>票券若需更改體驗日期、取消退費，請提供相應的資料，來信《幻浸實驗室》客服信箱<br></span>
+                <span class="info">票券若需更改體驗日期、取消退費，請提供相應的資料，來信《幻浸實驗室》客服信箱<br></span>
                 <span class="mail">illusionlab@gmail.com</span>
             </div>
             <div class="rules">
@@ -55,11 +58,16 @@
         background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)) ,
     url(../assets/images/STBackground.png);
     }
+
+    .bookingChange{
+        padding-top: 120px;
+    }
+
     .Title{
         text-align: center;
     }
     hr{
-        width: 20%;
+        width: 130px;
         margin-top: 20px;
     }
     //下方規則區塊
@@ -71,7 +79,7 @@
         line-height: 1.6;
     }
     .method{
-        margin-bottom: 3%;
+        margin-bottom: 50px;
     }
     .method span{
         font-size: 20px;
@@ -94,5 +102,15 @@
         font-weight: bold;
         display: block;
         margin-top: 2%;
+    }
+
+    @media screen and (max-width: 430px){
+        .rules{
+            margin: 40px auto;
+        }
+
+        .text{
+            margin: 50px auto;
+        }
     }
 </style>

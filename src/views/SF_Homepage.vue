@@ -1,5 +1,5 @@
 <script setup>
-// import { ref } from 'vue';
+
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
@@ -60,56 +60,54 @@ const fullText = '歡迎來到星際邊境，一起踏上這場前所未有的�
 const displayedText = ref('');
 
 const typeWriterEffect = () => {
-  let index = 0;
-  const typingSpeed = 150; // 打字速度
+    let index = 0;
+    const typingSpeed = 150; // 打字速度
 
- // 使用 requestAnimationFrame 進行打字效果
- const type = () => {
-    if (index < fullText.length) {
-      displayedText.value += fullText[index];
-      index++;
-      setTimeout(() => {
+    // 使用 requestAnimationFrame 進行打字效果
+    const type = () => {
+        if (index < fullText.length) {
+            displayedText.value += fullText[index];
+            index++;
+            setTimeout(() => {
+                requestAnimationFrame(type);
+            }, typingSpeed);
+        }
+    };
+
+    // 延遲 ? 秒後啟動打字效果
+    setTimeout(() => {
         requestAnimationFrame(type);
-      }, typingSpeed);
-    }
-  };
-
-// 延遲 ? 秒後啟動打字效果
-setTimeout(() => {
-    requestAnimationFrame(type);
-  }, 3000); 
+    }, 3000);
 };
 
 // 當元件掛載時啟動打字機效果
 onMounted(() => {
-  typeWriterEffect();
+    typeWriterEffect();
 });
 
 // to top按鈕
 const showTopButton = ref(false);
 
 const Scroll = () => {
-  showTopButton.value = window.scrollY > 1800;
+  showTopButton.value = window.scrollY > 700;
 };
 
 const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', Scroll);
+    window.addEventListener('scroll', Scroll);
 });
 
-// onUnmounted(() => {
-//   window.removeEventListener('scroll', Scroll);
-// });
+
 
 // ======點選到下一頁最上面==========
 
-function scrollTop (){
+function scrollTop() {
     window.scrollTo({
-    top: 0,
-    behavior: 'auto' // 平滑滚动
+        top: 0,
+        behavior: 'auto' // 平滑滚动
     });
 }
 //購票去
@@ -120,7 +118,7 @@ const isLogoVisible = ref(false); // 控制 LOGO 顯示的變量
 
 const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    isLogoVisible.value = scrollPosition >= 700; // 當滾動位置大於 1240px 時顯示 LOGO
+    isLogoVisible.value = scrollPosition >= 700; 
 };
 
 onMounted(() => {
@@ -141,7 +139,7 @@ onBeforeUnmount(() => {
         <!-- 星球運轉 -->
         <div class="intro">
             <!-- <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video> -->
-            <video src="../assets/video/sf.mp4"  autoplay muted loop class="movie"></video>
+            <video src="../assets/video/sf.mp4" autoplay muted loop class="movie"></video>
             <!-- <video src="../assets/video/SFmovie.mp4 controls autoplay muted loop" class="movie"></video> -->
         </div>
 
@@ -161,7 +159,7 @@ onBeforeUnmount(() => {
         <SF_Stone></SF_Stone>
 
         <!-- 購票去 -->
-        <router-link>
+        <router-link  to="/SF_Ticket_step0">
             <div v-show="isLogoVisible" id="fixed-logo">
                 <img src="../assets/images/SF_moontoticket.png" alt="" class="rotate">
             </div>
@@ -183,8 +181,8 @@ onBeforeUnmount(() => {
             </div>
             <div class="ticketInfo" @click="scrollTop">
                 <router-link to="/SF_Ticket_step0">
-                <img src="../assets/images/StrellarFrontierTicket.png">
-            </router-link>
+                    <img src="../assets/images/StrellarFrontierTicket.png">
+                </router-link>
             </div>
         </div>
 
@@ -227,8 +225,8 @@ onBeforeUnmount(() => {
                                     </div>
                                 </div>
                             </div>
-                        
-                   
+
+
                         </router-link>
                     </swiper-slide>
                     <swiper-slide>
@@ -347,8 +345,10 @@ onBeforeUnmount(() => {
 
 // 匯入打字機字體
 @font-face {
-    font-family: '瀞ノグリッチ明朝 H1'; /* 字體名稱 */
-    src: url('/src/assets/fonts/瀞ノグリッチ明朝H1.otf') format('opentype'); /* 使用 .otf 格式 */
+    font-family: '瀞ノグリッチ明朝 H1';
+    /* 字體名稱 */
+    src: url('/src/assets/fonts/瀞ノグリッチ明朝H1.otf') format('opentype');
+    /* 使用 .otf 格式 */
     font-weight: normal;
     font-style: normal;
 }
@@ -356,37 +356,40 @@ onBeforeUnmount(() => {
 * {
     font-family: "Noto Serif TC";
     color: map-get($colofont_2 , text);
+    box-sizing: border-box;
 }
 
 .wrapper {
     background: linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)),
         url(../assets/images/STBackground.png);
-   
+    width: 100%;
+    max-width:1440px ;
+
 }
 
 //影片
 
-.intro{
+.intro {
     position: relative;
-    padding-bottom:56.25%;
-    width:100%;
-    height:0;
+    padding-bottom: 56.25%;
+    width: 100%;
+    height: 0;
     margin-bottom: 40px;
 }
 
 .movie {
     // display: flex;
-  
+
     // max-width: 1400px;
     // width: 100%;
     // height: 750px;
 
 
     position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .Title {
@@ -398,15 +401,17 @@ onBeforeUnmount(() => {
 
 // 打字機
 .typewriter-container {
-  white-space: nowrap; /* 確保文字不換行 */
-  overflow: hidden; /* 隱藏超出範圍的文字 */
-  text-align: center;
-  margin: 4% auto;
+    white-space: nowrap;
+    /* 確保文字不換行 */
+    overflow: hidden;
+    /* 隱藏超出範圍的文字 */
+    text-align: center;
+    margin: 4% auto;
 
 }
 
 // 打字機文字
-.typewriter-container h2{
+.typewriter-container h2 {
     background: linear-gradient(136deg, #FFF 10.13%, rgba(255, 255, 255, 0.30) 88.6%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -415,7 +420,7 @@ onBeforeUnmount(() => {
     font-size: 24px;
     font-weight: 400;
     line-height: normal;
-    
+
 }
 
 // 票價資訊
@@ -606,7 +611,8 @@ onBeforeUnmount(() => {
 .accordion-toggle .up {
     transform: rotate(-90deg);
     /* 向上 */
-    color: #C1693B;
+
+
 }
 
 .accordion-toggle .down {
@@ -688,27 +694,29 @@ onBeforeUnmount(() => {
 
 // to top 按鈕
 .top-button {
-  position: fixed;
-  bottom: 2vw;
-  right: 1vw;
-  padding: 6px;
-  background: none;
-  color: #ffffff;
-  border: 1px solid;
-  border-radius: 5px;
-  cursor: pointer;
-  animation: slide-in 0.8s forwards;
-  font-size: 16px;
+    position: fixed;
+    bottom: 130px;
+    right: 15px;
+    padding: 6px;
+    background: none;
+    color: #ffffff;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: slide-in 0.8s forwards;
+    font-size: 16px;
 }
 
 
 @keyframes slide-in {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0); /* 移動至最終位置 */
-  }
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+        /* 移動至最終位置 */
+    }
 }
 
 
@@ -716,125 +724,136 @@ onBeforeUnmount(() => {
 // === RWD ===
 
 @media screen and (max-width: 1100px) {
+
     // 熱門商品
-    .carousel-item{
+    .carousel-item {
         display: inline-block;
     }
-    .product-info{
+
+    .product-info {
         margin-left: 0px;
     }
-    .product-info h3{
+
+    .product-info h3 {
         margin-bottom: 10px;
     }
-    .product-info p{
-        br{
-        display: none;
+
+    .product-info p {
+        br {
+            display: none;
         }
+
         text-align: center;
     }
-   
+
 }
 
 @media screen and (max-width: 768px) {
-    .logo{
+    .logo {
         gap: 10px;
     }
-    .left .worktime{
+
+    .left .worktime {
         margin-bottom: 10px;
     }
 
 }
 
-@media screen and (max-width: 600px){
-    .typewriter-container h2{
+@media screen and (max-width: 600px) {
+    .typewriter-container h2 {
         font-size: 20px;
         white-space: normal; //自動換行
     }
 
-    .ticketInfo img{
+    .ticketInfo img {
         max-width: 400px;
     }
 
-    .carousel-container img{
+    .carousel-container img {
         max-width: 200px;
     }
 
-    .product-info h3{
+    .product-info h3 {
         font-size: 20px;
     }
 
-    .swiper-slide{
+    .swiper-slide {
         height: 200px;
     }
 
-    .infoText{
+    .infoText {
         display: flex;
         flex-direction: column;
-        gap:30px;
+        gap: 30px;
     }
-    
-    .logo a{
+
+    .logo a {
         max-width: 100px;
     }
-    .logo .first{
+
+    .logo .first {
         max-width: 80px;
     }
-    .accordion-question span{
+
+    .accordion-question span {
         font-size: 16px;
     }
 }
 
 
-@media screen and (max-width: 430px){
-    .typewriter-container h2{
+@media screen and (max-width: 430px) {
+    .typewriter-container h2 {
         font-size: 16px;
     }
 
-    .swiper{
+    .swiper {
         padding-top: 30px;
         padding-bottom: 30px;
     }
-    .ticketInfo{
-        margin: 12% 8% ;
+
+    .ticketInfo {
+        margin: 12% 8%;
     }
 
-    .product-info h3{
+    .product-info h3 {
         font-size: 16px;
         font-weight: bold;
     }
 
-    .infoText .right img{
+    .infoText .right img {
         max-width: 300px;
     }
 
-    .accordion-question{
+    .accordion-question {
         width: auto;
         height: auto;
     }
 
-    .accordion-answer .answer{
+    .accordion-answer .answer {
         width: 77%;
         text-align: justify;
     }
 
-    .logo{
-        grid-template-columns:repeat(2, 1fr);
-        gap:30px;
+    .logo {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
     }
 
-    .rules,.sponsor,.contact{
+    .rules,
+    .sponsor,
+    .contact {
         margin: 12% auto;
     }
 
-    .contact #text{
-        margin: 5% ;
+    .contact #text {
+        margin: 5%;
     }
 
-    .contact p{
+    .contact p {
         line-height: 2;
     }
 
-    .icons{
+    .icons {
         max-width: 55%;
         margin: 5% auto;
     }
@@ -844,16 +863,18 @@ onBeforeUnmount(() => {
 
 #fixed-logo {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 180px;
+    right: 15px;
     z-index: 1000;
-
+    animation: slide-in 0.8s forwards;
 }
 
 #fixed-logo img {
     width: 100px;
     height: auto;
     max-width: 100px;
+  
+
 
 }
 
@@ -873,5 +894,17 @@ onBeforeUnmount(() => {
 }
 
 
+
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+        /* 移動至最終位置 */
+    }
+}
 
 </style>

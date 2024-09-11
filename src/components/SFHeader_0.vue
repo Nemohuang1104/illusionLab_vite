@@ -116,10 +116,10 @@ onUnmounted(() => {
     <!-- 半圓形菜單 -->
     <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
       <ul class="menu">
-        <li class="one"> <router-link :to="{ name: 'shop' }">會員登入</router-link>
+        <li class="one"> <router-link :to="{ name: 'login' }">會員登入</router-link>
         </li>
         <li class="two">
-          <router-link :to="{ name: 'login' }">購物車</router-link>
+          <router-link :to="{ name: 'shop' }">購物車</router-link>
         </li>
         <li class="three">
           <router-link to="/lifeCasino">人生賭場</router-link>

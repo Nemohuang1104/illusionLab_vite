@@ -33,9 +33,9 @@ import Footer_0 from '../components/Footer_0.vue';
 </main>
 
 <!-- 頁尾 -->
-<Footer_0></Footer_0>
+
   </div>
-  
+  <Footer_0></Footer_0>
 </template>
 
 
@@ -46,7 +46,7 @@ import Footer_0 from '../components/Footer_0.vue';
   background: map-get($color_0,bgc_blue);
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   font-family:"Noto Sans TC";
   padding-top: 80px;
 }
@@ -59,7 +59,7 @@ import Footer_0 from '../components/Footer_0.vue';
 }
 
 main{
-  width: 520px;
+  width: 40vw;
   height: 480px;
   border-radius: 20px;
   border: 1px solid  map-get($colorfont_0,white);
@@ -162,5 +162,25 @@ h1{
 .form .signup:hover{
   color: #505050;
   background-color:#fff;
+}
+
+//==========================RWD=========================
+@media screen and (max-width:1000px){
+  .form{
+    width: 270px;
+  }
+  .form .text{
+    width: 250px;
+  }
+
+ .form .login,.form .signup{
+    width: 270px;
+  }
+}
+
+@media screen and (max-width:800px){
+  main{
+    width: 350px;
+  }
 }
 </style>

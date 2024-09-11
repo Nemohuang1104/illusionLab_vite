@@ -98,7 +98,7 @@ const register = () => {
 
           <!-- 輸入驗證碼 -->
           <div class="random">
-            <input v-model="userInput" type="text" placeholder="請輸入右方認證碼">
+            <input v-model="userInput" type="text" placeholder="請輸入認證碼">
             <!-- <span class="number">3456</span> -->
             <p>{{ captcha }}</p>
             <img @click="refreshCaptcha" :class="{ rotating: isRotating }" src="../assets/images/icon-change.svg"
@@ -110,9 +110,10 @@ const register = () => {
       </div>
     </main>
 
-    <Footer_0></Footer_0>
+    
 
   </div>
+  <Footer_0></Footer_0>
 </template>
 
 
@@ -127,6 +128,7 @@ const register = () => {
   width: 100%;
   font-family: "Noto Sans TC";
   padding-top: 80px;
+  height: 100vh;
 }
 
 .header{
@@ -150,9 +152,10 @@ main {
 }
 
 .form {
-  width: 360px;
+  width: 340px;
   margin: 0 auto;
   margin-top: 20px;
+  box-sizing: border-box;
 }
 
 .form h1 {
@@ -176,6 +179,7 @@ main {
   padding-left: 20px;
   margin-bottom: 10px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .form .gender {
@@ -209,6 +213,7 @@ main {
   padding-left: 20px;
   margin-bottom: 10px;
   outline: none;
+  box-sizing: border-box;
 }
 
 
@@ -224,6 +229,7 @@ main {
   padding-left: 20px;
   margin-bottom: 10px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .form .random {
@@ -240,6 +246,7 @@ main {
   background-color: transparent;
   padding-left: 20px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .random p {
@@ -272,7 +279,7 @@ main {
 .form a {}
 
 .form .button {
-  width: 360px;
+  width: 340px;
   height: 32px;
   font-size: 16px;
   color: #505050;
@@ -284,11 +291,44 @@ main {
   margin-bottom: 20px;
   cursor: pointer;
   outline: none;
+  box-sizing: border-box;
 }
 
 .form .button:hover {
   background-color: #fff;
   color: #505050;
+}
+
+
+//================================RWD==========================
+@media screen and (max-width:600px){
+  main{
+    width: 90vw;
+  }
+  .form,.form .id input,.form .name input,.form .address,.form .button{
+    width: 300px;
+    padding-left: 10px;
+  }
+  
+
+  .form .random > input{
+    width: 130px;
+    padding-left: 10px;
+  }
+  .random p{
+    width: 110px;
+  }
+
+  .custom-v-select{
+    width: 140px;
+  }
+
+
+
+
+
+
+
 }
 </style>
 <!-- =================================縣市下拉選單======================================== -->
@@ -303,7 +343,7 @@ main {
 }
 
 .custom-v-select {
-  width: 170px;
+  width: 160px;
   height: 32px;
   font-size: 16px;
   border-radius: 80px;
@@ -326,4 +366,7 @@ main {
 .vs__search:focus {
   text-align: center;
 }
+
+
+
 </style>

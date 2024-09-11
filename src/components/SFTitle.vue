@@ -27,7 +27,7 @@ h1 {
   -webkit-background-clip: text;
   color: transparent;
   margin-bottom: 0.5%;
-  
+
 }
 
 p {
@@ -38,10 +38,11 @@ p {
   -webkit-background-clip: text;
   color: transparent;
   font-size: 14px;
+
 }
 
-@media screen and (max-width: 430px){
-  h1{
+@media screen and (max-width: 430px) {
+  h1 {
     font-size: 24px;
   }
 }

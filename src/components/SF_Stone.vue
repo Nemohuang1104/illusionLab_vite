@@ -210,8 +210,8 @@ onBeforeUnmount(() => {
 .ohMyGod {
     width: 100%;
     max-width: 1440px;
-    height: 100vh;
-    // background-color: black;
+    height: 70vh;
+ 
 
 }
 

@@ -20,7 +20,7 @@ const props = defineProps({
   <div class="wrapper">
     
     <div class="title">
-      <p>票券完成!</p>
+      <!-- <p>票券完成!</p> -->
     </div>
 
     <div class="envolope-outside">
@@ -78,14 +78,12 @@ const props = defineProps({
     url(../assets/images/STBackground.png);
   }
   
-  .title, .info{
+  .info{
     text-align: center;
   }
+
   .title{
-    padding: 4%;
-  }
-  .title p{
-    font-size: 20px;
+    padding-top: 100px;
   }
 
   .envolope-outside{
@@ -174,6 +172,9 @@ const props = defineProps({
     line-height: 3;
   }
 
+  .finish{
+    margin-bottom: 30px;
+  }
 
   @keyframes slideIn {
   0% {
@@ -196,5 +197,20 @@ const props = defineProps({
   }
 }
 
+
+// @media screen and (max-width: 430px){
+  
+//   .envolope-outside{
+//     max-width: 50%;
+//   }
+
+//   .envelope-image.front{
+//     top: 17vw;
+//   }
+
+//   .finalTicket{
+//     max-width: 380px;
+//   }
+// }
   </style>
   

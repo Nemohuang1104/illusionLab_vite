@@ -315,7 +315,7 @@
     }
 
     .spBorder{
-        width: 10vw;
+        // width: 10vw;
         display: flex;
         padding: 40px;
         justify-content: center;
