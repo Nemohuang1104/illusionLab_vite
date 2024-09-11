@@ -74,7 +74,7 @@
                 "/>
             </article>
         </main>
-        <MS_com_buttons mode="one1" step="three"/>
+        <!-- <MS_com_buttons mode="one1" step="three"/> -->
     </div>
 </template>
 
@@ -82,6 +82,21 @@
     import MS_com_title from '@/components/MS/MS_com_title.vue';
     import MS_com_ticket_intro from '@/components/MS/MS_com_ticket_intro.vue';
     import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      currentStep: 0, // 当前步骤
+      activityMode: 'activity3', // 初始活动模式
+      mode: 'one1', // 初始 mode
+      modeSelect: 'three',
+
+    };
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -103,4 +118,5 @@
         border-radius: 12px;
         background: rgba(184, 153, 119, 0.20);
     }
+    
 </style>

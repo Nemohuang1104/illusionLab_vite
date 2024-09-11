@@ -1,8 +1,8 @@
 <template>
     <div>
-        <MS_Enter/>
-    <!-- <Header mode="four"/> 
-    <MS_main/> -->
+        <!-- <MS_Enter/> -->
+    <Header mode="four"/> 
+    <MS_main/> 
     <!-- <section>
         <Footer/>
     </section> -->

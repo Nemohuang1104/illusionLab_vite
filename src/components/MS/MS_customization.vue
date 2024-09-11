@@ -319,8 +319,12 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../../assets/SASS/component/ms";
+.template{
+  background-image: url('../src/ms/modeBGI3.jpg');
+
+}
 
 .finishMyTicket{
     position: absolute;

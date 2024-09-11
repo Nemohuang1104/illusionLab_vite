@@ -282,42 +282,7 @@ const routes = [
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
   },
-  {
-    path: '/MS_ProductPage',
-    name: '心靈光譜商品頁',
-    component: () => import('@/views/MS_ProductPage.vue'),
-    meta: {
-      title: "心靈光譜商品頁"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/MS_ProductList',
-    name: '心靈光譜商品細項頁',
-    component: () => import('@/views/MS_ProductList.vue'),
-    meta: {
-      title: "心靈光譜商品頁細項頁"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/FQA_03',
-    name: '常見問題',
-    component: () => import('@/views/FQA_03.vue'),
-    meta: {
-      title: "心靈光譜常見問題"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/TicketChange_03',
-    name: '票務資訊',
-    component: () => import('@/views/TicketChange_03.vue'),
-    meta: {
-      title: "心靈光譜票務資訊"
-    },
-    requiredLogin: false
-  },
+  
   {
     path: '/littleQuiz',
     name: 'littleQuiz',
@@ -427,7 +392,7 @@ const routes = [
   },
   {
     path: '/MS_Ticket_step0',
-    component: () => import('@/components/MS/MS_ticket_into.vue'),
+    component: () => import('@/views/MS_ticket_into.vue'),
     meta: {
       title: "心靈光譜-購票"
     },
@@ -464,6 +429,40 @@ const routes = [
       title: "心靈光譜-客製票卷"
     },
     requiredLogin: true
+  },
+  {
+    path: '/FQA_03',
+    component: () => import('@/views/FQA_03.vue'),
+    meta: {
+      title: "心靈光譜-常見問題"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/TicketChange_03',
+    component: () => import('@/views/TicketChange_03.vue'),
+    meta: {
+      title: "心靈光譜-票務資訊"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MS_ProductPage',
+    name: '心靈光譜商品頁',
+    component: () => import('@/views/MS_ProductPage.vue'),
+    meta: {
+      title: "心靈光譜商品頁"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/MS_ProductList',
+    name: '心靈光譜商品細項頁',
+    component: () => import('@/views/MS_ProductList.vue'),
+    meta: {
+      title: "心靈光譜商品頁細項頁"
+    },
+    requiredLogin: false
   },
   {
     path: '/LittleQuizResult',

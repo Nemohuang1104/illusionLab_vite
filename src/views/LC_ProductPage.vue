@@ -36,7 +36,7 @@ function goToLoginCMS(){
   
   <div class="warpper">
     <div>
-      <Header :mode="currentMode"/> 
+      <Header :mode="currentMode" class="header"/> 
     </div>
     
     <div class="center">
@@ -50,10 +50,14 @@ function goToLoginCMS(){
       <div class="producttitle">
         <div class="arrowlift">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
+          <router-link to="/SF_ProductPage">
           <P @click="goToLoginCMS" class="link">星際邊境</P>
+        </router-link>
         </div>
         <div class="arrowright">
+          <router-link to="/MS_ProductPage">
           <P class="link">心靈光譜</P>
+        </router-link>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
       </div>
@@ -94,7 +98,9 @@ function goToLoginCMS(){
 
 @import "../assets/style";
 
-
+.header{
+  position: unset;
+}
 .title{
   margin-top: 10px;
   width: 400px;

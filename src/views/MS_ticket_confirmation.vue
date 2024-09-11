@@ -31,7 +31,7 @@
 export default {
   data() {
     return {
-      currentStep: 2, // 当前步骤
+      currentStep: 3, // 当前步骤
       activityMode: 'activity3', // 初始活动模式
       mode: 'three1', // 初始 mode
       modeSelect: 'three',

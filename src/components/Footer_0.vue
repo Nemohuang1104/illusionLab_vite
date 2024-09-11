@@ -42,7 +42,7 @@ function goToPage (){
 <style lang="scss" scoped>
 // 幻境LOGO
 .outline{
-    width: 100vw;
+    // width: 100vw;
     max-width: 1440px;
     //height: 200px; //高度無法寫死，會有空白留在下面
     background: var(--header-footer, #000354);
