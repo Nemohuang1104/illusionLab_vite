@@ -85,6 +85,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../../assets/SASS/component/ms";
+
     .ticketIntros{
         margin: 50px 0;
         display: flex;
