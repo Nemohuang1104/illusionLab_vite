@@ -10,7 +10,7 @@
         </div>
         <main>
             <div class="top">
-                <MS_com_title 
+                <MS_com_title mode="four"
                 mainTitle="使用條款" 
                 subTitle="TERM OF USE"
                 />
@@ -18,10 +18,10 @@
             <div id="section1" class="section">
                 <h4>一、會員註冊</h4>
                 <h6>首先感謝您造訪我們的網站<br><br>
-                    BELLEU是採用會員制的品牌<br><br>
-                    在您使用BELLEU的服務時，請確保處於登入狀態。<br><br>
+                    幻浸實驗室是採用會員制的品牌<br><br>
+                    在您使用幻浸實驗室的服務時，請確保處於登入狀態。<br><br>
                     您可以透過電子郵件、帳號或手機號碼以及密碼來建立帳戶。<br><br>
-                    非必要的資訊，BELLEU並不會強迫您輸入。<br><br>
+                    非必要的資訊，幻浸實驗室並不會強迫您輸入。<br><br>
                     登入後，您將享受會員以及折扣活動</h6>
             </div>
             <div id="section2" class="section">
@@ -46,7 +46,7 @@
                 <h6>購買前請仔細檢查顏色與尺碼，謹慎購買。<br><br>
                     商品到貨後七日內，不滿意的商品您可以換貨與退貨。<br><br>
                     不符合退貨政策的商品會有標註，請務必留意。<br><br>
-                    商品內容瑕疵或是錯誤，BELLEU將會提供免費換退貨服務。<br><br>
+                    商品內容瑕疵或是錯誤，幻浸實驗室將會提供免費換退貨服務。<br><br>
                     若商品內容沒有錯誤，退換貨費用由客人承擔。<br><br>
                     我們將在收到您的退換貨申請後進行處理，並通過電子郵件通知您相關信息。</h6>
 
@@ -60,8 +60,8 @@
             </div>
             <div id="section6" class="section">
                 <h4>六、聯絡我們</h4>
-                <h6>如有任何問題，請隨時通過電子郵件（service@belleu.com.tw）或電話(TID)102-11-8939聯絡我們。<br><br>
-                    感謝您選擇 BELLEU 比露，祝您購物愉快！</h6>
+                <h6>如有任何問題，請隨時通過電子郵件（service@幻浸實驗室.com.tw）或電話(TID)102-11-8939聯絡我們。<br><br>
+                    感謝您選擇 幻浸實驗室 比露，祝您購物愉快！</h6>
             </div>
         </main>
         <img src="" alt="">
@@ -70,24 +70,42 @@
 </template>
 
 <script setup>
-    import MS_com_title from '@/components/MS/MS_com_title.vue';
+import { onMounted } from 'vue';
+import MS_com_title from '@/components/MS/MS_com_title.vue';
 
-        $(document).ready(() => {
-            $('.menu a').click(function(event) {
-                //取消事件
-                event.preventDefault(); 
-                //將href的內容#去掉
-                const targetId = $(this).attr('href').substring(1);
-                $('html, body').animate({
-                    scrollTop: $('#' + targetId).offset().top
-                }, 300);
-            });
+onMounted(() => {
+  const menuLinks = document.querySelectorAll('.menu a');
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop,
+          behavior: 'smooth' // 平滑滾動
         });
+      }
+    });
+  });
+});
 </script>
 
 <style lang="scss" scoped>
+  @import "../../assets/SASS/component/ms";
+  h1,h2,h3,h4,h5,h6,p{
+    color: #FFFFFF !important;
+  }
+  
+  .top{
+    padding-bottom: 30px;
+  }
+  
     .template{
         position: relative;
+        background: linear-gradient(146deg, #22247A 1.3%, #7976BB 98.32%);
     }
     .menu{
         position: fixed;
@@ -111,6 +129,7 @@
         flex-direction: column;
         gap: 40px;
         height: 100vh;
-        padding-top: 60px;
+        padding-top: 80px;
+        border-top: 1px solid #FFFFFF;
     }
 </style>

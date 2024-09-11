@@ -4,30 +4,30 @@
         <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
         <img class="IWillFireYou" src="../../MS/superFuckingCuteDuck_DoMeDo/IWillFireYou.gif" alt="">
         <img class="yourDuckIsSoHot" src="../../MS/superFuckingCuteDuck_DoMeDo/yourDuckIsSoHot.gif" alt="">
-        <h2 class="loadingText">LOADING</h2>
+        <h4 class="loadingText">LOADING</h4>
         <div class="loading">
         </div>
-        <div class="letGetStarting" @click="goingToHtml"><h1>進入心靈光譜</h1></div>
+        <div class="letGetStarting" @click="goingToIndex"><h3>進入心靈光譜</h3></div>   
         <div class="ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee">
             <div class="ducktoolyoyo" @click="letsDancing">
                 <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_LetsDance.png' alt="">
-                <h1>舞</h1>
+                <h3>舞</h3>
             </div>
-            <div class="ducktoolyoyo" @click="letsEgging">
-                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_NeedSomeEggs.png' alt="">
-                <h1>蛋</h1>
+            <div class="ducktoolyoyo" @click="letsWalking">
+                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_letMyDuckBack.png' alt="">
+                <h3>回</h3>
             </div>
             <div class="ducktoolyoyo" @click="letsWatering">
                 <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_SoManyWater.png' alt="">
-                <h1>水</h1>
+                <h3>水</h3>
             </div>
             <div class="ducktoolyoyo" @click="letsCooking">
                 <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_YouAreFire.png' alt="">
-                <h1>煮</h1>
+                <h3>煮</h3>
             </div>
-            <div class="ducktoolyoyo" >
-                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_letMyDuckBack.png' alt="">
-                <h1>回</h1>
+            <div class="ducktoolyoyo" @click="letsEgging">
+                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_NeedSomeEggs.png' alt="">
+                <h3>蛋</h3>
             </div>
         </div>    
     </div>
@@ -52,6 +52,14 @@ export default {
     this.addLoadingBlocks(0)
   },
   methods: {
+    goingToIndex(){
+        let ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee = document.querySelector(".ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee")
+        ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee.style.transform = 'translateY(200%)'
+        let duckLaiYi = document.querySelector(".duckLaiYi")
+        duckLaiYi.style.transform = 'translateX(50%) translateY(200%) scale(15)'
+        // ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee.style.display = 'none'
+        
+    },
     addLoadingBlocks(count) {
         if (count < 13) {
             const loadingBlock = document.createElement('div');
@@ -261,30 +269,42 @@ export default {
       this.action = 'Walking';
       this.startAnimation(); // 根據需要啟動對應動畫
     },
+
   },
 };
 </script>
 
 
-<script setup>
 
-</script>
 
 <style lang="scss" scoped>
+  @import "../../assets/SASS/component/ms";
+
+.ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee{
+    transition: transform 0.8s ease;
+}
+
 .letGetStarting{
+    width: 15vw;
     display: none;
     border: 2px solid #855F49;
     box-sizing: border-box;
     padding: 1vw ;
     border-radius: 20px;
     margin: 0 auto;
-    margin-top: 10px;
     position: absolute;
-    left: calc(50vw - 5vw);
-    bottom: 25vh;
+    left: calc(50vw - 7.5vw);
+    bottom: 22vh;
+    cursor: pointer;
 }
-.letGetStarting > h1{
-    font-size: 32px;
+
+.letGetStarting:hover{
+    background-color: #855F49;
+
+}
+
+.letGetStarting:hover h3{
+    color: #FFFFFF !important;
 }
 
 .yourDuckIsSoHot{
@@ -300,7 +320,7 @@ export default {
     width: 36vw;
     position: absolute;
     left: calc(50% - 18vw) ;
-    top:calc(50% - 34vw)  ;
+    top:calc(50% - 30vw)  ;
     z-index: 3;
 }
 .swimmingpool{
@@ -313,6 +333,7 @@ export default {
 }
     .holo{
     overflow-x: hidden;
+    overflow-y: hidden;
     position: relative;
     background-image: url(../../ms/modeBGI3.jpg);
     display: flex;
@@ -324,6 +345,8 @@ export default {
         width: 20vw;
         margin: 0 auto;
         z-index: 2;
+        transition: transform 2s ease;
+
     }
     .loadingText{
         width: 15vw;
@@ -365,6 +388,7 @@ export default {
     }
     .ducktoolyoyo{
         cursor: pointer;
+
     }
     .ducktoolyoyo:hover .duckTool{
         transform: translateY(-100%);

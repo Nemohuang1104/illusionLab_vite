@@ -208,14 +208,18 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .ohMyGod {
-    width: 100vw;
+    width: 100%;
+    max-width: 1440px;
     height: 100vh;
     // background-color: black;
-    
+
 }
+
+
 
 .theRock>svg {
     position: absolute;
+
 }
 
 // .clickPath {
@@ -229,8 +233,8 @@ onBeforeUnmount(() => {
 #ball4,
 #ball5 {
     position: absolute;
-    left: calc(72vw - (883px / 2));
-    top: 150%;
+    // left: calc(72vw - (883px / 2));
+    left: calc(100vw - 65%);
     pointer-events: none;
 
     // transform: ;
@@ -240,28 +244,29 @@ onBeforeUnmount(() => {
     width: 320px !important;
     height: 400px !important;
 
+
     &.active {
         // width: 400px !important;
         // transform: translate(300px, 0) !important;
 
         &#ball1 {
-            transform: translate(300px, 0px)
+            transform: translate(50px, 0px)
         }
 
         &#ball2 {
-            transform: translate(-300px, 0px)
+            transform: translate(-80px, 50px)
         }
 
         &#ball3 {
-            transform: translate(250px, -200px)
+            transform: translate(50px, -50px)
         }
 
         &#ball4 {
-            transform: translate(-150px, -50px)
+            transform: translate(-80px, 0px)
         }
 
         &#ball5 {
-            transform: translate(-150px, -200px)
+            transform: translate(-50px, -50px)
         }
 
     }
@@ -308,10 +313,10 @@ onBeforeUnmount(() => {
     align-items: end;
     /* 確保子元素居中 */
     width: 350px;
-    height: 200px;
+    height: 150px;
     border: 5px solid #2668C866;
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px;
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.509);
     /* 確保背景透明 */
@@ -327,14 +332,16 @@ onBeforeUnmount(() => {
     background: black;
     /* background-color: red; */
     /* 黑色背景 */
-    background: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 0.30) 97.6%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    // background: linear-gradient(136deg, #FFF 3.13%, rgba(255, 255, 255, 0.30) 97.6%);
+    // background-clip: text;
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
 
+
+    color: #d1d1d1;
     /* 文字在邊框上 */
     position: fixed;
-    top: -13px;
+    top: -15px;
     left: 21px;
 
 }
@@ -379,29 +386,29 @@ onBeforeUnmount(() => {
 /* 控制位置的 */
 .popupone {
     position: fixed;
-    top: 2000%;
-    left: 100%;
+    top: 2130%;
+    left: 400%;
     transform: translate(-170%, -150%);
 }
 
 .popuptwo {
     position: fixed;
     top: 1800%;
-    left: 50%;
+    left: 135%;
     transform: translate(-155%, -25%);
 }
 
 .popupthree {
     position: fixed;
-    top: 1800%;
-    left: 50%;
+    top: 2020%;
+    left: 100%;
     transform: translate(-160%, 55%);
 }
 
 .popupfour {
     position: fixed;
     top: 2100%;
-    left: 50%;
+    left: -100%;
     transform: translate(55%, -130%);
 }
 
@@ -409,7 +416,146 @@ onBeforeUnmount(() => {
 .popupfive {
     position: fixed;
     top: 1900%;
-    left: 50%;
+    left: -145%;
     transform: translate(65%, 5%);
+}
+
+@media (max-width: 1000px) {
+    .popupone {
+        position: fixed;
+        top: 2165%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popuptwo {
+        position: fixed;
+        top: 2165%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popupthree {
+        position: fixed;
+        top: 2165%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popupfour {
+        position: fixed;
+        top: 2165%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+
+    .popupfive {
+        position: fixed;
+        top: 2480%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    #ball_all,
+    #ball1,
+    #ball2,
+    #ball3,
+    #ball4,
+    #ball5 {
+        left: calc(72vw - 50%);
+    }
+
+    .popupone {
+        position: fixed;
+        top: 1768%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popuptwo {
+        position: fixed;
+        top: 1768%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popupthree {
+        position: fixed;
+        top: 1768%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popupfour {
+        position: fixed;
+        top: 1768%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+
+    .popupfive {
+        position: fixed;
+        top: 1768%;
+        left: 1075%;
+        transform: translate(-170%, -150%);
+    }
+
+
+}
+
+@media (max-width: 768px) {
+
+    #ball_all,
+    #ball1,
+    #ball2,
+    #ball3,
+    #ball4,
+    #ball5 {
+        width: 280px !important;
+        height: 300px !important;
+    }
+
+    .popupone {
+        position: fixed;
+        top: 1200%;
+        left: 1095%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popuptwo {
+        position: fixed;
+        top: 1200%;
+        left: 1095%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popupthree {
+        position: fixed;
+        top: 1200%;
+        left: 1095%;
+        transform: translate(-170%, -150%);
+    }
+
+    .popupfour {
+        position: fixed;
+        top: 1200%;
+        left: 1095%;
+        transform: translate(-170%, -150%);
+    }
+
+
+    .popupfive {
+        position: fixed;
+        top: 1200%;
+        left: 1095%;
+        transform: translate(-170%, -150%);
+    }
+
 }
 </style>

@@ -1,57 +1,3 @@
-<template>
-  <header :class="headerClass">
-    <div class="divnull"></div>
-    <div class="logo">
-      <!-- 人生賭場 LOGO  @click="handleClick('two')"  -->
-      <router-link to='/lifeCasino' @click="handleClick('two')" v-show="screenWidth > 768 || isActive('two')">
-        <img :src="logos['two']" :class="['LS', { 'inactive': !isActive('two'), 'active': isActive('two') }]"
-          alt="人生賭場" />
-      </router-link>
-
-      <!-- 星際邊境 LOGO  @click="handleClick('three')" -->
-      <router-link to="/strellarfrontierintro" @click="handleClick('three')"
-        v-show="screenWidth > 768 || isActive('three')">
-        <img :src="logos['three']" :class="['SF', { 'inactive': !isActive('three'), 'active': isActive('three') }]"
-          alt="星際邊境" />
-      </router-link>
-
-      <!-- 心靈光譜 LOGO  @click="handleClick('four')"-->
-      <router-link to="/mindspectrum" @click="handleClick('four')" v-show="screenWidth > 768 || isActive('four')">
-        <img :src="logos['four']" :class="['LI', { 'inactive': !isActive('four'), 'active': isActive('four') }]"
-          alt="心靈光譜" />
-      </router-link>
-
-    </div>
-    <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
-      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-meh"
-          class="peopleicon" /></router-link>
-      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
-    </div>
-
-    <!-- 半圓形菜單 -->
-    <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
-      <ul class="menu">
-        <li class="one"> <router-link :to="{ name: 'shop' }">會員登入</router-link>
-        </li>
-        <li class="two">
-          <router-link :to="{ name: 'login' }">購物車</router-link>
-        </li>
-        <li class="three">
-          <router-link to="/lifeCasino">人生賭場</router-link>
-        </li>
-        <li class="four">
-          <router-link to="/SF_Homepage">星際邊境</router-link>
-        </li>
-        <li class="five">
-          <router-link to="/mindspectrum">心靈光譜</router-link>
-        </li>
-      </ul>
-    </div>
-  </header>
-</template>
-
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
@@ -134,19 +80,85 @@ onUnmounted(() => {
 });
 </script>
 
+<template>
+  
+  <header :class="headerClass">
+    <div class="divnull"></div>
+    <div class="logo">
+      <!-- 人生賭場 LOGO  @click="handleClick('two')"  -->
+      <router-link to='/lifeCasino' @click="handleClick('two')" v-show="screenWidth > 768 || isActive('two')">
+        <img :src="logos['two']" :class="['LS', { 'inactive': !isActive('two'), 'active': isActive('two') }]"
+          alt="人生賭場" />
+      </router-link>
+
+      <!-- 星際邊境 LOGO  @click="handleClick('three')" -->
+      <router-link to="/strellarfrontierintro" @click="handleClick('three')"
+        v-show="screenWidth > 768 || isActive('three')">
+        <img :src="logos['three']" :class="['SF', { 'inactive': !isActive('three'), 'active': isActive('three') }]"
+          alt="星際邊境" />
+      </router-link>
+
+      <!-- 心靈光譜 LOGO  @click="handleClick('four')"-->
+      <router-link to="/mindspectrum" @click="handleClick('four')" v-show="screenWidth > 768 || isActive('four')">
+        <img :src="logos['four']" :class="['LI', { 'inactive': !isActive('four'), 'active': isActive('four') }]"
+          alt="心靈光譜" />
+      </router-link>
+
+    </div>
+    <div class="icons">
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
+          class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-meh"
+          class="peopleicon" /></router-link>
+      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
+    </div>
+
+    <!-- 半圓形菜單 -->
+    <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
+      <ul class="menu">
+        <li class="one"> <router-link :to="{ name: 'shop' }">會員登入</router-link>
+        </li>
+        <li class="two">
+          <router-link :to="{ name: 'login' }">購物車</router-link>
+        </li>
+        <li class="three">
+          <router-link to="/lifeCasino">人生賭場</router-link>
+        </li>
+        <li class="four">
+          <router-link to="/SF_Homepage">星際邊境</router-link>
+        </li>
+        <li class="five">
+          <router-link to="/mindspectrum">心靈光譜</router-link>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <!-- <div class="body">
+
+  </div> -->
+</template>
+
+
 
 <style lang="scss" scoped>
 @import "../assets/style";
+
+// .body{
+// height: 1000px;
+// width: 100%;
+// background-color: red;
+// }
 
 header {
   position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 1440px;
+  width: 100vw;
+
   height: 80px;
   z-index: 10000;
+  
 }
 
 /* 中間三個LOGO配置 */
@@ -159,6 +171,7 @@ header {
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s;
+  box-sizing: border-box;
 }
 
 /* 預留一個div給他一個寬 */
@@ -172,7 +185,7 @@ img {
   width: 145px;
   flex-shrink: 0;
   height: 50px;
-  /* padding: 10px 20px; */
+  padding: 10px 20px;
   transition: all 0.3s;
   cursor: pointer;
 }
@@ -187,7 +200,7 @@ img {
 }
 
 .SF {
-  width: 150px;
+  width: 170px;
   height: auto;
   flex-shrink: 0;
 }
@@ -223,6 +236,7 @@ img {
   padding: 10px 20px;
   /* border: 1px solid red; */
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .shoppingicon {

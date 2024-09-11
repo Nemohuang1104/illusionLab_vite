@@ -2,6 +2,7 @@
     <div class="template">
         <div class="top">
             <MS_com_title 
+            mode="three"
             mainTitle="訂購流程" 
             subTitle="ORDERING PROCESS"
             intro="
@@ -13,6 +14,7 @@
         <main>
             <article>
                 <MS_com_title 
+                mode="three"
                 introTitle="Step 1. 選擇活動人數"
                 intro="
                 <br>
@@ -53,6 +55,7 @@
             </article>
             <article>
                 <MS_com_title 
+                mode="three"
                 introTitle="Step 2. 挑選您喜歡的活動場次"
                 intro="
                 <br>
@@ -62,6 +65,7 @@
             </article>
             <article>
                 <MS_com_title 
+                mode="three"
                 introTitle="Step 3. 客製化您的票券"
                 intro="
                 <br>
@@ -70,7 +74,7 @@
                 "/>
             </article>
         </main>
-        <MS_com_buttons mode="one" />
+        <MS_com_buttons mode="one1" step="three"/>
     </div>
 </template>
 
@@ -81,6 +85,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../../assets/SASS/component/ms";
+    
     .ticketIntros{
         margin: 50px 0;
         display: flex;

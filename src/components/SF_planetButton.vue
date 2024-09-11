@@ -39,6 +39,7 @@
   }
 
   .text{
+    
     width: 100%;
     max-width: 50px;
     position: absolute;

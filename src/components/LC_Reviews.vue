@@ -102,7 +102,7 @@ const swiper2 = ref(null);
 p{
   font-weight: 300;
   line-height: 150%;
-  font-size: map-get($map: $fontSize, $key: p);
+  font-size: 12px;
   color: white;
 }
 
@@ -176,8 +176,8 @@ section{
 .mySwiper2 {
   // background-color: #333;
   // border: 2px solid red;
-  width: 500px;
-  height: 520px;
+  max-width: 480px;
+  max-height: 500px;
   padding: 20px 100px;
 }
 
@@ -188,8 +188,8 @@ section{
 
   background-position: center;
   background-size: cover;
-  width: 400px;
-  height: 515px;
+  width: 480px;
+  height: 520px;
 }
 
 </style>

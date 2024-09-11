@@ -35,6 +35,9 @@ const props = defineProps({
 
 
 <style lang="scss" scoped>
+header{
+    position: unset
+}
 .step{
     display: flex;
     justify-content: center;

@@ -100,9 +100,9 @@ onMounted(() => {
   window.addEventListener('scroll', Scroll);
 });
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', Scroll);
-});
+// onUnmounted(() => {
+//   window.removeEventListener('scroll', Scroll);
+// });
 
 // ======點選到下一頁最上面==========
 
@@ -114,47 +114,35 @@ function scrollTop (){
 }
 //購票去
 
-const scrollCount = ref(0);
-const showImage = ref(false);
+// import { ref, onMounted, onBeforeUnmount } from 'vue';
 
+const isLogoVisible = ref(false); // 控制 LOGO 顯示的變量
 
 const handleScroll = () => {
-  scrollCount.value++;
-  if (scrollCount.value >= 7) {
-    showImage.value = true;
-  }
+    const scrollPosition = window.scrollY;
+    isLogoVisible.value = scrollPosition >= 700; // 當滾動位置大於 1240px 時顯示 LOGO
 };
 
-
 onMounted(() => {
-  window.addEventListener('wheel', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 });
-
 
 onBeforeUnmount(() => {
-  window.removeEventListener('wheel', handleScroll);
+    window.removeEventListener('scroll', handleScroll);
 });
-
-
 
 </script>
 
 
 <template>
     <SFHeader_0 :mode="currentMode"></SFHeader_0>
-    <div class="image-container">
-        <div v-if="showImage">
-            <!-- 圖片與文字同時顯示 -->
-            <img src="../assets/images/SF_moontoticket.png" alt="Your Image" class="moonticket" />
-            <div class="moonp">
-                <p>購票去</p>
-            </div>
-        </div>
-    </div>
+
     <div class="wrapper">
         <!-- 星球運轉 -->
         <div class="intro">
-            <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video>
+            <!-- <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video> -->
+            <video src="../assets/video/sf.mp4"  autoplay muted loop class="movie"></video>
+            <!-- <video src="../assets/video/SFmovie.mp4 controls autoplay muted loop" class="movie"></video> -->
         </div>
 
         <!-- 歡迎文字 -->
@@ -171,6 +159,14 @@ onBeforeUnmount(() => {
 
         <!-- 隕石及popup -->
         <SF_Stone></SF_Stone>
+
+        <!-- 購票去 -->
+        <router-link>
+            <div v-show="isLogoVisible" id="fixed-logo">
+                <img src="../assets/images/SF_moontoticket.png" alt="" class="rotate">
+            </div>
+        </router-link>
+
 
         <!-- 心得 -->
         <div class="comments">
@@ -365,11 +361,39 @@ onBeforeUnmount(() => {
 .wrapper {
     background: linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)),
         url(../assets/images/STBackground.png);
+   
+}
+
+//影片
+
+.intro{
+    position: relative;
+    padding-bottom:56.25%;
+    width:100%;
+    height:0;
+    margin-bottom: 40px;
+}
+
+.movie {
+    // display: flex;
+  
+    // max-width: 1400px;
+    // width: 100%;
+    // height: 750px;
+
+
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
 }
 
 .Title {
     //大標題
     text-align: center;
+    margin-bottom: 55px;
+    box-sizing: border-box;
 }
 
 // 打字機
@@ -818,22 +842,36 @@ onBeforeUnmount(() => {
 
 //購票去
 
-.image-container {
-  position: fixed; /* 改为 fixed 让图片固定在视窗中 */
-  top: 1240px; /* 固定在距離頂部 1400px 的位置 */
-  right: 0;
-  margin: 20px;
-}
-
-img {
-  width: 100px; /* 根据需要调整图片大小 */
-}
-
-.moonp {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+#fixed-logo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
 
 }
+
+#fixed-logo img {
+    width: 100px;
+    height: auto;
+    max-width: 100px;
+
+}
+
+.rotate {
+    animation: spin 10s linear infinite;
+}
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
 </style>

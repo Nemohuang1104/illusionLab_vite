@@ -370,6 +370,10 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 
     @import "../assets/style";
+
+    header{
+      position: unset
+    }
     .template{
       background-image: url(../assets/images/lifecasino_bg2.png);
 
