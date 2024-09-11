@@ -53,7 +53,7 @@
         <img class="logo" src="../assets/images/logo_StrellarFrontierIntro.svg" alt="">
         <p>體驗前所未有的奇幻冒險<br>
           揭開宇宙的神秘面紗</p>
-          <router-link to="SF_Homepage">
+          <router-link to="strellarfrontierintro">
             <ActivityButton class="LC_btn" Button="ENTER" ></ActivityButton>
           </router-link>
       </div>
