@@ -278,6 +278,7 @@ export default {
 
 
 <style lang="scss" scoped>
+  // @import "../../assets/SASS/component/ms";
 
 .ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee{
     transition: transform 0.8s ease;

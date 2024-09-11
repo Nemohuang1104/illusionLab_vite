@@ -1,7 +1,8 @@
 <template>
     <div>
-    <Header mode="four"/> 
-    <MS_main/>
+        <MS_Enter/>
+    <!-- <Header mode="four"/> 
+    <MS_main/> -->
     <!-- <section>
         <Footer/>
     </section> -->
@@ -12,7 +13,7 @@
     import MS_main from '@/components/MS/MS_main.vue';
     import Header from '@/components/SFHeader_0.vue';
     // import Footer from '@/components/Footer_03.vue';
-    // import MS_main from '@/components/MS/MS_main.vue';
+    import MS_Enter from '@/components/MS/MS_Enter.vue';
 
 </script>
 
