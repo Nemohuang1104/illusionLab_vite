@@ -102,7 +102,7 @@ const highlight = ref({
 
 <template>
     <div class="wrapper">
-        <div><Header_0></Header_0></div>
+        <div class="header"><Header_0></Header_0></div>
 
         <!--購物車流程數字圖示_組件模板開始線-->
         <div class="ShoppingStep">
@@ -304,6 +304,12 @@ const highlight = ref({
 
 .wrapper {
     background: linear-gradient(134deg, #22247A 23.77%, #7976BB 100.56%);
+}
+
+
+
+.step{
+    padding-top: 100px;
 }
 
 .content {
@@ -842,7 +848,7 @@ const highlight = ref({
 
     font-size: 16px;
     line-height: 1.6rem;
-    flex-basis: 23%;
+    flex-basis: 25%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 
@@ -892,7 +898,7 @@ const highlight = ref({
 
     font-size: 16px;
     line-height: 1.6rem;
-    flex-basis: 23%;
+    flex-basis: 25%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
 
@@ -993,10 +999,6 @@ const highlight = ref({
 
 @media screen and (max-width: 780px) {
 
-.ShoppingStep{
-    width: 70%;
-    margin: 0 auto;
-}
 
 
 

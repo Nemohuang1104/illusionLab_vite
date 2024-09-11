@@ -356,8 +356,10 @@ const closeModal = () => {
 }
 
 .modal-image {
-  width:500px;
-  height: 260px;
+  max-width:500px;
+  width: 100%;
+  max-height: 260px;
+  width: 100%;
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 30px;

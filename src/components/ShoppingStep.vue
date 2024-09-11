@@ -36,6 +36,9 @@ const props = defineProps({
 
 
 <style lang="scss" scoped>
+header{
+    position: unset
+}
 .step{
     display: flex;
     justify-content: center;
@@ -86,5 +89,12 @@ const props = defineProps({
     line-height: 1.6rem;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
+}
+
+@media screen and (max-width: 900px){
+    .step{
+    width: 70%;
+    margin: 0 auto;
+    }
 }
 </style>

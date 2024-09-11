@@ -193,7 +193,7 @@ const finalTicket = computed(() => ({
 
 .fixed-header {
   position:sticky;
-  top:0;
+  top:80px;
   z-index: 10;
   background:#000000;
   border-top: 1px solid #303030;
@@ -227,12 +227,12 @@ const finalTicket = computed(() => ({
     width: 100%;
     max-width: 60%;
     display: block;
-    margin: 3% auto;
+    margin:130px auto 80px auto;
 }
 
 // 公版
 .template{
-    margin: 3% auto;
+    margin: 30px auto;
 }
 
 // 公版選項&票券選項
@@ -251,7 +251,7 @@ const finalTicket = computed(() => ({
 
 // 票券樣式
 .style{
-    margin: 3% auto;
+    margin: 30px auto;
 }
 
 .style-options img{
@@ -264,7 +264,7 @@ const finalTicket = computed(() => ({
     display: flex;
     cursor: pointer;
     justify-content: space-between;
-    margin: 2% auto;
+    margin: 30px auto;
 }
 
 
@@ -289,7 +289,7 @@ const finalTicket = computed(() => ({
 .checkInfo {
     display:flex;                
     width: 35%;
-    margin: 5% auto;   
+    margin: 50px auto;   
     flex-direction: column;
 }
 
@@ -319,7 +319,8 @@ const finalTicket = computed(() => ({
 
         /* 打勾標記 */
         &:checked::after {
-            content: '✔'; /* 選中後顯示的符號 */
+            // content: '✔'; /* 選中後顯示的符號 */
+            content: '✓';
             display: block;
             text-align: center;
             line-height: 15px;
@@ -333,7 +334,7 @@ const finalTicket = computed(() => ({
 // 送出按鈕
 
 .nextStep{
-    margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 
@@ -346,10 +347,26 @@ const finalTicket = computed(() => ({
     .template-options , .style-options{
         grid-template-columns:repeat(1, 1fr)
     }
+    .sticker-options{
+        flex-wrap: wrap;
+    }
 }
 
 
-// @media screen and (max-width: 600px){
+@media screen and (max-width: 430px){
+    .finalTicket{
+        max-width: 340px;
+    }
+    .choose-section p{
+        margin-bottom: 20px;
+    }
+    .sticker-options{
+        justify-content: left;
+        gap:5px;
+    }
 
-// }
+    .checkInfo{
+        width: 90%;
+    }
+}
 </style>

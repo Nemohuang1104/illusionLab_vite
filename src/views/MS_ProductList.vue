@@ -45,7 +45,7 @@ import Footer_03 from '@/components/Footer_03.vue';
         <div class="pboxout">
             <div aria-label="Breadcrumb">
                 <ul class="breadcrumb">
-                    <li><router-link to="/SF_ProductPage">心靈光譜商品頁 </router-link></li>
+                    <li><router-link to="/MS_ProductPage">心靈光譜商品頁 </router-link></li>
                     <li><a href="#">小女孩帆布袋</a></li>
                 </ul>
             </div>
@@ -433,7 +433,8 @@ text-decoration: none;
 
 @media(max-width: 920px) {
    .breadcrumb{
-    padding-left:5%;
+        justify-content: center;
+        margin-bottom: 8px;
     }
     
     .producttitle {

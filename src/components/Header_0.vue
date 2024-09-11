@@ -1,3 +1,5 @@
+
+
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
@@ -124,6 +126,8 @@ header {
   
   z-index: 1000;
 }
+
+
 
 .logo img {
   width: 145px;

@@ -1,5 +1,5 @@
 <script setup>
-// import { ref } from 'vue';
+
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
@@ -89,7 +89,7 @@ onMounted(() => {
 const showTopButton = ref(false);
 
 const Scroll = () => {
-    showTopButton.value = window.scrollY > 1800;
+  showTopButton.value = window.scrollY > 700;
 };
 
 const scrollToTop = () => {
@@ -611,7 +611,8 @@ onBeforeUnmount(() => {
 .accordion-toggle .up {
     transform: rotate(-90deg);
     /* 向上 */
-    color: #C1693B;
+
+
 }
 
 .accordion-toggle .down {

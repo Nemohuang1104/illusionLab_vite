@@ -282,6 +282,7 @@ export default {
 </script>
 
 <script setup>
+
     import { ref, onMounted } from 'vue'
 
     const pathData1 = ref('')
@@ -319,6 +320,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "../../assets/SASS/component/ms";
+
 .finishMyTicket{
     position: absolute;
     bottom: 7%;

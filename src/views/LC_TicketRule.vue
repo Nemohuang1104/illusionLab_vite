@@ -1,5 +1,7 @@
 <script setup>
 import LC_Text3 from '@/components/LC_Text3.vue';
+import Btn3_Lifecasino from "@/components/Btn3_Lifecasino.vue";
+import Btn2_Lifecasino from "@/components/Btn2_Lifecasino.vue";
 
 </script>
 
@@ -7,6 +9,25 @@ import LC_Text3 from '@/components/LC_Text3.vue';
 <template>
 
           <div class="wrapper">
+            <div class="tab">
+
+                <RouterLink tag="div" to="/LC_Question" class="tab-item" replace >
+                <Btn3_Lifecasino Button="常見問題"></Btn3_Lifecasino>
+                </RouterLink>
+
+                <RouterLink tag="div" to="/LC_TicketRule" class="tab-item" replace>
+                <Btn2_Lifecasino Button="票務規則"></Btn2_Lifecasino>
+                <!-- <component :is="currentComponent" @click="currentButton.value = 'tab3'" Button="票務規則"/> -->
+                </RouterLink>
+
+                <RouterLink tag="div" to="/LC_TicketChange" class="tab-item" replace>
+                <Btn3_Lifecasino Button="退換票政策"></Btn3_Lifecasino>
+                </RouterLink>
+                </div>
+
+                <div class="top_img">
+                <img src="../assets/images/Line 24.png" alt="">
+                </div>
             <div class="title">
             <LC_Text3
                 Title1="票務規則"
@@ -68,12 +89,18 @@ import LC_Text3 from '@/components/LC_Text3.vue';
 
 
     .top_img{
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 4%;
-      
-    }
+        img{
+            max-width: 800px;
+        width: 100%;
+
+        }
+        
+        display: flex;
+        justify-content: center;
+        margin: 0 10px;
+        margin-bottom: 4%;
+
+        }
 
     .step{
         width: 80%;
@@ -108,7 +135,7 @@ import LC_Text3 from '@/components/LC_Text3.vue';
 
     .title{
         margin: 0 auto;
-        width: 32%;
+        
         margin-bottom: 32px;
         // border-bottom: 1px solid #eae6eb;
     }
@@ -135,6 +162,7 @@ import LC_Text3 from '@/components/LC_Text3.vue';
         margin: 0 auto;
         width: 80%;
         display: flex;
+        
         justify-content: center;
         margin-bottom: 60px;
     }
@@ -224,12 +252,41 @@ import LC_Text3 from '@/components/LC_Text3.vue';
         
     }
 
+
+    .tab-item{
+      max-width: 200px;
+      width: 100%;
+      
+    }
+
     .tab{
     display: flex;
-    gap: 8px;
-    justify-content: center;
+    gap: 2%;
+    max-width: 660px;
+    justify-content: space-around;
+    margin: 0 auto;
     margin-bottom: 2%;
+    padding: 0 20px;
     }
+
+  @media (max-width: 430px) {
+    .tab{
+      gap: 8px;
+    }
+    .img_offset{
+        flex-direction: column;
+    }
+
+    .img_offset > img{
+        width: 60px;
+        transform: rotate(90deg);
+        margin: 0 auto;
+    }
+
+    .step{
+        margin: 0 auto;
+    }
+}
 
     
 </style>
