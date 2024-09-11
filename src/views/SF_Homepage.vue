@@ -100,9 +100,9 @@ onMounted(() => {
   window.addEventListener('scroll', Scroll);
 });
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', Scroll);
-});
+// onUnmounted(() => {
+//   window.removeEventListener('scroll', Scroll);
+// });
 
 // ======點選到下一頁最上面==========
 

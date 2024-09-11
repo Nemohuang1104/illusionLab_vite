@@ -41,8 +41,8 @@ function goToPage (){
 <style lang="scss" scoped>
 // 幻境LOGO
 .outline{
-    width: 100vw;
-    max-width: 1440px;
+    // width: 100vw;
+    // max-width: 1440px;
     // height: 200px; //footer的高度不能寫死，會有空白跑出來
     background-image: url(../assets/images/LC_Footer.jpg);
     background-repeat: no-repeat;

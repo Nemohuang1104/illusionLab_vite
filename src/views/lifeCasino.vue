@@ -634,9 +634,9 @@ p{
 
 }
 .header{
-    position: fixed;
-    top: 0;
-    z-index: 100;
+    // position: fixed;
+    // top: 0;
+    // z-index: 100;
     // opacity: 0;
     // visibility: hidden;
     // transition: opacity 0.5s ease, visibility 0.5s ease;
