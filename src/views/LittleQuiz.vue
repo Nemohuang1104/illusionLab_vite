@@ -235,25 +235,25 @@ export default {
 <style lang="scss" scoped>
 .container {
   background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
-  height: 100vh;
+  min-height: 100vh;
   background-repeat: no-repeat;
   width: 100%;
   font-family: "Noto Sans TC";
   position: relative;
-  padding-top: 80px;
+  padding-top: 100px;
+  overflow: hidden;
 }
 
 .enter_title,
 .question,
 .result {
-  padding-top: 110px;
   box-sizing: border-box;
-  padding-bottom: 50px;
-  position: absolute;
+  // padding-bottom: 50px;
+  // position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: 10;
 }
 
@@ -308,19 +308,19 @@ export default {
   animation: smoke1 3s linear infinite;
 }
 
-@keyframes smoke1 {
-  0% {
-    transform: scale(1);
-  }
+// @keyframes smoke1 {
+//   0% {
+//     transform: scale(1);
+//   }
 
-  50% {
-    transform: scale(1.1);
-  }
+//   50% {
+//     transform: scale(1.1);
+//   }
 
-  100% {
-    transform: scale(1);
-  }
-}
+//   100% {
+//     transform: scale(1);
+//   }
+// }
 
 .smoke .pic2 {
   display: inline-block;
@@ -368,7 +368,7 @@ export default {
   display: block;
   margin: 0 auto;
   margin-bottom: 10px;
-  width: 38%;
+  width: 450px;
   margin-bottom: 10px;
 }
 
@@ -556,6 +556,62 @@ export default {
 
 .progress-segment.active {
   background-color: #768BFF;
+}
+
+
+
+//============================RWD=====================================
+@media screen and (max-width:820px){
+  .smoke .pic1{
+    width: 200px;
+  }
+
+  .smoke .pic2{
+    width: 110px;
+  }
+
+  .smoke .pic3{
+    width: 380px;
+  }
+
+  .enter_title p{
+    font-size: 18px;
+    padding: 0 60px;
+  }
+
+  .answer_flex{
+    flex-flow: column;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width:520px){
+  .question .title{
+    font-size: 18px;
+  }
+
+  .question-image{
+    width: 340px;
+  }
+
+  //===============結果轉場動畫==================
+  .finallongcloud{
+    width: 380px;
+  }
+
+  .middlebluesmoke{
+    width: 360px;
+  }
+
+  .finalanswer img{
+    width: 360px;
+  }
+
+  .finalanswer button{
+    width: 130px;
+    font-size: 18px;
+  }
+
 }
 </style>
 

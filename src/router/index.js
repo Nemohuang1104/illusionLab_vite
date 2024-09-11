@@ -281,47 +281,6 @@ const routes = [
     path: '/SF_ProductPage',
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
-  },
-  {
-    path: '/MS_ProductPage',
-    name: '心靈光譜商品頁',
-    component: () => import('@/views/MS_ProductPage.vue'),
-    meta: {
-      title: "心靈光譜商品頁"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/MS_ProductList',
-    name: '心靈光譜商品細項頁',
-    component: () => import('@/views/MS_ProductList.vue'),
-    meta: {
-      title: "心靈光譜商品頁細項頁"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/FQA_03',
-    name: '常見問題',
-    component: () => import('@/views/FQA_03.vue'),
-    meta: {
-      title: "心靈光譜常見問題"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/TicketChange_03',
-    name: '票務資訊',
-    component: () => import('@/views/TicketChange_03.vue'),
-    meta: {
-      title: "心靈光譜票務資訊"
-    },
-    requiredLogin: false
-  },
-  {
-    path: '/littleQuiz',
-    name: 'littleQuiz',
-    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
       title: "星際邊際全部商品"
     },
@@ -331,11 +290,6 @@ const routes = [
     path: '/SF_DetailList',
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
-  },
-  {
-    path: '/littlequiz',
-    name: 'littlequiz',
-    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
       title: "星際邊際商品細項"
     },
@@ -387,7 +341,6 @@ const routes = [
     },
     requiredLogin: true
   },
-
   {
     path: '/SF_Ticket_step2',
     component: () => import('@/views/SF_ticket_confirmation.vue'),
@@ -446,6 +399,42 @@ const routes = [
       title: "心靈光譜-客製票卷"
     },
     requiredLogin: true
+  },
+  {
+    path: '/MS_ProductPage',
+    name: '心靈光譜商品頁',
+    component: () => import('@/views/MS_ProductPage.vue'),
+    meta: {
+      title: "心靈光譜商品頁"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/MS_ProductList',
+    name: '心靈光譜商品細項頁',
+    component: () => import('@/views/MS_ProductList.vue'),
+    meta: {
+      title: "心靈光譜商品頁細項頁"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/FQA_03',
+    name: '常見問題',
+    component: () => import('@/views/FQA_03.vue'),
+    meta: {
+      title: "心靈光譜常見問題"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/TicketChange_03',
+    name: '票務資訊',
+    component: () => import('@/views/TicketChange_03.vue'),
+    meta: {
+      title: "心靈光譜票務資訊"
+    },
+    requiredLogin: false
   },
   {
     path: '/LittleQuizResult',
