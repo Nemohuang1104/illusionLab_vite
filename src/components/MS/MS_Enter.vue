@@ -7,7 +7,9 @@
         <h4 class="loadingText">LOADING</h4>
         <div class="loading">
         </div>
-        <div class="letGetStarting" @click="goingToIndex"><h3>進入心靈光譜</h3></div>   
+        <router-link to="/mindspectrum">
+        <div class="letGetStarting" @click="goingToIndex"><h3>進入心靈光譜</h3></div>  
+      </router-link> 
         <div class="ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee">
             <div class="ducktoolyoyo" @click="letsDancing">
                 <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_LetsDance.png' alt="">
@@ -53,12 +55,12 @@ export default {
   },
   methods: {
     goingToIndex(){
+      // router.push('/mindspectrum');
         let ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee = document.querySelector(".ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee")
         ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee.style.transform = 'translateY(200%)'
         let duckLaiYi = document.querySelector(".duckLaiYi")
-        duckLaiYi.style.transform = 'translateX(50%) translateY(200%) scale(15)'
+        duckLaiYi.style.transform = 'translateX(50%) translateY(200%) scale(15)';
         // ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee.style.display = 'none'
-        
     },
     addLoadingBlocks(count) {
         if (count < 13) {

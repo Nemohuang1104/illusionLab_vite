@@ -407,9 +407,19 @@ const routes = [
 
   // =================心靈光譜===============//
   {
+    path: '/MS_Enter',
+    name: 'MS_Enter',
+    component: () => import('@/components/MS/MS_Enter.vue'),
+    meta: {
+      title: "心靈光譜"
+    },
+    requiredLogin: false
+  },
+
+  {
     path: '/mindspectrum',
     name: 'mindspectrum',
-    component: () => import('@/components/MS/MS_main.vue'),
+    component: () => import('@/views/MS_views_index.vue'),
     meta: {
       title: "心靈光譜"
     },
@@ -417,7 +427,7 @@ const routes = [
   },
   {
     path: '/MS_Ticket_step0',
-    component: () => import('@/views/MS_Ticket_reservation.vue'),
+    component: () => import('@/components/MS/MS_ticket_into.vue'),
     meta: {
       title: "心靈光譜-購票"
     },
@@ -425,7 +435,7 @@ const routes = [
   },
   {
     path: '/MS_Ticket_step1',
-    component: () => import('@/views/MS_ticket_customer_info.vue'),
+    component: () => import('@/views/MS_Ticket_reservation.vue'),
     meta: {
       title: "心靈光譜-購票"
     },
@@ -433,6 +443,14 @@ const routes = [
   },
   {
     path: '/MS_Ticket_step2',
+    component: () => import('@/views/MS_ticket_customer_info.vue'),
+    meta: {
+      title: "心靈光譜-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MS_Ticket_step3',
     component: () => import('@/views/MS_ticket_confirmation.vue'),
     meta: {
       title: "心靈光譜-購票"
@@ -585,19 +603,6 @@ const routes = [
     },
     requiredLogin: true
   },
-
-
-
-  // =================心靈光譜===============//
-  {
-    path: '/mindspectrum',
-    name: 'mindspectrum',
-    component: () => import('@/components/MS/MS_main.vue'),
-    meta: {
-      title: "頁首"
-    },
-    requiredLogin: false
-  },
   {
     path: '/SF_DetailList',
     name: 'SF_DetailList',
@@ -640,7 +645,25 @@ const routes = [
     requiredLogin: false
   },
 
+  {
+    path: '/PP_termOfUse',
+    name: 'termOfUse',
+    component: () => import('@/views/PP_termOfUse.vue'),
+    meta: {
+      title: "使用條款"
+    },
+    requiredLogin: false
+  },
 
+  {
+    path: '/PP_privacy_policy',
+    name: 'privacy_policy',
+    component: () => import('@/views/PP_privacy_policy.vue'),
+    meta: {
+      title: "隱私權政策"
+    },
+    requiredLogin: false
+  },
 
 ];
 

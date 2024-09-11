@@ -39,7 +39,7 @@ const logoLinkMap = {
   'one': '/Home',
   'two': '/lifecasino',
   'three': '/SF_Homepage',
-  'four': '/mindspectrum'
+  'four': '/MS_Enter',
 };
 
 const logoLink = computed(() => {
@@ -103,7 +103,7 @@ onUnmounted(() => {
           <router-link to="/SF_Homepage">星際邊境</router-link>
         </li>
         <li class="five">
-          <router-link to="/mindspectrum">心靈光譜</router-link>
+          <router-link to="/MS_Enter">心靈光譜</router-link>
         </li>
       </ul>
     </div>
