@@ -18,10 +18,10 @@
 
 <style lang="scss" >
 .header-four{
-    position: fixed;
-    z-index: 999;
+//     position: fixed;
+//     z-index: 999;
     height: 65px !important;
-}
+} 
 
 
 .logo > router-link:nth-child(1){
@@ -36,17 +36,17 @@
     order: 2 //心靈光譜的順序
 }
 
-.logo > router-link:nth-child(1) > img{
-    width: 100px;
-}
+// .logo > router-link:nth-child(1) > img{
+//     width: 100px;
+// }
 
-.logo > router-link:nth-child(2) > img{
-    width: 100px;
-}
+// .logo > router-link:nth-child(2) > img{
+//     width: 100px;
+// }
 
-.logo > router-link:nth-child(3) > img{
-    width: 130px;
+// .logo > router-link:nth-child(3) > img{
+//     width: 130px;
 
-}
+// }
 
 </style>
