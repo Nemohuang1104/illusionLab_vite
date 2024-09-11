@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent Sticky Example</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sticky-container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .invisible-blocker {
+            position: relative;
+            height: 80px; /* 确保占位 */
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid red; /* 这里是你红色框的样式 */
+            padding: 20px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="sticky-container">
+        <div class="sticky-header">
+            <h2>固定在顶部的透明内容</h2>
+            <p>这里是一些固定的透明内容。</p>
+        </div>
+        <div class="scrollable-content">
+            <p>这里是滑动的内容部分。</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+            <p>更多的内容...</p>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

@@ -1,3 +1,15 @@
+<template>
+  <header :class="headerClass">
+    <div class="logo">
+    <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
+    </div>
+    <div class="icons">
+      <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+      <font-awesome-icon icon="fa-regular fa-face-meh" class="peopleicon" />
+    </div>
+  </header>
+</template>
+
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
@@ -123,6 +135,11 @@ header {
   position: absolute;
   z-index: 1000;
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> dandy
 
 .logo img {
   height: 60px;
