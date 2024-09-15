@@ -19,8 +19,8 @@
 
 <style lang="scss" >
 .header-four{
-//     position: fixed;
-//     z-index: 999;
+    position: fixed;
+    z-index: 999;
     height: 65px !important;
 } 
 
