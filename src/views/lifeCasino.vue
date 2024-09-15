@@ -6,7 +6,7 @@
     class="header" 
     :mode="currentMode"
     
-    v-if="showHeader"
+    
     /> 
     <router-link to="/LC_Ticket_step0" 
     :class="{'show-btn': buyNow}"
@@ -446,7 +446,7 @@ const swiperInstance = ref(null);
 // 當 Swiper 實例初始化後，將其保存到 mySwiper
 const onSwiper = (swiper) => {
     mySwiper.value = swiper;
-    swiperInstance.value = swiper;
+    // swiperInstance.value = swiper;
 
     // swiperInstance.on('slideChange', () => {
     // showHeader.value = swiperInstance.activeIndex >= 1;})
