@@ -248,7 +248,7 @@ const o_ship = ref('')
 const edit = (index) => {
   // 使用 filteredItems 的索引來查找對應的 orders 項目
   const filteredItem = displayedItems.value[index];
-  const originalIndex = orders.value.findIndex(item => item.order_list === filteredItem.order_list);
+  const originalIndex = orders.value.findIndex(item => item.news_id === filteredItem.news_id);
   
   if (originalIndex !== -1) {
     current_edit.value = originalIndex;
