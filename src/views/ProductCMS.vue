@@ -1,6 +1,6 @@
 <script setup>
 import Header_CMS from '@/components/Header_CMS.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import ProductPopCMS from '@/components/ProductPopCMS.vue';
 
 import axios from 'axios'; // 註解掉 axios 的引入
@@ -9,42 +9,60 @@ import axios from 'axios'; // 註解掉 axios 的引入
 const searchQuery = ref('');
 
 const orders = ref([
-  {
-    product_id: '1',
-    event_name: '心靈光譜',
-    product_name: '繪本風格帆布袋',
-    product_status: 2,
-    product_price: 599,
-    cardimage: ''
-  },
-  {
-    product_id: '2',
-    event_name: '人生賭場',
-    product_name: '奢華金杯',
-    product_status: 2,
-    product_price: 599,
-    cardimage: ''
-  },
-  {
-    product_id: '3',
-    event_name: '星際邊境',
-    product_name: '太空鋼杯',
-    product_status: 2,
-    product_price: 599,
-    cardimage: ''
-  },
-  {
-    product_id: '4',
-    event_name: '人生賭場',
-    product_name: '賭城帆布袋',
-    product_status: 2,
-    product_price: 299,
-    cardimage: ''
-  },
+  // {
+  //   product_id: '1',
+  //   event_name: '心靈光譜',
+  //   product_name: '繪本風格帆布袋',
+  //   product_status: 2,
+  //   product_price: 599,
+  //   cardimage: ''
+  // },
+  // {
+  //   product_id: '2',
+  //   event_name: '人生賭場',
+  //   product_name: '奢華金杯',
+  //   product_status: 2,
+  //   product_price: 599,
+  //   cardimage: ''
+  // },
+  // {
+  //   product_id: '3',
+  //   event_name: '星際邊境',
+  //   product_name: '太空鋼杯',
+  //   product_status: 2,
+  //   product_price: 599,
+  //   cardimage: ''
+  // },
+  // {
+  //   product_id: '4',
+  //   event_name: '人生賭場',
+  //   product_name: '賭城帆布袋',
+  //   product_status: 2,
+  //   product_price: 299,
+  //   cardimage: ''
+  // },
  
   
   // 更多訂單數據...
 ]);
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/LC_FetchProducts.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    orders.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
+
 
 
 const initialItems = ref([...orders.value]); // 保存初始資料的副本
@@ -55,8 +73,8 @@ const filteredItems = computed(() => {
     return orders.value;
   }
   return orders.value.filter(item =>
-    item.product_id.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.product_name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    item.PRODUCT_ID.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.PRODUCT_NAME.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
@@ -88,26 +106,7 @@ const searchItems = () => {
   currentPage.value = 1; // 搜尋時重設為第1頁
 };
 
-// 切換會員狀態
-const toggleStatus = (item) => {
-  const newStatus = item.status === '正常' ? '停權' : '正常';
-  item.status = newStatus;
 
-  // 註解掉 AJAX 請求部分
-  /*
-  axios.post('/api/update-status.php', {
-    id: item.id,
-    status: newStatus
-  })
-  .then(response => {
-    console.log('狀態更新成功');
-  })
-  .catch(error => {
-    item.status = item.status === '正常' ? '停權' : '正常';
-    console.error('更新狀態失敗:', error);
-  });
-  */
-};
 
 // 分頁功能
 const itemsPerPage = ref(10);
@@ -171,21 +170,14 @@ const o_ship = ref('')
 const edit = (index) => {
   // 使用 filteredItems 的索引來查找對應的 orders 項目
   const filteredItem = displayedItems.value[index];
-  const originalIndex = orders.value.findIndex(item => item.order_list === filteredItem.order_list);
+  const originalIndex = orders.value.findIndex(item => item.PRODUCT_ID === filteredItem.PRODUCT_ID);
+
   
   if (originalIndex !== -1) {
     current_edit.value = originalIndex;
     editOpacity.value = 1;
-    select_number.value = orders.value[originalIndex].order_list;
+    select_number.value = orders.value[originalIndex].PRODUCT_ID;
 
-    const tot = order_list.value[originalIndex];
-    total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
-
-    order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
-
-    o_pay.value = orders.value[originalIndex].payment_status;
-    o_form.value = orders.value[originalIndex].order_status;
-    o_ship.value = orders.value[originalIndex].shipping_status;
   }
 };
 // 2.當子組件 OrderTicketPopCMS 中的 f_close及f_save 被觸發時，會通過 emit 通知父組件，從而更新父組件中的 editOpacity 值，達到控制彈出視窗顯示或隱藏的效果。
@@ -195,42 +187,36 @@ const handleCloseEdit = ({ opacity, edit }) => {
   current_edit.value = edit;   // 更新 current_edit 的值
 };
 
-// 2.2 @save-edit事件回調函式
-const handleSaveEdit = async (updatedOrder) => {
+// 2.2 @save-edit事件回調函式(本地資料開發使用)(開始)======
+// const handleSaveEdit = async (updatedOrder) => {
+//   if (current_edit.value !== null) {
+//     orders.value[current_edit.value] = updatedOrder;
+//     initialItems.value = [...orders.value]; // 編輯後更新 initialItems
+//   }
+//   editOpacity.value = 0;
+//   current_edit.value = null;
+//   }
+
+  // (本地資料開發使用)(結束)================
+  
+
+// 2.3 @save-edit事件回調函式(串接資料庫開發使用)(開始)======
+  const handleSaveEdit = async (updatedOrder) => {
   if (current_edit.value !== null) {
     orders.value[current_edit.value] = updatedOrder;
     initialItems.value = [...orders.value]; // 編輯後更新 initialItems
   }
+
+  // 重新撈取更新後的資料
+  await fetchProducts();
+  
   editOpacity.value = 0;
   current_edit.value = null;
-  }
-  // 小春堂範例開始
-  // if (current_edit.value === null) return
+};
 
-  // const nIndex = current_edit.value
-  // orders.value[nIndex].payment_status = o_pay.value
-  // orders.value[nIndex].order_status = o_form.value
-  // orders.value[nIndex].shipping_status = o_ship.value
-
-  // current_edit.value = null
-  // total_cost.value = 0
-  // order_cost.value = 0
-  // 小春堂範例結束
+// (串接資料庫開發使用)(結束)======
 
 
-
-// 3.發送 AJAX 請求更新訂單 (帶串接資料庫後再嘗試)
-  // try {
-  //   const response = await axios.post('../php/n-order_update.php', {
-  //     order_list: orders.value[nIndex].order_list,
-  //     payment_status: orders.value[nIndex].payment_status,
-  //     order_status: orders.value[nIndex].order_status,
-  //     shipping_status: orders.value[nIndex].shipping_status,
-  //   })
-  //   alert("儲存成功")
-  // } catch (error) {
-  //   alert("儲存失敗: " + error.response.status)
-  // }
 
 </script>
 
@@ -270,11 +256,11 @@ const handleSaveEdit = async (updatedOrder) => {
 
             
             <div v-for="(item, index) in displayedItems" :key="item.id" class="order-text">
-            <span>{{ item.product_id }}</span>
-            <span>{{ item.event_name }}</span>
-            <span>{{ item.product_name }}</span>
-            <span>{{ item.product_price }}</span>
-            <span>{{ item.product_status }}</span>
+            <span>{{ item.PRODUCT_ID }}</span>
+            <span>{{ item.EVENT_ID }}</span>
+            <span>{{ item.PRODUCT_NAME }}</span>
+            <span>{{ item.PRODUCT_PRICE }}</span>
+            <span>{{ item.PRODUCT_STATUS }}</span>
             <span @click="edit(index)">編輯</span>
             </div>
         </div> 
