@@ -19,30 +19,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 try {
+    // 取得商品 ID
+    $productId = isset($_GET['productId']) ? intval($_GET['productId']) : 0;
+
     // 使用從 conn.php 中獲取的變數建立 PDO 物件
     $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
     $pdo = new PDO($dsn, $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // 取得 productId 參數，並檢查是否存在
-    $productId = isset($_GET['productId']) ? intval($_GET['productId']) : 0;
+    // 查詢商品基本資訊
+    $sql = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = :productId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+    $stmt->execute();
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($productId > 0) {
-        // 從資料庫撈取指定商品的資料
-        $sql = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = :productId AND EVENT_ID = 1";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-        $stmt->execute();
-        
-        // 返回單個商品
-        $product = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo json_encode($product); // 只返回單個商品，不是陣列
+    if ($product) {
+        // 查詢商品的所有尺寸
+        $sizeSql = "SELECT SIZE_VALUE FROM PRODUCT_SIZES WHERE PRODUCT_ID = :productId";
+        $sizeStmt = $pdo->prepare($sizeSql);
+        $sizeStmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+        $sizeStmt->execute();
+        $sizes = $sizeStmt->fetchAll(PDO::FETCH_COLUMN);
 
-        
+        // 查詢商品的所有樣式
+        $styleSql = "SELECT STYLE_VALUE FROM PRODUCT_STYLES WHERE PRODUCT_ID = :productId";
+        $styleStmt = $pdo->prepare($styleSql);
+        $styleStmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+        $styleStmt->execute();
+        $styles = $styleStmt->fetchAll(PDO::FETCH_COLUMN);
+
+        // 將尺寸和樣式加入商品資料中
+        $product['PRODUCT_SIZES'] = $sizes;
+        $product['PRODUCT_STYLES'] = $styles;
+
+        // 返回商品資料
+        echo json_encode($product);
     } else {
-        echo json_encode(['error' => 'Invalid productId']);
+        echo json_encode(['error' => 'Product not found']);
     }
-
 } catch (PDOException $e) {
     // 捕捉並返回錯誤
     echo json_encode(['error' => $e->getMessage()]);
