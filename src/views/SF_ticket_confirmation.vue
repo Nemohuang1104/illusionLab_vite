@@ -41,6 +41,8 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/style";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
 .warpper{
   background-image: url('../src/ms/modeBGI2.png');
 
@@ -51,7 +53,7 @@ export default {
   margin-top: -50px;
 }
 
-.header{
+::v-deep .header{
   position: fixed;
   left: 0;
   top: 0;
@@ -69,55 +71,51 @@ export default {
     }
 }
 
+::v-deep *{
+  font-family: "Noto Serif TC" !important;
+}
 
-
-
-
-</style>
-
-<style lang="scss">
-@import "../assets/style";
-
-.title{
+::v-deep.title{
   text-align: center;
 }
 
-body{
+::v-deep body{
   font-family: map-get($map: $fontStyle, $key: style_2);
 };
 
-h1{
+::v-deep h1{
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
 }
 
-h2{
+::v-deep h2{
   font-size: map-get($map: $fontSize , $key: h2);
   font-weight: 800;
 }
 
-h3{
+::v-deep h3{
   font-size: map-get($map: $fontSize , $key: h3) ;
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
 
   font-weight: 800;
 }
 
-h4{
+::v-deep h4{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
 }
 
-h6{
+::v-deep h6{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
   transition: .3s;
+  font-size: 16px  !important;
 }
 
-p{
+::v-deep p{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
@@ -131,9 +129,88 @@ p{
   }
 }
 
-.options{
+::v-deep .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
   
 }
 
+@media (max-width: 500px){
+  ::v-deep main{
+    width: 90vw;
+    padding: 40px 20px;
+  }
+  ::v-deep h1{
+    font-size: 30px;
+  }
+  ::v-deep h3{
+    font-size: 20px;
+  }
+  ::v-deep h4{
+    font-size: 14px;
+  }
+  ::v-deep p{
+    font-size: 12px;
+  }
+  ::v-deep .template_mobang{
+    padding: 150px 40px;
+  }
+
+  
+@media (max-width: 430px){
+
+::v-deep .options{
+  width: 70vw !important;
+}
+
+::v-deep .weNeedAStarlight{
+    display: flex;
+    background-image: url(/src/ms/yourAreTheBiggestStar.png);
+    background-size: cover;
+    background-position-y: -22px!important;
+    width: 150px!important;
+    height: 100px!important;
+    align-items: center;
+}
+
+::v-deep h6{
+  font-size: 6px !important;
+}
+}
+
+ 
+@media (max-width: 390px){
+  ::v-deep main{
+    width: 90vw;
+    padding: 40px 10px;
+  }
+
+::v-deep .options{
+  width: 90vw !important;
+}
+
+::v-deep .eventInfo,::v-deep .memberInfo {
+  padding: 0px 20px !important;
+}
+
+::v-deep .weNeedAStarlight{
+    display: flex;
+    background-image: url(/src/ms/yourAreTheBiggestStar.png);
+    background-size: cover;
+    background-position-y: -22px!important;
+    width: 150px!important;
+    height: 100px!important;
+    align-items: center;
+}
+
+::v-deep h6{
+  font-size: 8px !important;
+}
+}
+
+}
+
+
+
+
 </style>
+

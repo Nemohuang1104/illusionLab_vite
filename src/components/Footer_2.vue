@@ -44,6 +44,7 @@
     background: linear-gradient(180deg, #000 26%, #505050 100%);
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .content{
@@ -84,12 +85,6 @@ a:last-child{
 }
 
 @media (max-width: 768px){
-    .content p{
-        font-size: 8px;
-    }
-}
-
-@media (max-width: 390px){
     .content p{
         font-size: 8px;
     }

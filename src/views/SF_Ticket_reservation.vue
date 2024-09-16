@@ -41,7 +41,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/style";
-.warpper{
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
+
+*{
+  font-family: "Noto Serif TC"  !important;
+ }
+  .warpper{
   background-image: url('../src/ms/modeBGI2.png');
 
 }
@@ -53,7 +59,7 @@ export default {
   
 }
 
-.header{
+::v-deep.header{
   position: fixed;
   left: 0;
   top: 0;
@@ -62,46 +68,46 @@ export default {
 
 
 
-</style>
 
-<style lang="scss" >
-@import "../assets/style";
-
-.title{
+::v-deep.title{
   text-align: center;
 }
 
-body{
+::v-deep body{
   font-family: map-get($map: $fontStyle, $key: style_2);
 };
 
-h1{
+::v-deep h1{
   font-size: map-get($map: $fontSize , $key: h1);
   // font-size: 28px;
   font-weight: 800;
   // z-index: 1;
+  font-family: "Noto Serif TC"  !important;
 }
 
-h2{
+::v-deep h2{
   font-size: map-get($map: $fontSize , $key: h2);
   font-weight: 800;
 }
 
-h3{
+::v-deep h3{
   font-size: map-get($map: $fontSize , $key: h3);
   font-weight: 800;
+  font-family: "Noto Serif TC"  !important;
 }
 
-h4{
+::v-deep h4{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
 }
 
-h6{
+::v-deep h6{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
+  font-size: 16px  !important;
+  font-family: "Noto Serif TC"  !important;
   transition: .3s;
 }
 
@@ -112,38 +118,68 @@ h6{
   }
 }
 
-.options{
+
+::v-deep .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
-//  background: linear-gradient(180deg, rgba(19, 44, 121, 0.8) 44.5%, rgba(7, 143, 242, 0.7) 100%)!important;
+ background: linear-gradient(180deg, rgba(19, 44, 121, 0.8) 44.5%, rgba(7, 143, 242, 0.7) 100%)!important;
  color: white !important;
 
-//  outline: unset ;
+ outline: unset ;
 }
 
-.options:hover{
-  // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+::v-deep .options:hover{
+  background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
 }
 
-.options option{
-  // background-color: black;
+::v-deep .options option{
+  background-color: black;
 }
 
+@media (max-width: 500px){
 
-// .options{
-// //  background-color:rgba(255, 255, 255, 0.5) !important;
-//  background: linear-gradient(180deg, rgba(19, 44, 121, 0.8) 44.5%, rgba(7, 143, 242, 0.7) 100%)!important;
-//  color: white !important;
+::v-deep .options{
+  width: 70vw;
+}
 
-//  outline: unset ;
-// }
+::v-deep h1{
+  font-size: 30px;
+}
+::v-deep h3{
+  font-size: 20px;
+}
+::v-deep h4{
+  font-size: 14px;
+}
+::v-deep p{
+  font-size: 12px;
+}
+::v-deep .template_mobang{
+  padding: 150px 70px ;
+}
+}
 
-// .options:hover{
-//   background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
-// }
+@media (max-width: 430px){
 
-// .options option{
-//   background-color: black;
-// }
+::v-deep .options{
+  width: 70vw !important;
+}
+
+::v-deep .weNeedAStarlight{
+    display: flex;
+    background-image: url(/src/ms/yourAreTheBiggestStar.png);
+    background-size: cover;
+    background-position-y: -22px!important;
+    width: 150px!important;
+    height: 100px!important;
+    align-items: center;
+}
+
+::v-deep h6{
+  font-size: 8px !important;
+}
+}
+
 
 
 </style>
+

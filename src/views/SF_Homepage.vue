@@ -139,7 +139,7 @@ onBeforeUnmount(() => {
         <!-- 星球運轉 -->
         <div class="intro">
             <!-- <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video> -->
-            <video src="../assets/video/sf.mp4" autoplay muted loop class="movie"></video>
+            <video src="../assets/video/sf.mp4" muted playsinline autoplay loop class="movie"></video>
             <!-- <video src="../assets/video/SFmovie.mp4 controls autoplay muted loop" class="movie"></video> -->
         </div>
 
@@ -362,8 +362,8 @@ onBeforeUnmount(() => {
 .wrapper {
     background: linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)),
         url(../assets/images/STBackground.png);
-    width: 100%;
-    max-width:1440px ;
+    width: 100vw;
+    // max-width:1440px ;
 
 }
 

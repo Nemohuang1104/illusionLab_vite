@@ -81,7 +81,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  
+
   <header :class="headerClass">
     <div class="divnull"></div>
     <div class="logo">
@@ -92,8 +92,7 @@ onUnmounted(() => {
       </router-link>
 
       <!-- 星際邊境 LOGO  @click="handleClick('three')" -->
-      <router-link to="/strellarfrontierintro" @click="handleClick('three')"
-        v-show="screenWidth > 768 || isActive('three')">
+      <router-link to="/SF_Homepage" @click="handleClick('three')" v-show="screenWidth > 768 || isActive('three')">
         <img :src="logos['three']" :class="['SF', { 'inactive': !isActive('three'), 'active': isActive('three') }]"
           alt="星際邊境" />
       </router-link>
@@ -108,8 +107,7 @@ onUnmounted(() => {
     <div class="icons">
       <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
           class="shoppingicon" /></router-link>
-      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-meh"
-          class="peopleicon" /></router-link>
+      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-smile"class="peopleicon" /></router-link>
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
 
@@ -154,11 +152,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  width: 100%;
 
   height: 80px;
   z-index: 10000;
-  
+
 }
 
 /* 中間三個LOGO配置 */
@@ -192,7 +190,7 @@ img {
 
 
 .LS {
-  width: 150px;
+  width: 160px;
   height: auto;
   flex-shrink: 0;
 
@@ -206,7 +204,7 @@ img {
 }
 
 .LI {
-  width: 150px;
+  width: 160px;
   height: auto;
   flex-shrink: 0;
 }
