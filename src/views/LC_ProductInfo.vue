@@ -91,8 +91,8 @@ onMounted(() => {
                 <p>規格 : {{ item.PRODUCT_SIZE }}</p>
                 
                 <!-- 尺寸選擇 -->
+                <p class="txt">選擇尺寸：</p>
               <div class="input" v-if="item.PRODUCT_ID === 2">
-                <label for="size">選擇尺寸：</label>
                 <select v-model="selectedSize" id="size">
                   <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size">
                     {{ size }}
@@ -101,7 +101,8 @@ onMounted(() => {
               </div>
 
                  <!-- 數量選擇 -->
-                  <div class="quantity-input">
+                 <p class="txt">選擇數量：</p>
+                  <div class="quantity-input" id="quantity">
                     <button class="quantity-button" id="minus6" @click="item.quantity > 1 && item.quantity--">-</button>
                     <input type="text" v-model="item.quantity" min="1" />
                     <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
@@ -133,6 +134,8 @@ onMounted(() => {
 @import "../assets/style";
 
 .warpper {
+  box-sizing: border-box;
+
   font-family: "Noto Serif SC";
   // max-width: 1440px;
   width: 100%;
@@ -292,7 +295,7 @@ onMounted(() => {
 .pro {
   // border: 1px solid red;
   width: 200px;
-  height: 250px;
+  // height: 250px;
   // margin-bottom: 20px;
   padding: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -403,6 +406,7 @@ onMounted(() => {
     height: 28px;
     color: #fff;
     text-align: center;
+    margin-bottom: 15px;
 
 }
 
@@ -417,6 +421,9 @@ onMounted(() => {
     color: #313131;
 }
 
+.txt{
+  font-size: 16px !important;
+}
 
 
 
