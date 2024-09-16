@@ -10,6 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productName = $_POST['PRODUCT_NAME'];
     $productPrice = $_POST['PRODUCT_PRICE'];
     $productStatus = $_POST['PRODUCT_STATUS'];
+    $productMaterial = $_POST['MATERIAL'];
+    $productSize = $_POST['PRODUCT_SIZE'];
 
     // 處理圖片上傳
     $imagePath = null;
@@ -37,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 新增商品資訊
     try {
         // 建立 SQL 語句，根據是否有圖片決定是否插入 PRODUCT_IMG 欄位
-        $sql = "INSERT INTO PRODUCT (EVENT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STATUS";
+        $sql = "INSERT INTO PRODUCT (EVENT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STATUS, MATERIAL, PRODUCT_SIZE";
 
         if ($imagePath) {
             $sql .= ", PRODUCT_IMG"; // 若有圖片，插入 PRODUCT_IMG 欄位
         }
 
-        $sql .= ") VALUES (:eventId, :productName, :productPrice, :productStatus";
+        $sql .= ") VALUES (:eventId, :productName, :productPrice, :productStatus, :productMaterial, :productSize";
 
         if ($imagePath) {
             $sql .= ", :imagePath"; // 若有圖片，插入相應的值
@@ -56,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':productName', $productName);
         $stmt->bindParam(':productPrice', $productPrice);
         $stmt->bindParam(':productStatus', $productStatus);
+        $stmt->bindParam(':productMaterial', $productMaterial);
+        $stmt->bindParam(':productSize', $productSize);
 
         if ($imagePath) {
             $stmt->bindParam(':imagePath', $imagePath); // 綁定圖片路徑參數
