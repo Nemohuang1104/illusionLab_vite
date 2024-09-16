@@ -150,59 +150,42 @@ const filteredItems = computed(() => {
     return orders.value;
   }
   return orders.value.filter(item =>
-    item.NEWS_ID.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.NEWS_TITLE.toLowerCase().includes(searchQuery.value.toLowerCase())
+    item.NEWS_ID.toString().toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.NEWS_TITLE.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
 // 恢復顯示所有資料
 const resetSearch = () => {
   searchQuery.value = '';
-  initialItems.value = [...orders.value]; // 更新 initialItems 以包含最新的訂單資料
-  orders.value = [...initialItems.value];
+  get_news(); // 恢復撈取全部資料
   currentPage.value = 1;
 };
 
-// 搜尋功能
-const searchItems = () => {
-  // 若使用 axios 進行搜尋，需恢復以下代碼
-  /*
-  axios.post('/api/search-members', {
-    query: searchQuery.value
-  })
-  .then(response => {
-    allItems.value = response.data;
-    currentPage.value = 1;
-  })
-  .catch(error => {
+// 使用 fetch API 搜尋資料庫中的商品
+const searchItems = async () => {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/News/SearchNews.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query: searchQuery.value }) // 傳送搜尋字串到後端 PHP
+    });
+
+    if (!response.ok) {
+      throw new Error('搜尋請求失敗');
+    }
+
+    const data = await response.json();
+    orders.value = data; // 更新 orders 資料
+    currentPage.value = 1; // 搜尋後重設為第 1 頁
+  } catch (error) {
     console.error('搜尋出錯:', error);
-  });
-  */
-  
-  // 直接使用本地資料進行搜尋
-  currentPage.value = 1; // 搜尋時重設為第1頁
+  }
 };
 
-// 切換會員狀態
-const toggleStatus = (item) => {
-  const newStatus = item.status === '正常' ? '停權' : '正常';
-  item.status = newStatus;
 
-  // 註解掉 AJAX 請求部分
-  /*
-  axios.post('/api/update-status.php', {
-    id: item.id,
-    status: newStatus
-  })
-  .then(response => {
-    console.log('狀態更新成功');
-  })
-  .catch(error => {
-    item.status = item.status === '正常' ? '停權' : '正常';
-    console.error('更新狀態失敗:', error);
-  });
-  */
-};
 
 // 分頁功能
 const itemsPerPage = ref(10);
@@ -244,6 +227,15 @@ const dbcheck = ref(false)
 const current_edit = ref(null);
 const select_number = ref('');
 
+// 是否在新增模式下(開始)======================
+const isCreating = ref(false);
+// 1.點擊新增按鈕彈出編輯視窗內容(新增產品視窗)
+const openAddProduct = () => {
+  current_edit.value = null; // 清空當前編輯的索引
+  isCreating.value = true;   // 設置為新增模式
+  editOpacity.value = 1;     // 顯示彈出視窗
+};
+
 
 const order_list = ref([
   // 這裡可以填入初始的訂單商品列表
@@ -255,34 +247,7 @@ const order_list = ref([
   // ]
 ])
 
-const total_cost = ref(0)
-const order_cost = ref(0)
 
-const o_pay = ref('')
-const o_form = ref('')
-const o_ship = ref('')
-
-// // 1.點擊編輯按鈕彈出v-if內容(@click="edit(key)")
-// const edit = (index) => {
-//   // 使用 filteredItems 的索引來查找對應的 orders 項目
-//   const filteredItem = displayedItems.value[index];
-//   const originalIndex = orders.value.findIndex(item => item.NEWS_ID === filteredItem.NEWS_ID);
-  
-//   if (originalIndex !== -1) {
-//     current_edit.value = originalIndex;
-//     editOpacity.value = 1;
-//     select_number.value = orders.value[originalIndex].NEWS_ID;
-
-//     const tot = order_list.value[originalIndex];
-//     total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
-
-//     order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
-
-//     o_pay.value = orders.value[originalIndex].payment_status;
-//     o_form.value = orders.value[originalIndex].order_status;
-//     o_ship.value = orders.value[originalIndex].shipping_status;
-//   }
-// };
 
 // 1.點擊編輯按鈕彈出v-if內容(@click="edit(key)")
 const edit = (index) => {
@@ -304,6 +269,7 @@ const edit = (index) => {
 const handleCloseEdit = ({ opacity, edit }) => {
   editOpacity.value = opacity; // 更新 editOpacity 的值
   current_edit.value = edit;   // 更新 current_edit 的值
+  isCreating.value = false;    // 結束新增模式
 };
 
 // 2.2 @save-edit事件回調函式
@@ -314,38 +280,13 @@ const handleSaveEdit = async (updatedOrder) => {
   }
 
     // 重新撈取更新後的資料
-    await fetchProducts();
+    await get_news();
 
   editOpacity.value = 0;
   current_edit.value = null;
   }
-  // 小春堂範例開始
-  // if (current_edit.value === null) return
+  
 
-  // const nIndex = current_edit.value
-  // orders.value[nIndex].payment_status = o_pay.value
-  // orders.value[nIndex].order_status = o_form.value
-  // orders.value[nIndex].shipping_status = o_ship.value
-
-  // current_edit.value = null
-  // total_cost.value = 0
-  // order_cost.value = 0
-  // 小春堂範例結束
-
-
-
-// 3.發送 AJAX 請求更新訂單 (帶串接資料庫後再嘗試)
-  // try {
-  //   const response = await axios.post('../php/n-order_update.php', {
-  //     order_list: orders.value[nIndex].order_list,
-  //     payment_status: orders.value[nIndex].payment_status,
-  //     order_status: orders.value[nIndex].order_status,
-  //     shipping_status: orders.value[nIndex].shipping_status,
-  //   })
-  //   alert("儲存成功")
-  // } catch (error) {
-  //   alert("儲存失敗: " + error.response.status)
-  // }
 
 </script>
 
@@ -356,7 +297,7 @@ const handleSaveEdit = async (updatedOrder) => {
         <div class="code-input">
             <p>消息管理</p>
             <div class="add">
-                <button >新增
+                <button @click="openAddProduct">新增
                   <img src="../assets/images/flat-color-icons_plus.png" alt="">
                 </button>  
             </div>
@@ -408,17 +349,17 @@ const handleSaveEdit = async (updatedOrder) => {
             </button>
         </div>
        <!-- 編輯視窗 -->
-       <div class="n-order_edit" v-if="current_edit !== null" :style="{ opacity: editOpacity }">
+       <div class="n-order_edit" v-if="current_edit !== null || isCreating" :style="{ opacity: editOpacity }">
             <!-- 0.a  在 template 中使用 @close-edit="handleCloseEdit" 來監聽子組件的關閉按鈕的事件，並在 handleCloseEdit 函式中更新 editOpacity 的值。 -->
 
             <!-- 0.b  在 template 中使用 @save-edit="handleSaveEdit" 來監聽子組件的儲存按鈕的事件，並在 handleSaveEdit 函式中更新 editOpacity 的值。 -->
               <NewsPopCMS
-              :order="orders[current_edit]"
+              :order="isCreating ? {} : orders[current_edit]"
               @close-edit="handleCloseEdit"
               @save-edit="handleSaveEdit"/>
             </div>
 
-            <div id="hide" v-if="current_edit !== null"></div>
+            <div id="hide" v-if="current_edit !== null || isCreating"></div>
 
 
             <!-- 1.點擊視窗的儲存或關閉按鈕，畫面要隱藏或持續顯示v-if -->

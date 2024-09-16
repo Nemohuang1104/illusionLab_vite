@@ -5,6 +5,7 @@
     import ShoppingStep from '@/components/ShoppingStep.vue';
     import Footer from '@/components/Footer_0.vue';
 
+
     const cartItems = ref([
     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
 ]);
@@ -385,6 +386,7 @@ const highlight = ref({
         outline: none;
         /* 移除默認的黑框 */
         background: none;
+        color: #ffffff; //文字顏色
     }
 
 
