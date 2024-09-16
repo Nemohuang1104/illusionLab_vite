@@ -207,11 +207,50 @@ onBeforeUnmount(() => {
 
 
 <style lang="scss" scoped>
+
+
+
+// svg {
+//   transition: transform 0.3s ease, filter 0.3s ease;
+  
+// }
+
+
+
+/* 定義閃爍動畫 */
+@keyframes flicker {
+  0% {
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 1));
+  }
+  100% {
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+  }
+}
+
+/* 為隕石設置閃爍效果 */
+svg {
+  transition: transform 0.3s ease;
+  animation: flicker 1.5s infinite; /* 持續閃爍 */
+  cursor: pointer; /* 提示可以互動 */
+}
+
+/* 點擊隕石時放大並保持亮度 */
+svg.active {
+  transform: scale(1.2);
+  filter: drop-shadow(0px 0px 15px rgba(204, 219, 232, 0.8));
+//   animation: none; /* 點擊後停止閃爍效果，保持亮度 */
+}
+
+
+
 .ohMyGod {
     width: 100%;
     max-width: 1440px;
     height: 70vh;
- 
+
 
 }
 
@@ -272,6 +311,20 @@ onBeforeUnmount(() => {
     }
 
 }
+
+
+#ball_all {
+    border: 1px solid red;
+}
+
+#ball_all>.clickPath:hover {
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    border: 1px solid red;
+}
+
+
+
+
 
 #ball_all {
     pointer-events: auto;

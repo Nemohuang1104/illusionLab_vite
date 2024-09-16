@@ -168,22 +168,29 @@ const routes = [
     },
     requiredLogin: false
   },
+
+  // -----商品區------//
   {
     path: '/LC_ProductPage',
     component: () => import('@/views/LC_ProductPage.vue'),
+    name:'LC_ProductPage',
     meta: {
       title: "人生賭場-精選商品"
     },
     requiredLogin: false
   },
   {
-    path: '/LC_ProductInfo',
+    path: '/LC_ProductInfo/:id',
     component: () => import('@/views/LC_ProductInfo.vue'),
+    name:'LC_ProductInfo',
     meta: {
       title: "人生賭場-商品細項"
     },
-    requiredLogin: false
+    requiredLogin: false,
+    props: true // 將路由參數作為 props 傳入組件
   },
+
+  // ------入場須知-------//
   {
     path: '/LC_QuestionIntro',
     component: () => import('@/views/LC_QuestionIntro.vue'),
@@ -211,6 +218,8 @@ const routes = [
       }
     ]
   },
+
+  // -----購票-----//
   {
 
     path: '/LC_Ticket_step0',

@@ -6,24 +6,48 @@ import LC_Text2 from '@/components/LC_Text2.vue';
 import icon3 from '../assets/images/LC_icon3.svg' 
 import CoinFall2 from '@/components/CoinFall.vue';
 
-
-import { defineProps, ref, defineEmits } from 'vue';
+import { useRoute } from 'vue-router';
+import { defineProps, ref, defineEmits, onMounted } from 'vue';
 const currentMode = ref('two');
 const props = defineProps({
     productInfo: Object
 })
 
-const productInfo = ref([
-    {id:'1',productList:'20240904001', cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:599,material:'銅鍍合金',size:'直徑6.5cm，高6cm',quantity: 1},
+const item = ref([
+    // {id:'1',productList:'20240904001', cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:599,material:'銅鍍合金',size:'直徑6.5cm，高6cm',quantity: 1},
 ])
-
+const route = useRoute();
 
 // function goToLoginCMS(){
 //   router.push('/LoginCMS');
 
 // }
 
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const productId = route.params.id;
+    const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/LC_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    const data = await response.json();
+    item.value = data;
+    
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
 
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
+
+// const product = ref(null);
+// const route = useRoute();
+
+// onMounted(async () => {
+//   const productId = route.params.id;
+//   const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/getProductDetail.php?productId=${productId}`);
+//   product.value = await response.json();
+// });
 
 </script>
 
@@ -49,16 +73,16 @@ const productInfo = ref([
         </div>
         
       </div>
-      <div v-for="(item,index) in productInfo"   :key="item.id" class="pagebox">
+      <div v-if="item"    class="pagebox">
         <!-- 放置一個商品列的外框 -->
-        <img :src="item.cardImage" alt="">
+        <img :src="item.PRODUCT_IMG" alt="">
         <div class="list">
           <div class="pro">
-                <p>商品編號 : {{ item.productList }}</p>
-                <p>{{ item.productName }}</p>
-                <p>NT $ {{item.price }}</p>
-                <p>材質 : {{ item.material }}</p>
-                <p>規格 : {{ item.size }}</p>
+                <p>商品編號 : {{ item.PRODUCT_ID }}</p>
+                <p>{{ item.PRODUCT_NAME }}</p>
+                <p>NT $ {{item.PRODUCT_PRICE }}</p>
+                <p>材質 : {{ item.MATERIAL }}</p>
+                <p>規格 : {{ item.PRODUCT_SIZE }}</p>
                 <div class="input">
                     <select name="" id="">
                         <option value="0">商品規格</option>

@@ -80,9 +80,9 @@ function goToLoginCMS(){
       </div>
       <div class="pagebox">
         <!-- 放置一個商品列的外框 -->
-         <router-link to="LC_ProductInfo">
         <div class="list">
-          <div  v-for="(item,index) in productInfo" class="pro"  :key="item.PRODUCT_ID" >
+          <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
+            <router-link :to="{ name:'LC_ProductInfo', params: { id: item.PRODUCT_ID } }">
            
               <img :src="item.PRODUCT_IMG" alt="">
               <p>{{ item.PRODUCT_NAME }}</p>
@@ -92,9 +92,9 @@ function goToLoginCMS(){
                 </div>
                 <div class="icon"></div>
               </div>
+            </router-link>
           </div>
         </div>
-      </router-link>
       </div>
     </div>
   </div>
@@ -294,7 +294,9 @@ function goToLoginCMS(){
 }
 
 .pro img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
   max-height: 150px; /* 限制圖片高度 */
   object-fit: contain; /* 保持圖片比例 */
   margin-bottom: 10px;
