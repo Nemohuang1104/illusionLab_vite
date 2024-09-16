@@ -297,7 +297,7 @@ const routes = [
     name: 'littleQuiz',
     component: () => import('@/views/LittleQuiz.vue'),
     meta: {
-      title: "星際邊際全部商品"
+      title: "星際邊境全部商品"
     },
     requiredLogin: false
   },
@@ -306,7 +306,7 @@ const routes = [
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊際商品細項"
+      title: "星際邊境商品細項"
     },
     requiredLogin: false
   },
@@ -631,7 +631,7 @@ const routes = [
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊際商品細項"
+      title: "星際邊境商品細項"
     },
     requiredLogin: false
   },
