@@ -73,39 +73,40 @@ const filteredItems = computed(() => {
     return orders.value;
   }
   return orders.value.filter(item =>
-    item.PRODUCT_ID.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.PRODUCT_NAME.toLowerCase().includes(searchQuery.value.toLowerCase())
+    item.PRODUCT_ID.toString().toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.PRODUCT_NAME.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
 // 恢復顯示所有資料
 const resetSearch = () => {
   searchQuery.value = '';
-  initialItems.value = [...orders.value]; // 更新 initialItems 以包含最新的訂單資料
-  orders.value = [...initialItems.value];
+  fetchProducts(); // 恢復撈取全部資料
   currentPage.value = 1;
 };
 
-// 搜尋功能
-const searchItems = () => {
-  // 若使用 axios 進行搜尋，需恢復以下代碼
-  /*
-  axios.post('/api/search-members', {
-    query: searchQuery.value
-  })
-  .then(response => {
-    allItems.value = response.data;
-    currentPage.value = 1;
-  })
-  .catch(error => {
-    console.error('搜尋出錯:', error);
-  });
-  */
-  
-  // 直接使用本地資料進行搜尋
-  currentPage.value = 1; // 搜尋時重設為第1頁
-};
+// 使用 fetch API 搜尋資料庫中的商品
+const searchItems = async () => {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/searchProducts.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query: searchQuery.value }) // 傳送搜尋字串到後端 PHP
+    });
 
+    if (!response.ok) {
+      throw new Error('搜尋請求失敗');
+    }
+
+    const data = await response.json();
+    orders.value = data; // 更新 orders 資料
+    currentPage.value = 1; // 搜尋後重設為第 1 頁
+  } catch (error) {
+    console.error('搜尋出錯:', error);
+  }
+};
 
 
 // 分頁功能
@@ -148,6 +149,18 @@ const dbcheck = ref(false)
 const current_edit = ref(null);
 const select_number = ref('');
 
+// 是否在新增模式下(開始)======================
+const isCreating = ref(false);
+// 1.點擊新增按鈕彈出編輯視窗內容(新增產品視窗)
+const openAddProduct = () => {
+  current_edit.value = null; // 清空當前編輯的索引
+  isCreating.value = true;   // 設置為新增模式
+  editOpacity.value = 1;     // 顯示彈出視窗
+};
+
+
+// 新增產品模式下(結束)======================
+
 
 const order_list = ref([
   // 這裡可以填入初始的訂單商品列表
@@ -159,12 +172,7 @@ const order_list = ref([
   // ]
 ])
 
-const total_cost = ref(0)
-const order_cost = ref(0)
 
-const o_pay = ref('')
-const o_form = ref('')
-const o_ship = ref('')
 
 // 1.點擊編輯按鈕彈出v-if內容(@click="edit(key)")
 const edit = (index) => {
@@ -185,6 +193,8 @@ const edit = (index) => {
 const handleCloseEdit = ({ opacity, edit }) => {
   editOpacity.value = opacity; // 更新 editOpacity 的值
   current_edit.value = edit;   // 更新 current_edit 的值
+
+  isCreating.value = false;    // 結束新增模式
 };
 
 // 2.2 @save-edit事件回調函式(本地資料開發使用)(開始)======
@@ -202,7 +212,8 @@ const handleCloseEdit = ({ opacity, edit }) => {
 
 // 2.3 @save-edit事件回調函式(串接資料庫開發使用)(開始)======
   const handleSaveEdit = async (updatedOrder) => {
-  if (current_edit.value !== null) {
+    
+     if (current_edit.value !== null) {
     orders.value[current_edit.value] = updatedOrder;
     initialItems.value = [...orders.value]; // 編輯後更新 initialItems
   }
@@ -226,7 +237,7 @@ const handleCloseEdit = ({ opacity, edit }) => {
         <div class="code-input">
             <p>商品管理</p>
             <div class="add">
-                <button >新增
+                <button @click="openAddProduct">新增
                   <img src="../assets/images/flat-color-icons_plus.png" alt="">
                 </button>  
             </div>
@@ -277,13 +288,15 @@ const handleCloseEdit = ({ opacity, edit }) => {
             {{ page }}
             </button>
         </div>
+
+
         <!-- 編輯視窗 -->
-        <div class="n-order_edit" v-if="current_edit !== null" :style="{ opacity: editOpacity }">
+        <div class="n-order_edit" v-if="current_edit !== null || isCreating" :style="{ opacity: editOpacity }">
             <!-- 0.a  在 template 中使用 @close-edit="handleCloseEdit" 來監聽子組件的關閉按鈕的事件，並在 handleCloseEdit 函式中更新 editOpacity 的值。 -->
 
             <!-- 0.b  在 template 中使用 @save-edit="handleSaveEdit" 來監聽子組件的儲存按鈕的事件，並在 handleSaveEdit 函式中更新 editOpacity 的值。 -->
               <ProductPopCMS
-              :order="orders[current_edit]"
+              :order="isCreating ? {} : orders[current_edit]"
               @close-edit="handleCloseEdit"
               @save-edit="handleSaveEdit"/>
             </div>

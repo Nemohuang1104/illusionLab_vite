@@ -19,6 +19,7 @@ const upload_img = (event) => {
 /* 定義父組件的 props */
 const props = defineProps({
   order: Object,
+  default: () => ({})  // 默認是空對象，用於新增產品
 });
 
 /* 定義 emit 事件 */
@@ -35,32 +36,62 @@ const f_close = () => {
 /* 儲存修改並發送到後端 */
 const f_save = async () => {
   const formData = new FormData();
-  formData.append('PRODUCT_ID', localOrder.value.PRODUCT_ID);
-  formData.append('EVENT_ID', localOrder.value.EVENT_ID);
-  formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
-  formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
-  formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
+  if (!localOrder.value.PRODUCT_ID) {
+    // 新增產品
+    formData.append('EVENT_ID', localOrder.value.EVENT_ID);
+    formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
+    formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
+    formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
 
-  // 如果有上傳的圖片，將圖片加入 FormData
-  if (localOrder.value.imageFile) {
-    formData.append('image', localOrder.value.imageFile); // 注意這裡上傳的是檔案，而非 Base64
-  }
-
-  try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SaveProductData.php', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const result = await response.json();
-    if (result.status === 'success') {
-      emit('save-edit', localOrder.value); // 將編輯的數據傳遞回父組件
-      f_close(); // 儲存後關閉彈出視窗
-    } else {
-      console.error('儲存失敗:', result.message);
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
     }
-  } catch (error) {
-    console.error('發送儲存請求時發生錯誤:', error);
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/AddProduct.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('新增產品成功:', result);
+        emit('save-edit', result); // 傳遞結果給父組件
+        f_close();
+      } else {
+        console.error('新增產品失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  } else {
+    // 編輯已有產品
+    formData.append('PRODUCT_ID', localOrder.value.PRODUCT_ID);
+    formData.append('EVENT_ID', localOrder.value.EVENT_ID);
+    formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
+    formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
+    formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
+
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
+    }
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SaveProductData.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        emit('save-edit', localOrder.value);
+        f_close();
+      } else {
+        console.error('儲存失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
   }
 };
 </script>
