@@ -19,6 +19,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 // 商品
 import 'swiper/css';
 import 'swiper/css/pagination';
+
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper/modules';
 
@@ -110,13 +111,12 @@ function scrollTop (){
 }
 //購票去
 
-// import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const isLogoVisible = ref(false); // 控制 LOGO 顯示的變量
 
 const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    isLogoVisible.value = scrollPosition >= 700; // 當滾動位置大於 1240px 時顯示 LOGO
+    isLogoVisible.value = scrollPosition >= 700; // 當滾動位置大於 700px 時顯示 LOGO
 };
 
 onMounted(() => {
@@ -388,7 +388,6 @@ onBeforeUnmount(() => {
 .Title {
     //大標題
     text-align: center;
-    margin-bottom: 55px;
     box-sizing: border-box;
 }
 
@@ -415,8 +414,12 @@ onBeforeUnmount(() => {
 }
 
 // 票價資訊
+.ticket{
+    margin: 80px 0 140px 0;
+}
+
 .ticketInfo {
-    margin: 5%;
+    margin: 80px;
 }
 
 .ticketInfo img {
@@ -476,11 +479,15 @@ onBeforeUnmount(() => {
 
 
 // 航站資訊
+.info{
+    margin: 80px 0 140px 0;
+}
+
 .infoText {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5% auto;
+    margin: 80px auto;
     line-height: 2;
 }
 
@@ -505,12 +512,15 @@ onBeforeUnmount(() => {
 
 
 //常見規則
+.rules{
+    margin: 80px 0 140px 0;
+}
 
 .mainSel {
     display: block;
     width: 100%;
     max-width: 500px;
-    margin: 5% auto;
+    margin: 80px auto;
 }
 
 .changeRules {
@@ -624,11 +634,16 @@ onBeforeUnmount(() => {
 
 
 // 合作廠商
+
+.sponsor{
+    margin: 80px 0 140px 0;
+}
+
 .logo {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    margin: 5% auto;
+    margin: 80px auto;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -653,7 +668,7 @@ onBeforeUnmount(() => {
 
 // 聯絡我們
 .contact {
-    margin: 5%;
+   margin: 80px 0 140px 0;
 }
 
 .contact #text {
@@ -666,7 +681,7 @@ onBeforeUnmount(() => {
     width: 100%;
     max-width: 30%;
     display: flex;
-    margin: 3% auto;
+    margin: 50px auto;
     justify-content: space-evenly;
 
 }
@@ -686,8 +701,8 @@ onBeforeUnmount(() => {
 // to top 按鈕
 .top-button {
   position: fixed;
-  bottom: 40px;
-  right: 15px;
+  bottom: 10%;
+  right: 1%;
   padding: 6px;
   background: none;
   color: #ffffff;
@@ -841,8 +856,8 @@ onBeforeUnmount(() => {
 
 #fixed-logo {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 20%;
+    right: 1%;
     z-index: 1000;
 
 }

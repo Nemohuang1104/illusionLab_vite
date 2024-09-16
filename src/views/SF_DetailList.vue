@@ -30,7 +30,6 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 // Swiper modules used
 // const modules = [FreeMode, Navigation, Thumbs];
 
-
 </script>
 
 <template>
@@ -88,8 +87,8 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
                             <input type="button" value=" + " class="add">
                         </div>
                         <div class="size">
-                            <select name="size-select" id="">
-                                <option value="----- 商品尺寸 -----">----- 商品尺寸 -----</option>
+                            <select name="size-select" id="size-select">
+                                <option value="----- 商品尺寸 -----">商品尺寸</option>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
@@ -229,11 +228,11 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 .textbox h3 {
     font-size: 28px;
-    color: #C1693B;
-    font-weight: bold;
+    font-weight: 600;
 }
 .textbox h4{
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: 800;
 }
 
 
@@ -293,7 +292,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 //尺寸下拉式選單
 .size select {
-    width: 300px;
+    width: 200px;
     height: 40px;
     border-radius: 12px;
     display: block;
@@ -301,13 +300,12 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     line-height: 40px;
     margin-bottom: 20px;
     font-size: 20px;
-    color: #fff;
+    color: #ffffff;
     outline: none;
-    background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    // border: 1px solid ;
-    border: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-
+    // background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    background: none;
 }
+
 
 //將下拉式選單select箭頭刪掉 
 .size select {
@@ -339,6 +337,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     font-size: 22px;
     color: #fff;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    cursor: pointer;
 }
 
 //小圖換大圖
