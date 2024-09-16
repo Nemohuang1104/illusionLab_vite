@@ -37,6 +37,8 @@ try {
         // 返回單個商品
         $product = $stmt->fetch(PDO::FETCH_ASSOC);
         echo json_encode($product); // 只返回單個商品，不是陣列
+
+        
     } else {
         echo json_encode(['error' => 'Invalid productId']);
     }

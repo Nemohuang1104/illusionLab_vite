@@ -16,6 +16,9 @@ const props = defineProps({
 const item = ref([
     // {id:'1',productList:'20240904001', cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:599,material:'銅鍍合金',size:'直徑6.5cm，高6cm',quantity: 1},
 ])
+
+const selectedSize = ref('');  // 尺寸選擇
+const selectedStyle = ref(''); // 樣式選擇
 const route = useRoute();
 
 // function goToLoginCMS(){
@@ -30,6 +33,9 @@ async function fetchProducts() {
     const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/LC_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
     const data = await response.json();
     item.value = data;
+    item.value = { ...data, quantity: 1 };  // 初始化數量為 1
+    selectedSize.value = item.value.PRODUCT_SIZE.split(',')[0];  // 預設選中第一個尺寸
+    selectedStyle.value = item.value.PRODUCT_STYLE.split(',')[0]; // 預設選中第一個樣式
     
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -83,21 +89,23 @@ onMounted(() => {
                 <p>NT $ {{item.PRODUCT_PRICE }}</p>
                 <p>材質 : {{ item.MATERIAL }}</p>
                 <p>規格 : {{ item.PRODUCT_SIZE }}</p>
-                <div class="input">
-                    <select name="" id="">
-                        <option value="0">商品規格</option>
-                        <option value="1">可愛動物區</option>
-                        <option value="2">內心小女孩</option>
-                        <option value="3">大人釋懷中</option>
+                
+                <!-- 尺寸選擇 -->
+              <div class="input" v-if="item.PRODUCT_ID === 2">
+                <label for="size">選擇尺寸：</label>
+                <select v-model="selectedSize" id="size">
+                  <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size">
+                    {{ size }}
+                  </option>
+                </select>
+              </div>
 
-                    </select>
-                </div>
-                <div class="quantity-input">
-                    <button class="quantity-button" id="minus6"
-                        @click="item.quantity > 1 &&item.quantity--">-</button>
+                 <!-- 數量選擇 -->
+                  <div class="quantity-input">
+                    <button class="quantity-button" id="minus6" @click="item.quantity > 1 && item.quantity--">-</button>
                     <input type="text" v-model="item.quantity" min="1" />
                     <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
-                </div>
+                  </div>
                 
                 <div class="icon"><Btn_Lifecasino Button="加入購物車"></Btn_Lifecasino></div>
               </div>
@@ -306,11 +314,7 @@ onMounted(() => {
 // }
 
 .pro img {
-  max-width: 100%;
-  max-height: 150px  ; /* 限制圖片高度 */
-  object-fit: contain; /* 保持圖片比例 */
-  margin: 0 auto;
-  text-align: center;
+
 
 }
 
@@ -350,9 +354,12 @@ onMounted(() => {
 }
 //商品
 .pagebox img {
-  object-fit: cover;
-  width:  80%;
-  
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
+  height: 100%; /* 限制圖片高度 */
+  object-fit: cover; /* 保持圖片比例 */
+
   
   border-radius: 12px;
   margin-bottom: 15px;

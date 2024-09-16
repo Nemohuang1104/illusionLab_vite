@@ -295,11 +295,12 @@ function goToLoginCMS(){
 
 .pro img {
   width: 100%;
-  max-width: 200px;
+  max-width: 150px;
   height: 100%;
-  max-height: 150px; /* 限制圖片高度 */
-  object-fit: contain; /* 保持圖片比例 */
+  max-height: 160px; /* 限制圖片高度 */
+  object-fit: cover; /* 保持圖片比例 */
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 
@@ -316,12 +317,12 @@ function goToLoginCMS(){
 
 
 //商品
-.pagebox img {
-  object-fit: cover;
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
+// .pagebox img {
+//   object-fit: cover;
+//   width: 100%;
+//   border-radius: 12px;
+//   margin-bottom: 15px;
+// }
 
 .price span {
   color: #fff;
