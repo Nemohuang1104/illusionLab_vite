@@ -129,7 +129,9 @@
                 mainTitle="周邊商品" 
                 subTitle="PERIPHERAL GOODS"
                 />
+                <router-link to="/MS_ProductPage">
                 <MS_com_marquee/>
+            </router-link>
             </section>
         </div>
         <div class="section fp-auto-height" id="section9">

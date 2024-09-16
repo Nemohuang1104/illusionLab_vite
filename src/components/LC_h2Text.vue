@@ -28,6 +28,7 @@
   padding-bottom: 5px;
   max-width: 200px;
   justify-content: center;
+  margin: 0 auto;
   
 }
 

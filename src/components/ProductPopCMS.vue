@@ -2,104 +2,155 @@
 import Header_0 from '@/components/Header_0.vue';
 import { defineProps, ref, defineEmits } from 'vue';
 
-
-/*文件上傳方法(實現上傳圖片預覽功能)=======================*/
-// 1.頭貼預覽
-// (前端程式預覽)
+/* 文件上傳方法(實現上傳圖片預覽功能) */
 // 處理圖片上傳的方法
 const upload_img = (event) => {
   const file = event.target.files[0];
   if (file) {
+    localOrder.value.imageFile = file; // 儲存圖片檔案以便後續上傳
     const reader = new FileReader();
     reader.onload = (e) => {
-      localOrder.value.cardimage = e.target.result; // 將圖片轉為 Base64 並設置到 localOrder
+      localOrder.value.PRODUCT_IMG = e.target.result; // 預覽圖片（Base64 用於預覽）
     };
     reader.readAsDataURL(file);
   }
 };
 
-/*定義 父組件prop 事件的原始夾帶資訊*/
+/* 定義父組件的 props */
 const props = defineProps({
   order: Object,
+  default: () => ({})  // 默認是空對象，用於新增產品
 });
 
-/*定義 儲存和關閉按鈕emit 事件的夾帶資訊*/
+/* 定義 emit 事件 */
 const emit = defineEmits(['close-edit', 'save-edit']);
-// 0.創建本地狀態來保存父組件的原始數據，以利後續編輯的數據
+
+// 創建本地狀態來保存父組件的原始數據
 const localOrder = ref({ ...props.order });
-// 1.處理關閉按鈕emit夾帶的透明度及編輯狀態(讓父組件的編輯視窗消失)
+
+/* 關閉編輯視窗的事件 */
 const f_close = () => {
-  emit('close-edit', { opacity: 0, edit: null }); // 發出 'close-edit' 事件並傳遞 editOpacity 值
+  emit('close-edit', { opacity: 0, edit: null });
 };
 
-// 2.處理儲存按鈕emit夾帶的編輯狀態，並傳回父組件
-const f_save = () => {
-  emit('save-edit', localOrder.value); // 將本地編輯的數據傳遞回父組件
-  f_close(); // 儲存後關閉編輯視窗
+/* 儲存修改並發送到後端 */
+const f_save = async () => {
+  const formData = new FormData();
+  if (!localOrder.value.PRODUCT_ID) {
+    // 新增產品
+    formData.append('EVENT_ID', localOrder.value.EVENT_ID);
+    formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
+    formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
+    formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
+
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
+    }
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/AddProduct.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('新增產品成功:', result);
+        emit('save-edit', result); // 傳遞結果給父組件
+        f_close();
+      } else {
+        console.error('新增產品失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  } else {
+    // 編輯已有產品
+    formData.append('PRODUCT_ID', localOrder.value.PRODUCT_ID);
+    formData.append('EVENT_ID', localOrder.value.EVENT_ID);
+    formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
+    formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
+    formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
+
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
+    }
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SaveProductData.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        emit('save-edit', localOrder.value);
+        f_close();
+      } else {
+        console.error('儲存失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  }
 };
-
-
 </script>
+
 <template>
-    <div class="wrapper">
-        <div class="detail">
-            <div class="order-summary">
-                <div class="order-header">
-                    <span>編輯</span>
-                </div>
-                <hr>
-                <div class="orderinf1">
-                    <div class="orderdiv">
-                        <p class="ptext">商品編號 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.product_id">
-                    </div>
-                </div>
-
-                <div class="edit_border">
-                    <div class="orderinf">
-                    <div class="orderdiv">
-                        <p class="ptext">活動類別 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.event_name">
-                    </div>
-                    
-                    <div class="orderdiv">
-                        <p class="ptext">商品名稱 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.product_name">
-                    </div>
-                    <div class="orderdiv">
-                        <p class="ptext">價格 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.product_price">
-                    </div>
-                    <div class="orderdiv">
-                        <p class="ptext">上下架 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.product_status">
-                    </div>
-                </div>
-                <div class="upload_div">
-                        <p class="upload-product"> 圖片 : </p>
-                        <input class="n-customizedCard" type="file" @change="upload_img">
-                        <p class="upload">請選擇圖片上傳</p>
-                        <div class="n-customized_img">
-                            <img v-if="localOrder.cardimage" :src="localOrder.cardimage" alt="預覽圖片" class="preview-img">
-                        </div>
-                        
-                    </div>
-                </div>
-                
-
-                
-                <div class="n-order_editbtn">
-                    <button class="n-order_close" @click="f_close">關閉</button>
-                    <button class="n-order_save" @click="f_save">儲存</button>
-                </div>
-
-            </div>
-
+  <div class="wrapper">
+    <div class="detail">
+      <div class="order-summary">
+        <div class="order-header">
+          <span>編輯</span>
+        </div>
+        <hr>
+        <div class="orderinf1">
+          <div class="orderdiv">
+            <p class="ptext">商品編號 : </p>
+            <input class="inputtext" type="text" v-model="localOrder.PRODUCT_ID" />
+          </div>
         </div>
 
+        <div class="edit_border">
+          <div class="orderinf">
+            <div class="orderdiv">
+              <p class="ptext">活動類別 : </p>
+              <input class="inputtext" type="text" v-model="localOrder.EVENT_ID" />
+            </div>
 
+            <div class="orderdiv">
+              <p class="ptext">商品名稱 : </p>
+              <input class="inputtext" type="text" v-model="localOrder.PRODUCT_NAME" />
+            </div>
+            <div class="orderdiv">
+              <p class="ptext">價格 : </p>
+              <input class="inputtext" type="text" v-model="localOrder.PRODUCT_PRICE" />
+            </div>
+            <div class="orderdiv">
+              <p class="ptext">上下架 : </p>
+              <input class="inputtext" type="text" v-model="localOrder.PRODUCT_STATUS" />
+            </div>
+          </div>
+
+          <div class="upload_div">
+            <p class="upload-product">圖片 : </p>
+            <input class="n-customizedCard" type="file" @change="upload_img" />
+            <p class="upload">請選擇圖片上傳</p>
+            <div class="n-customized_img">
+              <img v-if="localOrder.PRODUCT_IMG" :src="localOrder.PRODUCT_IMG" alt="預覽圖片" class="preview-img" />
+            </div>
+          </div>
+        </div>
+
+        <div class="n-order_editbtn">
+          <button class="n-order_close" @click="f_close">關閉</button>
+          <button class="n-order_save" @click="f_save">儲存</button>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
+
 
 
 

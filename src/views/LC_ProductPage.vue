@@ -6,20 +6,37 @@ import CoinFall2 from '@/components/CoinFall.vue';
 import LC_Text2 from '@/components/LC_Text2.vue';
 import icon3 from '../assets/images/LC_icon3.svg' 
 
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue'; // 確保有引入 onMounted
 
 const currentMode = ref('two');
 
 const productInfo = ref([
-  {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
-  {id:'2',cardImage: '../src/assets/images/LC_Product_item2.svg',productName:'賭聖帽T',price:'1099'},
-  {id:'3',cardImage: '../src/assets/images/LC_Product_item3.svg',productName:'暗黑撲克牌組',price:'299'},
-  {id:'4',cardImage: '../src/assets/images/LC_Product_item4.svg',productName:'幸運骰子',price:'99'},
-  {id:'5',cardImage: '../src/assets/images/LC_Product_item5.svg',productName:'必勝籌碼',price:'199'},
-  {id:'6',cardImage: '../src/assets/images/LC_Product_item6.svg',productName:'賭城帆布袋',price:'599'},
-  {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
+  // {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
+  // {id:'2',cardImage: '../src/assets/images/LC_Product_item2.svg',productName:'賭聖帽T',price:'1099'},
+  // {id:'3',cardImage: '../src/assets/images/LC_Product_item3.svg',productName:'暗黑撲克牌組',price:'299'},
+  // {id:'4',cardImage: '../src/assets/images/LC_Product_item4.svg',productName:'幸運骰子',price:'99'},
+  // {id:'5',cardImage: '../src/assets/images/LC_Product_item5.svg',productName:'必勝籌碼',price:'199'},
+  // {id:'6',cardImage: '../src/assets/images/LC_Product_item6.svg',productName:'賭城帆布袋',price:'599'},
+  // {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
 
 ])
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/LC_FetchProducts.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    productInfo.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
 
 function goToLoginCMS(){
   router.push('/LoginCMS');
@@ -36,7 +53,7 @@ function goToLoginCMS(){
   
   <div class="warpper">
     <div>
-      <Header :mode="currentMode"/> 
+      <Header :mode="currentMode" class="header"/> 
     </div>
     
     <div class="center">
@@ -50,36 +67,38 @@ function goToLoginCMS(){
       <div class="producttitle">
         <div class="arrowlift">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
+          <router-link to="/SF_ProductPage">
           <P @click="goToLoginCMS" class="link">星際邊境</P>
+        </router-link>
         </div>
         <div class="arrowright">
+          <router-link to="/MS_ProductPage">
           <P class="link">心靈光譜</P>
+        </router-link>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
       </div>
       <div class="pagebox">
         <!-- 放置一個商品列的外框 -->
-         <router-link to="LC_ProductInfo">
         <div class="list">
-          <div  v-for="(item,index) in productInfo" class="pro"  :key="item.id" >
+          <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
+            <router-link :to="{ name:'LC_ProductInfo', params: { id: item.PRODUCT_ID } }">
            
-              <img :src="item.cardImage" alt="">
-              <p>{{ item.productName }}</p>
+              <img :src="item.PRODUCT_IMG" alt="">
+              <p>{{ item.PRODUCT_NAME }}</p>
               <div class="text">
                 <div class="price">
-                  <span>NT$ {{ item.price }}元</span>
+                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
                 </div>
                 <div class="icon"></div>
               </div>
+            </router-link>
           </div>
         </div>
-      </router-link>
       </div>
     </div>
   </div>
-  <div>
-
-  </div>
+ 
   <CoinFall2 class="coin"></CoinFall2>
 
     <Footer_2></Footer_2>
@@ -94,7 +113,9 @@ function goToLoginCMS(){
 
 @import "../assets/style";
 
-
+.header{
+  position: unset;
+}
 .title{
   margin-top: 10px;
   width: 400px;
@@ -273,7 +294,9 @@ function goToLoginCMS(){
 }
 
 .pro img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
   max-height: 150px; /* 限制圖片高度 */
   object-fit: contain; /* 保持圖片比例 */
   margin-bottom: 10px;

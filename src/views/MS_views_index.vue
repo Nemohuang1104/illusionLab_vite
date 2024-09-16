@@ -1,8 +1,8 @@
 <template>
     <div>
-        <MS_Enter/>
-    <!-- <Header mode="four"/> 
-    <MS_main/> -->
+        <!-- <MS_Enter/> -->
+    <Header mode="four"/> 
+    <MS_main/> 
     <!-- <section>
         <Footer/>
     </section> -->
@@ -19,8 +19,8 @@
 
 <style lang="scss" >
 .header-four{
-//     position: fixed;
-//     z-index: 999;
+    position: fixed;
+    z-index: 999;
     height: 65px !important;
 } 
 

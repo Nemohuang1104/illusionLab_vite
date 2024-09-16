@@ -37,7 +37,7 @@ const logoLinkMap = {
   'one': '/Home',
   'two': '/lifecasino',
   'three': '/SF_Homepage',
-  'four': '/mindspectrum'
+  'four': '/mindspectrum',
 };
 
 const logoLink = computed(() => {

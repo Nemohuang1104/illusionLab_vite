@@ -12,7 +12,7 @@
         <div class="content">
             <img src="../assets/images/illusionLab_logo.png" alt="">
             <div class="items">
-                <router-link  to="">
+                <router-link  to="PP_privacy_policy">
                     <span>隱私權政策</span>
                 </router-link>
                 <router-link to="">
@@ -21,7 +21,7 @@
                 <router-link @click="goToPage" to="/News">
                     <span>最新消息</span>
                 </router-link>
-                <router-link to="">
+                <router-link to="PP_termOfUse">
                     <span>使用辦法</span>
                 </router-link>
             </div>

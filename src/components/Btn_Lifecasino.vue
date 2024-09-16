@@ -37,6 +37,8 @@ const props = defineProps({
   text-align: center;
   transition: .5s;
   color: white;
+  font-family: map-get($fontStyle, style_2);
+
 }
 .LifeCasio_btn:hover{
     color: map-get($colofont_1, gold);

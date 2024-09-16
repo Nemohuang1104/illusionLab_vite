@@ -6,7 +6,7 @@
     class="header" 
     :mode="currentMode"
     
-    :class="{ 'show-header': showHeader }"
+    
     /> 
     <router-link to="/LC_Ticket_step0" 
     :class="{'show-btn': buyNow}"
@@ -28,7 +28,8 @@
     
     :slides-per-view="1" 
     @swiper="onSwiper"
-    @slideChange="onSlideChange"
+    
+    
   >
      
     <div  slot="container-start" class="parallax-bg" data-swiper-parallax="-90%">
@@ -395,11 +396,15 @@ import LC_ProductSwiper from '@/components/LC_ProductSwiper.vue'
 import SlotMachine_RWD from '@/components/SlotMachine_RWD.vue'
 import LC_AboutSwiper from '@/components/LC_AboutSwiper.vue'
 import SlotMachine_RWD2 from '@/components/SlotMachine_RWD2.vue'
+// ============header=============//
+import Header from '@/components/SFHeader_0.vue'
+const currentMode = ref('two');
 
 // ===============swiper============//
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.css';
+import { Swiper, SwiperSlide, } from 'swiper/vue';
 import { Pagination, Mousewheel, Parallax} from 'swiper/modules';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -408,7 +413,7 @@ import 'swiper/css/mousewheel'
 
 
 
-// const modules = [Pagination, Mousewheel, Autoplay, Parallax];
+const modules = [Pagination, Mousewheel, Parallax];
 
 // ============導航按鈕===========//
 const mySwiper = ref(null);
@@ -416,46 +421,42 @@ const isPaginationVisible = ref(false); // 初始狀態，分頁器隱藏
 
 // 切換分頁器顯示狀態
 const togglePagination = () => {
-    isPaginationVisible.value = !isPaginationVisible.value;
-    if (mySwiper.value && mySwiper.value.pagination) {
-    // 使用 render 和 init 更新分頁器
-    mySwiper.value.pagination.render();
-    mySwiper.value.pagination.init();
-    
-    // 控制分頁器的可見性
-    mySwiper.value.pagination.el.style.right = isPaginationVisible.value ? '8px' : '-100px';
-  }
+  isPaginationVisible.value = !isPaginationVisible.value;
+  mySwiper.value.pagination.el.style.right = isPaginationVisible.value ? '8px' : '-100px';
   isActive.value = !isActive.value;
     // 根據狀態動態更新樣式
-    toggleButton.value.right = isActive.value ? '138px' : '30px';
+  toggleButton.value.right = isActive.value ? '138px' : '30px';
 };  
 
 const isActive = ref(false);
     // 按鈕的動態樣式
-    const toggleButton = ref({
-    padding: '10px 10px',
-    color: 'white',
-    });
+const toggleButton = ref({
+padding: '10px 10px',
+color: 'white',
+});
 
-// ============header=============//
-import Header from '@/components/SFHeader_0.vue'
-const currentMode = ref('two');
 
-// ----第二張才出現header-------//
+
+// // ----第二張才出現header-------//
 const showHeader = ref(false);
 const buyNow = ref(false); //購票鈕
 
-// 監聽 Swiper 的 slideChange 事件
-const onSlideChange = () => {
-  showHeader.value = slider.activeIndex >= 1 ; // 如果 activeIndex 是 1，則顯示 header
+const swiperInstance = ref(null);
 
-  buyNow.value = slider.activeIndex >= 1 && slider.activeIndex != 4  ; // 如果 activeIndex 是 1，則顯示 buyNow
+// 當 Swiper 實例初始化後，將其保存到 mySwiper
+const onSwiper = (swiper) => {
+    mySwiper.value = swiper;
+    // swiperInstance.value = swiper;
+
+    // swiperInstance.on('slideChange', () => {
+    // showHeader.value = swiperInstance.activeIndex >= 1;})
+
+    // showHeader.value = swiperInstance.activeIndex >= 1;
+
+
 };
 
-
-
-
-// ==============RWD================//
+// // ==============RWD================//
 
 const isMobile = ref(window.innerWidth <= 820);
 const isMobile2 = ref(window.innerWidth <= 712);
@@ -473,22 +474,20 @@ onMounted(()=>{
     // 初始時隱藏分頁器
     mySwiper.value.pagination.el.style.right = '-188px';
     toggleButton.value.right = '30px';
-
     //  restoreScrollPostion();
 
      window.addEventListener('resize', handleResize);
 
+     if (swiperInstance.value) {
+    swiperInstance.value.on('scroll', (swiper) => {
+      // 檢查 Swiper 的滾動位置來更新 header 顯示
+      showHeader.value = swiper.activeIndex >= 1;
+    });
+  }
+
 })
 
 
-// 當 Swiper 實例初始化後，將其保存到 mySwiper
-const onSwiper = (swiperInstance) => {
-  mySwiper.value = swiperInstance;
-
-  swiperInstance.on('slideChange', () => {
-    onSlideChange(swiperInstance); // 這裡的 swiperInstance 就會傳遞給 onSlideChange 的 slider
-  });
-};
 
 
 // 切換到第二張幻燈片的函數
@@ -499,10 +498,6 @@ const goToSecondSlide = () => {
     mySwiper.value.swiper.slideTo(1); // Swiper 6.x/7.x 版本使用這個
   }
 };
-
-
-
-
 
 
 
@@ -519,7 +514,7 @@ onBeforeUnmount(() => {
 //   window.removeEventListener('scroll', checkSlide2Visibility);
 // });
 
-// ===========nav===============//
+// // ===========nav===============//
 // Define menu for pagination bullets
 const menu = ['HOME','ABOUT', 'SERVE','GAME', 'BOOKING','REVIEWS', 'PRODUCT', 'LOCATION', 'RULE', 'CONTACT', 'VIP', 'SPONSOR'];
 
@@ -631,6 +626,7 @@ p{
     height: 100vh;
     overflow: hidden;
     // border: 2px solid blue;
+    padding-top:0 ;
 
 }
 .header{
@@ -696,14 +692,15 @@ p{
     // background-image: url('../assets/images/lifecasino_bg1.png');
     background-image: url('../assets/images/lifecasino_bg3.jpg');
     // background: linear-gradient(180deg, #110338 0%, #30099E 100%);
-    // background-size: cover;
+    background-size: cover;
     // background-position: center;
     z-index: -10;
     //   mask-image: linear-gradient(to bottom, black 70%, transparent 100%)
 
     > img{
         // border: 2px solid red;
-
+        object-fit: cover;
+        width: 100%;
         position: absolute;
         left: 0;
         top: 0;
@@ -826,7 +823,7 @@ p{
         display: flex;
         flex-wrap: wrap;
         margin: 0 auto;
-        max-width: 1100px;
+        max-width: 1200px;
         justify-content: space-around;
         padding: 0 50px 50px;
 
@@ -836,6 +833,7 @@ p{
             max-width: 200px;
             display: block;
             text-align: center;
+            // gap: 1%;
 
         }
         
