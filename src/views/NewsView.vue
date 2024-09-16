@@ -15,6 +15,7 @@
         <div class="contain">
           <h2>{{ card.NEWS_TITLE }}</h2>
           <p class="description">{{ card.NEWS_CONTENT }}</p>
+          <p class="date">{{ card.PUBLISH_DATE }}</p>
           <p class="read" @click="openModal(card)">閱讀全文</p>
         </div>
 
@@ -76,6 +77,7 @@ onMounted(() => {
   AOS.init()
   get_news(); // 當頁面加載時撈取資料
 })
+
 
 
 // ======image========//
@@ -410,5 +412,11 @@ const closeModal = () => {
 
       background-color: map-get($map: $color_0, $key: dark_blue);
       }
-}
+
+    }
+    .date{
+      margin-top: 5px;
+      font-size: 12px;
+      color: map-get($map:$color_0, $key: btn_page);
+    }
 </style>
