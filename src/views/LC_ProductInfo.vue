@@ -91,21 +91,11 @@ onMounted(() => {
                 <p>規格 : {{ item.PRODUCT_SIZE }}</p>
                 
                 <!-- 尺寸選擇 -->
-              <div class="input">
+              <div class="input" v-if="item.PRODUCT_ID === 2">
                 <label for="size">選擇尺寸：</label>
                 <select v-model="selectedSize" id="size">
                   <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size">
                     {{ size }}
-                  </option>
-                </select>
-              </div>
-
-              <!-- 樣式選擇 -->
-              <div class="input">
-                <label for="style">選擇樣式：</label>
-                <select v-model="selectedStyle" id="style">
-                  <option v-for="style in item.PRODUCT_STYLES" :key="style" :value="style">
-                    {{ style }}
                   </option>
                 </select>
               </div>
