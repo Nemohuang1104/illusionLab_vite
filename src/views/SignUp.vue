@@ -3,24 +3,144 @@ import Header_0 from '../components/Header_0.vue';
 const currentMode = ref('one');
 import Footer_0 from '../components/Footer_0.vue';
 import vSelect from 'vue-select';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import tw_cities from '../data/TwCities.json';
+
 
 const citySelect = ref([]);
 const selected = ref('');
 const isRotating = ref(false);
 const router = useRouter();
 
+//表單資訊
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const phone = ref('');
+const gender = ref('');
+const name = ref('');
+const address = ref('');
+
+
+
+ 
+
+// 錯誤訊息
+const emailError = ref('');
+const passwordError = ref('');
+const confirmPasswordError = ref('');
+const phoneError = ref('');
+const genderError = ref('');
+const nameError = ref('');
+const captchaError = ref('');
+const addressError = ref('');
+
+
 const cities = tw_cities;
 
+//驗證信箱
+const validateEmail = () => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!email.value) {
+    emailError.value = '請輸入電子郵件'
+  } else if (!emailPattern.test(email.value)) {
+    emailError.value = '請輸入有效的電子郵件'
+  } else {
+    emailError.value = ''
+  }
+};
+
+// 驗證密碼
+const validatePassword = () => {
+  const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
+  if (!password.value) {
+    passwordError.value = '密碼不能為空'
+  } else if (password.value.length < 8 || password.value.length > 16) {
+    passwordError.value = '密碼必須是8到16位之間'
+  } else if (!passwordRegex.test(password.value)) {
+    passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字符必須是英文字母)';
+  } else {
+    passwordError.value = '';
+  }
+};
+
+// 確認密碼
+const validateConfirmPassword = () => {
+  // const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
+  if (!confirmPassword.value) {
+    confirmPasswordError.value = '請確認密碼'
+  } else if (confirmPassword.value !== password.value) {
+    confirmPasswordError.value = '兩次輸入的密碼不一致'
+  } else {
+    confirmPasswordError.value = ''
+  }
+};
+
+//驗證性別
+const validateGender = () => {
+  if (!gender.value) {
+    genderError.value = '請選擇性別'
+    return false
+  }
+  genderError.value = ''
+  return true
+};
+
+//驗證姓名
+const validateName = () => {
+  if (!name.value) {
+    nameError.value = '姓名不能為空'
+    return false
+  }
+  nameError.value = ''
+  return true
+};
+
+// 驗證電話
+const validatePhone = () => {
+  const phonePattern = /^[0-9]{10}$/
+  if (!phone.value) {
+    phoneError.value = '電話不能為空'
+  } else if (!phonePattern.test(phone.value)) {
+    phoneError.value = '無效的電話號碼，請輸入10位數字'
+  } else {
+    phoneError.value = ''
+  }
+};
+
+//驗證地址
+const validateAddress = () => {
+  if (!citySelect.value || !selected.value || !address.value) {
+    addressError.value = '地址不能為空'
+    return false
+  }
+  addressError.value = ''
+  return true
+};
+
+// 驗證碼產生
 const generateCaptcha = () => {
   return Math.floor(1000 + Math.random() * 9000).toString(); // 確保是四位數字
 };
-
 const captcha = ref(generateCaptcha());  // 初始生成驗證碼
-const userInput = ref('');               // 存放使用者輸入的驗證碼
+const captchaInput = ref('');// 存放使用者輸入的驗證碼
+              
+const validateCaptcha = () => {
+  if (!captchaInput.value) {
+    captchaError.value = '驗證碼不能為空'
+    return false
+  } else if (captchaInput.value !== captcha.value) {
+    captchaError.value = '驗證碼不正確'
+    return false
+  }
+  captchaError.value = ''
+  return true
+};
+
 
 const refreshCaptcha = () => {
   isRotating.value = true;              // 啟動旋轉效果
@@ -28,22 +148,55 @@ const refreshCaptcha = () => {
   setTimeout(() => {
     captcha.value = generateCaptcha();  // 更新驗證碼
     isRotating.value = false;           // 停止旋轉效果
-    userInput.value = '';               // 清空使用者輸入
+    captchaInput.value = '';               // 清空使用者輸入
   }, 500); // 旋轉1秒後更新
 };
 
 const register = () => {
+  validateEmail()
+  validatePassword()
+  validateConfirmPassword()
+  validatePhone()
+  validateName()
+  validateGender()
+  validateCaptcha()
+  validateAddress()
+  validateCaptcha()
+
   // 檢查驗證碼是否正確
-  if (userInput.value === captcha.value) {
+  if (captchaInput.value === captcha.value 
+  && !emailError.value 
+  && !passwordError.value 
+  && !confirmPasswordError.value 
+  && !phoneError.value
+  && !genderError.value
+  && !nameError.value
+  && !addressError.value
+  && !captchaError.value
+  ) {
     // 驗證碼正確，顯示註冊成功訊息
-    alert('註冊成功！歡迎加入！');
-    router.push('/home');
+    //alert('註冊成功！歡迎加入！');
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "註冊成功！開始您的幻浸之旅",
+      showConfirmButton: false,
+      timer: 1200
+    }).then(() => {router.push('/home')});
     // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
   } else {
     // 驗證碼錯誤，彈出錯誤訊息
-    alert('驗證碼錯誤，請重新輸入。');
+    //  alert('請重新檢視表單');
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "請重新檢視表單",
+      showConfirmButton: false,
+      timer: 1200
+    });
   }
 };
+
 </script>
 
 <template>
@@ -59,53 +212,90 @@ const register = () => {
 
         <!-- 信箱密碼 -->
         <div class="id">
-          <input type="text" placeholder="請輸入您的信箱">
-          <input type="password" placeholder="請輸入密碼 (數字+英文字母8-16位)">
-          <input type="password" placeholder="請再次輸入密碼">
+          <!-- 信箱錯誤時出現的訊息 -->
+          <span v-if="emailError" class="error">{{ emailError }}</span>
+
+          <input type="text" placeholder="請輸入您的信箱" 
+          v-model="email"
+          @blur="validateEmail">
+
+          <!-- 密碼錯誤時出現的訊息 -->
+          <span v-if="passwordError" class="error">{{ passwordError }}</span>
+
+          <input type="password" placeholder="請輸入密碼 (數字+英文字母8-16位)" 
+          v-model="password"
+          @blur="validatePassword">
+
+          
+          <!-- 密碼錯誤時出現的訊息 -->
+          <span v-if="confirmPasswordError" class="error">{{ confirmPasswordError }}</span>
+
+          <input type="password" placeholder="請再次輸入密碼" 
+          v-model="confirmPassword"
+          @blur="validateConfirmPassword">
+
+          
         </div>
 
         <!-- 性別 -->
+         <!-- 錯誤訊息 -->
+         <span v-if="genderError" class="error" >{{ genderError }}</span>
         <div class="gender">
-          <input type="radio" name="gender">
-          <p>男</p>
-          <input type="radio" name="gender">
-          <p>女</p>
-          <input type="radio" name="gender">
-          <p>不公開</p>
+          <input type="radio" name="gender" id="boy" value="male" v-model="gender"  @blur="validateGender">
+          <label for="boy">男</label>
+          <input type="radio" name="gender" id="girl" value="female" v-model="gender"  @blur="validateGender">
+          <label for="girl">女</label>
+          <input type="radio" name="gender" id="unknow" value="unknow" v-model="gender"  @blur="validateGender">
+          <label for="unknow">不公開</label>
         </div>
 
         <!-- 姓名&連絡電話 -->
         <div class="name">
-          <input type="text" placeholder="請輸入姓名">
+          <!-- 錯誤訊息 -->
+          <span v-if="nameError" class="error" >{{ nameError }}</span>
+          <input type="text" placeholder="請輸入姓名" v-model="name" @blur="validateName">
           <br>
-          <input type="text" placeholder="請輸入連絡電話">
+
+          <!-- 電話錯誤時出現的訊息 -->
+          <span v-if="phoneError" class="error" >{{ phoneError }}</span>
+          <input type="text" placeholder="請輸入連絡電話" 
+          v-model="phone" @blur="validatePhone">
+          
         </div>
 
         <div class="city">
           <div>
             <v-select label="name"
               :reduce="(option) => { citySelect = option.districts; selected = option.districts[0] ? option.districts[0].name : ''; }"
-              placeholder="請選擇縣市" :options="cities" class="custom-v-select"></v-select>
+              placeholder="請選擇縣市" 
+              :options="cities" 
+              class="custom-v-select" 
+              ></v-select>
           </div>
           <div>
-            <v-select class="custom-v-select" label="name" placeholder="請選擇鄉鎮" v-model="selected"
-              :options="citySelect"></v-select>
+            <v-select class="custom-v-select" label="name" placeholder="請選擇鄉鎮" 
+              v-model="selected"
+              :options="citySelect"
+              ></v-select>
           </div>
         </div>
 
         <div>
-          <input type="text" placeholder="請輸入地址" class="address">
+          <span v-if="addressError" class="error">{{ addressError }}</span>
+          <input type="text" placeholder="請輸入地址" class="address" v-model="address" @blur="validateAddress">
 
           <!-- 輸入驗證碼 -->
+          <span v-if="captchaError" class="error">{{ captchaError }}</span>
           <div class="random">
-            <input v-model="userInput" type="text" placeholder="請輸入認證碼">
+            <input v-model="captchaInput" type="text" placeholder="請輸入認證碼" @blur="validateCaptcha">
             <!-- <span class="number">3456</span> -->
             <p>{{ captcha }}</p>
             <img @click="refreshCaptcha" :class="{ rotating: isRotating }" src="../assets/images/icon-change.svg"
               alt="">
           </div>
 
-          <router-link><input type="submit" value="註冊" class="button" @click="register"></router-link>
+          <router-link><button class="button" @click="register">註冊</button></router-link>
+          <!-- <input type="submit" value="註冊" class="button" @click="register"> -->
         </div>
       </div>
     </main>
@@ -128,7 +318,9 @@ const register = () => {
   width: 100%;
   font-family: "Noto Sans TC";
   padding-top: 80px;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
+  padding-bottom: 50px;
 }
 
 .header{
@@ -140,7 +332,6 @@ const register = () => {
 
 main {
   width: 520px;
-  height: 520px;
   border-radius: 20px;
   border: 1px solid #FFF;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 2.33%, rgba(255, 255, 255, 0.50) 97.83%);
@@ -148,7 +339,6 @@ main {
   backdrop-filter: blur(12.5px);
   margin: 0 auto;
   margin-top: 10px;
-  margin-bottom: 30px;
 }
 
 .form {
@@ -182,6 +372,12 @@ main {
   box-sizing: border-box;
 }
 
+.error{
+  font-size: 12px;
+  color: #000354;
+  padding-left: 10px;
+}
+
 .form .gender {
   display: flex;
   align-items: end;
@@ -195,7 +391,7 @@ main {
   margin: 0;
 }
 
-.form .gender p {
+.form label {
   font-size: 16px;
   color: #505050;
   margin-left: 8px;
@@ -274,11 +470,12 @@ main {
 .random img.rotating {
   transform: rotate(270deg);
   /* 旋轉360度 */
+  
 }
 
 .form a {}
 
-.form .button {
+.form button {
   width: 340px;
   height: 32px;
   font-size: 16px;
@@ -287,33 +484,49 @@ main {
   border: 1px solid #FFF;
   background-color: rgba(255, 255, 255, 0.70);
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
-  padding-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   cursor: pointer;
   outline: none;
   box-sizing: border-box;
 }
 
-.form .button:hover {
+.form button:hover {
   background-color: #fff;
   color: #505050;
 }
 
+.form .id input:focus{
+  border: 1px solid #7976BB;
+}
+
+.form .name input:focus{
+  border: 1px solid #7976BB;
+}
+
+.form .address:focus{
+  border: 1px solid #7976BB;
+}
+
+.form .random > input:focus{
+  border: 1px solid #7976BB;
+}
 
 //================================RWD==========================
 @media screen and (max-width:600px){
   main{
     width: 90vw;
   }
-  .form,.form .id input,.form .name input,.form .address,.form .button{
+  .form,.form .id input,.form .name input,.form .address{
     width: 300px;
-    padding-left: 10px;
+  }
+
+  .form button{
+    width: 300px;
+    padding-left: 0;
   }
   
-
   .form .random > input{
     width: 130px;
-    padding-left: 10px;
   }
   .random p{
     width: 110px;

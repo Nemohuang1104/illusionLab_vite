@@ -1,189 +1,138 @@
 <script setup>
-import { ref } from 'vue';
+import Header from '@/components/Header_0.vue';
+import Footer_03 from '@/components/Footer_03.vue';
+import LC_ProductInfo from './LC_ProductInfo.vue';
+import MS_com_title from '@/components/MS/MS_com_title.vue';
 
-// 頁首頁尾
-import Header_0 from '@/components/Header_0.vue';
-// 使用 ref 定義  currentMode 狀態 
+
+import { ref, onMounted } from 'vue'; // 確保有引入 onMounted
+
 const currentMode = ref('four');
 
-import Footer_03 from '@/components/Footer_03.vue';
-  
-// 螢幕寬高度
-// import { ref, onMounted, onUnmounted } from 'vue';
+const productInfo = ref([
+  // {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
+  // {id:'2',cardImage: '../src/assets/images/LC_Product_item2.svg',productName:'賭聖帽T',price:'1099'},
+  // {id:'3',cardImage: '../src/assets/images/LC_Product_item3.svg',productName:'暗黑撲克牌組',price:'299'},
+  // {id:'4',cardImage: '../src/assets/images/LC_Product_item4.svg',productName:'幸運骰子',price:'99'},
+  // {id:'5',cardImage: '../src/assets/images/LC_Product_item5.svg',productName:'必勝籌碼',price:'199'},
+  // {id:'6',cardImage: '../src/assets/images/LC_Product_item6.svg',productName:'賭城帆布袋',price:'599'},
+  // {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
 
-// const screenWidth = ref(window.innerWidth);
-// const screenHeight = ref(window.innerHeight);
+])
 
-// function updateDimensions() {
-//   screenWidth.value = window.innerWidth;
-//   screenHeight.value = window.innerHeight;
-// }
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/MS_FetchProducts.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    productInfo.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
 
-// onMounted(() => {
-//   window.addEventListener('resize', updateDimensions);
-// });
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
 
-// onUnmounted(() => {
-//   window.removeEventListener('resize', updateDimensions);
-// });
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
+
+
+
+
 
 </script>
 
 <template>
-  <div>
-   <Header_0 :mode="currentMode" class="header"></Header_0 >
-  </div>
-
-  <!--  螢幕寬度高度-->
-  <!-- <div>
-    <p>螢幕寬度: {{ screenWidth }}px</p>
-    <p>螢幕高度: {{ screenHeight }}px</p>
-  </div>
-   -->
+  
+  
   <div class="warpper">
-
+    <div>
+      <Header :mode="currentMode"/> 
+    </div>
+    
     <div class="center">
-
+      <div class="warp">
       <div class="title">
-        <h1>周邊商品</h1>
-        <p>PRODUCT</p>
-      </div>
-
+        <MS_com_title 
+            mode="three"  
+            mainTitle="精選商品" 
+            subTitle="PRODUCT"/>
+      </div>   
       <div class="producttitle">
-        <div class="arrowleft">
-          <font-awesome-icon icon="fa-solid fa-arrow-left-long" class="arrow"/>
-          <router-link to="/LC_ProductPage"><P>人生賭場</P></router-link>
+        <div class="arrowlift">
+          <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
+          <router-link to="/SF_ProductPage"><P class="link">星際邊境</P></router-link>
         </div>
         <div class="arrowright">
-          <router-link to="/SF_ProductPage"><P>星際邊際</P></router-link>
-          <font-awesome-icon icon="fa-solid fa-arrow-right-long" class="arrow"/>
+          <router-link to="/LC_ProductPage"><P class="link">人生賭場</P></router-link>
+          <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
       </div>
-      <!-- 放置一個商品列的外框 -->
       <div class="pagebox">
+        <!-- 放置一個商品列的外框 -->
+         
         <div class="list">
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_bearnotebook.png" alt="">
-            <div>
-              <p>繪本風格筆記本</p>
-              <div class="price">
-                <span>NT$ 180</span>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_littlebag.png" alt="">
-            <div>
-              <p>小女孩帆布袋</p>
-              <div class="price">
-                <p>NT$ 590</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_YOYOcard.png" alt="">
-            <div>
-              <p>小蜥蜴悠遊卡</p>
-              <div class="price">
-                <p>NT$ 300</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productphone.jpg" alt="">
-            <div>
-              <p>防摔手機殼</p>
-              <div class="price">
-                <p>NT$ 1280</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productcard.jpg" alt="">
-            <div>
-              <p>繪本風格卡片</p>
-              <div class="price">
-                <p>NT$ 80</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productcup.jpg" alt="">
-            <div>
-              <p>繪本風格馬克杯</p>
-              <div class="price">
-                <p>NT$ 250</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-          
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_product_t_shirt.jpg" alt="">
-            <div>
-              <p>童趣造型長袖大學T</p>
-              <div class="price">
-                <p>NT$ 580</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productsticker.jpg" alt="">
-            <div>
-              <p>繪本風貼紙</p>
-              <div class="price">
-                <p>NT$ 80</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
+          <router-link to="/MS_ProductList">
+            <div  v-for="(item,index) in productInfo" class="pro"  :key="item.PRODUCT_ID" >
+            
+                <img :src="item.PRODUCT_IMG" alt="">
+                <p>{{ item.PRODUCT_NAME }}</p>
+                <div class="text">
+                  <div class="price">
+                    <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                  </div>
+                  <div class="icon"></div>
+                </div>
+            </div>
+          </router-link>
         </div>
+      
       </div>
     </div>
-    <div>
+  </div>
+
     <Footer_03></Footer_03>
-    </div>
   </div>
 </template>
 
 
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
-@import '@/assets/SASS/basic/_color.scss';
-* {
-    font-family: "Noto Sans TC" ;
-    color:map-get($colofont_3 , text);
-    text-decoration: none;
+
+.title{
+  margin-top: 10px;
+  margin: 0 auto;
 }
 
 .warpper {
-  max-width: 1440px;
+  font-family: "Noto Sans TC";
+  // max-width: 1440px;
   width: 100%;
+  // height: 100vh;
   margin: 0 auto;
   // border: 1px solid red;
-  // background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0));
-  background-image: url(../assets/images/MS_paperbg.jpg);
-  padding-top: 150px;
+  // background-image: url(../assets/images/SFbg.png);
+  // background-color: #1E1E2F;
+  background:url(../assets/images/MS_paperbg.jpg);
+        // height: 180vh;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background-repeat: no-repeat;
 }
 
-.header{
-  z-index: 20;
+
+.warp{
+  position: relative;
+  padding: 0 50px;
 }
 
 .center {
+  background: linear-gradient(147deg, rgba(255, 255, 255, 0.40) 3.26%, rgba(255, 255, 255, 0.20) 97.45%);
+  box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
+  font-weight: 500;
   max-width: 1440px;
   width: 100%;
   display: flex;
@@ -191,41 +140,26 @@ import Footer_03 from '@/components/Footer_03.vue';
   align-items: center;
   text-align: center;
   padding-top: 20px;
-}
-
-.title{}
-
-.title h1{
-  font-size: 36px;
-  color: #855F49;
-  font-weight: bold;
-}
-
-.title p{
-  font-size: 20px;
-  color: #855F49;
-  font-weight: bold;
-  margin-top: 8px;
+  // position: relative;
+  z-index:0;
 }
 
 .producttitle {
   // max-width: 700px;
-  width: 61vw;
+  width: 100%;
+  font-family: "Noto Sans TC";
   font-size: 20px;
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
   margin-bottom: 30px;
   // border: 1px solid red;
-
-
 }
 
-.producttitle p {
+.link {
   width: 110px;
-  // color: #fff;
+  color: #FB9D3C;
   padding: 10px 0px;
-
 }
 
 .producttitle h1 {
@@ -233,112 +167,110 @@ import Footer_03 from '@/components/Footer_03.vue';
 
 }
 
-
-
-.arrowleft,.arrowright {
+.arrowlift {
+  color: #FB9D3C;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid #FB9D3C;
 }
 
-
-
-.arrowleft p ,.arrowright p{
+.arrowright {
   color: #FB9D3C;
-  font-weight: bold;
-}
-
-.arrow{
-  color: #FB9D3C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #FB9D3C;
 }
 
 //商品外框
 .pagebox {
-  width: 61vw;
-  height: auto;
+  font-family: "Noto Serif SC";
+  width: 100%;
   // height: 750px;
   overflow: hidden;
-  // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  // padding: 70px 80px 100px 80px;
-  padding: 20px;
+  padding: 50px ;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
-  border: 1px solid #e8e8e8;
-}
-
-.pagebox img {
-  max-width: 150px;
-  margin-bottom: 15px;
-  background-size: cover;
-  border-radius: 12px;
+  // border: 1px solid #fff;
 }
 
 .list {
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  // justify-content: center;
+  
+  gap: 18px;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
-  gap: 1vw;
+
 }
 
 .pro {
   // border: 1px solid red;
-  margin-bottom: 20px;
+  // max-width: 160px;
+  // max-height: 250px;
+  // margin-bottom: 20px;
   padding: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   /*浮起來及陰影效果 */
   border-radius: 10px;
-  cursor: pointer;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center; /* 確保內容居中 */
+
+}
+
+.pro img {
+  max-width: 100%;
+  max-height: 150px; /* 限制圖片高度 */
+  object-fit: contain; /* 保持圖片比例 */
+  margin-bottom: 10px;
 }
 
 
 
 .pro p {
-  font-weight: normal;
+  font-weight: 600;
   font-size: 18px;
-  // color: #fff;
+  color: #855F49;
   text-align: left;
   margin-bottom: 10px;
 }
 
 
 
-//商品價格
-.price{
-  // color: #fff;
+//商品
+.pagebox img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.price span {
+  color: #855F49;
   font-size: 16px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-// ==================RWD============================================
-@media screen and (max-width:820px){
-  .pagebox{
-    width: 80vw;
-  }
+@media screen and (max-width: 430px){
 
-  .list{
-    justify-content: center;
-    flex-grow: 1;
-  }
+.list{
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr  ;
 }
-
-@media screen and (max-width:430px){
-  .producttitle{
-    width: 76vw;
-  }
-
-  .pagebox img{
-    width: 110px;
-  }
-
-  .pro p {
-    font-size: 16px;
-  }
+.pagebox{
+  padding: 10px;
+  
+}
 }
 
 </style>

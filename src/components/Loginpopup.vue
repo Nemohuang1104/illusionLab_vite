@@ -36,7 +36,7 @@ width: 520px;
 height: 480px;
 border-radius: 20px;
 border: 1px solid  map-get($colorfont_0,white);
-background: linear-gradient(146deg, rgba(255, 255, 255, 0.90) 2.68%, #7976BB 96.55%);
+background: linear-gradient(146deg, rgba(255, 255, 255, 0.70) 2.68%, rgba(255, 255, 255, 0.70) 96.55%);
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 backdrop-filter: blur(50px);
 margin: 50px auto 20px;
@@ -46,7 +46,7 @@ left:calc(50vw - (520px/2));
 }
 
 h1{
-color: #7976BB;
+color: #fff;
 text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 font-family: "Noto Sans TC";
 font-size: 32px;
@@ -158,7 +158,11 @@ background-color:#fff;
     width: 350px;
     top: 50px;
     left:calc(50vw - (350px/2));
+    background: linear-gradient(146deg, rgba(255, 255, 255, 0.90) 2.68%, #7976BB 96.55%);
   }
 
+  h1{
+    color: #7976BB;
+  }
 }
 </style>

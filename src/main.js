@@ -11,6 +11,8 @@ import router from "./router";
 import "@/assets/css/reset.css";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+import VueSweetalert2 from 'vue-sweetalert2'; 
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 // ============fontawsome==================
 //參考網址: https://reurl.cc/4dQ4gD
@@ -37,5 +39,5 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark )
 
 
-createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router).mount("#app");
+createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router,VueSweetalert2).mount("#app");
 
