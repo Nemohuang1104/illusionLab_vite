@@ -25,7 +25,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // 從資料庫撈取商品資料
-    $sql = "SELECT * FROM NEWS";
+    $sql = "SELECT NEWS_ID, PUBLISH_DATE, NEWS_TITLE, NEWS_CONTENT, STATUS, NEWS_IMG, UPDATE_DATE FROM NEWS";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     

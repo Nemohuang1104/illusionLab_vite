@@ -6,11 +6,13 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $publishDate = $_POST['PUBLISH_DATE'];
+    // 檢查 PUBLISH_DATE，如果沒有傳入，則自動設置為當前日期
+    
+    $publishDate = date('Y-m-d'); // 使用當前日期
     $newsTittle = $_POST['NEWS_TITLE'];
     $newsContent = $_POST['NEWS_CONTENT'];
     $status = $_POST['STATUS'];
-  
+    $updateDate = date('Y-m-d'); // 使用當前日期
 
     // 處理圖片上傳
     $imagePath = null;
@@ -35,16 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // 新增商品資訊
+    // 新增新聞資訊
     try {
         // 建立 SQL 語句，根據是否有圖片決定是否插入 NEWS_IMG 欄位
-        $sql = "INSERT INTO NEWS (PUBLISH_DATE, NEWS_TITLE, NEWS_CONTENT, STATUS";
+        $sql = "INSERT INTO NEWS (PUBLISH_DATE, NEWS_TITLE, NEWS_CONTENT, STATUS, UPDATE_DATE";
 
         if ($imagePath) {
             $sql .= ", NEWS_IMG"; // 若有圖片，插入 NEWS_IMG 欄位
         }
 
-        $sql .= ") VALUES (:publishDate, :newsTittle, :newsContent, :status";
+        $sql .= ") VALUES (:publishDate, :newsTittle, :newsContent, :status, :updateDate";
 
         if ($imagePath) {
             $sql .= ", :imagePath"; // 若有圖片，插入相應的值
@@ -57,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':newsTittle', $newsTittle);
         $stmt->bindParam(':newsContent', $newsContent);
         $stmt->bindParam(':status', $status);
-        
+        $stmt->bindParam(':updateDate', $updateDate);
 
         if ($imagePath) {
             $stmt->bindParam(':imagePath', $imagePath); // 綁定圖片路徑參數
