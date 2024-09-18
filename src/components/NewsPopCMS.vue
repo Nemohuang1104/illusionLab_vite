@@ -43,6 +43,7 @@ const f_save = async () => {
     formData.append('NEWS_TITLE', localOrder.value.NEWS_TITLE);
     formData.append('NEWS_CONTENT', localOrder.value.NEWS_CONTENT);
     formData.append('STATUS', localOrder.value.STATUS);
+    formData.append('UPDATE_DATE', localOrder.value.UPDATE_DATE);
     
 
     if (localOrder.value.imageFile) {
@@ -73,6 +74,7 @@ const f_save = async () => {
   formData.append('NEWS_TITLE', localOrder.value.NEWS_TITLE);
   formData.append('NEWS_CONTENT', localOrder.value.NEWS_CONTENT);
   formData.append('STATUS', localOrder.value.STATUS);
+  formData.append('UPDATE_DATE', localOrder.value.UPDATE_DATE);
 
   // 如果有上傳的圖片，將圖片加入 FormData
   if (localOrder.value.imageFile) {

@@ -332,7 +332,7 @@ const handleSaveEdit = async (updatedOrder) => {
             <span>{{ item.PUBLISH_DATE }}</span>
             <span>{{ item.NEWS_TITLE }}</span>
             <span>{{ item.STATUS }}</span>
-            <span>{{ item.EDITOR }}</span>
+            <span>{{ item.UPDATE_DATE }}</span>
             <span @click="edit(index)">編輯</span>
             </div>
         </div> 

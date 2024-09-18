@@ -27,7 +27,8 @@
     "typewriter-vue": "^0.5.19",
     "vue": "^3.4.29",
     "vue-router": "^4.4.3",
-    "vue-select": "^4.0.0-beta.6"
+    "vue-select": "^4.0.0-beta.6",
+    "vue-sweetalert2": "^5.0.11"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
