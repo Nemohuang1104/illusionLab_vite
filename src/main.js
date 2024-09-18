@@ -22,13 +22,15 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // ---以下新增---
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { faFaceSmile } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { faFaceMeh } from '@fortawesome/free-regular-svg-icons'
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
+import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
+
+
 
 
 
@@ -36,7 +38,7 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 
 
 // ---libary也要加---//
-library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark )
+library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark)
 
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router,VueSweetalert2).mount("#app");

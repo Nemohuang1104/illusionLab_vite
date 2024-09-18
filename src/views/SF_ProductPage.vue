@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 // 頁首頁尾
 import Header_0 from '@/components/Header_0.vue';
@@ -9,39 +9,67 @@ const currentMode = ref('three');
 import Footer_2 from '@/components/Footer_2.vue';
 
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
-  
-// 螢幕寬高度
-// import { ref, onMounted, onUnmounted } from 'vue';
 
-// const screenWidth = ref(window.innerWidth);
-// const screenHeight = ref(window.innerHeight);
+const productInfo = ref([
+  // {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
+  // {id:'2',cardImage: '../src/assets/images/LC_Product_item2.svg',productName:'賭聖帽T',price:'1099'},
+  // {id:'3',cardImage: '../src/assets/images/LC_Product_item3.svg',productName:'暗黑撲克牌組',price:'299'},
+  // {id:'4',cardImage: '../src/assets/images/LC_Product_item4.svg',productName:'幸運骰子',price:'99'},
+  // {id:'5',cardImage: '../src/assets/images/LC_Product_item5.svg',productName:'必勝籌碼',price:'199'},
+  // {id:'6',cardImage: '../src/assets/images/LC_Product_item6.svg',productName:'賭城帆布袋',price:'599'},
+  // {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
 
-// function updateDimensions() {
-//   screenWidth.value = window.innerWidth;
-//   screenHeight.value = window.innerHeight;
-// }
+])
 
-// onMounted(() => {
-//   window.addEventListener('resize', updateDimensions);
-// });
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SF_FetchProducts.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    productInfo.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
 
-// onUnmounted(() => {
-//   window.removeEventListener('resize', updateDimensions);
-// });
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
 
+const productInfo = ref([
+  // {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
+  // {id:'2',cardImage: '../src/assets/images/LC_Product_item2.svg',productName:'賭聖帽T',price:'1099'},
+  // {id:'3',cardImage: '../src/assets/images/LC_Product_item3.svg',productName:'暗黑撲克牌組',price:'299'},
+  // {id:'4',cardImage: '../src/assets/images/LC_Product_item4.svg',productName:'幸運骰子',price:'99'},
+  // {id:'5',cardImage: '../src/assets/images/LC_Product_item5.svg',productName:'必勝籌碼',price:'199'},
+  // {id:'6',cardImage: '../src/assets/images/LC_Product_item6.svg',productName:'賭城帆布袋',price:'599'},
+  // {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
+
+])
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SF_FetchProducts.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    productInfo.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
 </script>
+
+
 
 <template>
   <div>
-   <Header_0 :mode="currentMode" ></Header_0 >
+    <Header_0 :mode="currentMode"></Header_0>
   </div>
-
-  <!--  螢幕寬度高度-->
-  <!-- <div>
-    <p>螢幕寬度: {{ screenWidth }}px</p>
-    <p>螢幕高度: {{ screenHeight }}px</p>
-  </div>
-   -->
+  
   <div class="warpper">
 
     <div class="center">
@@ -50,28 +78,50 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
       <div class="producttitle">
         <div class="arrowleft">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
-          <router-link to="/LC_ProductPage"><P>人生賭場</P></router-link>
+          <router-link to="/LC_ProductPage">
+            <P>人生賭場</P>
+          </router-link>
         </div>
         <div class="arrowright">
-          <router-link to="/MS_ProductPage"><P>心靈光譜</P></router-link>
+          <router-link to="/MS_ProductPage">
+            <P>心靈光譜</P>
+          </router-link>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
       </div>
       <!-- 放置一個商品列的外框 -->
       <div class="pagebox">
         <div class="list">
-          <div class="pro">
-            <router-link to="./SF_DetailList"><img src="../assets/images/SF_cup.png" alt=""></router-link>
-            <div>
-              <p>太空金屬杯</p>
-              <div class="price">
-                <span>NT$ 350元</span>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+          <!-- <router-link to="./SF_DetailList">
+            <div class="pro">
+              <img src="../assets/images/SF_cup.png" alt="">
+              <div>
+                <p>太空金屬杯</p>
+                <div class="price">
+                  <span>NT$ 350元</span>
+          <router-link to="./SF_DetailList">
+            <div class="pro" v-for="(item,index) in productInfo" :key="item.id">
+              <img :src="item.PRODUCT_IMG" alt="">
+              <div>
+                <p>{{ item.PRODUCT_NAME }}</p>
+                <div class="price">
+                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="pro">
+          </router-link> -->
+          <router-link to="./SF_DetailList">
+            <div class="pro" v-for="(item,index) in productInfo" :key="item.id">
+              <img :src="item.PRODUCT_IMG" alt="">
+              <div>
+                <p>{{ item.PRODUCT_NAME }}</p>
+                <div class="price">
+                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+                </div>
+          </router-link>
+          <!-- <div class="pro">
             <router-link  to="./SF_DetailList"><img src="../assets/images/SF_bag.png" alt=""></router-link>
             <div>
               <p>帆布袋</p>
@@ -80,10 +130,9 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
-          </div>
-
-          <div class="pro">
-            <router-link  to="./SF_DetailList"><img src="../assets/images/SF_easycard_1.png" alt=""></router-link>
+          </router-link>
+          <!-- <div class="pro">
+            <router-link to="./SF_DetailList"><img src="../assets/images/SF_easycard_1.png" alt=""></router-link>
             <div>
               <p>悠遊卡</p>
               <div class="price">
@@ -94,7 +143,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <router-link  to="./SF_DetailList"><img src="../assets/images/SFbook.svg" alt=""></router-link>
+            <router-link to="./SF_DetailList"><img src="../assets/images/SFbook.svg" alt=""></router-link>
             <div>
               <p>筆記本</p>
               <div class="price">
@@ -105,7 +154,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-            <router-link  to="./SF_DetailList"><img src="../assets/images/SF_Pillow.png" alt=""></router-link>
+            <router-link to="./SF_DetailList"><img src="../assets/images/SF_Pillow.png" alt=""></router-link>
             <div>
               <p>抱枕</p>
               <div class="price">
@@ -116,7 +165,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
           </div>
 
           <div class="pro">
-           <router-link  to="./SF_DetailList"><img src="../assets/images/SF_Tshirt.png" alt=""></router-link>
+            <router-link to="./SF_DetailList"><img src="../assets/images/SF_Tshirt.png" alt=""></router-link>
             <div>
               <p>T-shirt</p>
               <div class="price">
@@ -124,12 +173,12 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
     <div>
-    <Footer_2></Footer_2>
+      <Footer_2></Footer_2>
     </div>
   </div>
 </template>
@@ -139,10 +188,11 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 @import '@/assets/SASS/basic/_color.scss';
+
 * {
-    font-family: "Noto Serif TC" ;
-    color:map-get($colofont_2 , text);
-    text-decoration: none;
+  font-family: "Noto Serif TC";
+  color: map-get($colofont_2 , text);
+  text-decoration: none;
 }
 
 .warpper {
@@ -172,28 +222,6 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
   padding-top: 20px;
 
 }
-
-// .center h1 {
-//   font-size: 38px;
-//   font-weight: 700;
-//   margin-bottom: 5px;
-//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-//   background-clip: text;
-//   -webkit-background-clip: text;
-//   color: transparent;
-
-// }
-
-
-// .center p {
-//   font-size: 20px;
-//   font-weight: 700;
-//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-//   background-clip: text;
-//   -webkit-background-clip: text;
-//   color: transparent;
-// }
-
 
 
 .producttitle {
@@ -229,7 +257,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #fff;
-  
+
 }
 
 .arrowright {
@@ -254,9 +282,15 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
   // padding: 70px 80px 100px 80px;
   padding: 3%;
   margin-bottom: 50px;
-  box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
+  // box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   border: 1px solid #e8e8e8;
+  // box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+
 }
+
+
 
 .pagebox img {
   max-width: 150px;
@@ -286,12 +320,13 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 }
 
 .pro:hover {
-  transform: scale(1.1,1.1);
+  transform: scale(1.1, 1.1);
   /* 往上是負，輕微浮起 */
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
   /* 明顯的阴影效果 */
   border-color: rgba(255, 255, 255, 0.5);
   /* 懸停時增加邊框颜色 */
+
 }
 
 
@@ -308,12 +343,12 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 
 //商品價格
-.price{
+.price {
   // color: #fff;
   font-size: 16px;
   display: flex;
   justify-content: space-between;
-  
+
 }
 
 
@@ -322,17 +357,18 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 // RWD
 
 @media(max-width: 920px) {
-  .producttitle{
+  .producttitle {
     width: 80%;
   }
-  .list{  
+
+  .list {
     // width: 665PX;
   }
-  .pagebox {
-        padding: 0px;
-        height: auto;
-    }
- 
-}
 
+  .pagebox {
+    padding: 0px;
+    height: auto;
+  }
+
+}
 </style>

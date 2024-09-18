@@ -168,22 +168,29 @@ const routes = [
     },
     requiredLogin: false
   },
+
+  // -----商品區------//
   {
     path: '/LC_ProductPage',
     component: () => import('@/views/LC_ProductPage.vue'),
+    name:'LC_ProductPage',
     meta: {
       title: "人生賭場-精選商品"
     },
     requiredLogin: false
   },
   {
-    path: '/LC_ProductInfo',
+    path: '/LC_ProductInfo/:id',
     component: () => import('@/views/LC_ProductInfo.vue'),
+    name:'LC_ProductInfo',
     meta: {
       title: "人生賭場-商品細項"
     },
-    requiredLogin: false
+    requiredLogin: false,
+    props: true // 將路由參數作為 props 傳入組件
   },
+
+  // ------入場須知-------//
   {
     path: '/LC_QuestionIntro',
     component: () => import('@/views/LC_QuestionIntro.vue'),
@@ -211,6 +218,8 @@ const routes = [
       }
     ]
   },
+
+  // -----購票-----//
   {
 
     path: '/LC_Ticket_step0',
@@ -281,8 +290,14 @@ const routes = [
     path: '/SF_ProductPage',
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
+  },
+  
+  {
+    path: '/littleQuiz',
+    name: 'littleQuiz',
+    component: () => import('@/views/LittleQuiz.vue'),
     meta: {
-      title: "星際邊際全部商品"
+      title: "星際邊境全部商品"
     },
     requiredLogin: false
   },
@@ -291,7 +306,7 @@ const routes = [
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊際商品細項"
+      title: "星際邊境商品細項"
     },
     requiredLogin: false
   },
@@ -360,9 +375,19 @@ const routes = [
 
   // =================心靈光譜===============//
   {
+    path: '/MS_Enter',
+    name: 'MS_Enter',
+    component: () => import('@/components/MS/MS_Enter.vue'),
+    meta: {
+      title: "心靈光譜"
+    },
+    requiredLogin: false
+  },
+
+  {
     path: '/mindspectrum',
     name: 'mindspectrum',
-    component: () => import('@/components/MS/MS_main.vue'),
+    component: () => import('@/views/MS_views_index.vue'),
     meta: {
       title: "心靈光譜"
     },
@@ -370,7 +395,7 @@ const routes = [
   },
   {
     path: '/MS_Ticket_step0',
-    component: () => import('@/views/MS_Ticket_reservation.vue'),
+    component: () => import('@/views/MS_ticket_into.vue'),
     meta: {
       title: "心靈光譜-購票"
     },
@@ -378,7 +403,7 @@ const routes = [
   },
   {
     path: '/MS_Ticket_step1',
-    component: () => import('@/views/MS_ticket_customer_info.vue'),
+    component: () => import('@/views/MS_Ticket_reservation.vue'),
     meta: {
       title: "心靈光譜-購票"
     },
@@ -386,6 +411,14 @@ const routes = [
   },
   {
     path: '/MS_Ticket_step2',
+    component: () => import('@/views/MS_ticket_customer_info.vue'),
+    meta: {
+      title: "心靈光譜-購票"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/MS_Ticket_step3',
     component: () => import('@/views/MS_ticket_confirmation.vue'),
     meta: {
       title: "心靈光譜-購票"
@@ -397,6 +430,22 @@ const routes = [
     component: () => import('@/components/MS/MS_customization.vue'),
     meta: {
       title: "心靈光譜-客製票卷"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/FQA_03',
+    component: () => import('@/views/FQA_03.vue'),
+    meta: {
+      title: "心靈光譜-常見問題"
+    },
+    requiredLogin: true
+  },
+  {
+    path: '/TicketChange_03',
+    component: () => import('@/views/TicketChange_03.vue'),
+    meta: {
+      title: "心靈光譜-票務資訊"
     },
     requiredLogin: true
   },
@@ -556,8 +605,16 @@ const routes = [
     requiredLogin: true
   },
 
+  {
+    path: '/shop3',
+    name: 'shop3',
+    component: () => import('@/views/ShoppingCar3.vue'),
+    meta: {
+      title: "購物車"
+    },
+    requiredLogin: true
 
-
+  },
 
   // =================心靈光譜===============//
   {
@@ -574,7 +631,7 @@ const routes = [
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊際商品細項"
+      title: "星際邊境商品細項"
     },
     requiredLogin: false
   },
@@ -611,7 +668,25 @@ const routes = [
     requiredLogin: false
   },
 
+  {
+    path: '/PP_termOfUse',
+    name: 'termOfUse',
+    component: () => import('@/views/PP_termOfUse.vue'),
+    meta: {
+      title: "使用條款"
+    },
+    requiredLogin: false
+  },
 
+  {
+    path: '/PP_privacy_policy',
+    name: 'privacy_policy',
+    component: () => import('@/views/PP_privacy_policy.vue'),
+    meta: {
+      title: "隱私權政策"
+    },
+    requiredLogin: false
+  },
 
 ];
 

@@ -19,6 +19,7 @@ import Footer_2 from '@/components/Footer_2.vue';
 // 商品
 import 'swiper/css';
 import 'swiper/css/pagination';
+
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper/modules';
 
@@ -112,13 +113,12 @@ function scrollTop() {
 }
 //購票去
 
-// import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const isLogoVisible = ref(false); // 控制 LOGO 顯示的變量
 
 const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    isLogoVisible.value = scrollPosition >= 700; 
+    isLogoVisible.value = scrollPosition >= 700; // 當滾動位置大於 700px 時顯示 LOGO
 };
 
 onMounted(() => {
@@ -139,7 +139,7 @@ onBeforeUnmount(() => {
         <!-- 星球運轉 -->
         <div class="intro">
             <!-- <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video> -->
-            <video src="../assets/video/sf.mp4" autoplay muted loop class="movie"></video>
+            <video src="../assets/video/sf.mp4" muted playsinline autoplay loop class="movie"></video>
             <!-- <video src="../assets/video/SFmovie.mp4 controls autoplay muted loop" class="movie"></video> -->
         </div>
 
@@ -362,8 +362,8 @@ onBeforeUnmount(() => {
 .wrapper {
     background: linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)),
         url(../assets/images/STBackground.png);
-    width: 100%;
-    max-width:1440px ;
+    width: 100vw;
+    // max-width:1440px ;
 
 }
 
@@ -395,7 +395,6 @@ onBeforeUnmount(() => {
 .Title {
     //大標題
     text-align: center;
-    margin-bottom: 55px;
     box-sizing: border-box;
 }
 
@@ -424,8 +423,12 @@ onBeforeUnmount(() => {
 }
 
 // 票價資訊
+.ticket{
+    margin: 80px 0 140px 0;
+}
+
 .ticketInfo {
-    margin: 5%;
+    margin: 80px;
 }
 
 .ticketInfo img {
@@ -485,11 +488,15 @@ onBeforeUnmount(() => {
 
 
 // 航站資訊
+.info{
+    margin: 80px 0 140px 0;
+}
+
 .infoText {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5% auto;
+    margin: 80px auto;
     line-height: 2;
 }
 
@@ -514,12 +521,15 @@ onBeforeUnmount(() => {
 
 
 //常見規則
+.rules{
+    margin: 80px 0 140px 0;
+}
 
 .mainSel {
     display: block;
     width: 100%;
     max-width: 500px;
-    margin: 5% auto;
+    margin: 80px auto;
 }
 
 .changeRules {
@@ -633,11 +643,16 @@ onBeforeUnmount(() => {
 
 
 // 合作廠商
+
+.sponsor{
+    margin: 80px 0 140px 0;
+}
+
 .logo {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    margin: 5% auto;
+    margin: 80px auto;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -662,7 +677,7 @@ onBeforeUnmount(() => {
 
 // 聯絡我們
 .contact {
-    margin: 5%;
+   margin: 80px 0 140px 0;
 }
 
 .contact #text {
@@ -675,7 +690,7 @@ onBeforeUnmount(() => {
     width: 100%;
     max-width: 30%;
     display: flex;
-    margin: 3% auto;
+    margin: 50px auto;
     justify-content: space-evenly;
 
 }
@@ -694,17 +709,17 @@ onBeforeUnmount(() => {
 
 // to top 按鈕
 .top-button {
-    position: fixed;
-    bottom: 130px;
-    right: 15px;
-    padding: 6px;
-    background: none;
-    color: #ffffff;
-    border: 1px solid;
-    border-radius: 5px;
-    cursor: pointer;
-    animation: slide-in 0.8s forwards;
-    font-size: 16px;
+  position: fixed;
+  bottom: 10%;
+  right: 1%;
+  padding: 6px;
+  background: none;
+  color: #ffffff;
+  border: 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: slide-in 0.8s forwards;
+  font-size: 16px;
 }
 
 
@@ -863,8 +878,8 @@ onBeforeUnmount(() => {
 
 #fixed-logo {
     position: fixed;
-    bottom: 180px;
-    right: 15px;
+    bottom: 20%;
+    right: 1%;
     z-index: 1000;
     animation: slide-in 0.8s forwards;
 }

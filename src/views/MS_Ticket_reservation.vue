@@ -34,9 +34,9 @@
 export default {
   data() {
     return {
-      currentStep: 0, // 当前步骤
+      currentStep: 1, // 当前步骤
       activityMode: 'activity3', // 初始活动模式
-      mode: 'one1', // 初始 mode
+      mode: 'two1', // 初始 mode
       modeSelect: 'three',
 
     };

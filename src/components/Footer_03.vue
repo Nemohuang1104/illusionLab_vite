@@ -12,7 +12,7 @@
         <div class="content">
             <img src="../assets/images/illusionLabLOGO.SVG" alt="">
             <div class="items">
-                <router-link  to="">
+                <router-link  to="PP_privacy_policy">
                     <span>隱私權政策</span>
                 </router-link>
                 <router-link to="">
@@ -21,8 +21,14 @@
                 <router-link @click="goToPage" to="/News">
                     <span>最新消息</span>
                 </router-link>
-                <router-link to="">
+                <router-link to="PP_termOfUse">
                     <span>使用辦法</span>
+                </router-link>
+                <router-link to="FQA_03">
+                    <span>常見問題</span>
+                </router-link>
+                <router-link to="TicketChange_03">
+                    <span>票務資訊</span>
                 </router-link>
             </div>
             <p>本網站為緯育TibaMe【第93期】前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
@@ -39,6 +45,7 @@
 
 .outline{
     width: 100vw;
+    max-width: 1440px;
     height: 200px;
     background: map-get($color_3,header);
     display: flex;

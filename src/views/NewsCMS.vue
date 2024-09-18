@@ -1,7 +1,8 @@
 <script setup>
 import Header_CMS from '@/components/Header_CMS.vue';
 import NewsPopCMS from '@/components/NewsPopCMS.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+
 
 import axios from 'axios'; // 註解掉 axios 的引入
 
@@ -10,118 +11,135 @@ import axios from 'axios'; // 註解掉 axios 的引入
 const searchQuery = ref('');
 
 const orders = ref([
-{
-    news_id: '1',
-    news_title: '聖誕節雙人同行優惠',
-    news_content: '聖誕節一定要記得耶穌愛你唷!一起來心靈光譜活動，讓耶穌安慰修復你受傷的心吧!雙人同行，限時特價1200元!',
-    post_date: '2024-08-10',
-    news_status: 2,
-    update_date: '2024-08-28',
-    cardimage: ''
-  },
-  {
-    news_id: '2',
-    news_title: '中秋烤肉大作戰',
-    news_content: '今年中秋節不只有烤肉活動，還有月餅DIY體驗，讓你在過節的同時享受美食樂趣!',
-    post_date: '2024-09-01',
-    news_status: 1,
-    update_date: '2024-09-10',
-    cardimage: ''
-  },
-  {
-    news_id: '3',
-    news_title: '新年倒數派對',
-    news_content: '2025年即將來臨，快來參加我們的新年倒數派對，享受音樂、舞蹈和美食的盛宴!',
-    post_date: '2024-12-20',
-    news_status: 2,
-    update_date: '2024-12-25',
-    cardimage: ''
-  },
-  {
-    news_id: '4',
-    news_title: '夏日海灘音樂節',
-    news_content: '迎接炎炎夏日，來參加我們的海灘音樂節，享受陽光、海浪和無盡的音樂!',
-    post_date: '2024-06-15',
-    news_status: 1,
-    update_date: '2024-07-01',
-    cardimage: ''
-  },
-  {
-    news_id: '5',
-    news_title: '春季花卉展覽',
-    news_content: '春暖花開，快來參觀我們的春季花卉展覽，感受大自然的美麗與生機!',
-    post_date: '2024-03-10',
-    news_status: 2,
-    update_date: '2024-03-20',
-    cardimage: ''
-  },
-  {
-    news_id: '6',
-    news_title: '萬聖節南瓜燈籠製作',
-    news_content: '今年萬聖節，不妨來製作屬於自己的南瓜燈籠，為節日增添一份獨特的氛圍!',
-    post_date: '2024-10-10',
-    news_status: 1,
-    update_date: '2024-10-15',
-    cardimage: ''
-  },
-  {
-    news_id: '7',
-    news_title: '情人節特別套餐',
-    news_content: '情人節當天，享受我們為你準備的浪漫套餐，讓你和你的另一半度過一個難忘的夜晚!',
-    post_date: '2024-02-01',
-    news_status: 2,
-    update_date: '2024-02-14',
-    cardimage: ''
-  },
-  {
-    news_id: '8',
-    news_title: '端午節龍舟競賽',
-    news_content: '端午節怎麼能少了龍舟競賽？來參加我們的龍舟競賽活動，為你的隊伍加油打氣!',
-    post_date: '2024-05-05',
-    news_status: 1,
-    update_date: '2024-05-20',
-    cardimage: ''
-  },
-  {
-    news_id: '9',
-    news_title: '感恩節感恩聚餐',
-    news_content: '感恩節是感謝的時刻，來參加我們的感恩聚餐，與家人朋友一同分享美好的時光!',
-    post_date: '2024-11-10',
-    news_status: 2,
-    update_date: '2024-11-15',
-    cardimage: ''
-  },
-  {
-    news_id: '10',
-    news_title: '兒童節親子活動',
-    news_content: '兒童節當天，我們為孩子們準備了一系列有趣的親子活動，讓孩子們玩得開心，家長們也能輕鬆一日!',
-    post_date: '2024-04-01',
-    news_status: 1,
-    update_date: '2024-04-05',
-    cardimage: ''
-  },
-  {
-    news_id: '11',
-    news_title: '母親節康乃馨義賣',
-    news_content: '母親節快到了，快來我們的康乃馨義賣活動，為母親獻上一份最真摯的心意!',
-    post_date: '2024-05-01',
-    news_status: 2,
-    update_date: '2024-05-10',
-    cardimage: ''
-  },
-  {
-    news_id: '12',
-    news_title: '復活節彩蛋尋寶活動',
-    news_content: '復活節來了，參加我們的彩蛋尋寶活動，尋找隱藏的彩蛋，贏取豐富的獎品!',
-    post_date: '2024-03-30',
-    news_status: 1,
-    update_date: '2024-04-01',
-    cardimage: ''
-  }
+// {
+//     news_id: '1',
+//     news_title: '聖誕節雙人同行優惠',
+//     news_content: '聖誕節一定要記得耶穌愛你唷!一起來心靈光譜活動，讓耶穌安慰修復你受傷的心吧!雙人同行，限時特價1200元!',
+//     post_date: '2024-08-10',
+//     news_status: 2,
+//     update_date: '2024-08-28',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '2',
+//     news_title: '中秋烤肉大作戰',
+//     news_content: '今年中秋節不只有烤肉活動，還有月餅DIY體驗，讓你在過節的同時享受美食樂趣!',
+//     post_date: '2024-09-01',
+//     news_status: 1,
+//     update_date: '2024-09-10',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '3',
+//     news_title: '新年倒數派對',
+//     news_content: '2025年即將來臨，快來參加我們的新年倒數派對，享受音樂、舞蹈和美食的盛宴!',
+//     post_date: '2024-12-20',
+//     news_status: 2,
+//     update_date: '2024-12-25',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '4',
+//     news_title: '夏日海灘音樂節',
+//     news_content: '迎接炎炎夏日，來參加我們的海灘音樂節，享受陽光、海浪和無盡的音樂!',
+//     post_date: '2024-06-15',
+//     news_status: 1,
+//     update_date: '2024-07-01',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '5',
+//     news_title: '春季花卉展覽',
+//     news_content: '春暖花開，快來參觀我們的春季花卉展覽，感受大自然的美麗與生機!',
+//     post_date: '2024-03-10',
+//     news_status: 2,
+//     update_date: '2024-03-20',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '6',
+//     news_title: '萬聖節南瓜燈籠製作',
+//     news_content: '今年萬聖節，不妨來製作屬於自己的南瓜燈籠，為節日增添一份獨特的氛圍!',
+//     post_date: '2024-10-10',
+//     news_status: 1,
+//     update_date: '2024-10-15',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '7',
+//     news_title: '情人節特別套餐',
+//     news_content: '情人節當天，享受我們為你準備的浪漫套餐，讓你和你的另一半度過一個難忘的夜晚!',
+//     post_date: '2024-02-01',
+//     news_status: 2,
+//     update_date: '2024-02-14',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '8',
+//     news_title: '端午節龍舟競賽',
+//     news_content: '端午節怎麼能少了龍舟競賽？來參加我們的龍舟競賽活動，為你的隊伍加油打氣!',
+//     post_date: '2024-05-05',
+//     news_status: 1,
+//     update_date: '2024-05-20',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '9',
+//     news_title: '感恩節感恩聚餐',
+//     news_content: '感恩節是感謝的時刻，來參加我們的感恩聚餐，與家人朋友一同分享美好的時光!',
+//     post_date: '2024-11-10',
+//     news_status: 2,
+//     update_date: '2024-11-15',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '10',
+//     news_title: '兒童節親子活動',
+//     news_content: '兒童節當天，我們為孩子們準備了一系列有趣的親子活動，讓孩子們玩得開心，家長們也能輕鬆一日!',
+//     post_date: '2024-04-01',
+//     news_status: 1,
+//     update_date: '2024-04-05',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '11',
+//     news_title: '母親節康乃馨義賣',
+//     news_content: '母親節快到了，快來我們的康乃馨義賣活動，為母親獻上一份最真摯的心意!',
+//     post_date: '2024-05-01',
+//     news_status: 2,
+//     update_date: '2024-05-10',
+//     cardimage: ''
+//   },
+//   {
+//     news_id: '12',
+//     news_title: '復活節彩蛋尋寶活動',
+//     news_content: '復活節來了，參加我們的彩蛋尋寶活動，尋找隱藏的彩蛋，贏取豐富的獎品!',
+//     post_date: '2024-03-30',
+//     news_status: 1,
+//     update_date: '2024-04-01',
+//     cardimage: ''
+//   }
  
   
   // 更多訂單數據...
 ]);
+
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function get_news() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/News/get_news.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    orders.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+onMounted(() => {
+  get_news(); // 當頁面加載時撈取資料
+});
+
 
 
 const initialItems = ref([...orders.value]); // 保存初始資料的副本
@@ -132,59 +150,42 @@ const filteredItems = computed(() => {
     return orders.value;
   }
   return orders.value.filter(item =>
-    item.news_id.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.news_title.toLowerCase().includes(searchQuery.value.toLowerCase())
+    item.NEWS_ID.toString().toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.NEWS_TITLE.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
 // 恢復顯示所有資料
 const resetSearch = () => {
   searchQuery.value = '';
-  initialItems.value = [...orders.value]; // 更新 initialItems 以包含最新的訂單資料
-  orders.value = [...initialItems.value];
+  get_news(); // 恢復撈取全部資料
   currentPage.value = 1;
 };
 
-// 搜尋功能
-const searchItems = () => {
-  // 若使用 axios 進行搜尋，需恢復以下代碼
-  /*
-  axios.post('/api/search-members', {
-    query: searchQuery.value
-  })
-  .then(response => {
-    allItems.value = response.data;
-    currentPage.value = 1;
-  })
-  .catch(error => {
+// 使用 fetch API 搜尋資料庫中的商品
+const searchItems = async () => {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/News/SearchNews.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query: searchQuery.value }) // 傳送搜尋字串到後端 PHP
+    });
+
+    if (!response.ok) {
+      throw new Error('搜尋請求失敗');
+    }
+
+    const data = await response.json();
+    orders.value = data; // 更新 orders 資料
+    currentPage.value = 1; // 搜尋後重設為第 1 頁
+  } catch (error) {
     console.error('搜尋出錯:', error);
-  });
-  */
-  
-  // 直接使用本地資料進行搜尋
-  currentPage.value = 1; // 搜尋時重設為第1頁
+  }
 };
 
-// 切換會員狀態
-const toggleStatus = (item) => {
-  const newStatus = item.status === '正常' ? '停權' : '正常';
-  item.status = newStatus;
 
-  // 註解掉 AJAX 請求部分
-  /*
-  axios.post('/api/update-status.php', {
-    id: item.id,
-    status: newStatus
-  })
-  .then(response => {
-    console.log('狀態更新成功');
-  })
-  .catch(error => {
-    item.status = item.status === '正常' ? '停權' : '正常';
-    console.error('更新狀態失敗:', error);
-  });
-  */
-};
 
 // 分頁功能
 const itemsPerPage = ref(10);
@@ -226,6 +227,15 @@ const dbcheck = ref(false)
 const current_edit = ref(null);
 const select_number = ref('');
 
+// 是否在新增模式下(開始)======================
+const isCreating = ref(false);
+// 1.點擊新增按鈕彈出編輯視窗內容(新增產品視窗)
+const openAddProduct = () => {
+  current_edit.value = null; // 清空當前編輯的索引
+  isCreating.value = true;   // 設置為新增模式
+  editOpacity.value = 1;     // 顯示彈出視窗
+};
+
 
 const order_list = ref([
   // 這裡可以填入初始的訂單商品列表
@@ -237,39 +247,29 @@ const order_list = ref([
   // ]
 ])
 
-const total_cost = ref(0)
-const order_cost = ref(0)
 
-const o_pay = ref('')
-const o_form = ref('')
-const o_ship = ref('')
 
 // 1.點擊編輯按鈕彈出v-if內容(@click="edit(key)")
 const edit = (index) => {
   // 使用 filteredItems 的索引來查找對應的 orders 項目
   const filteredItem = displayedItems.value[index];
-  const originalIndex = orders.value.findIndex(item => item.order_list === filteredItem.order_list);
+  const originalIndex = orders.value.findIndex(item => item.NEWS_ID === filteredItem.NEWS_ID);
+
   
   if (originalIndex !== -1) {
     current_edit.value = originalIndex;
     editOpacity.value = 1;
-    select_number.value = orders.value[originalIndex].order_list;
+    select_number.value = orders.value[originalIndex].NEWS_ID;
 
-    const tot = order_list.value[originalIndex];
-    total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
-
-    order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
-
-    o_pay.value = orders.value[originalIndex].payment_status;
-    o_form.value = orders.value[originalIndex].order_status;
-    o_ship.value = orders.value[originalIndex].shipping_status;
   }
 };
+
 // 2.當子組件 OrderTicketPopCMS 中的 f_close及f_save 被觸發時，會通過 emit 通知父組件，從而更新父組件中的 editOpacity 值，達到控制彈出視窗顯示或隱藏的效果。
 // 2.1 @close-edit事件回調函式
 const handleCloseEdit = ({ opacity, edit }) => {
   editOpacity.value = opacity; // 更新 editOpacity 的值
   current_edit.value = edit;   // 更新 current_edit 的值
+  isCreating.value = false;    // 結束新增模式
 };
 
 // 2.2 @save-edit事件回調函式
@@ -278,36 +278,16 @@ const handleSaveEdit = async (updatedOrder) => {
     orders.value[current_edit.value] = updatedOrder;
     initialItems.value = [...orders.value]; // 編輯後更新 initialItems
   }
+
+    // 重新撈取更新後的資料
+    await get_news();
+// 測試註解
+// 測試註解2
   editOpacity.value = 0;
   current_edit.value = null;
   }
-  // 小春堂範例開始
-  // if (current_edit.value === null) return
+  
 
-  // const nIndex = current_edit.value
-  // orders.value[nIndex].payment_status = o_pay.value
-  // orders.value[nIndex].order_status = o_form.value
-  // orders.value[nIndex].shipping_status = o_ship.value
-
-  // current_edit.value = null
-  // total_cost.value = 0
-  // order_cost.value = 0
-  // 小春堂範例結束
-
-
-
-// 3.發送 AJAX 請求更新訂單 (帶串接資料庫後再嘗試)
-  // try {
-  //   const response = await axios.post('../php/n-order_update.php', {
-  //     order_list: orders.value[nIndex].order_list,
-  //     payment_status: orders.value[nIndex].payment_status,
-  //     order_status: orders.value[nIndex].order_status,
-  //     shipping_status: orders.value[nIndex].shipping_status,
-  //   })
-  //   alert("儲存成功")
-  // } catch (error) {
-  //   alert("儲存失敗: " + error.response.status)
-  // }
 
 </script>
 
@@ -318,7 +298,7 @@ const handleSaveEdit = async (updatedOrder) => {
         <div class="code-input">
             <p>消息管理</p>
             <div class="add">
-                <button >新增
+                <button @click="openAddProduct">新增
                   <img src="../assets/images/flat-color-icons_plus.png" alt="">
                 </button>  
             </div>
@@ -348,11 +328,11 @@ const handleSaveEdit = async (updatedOrder) => {
 
             
             <div v-for="(item, index) in displayedItems" :key="item.id" class="order-text">
-            <span>{{ item.news_id }}</span>
-            <span>{{ item.post_date }}</span>
-            <span>{{ item.news_title }}</span>
-            <span>{{ item.news_status }}</span>
-            <span>{{ item.update_date }}</span>
+            <span>{{ item.NEWS_ID }}</span>
+            <span>{{ item.PUBLISH_DATE }}</span>
+            <span>{{ item.NEWS_TITLE }}</span>
+            <span>{{ item.STATUS }}</span>
+            <span>{{ item.EDITOR }}</span>
             <span @click="edit(index)">編輯</span>
             </div>
         </div> 
@@ -370,17 +350,17 @@ const handleSaveEdit = async (updatedOrder) => {
             </button>
         </div>
        <!-- 編輯視窗 -->
-       <div class="n-order_edit" v-if="current_edit !== null" :style="{ opacity: editOpacity }">
+       <div class="n-order_edit" v-if="current_edit !== null || isCreating" :style="{ opacity: editOpacity }">
             <!-- 0.a  在 template 中使用 @close-edit="handleCloseEdit" 來監聽子組件的關閉按鈕的事件，並在 handleCloseEdit 函式中更新 editOpacity 的值。 -->
 
             <!-- 0.b  在 template 中使用 @save-edit="handleSaveEdit" 來監聽子組件的儲存按鈕的事件，並在 handleSaveEdit 函式中更新 editOpacity 的值。 -->
               <NewsPopCMS
-              :order="orders[current_edit]"
+              :order="isCreating ? {} : orders[current_edit]"
               @close-edit="handleCloseEdit"
               @save-edit="handleSaveEdit"/>
             </div>
 
-            <div id="hide" v-if="current_edit !== null"></div>
+            <div id="hide" v-if="current_edit !== null || isCreating"></div>
 
 
             <!-- 1.點擊視窗的儲存或關閉按鈕，畫面要隱藏或持續顯示v-if -->
@@ -543,6 +523,7 @@ const handleSaveEdit = async (updatedOrder) => {
     cursor: default;
     font-family: "Noto Sans TC";
     transition: background-color 0.3s ease, border-radius 0.3s ease;
+    gap: 3px;
 }
 .order-text:hover{
   background-color: #FCB600;
@@ -679,4 +660,6 @@ const handleSaveEdit = async (updatedOrder) => {
   background: rgba(0,0,0,0.5);
   z-index: 1;
 }
+
+
 </style>

@@ -1,5 +1,3 @@
-
-
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
@@ -39,7 +37,7 @@ const logoLinkMap = {
   'one': '/Home',
   'two': '/lifecasino',
   'three': '/SF_Homepage',
-  'four': '/mindspectrum'
+  'four': '/mindspectrum',
 };
 
 const logoLink = computed(() => {
@@ -84,8 +82,9 @@ onUnmounted(() => {
     <div class="icons">
       <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
           class="shoppingicon" /></router-link>
-      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-meh"
-          class="peopleicon" /></router-link>
+      <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" /></router-link>
+
+          
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
     <!-- 半圓形菜單 -->
@@ -122,8 +121,8 @@ header {
   width: 100%;
 
   height: 80px;
-  // position: fixed;
-  
+  position: fixed;
+
   z-index: 1000;
 }
 

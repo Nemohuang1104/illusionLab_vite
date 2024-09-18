@@ -10,9 +10,10 @@ import { defineProps, ref, defineEmits } from 'vue';
 const upload_img = (event) => {
   const file = event.target.files[0];
   if (file) {
+    localOrder.value.imageFile = file; // 儲存圖片檔案以便後續上傳
     const reader = new FileReader();
     reader.onload = (e) => {
-      localOrder.value.cardimage = e.target.result; // 將圖片轉為 Base64 並設置到 localOrder
+      localOrder.value.NEWS_IMG = e.target.result; // 預覽圖片（Base64 用於預覽）
     };
     reader.readAsDataURL(file);
   }
@@ -21,6 +22,7 @@ const upload_img = (event) => {
 /*定義 父組件prop 事件的原始夾帶資訊*/
 const props = defineProps({
   order: Object,
+  default: () => ({})  // 默認是空對象，用於新增產品
 });
 
 /*定義 儲存和關閉按鈕emit 事件的夾帶資訊*/
@@ -32,12 +34,70 @@ const f_close = () => {
   emit('close-edit', { opacity: 0, edit: null }); // 發出 'close-edit' 事件並傳遞 editOpacity 值
 };
 
-// 2.處理儲存按鈕emit夾帶的編輯狀態，並傳回父組件
-const f_save = () => {
-  emit('save-edit', localOrder.value); // 將本地編輯的數據傳遞回父組件
-  f_close(); // 儲存後關閉編輯視窗
-};
+/* 儲存修改並發送到後端 */
+const f_save = async () => {
+  const formData = new FormData();
+  if (!localOrder.value.NEWS_ID) {
+    // 新增產品
+    formData.append('PUBLISH_DATE', localOrder.value.PUBLISH_DATE);
+    formData.append('NEWS_TITLE', localOrder.value.NEWS_TITLE);
+    formData.append('NEWS_CONTENT', localOrder.value.NEWS_CONTENT);
+    formData.append('STATUS', localOrder.value.STATUS);
+    
 
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
+    }
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/News/AddNews.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('新增產品成功:', result);
+        emit('save-edit', result); // 傳遞結果給父組件
+        f_close();
+      } else {
+        console.error('新增產品失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  } else {
+    // 編輯已有產品
+  formData.append('NEWS_ID', localOrder.value.NEWS_ID);
+  formData.append('PUBLISH_DATE', localOrder.value.PUBLISH_DATE);
+  formData.append('NEWS_TITLE', localOrder.value.NEWS_TITLE);
+  formData.append('NEWS_CONTENT', localOrder.value.NEWS_CONTENT);
+  formData.append('STATUS', localOrder.value.STATUS);
+
+  // 如果有上傳的圖片，將圖片加入 FormData
+  if (localOrder.value.imageFile) {
+    formData.append('image', localOrder.value.imageFile); // 注意這裡上傳的是檔案，而非 Base64
+  }
+
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/NEWS/SaveNewsData.php', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const result = await response.json();
+    if (result.status === 'success') {
+      emit('save-edit', localOrder.value); // 將編輯的數據傳遞回父組件
+      f_close(); // 儲存後關閉彈出視窗
+    } else {
+      console.error('儲存失敗:', result.message);
+    }
+  } catch (error) {
+    console.error('發送儲存請求時發生錯誤:', error);
+  }
+
+}
+};
 
 </script>
 <template>
@@ -51,7 +111,7 @@ const f_save = () => {
                 <div class="orderinf1">
                     <div class="orderdiv">
                         <p class="ptext">文章編號 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.news_id">
+                        <input class="inputtext" type="text" v-model="localOrder.NEWS_ID">
                     </div>
                 </div>
 
@@ -59,25 +119,25 @@ const f_save = () => {
                     <div class="orderinf">
                     <div class="orderdiv">
                         <p class="ptext">文章標題 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.news_title">
+                        <input class="inputtext" type="text" v-model="localOrder.NEWS_TITLE">
                     </div>
                     
                     
                     <div class="orderdiv">
                         <p class="ptext">上下架 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.news_status">
+                        <input class="inputtext" type="text" v-model="localOrder.STATUS">
                     </div>
                 </div>
                 <div class="orderdiv">
                         <p class="text_ptext">文章內容 : </p>
-                        <textarea rows="10" class="textarea"  v-model="localOrder.news_content"></textarea>
+                        <textarea rows="10" class="textarea"  v-model="localOrder.NEWS_CONTENT"></textarea>
                     </div>
                 <div class="upload_div">
                         <p class="upload-product"> 圖片 : </p>
                         <input class="n-customizedCard" type="file" @change="upload_img">
                         <p class="upload">請選擇圖片上傳</p>
                         <div class="n-customized_img">
-                            <img v-if="localOrder.cardimage" :src="localOrder.cardimage" alt="預覽圖片" class="preview-img">
+                            <img v-if="localOrder.NEWS_IMG" :src="localOrder.NEWS_IMG" alt="預覽圖片" class="preview-img">
                         </div>
                         
                     </div>

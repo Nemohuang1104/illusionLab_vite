@@ -12,7 +12,7 @@
         <div class="content">
             <img src="../assets/images/illusionLab_logo.png" alt="">
             <div class="items">
-                <router-link  to="">
+                <router-link  to="PP_privacy_policy">
                     <span>隱私權政策</span>
                 </router-link>
                 <router-link to="">
@@ -21,7 +21,7 @@
                 <router-link @click="goToPage" to="/News">
                     <span>最新消息</span>
                 </router-link>
-                <router-link to="">
+                <router-link to="PP_termOfUse">
                     <span>使用辦法</span>
                 </router-link>
             </div>
@@ -44,6 +44,7 @@
     background: linear-gradient(180deg, #000 26%, #505050 100%);
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .content{
@@ -84,12 +85,6 @@ a:last-child{
 }
 
 @media (max-width: 768px){
-    .content p{
-        font-size: 8px;
-    }
-}
-
-@media (max-width: 390px){
     .content p{
         font-size: 8px;
     }
