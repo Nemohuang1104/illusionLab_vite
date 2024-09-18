@@ -1,17 +1,13 @@
 <template>
   <div class="template_mobang" :class=holyShitBGI>
-  <div class="top">
-      <MS_com_title 
-      :mode="modeSelect"  
-      mainTitle="賓客資料" 
-      subTitle="Customer Info"
-      :intro="OurIntro" />
-  </div>
+    <div class="top">
+      <MS_com_title :mode="modeSelect" mainTitle="賓客資料" subTitle="Customer Info" :intro="OurIntro" />
+    </div>
     <main>
       <form class="selections" action="" method="post">
         <div class="selection">
           <h4 :style="{ color: MobangColor }">* 姓名 Name</h4>
-          <input class="options" type="text"  :style="{ borderColor: MobangColor }"></input>
+          <input class="options" type="text" :style="{ borderColor: MobangColor }"></input>
         </div>
         <div class="selection">
           <h4 :style="{ color: MobangColor }">* 電話 Phone Number</h4>
@@ -50,13 +46,13 @@
       :mode="currentMode" :currentStep="currentStep"
         mode="two1" :step="modeSelect" 
     /> -->
-  <!-- </router-link> -->
+    <!-- </router-link> -->
   </div>
 </template>
 
 <script setup>
-  import MS_com_title from '@/components/MS/MS_com_title.vue';
-  import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+import MS_com_title from '@/components/MS/MS_com_title.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
 </script>
 
 <script>
@@ -78,8 +74,8 @@ export default {
     },
   },
   computed: {
-    holyShitBGI(){
-        if (this.mode === 'one') {
+    holyShitBGI() {
+      if (this.mode === 'one') {
         return 'template_mobangOne';
       } else if (this.mode === 'two') {
         return 'template_mobangTwo';
@@ -120,115 +116,152 @@ export default {
     },
     dynamicRoute() {
       if (this.mode === 'one1') {
-        return '/LC_Ticket_reservation2'; 
+        return '/LC_Ticket_reservation2';
       } else if (this.mode === 'mode2') {
         return '/page2';
-      }else if (this.mode === 'mode3') {
+      } else if (this.mode === 'mode3') {
         return '/page3';
       }
-     
+
     }
   },
 };
 </script>
 
-<style lang="scss" scoped>  
-    .check{
-        display: flex;
-        flex-direction: row;
-    }
+<style lang="scss" scoped>
+.check {
+  display: flex;
+  flex-direction: row;
+}
 
-    .selections{
-        display: flex;
-        flex-direction: column;
-        gap: 60px;
-    }
-    .noto-sans-tc-regular {
-    font-family: "Noto Sans TC", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    }
-    h1{font-size: 30px;}
-    h2{font-size: 28px;}
-    h3{font-size: 18px;}
-    h4{font-size: 16px;}
-    h5{font-size: 14px;}
-    h6{font-size: 16px;}
-     p{font-size: 14px;}
+.selections {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
 
-    a{
-        text-decoration: none;
-    }
+.noto-sans-tc-regular {
+  font-family: "Noto Sans TC", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 
-    h1,h2,h3,h4,h5,h6,p{
-        font-family:'Noto Sans TC';
-        color: #855F49;
-        font-weight: bold;
-        text-align: center;
-        line-height: 150%;
-    }
+h1 {
+  font-size: 30px;
+}
 
-    .template_mobang{
-        display: flex;
-        padding: 150px 200px;
-        flex-direction: column;
-        align-items: center;
-        gap: 50px;
-    }
+h2 {
+  font-size: 28px;
+}
 
-    .top{
-        display: flex;
-        flex-direction: column;
-        gap: 0;
+h3 {
+  font-size: 18px;
+}
 
-    }
-    main{
-        display: flex;
-        flex-direction: column;
-        gap: 60px;
-    }
-    .options{
-        box-sizing: border-box;
-        margin: 0 auto;
-        width: 40vw;
-        display: flex;
-        padding:15px 20px  ;
-        background: transparent;
-        justify-content: flex-end;
-        align-items: center;
-        border-radius: 40px;
-        border: 2px solid #855F49;
-        
-    }
-    .selection{
-        width: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .selections{
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-    }
+h4 {
+  font-size: 16px;
+}
 
-    select{
-        appearance: none
-    }
-    .options{
-        text-align: center;
-    }
-    .template_mobangOne{
-        // background-image: url('../src/ms/modeBGI1.png');
-        background-size:contain;  
-    }
-    .template_mobangTwo{
-        background-image: url('../src/ms/modeBGI2.png');
+h5 {
+  font-size: 14px;
+}
 
-    }
-    .template_mobangThree{
-        background-image: url('../src/ms/modeBGI3.jpg');
-    }
+h6 {
+  font-size: 16px;
+}
+
+p {
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: 'Noto Sans TC';
+  color: #855F49;
+  font-weight: bold;
+  text-align: center;
+  line-height: 150%;
+}
+
+.template_mobang {
+  display: flex;
+  padding: 150px 200px;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.options {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 40vw;
+  display: flex;
+  padding: 15px 20px;
+  background: transparent;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 40px;
+  border: 2px solid #855F49;
+
+}
+
+.selection {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.selections {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+select {
+  appearance: none
+}
+
+.options {
+  text-align: center;
+}
+
+.template_mobangOne {
+  // background-image: url('../src/ms/modeBGI1.png');
+  background-size: contain;
+}
+
+.template_mobangTwo {
+  background-image: url('../src/ms/modeBGI2.png');
+
+}
+
+.template_mobangThree {
+  background-image: url('../src/ms/modeBGI3.jpg');
+}
+
 </style>

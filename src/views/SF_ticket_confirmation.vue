@@ -115,6 +115,10 @@ export default {
   font-size: 16px  !important;
 }
 
+::v-deep h6:hover{
+  color: white  !important;
+}
+
 ::v-deep p{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;

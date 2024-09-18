@@ -202,7 +202,7 @@ onBeforeUnmount(() => {
                 }" class="mySwiper">
 
                     <swiper-slide>
-                        <router-link to="./SF_DetailList">
+                        <router-link to="./SF_DetailList/15">
                             <div class="carousel">
                                 <div class="carousel-item">
                                     <img id="tshirt" src="../assets/images/SF_Tshirt.png">
@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
                         </router-link>
                     </swiper-slide>
                     <swiper-slide>
-                        <router-link to="./SF_DetailList">
+                        <router-link to="./SF_DetailList/13">
                             <div class="carousel">
                                 <div class="carousel-item">
                                     <img src="../assets/images/SFbook.svg">
@@ -230,7 +230,7 @@ onBeforeUnmount(() => {
                         </router-link>
                     </swiper-slide>
                     <swiper-slide>
-                        <router-link to="./SF_DetailList">
+                        <router-link to="./SF_DetailList/12">
                             <div class="carousel">
                                 <div class="carousel-item">
                                     <img src="../assets/images/SF_cup.png">
@@ -383,8 +383,6 @@ onBeforeUnmount(() => {
     // max-width: 1400px;
     // width: 100%;
     // height: 750px;
-
-
     position: absolute;
     top: 0;
     left: 0;
@@ -739,11 +737,11 @@ onBeforeUnmount(() => {
     }
 
     .product-info p {
+        text-align: center;
         br {
             display: none;
         }
 
-        text-align: center;
     }
 
 }
@@ -802,6 +800,15 @@ onBeforeUnmount(() => {
 
 
 @media screen and (max-width: 430px) {
+    .intro video{
+        margin-top: 85px;
+        box-sizing: border-box;
+   
+    }
+    .typewriter-container{
+        margin-top: 105px;
+    }
+
     .typewriter-container h2 {
         font-size: 16px;
     }

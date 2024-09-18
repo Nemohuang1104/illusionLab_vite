@@ -1,13 +1,84 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+// 頁首頁尾
 import Header_0 from '@/components/Header_0.vue';
 const currentMode = ref('three');
 
 import Footer_2 from '@/components/Footer_2.vue';
 
-import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
-//輪播圖
+// 匯入漸層藍色標題樣式
+import StrellarFrontierTitle from '@/components/SFTitle.vue';
+
+const props = defineProps({
+    productInfo: Object
+})
+
+
+//在商品細項撈取商品資料
+const item = ref([]);
+const route = useRoute();
+// const router = useRouter();
+const productDetail = ref(null);
+
+// 根據商品 ID 撈取商品細項資料
+async function fetchProductDetail() {
+    try {
+        // console.log(router);
+
+        console.log(route.params);
+
+        console.log(route.params.id);
+
+        const productId = route.params.id; // 從路由獲取商品 ID
+        const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+
+        console.log(response);
+
+        if (response.ok) {
+            try {
+                const data = await response.json();
+                console.log(data);
+                item.value = data;
+
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+
+
+
+        }
+
+        // fetch(`http://illusionlab.local/public/PDO/ProductData/SF_FetchProductDetail.php?productId=${productId}`).then(response => response.json()).then(
+        //     json => console.log(json)
+        // )
+
+
+
+    } catch (error) {
+        console.error('Error fetching product details:', error);
+    }
+
+}
+
+onMounted(() => {
+    // router.push('/')
+    fetchProductDetail(); // 撈取商品細項資料
+});
+
+
+
+
+
+
+// 輪播圖
 // Import Swiper and modules
 // import { Swiper, SwiperSlide } from 'swiper/vue';
 // import 'swiper/css';
@@ -31,6 +102,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 // const modules = [FreeMode, Navigation, Thumbs];
 
 
+
 </script>
 
 <template>
@@ -47,10 +119,10 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
             <div aria-label="Breadcrumb">
                 <ul class="breadcrumb">
                     <li><router-link to="/SF_ProductPage">全部商品 </router-link></li>
-                    <li><a href="#">太空金屬杯</a></li>
+                    <li><a href="#">{{ item.PRODUCT_NAME }}</a></li>
                 </ul>
             </div>
-            <div class="pbox">
+            <div class="pbox" v-if="item">
                 <!-- <swiper :style="{
                     '--swiper-navigation-color': '#fff',
                     '--swiper-pagination-color': '#fff',
@@ -61,18 +133,18 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
                             src="../assets/images/SF_Pillow.png" /></swiper-slide><swiper-slide><img
                             src="../assets/images/SF_easycard_1.png" /></swiper-slide>
                 </swiper> -->
-                <div class="pimg"><img src="../assets/images/SF_cup.png" alt=""></div>
+                <div class="pimg"><img :src="item.PRODUCT_IMG" alt=""></div>
                 <div>
                     <div class="textbox">
-                        <p>商品編號 : SF001</p>
-                        <h3>太空金屬杯</h3>
-                        <h4>NT $ 299 </h4>
-                        <div class="leftlight">
+                        <p>商品編號 :　{{ item.PRODUCT_ID }}</p>
+                        <h3>{{ item.PRODUCT_NAME }}</h3>
+                        <h4>NT $ {{ item.PRODUCT_PRICE }} </h4>
+                        <!-- <div class="leftlight">
                             <p>作者 : Nemo  </p>
                             <p>與知名插畫家 Nina 聯名推出</p>
-                        </div>
-                        <p>材質：雙層鈦金屬</p>
-                        <p>商品規格 : 寬 7.5 cm x 高 10 cm</p>
+                        </div> -->
+                        <p>材質：{{ item.MATERIAL }}</p>
+                        <p>商品規格 :{{ item.PRODUCT_SIZE }}</p>
                     </div>
                     <!-- <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="4" :freeMode="true"
                         :watchSlidesProgress="true" :modules="modules" class="mySwiper">
@@ -112,11 +184,10 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 
 <style lang="scss" scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 
 
-*{
+* {
     text-decoration: none;
     font-family: "Noto Serif TC";
 
@@ -136,7 +207,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     text-align: center;
     padding-top: 120px;
 
-    
+
 }
 
 //標題
@@ -232,7 +303,8 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     color: #C1693B;
     font-weight: bold;
 }
-.textbox h4{
+
+.textbox h4 {
     font-size: 22px;
 }
 
@@ -322,10 +394,10 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 
 .size option {
     color: black;
-    
+
 }
 
-.size select:hover{
+.size select:hover {
     background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
 }
 
@@ -340,7 +412,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     // display: flex;
     // justify-content: center;
     // align-items: center;
-    
+
     cursor: pointer;
 
     text-decoration: none;
@@ -349,7 +421,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
 }
 
-.rightdown p:hover{
+.rightdown p:hover {
     background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
 }
 
@@ -381,6 +453,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     border-radius: 12px;
     margin: 0 auto;
 }
+
 //小圖
 .mySwiper {
     height: 70%;
@@ -390,7 +463,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     // border-radius: 12px;
     object-fit: cover;
     // border: 5px solid #122A74;
-    
+
 }
 
 
@@ -402,7 +475,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
     opacity: 0.6;
 }
 
-.mySwiper .swiper-slide img{
+.mySwiper .swiper-slide img {
     border: 3px solid #C1693B;
     border-radius: 12px;
     margin-right: 5px;
@@ -424,10 +497,10 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
 // RWD
 
 @media(max-width: 920px) {
-   .breadcrumb{
-    padding-left:5%;
+    .breadcrumb {
+        padding-left: 5%;
     }
-    
+
     .producttitle {
         width: 80%;
     }
@@ -437,7 +510,7 @@ import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層�
         height: auto;
     }
 
-    .pbox{
+    .pbox {
         flex-direction: column;
     }
 

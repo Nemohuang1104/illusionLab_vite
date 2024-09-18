@@ -111,7 +111,11 @@ export default {
   transition: .3s;
 }
 
-.soFuckingShinningTitleColor[data-v-3d5d2ec6]{
+::v-deep h6:hover{
+  color: white  !important;
+}
+
+.soFuckingShinningTitleColor{
   
   &:nth-last-child(2){
     margin-bottom: 10px;
@@ -134,6 +138,8 @@ export default {
 ::v-deep .options option{
   background-color: black;
 }
+
+
 
 @media (max-width: 500px){
 

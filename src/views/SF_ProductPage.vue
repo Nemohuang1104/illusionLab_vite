@@ -42,7 +42,8 @@ onMounted(() => {
   <div>
     <Header_0 :mode="currentMode"></Header_0>
   </div>
-  
+
+
   <div class="warpper">
 
     <div class="center">
@@ -65,6 +66,19 @@ onMounted(() => {
       <!-- 放置一個商品列的外框 -->
       <div class="pagebox">
         <div class="list">
+          <div class="pro" v-for="item in productInfo" :key="item.PRODUCT_ID">
+            <router-link :to="{ name: 'SF_DetailList', params: { id: item.PRODUCT_ID } }">
+              <img :src="item.PRODUCT_IMG" alt="">
+        
+              <div>
+                <p>{{ item.PRODUCT_NAME }}</p>
+                <div class="price">
+                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+                </div>
+              </div>
+            </router-link>
+          </div>
           <!-- <router-link to="./SF_DetailList">
             <div class="pro">
               <img src="../assets/images/SF_cup.png" alt="">
@@ -77,18 +91,7 @@ onMounted(() => {
               </div>
             </div>
           </router-link> -->
-          <router-link to="./SF_DetailList">
-            <div class="pro" v-for="(item,index) in productInfo" :key="item.id">
-              <img :src="item.PRODUCT_IMG" alt="">
-              <div>
-                <p>{{ item.PRODUCT_NAME }}</p>
-                <div class="price">
-                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
-                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-                </div>
-              </div>
-            </div>
-          </router-link>
+
           <!-- <div class="pro">
             <router-link to="./SF_DetailList"><img src="../assets/images/SF_easycard_1.png" alt=""></router-link>
             <div>
@@ -135,9 +138,9 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div>
-      <Footer_2></Footer_2>
-    </div>
+  </div>
+  <div>
+    <Footer_2></Footer_2>
   </div>
 </template>
 
@@ -160,7 +163,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  padding-top: 80px;
   // border: 1px solid red;
   // background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0));
 
@@ -282,19 +285,16 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 26px;
-  /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
-  /* 商品換行 */
 
 }
 
 .pro {
-  // border: 1px solid red;
-  width: 160px;
+  width: calc(25% - 26px); // 使用百分比設置寬度，讓元素在縮小時能換行
+  min-width: 160px; // 設置最小寬度，避免過度縮小
   height: 220px;
   margin-bottom: 20px;
   padding: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  /*浮起來及陰影效果 */
   border-radius: 10px;
   cursor: pointer;
 }
