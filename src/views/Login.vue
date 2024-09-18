@@ -1,7 +1,141 @@
 <script setup>
 import Header_0 from '../components/Header_0.vue';
+const currentMode = ref('one');
 import Footer_0 from '../components/Footer_0.vue';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+
+
+// export default {
+//   setup() {
+    const router = useRouter();
+    // 表单字段
+    const email = ref('');
+    const password = ref('');
+
+    // 错误信息
+    const emailError = ref('');
+    const passwordError = ref('');
+    
+
+    // 邮箱验证规则 (简单验证)
+    const checkEmail = () => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value) {
+        emailError.value = '請輸入電子郵件';
+      } else if (!emailRegex.test(email.value)) {
+        emailError.value = '請輸入有效的電子郵件';
+      } else {
+        emailError.value = '';
+      }
+    };
+
+    // 密码验证规则 (至少 6 个字符)
+    const checkPassword = () => {
+      const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
+      if (!password.value) {
+        passwordError.value = '請輸入密碼';
+      } else if (password.value.length < 8) {
+        passwordError.value = '密碼須為(數字+英文8-16位，開頭字符必須是英文字母)';
+      } else if (!passwordRegex.test(password.value)) {
+        passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字符必須是英文字母)';
+      } else {
+        passwordError.value = '';
+      }
+    };
+
+    //忘記密碼
+    const forgotPassword = () => {
+      // Swal.fire({
+      //   title: "請輸入電子信箱",
+      //   input: "text",
+      //   inputAttributes: {
+      //     autocapitalize: "off"}
+      // })
+      const { value: email } = Swal.fire({
+        title: "請輸入電子信箱",
+        input: "email",
+        inputLabel: "Your email address",
+        inputPlaceholder: "請輸入電子信箱"
+      })
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "已寄送信件至您的電子信箱中",
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+    };
+    
+
+    // 表单是否有效的计算属性
+    // const isFormValid = computed(() => {
+    //   return !emailError.value && !passwordError.value && email.value && password.value;
+    // });
+
+
+    //提交表单
+    // const onSubmit = () => {
+    //   checkEmail();     // 先验证电子邮件
+    //   checkPassword();  // 再验证密码
+
+    //   if (isFormValid.value) {
+    //     alert('歡迎進入幻浸實驗室')
+    //     router.push('/MemberCenter');
+    //   } else {
+    //     alert('請更正表單中的錯誤!');
+    //   }
+    // };
+
+  // 檢查驗證碼是否正確
+  const onSubmit = () => {
+    checkEmail();     // 先验证电子邮件
+    checkPassword();  
+
+  if (!emailError.value  && !passwordError.value ) {
+    // 驗證碼正確，顯示註冊成功訊息
+    //alert('註冊成功！歡迎加入！');
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "歡迎進入幻浸實驗室",
+      showConfirmButton: false,
+      timer: 1200
+    }).then(() => {router.push('/MemberCenter')});
+    // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
+  } else {
+    // 驗證碼錯誤，彈出錯誤訊息
+    //  alert('請重新檢視表單');
+    Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "請重新檢視表單",
+      showConfirmButton: false,
+      timer: 1200
+    });
+  }
+  }
+
+
+    // return {
+    //   email,
+    //   password,
+    //   emailError,
+    //   passwordError,
+    //   isFormValid,
+    //   onSubmit,
+    //   checkEmail,
+    //   checkPassword,
+    // };
+//   },
+// };
 </script>
+
 
 <template>
   <div class="wrapper">
@@ -14,13 +148,28 @@ import Footer_0 from '../components/Footer_0.vue';
   <h1>會員登入</h1>
   <!-- 表格區塊 -->
   <div class="form">
-    <input type="text" placeholder="請輸入您的電子信箱" class="text">
-    <input type="password" placeholder="請輸入您的密碼" class="text">
+    <!-- 信箱錯誤時出現的訊息 -->
+    <span v-if="emailError" class="error">{{ emailError }}</span>
+
+    <input type="text" placeholder="請輸入您的電子信箱" 
+    class="text" 
+    v-model="email"
+    @blur="checkEmail" >
+    
+    <!-- 密碼錯誤時出現的訊息 -->
+    <span v-if="passwordError" class="error">{{ passwordError }}</span>
+
+    <input type="password" placeholder="請輸入您的密碼" 
+    class="text" 
+    v-model="password"
+    @blur="checkPassword">
+    
+    <div></div>
     <!--忘記密碼 -->
-    <a href="#" class="forgot">忘記密碼 ?</a>
-    <router-link to="/MemberCenter">
-      <input type="submit" value="登入" class="login">
-    </router-link>
+    <a href="#" class="forgot" @click="forgotPassword">忘記密碼 ?</a>
+
+    <button @click="onSubmit" class="login">登入</button>
+   
     <p>其他登入方式</p>
     <div class="other">
       <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
@@ -46,9 +195,11 @@ import Footer_0 from '../components/Footer_0.vue';
   background: map-get($color_0,bgc_blue);
   background-repeat: no-repeat;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   font-family:"Noto Sans TC";
   padding-top: 80px;
+  padding-bottom: 30px;
 }
 
 .header{
@@ -59,8 +210,7 @@ import Footer_0 from '../components/Footer_0.vue';
 }
 
 main{
-  width: 40vw;
-  height: 480px;
+  width: 520px;
   border-radius: 20px;
   border: 1px solid  map-get($colorfont_0,white);
   background: map-get($color_0,bgc_white);
@@ -100,11 +250,17 @@ h1{
   outline: none;
 }
 
+.error{
+  font-size: 12px;
+  color: #000354;
+  padding-left: 10px;
+}
+
 .form .text:focus{
   border: 1px solid #7976BB;
 }
 
-.form .text+a{
+.form .forgot{
   display: block;
   text-align: right;
   margin-bottom: 16px;
@@ -120,12 +276,12 @@ h1{
   margin-bottom: 16px;
 }
 
-.form .login{
+button{
   width: 360px;
   height: 36px;
   border-radius: 80px;
   border: 1px solid #FFF;
-  background: rgba(255, 255, 255, 0.70);
+  background:rgba(255, 255, 255, 0.70);
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   font-size: 16px;
   color: #505050;
@@ -157,13 +313,13 @@ h1{
   font-size: 16px;
   color: #505050;
   cursor: pointer;
+  margin-bottom: 50px;
 }
 
 .form .signup:hover{
   color: #505050;
   background-color:#fff;
 }
-
 //==========================RWD=========================
 @media screen and (max-width:1000px){
   .form{

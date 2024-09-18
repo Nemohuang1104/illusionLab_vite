@@ -160,8 +160,8 @@ onMounted(() => {
                             <input type="button" value=" + " class="add">
                         </div>
                         <div class="size">
-                            <select name="size-select" id="">
-                                <option value="----- 商品尺寸 -----">----- 商品尺寸 -----</option>
+                            <select name="size-select" id="size-select">
+                                <option value="----- 商品尺寸 -----">商品尺寸</option>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
@@ -300,12 +300,11 @@ onMounted(() => {
 
 .textbox h3 {
     font-size: 28px;
-    color: #C1693B;
-    font-weight: bold;
+    font-weight: 600;
 }
-
-.textbox h4 {
-    font-size: 22px;
+.textbox h4{
+    font-size: 20px;
+    font-weight: 800;
 }
 
 
@@ -367,7 +366,7 @@ onMounted(() => {
 
 //尺寸下拉式選單
 .size select {
-    width: 300px;
+    width: 200px;
     height: 40px;
     border-radius: 12px;
     display: block;
@@ -375,14 +374,12 @@ onMounted(() => {
     line-height: 40px;
     margin-bottom: 20px;
     font-size: 20px;
-    color: #fff;
+    color: #ffffff;
     outline: none;
-    background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    // border: 1px solid ;
-    border: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    cursor: pointer;
-    border: unset;
+    // background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    background: none;
 }
+
 
 //將下拉式選單select箭頭刪掉 
 .size select {
@@ -419,6 +416,7 @@ onMounted(() => {
     font-size: 22px;
     color: #fff;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    cursor: pointer;
 }
 
 .rightdown p:hover {

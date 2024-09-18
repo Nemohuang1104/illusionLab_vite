@@ -22,6 +22,7 @@ const upload_img = (event) => {
 /*定義 父組件prop 事件的原始夾帶資訊*/
 const props = defineProps({
   order: Object,
+  default: () => ({})  // 默認是空對象，用於新增產品
 });
 
 /*定義 儲存和關閉按鈕emit 事件的夾帶資訊*/
@@ -36,11 +37,44 @@ const f_close = () => {
 /* 儲存修改並發送到後端 */
 const f_save = async () => {
   const formData = new FormData();
+  if (!localOrder.value.NEWS_ID) {
+    // 新增產品
+    formData.append('PUBLISH_DATE', localOrder.value.PUBLISH_DATE);
+    formData.append('NEWS_TITLE', localOrder.value.NEWS_TITLE);
+    formData.append('NEWS_CONTENT', localOrder.value.NEWS_CONTENT);
+    formData.append('STATUS', localOrder.value.STATUS);
+    formData.append('UPDATE_DATE', localOrder.value.UPDATE_DATE);
+    
+
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
+    }
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/News/AddNews.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('新增產品成功:', result);
+        emit('save-edit', result); // 傳遞結果給父組件
+        f_close();
+      } else {
+        console.error('新增產品失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  } else {
+    // 編輯已有產品
   formData.append('NEWS_ID', localOrder.value.NEWS_ID);
   formData.append('PUBLISH_DATE', localOrder.value.PUBLISH_DATE);
   formData.append('NEWS_TITLE', localOrder.value.NEWS_TITLE);
   formData.append('NEWS_CONTENT', localOrder.value.NEWS_CONTENT);
   formData.append('STATUS', localOrder.value.STATUS);
+  formData.append('UPDATE_DATE', localOrder.value.UPDATE_DATE);
 
   // 如果有上傳的圖片，將圖片加入 FormData
   if (localOrder.value.imageFile) {
@@ -63,8 +97,9 @@ const f_save = async () => {
   } catch (error) {
     console.error('發送儲存請求時發生錯誤:', error);
   }
-};
 
+}
+};
 
 </script>
 <template>

@@ -15,7 +15,7 @@
         <div class="contain">
           <h2>{{ card.NEWS_TITLE }}</h2>
           <p class="description">{{ card.NEWS_CONTENT }}</p>
-          <p class="date">{{ card.PUBLISH_DATE }}</p>
+          <p class="date">{{ card.UPDATE_DATE }}</p>
           <p class="read" @click="openModal(card)">閱讀全文</p>
         </div>
 

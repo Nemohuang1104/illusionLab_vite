@@ -11,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productName = $_POST['PRODUCT_NAME'];
     $productPrice = $_POST['PRODUCT_PRICE'];
     $productStatus = $_POST['PRODUCT_STATUS'];
+    $productMaterial = $_POST['MATERIAL'];
+    $productSize = $_POST['PRODUCT_SIZE'];
+
 
     // 處理圖片上傳
     $imagePath = null;
@@ -39,7 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // 建立 SQL 語句，根據是否有圖片決定是否更新 PRODUCT_IMG 欄位
         $sql = "UPDATE PRODUCT SET EVENT_ID = :eventId, PRODUCT_NAME = :productName, 
-                PRODUCT_PRICE = :productPrice, PRODUCT_STATUS = :productStatus";
+                PRODUCT_PRICE = :productPrice, PRODUCT_STATUS = :productStatus,
+                MATERIAL = :productMaterial,
+                PRODUCT_SIZE = :productSize ";
 
         if ($imagePath) {
             $sql .= ", PRODUCT_IMG = :imagePath"; // 若有圖片，更新 PRODUCT_IMG 欄位
@@ -53,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':productPrice', $productPrice);
         $stmt->bindParam(':productStatus', $productStatus);
         $stmt->bindParam(':productId', $productId);
+        $stmt->bindParam(':productMaterial', $productMaterial);
+        $stmt->bindParam(':productSize', $productSize);
 
         if ($imagePath) {
             $stmt->bindParam(':imagePath', $imagePath); // 綁定圖片路徑參數

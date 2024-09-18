@@ -291,7 +291,7 @@ const routes = [
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
     meta: {
-      title: "星際邊際全部商品"
+      title: "星際邊境全部商品"
     },
     requiredLogin: false
   },
@@ -300,7 +300,7 @@ const routes = [
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊際商品細項"
+      title: "星際邊境商品細項"
     },
     requiredLogin: false,
     props: true // 將路由參數作為 props 傳入組件

@@ -6,12 +6,13 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $eventId = $_POST['EVENT_ID'];
-    $productName = $_POST['PRODUCT_NAME'];
-    $productPrice = $_POST['PRODUCT_PRICE'];
-    $productStatus = $_POST['PRODUCT_STATUS'];
-    $productMaterial = $_POST['MATERIAL'];
-    $productSize = $_POST['PRODUCT_SIZE'];
+    // 檢查 PUBLISH_DATE，如果沒有傳入，則自動設置為當前日期
+    
+    $publishDate = date('Y-m-d'); // 使用當前日期
+    $newsTittle = $_POST['NEWS_TITLE'];
+    $newsContent = $_POST['NEWS_CONTENT'];
+    $status = $_POST['STATUS'];
+    $updateDate = date('Y-m-d'); // 使用當前日期
 
     // 處理圖片上傳
     $imagePath = null;
@@ -36,16 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // 新增商品資訊
+    // 新增新聞資訊
     try {
-        // 建立 SQL 語句，根據是否有圖片決定是否插入 PRODUCT_IMG 欄位
-        $sql = "INSERT INTO PRODUCT (EVENT_ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STATUS, MATERIAL, PRODUCT_SIZE";
+        // 建立 SQL 語句，根據是否有圖片決定是否插入 NEWS_IMG 欄位
+        $sql = "INSERT INTO NEWS (PUBLISH_DATE, NEWS_TITLE, NEWS_CONTENT, STATUS, UPDATE_DATE";
 
         if ($imagePath) {
-            $sql .= ", PRODUCT_IMG"; // 若有圖片，插入 PRODUCT_IMG 欄位
+            $sql .= ", NEWS_IMG"; // 若有圖片，插入 NEWS_IMG 欄位
         }
 
-        $sql .= ") VALUES (:eventId, :productName, :productPrice, :productStatus, :productMaterial, :productSize";
+        $sql .= ") VALUES (:publishDate, :newsTittle, :newsContent, :status, :updateDate";
 
         if ($imagePath) {
             $sql .= ", :imagePath"; // 若有圖片，插入相應的值
@@ -54,12 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql .= ")";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':eventId', $eventId);
-        $stmt->bindParam(':productName', $productName);
-        $stmt->bindParam(':productPrice', $productPrice);
-        $stmt->bindParam(':productStatus', $productStatus);
-        $stmt->bindParam(':productMaterial', $productMaterial);
-        $stmt->bindParam(':productSize', $productSize);
+        $stmt->bindParam(':publishDate', $publishDate);
+        $stmt->bindParam(':newsTittle', $newsTittle);
+        $stmt->bindParam(':newsContent', $newsContent);
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':updateDate', $updateDate);
 
         if ($imagePath) {
             $stmt->bindParam(':imagePath', $imagePath); // 綁定圖片路徑參數
@@ -67,9 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // 執行 SQL 語句
         if ($stmt->execute()) {
-            // 獲取剛剛插入的商品 ID
-            $newProductId = $pdo->lastInsertId();
-            echo json_encode(["status" => "success", "PRODUCT_ID" => $newProductId]);
+            // 獲取剛剛插入的消息 ID
+            $newNewsId = $pdo->lastInsertId();
+            echo json_encode(["status" => "success", "NEWS_ID" => $newNewsId]);
         } else {
             echo json_encode(["status" => "error", "message" => "資料庫插入失敗"]);
         }
@@ -79,5 +79,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-

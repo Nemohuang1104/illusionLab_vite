@@ -42,6 +42,8 @@ const f_save = async () => {
     formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
     formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
     formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
+    formData.append('MATERIAL', localOrder.value.MATERIAL);
+    formData.append('PRODUCT_SIZE', localOrder.value.PRODUCT_SIZE);
 
     if (localOrder.value.imageFile) {
       formData.append('image', localOrder.value.imageFile);
@@ -71,6 +73,8 @@ const f_save = async () => {
     formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
     formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
     formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
+    formData.append('MATERIAL', localOrder.value.MATERIAL);
+    formData.append('PRODUCT_SIZE', localOrder.value.PRODUCT_SIZE);
 
     if (localOrder.value.imageFile) {
       formData.append('image', localOrder.value.imageFile);
@@ -129,6 +133,14 @@ const f_save = async () => {
             <div class="orderdiv">
               <p class="ptext">上下架 : </p>
               <input class="inputtext" type="text" v-model="localOrder.PRODUCT_STATUS" />
+            </div>
+            <div class="orderdiv">
+              <p class="ptext">材質 : </p>
+              <input class="inputtext" type="text" v-model="localOrder.MATERIAL" />
+            </div>
+            <div class="orderdiv">
+              <p class="ptext">規格 : </p>
+              <input class="inputtext" type="text" v-model="localOrder.PRODUCT_SIZE" />
             </div>
           </div>
 
@@ -270,16 +282,14 @@ const f_save = async () => {
 
 .orderinf {
     
-    display: flex;
+  display: grid;
     align-items: start;
-    // max-width: 800px;
     max-width: 100%;
-
-    // border: 1px solid red;
-    gap: 20%;
+    gap: 4%;
     flex-wrap: wrap;
     margin-bottom: 20px;
     padding: 1%;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 
 }
 

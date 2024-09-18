@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newsTittle = $_POST['NEWS_TITLE'];
     $newsContent = $_POST['NEWS_CONTENT'];
     $status = $_POST['STATUS'];
+    $updateDate = date('Y-m-d'); // 使用當前日期
 
     // 處理圖片上傳
     $imagePath = null;
@@ -38,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 更新商品資訊
     try {
         // 建立 SQL 語句，根據是否有圖片決定是否更新 PRODUCT_IMG 欄位
-        $sql = "UPDATE NEWS SET PUBLISH_DATE = :publishDate, NEWS_TITLE = :newsTittle, 
+        $sql = "UPDATE NEWS SET PUBLISH_DATE = :publishDate, NEWS_TITLE = :newsTittle, UPDATE_DATE = :updateDate,
                 NEWS_CONTENT = :newsContent, STATUS = :status";
 
         if ($imagePath) {
@@ -53,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':newsContent', $newsContent);
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':newsId', $newsId);
+        $stmt->bindParam(':updateDate', $updateDate);
 
         if ($imagePath) {
             $stmt->bindParam(':imagePath', $imagePath); // 綁定圖片路徑參數
