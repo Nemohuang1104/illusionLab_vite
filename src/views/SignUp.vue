@@ -16,6 +16,9 @@ const isRotating = ref(false);
 const router = useRouter();
 
 
+
+
+
 //表單資訊
 const email = ref('');
 const password = ref('');
@@ -201,10 +204,10 @@ const register = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "註冊成功！開始您的幻浸之旅",
-          showConfirmButton: false,
-          timer: 1200
-        }).then(() => {router.push('/Login')});
+          title: "註冊成功！商品折價券60元已匯入您的帳戶，開始您的幻浸之旅吧!",
+          showConfirmButton: true,
+          // timer: 10000
+        }).then(() => {router.push('/home')});
       } else {
         Swal.fire({
           position: "center",
@@ -305,15 +308,18 @@ const register = () => {
               class="custom-v-select" 
               v-model="selectedCity"
               @input="selectedDistrict.value = ''">
-              ></v-select>
+              </v-select>
           </div>
           <div>
+            <!-- :reduce="option => option.name"，確保選擇的是字串，而不是物件 -->
             <v-select  class="custom-v-select" 
+              :reduce="option => option.name"
               label="name" 
               placeholder="請選擇鄉鎮" 
               v-model="selectedDistrict"
               :options="selectedDistricts">
-              ></v-select>
+              
+              </v-select>
           </div>
         </div>
 

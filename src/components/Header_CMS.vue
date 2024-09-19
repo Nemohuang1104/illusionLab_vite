@@ -8,7 +8,7 @@
         </div>
         <div class="title">幻浸實驗室後台管理</div>
         <div class="icons">
-            <RouterLink >
+            <RouterLink to="/logincms" >
                 <button>帳號登出</button>
                 
             </RouterLink>

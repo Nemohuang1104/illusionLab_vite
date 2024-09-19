@@ -36,12 +36,7 @@ onMounted(() => {
   fetchProducts(); // 當頁面加載時撈取資料
 });
 
-
-
-
 </script>
-
-
 
 <template>
   <div>
@@ -91,13 +86,6 @@ onMounted(() => {
                 <p>太空金屬杯</p>
                 <div class="price">
                   <span>NT$ 350元</span>
-          <router-link to="./SF_DetailList">
-            <div class="pro" v-for="(item,index) in productInfo" :key="item.id">
-              <img :src="item.PRODUCT_IMG" alt="">
-              <div>
-                <p>{{ item.PRODUCT_NAME }}</p>
-                <div class="price">
-                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
                   <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
                 </div>
               </div>
@@ -194,6 +182,28 @@ onMounted(() => {
   padding-top: 20px;
 
 }
+
+// .center h1 {
+//   font-size: 38px;
+//   font-weight: 700;
+//   margin-bottom: 5px;
+//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
+//   background-clip: text;
+//   -webkit-background-clip: text;
+//   color: transparent;
+
+// }
+
+
+// .center p {
+//   font-size: 20px;
+//   font-weight: 700;
+//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
+//   background-clip: text;
+//   -webkit-background-clip: text;
+//   color: transparent;
+// }
+
 
 
 .producttitle {
@@ -330,9 +340,7 @@ onMounted(() => {
     width: 80%;
   }
 
-  .list {
-    // width: 665PX;
-  }
+
 
   .pagebox {
     padding: 0px;
