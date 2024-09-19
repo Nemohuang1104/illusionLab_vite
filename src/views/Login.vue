@@ -4,6 +4,7 @@ const currentMode = ref('one');
 import Footer_0 from '../components/Footer_0.vue';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
+import axios from 'axios';
 
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
@@ -19,6 +20,7 @@ import { useRouter } from 'vue-router';
     // 错误信息
     const emailError = ref('');
     const passwordError = ref('');
+    const loginError = ref(''); // 用來顯示登入錯誤
     
 
     // 邮箱验证规则 (简单验证)
@@ -71,7 +73,6 @@ import { useRouter } from 'vue-router';
         })
       })
     };
-    
 
     // 表单是否有效的计算属性
     // const isFormValid = computed(() => {
@@ -79,61 +80,94 @@ import { useRouter } from 'vue-router';
     // });
 
 
-    //提交表单
-    // const onSubmit = () => {
-    //   checkEmail();     // 先验证电子邮件
-    //   checkPassword();  // 再验证密码
+  // const onSubmit = () => {
+  //   checkEmail();     // 先验证电子邮件
+  //   checkPassword();  
 
-    //   if (isFormValid.value) {
-    //     alert('歡迎進入幻浸實驗室')
-    //     router.push('/MemberCenter');
-    //   } else {
-    //     alert('請更正表單中的錯誤!');
-    //   }
-    // };
+  // if (!emailError.value  && !passwordError.value ) {
+  //   // 驗證碼正確，顯示註冊成功訊息
+  //   //alert('註冊成功！歡迎加入！');
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "success",
+  //     title: "歡迎進入幻浸實驗室",
+  //     showConfirmButton: false,
+  //     timer: 1200
+  //   }).then(() => {router.push('/MemberCenter')});
+  //   // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
+  // } else {
+  //   // 驗證碼錯誤，彈出錯誤訊息
+  //   //  alert('請重新檢視表單');
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "warning",
+  //     title: "請重新檢視表單",
+  //     showConfirmButton: false,
+  //     timer: 1200
+  //   });
+  // }
+  // }
 
-  // 檢查驗證碼是否正確
-  const onSubmit = () => {
-    checkEmail();     // 先验证电子邮件
-    checkPassword();  
+  //=============================PHP===================================
+  // 表單提交
+const onSubmit = async () => {
+  checkEmail();     // 驗證電子郵件
+  checkPassword();  // 驗證密碼
 
-  if (!emailError.value  && !passwordError.value ) {
-    // 驗證碼正確，顯示註冊成功訊息
-    //alert('註冊成功！歡迎加入！');
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "歡迎進入幻浸實驗室",
-      showConfirmButton: false,
-      timer: 1200
-    }).then(() => {router.push('/MemberCenter')});
-    // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
+  // 確認沒有錯誤後再發送請求
+  if (!emailError.value && !passwordError.value) {
+    try {
+      // 建立 FormData 物件
+      const formData = new FormData();
+      formData.append('email', email.value);
+      formData.append('password', password.value);
+
+      // 使用 FormData 發送 POST 請求
+      const response = await axios.post('http://illusionlab.local/public/PDO/Login/login.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data' // 設定標頭為 FormData
+        }
+      });
+
+      // 成功登入
+      if (response.data.status === 'success') {
+        const token = response.data.token;  // 從後端獲取 token
+        // sessionStorage.setItem('authToken', token);  // 將 token 儲存在 sessionStorage
+        sessionStorage.setItem('token', response.data.token);
+
+        Swal.fire({
+          icon: 'success',
+          title: '歡迎進入幻浸實驗室',
+          timer: 1200
+        }).then(() => {
+          router.push('/MemberCenter'); // 成功後導向會員中心
+        });
+      } else {
+        // 登入失敗，顯示錯誤訊息
+        Swal.fire({
+          icon: 'error',
+          title: response.data.message, // 後端傳回的訊息
+          timer: 1500
+        });
+      }
+    } catch (error) {
+      // 處理請求錯誤
+      Swal.fire({
+        icon: 'error',
+        title: '登入失敗，請確認是否註冊。',
+        timer: 1500
+      });
+    }
   } else {
-    // 驗證碼錯誤，彈出錯誤訊息
-    //  alert('請重新檢視表單');
+    // 如果表單有錯誤
     Swal.fire({
-      position: "center",
-      icon: "warning",
-      title: "請重新檢視表單",
-      showConfirmButton: false,
+      icon: 'warning',
+      title: '請重新檢視表單',
       timer: 1200
     });
   }
-  }
-
-
-    // return {
-    //   email,
-    //   password,
-    //   emailError,
-    //   passwordError,
-    //   isFormValid,
-    //   onSubmit,
-    //   checkEmail,
-    //   checkPassword,
-    // };
-//   },
-// };
+};
+  
 </script>
 
 
@@ -248,6 +282,7 @@ h1{
   padding-left: 20px;
   margin-bottom: 12px;
   outline: none;
+  margin-top: 4px;
 }
 
 .error{
