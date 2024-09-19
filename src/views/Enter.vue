@@ -87,6 +87,7 @@ console.log("docHeight = " + docHeight);
 //頁面高度小於等於視窗高度，或已經滾動到底部
 if(docHeight <= winHeigh || winTop + winHeigh >= docHeight - 1){
       window.location.href = "/home"; // 替換成你的下一頁網址
+      // window.location.href = "/tid102/g2/front/home"; // 替換成你的下一頁網址
   
 }
 

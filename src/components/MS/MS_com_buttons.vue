@@ -4,6 +4,7 @@
     <router-link :to="previousPage"  @click.native="scrollToTop">
       <div  v-if="showPrev" :class="{ weNeedAStarlight: step === 'two' }">
           <button 
+            @click="handleClick"
             v-if="showPrev" 
             id="prevStep" 
             @mouseover="hoveringPrev = true" 
@@ -29,6 +30,12 @@
   
   <script>
   import { computed, ref } from 'vue';
+  import { defineEmits } from 'vue';
+
+  const emit = defineEmits(['save']);
+  const handleClick = () => {
+  emit('save'); // 當按鈕被點擊時，傳遞 'save' 事件
+};
   
   export default {
     props: {
@@ -180,8 +187,6 @@
   };
   </script>
   
-  
-
 <style lang="scss" scoped>
 .buttons{
     width: 80vw;

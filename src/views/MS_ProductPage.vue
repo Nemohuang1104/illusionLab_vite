@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 // 頁首頁尾
 import Header_0 from '@/components/Header_0.vue';
@@ -7,6 +7,7 @@ import Header_0 from '@/components/Header_0.vue';
 const currentMode = ref('four');
 
 import Footer_03 from '@/components/Footer_03.vue';
+const productInfo = ref([])
   
 // 螢幕寬高度
 // import { ref, onMounted, onUnmounted } from 'vue';
@@ -26,6 +27,20 @@ import Footer_03 from '@/components/Footer_03.vue';
 // onUnmounted(() => {
 //   window.removeEventListener('resize', updateDimensions);
 // });
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/MS_FetchProducts.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    productInfo.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
 
 </script>
 
@@ -55,99 +70,27 @@ import Footer_03 from '@/components/Footer_03.vue';
           <router-link to="/LC_ProductPage"><P>人生賭場</P></router-link>
         </div>
         <div class="arrowright">
-          <router-link to="/SF_ProductPage"><P>星際邊際</P></router-link>
+          <router-link to="/SF_ProductPage"><P>星際邊境</P></router-link>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" class="arrow"/>
         </div>
       </div>
       <!-- 放置一個商品列的外框 -->
       <div class="pagebox">
+       
         <div class="list">
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_bearnotebook.png" alt="">
-            <div>
-              <p>繪本風格筆記本</p>
-              <div class="price">
-                <span>NT$ 180</span>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+          <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
+            <router-link :to="{ name:'MS_ProductList', params: { id: item.PRODUCT_ID } }">
+           
+              <img :src="item.PRODUCT_IMG" alt="">
+              <p>{{ item.PRODUCT_NAME }}</p>
+              <div class="text">
+                <div class="price">
+                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+                </div>
+                <div class="icon"></div>
               </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_littlebag.png" alt="">
-            <div>
-              <p>小女孩帆布袋</p>
-              <div class="price">
-                <p>NT$ 590</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_YOYOcard.png" alt="">
-            <div>
-              <p>小蜥蜴悠遊卡</p>
-              <div class="price">
-                <p>NT$ 300</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productphone.jpg" alt="">
-            <div>
-              <p>防摔手機殼</p>
-              <div class="price">
-                <p>NT$ 1280</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productcard.jpg" alt="">
-            <div>
-              <p>繪本風格卡片</p>
-              <div class="price">
-                <p>NT$ 80</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productcup.jpg" alt="">
-            <div>
-              <p>繪本風格馬克杯</p>
-              <div class="price">
-                <p>NT$ 250</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-          
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_product_t_shirt.jpg" alt="">
-            <div>
-              <p>童趣造型長袖大學T</p>
-              <div class="price">
-                <p>NT$ 580</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
-          </div>
-
-          <div class="pro">
-            <router-link to="/MS_ProductList"><img src="../assets/images/MS_productsticker.jpg" alt="">
-            <div>
-              <p>繪本風貼紙</p>
-              <div class="price">
-                <p>NT$ 80</p>
-                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-              </div>
-            </div></router-link>
+            </router-link>
           </div>
         </div>
       </div>
@@ -293,6 +236,15 @@ import Footer_03 from '@/components/Footer_03.vue';
   /*浮起來及陰影效果 */
   border-radius: 10px;
   cursor: pointer;
+
+    &:hover {
+    transform: translateY(-5px);
+    /* 往上是負，輕微浮起 */
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+    /* 明顯的阴影效果 */
+    border-color: rgba(255, 255, 255, 0.5);
+    /* 懸停時增加邊框颜色 */
+  }
 }
 
 

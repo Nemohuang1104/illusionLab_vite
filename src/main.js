@@ -11,6 +11,7 @@ import router from "./router";
 import "@/assets/css/reset.css";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+import { createPinia } from 'pinia';
 
 // ============fontawsome==================
 //參考網址: https://reurl.cc/4dQ4gD
@@ -30,7 +31,11 @@ import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
 
 
 
+const pinia = createPinia();
+const app = createApp(App);
 
+app.use(pinia);
+app.mount('#app');
 
 
 

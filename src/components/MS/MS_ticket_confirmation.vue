@@ -13,16 +13,17 @@
             </div>
             
             <div class="eventInfo">
-                <h4 :style="{color: MobangColor }">兩人票</h4>
-                <h4 :style="{color: MobangColor }">日期：2024-08-08</h4>
-                <h4 :style="{color: MobangColor }">時段：17:00-19:00</h4>
-                <h4 :style="{color: MobangColor }">張數：1張</h4>
+                <h4 :style="{color: MobangColor }">{{ guestNumber }}人</h4>
+                <h4 :style="{color: MobangColor }">日期：{{ date }}</h4>
+                <h4 :style="{color: MobangColor }">時段：{{ time }}</h4>
             </div>
             <div class="memberInfo">
-                <h4 :style="{color: MobangColor }">姓名：歐巴馬</h4>
-                <h4 :style="{color: MobangColor }">電話：081-0943-3202</h4>
-                <h4 :style="{color: MobangColor }">姓名：myNameIsObama@american.com</h4>
-                <h4 :style="{color: MobangColor }">統一編號：911</h4>
+                <h4 :style="{color: MobangColor }">姓名：{{ name }}</h4>
+                <h4 :style="{color: MobangColor }">電話：{{ phone }}</h4>
+                <h4 :style="{color: MobangColor }">電子郵件：{{ email }}</h4>
+                <h4 :style="{color: MobangColor }">統一編號：{{ taxID }}</h4>
+                <h4 :style="{ color: MobangColor }">公司名稱：{{ companyName }}</h4>
+                <h4 :style="{ color: MobangColor }">備註：{{ comments }}</h4>
             </div>
             
         </main>
@@ -85,8 +86,23 @@ export default {
 };
 </script>
 <script setup>
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-  import MS_com_title from '@/components/MS/MS_com_title.vue';
+   import { computed } from 'vue';
+    import MS_com_title from '@/components/MS/MS_com_title.vue';
+    import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+
+    const ticketStore = useTicketStore();
+
+    const guestNumber = computed(() => ticketStore.guestNumber);
+    const date = computed(() => ticketStore.date);
+    const time = computed(() => ticketStore.time);
+    const name = computed(() => ticketStore.name);
+    const phone = computed(() => ticketStore.phone);
+    const email = computed(() => ticketStore.email);
+    const taxID = computed(() => ticketStore.taxID);
+    const companyName = computed(() => ticketStore.companyName);
+    const comments = computed(() => ticketStore.comments);
+
+   
 </script>
 
 <style lang="scss" scoped>

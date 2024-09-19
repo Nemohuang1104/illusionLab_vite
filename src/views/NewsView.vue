@@ -65,6 +65,7 @@ import 'aos/dist/aos.css'
 async function get_news() {
   try {
     const response = await fetch('http://illusionlab.local/public/PDO/News/get_news.php'); // 替換成你實際的 API URL
+    // const response = await fetch('http://tibamef2e.com/tid102/g2/php/News/get_news.php'); // 替換成你實際的 API URL
     const data = await response.json();
     cards.value = data;
   } catch (error) {
