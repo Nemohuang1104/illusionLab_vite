@@ -50,9 +50,10 @@ const updateToggle = () => {
 
 .content{
     margin: 0 auto;
-    margin-top: 20px;
+    // margin-top: 20px;
     width: 100%;
     max-width:1000px;
+    padding-top: 100px;
     // border: 1px solid white;
 }
 
