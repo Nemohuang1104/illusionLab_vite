@@ -1,5 +1,6 @@
-
 <script setup>
+
+
 
 
 // import { onMounted, reactive, ref } from "@vue/runtime-core";
@@ -9,7 +10,6 @@
 
      <RouterView/>
 
-  
 </template>
 
 <style lang="scss" scoped>

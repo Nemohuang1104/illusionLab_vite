@@ -83,7 +83,7 @@ const props = defineProps({
   }
 
   .title{
-    padding-top: 100px;
+    padding-top: 120px;
   }
 
   .envolope-outside{
@@ -178,7 +178,7 @@ const props = defineProps({
 
   @keyframes slideIn {
   0% {
-    transform: translateY(-50px) rotate(10deg); /* 初始狀態 */
+    transform: translateY(-70px) rotate(10deg); /* 初始狀態 */
   }
 
   100% {

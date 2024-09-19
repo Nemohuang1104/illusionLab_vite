@@ -4,6 +4,12 @@
     import { ref } from 'vue' ;
     const currentMode = ref('three');
     import Footer_2 from '@/components/Footer_2.vue';
+
+    const router = useRouter();  // 初始化 router
+    import { useRouter } from 'vue-router';  // 引入 useRouter
+    function goHome() {
+        router.push('/SF_homepage');  // 將路由推送到首頁
+    }
 </script>
 
 
@@ -42,6 +48,7 @@
                 <span>‧  我們將在 3個工作日內處理您的申請，並在核准後 5個工作日內完成退款或換票操作。</span>
             </div>
         </div>
+        <button @click="goHome" class="back-to-home">回首頁</button>
         <Footer_2></Footer_2>
     </div>
     
@@ -102,6 +109,18 @@
         font-weight: bold;
         display: block;
         margin-top: 2%;
+    }
+
+    .back-to-home{
+        background: none;
+        border: .5px solid #ffffff;
+        border-radius: 4px;
+        color: #ffffff;
+        display: block;
+        margin: 0 auto;
+        cursor: pointer;
+        margin-bottom: 50px;
+        font-size: 16px;
     }
 
     @media screen and (max-width: 430px){

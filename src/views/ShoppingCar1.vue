@@ -95,7 +95,7 @@ const highlight = ref({
                 </div>
                 <div class="checkbutton">
                     <RouterLink to="/shop2">
-                        <button class="check">商品確認
+                        <button class="check">結帳
                         </button>
                     </RouterLink>
                 </div>
@@ -388,7 +388,10 @@ const highlight = ref({
         background: none;
         color: #ffffff; //文字顏色
     }
-
+    // 結帳按鈕
+    .check:hover{
+        opacity: 0.9;
+    }
 
     // 商品確認按鈕
     .payment button{
@@ -429,6 +432,12 @@ const highlight = ref({
         max-width: 1000px;
     }
     // 下方加購
+
+    .icon svg{
+        width: 100%;
+        max-width: 20px;
+    }
+
     .ProductAdd{
         width: 100%;
         max-width: 1000px;

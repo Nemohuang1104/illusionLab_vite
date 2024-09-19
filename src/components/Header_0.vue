@@ -1,6 +1,9 @@
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
+import { inject } from 'vue';
+const cartCount = inject('cartCount'); // 接收全局的購物車數量
+
 
 const props = defineProps({
   mode: {
@@ -80,8 +83,10 @@ onUnmounted(() => {
       <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'shop' }">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+        <span class="cartCount" v-if="cartCount > 0">{{ cartCount }}</span> <!-- 顯示購物車數量 -->
+      </router-link>
       <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" /></router-link>
 
           
@@ -302,6 +307,24 @@ header {
   transform: translateX(0);
   /* 滑入畫面 */
 }
+
+
+
+.cartCount{
+  background: #000000;
+  color: #ffffff;
+  border-radius: 20px;
+  position: absolute;
+  top: 22px;
+  right: 72px;
+  display: block;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+}
+
+
+
 
 /* RWD：小螢幕時顯示漢堡按鈕 */
 @media (max-width: 768px) {

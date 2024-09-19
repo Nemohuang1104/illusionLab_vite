@@ -173,7 +173,7 @@ const routes = [
   {
     path: '/LC_ProductPage',
     component: () => import('@/views/LC_ProductPage.vue'),
-    name:'LC_ProductPage',
+    name: 'LC_ProductPage',
     meta: {
       title: "人生賭場-精選商品"
     },
@@ -182,7 +182,7 @@ const routes = [
   {
     path: '/LC_ProductInfo/:id',
     component: () => import('@/views/LC_ProductInfo.vue'),
-    name:'LC_ProductInfo',
+    name: 'LC_ProductInfo',
     meta: {
       title: "人生賭場-商品細項"
     },
@@ -291,7 +291,7 @@ const routes = [
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
   },
-  
+
   {
     path: '/littleQuiz',
     name: 'littleQuiz',
@@ -336,6 +336,8 @@ const routes = [
     },
     requiredLogin: false
   },
+
+
 
 
   // -----購票頁--------//
