@@ -89,6 +89,7 @@ function goToLoginCMS(){
               <div class="text">
                 <div class="price">
                   <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
                 </div>
                 <div class="icon"></div>
               </div>
@@ -315,7 +316,22 @@ function goToLoginCMS(){
 }
 
 
+.price {
+  // color: #fff;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
 
+}
+
+.shoopingcar{
+  color: #fff;
+  transition: .5s;
+
+  &:hover{
+    color: map-get($map: $colofont_1, $key: gold)
+  }
+}
 //商品
 // .pagebox img {
 //   object-fit: cover;

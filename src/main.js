@@ -13,6 +13,7 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import VueSweetalert2 from 'vue-sweetalert2'; 
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { createPinia } from 'pinia';
 
 // ============fontawsome==================
 //參考網址: https://reurl.cc/4dQ4gD
@@ -32,7 +33,11 @@ import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
 
 
 
+const pinia = createPinia();
+const app = createApp(App);
 
+app.use(pinia);
+app.mount('#app');
 
 
 

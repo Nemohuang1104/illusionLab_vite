@@ -165,7 +165,6 @@ const f_save = async () => {
 
 
 
-
 <style lang="scss" scoped>
 //popup的外框樣式
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');

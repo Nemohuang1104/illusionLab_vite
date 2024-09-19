@@ -36,31 +36,9 @@ onMounted(() => {
   fetchProducts(); // 當頁面加載時撈取資料
 });
 
-const productInfo = ref([
-  // {id:'1',cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:'599'},
-  // {id:'2',cardImage: '../src/assets/images/LC_Product_item2.svg',productName:'賭聖帽T',price:'1099'},
-  // {id:'3',cardImage: '../src/assets/images/LC_Product_item3.svg',productName:'暗黑撲克牌組',price:'299'},
-  // {id:'4',cardImage: '../src/assets/images/LC_Product_item4.svg',productName:'幸運骰子',price:'99'},
-  // {id:'5',cardImage: '../src/assets/images/LC_Product_item5.svg',productName:'必勝籌碼',price:'199'},
-  // {id:'6',cardImage: '../src/assets/images/LC_Product_item6.svg',productName:'賭城帆布袋',price:'599'},
-  // {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
 
-])
 
-// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
-async function fetchProducts() {
-  try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SF_FetchProducts.php'); // 替換成你實際的 API URL
-    const data = await response.json();
-    productInfo.value = data;
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
-}
 
-onMounted(() => {
-  fetchProducts(); // 當頁面加載時撈取資料
-});
 </script>
 
 

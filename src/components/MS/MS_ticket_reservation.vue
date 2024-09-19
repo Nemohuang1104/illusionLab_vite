@@ -8,29 +8,47 @@
         :intro="OurIntro" />
     </div>
     <main>
-        <form class="selections" action="" method="post">
+        <form 
+        class="selections" 
+        action="" 
+        method="post"
+        @submit.prevent="handleSubmit">
         <div class="selection">
             <h4 :style="{ color: MobangColor }">人數 Guests</h4>
-            <select class="options" :style="{ borderColor: MobangColor }">
-            <option value="option1">1人</option>
-            <option value="option2">2人</option>
-            <option value="option3">3人</option>
-            <option value="option4">4人</option>
-            <option value="option5">5人</option>
-            <option value="option6">6人</option>
-            </select>
+            <input 
+            v-model="formData.quantity" 
+            type="number" 
+            min="1" 
+            :max="maxGuests" 
+            class="options" 
+            :style="{ borderColor: MobangColor }" 
+            
+            @input="updateFormData('quantity', formData.quantity)"
+          />
+          <p v-if="errorMessage" :style="{ color: 'red' }">{{ errorMessage }}</p>
         </div>
         <div class="selection">
             <h4 :style="{color: MobangColor }">日期 Date</h4>
-            <input class="options" type="date" :style="{ borderColor: MobangColor }"/>
+            <input 
+            v-model="formData.date"
+            class="options" 
+            type="date" 
+            :style="{ borderColor: MobangColor }"
+            @input="updateFormData('date', formData.date)"/>
         </div>
         <div class="selection">
             <h4 :style="{color: MobangColor }">時間 Select Time</h4>
-            <select class="options" :style="{ borderColor: MobangColor }">
+            <select 
+            v-model="formData.time"
+            class="options" 
+            :style="{ borderColor: MobangColor }"
+            @change="updateFormData('time', formData.time)"
+            >
             <option value="time1">13:00 ~ 15:00</option>
             <option value="time2">16:00 ~ 18:00</option>
             <option value="time3">19:00 ~ 21:00</option>
             <option value="time4">22:00 ~ 24:00</option>
+            
             </select>
         </div>
         </form>
@@ -47,6 +65,17 @@
   
 <script>
 export default {
+  data() {
+    return {
+      formData: {
+        quantity: 1,
+        date: '',
+        time: '',
+      },
+      maxGuests: 0, // 從後端獲取的最大人數
+      errorMessage: '', // 錯誤訊息
+    };
+  },
 
   props: {
     mode: {
@@ -114,6 +143,64 @@ export default {
     },
 
   },
+  methods: {
+    setMaxGuests() {
+      if (this.modeSelect === 'one') {
+        this.maxGuests = 30; // EVENT_ID = 1
+      } else if (this.modeSelect === 'two') {
+        this.maxGuests = 6;  // EVENT_ID = 2
+      } else if (this.modeSelect === 'three') {
+        this.maxGuests = 6;  // EVENT_ID = 3
+      }
+    },
+    checkMaxGuests() {
+      if (this.formData.quantity > this.maxGuests) {
+        this.errorMessage = `最多只能選擇 ${this.maxGuests} 人。`;
+      } else {
+        this.errorMessage = '';
+      }
+    },
+    async getMaxGuests() {
+      const eventId = this.mode === 'one' ? 1 : this.mode === 'two' ? 2 : 3;
+      const response = await fetch(`http://illusionlab.local/public/PDO/TicketOrder/get_max_guests.php?event_id=${eventId}`);
+      const result = await response.json();
+      this.maxGuests = result.maxGuests;
+    },
+    async submitForm() {
+      if (!this.errorMessage) {
+        // 發送表單資料到後端
+        const response = await fetch('http://illusionlab.local/public/PDO/TicketOrder/submit_order.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            USER_ID: 123, // 假設用戶ID
+            COMPANY: '幻浸實驗室',
+            EVENT_ID: this.modeSelect === 'one' ? 1 : this.modeSelect === 'two' ? 2 : 3,
+            QUANTITY: this.formData.quantity,
+            TOTAL_PRICE: this.calculateTotalPrice(),
+            SCHEDULE_DATE: this.formData.date,
+            SCHEDULE_TIME: this.formData.time,
+          }),
+        });
+
+        const result = await response.json();
+        if (result.message) {
+          alert('訂單提交成功!');
+        } else {
+          alert('訂單提交失敗: ' + result.error);
+        }
+      }
+    },
+    calculateTotalPrice() {
+      const pricePerPerson = this.modeSelect === 'one' ? 2200 : this.modeSelect === 'two' ? 3000 : 2200;
+      return pricePerPerson * this.formData.quantity;
+    },
+  },
+  mounted() {
+    this.setMaxGuests(); // 設置最大人數
+  }
 };
 </script>
 
@@ -122,6 +209,42 @@ export default {
 <script setup >
     import MS_com_title from '@/components/MS/MS_com_title.vue';
     import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+    import { defineProps, ref, onMounted, computed } from 'vue';
+    import { defineEmits } from 'vue';
+    import { useTicketStore } from '@/stores/ticketStore';
+
+    const events = ref([]);
+    
+
+    const props = defineProps();
+    const emit = defineEmits(['update:formData']);
+
+    const localFormData = ref({
+      quantity: '',
+      date: '',
+      time: ''
+    });
+
+    const updateFormData = (field, value) => {
+      localFormData.value[field] = value;
+      emit('update:formData', localFormData.value);
+    };
+
+    const handleSubmit = () => {
+      // 在提交表單時將數據發送給父組件
+      emit('saveData');
+    };
+
+    onMounted(() => {
+      fetch('http://illusionlab.local/public/PDO/ProductData/get_events.php')
+        .then((response) => response.json())
+        .then((data) => {
+          events.value = data;
+        })
+        .catch((error) => {
+          console.error('Error fetching events:', error);
+        });
+    });
 </script>
 
 <style lang="scss" scoped> 
@@ -179,7 +302,7 @@ export default {
         display: flex;
         padding:15px 20px  ;
         background: transparent;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
         border-radius: 40px;
         border: 2px solid #855F49;
@@ -203,6 +326,7 @@ export default {
     }
     .options{
         text-align: center;
+        font-size: 16px;
     }
     .template_mobangOne{
         // background-image: url('../src/ms/modeBGI1.png');

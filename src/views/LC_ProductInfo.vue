@@ -7,7 +7,7 @@ import icon3 from '../assets/images/LC_icon3.svg'
 import CoinFall2 from '@/components/CoinFall.vue';
 
 import { useRoute } from 'vue-router';
-import { defineProps, ref, defineEmits, onMounted } from 'vue';
+import { defineProps, ref, onMounted } from 'vue';
 const currentMode = ref('two');
 const props = defineProps({
     productInfo: Object
@@ -34,8 +34,8 @@ async function fetchProducts() {
     const data = await response.json();
     item.value = data;
     item.value = { ...data, quantity: 1 };  // 初始化數量為 1
-    selectedSize.value = item.value.PRODUCT_SIZE.split(',')[0];  // 預設選中第一個尺寸
-    selectedStyle.value = item.value.PRODUCT_STYLE.split(',')[0]; // 預設選中第一個樣式
+    selectedSize.value = item.value.PRODUCT_SIZE[0];  // 預設選中第一個尺寸
+    selectedStyle.value = item.value.PRODUCT_STYLE[0]; // 預設選中第一個樣式
     
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -91,10 +91,11 @@ onMounted(() => {
                 <p>規格 : {{ item.PRODUCT_SIZE }}</p>
                 
                 <!-- 尺寸選擇 -->
+                <div class="input" v-if="item.PRODUCT_ID === 2">
                 <p class="txt">選擇尺寸：</p>
-              <div class="input" v-if="item.PRODUCT_ID === 2">
                 <select v-model="selectedSize" id="size">
-                  <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size">
+                  <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size"
+                  >
                     {{ size }}
                   </option>
                 </select>
@@ -384,7 +385,7 @@ onMounted(() => {
     width: 100%;
     position: relative;
     /* 為了偽元素定位 */
-    margin-bottom: 8px;
+    // margin-bottom: 8px;
     border: 0
 }
 
@@ -435,7 +436,7 @@ onMounted(() => {
     color: map-get($color_0 , btn_orange );
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 60%;
     transform: translateY(-50%);
     pointer-events: none;
     /* 確保偽元素不會干擾選擇操作 */
@@ -475,6 +476,8 @@ onMounted(() => {
     /* 設置背景色，根據需求調整 */
     border: 0;
     color: #fff;
+    cursor: pointer;
+
 }
 
 .quantity-input>button:last-child:hover {
@@ -512,8 +515,21 @@ onMounted(() => {
 @media screen and (max-width: 820px){
   .pagebox{
     padding: 70px 40px 80px ;
+    grid-template-columns: 1fr ;
+    grid-template-rows: 1fr 1fr;
+
+    img{
+      text-align: center;
+      margin: auto auto;
+
+    }
+
+    .pro{
+      margin: 0 auto;
+    }
 
   }
+  
 }
 
 @media screen and (max-width: 430px){

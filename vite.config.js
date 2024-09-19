@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  // base:'/tid102/g2/',
+  // base:'/tid102/g2/front/',
   server:{
     host: '0.0.0.0',
     //open:true
