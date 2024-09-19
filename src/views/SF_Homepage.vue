@@ -138,9 +138,7 @@ onBeforeUnmount(() => {
     <div class="wrapper">
         <!-- 星球運轉 -->
         <div class="intro">
-            <!-- <video src="../assets/video/IntroVideo.mp4" width="100%" autoplay loop></video> -->
             <video src="../assets/video/sf.mp4" muted playsinline autoplay loop class="movie"></video>
-            <!-- <video src="../assets/video/SFmovie.mp4 controls autoplay muted loop" class="movie"></video> -->
         </div>
 
         <!-- 歡迎文字 -->
@@ -422,7 +420,7 @@ onBeforeUnmount(() => {
 
 // 票價資訊
 .ticket{
-    margin: 80px 0 140px 0;
+    margin: 100px 0 140px 0;
 }
 
 .ticketInfo {
@@ -643,7 +641,7 @@ onBeforeUnmount(() => {
 // 合作廠商
 
 .sponsor{
-    margin: 80px 0 140px 0;
+    margin: 100px 0 140px 0;
 }
 
 .logo {
@@ -675,7 +673,7 @@ onBeforeUnmount(() => {
 
 // 聯絡我們
 .contact {
-   margin: 80px 0 140px 0;
+   margin: 100px 0 140px 0;
 }
 
 .contact #text {
@@ -721,6 +719,8 @@ onBeforeUnmount(() => {
 }
 
 
+
+
 @keyframes slide-in {
     from {
         transform: translateX(100%);
@@ -732,6 +732,26 @@ onBeforeUnmount(() => {
     }
 }
 
+
+//購票去
+
+#fixed-logo {
+    position: fixed;
+    bottom: 20%;
+    right: 1%;
+    z-index: 1000;
+    animation: slide-in 0.8s forwards;
+}
+
+#fixed-logo img {
+    width: 100px;
+    height: auto;
+    max-width: 100px;
+}
+
+.rotate {
+    animation: spin 10s linear infinite;
+}
 
 
 // === RWD ===
@@ -834,7 +854,7 @@ onBeforeUnmount(() => {
     }
 
     .ticketInfo {
-        margin: 12% 8%;
+        margin: 80px 50px;
     }
 
     .product-info h3 {
@@ -861,14 +881,8 @@ onBeforeUnmount(() => {
         gap: 30px;
     }
 
-    .rules,
-    .sponsor,
-    .contact {
-        margin: 12% auto;
-    }
-
     .contact #text {
-        margin: 5%;
+        margin: 50px;
     }
 
     .contact p {
@@ -877,31 +891,8 @@ onBeforeUnmount(() => {
 
     .icons {
         max-width: 55%;
-        margin: 5% auto;
+        margin: 50px auto;
     }
-}
-
-//購票去
-
-#fixed-logo {
-    position: fixed;
-    bottom: 20%;
-    right: 1%;
-    z-index: 1000;
-    animation: slide-in 0.8s forwards;
-}
-
-#fixed-logo img {
-    width: 100px;
-    height: auto;
-    max-width: 100px;
-  
-
-
-}
-
-.rotate {
-    animation: spin 10s linear infinite;
 }
 
 

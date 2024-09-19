@@ -76,7 +76,10 @@ function selectSticker(sticker) {
 }
 
 function completeTicket() {
-    isComplete.value = true;
+    // isComplete.value = true;
+    if (validateSelection()) {
+        isComplete.value = true;
+    }
 }
 
 // 計算最終票券的屬性
@@ -84,6 +87,24 @@ const finalTicket = computed(() => ({
     style: selectedStyle.value,       // 自選票券樣式
     sticker: selectedSticker.value    // 自選飛航小物
 }));
+
+
+// ---- 打勾完成才能跳轉至票券完成畫面 ----
+
+// 控制兩個 checkbox 的選擇狀態
+const checked1 = ref(false);
+const checked2 = ref(false);
+
+// 計算屬性，用來檢查兩個 checkbox 是否都被選中
+const isBothChecked = computed(() => checked1.value && checked2.value);
+
+function validateSelection() {
+    if (!checked1.value || !checked2.value) {
+        alert('請確認所有選項都已勾選。');
+        return false;
+    }
+    return true;
+}
 
 </script>
 
@@ -157,16 +178,20 @@ const finalTicket = computed(() => ({
             <div>
                 <div class="checkInfo">
                     <label class="custom-checkbox">
-                        <input class="checkbox" type="checkbox" />
-                        <span>我了解 送出後即無法修改。</span>
+                        <input class="checkbox" type="checkbox" v-model="checked1" />
+                        <span>*我了解 送出後即無法修改。</span>
                     </label>
                     <label class="custom-checkbox">
-                        <input class="checkbox" type="checkbox" />
-                        <span>我了解 活動當日憑訂單QR-CODE換實體票卷入場。</span>
+                        <input class="checkbox" type="checkbox" v-model="checked2"/>
+                        <span>*我了解 活動當日憑訂單QR-CODE換實體票卷入場。</span>
                     </label>
                 </div>
                 <div class="nextStep">
-                        <SF_planetButton @click="completeTicket"></SF_planetButton>
+                        <SF_planetButton 
+                        :class="{ 'active': isBothChecked }"
+                        :disabled = "!isBothChecked"
+                        @click="completeTicket">
+                        </SF_planetButton>
                 </div>
             </div>
         </div>
@@ -332,6 +357,16 @@ const finalTicket = computed(() => ({
 }
 
 // 送出按鈕
+
+.nextStep .img-container {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.nextStep .img-container.active {
+    opacity: 1;
+    cursor: pointer;
+}
 
 .nextStep{
     margin-bottom: 30px;

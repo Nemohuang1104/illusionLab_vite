@@ -457,7 +457,7 @@ const routes = [
     meta: {
       title: "心靈光譜商品頁細項頁"
     },
-    name:'MS_ProductList',
+    name: 'MS_ProductList',
     requiredLogin: false,
     props: true // 將路由參數作為 props 傳入組件
   },

@@ -1,6 +1,7 @@
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
+
 //宣告每一個連結都有專屬要連結出去的網址
 const logos = {
   'two': new URL('@/assets/images/logo_lifecasino.svg', import.meta.url).href,
@@ -130,6 +131,7 @@ onUnmounted(() => {
         </li>
       </ul>
     </div>
+
   </header>
   <!-- <div class="body">
 
@@ -367,6 +369,8 @@ img {
   transform: translateX(0);
   /* 滑入畫面 */
 }
+
+
 
 /* RWD：小螢幕時顯示漢堡按鈕 */
 @media (max-width: 768px) {
