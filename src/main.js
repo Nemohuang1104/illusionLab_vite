@@ -30,6 +30,9 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
+
 
 
 
@@ -43,7 +46,7 @@ app.mount('#app');
 
 
 // ---libary也要加---//
-library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark)
+library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark,faAddressCard,faCircleUser)
 
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router,VueSweetalert2).mount("#app");

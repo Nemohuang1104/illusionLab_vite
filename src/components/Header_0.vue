@@ -75,6 +75,34 @@ onUnmounted(() => {
   document.removeEventListener('click', closeMenu);
 });
 
+// ========================添加是否登入的狀態判斷=======================
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+// 檢查用戶是否已登入
+const isLoggedIn = ref(false);
+
+onMounted(() => {
+  // 檢查 sessionStorage 中是否存在 token
+  const token = sessionStorage.getItem('token');
+  isLoggedIn.value = !!token;
+});
+
+
+// 點擊會員圖示時的處理邏輯
+const handleAvatarClick = () => {
+  if (isLoggedIn.value) {
+    // 若已登入，導向會員中心
+    router.push('/MemberCenter');
+  } else {
+    // 未登入，導向登入頁面
+    router.push('/Login');
+  }
+};
+
+
+
+
 </script>
 
 <template>
@@ -83,12 +111,18 @@ onUnmounted(() => {
       <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-      <router-link :to="{ name: 'shop' }">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
-        <span class="cartCount" v-if="cartCount > 0">{{ cartCount }}</span> <!-- 顯示購物車數量 -->
-      </router-link>
-      <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" /></router-link>
-
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
+          class="shoppingicon" /></router-link>
+      <!-- <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" 
+        /></router-link> -->
+      <!-- ===========================添加是否登入的狀態判斷======================== -->
+      <font-awesome-icon 
+        :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
+        class="peopleicon" 
+        @click="handleAvatarClick"
+      />
+      <!-- ========================================================================= -->
+      
           
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>

@@ -1,12 +1,16 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { ref, computed } from 'vue';
 
+const router = useRouter();
 const toggle_service = ref(true)
 const updateToggle = () => {
     toggle_service.value = !toggle_service.value; // 使用 .value 來更新 ref 的值  
 }
+
 </script>
 
 <template>
