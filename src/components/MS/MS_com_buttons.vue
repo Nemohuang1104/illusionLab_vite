@@ -212,7 +212,7 @@
 }
 .weNeedAStarlight{
   display: flex;
-  background-image: url("../../ms/yourAreTheBiggestStar.png");
+  background-image: url("../../assets/images/ms/yourAreTheBiggestStar.png");
   background-size: cover;
   background-position-y: -50px;
   width: 300px;
