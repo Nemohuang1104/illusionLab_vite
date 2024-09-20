@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-    import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
     import Footer_3 from '@/components/Footer_03.vue'
     import Header from '@/components/Header_0.vue';
     import { ref }from 'vue';

@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../../assets/SASS/component/ms";
   .ticketIntro{
       display: flex;
       flex-grow: 1;

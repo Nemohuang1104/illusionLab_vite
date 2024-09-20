@@ -22,7 +22,7 @@
     "html2canvas": "^1.4.1",
     "jQuery": "npm:jquery@^3.7.1",
     "pinia": "^2.1.4",
-    "swiper": "^11.1.12",
+    "swiper": "^11.1.14",
     "three": "^0.167.1",
     "typewriter-vue": "^0.5.19",
     "vue": "^3.4.29",

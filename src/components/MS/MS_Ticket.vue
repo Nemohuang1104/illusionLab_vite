@@ -5,7 +5,7 @@
 <script setup>
     import MS_main from '@/components/MS/MS_main.vue';
     import MS_ticket_into from '@/components/MS/MS_ticket_into.vue';
-    import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
     import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
     import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
     import MS_customization from '@/components/MS/MS_customization.vue';

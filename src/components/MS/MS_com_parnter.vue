@@ -17,10 +17,7 @@
                 </div>
                 <div class="news__title">{{ news.title }}</div>
                 <div class="news__txt">{{ news.text }}</div>
-                <!-- <div class="news-date">
-                  <span class="news-date__title">{{ news.date }}</span>
-                  <span class="news-date__txt">{{ news.month }}</span>
-                </div> -->
+
             </a>
           </div>
         </div>
@@ -43,14 +40,14 @@
       month: 'May',
       title: 'CORE',
       text: "熱愛蜆精的中性服飾品牌。",
-      image: '../src/ms/logo_of_parnter6.png',
+      image: '../src/assets/images/ms/logo_of_parnter6.png',
     },
     {
       date: ' https://ting-yuuuu.github.io/La-Vin-En-Rose/',
       month: 'May',
       title: 'La Vie En Rose',
       text: "打Code打到滿手瘀青的網路花店。",
-      image: '../src/ms/logo_of_parnter1.png',
+      image: '../src/assets/images/ms/logo_of_parnter1.png',
     },
 
     {
@@ -58,28 +55,28 @@
       month: 'May',
       title: '宅‧抒室',
       text: "熱愛海卻沒賣有關海的香氛蠟燭。",
-      image: '../src/ms/logo_of_parnter2.png',
+      image: '../src/assets/images/ms/logo_of_parnter2.png',
     },
     {
       date: 'https://ping355168.github.io/belleu/',
       month: 'May',
       title: 'BELLEU.',
       text: "聽說加顆鼻屎會看起來比較高級的服飾品牌。",
-      image: '../src/ms/logo_of_parnter3.png',
+      image: '../src/assets/images/ms/logo_of_parnter3.png',
     },
     {
       date: 'https://isnina47.github.io/nina_project/index.html',
       month: 'May',
       title: '屋裡',
       text: "想吃麥當勞但是怕胖的老屋網站。",
-      image: '../src/ms/logo_of_parnter4.png',
+      image: '../src/assets/images/ms/logo_of_parnter4.png',
     },
     {
       date: 'https://17-ching.github.io/cyanLightStudio/',
       month: 'May',
       title: '青芒影像工作室',
       text: "好想吃脆皮烤鴨沾白糖的影像工作室。",
-      image: '../src/ms/logo_of_parnter5.png',
+      image: '../src/assets/images/ms/logo_of_parnter5.png',
     },
 
     {
@@ -87,7 +84,7 @@
       month: 'May',
       title: 'GAME HEX',
       text: "工程師可能都不睡覺的獨立遊戲平台。",
-      image: '../src/ms/logo_of_parnter7.png',
+      image: '../src/assets/images/ms/logo_of_parnter7.png',
     },
 
     {
@@ -95,7 +92,7 @@
       month: 'May',
       title: 'LitteEnJoys',
       text: "甜點行銷大師的飲料品牌。",
-      image: '../src/ms/logo_of_parnter8.png',
+      image: '../src/assets/images/ms/logo_of_parnter8.png',
     },
 
     
@@ -104,21 +101,21 @@
       month: 'May',
       title: '貓奴養成日記',
       text: "喵。",
-      image: '../src/ms/logo_of_parnter10.png',
+      image: '../src/assets/images/ms/logo_of_parnter10.png',
     },
     {
       date: 'https://atlaskuo.github.io/Atlas-Travel/',
       month: 'May',
       title: 'Atlas Travel',
       text: "PM兼工程師兼DBA大哥的旅遊網站。",
-      image: '../src/ms/logo_of_parnter11.png',
+      image: '../src/assets/images/ms/logo_of_parnter11.png',
     },
     {
       date: 'https://yunyylin.github.io/lazydessert/index.html',
       month: 'May',
       title: 'Lazy Dessert',
       text: "製作人全糖的甜點品牌。",
-      image: '../src/ms/logo_of_parnter9.png',
+      image: '../src/assets/images/ms/logo_of_parnter9.png',
     },
   ]);
   
@@ -126,7 +123,7 @@
     const rect = sliderItem.getBoundingClientRect();
     itemBg.value.style.width = `${rect.width}px`;
     itemBg.value.style.height = `${rect.height}px`;
-    itemBg.value.style.transform = `translateX(${rect.left}px) translateY(${rect.top}px)`;
+    itemBg.value.style.transform = `translateX(${rect.left}px) translateY(230px)`;
   }
   
   onMounted(() => {
@@ -186,6 +183,10 @@
   </script>
   
 <style lang="scss">
+h1,h2,h3,h4,h5,h6,p{
+  text-align: center;
+}
+  @import "../../assets/SASS/component/ms";
 
 html {
   position: relative;
@@ -269,13 +270,14 @@ a, a:hover {
 
   &-slider {
     z-index: 2;
-    max-width: 1300px;
+    width: 30vw;
     margin-left: auto;
     margin-right: auto;
     // margin-top: 60px;
 
-    @media screen and (max-width: 1300px){
-      max-width: 1000px;
+    @media screen and (max-width: 1000px) {
+    width: 70vw;
+
     }
 
     @media screen and (max-width: 576px) {
@@ -551,6 +553,9 @@ a, a:hover {
 .wrapper{
   // margin-top:40px;
   padding-top: 20px;
+}
+.news__title, .news__txt{
+  text-align: center;
 }
 </style>
   

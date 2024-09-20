@@ -27,7 +27,7 @@ export default {
 </script>
 
 <script setup>
-    import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
     import Footer_2 from '@/components/Footer_2.vue'
     import Header from '@/components/Header_0.vue';
     import { ref }from 'vue';

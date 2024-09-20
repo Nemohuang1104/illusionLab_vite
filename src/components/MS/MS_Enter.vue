@@ -1,32 +1,32 @@
 <template>
     <div class="holo" >
-        <img class="swimmingpool" src="../../MS/superFuckingCuteDuck_DoMeDo/swimmingPool.png" alt="">
+        <img class="swimmingpool" src="../../assets/images/ms/superFuckingCuteDuck_DoMeDo/swimmingPool.png" alt="">
         <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
-        <img class="IWillFireYou" src="../../MS/superFuckingCuteDuck_DoMeDo/IWillFireYou.gif" alt="">
-        <img class="yourDuckIsSoHot" src="../../MS/superFuckingCuteDuck_DoMeDo/yourDuckIsSoHot.gif" alt="">
+        <img class="IWillFireYou" src="../../assets/images/ms/superFuckingCuteDuck_DoMeDo/IWillFireYou.gif" alt="">
+        <img class="yourDuckIsSoHot" src="../../assets/images/ms/superFuckingCuteDuck_DoMeDo/yourDuckIsSoHot.gif" alt="">
         <h4 class="loadingText">LOADING</h4>
         <div class="loading">
         </div>
         <div class="letGetStarting" @click="goingToIndex"><h3>進入心靈光譜</h3></div>   
         <div class="ourSpecialToolWhichCanGiveThisFuckingDuckSomeColorSeeSee">
             <div class="ducktoolyoyo" @click="letsDancing">
-                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_LetsDance.png' alt="">
+                <img class="duckTool"  src='../../assets/images/ms/superFuckingCuteDuck_DoMeDo/duckTool_LetsDance.png' alt="">
                 <h3>舞</h3>
             </div>
             <div class="ducktoolyoyo" @click="letsWalking">
-                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_letMyDuckBack.png' alt="">
+                <img class="duckTool"  src='../../assets/images/ms/superFuckingCuteDuck_DoMeDo/duckTool_letMyDuckBack.png' alt="">
                 <h3>回</h3>
             </div>
             <div class="ducktoolyoyo" @click="letsWatering">
-                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_SoManyWater.png' alt="">
+                <img class="duckTool"  src='../../assets/images/ms/superFuckingCuteDuck_DoMeDo/duckTool_SoManyWater.png' alt="">
                 <h3>水</h3>
             </div>
             <div class="ducktoolyoyo" @click="letsCooking">
-                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_YouAreFire.png' alt="">
+                <img class="duckTool"  src='../../assets/images/ms/superFuckingCuteDuck_DoMeDo/duckTool_YouAreFire.png' alt="">
                 <h3>煮</h3>
             </div>
             <div class="ducktoolyoyo" @click="letsEgging">
-                <img class="duckTool"  src='../../MS/superFuckingCuteDuck_DoMeDo/duckTool_NeedSomeEggs.png' alt="">
+                <img class="duckTool"  src='../../assets/images/ms/superFuckingCuteDuck_DoMeDo/duckTool_NeedSomeEggs.png' alt="">
                 <h3>蛋</h3>
             </div>
         </div>    
@@ -335,7 +335,7 @@ export default {
     overflow-x: hidden;
     overflow-y: hidden;
     position: relative;
-    background-image: url(../../ms/modeBGI3.jpg);
+    background-image: url(../../assets/images/ms/modeBGI3.jpg);
     display: flex;
     flex-direction: column;
     justify-content: center;
