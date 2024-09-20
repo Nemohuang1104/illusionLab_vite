@@ -1,10 +1,10 @@
-<script>
-import Header_0 from './Header_0.vue';
+<script setup>
+
  
 </script>
 
 <template>
-  <Header_0></Header_0>
+ 
   <main>
       <h1>會員登入</h1>
       <!-- 表格區塊 -->
