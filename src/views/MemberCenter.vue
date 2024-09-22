@@ -1,6 +1,8 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref, computed } from 'vue';
@@ -11,6 +13,29 @@ const updateToggle = () => {
     toggle_service.value = !toggle_service.value; // 使用 .value 來更新 ref 的值  
 }
 
+//=====================登出清除token==========================
+const isLoggedIn = ref(false);
+
+onMounted(() => {
+  // 檢查 sessionStorage 中是否存在 token
+  const token = sessionStorage.getItem('token');
+  isLoggedIn.value = !!token;
+});
+
+const logout = () => {
+  sessionStorage.removeItem('token'); // 清除 token
+  isLoggedIn.value = false; // 重設登入狀態
+
+  Swal.fire({
+        icon: 'success',
+        title: '您已成功登出',
+        timer: 1200,
+        showConfirmButton: false,
+    }).then(() => {
+        router.push('/home'); // 成功後導向主頁
+    });
+};
+
 </script>
 
 <template>
@@ -18,7 +43,8 @@ const updateToggle = () => {
         <Header_0></Header_0>
         <div class="content">
             
-            <div class="title">會員中心</div>
+            <div class="title">會員中心 <button class="logout" @click="logout" v-if="isLoggedIn">登出</button></div>
+           
             <button class="service_btn" @click="updateToggle">我的服務
                 <img :class="toggle_service ? 'arrow-up' : 'arrow-down'"  src="../assets/images/chevron-down-solid.svg" alt="">
             </button>
@@ -61,14 +87,35 @@ const updateToggle = () => {
     // border: 1px solid white;
 }
 
+
+
 .title{
     font-size: 28px;
     font-weight: 700;
     line-height: 1.6rem;
-    flex-basis: 20%;
+    // flex-basis: 20%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
     margin-bottom: 20px;
+}
+
+.logout{
+    width: 80px;
+    height: 30px;
+    font-weight: 600;
+    border-radius: 6px;
+    color: #fff;
+    background-color:transparent;
+    border: 1px solid #fff;
+    margin-left: 8px;
+    vertical-align:top;
+}
+
+.logout:hover{
+    border: 1px solid var(--Color, #7976BB);
+    background: linear-gradient(99deg, rgba(255, 255, 255, 0.80) 8.61%, rgba(255, 255, 255, 0.60) 91.82%);
+    backdrop-filter: blur(10px);
+    color: #22247A;
 }
 
 .tab{

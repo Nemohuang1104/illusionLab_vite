@@ -205,9 +205,8 @@ const register = () => {
           position: "center",
           icon: "success",
           title: "註冊成功！商品折價券60元已匯入您的帳戶，開始您的幻浸之旅吧!",
-          showConfirmButton: true,
-          // timer: 10000
-        }).then(() => {router.push('/home')});
+          showConfirmButton: true
+        }).then(() => {router.push('/Login')});
       } else {
         Swal.fire({
           position: "center",
@@ -257,7 +256,7 @@ const register = () => {
           <!-- 密碼錯誤時出現的訊息 -->
           <span v-if="passwordError" class="error">{{ passwordError }}</span>
 
-          <input type="password" placeholder="請輸入密碼 (數字+英文字母8-16位)" 
+          <input type="password" placeholder="請輸入數字+英文8-16位，開頭須為英文字母" 
           v-model="password"
           @blur="validatePassword">
 
@@ -561,6 +560,8 @@ main {
   border: 1px solid #7976BB;
 }
 
+
+
 //================================RWD==========================
 @media screen and (max-width:600px){
   main{
@@ -630,6 +631,10 @@ main {
   text-align: center;
 }
 
+//==========================sweetalert====================================
+#swal2-title.swal2-title{
+  font-size: 20px !important;
+}
 
 
 </style>
