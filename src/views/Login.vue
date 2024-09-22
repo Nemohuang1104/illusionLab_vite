@@ -20,10 +20,10 @@ import { useRouter } from 'vue-router';
     // 错误信息
     const emailError = ref('');
     const passwordError = ref('');
-    const loginError = ref(''); // 用來顯示登入錯誤
+    
     
 
-    // 邮箱验证规则 (简单验证)
+    // 電子信箱驗證規則 (簡單驗證)
     const checkEmail = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email.value) {
@@ -35,15 +35,15 @@ import { useRouter } from 'vue-router';
       }
     };
 
-    // 密码验证规则 (至少 6 个字符)
+    // 密碼驗證規則 (至少 8 個字符)
     const checkPassword = () => {
       const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
       if (!password.value) {
         passwordError.value = '請輸入密碼';
       } else if (password.value.length < 8) {
-        passwordError.value = '密碼須為(數字+英文8-16位，開頭字符必須是英文字母)';
+        passwordError.value = '密碼須為(數字+英文8-16位，開頭字母必須是英文字母)';
       } else if (!passwordRegex.test(password.value)) {
-        passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字符必須是英文字母)';
+        passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字母必須是英文字母)';
       } else {
         passwordError.value = '';
       }
@@ -138,7 +138,8 @@ const onSubmit = async () => {
         Swal.fire({
           icon: 'success',
           title: '歡迎進入幻浸實驗室',
-          timer: 1200
+          timer: 1200,
+          showConfirmButton: false,
         }).then(() => {
           router.push('/MemberCenter'); // 成功後導向會員中心
         });
@@ -155,7 +156,8 @@ const onSubmit = async () => {
       Swal.fire({
         icon: 'error',
         title: '登入失敗，請確認是否註冊。',
-        timer: 1500
+        timer: 1500,
+        showConfirmButton: false,
       });
     }
   } else {
@@ -163,7 +165,8 @@ const onSubmit = async () => {
     Swal.fire({
       icon: 'warning',
       title: '請重新檢視表單',
-      timer: 1200
+      timer: 1200,
+      showConfirmButton: false,
     });
   }
 };
