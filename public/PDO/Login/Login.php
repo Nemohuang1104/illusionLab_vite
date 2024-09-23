@@ -6,7 +6,8 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header('Content-Type: application/json'); // 設置返回的內容類型為 JSON
 
-header('Content-Type: application/json');
+header("Cache-Control: no-cache, must-revalidate"); // 禁止緩存
+
 include("../conn.php");  // 引入您的資料庫連接檔案
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,15 +22,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // 查詢用戶
-        $sql = "SELECT USER_ID, PASSWORD FROM MEMBER WHERE EMAIL = :email";
+        // 查詢用戶，增加 ACCOUNT_STATUS 欄位
+        $sql = "SELECT USER_ID, PASSWORD, ACCOUNT_STATUS FROM MEMBER WHERE EMAIL = :email";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['PASSWORD'])) {
+        // 檢查是否找到用戶
+        if (!$user) {
+            echo json_encode(['status' => 'error', 'message' => '電子郵件或密碼錯誤。']);
+            exit();
+        }
+
+        // 檢查會員狀態
+        if ($user['ACCOUNT_STATUS'] === '停權') {
+            echo json_encode(['status' => 'error', 'message' => '您的帳號已被停權，無法登入']);
+            exit();
+        }
+
+        // 驗證密碼
+        if (password_verify($password, $user['PASSWORD'])) {
             // 密碼正確，生成 Token
             $token = bin2hex(random_bytes(16)); // 生成隨機 Token
 
@@ -48,6 +62,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(["status" => "error", "message" => "資料庫錯誤：" . $e->getMessage()]);
     }
 }
-
-
 ?>

@@ -1,7 +1,54 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
-import { ref, computed} from 'vue';
+import { ref, computed, onMounted } from 'vue';
+
+// 用戶資料
+const userInfo = ref({
+  user_name: '',
+  gender: '',
+  email: '',
+  phone_number: '',
+  address: '',
+  city: '',
+  district: ''
+});
+
+// 從 sessionStorage 或其他地方取出 token
+const token = sessionStorage.getItem('token');
+
+// 請求會員資料
+const getUserInfo = async () => {
+  try {
+    // 使用 FormData 傳送 token
+    const formData = new FormData();
+    formData.append('token', token);
+
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/GetUserInfo.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.status === 'success') {
+      userInfo.value = data.data;
+    } else {
+      console.error('Error fetching user info:', data.message);
+    }
+  } catch (error) {
+    console.error('Request failed:', error);
+  }
+};
+
+// 在組件加載時發起請求
+onMounted(() => {
+  getUserInfo();
+});
+
 </script>
 
 <template>
@@ -25,7 +72,7 @@ import { ref, computed} from 'vue';
                         <p>姓名:</p>
                         <div class="code-input">
                             <div class="fill">
-                                <input type="text" />
+                                <input type="text" v-model="userInfo.user_name" disabled />
                             </div>
                         </div>
                     </div>
@@ -33,17 +80,17 @@ import { ref, computed} from 'vue';
                         <p>性別:</p>
                         <div class="form-check">
                             <label class="custom-checkbox">
-                                <input type="radio" name="pay" />
+                                <input type="radio" name="gender" id="boy" value="male" v-model="userInfo.gender" disabled />
                                 <span class="checkmark"></span>
                                 <span class="text">男性</span>
                             </label>
                             <label class="custom-checkbox">
-                                <input type="radio" name="pay"  />
+                                <input type="radio" name="gender" id="girl" value="female" v-model="userInfo.gender" disabled />
                                 <span class="checkmark"></span>
                                 <span class="text">女性</span>
                             </label>
                             <label class="custom-checkbox">
-                                <input type="radio" name="pay"  />
+                                <input type="radio" name="gender" id="unknow" value="unknow" v-model="userInfo.gender" disabled />
                                 <span class="checkmark"></span>
                                 <span class="text">不公開</span>
                             </label>
@@ -54,7 +101,7 @@ import { ref, computed} from 'vue';
                         <p>帳號:</p>
                         <div class="code-input">
                             <div class="fill">
-                                <input type="text" />
+                                <input type="text" v-model="userInfo.email" disabled/>
                             </div>
                         </div>
                     </div>
@@ -62,7 +109,7 @@ import { ref, computed} from 'vue';
                         <p>聯絡電話:</p>
                         <div class="code-input">
                             <div class="fill">
-                                <input type="text" />
+                                <input type="text" v-model="userInfo.phone_number" disabled/>
                             </div>
                         </div>
                     </div>
@@ -71,28 +118,16 @@ import { ref, computed} from 'vue';
                         <div class="code-input">
                             <div class="address-1">
                                 <div class="fill">
-                                    <select name="" id="">
-                                        <option value="0">縣市</option>
-                                        <option value="1">台南市</option>
-                                        <option value="2">桃園市</option>
-                                        <option value="3">台北市</option>
-
-                                    </select>
+                                    <input type="text" v-model="userInfo.city" disabled />
                                 </div>
                                 <div class="fill">
-                                    <select name="" id="">
-                                        <option value="0">鄉鎮</option>
-                                        <option value="1">南區</option>
-                                        <option value="2">中壢區</option>
-                                        <option value="3">中山區</option>
-
-                                    </select>
+                                    <input type="text" v-model="userInfo.district" disabled />
                                 </div>
                             </div>
                             
                             <div class="address-2">
                                 <div class="fill">
-                                    <input type="text" />
+                                    <input type="text" v-model="userInfo.address" disabled/>
                                 </div>
                             </div>
                         </div>
@@ -444,6 +479,7 @@ import { ref, computed} from 'vue';
     justify-content: center;
     align-items: center;
     margin-bottom: 60px;
+    display: none;
 }
 
 .confirm button{

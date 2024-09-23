@@ -1,6 +1,8 @@
 <script setup>
 import Header_CMS from '@/components/Header_CMS.vue';
 import { ref, computed, onMounted } from 'vue';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 // import axios from 'axios'; // 註解掉 axios 的引入
 
@@ -90,7 +92,29 @@ const searchItems = async () => {
 // 切換會員狀態
 const toggleStatus = async (item) => {
   const newStatus = item.ACCOUNT_STATUS === '正常' ? '停權' : '正常';
+
+  // 當切換為停權時才顯示 SweetAlert
+  if (newStatus === '停權') {
+    const result = await Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "確定將該會員停權嗎?",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: '確定',
+      cancelButtonText: '取消'
+    });
+
+    // 如果使用者點擊取消，則終止操作
+    if (result.isDismissed) {
+      return;
+    }
+  }
+
+  // 更新會員的狀態
   item.ACCOUNT_STATUS = newStatus;
+
+ 
 
   try {
     const response = await fetch('http://illusionlab.local/public/PDO/Login/UpdateStatus.php', {

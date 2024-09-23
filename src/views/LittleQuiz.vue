@@ -1,8 +1,10 @@
-<script setup>
+<!-- <script setup>
 import Header_0 from '@/components/Header_0.vue';
 import Quizfinal01 from '@/assets/images/Quizch4.png';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import Loginpopup from '@/components/Loginpopup.vue'
-</script>
+</script> -->
 
 
 <template>
@@ -66,10 +68,12 @@ import Loginpopup from '@/components/Loginpopup.vue'
             <img :src="result[final_answer].image" alt="" class="finalanswer-image">
             <div class="answer_text" v-if="result[final_answer] && result[final_answer].text"
               v-html="result[final_answer].text"></div>
-            <button @click="popshow">領取折價卷</button>
+            <button @click="claimCoupon">領取折價卷</button>
+          
 
-            <div class="popup" v-if="login == true">
-            <Loginpopup></Loginpopup>
+            <div class="popup" v-if="showLogin">
+            <Loginpopup @login-success="handleLoginSuccess" @close-popup="showLogin = false"
+            redirect="quiz"></Loginpopup>
             </div>
           </div>
 
@@ -83,35 +87,30 @@ import Loginpopup from '@/components/Loginpopup.vue'
 </template>
 
 <script>
+import Header_0 from '@/components/Header_0.vue';
+import Loginpopup from '@/components/Loginpopup.vue';
+import Quizfinal01 from '@/assets/images/Quizch4.png';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 // const currentMode = ref('one');
 
 export default {
+  components: {
+    Header_0,
+    Loginpopup
+  },
   data() {
     return {
+      currentMode: 'one',
       imgPath: '',
       start_animation: false,
-      login:false,
+      showLogin: false,
       activeIndex: 0,
       final_answer: 1,
-      result: {
-        1: {
-          image: new URL('../assets/images/Quiz_LCresult.png', import.meta.url).href,
-          text: '你適合參加刺激的人生賭場<br>這是一個充滿挑戰和策略的活動<br>讓你感受到生活中的刺激和選擇的重要性。'
-        },
-        2: {
-          image: new URL('../assets/images/Quiz_SFresult.png', import.meta.url).href,
-          text: '你適合參加新奇的星際邊際<br>這是一場太空探險<br>適合喜愛探索未知和挑戰自我的人'
-        },
-        3: {
-          image: new URL('../assets/images/Quiz_MSresult.png', import.meta.url).href,
-          text: '你適合參加療癒的心靈光譜<br>這個活動專注於心靈療癒和自我反思<br>幫助你找到內心的平靜和力量'
-        }
-      },
+      discountCode: '',
       data: [
-        {
-
-        },
+        {},
         {
           image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
           label: '1.你認為哪種生活哲學最適合你？',
@@ -162,58 +161,250 @@ export default {
             { name: '能夠在任何環境下<br>都保持冷靜與沉著', value: '2' }
           ]
         },
-        {
-
+        {}
+      ],
+      result: {
+        1: {
+          image: new URL('../assets/images/Quiz_LCresult.png', import.meta.url).href,
+          text: '你適合參加刺激的人生賭場<br>這是一個充滿挑戰和策略的活動<br>讓你感受到生活中的刺激和選擇的重要性。'
         },
-      ]
+        2: {
+          image: new URL('../assets/images/Quiz_SFresult.png', import.meta.url).href,
+          text: '你適合參加新奇的星際邊際<br>這是一場太空探險<br>適合喜愛探索未知和挑戰自我的人'
+        },
+        3: {
+          image: new URL('../assets/images/Quiz_MSresult.png', import.meta.url).href,
+          text: '你適合參加療癒的心靈光譜<br>這個活動專注於心靈療癒和自我反思<br>幫助你找到內心的平靜和力量'
+        }
+      }
+    }
+  },
+  mounted() {
+    // 檢查路由是否有 showLogin=true
+    if (this.$route.query.showLogin === 'true') {
+      this.showLogin = true;
+    }
+  },
+  watch: {
+    '$route.query.showLogin'(newVal) {
+      if (newVal === 'true') {
+        this.showLogin = true;
+      }
     }
   },
   methods: {
-    popshow(){
-      this.login = true
+    startQuiz() {
+      this.activeIndex = 1;
     },
     next(question, answer) {
-      question.value = answer.value
-      this.activeIndex++
+      question.value = answer.value;
+      this.activeIndex++;
 
       if (this.activeIndex === this.data.length - 1) {
-        this.start_animation = true
-
+        this.start_animation = true;
 
         console.log(this.data);
 
-        let final_point = 0
+        let final_point = 0;
 
         for (let index = 0; index < this.data.length; index++) {
           const point = this.data[index].value ? this.data[index].value : 0;
-          final_point += Number(point)
-
+          final_point += Number(point);
         }
 
         console.log(final_point);
 
-       if(final_point <= 8){
-        this.final_answer = 1
-       }else if(final_point >= 9 && final_point <= 11 ){
-        this.final_answer = 2
-       }else{
-        this.final_answer = 3
-       };
+        if (final_point <= 8) {
+          this.final_answer = 1;
+        } else if (final_point >= 9 && final_point <= 11) {
+          this.final_answer = 2;
+        } else {
+          this.final_answer = 3;
+        }
 
-
+        // 標記測驗完成
+        this.markQuizCompleted();
 
         setTimeout(() => {
-          this.start_animation = false
-
+          this.start_animation = false;
         }, 2500);
       }
+    },
+    async markQuizCompleted() {
+      const token = sessionStorage.getItem('token');
+
+      if (token) {
+        try {
+          const response = await axios.post('http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php', {}, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (response.data.status === 'success') {
+            sessionStorage.setItem('quizCompleted', 'true');
+            console.log('測驗完成標記已更新。');
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: response.data.message,
+              timer: 2500,
+              showConfirmButton: false,
+              backdrop: false,
+              willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+            });
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: '標記測驗完成失敗，請稍後再試。',
+            timer: 2500,
+            showConfirmButton: false,
+            backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+          });
+        }
+      }
+    },
+    async claimCoupon() {
+      const token = sessionStorage.getItem('token');
+
+      if (!token) {
+        // 設置折扣碼請求標記
+        sessionStorage.setItem('couponRequested', 'true');
+        // 顯示登入彈窗
+        this.showLogin = true;
+      } else {
+        // 呼叫後端 API 取得折扣碼
+        try {
+          const response = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          if (response.data.status === 'success') {
+            this.discountCode = response.data.discountCode;
+            Swal.fire({
+              icon: 'success',
+              title: `您的折扣碼是: ${response.data.discountCode}`,
+              timer: 2500,
+              showConfirmButton: false,
+              backdrop: false,
+              willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+            });
+            console.log('即將跳轉到 /LittleQuizResult');
+            // 跳轉到結果頁面
+              this.$router.push('/LittleQuizResult');
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: response.data.message,
+              timer: 2500,
+              showConfirmButton: false,
+              backdrop: false,
+              willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+            });
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: '獲取折扣碼失敗，請稍後再試。',
+            timer: 2500,
+            showConfirmButton: false,
+            backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+          });
+        }
+        
+      }
+      
+    },
+    async handleLoginSuccess() {
+  this.showLogin = false;
+  const couponRequested = sessionStorage.getItem('couponRequested');
+
+  if (couponRequested === 'true') {
+    sessionStorage.removeItem('couponRequested');
+    const token = sessionStorage.getItem('token');
+
+    if (token) {
+      try {
+        // 先標記測驗完成
+        await this.markQuizCompleted();
+
+        // 然後獲取折扣碼
+        const response = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.data.status === 'success') {
+          this.discountCode = response.data.discountCode;
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: `您的折扣碼是: ${response.data.discountCode}`,
+          //   timer: 2500,
+          //   showConfirmButton: false,
+          //   backdrop: false,
+          //   willOpen: () => {
+          //       document.body.style.paddingRight = '0';
+          //     }
+          // });
+          // 跳轉到結果頁面
+          this.$router.push('/LittleQuizResult');
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: response.data.message,
+            timer: 2500,
+            showConfirmButton: false,
+            backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: '獲取折扣碼失敗，請稍後再試。',
+          timer: 2500,
+          showConfirmButton: false,
+          backdrop: false,
+          willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+        });
+      }
     }
+  } else {
+    // 若沒有請求優惠券，僅執行標記
+    await this.markQuizCompleted();
+      }
+    }
+
   }
+  
 }
 
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
@@ -233,6 +424,10 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+
+.swal2-shown {
+    padding-right: 0 !important; /* 去除右側 padding */
+}
 .container {
   background: linear-gradient(115deg, #22247A 22.76%, #7976BB 97.71%);
   min-height: 100vh;
@@ -495,7 +690,9 @@ export default {
 }
 
 //==================結果頁============================================
-
+element.style{
+  padding-right: 0;
+}
 
 .finalanswer {
   // padding-top: 120px;
@@ -537,6 +734,8 @@ export default {
   margin: 0 auto;
   cursor: pointer;
 }
+
+// 
 
 //==================================進度條=========================================
 
