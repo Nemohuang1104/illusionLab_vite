@@ -30,4 +30,5 @@ if ($token) {
 } else {
     echo json_encode(["status" => "error", "message" => "缺少 token"]);
 }
+
 ?>

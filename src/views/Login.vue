@@ -5,7 +5,11 @@ import Footer_0 from '../components/Footer_0.vue';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import axios from 'axios';
-
+import GoogleLogin from '@/components/GoogleLogin.vue';
+//===============================================================================
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import apiInstance from 'path-to-your-api-instance';  // 確保 apiInstance 正確導入
+//==================================================================================
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -20,7 +24,11 @@ import { useRouter } from 'vue-router';
     // 错误信息
     const emailError = ref('');
     const passwordError = ref('');
-    
+    //==========================================================
+    const alertContent = ref([]);  // 響應式的警告訊息內容
+    const showAlert = ref(false);  // 響應式的警告顯示狀態
+    const route = useRoute();    
+    //============================================================
     
 
     // 電子信箱驗證規則 (簡單驗證)
@@ -74,6 +82,57 @@ import { useRouter } from 'vue-router';
       })
     };
 
+  //================================google================================
+    const updateToken = (token) => {
+      // 實現 token 更新邏輯
+    };
+
+    const updateUserData = (userData) => {
+      // 實現更新用戶數據邏輯
+    };
+
+    const googleLogin = async () => {
+      try {
+        const auth = getAuth();
+        const googleProvider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, googleProvider);
+        const userName = result.user.displayName;
+        const userEmail = result.user.email;
+
+        // 發送 API 請求
+        const res = await apiInstance({
+          method: 'post',
+          url: `${import.meta.env.VITE_API_URL}/googleLogin.php`,
+          headers: { "Content-Type": "multipart/form-data" },
+          data: {
+            mem_account: userEmail,
+            mem_name: userName
+          }
+        });
+
+        // 處理 API 響應
+        if (res.data.memInfo.mem_state === 0) {
+          alertContent.value.push('登入失敗，請聯繫客服人員。');
+          showAlert.value = true;
+          document.body.classList.add('body-overflow-hidden');
+        } else {
+          updateToken(true);
+          updateUserData(res.data.memInfo);
+
+          const redirect = route.query.redirect;  // 使用 route.query 取代 this.$route.query
+          if (redirect) {
+            router.push(redirect);  // 使用 router.push 取代 this.$router.push
+          } else {
+            router.push('/');  // 導回首頁或自訂頁面
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  //======================================================================================
+  
     // 表单是否有效的计算属性
     // const isFormValid = computed(() => {
     //   return !emailError.value && !passwordError.value && email.value && password.value;
@@ -209,8 +268,9 @@ const onSubmit = async () => {
    
     <p>其他登入方式</p>
     <div class="other">
-      <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
-      <a href=""><img src="../assets/images/icon-google.svg" alt=""></a>
+      <img src="../assets/images/icon-facebook.svg" alt="" >
+      <img src="../assets/images/icon-google.svg" alt="" @click="googleLogin">
+      <GoogleLogin></GoogleLogin>
     </div>
     <p>還不是會員? 前往註冊</p>
     <router-link to="/SignUp"><input type="submit" value="註冊" class="signup"></router-link>
@@ -334,6 +394,7 @@ button{
 
 .form .other{
   text-align: center;
+  cursor: pointer;
 }
 
 .form img{
