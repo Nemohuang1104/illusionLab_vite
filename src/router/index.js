@@ -46,7 +46,7 @@ const routes = [
     requiredLogin: true
   },
   {
-    path: '/shop',
+    path: '/shop/:id',
     name: 'shop',
     component: () => import('@/views/ShoppingCar1.vue'),
     meta: {

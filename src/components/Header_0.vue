@@ -1,7 +1,7 @@
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
-
+//設定各組mode狀態
 const props = defineProps({
   mode: {
     type: String,
@@ -72,6 +72,7 @@ onUnmounted(() => {
   document.removeEventListener('click', closeMenu);
 });
 
+
 </script>
 
 <template>
@@ -80,20 +81,30 @@ onUnmounted(() => {
       <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
-      <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" /></router-link>
+      <div class="header-cart">
+        <!-- 購物車圖示和商品數量 -->
+        <router-link :to="{ name: 'shop' }">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+          <span class="cart-count">{{ cartItemCount }}</span>  <!-- 顯示購物車商品數量 -->
+        </router-link>
+      </div>
+      <!-- 登入圖示 -->
+      <router-link :to="{ name: 'login' }">
+        <font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" />
+      </router-link>
 
-          
+      <!-- 漢堡菜單 -->
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
     <!-- 半圓形菜單 -->
     <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
       <ul class="menu">
-        <li class="one"> <router-link :to="{ name: 'shop' }">會員登入</router-link>
+        <li class="one">
+          <router-link :to="{ name: 'shop' }">會員登入</router-link>
         </li>
         <li class="two">
           <router-link :to="{ name: 'login' }">購物車</router-link>
+          <span class="cart-count2">{{ cartItemCount }}</span>  <!-- 顯示購物車商品數量 -->
         </li>
         <li class="three">
           <router-link to="/lifeCasino">人生賭場</router-link>
@@ -136,11 +147,16 @@ header {
 
 //右側ICON
 .icons {
-  display: inline-block;
+  // display: inline-block;
   justify-content: end;
   align-items: center;
   padding: 10px 20px;
   // border: 1px solid red;
+  display: flex;
+}
+
+.header-cart{
+  position: relative;
 }
 
 .shoppingicon {
@@ -150,11 +166,26 @@ header {
   margin-right: 20px;
 }
 
+.cart-count{
+  background-color: #FCB600;
+  height: 20px;
+  width: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
 .peopleicon {
   width: 35px;
   height: 25px;
   color: #fff;
 }
+
+
 
 
 
@@ -323,6 +354,24 @@ header {
 
   .hamburger {
     display: block;
+  }
+
+  .cart-count{
+    display: none;
+  }
+
+  .cart-count2{
+   display: block;
+   background-color: #FCB600;
+  height: 20px;
+  width: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 64px;
+  left: 115px;
   }
 }
 </style>

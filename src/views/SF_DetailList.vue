@@ -9,6 +9,7 @@ const currentMode = ref('three');
 import Footer_2 from '@/components/Footer_2.vue';
 
 
+
 // 匯入漸層藍色標題樣式
 import StrellarFrontierTitle from '@/components/SFTitle.vue';
 
@@ -17,10 +18,10 @@ const props = defineProps({
 })
 
 
+
 //在商品細項撈取商品資料
 const item = ref([]);
 const route = useRoute();
-// const router = useRouter();
 const productDetail = ref(null);
 
 // 根據商品 ID 撈取商品細項資料
@@ -51,9 +52,6 @@ async function fetchProductDetail() {
             } catch (error) {
                 console.error('Error fetching product details:', error);
             }
-
-
-
         }
 
         // fetch(`http://illusionlab.local/public/PDO/ProductData/SF_FetchProductDetail.php?productId=${productId}`).then(response => response.json()).then(
@@ -73,6 +71,58 @@ onMounted(() => {
     fetchProductDetail(); // 撈取商品細項資料
 });
 
+
+
+
+async function addToCart() {
+    try {
+        const productId = route.params.id; // 從路由獲取商品 ID
+        const userId = 'ILC0001';
+        const quantity = counter.value;
+        
+        // 構造 FormData 對象來傳遞數據
+        const formData = new FormData();
+        formData.append('userId', userId);
+        formData.append('productId', productId);
+        formData.append('quantity', quantity);
+
+        // 發送 POST 請求
+        const response = await fetch('http://illusionlab.local/public/PDO/ProductData/ShoppingCar1.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('商品已加入購物車！');
+        } else {
+            console.error('加入購物車失敗:', data.error);
+        }
+
+    } catch (error) {
+        console.error('Error adding to cart:', error);
+    }
+}
+
+
+
+
+
+// 定義計數器，使用 ref 來創建響應式變量
+const counter = ref(1);
+
+// 增加數量
+const increment = () => {
+    counter.value++;
+};
+
+// 減少數量 (確保不小於 1)
+const decrement = () => {
+    if (counter.value > 1) {
+        counter.value--;
+    }
+};
 
 
 
@@ -143,8 +193,10 @@ onMounted(() => {
                             <p>作者 : Nemo  </p>
                             <p>與知名插畫家 Nina 聯名推出</p>
                         </div> -->
-                        <p>材質：{{ item.MATERIAL }}</p>
-                        <p>商品規格 :{{ item.PRODUCT_SIZE }}</p>
+                        <div class="leftlight">
+                            <p>材質：{{ item.MATERIAL }}</p>
+                            <p>商品規格 :{{ item.PRODUCT_SIZE }}</p>
+                        </div>
                     </div>
                     <!-- <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="4" :freeMode="true"
                         :watchSlidesProgress="true" :modules="modules" class="mySwiper">
@@ -154,11 +206,20 @@ onMounted(() => {
                         <swiper-slide><img src="../assets/images/SF_easycard_1.png" /></swiper-slide>
                     </swiper> -->
                     <div class="rightdown">
+                        <!-- <div class="but">
+                            <input type="button" value=" - " class="sub" @click="decrement">
+                            <div class="counter">{{ counter }}</div>
+                            <input type="button" value=" + " class="add" @click="increment">
+                        </div> -->
+
                         <div class="but">
-                            <input type="button" value=" - " class="sub">
-                            <div class="counter" id="counter">1</div>
-                            <input type="button" value=" + " class="add">
+                            <input type="button" value=" - " class="sub" @click="decrement">
+                            <div class="counter">{{ counter }}</div>
+                            <input type="button" value=" + " class="add" @click="increment">
                         </div>
+                        <input type="hidden" name="quantity" :value="counter"> <!-- 傳送商品數量 -->
+
+
                         <div class="size">
                             <select name="size-select" id="size-select">
                                 <option value="----- 商品尺寸 -----">商品尺寸</option>
@@ -169,7 +230,9 @@ onMounted(() => {
                             </select>
                         </div>
 
-                        <p>加入購物車</p>
+                        <!-- <p>加入購物車</p> -->
+                        <button @click="addToCart">加入購物車</button>
+
                     </div>
                 </div>
             </div>
@@ -282,7 +345,7 @@ onMounted(() => {
 //右側上方文字框
 .textbox {
     // border: 1px solid red;
-    width: 240px;
+    width: 300px;
     // height: 150px;
 
     // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
@@ -301,18 +364,28 @@ onMounted(() => {
 .textbox h3 {
     font-size: 28px;
     font-weight: 600;
+    // color: #C1693B;
+    // background-color: #C1693B;
 }
-.textbox h4{
+
+.textbox h4 {
     font-size: 20px;
     font-weight: 800;
+
 }
 
 
 .textbox p {
-    font-size: 16px;
+    font-size: 14px;
     color: #FFFFFF;
+
 }
 
+.leftlight {
+    border-left: 5px solid #C1693B;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
 
 .btn {
     flex-direction: row;
@@ -347,26 +420,36 @@ onMounted(() => {
 }
 
 .sub {
-    border-radius: 40px 0px 0px 40px;
+    border-radius: 12px 0px 0px 12px;
     color: #ffffff;
     background-color: transparent;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
+    // background-color: #C1693B;
+}
+
+.sub:hover {
+    background-color: #C1693B;
 }
 
 .add {
-    border-radius: 40px 0px 0px 40px;
+    border-radius: 0px 12px 12px 0px;
     color: #ffffff;
     background-color: transparent;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
+    // background-color: #C1693B;
+}
+
+.add:hover {
+    background-color: #C1693B;
 }
 
 //尺寸下拉式選單
 .size select {
-    width: 200px;
+    width: 300px;
     height: 40px;
     border-radius: 12px;
     display: block;
@@ -374,12 +457,14 @@ onMounted(() => {
     line-height: 40px;
     margin-bottom: 20px;
     font-size: 20px;
-    color: #ffffff;
+    color: #fff;
     outline: none;
-    // background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    background: none;
+    background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    // border: 1px solid ;
+    border: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    cursor: pointer;
+    border: unset;
 }
-
 
 //將下拉式選單select箭頭刪掉 
 .size select {
@@ -399,7 +484,7 @@ onMounted(() => {
 }
 
 //加入購物車
-.rightdown p {
+.rightdown button {
     width: 300px;
     height: 50px;
     border-radius: 40px;
@@ -417,9 +502,10 @@ onMounted(() => {
     color: #fff;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
     cursor: pointer;
+    border: none;
 }
 
-.rightdown p:hover {
+.rightdown button:hover {
     background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
 }
 

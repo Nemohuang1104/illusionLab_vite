@@ -78,6 +78,13 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', updateWidth);
 });
+
+
+
+//點擊商品時購物車icon會出現增加數字 
+import { inject } from 'vue';
+
+const cart = inject('cart');  // 獲取購物車數據
 </script>
 
 <template>
@@ -105,8 +112,13 @@ onUnmounted(() => {
 
     </div>
     <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
+      <div class="header-cart">
+        <!-- 購物車圖示和商品數量 -->
+        <router-link :to="{ name: 'shop' }">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+          <span class="cart-count">{{ 0 }}</span>  <!-- 顯示購物車商品數量 -->
+        </router-link>
+      </div>
       <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-smile"class="peopleicon" /></router-link>
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
@@ -228,13 +240,18 @@ img {
 
 /* 右側ICON */
 .icons {
-  display: inline-block;
+  // display: inline-block;
   justify-content: end;
   align-items: center;
   padding: 10px 20px;
   /* border: 1px solid red; */
   cursor: pointer;
   box-sizing: border-box;
+  display: flex;
+}
+
+.header-cart{
+  position: relative;
 }
 
 .shoppingicon {
@@ -242,6 +259,19 @@ img {
   height: 25px;
   color: #fff;
   margin-right: 20px;
+}
+
+.cart-count{
+  background-color: #FCB600;
+  height: 20px;
+  width: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
 }
 
 .peopleicon {
@@ -402,6 +432,8 @@ img {
   .hamburger {
     display: block;
   }
+
+  
 
 }
 </style>

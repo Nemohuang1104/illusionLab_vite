@@ -1,40 +1,116 @@
 <script setup>
 
-    import { ref } from 'vue';
-    import Header_1 from '@/components/Header_0.vue';
-    import ShoppingStep from '@/components/ShoppingStep.vue';
-    import Footer from '@/components/Footer_0.vue';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import Header_0 from '@/components/Header_0.vue';
+const currentMode = ref('one');
+
+import ShoppingStep from '@/components/ShoppingStep.vue';
+import Footer from '@/components/Footer_0.vue';
 
 
-    const cartItems = ref([
+const cartItems = ref([
     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
 ]);
 
 
 const productInfo = ref([
-  {id:'1',cardImage: '../src/assets/images/MS_Product1.svg',productName:'繪本風格悠遊卡卡夾',price:'300'},
-  {id:'2',cardImage: '../src/assets/images/MS_Product2.svg',productName:'繪本風格筆記本',price:'180'},
-  {id:'3',cardImage: '../src/assets/images/MS_Product3.svg',productName:'繪本風格帆布袋',price:'590'},
-  {id:'4',cardImage: '../src/assets/images/MS_Product4.svg',productName:'繪本風格小貼紙',price:'100'},
-  {id:'5',cardImage: '../src/assets/images/MS_Product5.svg',productName:'繪本風格悠遊抱枕',price:'990'},
-  {id:'6',cardImage: '../src/assets/images/MS_Product6.svg',productName:'繪本風格防摔手機殼',price:'1280'},
+    // { id: '1', cardImage: '../src/assets/images/MS_Product1.svg', productName: '繪本風格悠遊卡卡夾', price: '300' },
+    // { id: '2', cardImage: '../src/assets/images/MS_Product2.svg', productName: '繪本風格筆記本', price: '180' },
+    // { id: '3', cardImage: '../src/assets/images/MS_Product3.svg', productName: '繪本風格帆布袋', price: '590' },
+    // { id: '4', cardImage: '../src/assets/images/MS_Product4.svg', productName: '繪本風格小貼紙', price: '100' },
+    // { id: '5', cardImage: '../src/assets/images/MS_Product5.svg', productName: '繪本風格悠遊抱枕', price: '990' },
+    // { id: '6', cardImage: '../src/assets/images/MS_Product6.svg', productName: '繪本風格防摔手機殼', price: '1280' },
+])
 
 
-]) 
+
 
 // ============ShoppingStep=============//
 const highlight = ref({
-    1:{  background : '#fff', fontcolor : '#22247A' },
-    2:{  background : 'transparent', fontcolor : '#fff' },
-    3:{  background : 'transparent', fontcolor : '#fff' }
+    1: { background: '#fff', fontcolor: '#22247A' },
+    2: { background: 'transparent', fontcolor: '#fff' },
+    3: { background: 'transparent', fontcolor: '#fff' }
 
+}
+);
+
+
+
+
+
+//在商品細項撈取商品資料
+const carts = ref([]);
+const route = useRoute();
+const productDetail = ref(null);
+const totalAmount = ref(0);
+
+
+// 根據商品 ID 撈取商品細項資料
+async function fetchShoppingCar1() {
+    try {
+        const productId = route.params.id; // 從路由獲取商品 ID
+        const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/ShoppingCar1.php?productId=${productId}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            console.log(data);
+
+            carts.value = data;
+            calculateTotal(); // 在獲取商品資料後計算總金額
+        }
+    } catch (error) {
+        console.error('Error fetching product details:', error);
     }
-  );
+}
+
+// 計算總金額
+const calculateTotal = () => {
+    totalAmount.value = item.value.reduce((total, item) => {
+        return total + (item.price * item.quantity); // 假設item有price和quantity屬性
+    }, 0);
+};
+
+// 在mounted時獲取商品資料
+onMounted(() => {
+    fetchShoppingCar1(); // 撈取商品細項資料
+});
+// const addToCart = () => {
+//   const userId = currentUser.id;
+//   const productId = item.PRODUCT_ID;
+//   const quantity = item.quantity;
+
+//   console.log('userId:', userId);
+//   console.log('productId:', productId);
+//   console.log('quantity:', quantity); // 確認數據是否正確
+
+//   const formData = new FormData();
+//   formData.append('userId', userId);
+//   formData.append('productId', productId);
+//   formData.append('quantity', quantity);
+
+//   fetch('ShoppingCar1.php', {
+//     method: 'POST',
+//     body: formData
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log('加入購物車成功:', data);
+//   })
+//   .catch(error => {
+//     console.error('加入購物車失敗:', error);
+//   });
+// };
 </script>
 <template>
     <div class="wrapper">
         <div class="header">
-            <Header_1></Header_1>
+            <Header_0 :mode="currentMode"></Header_0>
         </div>
         <div class="step">
             <ShoppingStep :styles="highlight"></ShoppingStep>
@@ -42,13 +118,14 @@ const highlight = ref({
         <div class="contanier">
             <div class="order">
                 <p class="title">訂單內容</p>
-                <ul>
-                    <li class="card">
+                <ul v-if="carts.length > 0">
+                    <li class="card" v-for="(item, key) in carts" :key="key">
                         <div class="product-info">
                             <input class="checkbox" type="checkbox">
-                            <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image">
+                            <!-- <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image"> -->
+                            <img :src="item.PRODUCT_IMG" alt="商品圖片" class="product-image">
                             <div class="description">
-                                <span class="product-name">繪本風格帆布袋</span>
+                                <span class="product-name">{{ item.PRODUCT_NAME }}</span>
                                 <div class="input">
                                     <select name="" id="">
                                         <option value="0">規格</option>
@@ -59,17 +136,17 @@ const highlight = ref({
                                     </select>
                                 </div>
                             </div>
-                            
-                            <div class="quantity-input"  v-for="(item, index) in cartItems">
+                            <!-- v-for="(item, index) in cartItems" -->
+                            <div class="quantity-input">
                                 <button class="quantity-button" id="minus6"
-                                    @click="item.quantity > 1 && item.quantity--">-</button>
-                                <input type="text" v-model="item.quantity" min="1" />
-                                <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
+                                    @click="item.QUANTITY > 1 && item.QUANTITY--">-</button>
+                                <input type="text" v-model="item.QUANTITY" min="1" />
+                                <button class="quantity-button" id="plus6" @click="item.QUANTITY++">+</button>
                             </div>
-                            <span class="des_span" >$590</span>
+                            <span class="des_span">NT$ {{ item.PRODUCT_PRICE * item.QUANTITY }} </span>
                             <img class="trash-can" src="../assets/images/trashcan.svg">
                         </div>
-                     
+
                     </li>
                 </ul>
             </div>
@@ -77,12 +154,12 @@ const highlight = ref({
                 <p>使用折扣碼</p>
                 <input type="text" size="30">
                 <div class="total">
-                    
+
                     <div class="count">
                         <h3>商品金額</h3>
                         <p>$590</p>
                     </div>
-                   
+
                     <div class="discount-fee">
                         <h3>折扣</h3>
                         <p>$0</p>
@@ -90,7 +167,7 @@ const highlight = ref({
                     <hr>
                     <div class="total-fee">
                         <h3>總金額</h3>
-                        <p>$590</p>
+                        <p>${{ totalAmount }}</p>
                     </div>
                 </div>
                 <div class="checkbutton">
@@ -104,16 +181,22 @@ const highlight = ref({
         <hr>
         <div class="ProductAdd">
             <p>商品加購</p>
-            <ul class="addProduct_grid" >
+            <ul class="addProduct_grid">
                 <li class="pro" v-for="(item, index) in productInfo" :key="item.id">
                     <img :src="item.cardImage" alt="">
                     <p>{{ item.productName }}</p>
                     <div class="text">
                         <div class="price">
-                        <span>NT${{ item.price }}</span>
+                            <span>NT${{ item.price }}</span>
                         </div>
                         <div class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.<path fill="#ffffff" d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48l45.5 0c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5L488 384c13.3 0 24-10.7 24-24s-10.7-24-24-24l-288.3 0c-11.5 0-21.4-8.2-23.6-19.5L170.7 288l288.5 0c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32L360 32l0 102.1 23-23c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-64 64c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l23 23L312 32 120.1 32C111 12.8 91.6 0 69.5 0L24 0zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z"/></svg>                        </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">!Font Awesome Free 6.6.0 by
+                                @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free
+                                Copyright 2024 Fonticons, Inc.
+                                <path fill="#ffffff"
+                                    d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48l45.5 0c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5L488 384c13.3 0 24-10.7 24-24s-10.7-24-24-24l-288.3 0c-11.5 0-21.4-8.2-23.6-19.5L170.7 288l288.5 0c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32L360 32l0 102.1 23-23c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-64 64c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l23 23L312 32 120.1 32C111 12.8 91.6 0 69.5 0L24 0zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z" />
+                            </svg>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -128,389 +211,416 @@ const highlight = ref({
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 
-    * {
-        font-family: "Noto Sans TC";
-    }
-    .wrapper{
-        background: linear-gradient(125deg, #22247A 23.82%, #7976BB 101.34%);
-    }
-
-  
-    
-    .step{
-        padding-top: 50px;
+* {
+    font-family: "Noto Sans TC";
 }
 
-    .contanier{
-        display: flex;
-        width: 100%;
-        max-width: 1000px;
-        margin: 5% auto 0;
-        justify-content: space-between;
-    }
-    .contanier p, .contanier span{
-        color: #FFFFFF;
-    }
+.wrapper {
+    background: linear-gradient(125deg, #22247A 23.82%, #7976BB 101.34%);
+}
 
-    .contanier p{
-        margin-bottom: 10px;
-    }
 
-    .order .title{
-        border-radius: 10px;
-        background: #000354;
-        color: #FFFFFF;
-        font-size: 20px;
-        font-style: normal;
-        padding: 10px;
-        width: 95%;
-    }
 
-    ul{
-        list-style: none;
-        margin-top: 10px;
-    }
-    .card{
-        display: flex;
-        align-items: center;
-    }
+.step {
+    padding-top: 50px;
+}
 
-    .trash-can{
-        cursor: pointer;
-        width: 100%;
-        max-width: 20px;
-    }
-    // ======================
+.contanier {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    margin: 5% auto 0;
+    justify-content: space-between;
+}
 
-    .product-info{
-        width: 100%;
-        display: grid;
-        grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 1fr;
-        padding: 10px;
-        align-items: center;
-        justify-items: center;
-        color: var(--Color-6, #FFF);
-        font-family: "Noto Sans TC";
-    }
+.contanier p,
+.contanier span {
+    color: #FFFFFF;
+}
 
-    .product-name{
-        line-height: 1.2;
-    }
+.contanier p {
+    margin-bottom: 10px;
+}
 
-    .checkbox {
-        appearance: none; /* 隱藏原始 checkbox */
-        width: 100px;
-        max-width: 16px;
-        height: 16px;
-        border: 1px solid #ffffff; /* 自定義背景色 */
-        cursor: pointer;
+.order .title {
+    border-radius: 10px;
+    background: #000354;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-style: normal;
+    padding: 10px;
+    width: 95%;
+}
 
-        &:checked {
-            background-color: rgba(255, 255, 255, 0); /* 選中後背景顏色 */
-        }
+ul {
+    list-style: none;
+    margin-top: 10px;
+}
 
-        /* 打勾標記 */
-        &:checked::after {
-            // content: '✔'; /* 選中後顯示的符號 */
-            content: '✓'; 
-            display: block;
-            text-align: center;
-            line-height: 13px;
-            color: #ffffff; /* 勾勾的顏色 */
-            font-size: 16px;
-        }
-    }
+.card {
+    display: flex;
+    align-items: center;
+}
 
-    // ========================
-    .product-image{
-        border-radius: 10px;
-        // width: 100%;
-        max-width: 120px;
+.trash-can {
+    cursor: pointer;
+    width: 100%;
+    max-width: 20px;
+}
+
+// ======================
+
+.product-info {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 1fr;
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
+    color: var(--Color-6, #FFF);
+    font-family: "Noto Sans TC";
+}
+
+.product-name {
+    line-height: 1.2;
+}
+
+.checkbox {
+    appearance: none;
+    /* 隱藏原始 checkbox */
+    width: 100px;
+    max-width: 16px;
+    height: 16px;
+    border: 1px solid #ffffff;
+    /* 自定義背景色 */
+    cursor: pointer;
+
+    &:checked {
+        background-color: rgba(255, 255, 255, 0);
+        /* 選中後背景顏色 */
     }
 
-    .quantity-input {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-    }
-
-    .quantity-button {
-        vertical-align: middle;
-        display: inline-block;
+    /* 打勾標記 */
+    &:checked::after {
+        // content: '✔'; /* 選中後顯示的符號 */
+        content: '✓';
+        display: block;
         text-align: center;
+        line-height: 13px;
+        color: #ffffff;
+        /* 勾勾的顏色 */
         font-size: 16px;
-        width: 40px;
-        height: 16px;
-        /* 將高度設置為 40px，與輸入框一致 */
-        line-height: 16px;
-        /* 將 line-height 設置為 40px，確保文字垂直居中 */
-        background-color: #FFEDBC;
-        /* 設置背景色，根據需求調整 */
-        border: 0
     }
+}
 
-    .quantity-input>button:hover {
-        background-color: #B36243;
-        transition: 0.3s;
-    }
+// ========================
+.product-image {
+    border-radius: 10px;
+    // width: 100%;
+    max-width: 120px;
+}
 
-    .quantity-input>input {
-        display: inline-block;
-        text-align: center;
-        font-size: 16px;
-        width: 50px;
-        /* 適當調整寬度，使其與按鈕相匹配 */
-        height: 20px;
-        /* 將高度設置為 40px，與按鈕一致 */
-        line-height: 20px;
-        /* 將 line-height 設置為 40px，確保文字垂直居中 */
-        background-color: #FFEDBC;
-        /* 設置背景色，根據需求調整 */
-        margin: 0 2px;
-        /* 添加 margin 以確保輸入框與按鈕之間有適當的間距 */
-        box-sizing: border-box;
-        /* 確保 padding 和 border 不會影響元素的寬度 */
-        border: 0;
-        // margin-bottom: 80px;
-    }
+.quantity-input {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
 
+.quantity-button {
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    width: 40px;
+    height: 16px;
+    /* 將高度設置為 40px，與輸入框一致 */
+    line-height: 16px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: #FFEDBC;
+    /* 設置背景色，根據需求調整 */
+    border: 0
+}
 
-    .input{
-        width: 100%;
-        max-width: 94%;
-        position: relative; 
-        margin-top: 10px;
-        border: 0
-    }
+.quantity-input>button:hover {
+    background-color: #B36243;
+    transition: 0.3s;
+}
 
-    .input select{
-        width: 90%;
-        height: 20px;
-        line-height: 20px; 
-        // border: 1px solid #ccc;
-        border-radius: 6px;
-        padding: 0 8px;
-        font-size: 16px;
-        transition: border-color 0.3s ease-in-out;
-        appearance: none; 
-        background: #FFEDBC; 
-        vertical-align: baseline;
-
-    }
-
-    .input > select > option {
-        line-height: 20px; 
-        vertical-align: middle; 
-        text-align: left; 
-      
-    }
-
-    .input::after {
-        content: "▼";
-        font-size: 16px;
-        color: #B36243;
-        position: absolute;
-        right: 24px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-    }
-
-    .input select:focus {
-        // border-color: #B36243;
-        box-shadow: 0 0 8px rgba(179, 98, 67, 0.3); 
-        outline: none; 
-    }
-
-    .quantity-input {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-    }
-
-    .quantity-button {
-        display: inline-block;
-        text-align: center;
-        font-size: 1.6rem;
-        width: 40px;
-        height: 20px; 
-        // line-height: 20px; 
-        background-color: #FFEDBC; 
-        border: 0;
-    }
-
-    .quantity-input > button:hover {
-        background-color: #B36243;
-        transition: 0.3s;
-    }
-
-    .quantity-input > input {
-        display: inline-block;
-        text-align: center;
-        font-size: 16px;
-        width: 50px; 
-        height: 20px; 
-        line-height: 20px; 
-        background-color: #FFEDBC;
-        margin: 0 2px; 
-        box-sizing: border-box; 
-        border: 0;
-        // margin-bottom: 80px;
-    }
-    .payment{
-        border-radius: 10px;
-        background:#000354;
-        width: 100%;
-        max-width: 400px;
-        padding: 30px;
-        flex-grow: 0;
-        color: #FFFFFF;
-    }
-    .detail{
-        width: 100%;
-        color: #FFFFFF;
-    }
-    .payment hr{
-        width: 100%;
-        max-width: 400px;
-        background-color: #FFFFFF;
-        margin: 20px auto;
-        height: 2px;
-        border: none;
-        border-radius: 2.5px;
-    }
-    
-    .payment input{
-        border-radius: 8px;
-        border: 1px solid #FFFFFF;
-        outline: none;
-        /* 移除默認的黑框 */
-        background: none;
-        color: #ffffff; //文字顏色
-    }
+.quantity-input>input {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    width: 50px;
+    /* 適當調整寬度，使其與按鈕相匹配 */
+    height: 20px;
+    /* 將高度設置為 40px，與按鈕一致 */
+    line-height: 20px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: #FFEDBC;
+    /* 設置背景色，根據需求調整 */
+    margin: 0 2px;
+    /* 添加 margin 以確保輸入框與按鈕之間有適當的間距 */
+    box-sizing: border-box;
+    /* 確保 padding 和 border 不會影響元素的寬度 */
+    border: 0;
+    // margin-bottom: 80px;
+}
 
 
-    // 商品確認按鈕
-    .payment button{
-        border-radius: 5px;
-        background: #FFEDBC;
-        border: none;
-        color: #58596D;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        width: 100%;
-        cursor: pointer;
-        padding: 5px;
-        margin-top: 15px;
-    }
+.input {
+    width: 100%;
+    max-width: 94%;
+    position: relative;
+    margin-top: 10px;
+    border: 0
+}
 
-    .discount-fee{
-        margin: 10px auto;
-    }
+.input select {
+    width: 90%;
+    height: 20px;
+    line-height: 20px;
+    // border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+    appearance: none;
+    background: #FFEDBC;
+    vertical-align: baseline;
 
-    .total{
-        margin-top: 20px;
-    }
-    .count, .discount-fee, .total-fee{
-        display: flex;
-        justify-content: space-between;
-    }
-    .count p, .discount-fee p, .total-fee p{
-        flex-basis: 0%;
-    }
-    .wrapper hr{
-        background-color: #FFFFFF;
-        margin: 20px auto;
-        height: 2px;
-        border: none;
-        border-radius: 2.5px;
-        width: 100%;
-        max-width: 1000px;
-    }
-    // 下方加購
-    .ProductAdd{
-        width: 100%;
-        max-width: 1000px;
-        margin: 3% auto;
-        padding: 10px;
-        color: #FFFFFF;
+}
 
-        position: relative;
-    }
+.input>select>option {
+    line-height: 20px;
+    vertical-align: middle;
+    text-align: left;
 
-    .addProduct_grid{
-        display: grid;
-        gap:20px;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
 
-    }
-    .ProductAdd p{
-       margin-bottom: 25px;
-    }    
-    // 價格&icon
-    .text{
-        display: flex;
-        justify-content: space-between;
-    }
+.input::after {
+    content: "▼";
+    font-size: 16px;
+    color: #B36243;
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
 
-    .pro{
-        cursor: pointer;
-    }
+.input select:focus {
+    // border-color: #B36243;
+    box-shadow: 0 0 8px rgba(179, 98, 67, 0.3);
+    outline: none;
+}
 
-    .pro p{
-        margin: 20px auto;
-        font-family: "Noto Sans TC";
-        height: 4vh;
-    }
+.quantity-input {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
 
-    .pro img{
-        border-radius: 10px;
-        width: 100%;
-        max-width: 150px;
-    }
+.quantity-button {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.6rem;
+    width: 40px;
+    height: 20px;
+    // line-height: 20px; 
+    background-color: #FFEDBC;
+    border: 0;
+}
+
+.quantity-input>button:hover {
+    background-color: #B36243;
+    transition: 0.3s;
+}
+
+.quantity-input>input {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    width: 50px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #FFEDBC;
+    margin: 0 2px;
+    box-sizing: border-box;
+    border: 0;
+    // margin-bottom: 80px;
+}
+
+.payment {
+    border-radius: 10px;
+    background: #000354;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    flex-grow: 0;
+    color: #FFFFFF;
+}
+
+.detail {
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.payment hr {
+    width: 100%;
+    max-width: 400px;
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    height: 2px;
+    border: none;
+    border-radius: 2.5px;
+}
+
+.payment input {
+    border-radius: 8px;
+    border: 1px solid #FFFFFF;
+    outline: none;
+    /* 移除默認的黑框 */
+    background: none;
+    color: #ffffff; //文字顏色
+}
+
+
+// 商品確認按鈕
+.payment button {
+    border-radius: 5px;
+    background: #FFEDBC;
+    border: none;
+    color: #58596D;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.discount-fee {
+    margin: 10px auto;
+}
+
+.total {
+    margin-top: 20px;
+}
+
+.count,
+.discount-fee,
+.total-fee {
+    display: flex;
+    justify-content: space-between;
+}
+
+.count p,
+.discount-fee p,
+.total-fee p {
+    flex-basis: 0%;
+}
+
+.wrapper hr {
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    height: 2px;
+    border: none;
+    border-radius: 2.5px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+// 下方加購
+.ProductAdd {
+    width: 100%;
+    max-width: 1000px;
+    margin: 3% auto;
+    padding: 10px;
+    color: #FFFFFF;
+
+    position: relative;
+}
+
+.addProduct_grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+}
+
+.ProductAdd p {
+    margin-bottom: 25px;
+}
+
+// 價格&icon
+.text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pro {
+    cursor: pointer;
+}
+
+.pro p {
+    margin: 20px auto;
+    font-family: "Noto Sans TC";
+    height: 4vh;
+}
+
+.pro img {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 150px;
+}
 
 
 // =====  RWD  =====
 
-@media screen and (max-width: 1024px){
-    .contanier{
+@media screen and (max-width: 1024px) {
+    .contanier {
         width: 80%;
-        gap:20px;
+        gap: 20px;
     }
-    .ProductAdd{
+
+    .ProductAdd {
         width: 80%;
     }
-    
-    .payment{
+
+    .payment {
         max-width: 300px;
         padding: 20px;
     }
-    .input select{
+
+    .input select {
         width: 80%;
         font-size: 14px;
     }
-    .input::after{
+
+    .input::after {
         font-size: 14px;
     }
-    .quantity-input > input{
+
+    .quantity-input>input {
         width: 40px;
     }
-    .quantity-button{
+
+    .quantity-button {
         width: 30px;
     }
 
 }
 
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 900px) {
 
-    .contanier{
+    .contanier {
         flex-direction: column;
         align-items: center;
     }
 
-    .product-image{
+    .product-image {
         grid-column: 2/3;
         grid-row: 1/4;
     }
@@ -529,72 +639,72 @@ const highlight = ref({
 
     }
 
-    .quantity-input{
+    .quantity-input {
         grid-column: 3/4;
         grid-row: 2/3;
         justify-self: start;
     }
 
-    .des_span{
+    .des_span {
         grid-column: 3/4;
         grid-row: 3/4;
         align-self: start;
         justify-self: start;
     }
 
-    .trash-can{
+    .trash-can {
         grid-column: 4/5;
         grid-row: 3/4;
         justify-self: start;
     }
 
-    .checkbox{
+    .checkbox {
         grid-column: 1/2;
         grid-row: 2/3;
     }
 
-    .description{
+    .description {
         grid-column: 3 / 4;
         grid-row: 1 / 2;
     }
 }
 
-@media screen and (max-width: 430px){
+@media screen and (max-width: 430px) {
 
-    .quantity-input > input{
+    .quantity-input>input {
         width: 30px;
     }
 
-    .quantity-button{
+    .quantity-button {
         width: 15px;
         font-size: 10px;
         font-weight: bold;
     }
 
-    .product-info{
+    .product-info {
         padding: 0;
         gap: 5px;
     }
 
-    .order .title{
+    .order .title {
         width: 100%;
     }
-    .payment input{
+
+    .payment input {
         width: 100%;
         max-width: 90%;
     }
 
-    .input::after{
+    .input::after {
         font-size: 12px;
     }
 
-    .payment{
+    .payment {
         max-width: 300px;
     }
 
-    .addProduct_grid{
-        grid-template-columns:repeat(auto-fit, minmax(100px, 1fr))
+    .addProduct_grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr))
     }
 }
-
 </style>
