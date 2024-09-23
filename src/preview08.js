@@ -1,7 +1,7 @@
 // src / preview.js
 import { createApp } from 'vue';
 
-import SF_TicketDesign from './views/SF_TicketDesign.vue';
+import SF_DetailList_test from './views/SF_DetailList_test.vue';
 
 
 
@@ -13,7 +13,7 @@ import SF_TicketDesign from './views/SF_TicketDesign.vue';
 
 
 
-const app = createApp(SF_TicketDesign);
+const app = createApp(SF_DetailList_test);
 
 
 app.mount('#preview-app');

@@ -5,6 +5,7 @@
         
       </MS_ticket_confirmation>
       <MS_com_buttons
+      @click="saveData"
       class="actitvyBtn"
       :currentStep="currentStep"
         :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
@@ -25,15 +26,28 @@ export default {
 </script>
 
 <script setup>
-    import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
-    import Footer_1 from '@/components/Footer_1.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import CoinFall from '@/components/CoinFall.vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+  import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
+  import Footer_1 from '@/components/Footer_1.vue';
+  import Header from '@/components/Header_0.vue';
+  import { ref } from 'vue';
+  import CoinFall from '@/components/CoinFall.vue';
+  import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+  import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+
+  const ticketStore = useTicketStore();
+
+  const currentMode = ref('three1');
+  const currentStep = ref(2); // 当前步骤
+  const activityMode = ref('activity1'); // 初始活动模式
+  const mode = ref('three1'); // 初始 mode
+
+  // 這裡假設你可能需要保存一些數據，這裡的 saveData 可以根據實際需要進行調整
+  const saveData = () => {
+    // 保存數據邏輯
+  };
+
     
 
-    const currentMode = ref('two');
     
 </script>
 

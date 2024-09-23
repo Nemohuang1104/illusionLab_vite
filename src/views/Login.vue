@@ -4,14 +4,20 @@ const currentMode = ref('one');
 import Footer_0 from '../components/Footer_0.vue';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
-
+import axios from 'axios';
+import GoogleLogin from '@/components/GoogleLogin.vue';
+//===============================================================================
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import apiInstance from 'path-to-your-api-instance';  // 確保 apiInstance 正確導入
+//==================================================================================
 import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 
 // export default {
 //   setup() {
     const router = useRouter();
+    const route = useRoute();
     // 表单字段
     const email = ref('');
     const password = ref('');
@@ -19,9 +25,14 @@ import { useRouter } from 'vue-router';
     // 错误信息
     const emailError = ref('');
     const passwordError = ref('');
+    //==========================================================
+    const alertContent = ref([]);  // 響應式的警告訊息內容
+    const showAlert = ref(false);  // 響應式的警告顯示狀態
+    const route = useRoute();    
+    //============================================================
     
 
-    // 邮箱验证规则 (简单验证)
+    // 電子信箱驗證規則 (簡單驗證)
     const checkEmail = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email.value) {
@@ -33,15 +44,15 @@ import { useRouter } from 'vue-router';
       }
     };
 
-    // 密码验证规则 (至少 6 个字符)
+    // 密碼驗證規則 (至少 8 個字符)
     const checkPassword = () => {
       const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
       if (!password.value) {
         passwordError.value = '請輸入密碼';
       } else if (password.value.length < 8) {
-        passwordError.value = '密碼須為(數字+英文8-16位，開頭字符必須是英文字母)';
+        passwordError.value = '密碼須為(數字+英文8-16位，開頭字母必須是英文字母)';
       } else if (!passwordRegex.test(password.value)) {
-        passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字符必須是英文字母)';
+        passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字母必須是英文字母)';
       } else {
         passwordError.value = '';
       }
@@ -71,69 +82,216 @@ import { useRouter } from 'vue-router';
         })
       })
     };
-    
 
+  //================================google================================
+    const updateToken = (token) => {
+      // 實現 token 更新邏輯
+    };
+
+    const updateUserData = (userData) => {
+      // 實現更新用戶數據邏輯
+    };
+
+    const googleLogin = async () => {
+      try {
+        const auth = getAuth();
+        const googleProvider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, googleProvider);
+        const userName = result.user.displayName;
+        const userEmail = result.user.email;
+
+        // 發送 API 請求
+        const res = await apiInstance({
+          method: 'post',
+          url: `${import.meta.env.VITE_API_URL}/googleLogin.php`,
+          headers: { "Content-Type": "multipart/form-data" },
+          data: {
+            mem_account: userEmail,
+            mem_name: userName
+          }
+        });
+
+        // 處理 API 響應
+        if (res.data.memInfo.mem_state === 0) {
+          alertContent.value.push('登入失敗，請聯繫客服人員。');
+          showAlert.value = true;
+          document.body.classList.add('body-overflow-hidden');
+        } else {
+          updateToken(true);
+          updateUserData(res.data.memInfo);
+
+          const redirect = route.query.redirect;  // 使用 route.query 取代 this.$route.query
+          if (redirect) {
+            router.push(redirect);  // 使用 router.push 取代 this.$router.push
+          } else {
+            router.push('/');  // 導回首頁或自訂頁面
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+  //======================================================================================
+  
     // 表单是否有效的计算属性
     // const isFormValid = computed(() => {
     //   return !emailError.value && !passwordError.value && email.value && password.value;
     // });
 
 
-    //提交表单
-    // const onSubmit = () => {
-    //   checkEmail();     // 先验证电子邮件
-    //   checkPassword();  // 再验证密码
+  // const onSubmit = () => {
+  //   checkEmail();     // 先验证电子邮件
+  //   checkPassword();  
 
-    //   if (isFormValid.value) {
-    //     alert('歡迎進入幻浸實驗室')
-    //     router.push('/MemberCenter');
-    //   } else {
-    //     alert('請更正表單中的錯誤!');
-    //   }
-    // };
+  // if (!emailError.value  && !passwordError.value ) {
+  //   // 驗證碼正確，顯示註冊成功訊息
+  //   //alert('註冊成功！歡迎加入！');
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "success",
+  //     title: "歡迎進入幻浸實驗室",
+  //     showConfirmButton: false,
+  //     timer: 1200
+  //   }).then(() => {router.push('/MemberCenter')});
+  //   // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
+  // } else {
+  //   // 驗證碼錯誤，彈出錯誤訊息
+  //   //  alert('請重新檢視表單');
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "warning",
+  //     title: "請重新檢視表單",
+  //     showConfirmButton: false,
+  //     timer: 1200
+  //   });
+  // }
+  // }
 
-  // 檢查驗證碼是否正確
-  const onSubmit = () => {
-    checkEmail();     // 先验证电子邮件
-    checkPassword();  
+  //=============================PHP===================================
+  // 表單提交
+const onSubmit = async () => {
+  checkEmail();     // 驗證電子郵件
+  checkPassword();  // 驗證密碼
 
-  if (!emailError.value  && !passwordError.value ) {
-    // 驗證碼正確，顯示註冊成功訊息
-    //alert('註冊成功！歡迎加入！');
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "歡迎進入幻浸實驗室",
-      showConfirmButton: false,
-      timer: 1200
-    }).then(() => {router.push('/MemberCenter')});
-    // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
+  // 確認沒有錯誤後再發送請求
+  if (!emailError.value && !passwordError.value) {
+    try {
+      // 建立 FormData 物件
+      const formData = new FormData();
+      formData.append('email', email.value);
+      formData.append('password', password.value);
+
+      // 使用 FormData 發送 POST 請求
+      const response = await axios.post('http://illusionlab.local/public/PDO/Login/login.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data' // 設定標頭為 FormData
+        }
+      });
+
+      // 成功登入
+      if (response.data.status === 'success') {
+        const token = response.data.token;  // 從後端獲取 token
+        // sessionStorage.setItem('authToken', token);  // 將 token 儲存在 sessionStorage
+        sessionStorage.setItem('token', response.data.token);
+
+        Swal.fire({
+          icon: 'success',
+          title: '歡迎進入幻浸實驗室',
+          timer: 1200
+        }).then(async () => {
+          if (route.query.showLogin === 'true') {
+            if (token) {
+              try {
+                // 先執行 SetQuizCompleted.php
+                const setQuizResponse = await axios.post('http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php', {}, {
+                  headers: {
+                    'Authorization': `Bearer ${token}`
+                  }
+                });
+
+                if (setQuizResponse.data.status === 'success') {
+                  sessionStorage.setItem('quizCompleted', 'true');
+                  console.log('測驗完成標記已更新。');
+
+                  // 再執行 GetTicketCoupon.php
+                  const couponResponse = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+                    headers: {
+                      'Authorization': `Bearer ${token}`
+                    }
+                  });
+
+                  if (couponResponse.data.status === 'success') {
+                    // Swal.fire({
+                    //   icon: 'success',
+                    //   title: `您的折扣碼是: ${couponResponse.data.discountCode}`,
+                    //   timer: 2500,
+                    //   showConfirmButton: false,
+                    // });
+                  } else {
+                    Swal.fire({
+                      icon: 'error',
+                      title: couponResponse.data.message,
+                      timer: 2500,
+                      showConfirmButton: false,
+                    });
+                  }
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: setQuizResponse.data.message,
+                    timer: 2500,
+                    showConfirmButton: false,
+                  });
+                }
+              } catch (error) {
+                console.error(error);
+                Swal.fire({
+                  icon: 'error',
+                  title: '操作失敗，請稍後再試。',
+                  timer: 2500,
+                  showConfirmButton: false,
+                });
+              }
+            }
+            router.push({ path: '/LittleQuizResult' });
+          } else {
+            // 否則跳轉至 導向會員中心
+            router.push('/MemberCenter');
+          }
+          
+          
+        }
+      
+      );
+      } else {
+        // 登入失敗，顯示錯誤訊息
+        Swal.fire({
+          icon: 'error',
+          title: response.data.message, // 後端傳回的訊息
+          timer: 1500
+        });
+      }
+    } catch (error) {
+      // 處理請求錯誤
+      Swal.fire({
+        icon: 'error',
+        title: '登入失敗，請確認是否註冊。',
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
   } else {
-    // 驗證碼錯誤，彈出錯誤訊息
-    //  alert('請重新檢視表單');
+    // 如果表單有錯誤
     Swal.fire({
-      position: "center",
-      icon: "warning",
-      title: "請重新檢視表單",
+      icon: 'warning',
+      title: '請重新檢視表單',
+      timer: 1200,
       showConfirmButton: false,
-      timer: 1200
     });
   }
-  }
-
-
-    // return {
-    //   email,
-    //   password,
-    //   emailError,
-    //   passwordError,
-    //   isFormValid,
-    //   onSubmit,
-    //   checkEmail,
-    //   checkPassword,
-    // };
-//   },
-// };
+};
+  
 </script>
 
 
@@ -172,8 +330,9 @@ import { useRouter } from 'vue-router';
    
     <p>其他登入方式</p>
     <div class="other">
-      <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
-      <a href=""><img src="../assets/images/icon-google.svg" alt=""></a>
+      <img src="../assets/images/icon-facebook.svg" alt="" >
+      <img src="../assets/images/icon-google.svg" alt="" @click="googleLogin">
+      <GoogleLogin></GoogleLogin>
     </div>
     <p>還不是會員? 前往註冊</p>
     <router-link to="/SignUp"><input type="submit" value="註冊" class="signup"></router-link>
@@ -248,6 +407,7 @@ h1{
   padding-left: 20px;
   margin-bottom: 12px;
   outline: none;
+  margin-top: 4px;
 }
 
 .error{
@@ -296,6 +456,7 @@ button{
 
 .form .other{
   text-align: center;
+  cursor: pointer;
 }
 
 .form img{

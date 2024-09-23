@@ -1,10 +1,13 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_customer_info mode="one" class="customer_info">
+      <MS_ticket_customer_info mode="one" class="customer_info"
+      @update:formData="updateFormData"
+      @saveData="saveData">
         
       </MS_ticket_customer_info>
       <MS_com_buttons
+      @click="saveData"
       class="actitvyBtn"
       :currentStep="currentStep"
         :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
@@ -14,16 +17,43 @@
 </template>
 
 <script setup>
-    import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
-    import Footer_1 from '@/components/Footer_1.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import CoinFall from '@/components/CoinFall.vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
+import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
+import Footer_1 from '@/components/Footer_1.vue';
+import Header from '@/components/Header_0.vue';
+import { ref } from 'vue';
+import CoinFall from '@/components/CoinFall.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
 
-    const currentMode = ref('two');
-    
+const ticketStore = useTicketStore(); // 初始化 store
+
+const formData = ref({
+  name: '',
+  phone: '',
+  email: '',
+  taxID: '',
+  companyName: '',
+  comments: '',
+  agreePrivacyPolicy: false,
+  agreeRefundPolicy: false
+});
+
+const updateFormData = (data) => {
+  formData.value = data;
+    };
+
+const saveData = () => {
+  ticketStore.setName(formData.value.name);
+  ticketStore.setPhone(formData.value.phone);
+  ticketStore.setEmail(formData.value.email);
+  ticketStore.setTaxID(formData.value.taxID);
+  ticketStore.setCompanyName(formData.value.companyName);
+  ticketStore.setComments(formData.value.comments);
+  ticketStore.setAgreePrivacyPolicy(formData.value.agreePrivacyPolicy);
+  ticketStore.setAgreeRefundPolicy(formData.value.agreeRefundPolicy);
+};
+
+const currentMode = ref('two');
 </script>
 <script>
 export default {
@@ -118,6 +148,7 @@ body{
 };
 
 h1{
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
@@ -129,6 +160,8 @@ h2{
 }
 
 h3{
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
   font-size: map-get($map: $fontSize , $key: h3);
   font-weight: 800;
 }

@@ -19,7 +19,14 @@ const productInfo = ref([
   // {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
 
 ])
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
 
+
+
+
+// onUnmounted(() => {
+//   window.removeEventListener('resize', updateDimensions);
+// });
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 async function fetchProducts() {
   try {
@@ -34,12 +41,6 @@ async function fetchProducts() {
 onMounted(() => {
   fetchProducts(); // 當頁面加載時撈取資料
 });
-
-// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
-
-
-
-
 
 </script>
 
@@ -65,27 +66,27 @@ onMounted(() => {
           <router-link to="/SF_ProductPage"><P class="link">星際邊境</P></router-link>
         </div>
         <div class="arrowright">
-          <router-link to="/LC_ProductPage"><P class="link">人生賭場</P></router-link>
-          <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
+          <router-link to="/lifecasino"><P class="link">人生賭場</P></router-link>
+          <font-awesome-icon icon="fa-solid fa-arrow-right-long" class="arrow"/>
         </div>
       </div>
       <div class="pagebox">
-        <!-- 放置一個商品列的外框 -->
-         
+       
         <div class="list">
-          <router-link to="/MS_ProductList">
-            <div  v-for="(item,index) in productInfo" class="pro"  :key="item.PRODUCT_ID" >
-            
-                <img :src="item.PRODUCT_IMG" alt="">
-                <p>{{ item.PRODUCT_NAME }}</p>
-                <div class="text">
-                  <div class="price">
-                    <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
-                  </div>
-                  <div class="icon"></div>
+          <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
+            <router-link :to="{ name:'MS_ProductList', params: { id: item.PRODUCT_ID } }">
+           
+              <img :src="item.PRODUCT_IMG" alt="">
+              <p>{{ item.PRODUCT_NAME }}</p>
+              <div class="text">
+                <div class="price">
+                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
                 </div>
-            </div>
-          </router-link>
+                <div class="icon"></div>
+              </div>
+            </router-link>
+          </div>
         </div>
       
       </div>
@@ -99,7 +100,13 @@ onMounted(() => {
 
 
 <style lang="scss" scoped>
+@import "../assets/style";
 
+p{
+  color: #FB9D3C;
+
+
+}
 .title{
   margin-top: 10px;
   margin: 0 auto;
@@ -196,6 +203,7 @@ onMounted(() => {
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   // border: 1px solid #fff;
+  
 }
 
 .list {
@@ -208,6 +216,7 @@ onMounted(() => {
   gap: 18px;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
+  
 
 }
 
@@ -222,14 +231,29 @@ onMounted(() => {
   // display: flex;
   // flex-direction: column;
   // align-items: center; /* 確保內容居中 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    /* 往上是負，輕微浮起 */
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+    /* 明顯的阴影效果 */
+    border-color: rgba(255, 255, 255, 0.5);
+    /* 懸停時增加邊框颜色 */
+  }
 
 }
+
+
 
 .pro img {
   max-width: 100%;
   max-height: 150px; /* 限制圖片高度 */
   object-fit: contain; /* 保持圖片比例 */
   margin-bottom: 10px;
+  cursor: pointer;
+
+    
 }
 
 
@@ -259,6 +283,22 @@ onMounted(() => {
   justify-content: space-between;
   margin-bottom: 10px;
   font-family:Arial, Helvetica, sans-serif;
+}
+.price{
+  display: flex;
+  flex-direction: column;
+}
+
+.shoopingcar{
+  color: #855F49;
+  display: block;
+  align-self: flex-end;
+  transition: .3s;
+
+  &:hover{
+    color: map-get($map: $colofont_3, $key: orange);
+
+  }
 }
 
 @media screen and (max-width: 430px){

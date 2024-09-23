@@ -1,7 +1,10 @@
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
-//設定各組mode狀態
+import { inject } from 'vue';
+const cartCount = inject('cartCount'); // 接收全局的購物車數量
+
+
 const props = defineProps({
   mode: {
     type: String,
@@ -72,6 +75,33 @@ onUnmounted(() => {
   document.removeEventListener('click', closeMenu);
 });
 
+// ========================添加是否登入的狀態判斷=======================
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+// 檢查用戶是否已登入
+const isLoggedIn = ref(false);
+
+onMounted(() => {
+  // 檢查 sessionStorage 中是否存在 token
+  const token = sessionStorage.getItem('token');
+  isLoggedIn.value = !!token;
+});
+
+
+// 點擊會員圖示時的處理邏輯
+const handleAvatarClick = () => {
+  if (isLoggedIn.value) {
+    // 若已登入，導向會員中心
+    router.push('/MemberCenter');
+  } else {
+    // 未登入，導向登入頁面
+    router.push('/Login');
+  }
+};
+
+
+
 
 </script>
 
@@ -81,19 +111,19 @@ onUnmounted(() => {
       <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-      <div class="header-cart">
-        <!-- 購物車圖示和商品數量 -->
-        <router-link :to="{ name: 'shop' }">
-          <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
-          <span class="cart-count">{{ cartItemCount }}</span>  <!-- 顯示購物車商品數量 -->
-        </router-link>
-      </div>
-      <!-- 登入圖示 -->
-      <router-link :to="{ name: 'login' }">
-        <font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" />
-      </router-link>
-
-      <!-- 漢堡菜單 -->
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
+          class="shoppingicon" /></router-link>
+      <!-- <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" 
+        /></router-link> -->
+      <!-- ===========================添加是否登入的狀態判斷======================== -->
+      <font-awesome-icon 
+        :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
+        class="peopleicon" 
+        @click="handleAvatarClick"
+      />
+      <!-- ========================================================================= -->
+      
+          
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
     <!-- 半圓形菜單 -->
@@ -333,6 +363,24 @@ header {
   transform: translateX(0);
   /* 滑入畫面 */
 }
+
+
+
+.cartCount{
+  background: #000000;
+  color: #ffffff;
+  border-radius: 20px;
+  position: absolute;
+  top: 22px;
+  right: 72px;
+  display: block;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+}
+
+
+
 
 /* RWD：小螢幕時顯示漢堡按鈕 */
 @media (max-width: 768px) {

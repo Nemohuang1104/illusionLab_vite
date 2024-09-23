@@ -25,7 +25,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // 從資料庫撈取商品資料
-    $sql = "SELECT * FROM PRODUCT where EVENT_ID = 3";
+    $sql = "SELECT * FROM PRODUCT WHERE EVENT_ID = 3 && PRODUCT_STATUS = 1" ;
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     
@@ -36,5 +36,4 @@ try {
     // 捕捉並返回錯誤
     echo json_encode(['error' => $e->getMessage()]);
 }
-
 ?>

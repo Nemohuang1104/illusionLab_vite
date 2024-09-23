@@ -1,67 +1,47 @@
 <script setup>
 import Header_CMS from '@/components/Header_CMS.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 // import axios from 'axios'; // 註解掉 axios 的引入
 
 // 搜尋資料功能
 const searchQuery = ref('');
 const allItems = ref([
-  { id: 'ILC0001', email: 'anna@example.com', name: 'Anna Smith', phone: '0911222333', status: '正常' },
-  { id: 'ILC0002', email: 'john@example.com', name: 'John Doe', phone: '0911111111', status: '停權' },
-  { id: 'ILC0003', email: 'jane@example.com', name: 'Jane Roe', phone: '0912333444', status: '正常' },
-  { id: 'ILC0004', email: 'mike@example.com', name: 'Mike Johnson', phone: '0922333444', status: '正常' },
-  { id: 'ILC0005', email: 'lucy@example.com', name: 'Lucy Brown', phone: '0911000222', status: '停權' },
-  { id: 'ILC0006', email: 'maria@example.com', name: 'Maria Garcia', phone: '0933444555', status: '正常' },
-  { id: 'ILC0007', email: 'james@example.com', name: 'James Wilson', phone: '0911222000', status: '正常' },
-  { id: 'ILC0008', email: 'linda@example.com', name: 'Linda Davis', phone: '0922333555', status: '停權' },
-  { id: 'ILC0009', email: 'robert@example.com', name: 'Robert Moore', phone: '0912444555', status: '正常' },
-  { id: 'ILC0010', email: 'patricia@example.com', name: 'Patricia Taylor', phone: '0911333444', status: '正常' },
-  { id: 'ILC0011', email: 'charles@example.com', name: 'Charles Anderson', phone: '0911222333', status: '正常' },
-  { id: 'ILC0012', email: 'barbara@example.com', name: 'Barbara Thomas', phone: '0911555666', status: '停權' },
-  { id: 'ILC0013', email: 'michael@example.com', name: 'Michael Jackson', phone: '0911444555', status: '正常' },
-  { id: 'ILC0014', email: 'susan@example.com', name: 'Susan Lee', phone: '0911777888', status: '正常' },
-  { id: 'ILC0015', email: 'william@example.com', name: 'William Harris', phone: '0922333444', status: '停權' },
-  { id: 'ILC0016', email: 'karen@example.com', name: 'Karen Clark', phone: '0911999000', status: '正常' },
-  { id: 'ILC0017', email: 'richard@example.com', name: 'Richard Lewis', phone: '0933555666', status: '正常' },
-  { id: 'ILC0018', email: 'betty@example.com', name: 'Betty Walker', phone: '0911000333', status: '停權' },
-  { id: 'ILC0019', email: 'thomas@example.com', name: 'Thomas Hall', phone: '0911222111', status: '正常' },
-  { id: 'ILC0020', email: 'lisa@example.com', name: 'Lisa Allen', phone: '0911222777', status: '正常' },
-  { id: 'ILC0021', email: 'donald@example.com', name: 'Donald Young', phone: '0922444666', status: '停權' },
-  { id: 'ILC0022', email: 'helen@example.com', name: 'Helen King', phone: '0911444333', status: '正常' },
-  { id: 'ILC0023', email: 'steven@example.com', name: 'Steven Wright', phone: '0911555444', status: '正常' },
-  { id: 'ILC0024', email: 'doris@example.com', name: 'Doris Green', phone: '0911666777', status: '停權' },
-  { id: 'ILC0025', email: 'george@example.com', name: 'George Adams', phone: '0911777888', status: '正常' },
-  { id: 'ILC0026', email: 'cynthia@example.com', name: 'Cynthia Baker', phone: '0911888999', status: '正常' },
-  { id: 'ILC0027', email: 'mark@example.com', name: 'Mark Campbell', phone: '0911999000', status: '停權' },
-  { id: 'ILC0028', email: 'nancy@example.com', name: 'Nancy Carter', phone: '0912000111', status: '正常' },
-  { id: 'ILC0029', email: 'paul@example.com', name: 'Paul Parker', phone: '0912111222', status: '正常' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
-  { id: 'ILC0030', email: 'mary@example.com', name: 'Mary Evans', phone: '0912222333', status: '停權' },
+  // { id: 'ILC0001', email: 'anna@example.com', name: 'Anna Smith', phone: '0911222333', status: '正常' },
+  // { id: 'ILC0002', email: 'john@example.com', name: 'John Doe', phone: '0911111111', status: '停權' },
+  // { id: 'ILC0003', email: 'jane@example.com', name: 'Jane Roe', phone: '0912333444', status: '正常' },
+  // { id: 'ILC0004', email: 'mike@example.com', name: 'Mike Johnson', phone: '0922333444', status: '正常' },
+  // { id: 'ILC0005', email: 'lucy@example.com', name: 'Lucy Brown', phone: '0911000222', status: '停權' },
+  // { id: 'ILC0006', email: 'maria@example.com', name: 'Maria Garcia', phone: '0933444555', status: '正常' },
+  // { id: 'ILC0007', email: 'james@example.com', name: 'James Wilson', phone: '0911222000', status: '正常' },
+  // { id: 'ILC0008', email: 'linda@example.com', name: 'Linda Davis', phone: '0922333555', status: '停權' },
+  // { id: 'ILC0009', email: 'robert@example.com', name: 'Robert Moore', phone: '0912444555', status: '正常' },
+  // { id: 'ILC0010', email: 'patricia@example.com', name: 'Patricia Taylor', phone: '0911333444', status: '正常' },
+  // { id: 'ILC0011', email: 'charles@example.com', name: 'Charles Anderson', phone: '0911222333', status: '正常' },
+  
 ]);
 
-const initialItems = ref([...allItems.value]); // 保存初始資料的副本
+// 在你的 Vue.js 後台管理頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchMembers() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/FetchAllMembers.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    allItems.value = data;
+  } catch (error) {
+    console.error('Error fetching members:', error);
+  }
+}
+
+onMounted(() => {
+  fetchMembers(); // 當頁面加載時撈取資料
+});
+
+// 在你的 Vue.js 後台管理頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
+
+
+// const initialItems = ref([...allItems.value]); // 保存初始資料的副本
 
 // 过滤后的数据
 const filteredItems = computed(() => {
@@ -69,58 +49,100 @@ const filteredItems = computed(() => {
     return allItems.value;
   }
   return allItems.value.filter(item =>
-    item.id.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    item.USER_CODE.toString().toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.EMAIL.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
+
+
 
 // 恢復顯示所有資料
 const resetSearch = () => {
   searchQuery.value = '';
-  allItems.value = [...initialItems.value];
+  fetchMembers(); // 恢復撈取全部資料
   currentPage.value = 1;
 };
 
-// 搜尋功能
-const searchItems = () => {
-  // 若使用 axios 進行搜尋，需恢復以下代碼
-  /*
-  axios.post('/api/search-members', {
-    query: searchQuery.value
-  })
-  .then(response => {
-    allItems.value = response.data;
-    currentPage.value = 1;
-  })
-  .catch(error => {
+// 使用 fetch API 搜尋資料庫中的會員資料
+const searchItems = async () => {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/searchMembers.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query: searchQuery.value }) // 傳送搜尋字串到後端 PHP
+    });
+
+    if (!response.ok) {
+      throw new Error('搜尋請求失敗');
+    }
+
+    const data = await response.json();
+    console.log('Search Results:', data); // 檢查回傳資料
+    allItems.value = data; // 更新 allItems 資料
+    currentPage.value = 1; // 搜尋後重設為第 1 頁
+  } catch (error) {
     console.error('搜尋出錯:', error);
-  });
-  */
-  
-  // 直接使用本地資料進行搜尋
-  currentPage.value = 1; // 搜尋時重設為第1頁
+  }
 };
+
+
 
 // 切換會員狀態
-const toggleStatus = (item) => {
-  const newStatus = item.status === '正常' ? '停權' : '正常';
-  item.status = newStatus;
+const toggleStatus = async (item) => {
+  const newStatus = item.ACCOUNT_STATUS === '正常' ? '停權' : '正常';
 
-  // 註解掉 AJAX 請求部分
-  /*
-  axios.post('/api/update-status.php', {
-    id: item.id,
-    status: newStatus
-  })
-  .then(response => {
-    console.log('狀態更新成功');
-  })
-  .catch(error => {
-    item.status = item.status === '正常' ? '停權' : '正常';
-    console.error('更新狀態失敗:', error);
-  });
-  */
+  // 當切換為停權時才顯示 SweetAlert
+  if (newStatus === '停權') {
+    const result = await Swal.fire({
+      position: "center",
+      icon: "warning",
+      title: "確定將該會員停權嗎?",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: '確定',
+      cancelButtonText: '取消'
+    });
+
+    // 如果使用者點擊取消，則終止操作
+    if (result.isDismissed) {
+      return;
+    }
+  }
+
+  // 更新會員的狀態
+  item.ACCOUNT_STATUS = newStatus;
+
+ 
+
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/UpdateStatus.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: item.USER_ID, // 傳送會員的 USER_ID
+        accountStatus: newStatus // 傳送更新後的 ACCOUNT_STATUS
+      })
+    });
+
+    const data = await response.json();
+    if (data.status === 'success') {
+      console.log('會員狀態更新成功');
+    } else {
+      console.error('狀態更新失敗:', data.message);
+      // 回復為原狀態，如果更新失敗
+      item.ACCOUNT_STATUS = item.ACCOUNT_STATUS === '正常' ? '停權' : '正常';
+    }
+  } catch (error) {
+    console.error('Error Update Status:', error);
+    // 回復為原狀態，如果出現錯誤
+    item.ACCOUNT_STATUS = item.ACCOUNT_STATUS === '正常' ? '停權' : '正常';
+  }
 };
+
 
 // 分頁功能
 const itemsPerPage = ref(10);
@@ -183,12 +205,12 @@ const goToPage = (page) => {
               <hr>
 
               
-              <div v-for="item in displayedItems" :key="item.id" class="order-text">
-                <span>{{ item.id }}</span>
-                <span>{{ item.email }}</span>
-                <span>{{ item.name }}</span>
-                <span>{{ item.phone }}</span>
-                <span  @click="toggleStatus(item)" :class="{'status-normal': item.status === '正常', 'status-disabled': item.status === '停權'}">{{ item.status }}</span>
+              <div  v-for="(item, index) in displayedItems" :key="item.id" class="order-text">
+                <span>{{ item.USER_CODE }}</span>
+                <span>{{ item.EMAIL }}</span>
+                <span>{{ item.USER_NAME }}</span>
+                <span>{{ item.PHONE_NUMBER }}</span>
+                <span  @click="toggleStatus(item)" :class="{'status-normal': item.ACCOUNT_STATUS === '正常', 'status-disabled': item.ACCOUNT_STATUS === '停權'}">{{ item.ACCOUNT_STATUS }}</span>
               </div>
             </div> 
           </div> 

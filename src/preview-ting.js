@@ -16,11 +16,12 @@ import { createApp } from 'vue';
 // import Footer_03 from './components/Footer_03';
 // import TicketChangeSwiper from './components/TicketChangeSwiper.vue';
 // import ting_test from './views/ting_test.vue';
- import SF_ProudctPage from './views/SF_ProudctPage';
- //import Loginpopup from './components/Loginpopup.vue';
+ //import SF_ProudctPage from './views/SF_ProudctPage';
+//import Loginpopup from './components/Loginpopup.vue';
 //import LittleQuizResult from './views/LittleQuizResult.vue';
+import GoogleLogin from './components/GoogleLogin.vue';
 
 
 
-createApp(SF_ProudctPage).mount('#preview');
+createApp(GoogleLogin).mount('#preview');
   

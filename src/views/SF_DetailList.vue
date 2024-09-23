@@ -222,7 +222,7 @@ const decrement = () => {
 
                         <div class="size">
                             <select name="size-select" id="size-select">
-                                <option value="----- 商品尺寸 -----">商品尺寸</option>
+                                <option value="----- 商品尺寸 -----">商品規格</option>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
@@ -395,13 +395,14 @@ const decrement = () => {
 .but {
     // border: 1px solid red;
     display: flex;
+    align-items: center;
+    text-align: center;
     justify-content: space-between;
     line-height: 50px;
-    width: 300px;
-    height: 40px;
-    line-height: 40px;
-
-    margin-bottom: 20px;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    margin: 20px auto;
     border-radius: 12px;
 
 
@@ -416,7 +417,7 @@ const decrement = () => {
 
 .counter {
     color: #FFFFFF;
-    font-size: 25px;
+    font-size: 16px;
 }
 
 .sub {
@@ -448,6 +449,7 @@ const decrement = () => {
 }
 
 //尺寸下拉式選單
+<<<<<<< HEAD
 .size select {
     width: 300px;
     height: 40px;
@@ -467,11 +469,41 @@ const decrement = () => {
 }
 
 //將下拉式選單select箭頭刪掉 
+=======
+
+.size {
+    position: relative;
+    display: inline-block;
+}
+
+>>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
 .size select {
+    width: 200px;
+    text-align: center;
+    height: 30px;
+    border-radius: 12px;
+    display: block;
+    line-height: 30px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    color: #ffffff;
+    outline: none;
+    background: none;
+    //select箭頭
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
+    font-size: 14px;
+}
+.size::after {
+    content: '\25BC'; /* Unicode的下箭頭符號 */
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none; /* 防止箭頭阻擋下拉選單的點擊 */
+    font-size: 10px;  /* 控制箭頭大小 */
 }
 
 .size option {
@@ -484,9 +516,15 @@ const decrement = () => {
 }
 
 //加入購物車
+<<<<<<< HEAD
 .rightdown button {
     width: 300px;
     height: 50px;
+=======
+.rightdown p {
+    width: 200px;
+    height: 40px;
+>>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
     border-radius: 40px;
     display: block;
     text-align: center;
@@ -496,17 +534,25 @@ const decrement = () => {
     // align-items: center;
 
     cursor: pointer;
-
     text-decoration: none;
-    font-size: 22px;
+    // font-size: 20px;
     color: #fff;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+<<<<<<< HEAD
     cursor: pointer;
     border: none;
 }
 
 .rightdown button:hover {
     background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+=======
+    margin: 0 auto;
+    
+}
+
+.rightdown p:hover{
+    background: linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%);
+>>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
 }
 
 //小圖換大圖
@@ -598,5 +644,16 @@ const decrement = () => {
         flex-direction: column;
     }
 
+    .size select {
+        text-align-last: center;
+    }
+
+}
+
+
+@media (max-width: 430px) {
+    .size select {
+        text-align-last: center;
+    }
 }
 </style>

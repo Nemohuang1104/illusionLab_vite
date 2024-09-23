@@ -4,40 +4,78 @@
       <MS_com_title :mode="modeSelect" mainTitle="賓客資料" subTitle="Customer Info" :intro="OurIntro" />
     </div>
     <main>
-      <form class="selections" action="" method="post">
+      <form 
+      @submit.prevent="handleSubmit"
+      class="selections" action="" method="post">
         <div class="selection">
           <h4 :style="{ color: MobangColor }">* 姓名 Name</h4>
-          <input class="options" type="text" :style="{ borderColor: MobangColor }"></input>
+          <input 
+          v-model="formData.name"
+          @input="updateFormData('name', formData.name)"
+          class="options" type="text"  :style="{ borderColor: MobangColor }"
+          />
         </div>
+
         <div class="selection">
           <h4 :style="{ color: MobangColor }">* 電話 Phone Number</h4>
-          <input class="options" type="number" :style="{ borderColor: MobangColor }"></input>
+          <input 
+          @input="updateFormData('phone', formData.phone)"
+          v-model="formData.phone"
+          class="options" type="number" :style="{ borderColor: MobangColor }"></input>
         </div>
+
         <div class="selection">
           <h4 :style="{ color: MobangColor }">* 電子信箱 Email（預約登記使用，請確保填寫正確。）</h4>
-          <input class="options" type="email" :style="{ borderColor: MobangColor }"></input>
+          <input 
+          v-model="formData.email"
+          class="options" type="email" :style="{ borderColor: MobangColor }"
+          @input="updateFormData('email', formData.email)"
+          ></input>
         </div>
+
         <div class="selection">
           <h4 :style="{ color: MobangColor }">統一編號 Company Tax ID（無開立統編發票不須填寫）</h4>
-          <input class="options" type="email" :style="{ borderColor: MobangColor }"></input>
+          <input 
+          v-model="formData.taxID"
+          class="options" type="email" :style="{ borderColor: MobangColor }"
+          @input="updateFormData('taxID', formData.taxID)"
+          ></input>
         </div>
+
         <div class="selection">
           <h4 :style="{ color: MobangColor }">公司抬頭 Company Name（無開立統編發票不須填寫）</h4>
-          <input class="options" type="email" :style="{ borderColor: MobangColor }"></input>
+          <input 
+          v-model="formData.companyName"
+          class="options" type="email" :style="{ borderColor: MobangColor }"
+          @input="updateFormData('companyName', formData.companyName)"></input>
         </div>
+
         <div class="selection">
           <h4 :style="{ color: MobangColor }">其他備註 Other Comments</h4>
-          <input class="options" type="textarea" :style="{ borderColor: MobangColor }"></input>
+          <input 
+          v-model="formData.comments"
+          class="options" type="textarea" :style="{ borderColor: MobangColor }"
+          @input="updateFormData('comments', formData.comments)"></input>
         </div>
+
         <div class="check">
-          <input type="checkbox" :style="{ borderColor: MobangColor }">
+          <input 
+          v-model="formData.agreePrivacyPolicy"
+          type="checkbox" :style="{ borderColor: MobangColor }" id="check1">
           <span class="custom-radio-mark"></span>
+          <label for="check1">
           <h4 :style="{ color: MobangColor }">我已詳閱並遵守隱私條款。</h4>
+        </label>
         </div>
+
         <div class="check">
-          <input type="checkbox" :style="{ borderColor: MobangColor }">
+          <input 
+          v-model="formData.agreeRefundPolicy"
+          type="checkbox" :style="{ borderColor: MobangColor }" id="check2">
           <span class="custom-radio-mark"></span>
-          <h4 :style="{ color: MobangColor }">我已詳讀並遵守退換票政策心靈光譜退換票政策係依行政院文化部之定型化契約。</h4>
+          <label for="check2">
+          <h4 :style="{ color: MobangColor }">我已詳讀並遵守退換票政策係依行政院文化部之定型化契約。</h4>
+        </label>
         </div>
       </form>
     </main>
@@ -51,8 +89,36 @@
 </template>
 
 <script setup>
+ import { ref, defineEmits } from 'vue';
 import MS_com_title from '@/components/MS/MS_com_title.vue';
-import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
+const props = defineProps();
+const emit = defineEmits(['saveData']);
+
+
+
+const localFormData = ref({
+      formData : {
+        phone: '',
+        email: '',
+        taxID: '',
+        companyName: '',
+        comments: '',
+        agreePrivacyPolicy: false,
+        agreeRefundPolicy: false
+      },
+    });
+
+    const updateFormData = (field, value) => {
+      localFormData.value[field] = value;
+      emit('update:formData', localFormData.value);
+    };
+
+    const handleSubmit = () => {
+      // 在提交表單時將數據發送給父組件
+      emit('saveData');
+    };
+
 </script>
 
 <script>
@@ -60,11 +126,21 @@ export default {
   data() {
     return {
       currentMode: 'two1', // 当前的模式
-      currentStep: 1        // 当前的步骤
+      currentStep: 1,     // 当前的步骤
+
+      formData : {
+      phone: '',
+      email: '',
+      taxID: '',
+      companyName: '',
+      comments: '',
+      agreePrivacyPolicy: false,
+      agreeRefundPolicy: false
+    },
     };
   },
   components: {
-    MS_com_buttons
+    // MS_com_buttons
   },
   props: {
     mode: {

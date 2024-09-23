@@ -1,6 +1,7 @@
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
+
 //宣告每一個連結都有專屬要連結出去的網址
 const logos = {
   'two': new URL('@/assets/images/logo_lifecasino.svg', import.meta.url).href,
@@ -79,12 +80,39 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateWidth);
 });
 
+<<<<<<< HEAD
 
 
 //點擊商品時購物車icon會出現增加數字 
 import { inject } from 'vue';
 
 const cart = inject('cart');  // 獲取購物車數據
+=======
+// ========================添加是否登入的狀態判斷=======================
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+// 檢查用戶是否已登入
+const isLoggedIn = ref(false);
+
+onMounted(() => {
+  // 檢查 sessionStorage 中是否存在 token
+  const token = sessionStorage.getItem('token');
+  isLoggedIn.value = !!token;
+});
+
+
+// 點擊會員圖示時的處理邏輯
+const handleAvatarClick = () => {
+  if (isLoggedIn.value) {
+    // 若已登入，導向會員中心
+    router.push('/MemberCenter');
+  } else {
+    // 未登入，導向登入頁面
+    router.push('/Login');
+  }
+};
+>>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
 </script>
 
 <template>
@@ -112,6 +140,7 @@ const cart = inject('cart');  // 獲取購物車數據
 
     </div>
     <div class="icons">
+<<<<<<< HEAD
       <div class="header-cart">
         <!-- 購物車圖示和商品數量 -->
         <router-link :to="{ name: 'shop' }">
@@ -121,6 +150,20 @@ const cart = inject('cart');  // 獲取購物車數據
       </div>
       <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-smile"class="peopleicon" /></router-link>
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
+=======
+      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
+          class="shoppingicon" /></router-link>
+      <!-- <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-smile"class="peopleicon" /></router-link>
+      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" /> -->
+
+       <!-- ===========================添加是否登入的狀態判斷======================== -->
+       <font-awesome-icon 
+        :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
+        class="peopleicon" 
+        @click="handleAvatarClick"
+      />
+      <!-- ========================================================================= -->
+>>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
     </div>
 
     <!-- 半圓形菜單 -->
@@ -142,6 +185,7 @@ const cart = inject('cart');  // 獲取購物車數據
         </li>
       </ul>
     </div>
+
   </header>
   <!-- <div class="body">
 
@@ -397,6 +441,8 @@ img {
   transform: translateX(0);
   /* 滑入畫面 */
 }
+
+
 
 /* RWD：小螢幕時顯示漢堡按鈕 */
 @media (max-width: 768px) {

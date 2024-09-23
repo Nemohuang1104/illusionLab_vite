@@ -14,6 +14,8 @@ import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import VueSweetalert2 from 'vue-sweetalert2'; 
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { createPinia } from 'pinia';
+
 
 // ============fontawsome==================
 //參考網址: https://reurl.cc/4dQ4gD
@@ -30,16 +32,22 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
+import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 
 
 
 
+const pinia = createPinia();
+const app = createApp(App);
 
+app.use(pinia);
+app.mount('#app');
 
 
 
 // ---libary也要加---//
-library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark)
+library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark,faAddressCard,faCircleUser)
 
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router,VueSweetalert2).mount("#app");

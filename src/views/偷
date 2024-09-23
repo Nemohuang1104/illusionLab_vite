@@ -1,0 +1,75 @@
+// ============導航按鈕===========//
+const mySwiper = ref(null);
+const isPaginationVisible = ref(false); // 初始狀態，分頁器隱藏
+
+// 切換分頁器顯示狀態
+const togglePagination = () => {
+    isPaginationVisible.value = !isPaginationVisible.value;
+    if (mySwiper.value && mySwiper.value.pagination) {
+    // 使用 render 和 init 更新分頁器
+    mySwiper.value.pagination.render();
+    mySwiper.value.pagination.init();
+    
+    // 控制分頁器的可見性
+    mySwiper.value.pagination.el.style.right = isPaginationVisible.value ? '8px' : '-100px';
+  }
+  isActive.value = !isActive.value;
+    // 根據狀態動態更新樣式
+    toggleButton.value.right = isActive.value ? '138px' : '30px';
+};  
+
+const isActive = ref(false);
+    // 按鈕的動態樣式
+    const toggleButton = ref({
+    padding: '10px 10px',
+    color: 'white',
+    });
+
+
+        <!-- 控制分頁器顯示的按鈕 -->
+    <button 
+    class="toggle-pagination" 
+    @click="togglePagination" 
+    :style="toggleButton" 
+    :class="{'active-button': isActive, 'default-button': !isActive}"
+    >
+      {{ isPaginationVisible ? 'CLOSE >' : '< OPEN' }} 
+    </button>
+
+    <!-- Swiper內建的分頁器 -->
+    <div v-show="isPaginationVisible" class="swiper-pagination">
+
+    </div>
+
+
+    // ===========nav===============//
+// Define menu for pagination bullets
+const menu = ['HOME','ABOUT', 'SERVE','GAME', 'BOOKING','REVIEWS', 'PRODUCT', 'LOCATION', 'RULE', 'CONTACT', 'VIP', 'SPONSOR'];
+
+
+    
+    // Pagination configuration
+    var pagination = {
+        clickable: true,
+      renderBullet: (index, className) => {
+        console.log(`Rendering bullet for index ${index}: ${menu[index]}`);
+        // Return custom bullet with text from the `menu` array
+        return `<span class="${className}">${menu[index]}</span>`;
+      },
+    }
+
+    /* 切換分頁器顯示狀態的按鈕 */
+.toggle-pagination {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  background-color:map-get($map: $color_1, $key: btn_gold);
+  color: white;
+  border: none;
+//   padding: 10px 35px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 1000;
+  animation: nav 1s linear infinite;
+  border-radius: 30px;
+}

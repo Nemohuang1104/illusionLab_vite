@@ -298,9 +298,7 @@ onMounted(() => {
     width: 80%;
   }
 
-  .list {
-    // width: 665PX;
-  }
+
 
   .pagebox {
     padding: 0px;

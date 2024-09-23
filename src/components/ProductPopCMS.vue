@@ -1,6 +1,8 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
 import { defineProps, ref, defineEmits } from 'vue';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 /* 文件上傳方法(實現上傳圖片預覽功能) */
 // 處理圖片上傳的方法
@@ -59,6 +61,12 @@ const f_save = async () => {
       if (response.ok) {
         console.log('新增產品成功:', result);
         emit('save-edit', result); // 傳遞結果給父組件
+        Swal.fire({
+          icon: 'success',
+          title: '新增商品成功',
+          showConfirmButton: false,
+          timer: 1200
+        })
         f_close();
       } else {
         console.error('新增產品失敗:', result.message);
@@ -89,6 +97,12 @@ const f_save = async () => {
       const result = await response.json();
       if (result.status === 'success') {
         emit('save-edit', localOrder.value);
+        Swal.fire({
+          icon: 'success',
+          title: '儲存成功',
+          showConfirmButton: false,
+          timer: 1200
+        })
         f_close();
       } else {
         console.error('儲存失敗:', result.message);
@@ -162,7 +176,6 @@ const f_save = async () => {
     </div>
   </div>
 </template>
-
 
 
 

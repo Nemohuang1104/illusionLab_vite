@@ -172,7 +172,7 @@ onMounted(() => {
                 </div>
                 <div class="checkbutton">
                     <RouterLink to="/shop2">
-                        <button class="check">商品確認
+                        <button class="check">結帳
                         </button>
                     </RouterLink>
                 </div>
@@ -431,59 +431,54 @@ ul {
     border: 0;
 }
 
-.quantity-input>button:hover {
-    background-color: #B36243;
-    transition: 0.3s;
-}
-
-.quantity-input>input {
-    display: inline-block;
-    text-align: center;
-    font-size: 16px;
-    width: 50px;
-    height: 20px;
-    line-height: 20px;
-    background-color: #FFEDBC;
-    margin: 0 2px;
-    box-sizing: border-box;
-    border: 0;
-    // margin-bottom: 80px;
-}
-
-.payment {
-    border-radius: 10px;
-    background: #000354;
-    width: 100%;
-    max-width: 400px;
-    padding: 30px;
-    flex-grow: 0;
-    color: #FFFFFF;
-}
-
-.detail {
-    width: 100%;
-    color: #FFFFFF;
-}
-
-.payment hr {
-    width: 100%;
-    max-width: 400px;
-    background-color: #FFFFFF;
-    margin: 20px auto;
-    height: 2px;
-    border: none;
-    border-radius: 2.5px;
-}
-
-.payment input {
-    border-radius: 8px;
-    border: 1px solid #FFFFFF;
-    outline: none;
-    /* 移除默認的黑框 */
-    background: none;
-    color: #ffffff; //文字顏色
-}
-
+    .quantity-input > input {
+        display: inline-block;
+        text-align: center;
+        font-size: 16px;
+        width: 50px; 
+        height: 20px; 
+        line-height: 20px; 
+        background-color: #FFEDBC;
+        margin: 0 2px; 
+        box-sizing: border-box; 
+        border: 0;
+        // margin-bottom: 80px;
+    }
+    .payment{
+        border-radius: 10px;
+        background:#000354;
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+        flex-grow: 0;
+        color: #FFFFFF;
+    }
+    .detail{
+        width: 100%;
+        color: #FFFFFF;
+    }
+    .payment hr{
+        width: 100%;
+        max-width: 400px;
+        background-color: #FFFFFF;
+        margin: 20px auto;
+        height: 2px;
+        border: none;
+        border-radius: 2.5px;
+    }
+    
+    .payment input{
+        border-radius: 8px;
+        border: 1px solid #FFFFFF;
+        outline: none;
+        /* 移除默認的黑框 */
+        background: none;
+        color: #ffffff; //文字顏色
+    }
+    // 結帳按鈕
+    .check:hover{
+        opacity: 0.9;
+    }
 
 // 商品確認按鈕
 .payment button {
@@ -504,9 +499,38 @@ ul {
     margin: 10px auto;
 }
 
-.total {
-    margin-top: 20px;
-}
+    .total{
+        margin-top: 20px;
+    }
+    .count, .discount-fee, .total-fee{
+        display: flex;
+        justify-content: space-between;
+    }
+    .count p, .discount-fee p, .total-fee p{
+        flex-basis: 0%;
+    }
+    .wrapper hr{
+        background-color: #FFFFFF;
+        margin: 20px auto;
+        height: 2px;
+        border: none;
+        border-radius: 2.5px;
+        width: 100%;
+        max-width: 1000px;
+    }
+    // 下方加購
+
+    .icon svg{
+        width: 100%;
+        max-width: 20px;
+    }
+
+    .ProductAdd{
+        width: 100%;
+        max-width: 1000px;
+        margin: 3% auto;
+        padding: 10px;
+        color: #FFFFFF;
 
 .count,
 .discount-fee,

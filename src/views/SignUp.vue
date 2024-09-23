@@ -6,15 +6,19 @@ import vSelect from 'vue-select';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import tw_cities from '../data/TwCities.json';
-
 
 const citySelect = ref([]);
 const selected = ref('');
 const isRotating = ref(false);
 const router = useRouter();
+const route = useRoute();
+
+
+
+
 
 //表單資訊
 const email = ref('');
@@ -25,9 +29,9 @@ const gender = ref('');
 const name = ref('');
 const address = ref('');
 
+const selectedCity = ref('');      // 新增縣市選擇
+const selectedDistrict = ref('');  // 新增鄉鎮選擇
 
-
- 
 
 // 錯誤訊息
 const emailError = ref('');
@@ -39,8 +43,13 @@ const nameError = ref('');
 const captchaError = ref('');
 const addressError = ref('');
 
-
+// const cities = tw_cities;
+// 城市選擇
 const cities = tw_cities;
+const selectedDistricts = computed(() => {
+  const cityObj = cities.find(city => city.name === selectedCity.value);
+  return cityObj ? cityObj.districts : [];
+});
 
 //驗證信箱
 const validateEmail = () => {
@@ -114,7 +123,7 @@ const validatePhone = () => {
 
 //驗證地址
 const validateAddress = () => {
-  if (!citySelect.value || !selected.value || !address.value) {
+  if (!selectedCity.value || !selectedDistrict.value || !address.value) {
     addressError.value = '地址不能為空'
     return false
   }
@@ -174,19 +183,55 @@ const register = () => {
   && !addressError.value
   && !captchaError.value
   ) {
-    // 驗證碼正確，顯示註冊成功訊息
-    //alert('註冊成功！歡迎加入！');
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "註冊成功！開始您的幻浸之旅",
-      showConfirmButton: false,
-      timer: 1200
-    }).then(() => {router.push('/home')});
-    // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
+    const formData = new FormData();
+    formData.append('username', name.value);
+    formData.append('email', email.value);
+    formData.append('password', password.value);
+    formData.append('repassword', confirmPassword.value);
+    formData.append('phoneNumber', phone.value);
+    formData.append('gender', gender.value);
+    formData.append('address', address.value);
+    formData.append('city', selectedCity.value);
+    formData.append('district', selectedDistrict.value);
+
+    // 發送 POST 請求到後端
+    fetch('http://illusionlab.local/public/PDO/Login/Register.php', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "註冊成功！商品折價券60元已匯入您的帳戶，開始您的幻浸之旅吧!",
+          showConfirmButton: true,
+          // timer: 10000
+        }).then(() =>  {
+          // 根據是否有 redirect 參數決定跳轉路由
+          if (route.query.redirect === 'quiz') {
+            // 導回小測驗頁面並添加 showLogin=true
+            router.push({ path: '/login', query: { showLogin: 'true' } });
+          } else {
+            // 否則跳轉至 /home
+            router.push('/home');
+          }
+        });
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: data.message,
+          showConfirmButton: false,
+          timer: 1200
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   } else {
-    // 驗證碼錯誤，彈出錯誤訊息
-    //  alert('請重新檢視表單');
     Swal.fire({
       position: "center",
       icon: "warning",
@@ -222,7 +267,7 @@ const register = () => {
           <!-- 密碼錯誤時出現的訊息 -->
           <span v-if="passwordError" class="error">{{ passwordError }}</span>
 
-          <input type="password" placeholder="請輸入密碼 (數字+英文字母8-16位)" 
+          <input type="password" placeholder="請輸入數字+英文8-16位，開頭須為英文字母" 
           v-model="password"
           @blur="validatePassword">
 
@@ -265,18 +310,26 @@ const register = () => {
 
         <div class="city">
           <div>
-            <v-select label="name"
-              :reduce="(option) => { citySelect = option.districts; selected = option.districts[0] ? option.districts[0].name : ''; }"
+            <v-select 
+            label="name"
+              :reduce="option => option.name"
               placeholder="請選擇縣市" 
               :options="cities" 
               class="custom-v-select" 
-              ></v-select>
+              v-model="selectedCity"
+              @input="selectedDistrict.value = ''">
+              </v-select>
           </div>
           <div>
-            <v-select class="custom-v-select" label="name" placeholder="請選擇鄉鎮" 
-              v-model="selected"
-              :options="citySelect"
-              ></v-select>
+            <!-- :reduce="option => option.name"，確保選擇的是字串，而不是物件 -->
+            <v-select  class="custom-v-select" 
+              :reduce="option => option.name"
+              label="name" 
+              placeholder="請選擇鄉鎮" 
+              v-model="selectedDistrict"
+              :options="selectedDistricts">
+              
+              </v-select>
           </div>
         </div>
 
@@ -293,8 +346,9 @@ const register = () => {
             <img @click="refreshCaptcha" :class="{ rotating: isRotating }" src="../assets/images/icon-change.svg"
               alt="">
           </div>
-
-          <router-link><button class="button" @click="register">註冊</button></router-link>
+          <router-link >
+          <button class="button" @click="register">註冊</button>
+          </router-link>
           <!-- <input type="submit" value="註冊" class="button" @click="register"> -->
         </div>
       </div>
@@ -370,12 +424,14 @@ main {
   margin-bottom: 10px;
   outline: none;
   box-sizing: border-box;
+  margin-top: 4px;
 }
 
 .error{
   font-size: 12px;
   color: #000354;
   padding-left: 10px;
+  margin-bottom: 4px;
 }
 
 .form .gender {
@@ -383,6 +439,7 @@ main {
   align-items: end;
   padding-left: 10px;
   margin-bottom: 10px;
+  margin-top: 4px;
 }
 
 .form .gender input {
@@ -410,6 +467,7 @@ main {
   margin-bottom: 10px;
   outline: none;
   box-sizing: border-box;
+  margin-top: 4px;
 }
 
 
@@ -426,6 +484,7 @@ main {
   margin-bottom: 10px;
   outline: none;
   box-sizing: border-box;
+  margin-top: 4px;
 }
 
 .form .random {
@@ -443,6 +502,7 @@ main {
   padding-left: 20px;
   outline: none;
   box-sizing: border-box;
+  margin-top: 4px;
 }
 
 .random p {
@@ -510,6 +570,8 @@ main {
 .form .random > input:focus{
   border: 1px solid #7976BB;
 }
+
+
 
 //================================RWD==========================
 @media screen and (max-width:600px){
@@ -580,6 +642,10 @@ main {
   text-align: center;
 }
 
+//==========================sweetalert====================================
+#swal2-title.swal2-title{
+  font-size: 20px !important;
+}
 
 
 </style>

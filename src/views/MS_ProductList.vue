@@ -1,34 +1,49 @@
 <script setup>
-import { ref } from 'vue';
+
 import Header_0 from '@/components/Header_0.vue';
 const currentMode = ref('four');
 import Footer_03 from '@/components/Footer_03.vue';
 
+import { useRoute } from 'vue-router';
+import { defineProps, ref, onMounted } from 'vue';
+const props = defineProps({
+    productInfo: Object
+})
 
-//輪播圖
-// Import Swiper and modules
-// import { Swiper, SwiperSlide } from 'swiper/vue';
-// import 'swiper/css';
-// import 'swiper/css/free-mode';
-// import 'swiper/css/navigation';
-// import 'swiper/css/thumbs';
+const item = ref([])
 
-// Import required modules
-// import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-
-
-// Define the thumbsSwiper reference
-// const thumbsSwiper = ref(null);
-
-// Function to set the thumbsSwiper instance
-// const setThumbsSwiper = (swiper) => {
-//   thumbsSwiper.value = swiper;
-// };
-
-// Swiper modules used
-// const modules = [FreeMode, Navigation, Thumbs];
+const selectedSize = ref('');  // 尺寸選擇
+const selectedStyle = ref(''); // 樣式選擇
+const selectedImage = ref('');  // 用來儲存當前顯示的圖片
+const route = useRoute();
 
 
+async function fetchProducts() {
+  try {
+    const productId = route.params.id;
+    const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/MS_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    const data = await response.json();
+    item.value = data;
+    item.value = { ...data, quantity: 1 };  // 初始化數量為 1
+    selectedSize.value = item.value.PRODUCT_SIZES[0];  // 預設選擇第一個尺寸
+    selectedStyle.value = item.value.PRODUCT_STYLES[0].STYLE_VALUE;  // 預設選擇第一個樣式
+    selectedImage.value = item.value.PRODUCT_STYLES[0].STYLE_IMG;   // 預設顯示第一個樣式圖片
+    
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
+
+
+// 切換樣式並更新圖片
+function selectStyle(style) {
+  selectedStyle.value = style.STYLE_VALUE;
+  selectedImage.value = style.STYLE_IMG;  // 更新主圖片為所選樣式的圖片
+}
 </script>
 
 <template>
@@ -49,44 +64,62 @@ import Footer_03 from '@/components/Footer_03.vue';
                     <li><a href="#">小女孩帆布袋</a></li>
                 </ul>
             </div>
-            <div class="pbox">
-                <!-- <swiper :style="{
-                    '--swiper-navigation-color': '#fff',
-                    '--swiper-pagination-color': '#fff',
-                }" :spaceBetween="20" :navigation="flase" :thumbs="{ swiper: thumbsSwiper }" :modules="modules"
-                    class="mySwiper2">
-                    <swiper-slide><img src="../assets/images/SF_bag.png" /></swiper-slide><swiper-slide><img
-                            src="../assets/images/SF_cup.png" /></swiper-slide><swiper-slide><img
-                            src="../assets/images/SF_Pillow.png" /></swiper-slide><swiper-slide><img
-                            src="../assets/images/SF_easycard_1.png" /></swiper-slide>
-                </swiper> -->
-                <div class="pimg"><img src="../assets/images/MS_littlebag.png" alt=""></div>
+            <div class="pbox" v-if="item">
+                <div class="pimg">
+                    <img :src="selectedImage" alt="product image" class="main-product-image"></div>
                 <div>
                     <div class="textbox">
-                        <p>商品編號 : MS001</p>
-                        <h3>小女孩帆布袋</h3>
-                        <h4>NT $ 590 </h4>
+                        <p>商品編號 : {{ item.PRODUCT_ID }}</p>
+                        <h3>{{ item.PRODUCT_NAME }}</h3>
+                        <h4>NT $ {{item.PRODUCT_PRICE }} </h4>
                         <div class="leftlight">
                             <p>作者：Dandy · Syike</p>
                             <p>與知名插畫家DoMeDo聯名推出</p>
                         </div>
-                        <p>材質：帆布</p>
-                        <p>商品規格 : 寬 24 cm x 高 30 cm</p>
+                        <p>材質：{{ item.MATERIAL }}</p>
+                        <p>商品規格 : {{ item.PRODUCT_SIZE }}</p>
                     </div>
-                    <!-- <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="4" :freeMode="true"
-                        :watchSlidesProgress="true" :modules="modules" class="mySwiper">
-                        <swiper-slide><img src="../assets/images/SF_bag.png" /></swiper-slide>
-                        <swiper-slide><img src="../assets/images/SF_cup.png" /></swiper-slide>
-                        <swiper-slide><img src="../assets/images/SF_Pillow.png" /></swiper-slide>
-                        <swiper-slide><img src="../assets/images/SF_easycard_1.png" /></swiper-slide>
-                    </swiper> -->
-                    <div class="rightdown">
+                    <!-- 樣式選擇圖片，只有在活動三顯示 -->
+                    <div v-if="item.EVENT_ID === 3" class="style-selection">
+                    <p class="txt">選擇樣式：{{ selectedStyle }}</p>
+
+                    <div class="style-options">
+                        <img v-for="style in item.PRODUCT_STYLES" :key="style.STYLE_VALUE" 
+                            :src="style.STYLE_IMG" 
+                            :alt="style.STYLE_VALUE"
+                            :class="{ 'selected': style.STYLE_VALUE === selectedStyle }"
+                            @click="selectStyle(style)" class="style-image">
+                            
+                    </div>
+
+                    </div>
+                     <!-- 數量選擇 -->
+                 <p class="txt">選擇數量：</p>
+                  <div class="quantity-input" id="quantity">
+                    <button class="quantity-button" id="minus6" @click="item.quantity > 1 && item.quantity--">-</button>
+                    <input type="text" v-model="item.quantity" min="1" />
+                    <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
+                  </div>
+                  
+                    <!-- <div class="rightdown">
                         <div class="but">
                             <input type="button" value=" - " class="sub">
                             <div class="counter" id="counter">1</div>
                             <input type="button" value=" + " class="add">
+                        </div> -->
+
+                        <!-- 尺寸選擇 -->
+                        <div class="size" v-if="item.PRODUCT_ID === 22">
+                            <p class="txt">選擇尺寸：</p>
+                            <select v-model="selectedSize" id="size">
+                            <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size" 
+                            >
+                                {{ size }}
+                            </option>
+                            </select>
                         </div>
-                        <div class="size">
+
+                        <!-- <div class="size">
                             <select name="size-select" id="">
                                 <option value="----- 商品尺寸 -----">----- 商品尺寸 -----</option>
                                 <option value="S">S</option>
@@ -94,15 +127,15 @@ import Footer_03 from '@/components/Footer_03.vue';
                                 <option value="L">L</option>
                                 <option value="XL">XL</option>
                             </select>
-                        </div>
+                        </div> -->
 
-                        <p>加入購物車</p>
+                        <p class="shop">加入購物車</p>
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>
+
     <div>
         <Footer_03></Footer_03>
     </div>
@@ -115,6 +148,8 @@ import Footer_03 from '@/components/Footer_03.vue';
 *{
 text-decoration: none;
 }
+@import "../assets/style";
+
 
 .warpper {
     font-family: "Noto Sans TC";
@@ -156,7 +191,7 @@ text-decoration: none;
 
 
 
-.title p {
+.title > p {
     font-size: 20px;
     font-weight: 700;
     background:#855F49;
@@ -228,7 +263,7 @@ text-decoration: none;
 //右側上方文字框
 .textbox {
     // border: 1px solid red;
-    width: 240px;
+    // width: 240px;
     // height: 150px;
 
     // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
@@ -330,19 +365,115 @@ text-decoration: none;
 
 //將下拉式選單select箭頭刪掉 
 .size select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
     appearance: none;
 
 }
 
 .size option {
-    color: black;
+    // color: black;
     
 }
 
+// ========選擇數量===========//
+.quantity-input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    height: 40px;
+    border-radius: 12px;
+    // display: block;
+    text-align: center;
+    line-height: 40px;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #9F7557;
+    outline: none;
+    background: #FCF7EC;
+    border: 1px solid #9F7557;
+}
+.quantity-button {
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    /* 將高度設置為 40px，與輸入框一致 */
+    line-height: 40px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: transparent;
+    // border-radius: 12px;
+    color: #9F7557;
+    border: 0;
+    cursor: pointer;
+
+}
+
+.quantity-input>button:last-child:hover {
+    color: map-get($colofont_3 , orange );
+    transition: 0.3s;
+    border-radius:  0 12px 12px 0;
+}
+
+.quantity-input>button:first-child:hover {
+    color: map-get($colofont_3 , orange );
+    transition: 0.3s;
+    border-radius: 12px 0 0 12px;
+}
+
+.quantity-input>input {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    // width: 50px;
+    // /* 適當調整寬度，使其與按鈕相匹配 */
+    // height: 20px;
+    // /* 將高度設置為 40px，與按鈕一致 */
+    line-height: 40px;
+    /* 將 line-height 設置為 40px，確保文字垂直居中 */
+    background-color: #ffedbc00;
+    /* 設置背景色，根據需求調整 */
+    // margin: 0 2px;
+    /* 添加 margin 以確保輸入框與按鈕之間有適當的間距 */
+    box-sizing: border-box;
+    /* 確保 padding 和 border 不會影響元素的寬度 */
+    border: 0;
+    // margin-bottom: 80px;
+    color: #9F7557;
+    
+}
+
+// ==============選擇樣式==============//
+.main-product-image {
+  width: 100%;
+  height: auto;
+}
+
+.style-options {
+  display: flex;
+  gap: 10px;
+}
+
+.style-image {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.style-image.selected {
+
+  border: 2px solid #9F7557;
+  border-radius: 5px;
+}
+
 //加入購物車
-.rightdown p {
+.shop {
     width: 300px;
     height: 40px;
     border-radius: 12px;
@@ -359,6 +490,13 @@ text-decoration: none;
     color: #9F7557;
     background:#FEDCAA;
     margin-bottom: 50px;
+}
+
+.txt{
+  font-size: 16px ;
+  color: #9F7557;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 //小圖換大圖

@@ -451,14 +451,17 @@ const routes = [
     requiredLogin: false
   },
   {
-    path: '/MS_ProductList',
+    path: '/MS_ProductList/:id',
     name: '心靈光譜商品細項頁',
     component: () => import('@/views/MS_ProductList.vue'),
     meta: {
       title: "心靈光譜商品頁細項頁"
     },
-    requiredLogin: false
+    name: 'MS_ProductList',
+    requiredLogin: false,
+    props: true // 將路由參數作為 props 傳入組件
   },
+
   {
     path: '/FQA_03',
     name: '常見問題',
@@ -606,17 +609,6 @@ const routes = [
     },
     requiredLogin: true
 
-  },
-
-  // =================心靈光譜===============//
-  {
-    path: '/mindspectrum',
-    name: 'mindspectrum',
-    component: () => import('@/components/MS/MS_main.vue'),
-    meta: {
-      title: "頁首"
-    },
-    requiredLogin: false
   },
   {
     path: '/WeiText',

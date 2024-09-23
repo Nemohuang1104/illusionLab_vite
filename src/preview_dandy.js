@@ -1,8 +1,16 @@
 import { createApp } from 'vue';
-import MindSpectrum from '@/views/MindSpectrum.vue';
-import MS_views_index from '@/views/MS_views_index.vue';
-import PP_termOfUse from '@/views/PP_termOfUse.vue';
-import PP_privacy_policy from '@/views/PP_privacy_policy.vue';
+import MS_index from '@/components/MS/MS_index.vue';
 
-const app = createApp(MS_views_index);
-app.mount('#preview-app');
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+import { faFacebook, faLine, faInstagram, faYoutube, faThreads, faBilibili, faTiktok, faXTwitter, faWeibo } from '@fortawesome/free-brands-svg-icons'
+
+// 将图标添加到库中
+library.add(faFacebook, faLine, faInstagram, faYoutube, faThreads, faBilibili, faTiktok, faXTwitter, faWeibo)
+
+const app = createApp(MS_index);
+
+app.component('font-awesome-icon', FontAwesomeIcon);
+
+app.mount('#app');

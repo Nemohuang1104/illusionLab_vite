@@ -1,10 +1,13 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_reservation mode="one" activityMode="activity1" class="reservation">
+      <MS_ticket_reservation mode="one" activityMode="activity1" class="reservation"
+      @update:formData="updateFormData"
+      @saveData="saveData">
         
       </MS_ticket_reservation>
       <MS_com_buttons
+        @click="saveData"
         class="actitvyBtn"
         :currentStep="currentStep"
         :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
@@ -15,17 +18,36 @@
 </template>
 
 <script setup>
-    import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
     import Footer_1 from '@/components/Footer_1.vue'
     import Header from '@/components/Header_0.vue';
     import { ref }from 'vue';
     import CoinFall from '@/components/CoinFall.vue';
     import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
     
+    import { useTicketStore } from '@/stores/ticketStore';
 
     const currentMode = ref('two');
 
-    
+    const ticketStore = useTicketStore(); // 初始化 store
+
+    const formData = ref({
+        quantity: '',
+        date: '',
+        time: ''
+    });
+
+  const updateFormData = (data) => {
+  formData.value = data;
+    };
+
+    const saveData = () => {
+        // 將資料保存到 Pinia
+          ticketStore.setGuestNumber(formData.value.quantity)
+          ticketStore.setDate(formData.value.date);
+          ticketStore.setTime(formData.value.time);
+        
+    };
     
 </script>
 <script>
@@ -124,6 +146,8 @@ body{
 };
 
 h1{
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
@@ -135,6 +159,8 @@ h2{
 }
 
 h3{
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
   font-size: map-get($map: $fontSize , $key: h3);
   font-weight: 800;
 }
