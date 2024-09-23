@@ -5,10 +5,8 @@ import Footer_0 from '../components/Footer_0.vue';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import axios from 'axios';
-import GoogleLogin from '@/components/GoogleLogin.vue';
 //===============================================================================
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import apiInstance from 'path-to-your-api-instance';  // 確保 apiInstance 正確導入
+import { auth, GoogleAuthProvider, signInWithPopup } from "../firebase";
 //==================================================================================
 import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
@@ -26,9 +24,7 @@ import { useRouter, useRoute } from 'vue-router';
     const emailError = ref('');
     const passwordError = ref('');
     //==========================================================
-    const alertContent = ref([]);  // 響應式的警告訊息內容
-    const showAlert = ref(false);  // 響應式的警告顯示狀態
-    const route = useRoute();    
+    const loginError = ref(null);
     //============================================================
     
 
@@ -84,51 +80,50 @@ import { useRouter, useRoute } from 'vue-router';
     };
 
   //================================google================================
-    const updateToken = (token) => {
-      // 實現 token 更新邏輯
-    };
-
-    const updateUserData = (userData) => {
-      // 實現更新用戶數據邏輯
-    };
-
-    const googleLogin = async () => {
+  // Google 登入處理邏輯
+  const handleGoogleLogin = async () => {
+      loginError.value = null;
+      const provider = new GoogleAuthProvider();
+      
       try {
-        const auth = getAuth();
-        const googleProvider = new GoogleAuthProvider();
-        const result = await signInWithPopup(auth, googleProvider);
-        const userName = result.user.displayName;
-        const userEmail = result.user.email;
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        
+        // 取得使用者資料
+        const userName = user.displayName;
+        const userEmail = user.email;
+        
+        // 登入成功後可將資料發送到後端 API
+        await sendUserDataToBackend(userEmail, userName);
+        
+      } catch (error) {
+        loginError.value = "Google 登入失敗，請稍後再試。";
+        console.error("登入錯誤:", error);
+      }
+    };
 
-        // 發送 API 請求
-        const res = await apiInstance({
-          method: 'post',
-          url: `${import.meta.env.VITE_API_URL}/googleLogin.php`,
-          headers: { "Content-Type": "multipart/form-data" },
-          data: {
-            mem_account: userEmail,
-            mem_name: userName
-          }
+    // 發送使用者資料到後端 API
+    const sendUserDataToBackend = async (email, name) => {
+      try {
+        const response = await fetch("http://illusionlab.local/public/PDO/Login/GoogleLogin.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ mem_account: email, mem_name: name })
         });
-
-        // 處理 API 響應
-        if (res.data.memInfo.mem_state === 0) {
-          alertContent.value.push('登入失敗，請聯繫客服人員。');
-          showAlert.value = true;
-          document.body.classList.add('body-overflow-hidden');
+        
+        const result = await response.json();
+        console.log("後端回應:", result);
+        
+        if (result.memInfo.mem_state === 0) {
+          loginError.value = "登入失敗，請聯繫客服人員。";
         } else {
-          updateToken(true);
-          updateUserData(res.data.memInfo);
-
-          const redirect = route.query.redirect;  // 使用 route.query 取代 this.$route.query
-          if (redirect) {
-            router.push(redirect);  // 使用 router.push 取代 this.$router.push
-          } else {
-            router.push('/');  // 導回首頁或自訂頁面
-          }
+          // 處理登入成功邏輯，例如保存 token 或跳轉
+          console.log("登入成功，重定向...");
         }
       } catch (error) {
-        console.log(error);
+        console.error("後端 API 錯誤:", error);
       }
     };
 
@@ -328,11 +323,12 @@ const onSubmit = async () => {
 
     <button @click="onSubmit" class="login">登入</button>
    
+    <div v-if="loginError" class="error">{{ loginError }}</div>
     <p>其他登入方式</p>
     <div class="other">
       <img src="../assets/images/icon-facebook.svg" alt="" >
-      <img src="../assets/images/icon-google.svg" alt="" @click="googleLogin">
-      <GoogleLogin></GoogleLogin>
+      
+      <img src="../assets/images/icon-google.svg" alt="" @click="handleGoogleLogin">
     </div>
     <p>還不是會員? 前往註冊</p>
     <router-link to="/SignUp"><input type="submit" value="註冊" class="signup"></router-link>

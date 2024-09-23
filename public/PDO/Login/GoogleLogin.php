@@ -1,55 +1,54 @@
 <?php
-require_once("../header.php");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
+// googleLogin.php
+include("../conn.php");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header('Content-Type: application/json'); // 設置返回的內容類型為 JSON
+header('Cross-Origin-Opener-Policy: same-origin'); 
+header("Cache-Control: no-cache, must-revalidate"); // 禁止緩存
+// 獲取前端傳來的資料
+$postData = file_get_contents("php://input");
+$request = json_decode($postData, true);
+$mem_account = $request['mem_account'];
+$mem_name = $request['mem_name'];
 
-ini_set("display_errors", "On");
+// 假設您有一個資料庫來儲存會員資料
+// 使用 PDO 連接到資料庫 (此處假設已設置資料庫)
+try {
+    $pdo = new PDO("mysql:host=localhost;dbname=YOUR_DB_NAME", "USERNAME", "PASSWORD");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // 查詢資料庫是否已有此使用者
+    $stmt = $pdo->prepare("SELECT * FROM members WHERE email = ?");
+    $stmt->execute([$mem_account]);
+    $user = $stmt->fetch();
 
-session_start();
+    if ($user) {
+        // 使用者已存在，返回使用者資料
+        $response = [
+            "memInfo" => [
+                "mem_state" => 1,  // 登入成功
+                "mem_name" => $user['name']
+            ]
+        ];
+    } else {
+        // 使用者不存在，新增使用者
+        $stmt = $pdo->prepare("INSERT INTO members (email, name) VALUES (?, ?)");
+        $stmt->execute([$mem_account, $mem_name]);
 
-try{
-  require_once("../connectGridIsland.php");
-  // $sql = "select mem_id, mem_name, mem_addr, mem_email, mem_tel, mem_game_state, mem_bug_state, mem_profile, mem_nickname, mem_gender, mem_birthday from mem where mem_email=:memEmail"; 
-  $sql = "select mem_id, mem_name, mem_addr, mem_email, mem_tel, mem_game_state, mem_bug_state, mem_profile, mem_nickname, mem_gender, mem_birthday, mem_state from mem where mem_email = :memEmail";
-  
-  $member = $pdo->prepare($sql);
+        $response = [
+            "memInfo" => [
+                "mem_state" => 1,  // 新增並登入成功
+                "mem_name" => $mem_name
+            ]
+        ];
+    }
 
-  $member->bindValue(":memEmail", $_POST["mem_account"]);
+    // 返回 JSON 格式的回應
+    echo json_encode($response);
 
-  $member->execute();
-
-  if ( $member->rowCount()=== 0) { //查無此信箱, 新增資料
-    // $res = array('code' => 0);
-    $sql = "insert into mem (mem_name, mem_email) values (:memName, :memEmail)";
-    $addMember = $pdo->prepare($sql);
-    $addMember->bindValue(":memEmail", $_POST["mem_account"]);
-    $addMember->bindValue(":memName", $_POST["mem_name"]);
-    $addMember->execute();
-
-    $sql = "select mem_id, mem_name, mem_addr, mem_email, mem_tel, mem_game_state, mem_bug_state, mem_profile, mem_nickname, mem_gender, mem_birthday, mem_state from mem where mem_email=:memEmail";
-    $newMember = $pdo->prepare($sql);
-    $newMember->bindValue(":memEmail", $_POST["mem_account"]);
-    $newMember->execute();
-    $newMemRow = $newMember->fetch(PDO::FETCH_ASSOC);
-    $res = array(
-      'session_id' => session_id(), // 这里可以使用您自己的会话管理
-      'memInfo' => $newMemRow // 将用户信息返回给前端
-    );
-  } else { //登入成功
-    //自資料庫中取回資料
-    $memRow = $member->fetch(PDO::FETCH_ASSOC);
-    //送出登入者的姓名資料
-    $res = array(
-      'session_id' => session_id(), // 这里可以使用您自己的会话管理
-      'memInfo' => $memRow // 将用户信息返回给前端
-    );
-
-  }
 } catch (PDOException $e) {
-  $res = ["msg"=>$e->getMessage()];
-  
+    echo json_encode(["memInfo" => ["mem_state" => 0]]);
 }
-// $conn->close();
-echo json_encode($res);
 ?>
