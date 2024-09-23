@@ -7,12 +7,13 @@ import 'sweetalert2/src/sweetalert2.scss';
 import axios from 'axios';
 
 import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 
 // export default {
 //   setup() {
     const router = useRouter();
+    const route = useRoute();
     // 表单字段
     const email = ref('');
     const password = ref('');
@@ -138,11 +139,72 @@ const onSubmit = async () => {
         Swal.fire({
           icon: 'success',
           title: '歡迎進入幻浸實驗室',
-          timer: 1200,
-          showConfirmButton: false,
-        }).then(() => {
-          router.push('/MemberCenter'); // 成功後導向會員中心
-        });
+          timer: 1200
+        }).then(async () => {
+          if (route.query.showLogin === 'true') {
+            if (token) {
+              try {
+                // 先執行 SetQuizCompleted.php
+                const setQuizResponse = await axios.post('http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php', {}, {
+                  headers: {
+                    'Authorization': `Bearer ${token}`
+                  }
+                });
+
+                if (setQuizResponse.data.status === 'success') {
+                  sessionStorage.setItem('quizCompleted', 'true');
+                  console.log('測驗完成標記已更新。');
+
+                  // 再執行 GetTicketCoupon.php
+                  const couponResponse = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+                    headers: {
+                      'Authorization': `Bearer ${token}`
+                    }
+                  });
+
+                  if (couponResponse.data.status === 'success') {
+                    // Swal.fire({
+                    //   icon: 'success',
+                    //   title: `您的折扣碼是: ${couponResponse.data.discountCode}`,
+                    //   timer: 2500,
+                    //   showConfirmButton: false,
+                    // });
+                  } else {
+                    Swal.fire({
+                      icon: 'error',
+                      title: couponResponse.data.message,
+                      timer: 2500,
+                      showConfirmButton: false,
+                    });
+                  }
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: setQuizResponse.data.message,
+                    timer: 2500,
+                    showConfirmButton: false,
+                  });
+                }
+              } catch (error) {
+                console.error(error);
+                Swal.fire({
+                  icon: 'error',
+                  title: '操作失敗，請稍後再試。',
+                  timer: 2500,
+                  showConfirmButton: false,
+                });
+              }
+            }
+            router.push({ path: '/LittleQuizResult' });
+          } else {
+            // 否則跳轉至 導向會員中心
+            router.push('/MemberCenter');
+          }
+          
+          
+        }
+      
+      );
       } else {
         // 登入失敗，顯示錯誤訊息
         Swal.fire({

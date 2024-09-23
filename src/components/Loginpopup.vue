@@ -1,12 +1,28 @@
+<!-- Loginpopup.vue -->
 <script setup>
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import axios from 'axios';
- 
-import { ref, computed } from 'vue';
+import { ref, defineEmits, defineProps, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
+const props = defineProps({
+  redirect: {
+    type: String,
+    default: ''
+  }
+});
+
+const redirectLink = computed(() => {
+  if (props.redirect) {
+    return { path: '/SignUp', query: { redirect: props.redirect } };
+  }
+  return '/SignUp';
+});
+
 const router = useRouter();
+const emit = defineEmits(['login-success', 'close-popup']);
+
 // 表单字段
 const email = ref('');
 const password = ref('');
@@ -15,7 +31,7 @@ const password = ref('');
 const emailError = ref('');
 const passwordError = ref('');
 
-// 電子信箱驗證規則 (簡單驗證)
+// 電子信箱驗證規則
 const checkEmail = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email.value) {
@@ -27,7 +43,7 @@ const checkEmail = () => {
   }
 };
 
-// 密碼驗證規則 (至少 8 個字符)
+// 密碼驗證規則
 const checkPassword = () => {
   const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
   if (!password.value) {
@@ -41,51 +57,45 @@ const checkPassword = () => {
   }
 };
 
-//忘記密碼
+// 忘記密碼功能（可根據需求實現）
 const forgotPassword = () => {
-  const { value: email } = Swal.fire({
+  Swal.fire({
     title: "請輸入電子信箱",
     input: "email",
     inputLabel: "Your email address",
     inputPlaceholder: "請輸入電子信箱"
-  })
-  .then(() => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "已寄送信件至您的電子信箱中",
-      showConfirmButton: false,
-      timer: 1500
-    })
-  })
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // 處理忘記密碼邏輯
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "已寄送信件至您的電子信箱中",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  });
 };
 
-//=============================PHP===================================
-  // 表單提交
-  const onSubmit = async () => {
-  checkEmail();     // 驗證電子郵件
-  checkPassword();  // 驗證密碼
+// 表單提交
+const onSubmit = async () => {
+  checkEmail();
+  checkPassword();
 
-  // 確認沒有錯誤後再發送請求
   if (!emailError.value && !passwordError.value) {
     try {
-      // 建立 FormData 物件
       const formData = new FormData();
       formData.append('email', email.value);
       formData.append('password', password.value);
 
-      // 使用 FormData 發送 POST 請求
-      const response = await axios.post('http://illusionlab.local/public/PDO/Login/login.php', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data' // 設定標頭為 FormData
-        }
+      const response = await axios.post('http://illusionlab.local/public/PDO/Login/Login.php', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      // 成功登入
       if (response.data.status === 'success') {
-        const token = response.data.token;  // 從後端獲取 token
-        // sessionStorage.setItem('authToken', token);  // 將 token 儲存在 sessionStorage
-        sessionStorage.setItem('token', response.data.token);
+        const token = response.data.token;
+        sessionStorage.setItem('token', token);
 
         Swal.fire({
           icon: 'success',
@@ -93,19 +103,19 @@ const forgotPassword = () => {
           timer: 1200,
           showConfirmButton: false,
         }).then(() => {
-          router.push('/LittleQuizResult'); // 成功後導向會員中心
+          emit('login-success'); // 發出登入成功事件
+          emit('close-popup'); // 關閉彈窗
+          // 不再自動跳轉，父組件會處理
         });
       } else {
-        // 登入失敗，顯示錯誤訊息
         Swal.fire({
           icon: 'error',
-          title: response.data.message, // 後端傳回的訊息
+          title: response.data.message,
           timer: 1500,
           showConfirmButton: false,
         });
       }
     } catch (error) {
-      // 處理請求錯誤
       Swal.fire({
         icon: 'error',
         title: '登入失敗，請確認是否註冊。',
@@ -114,7 +124,6 @@ const forgotPassword = () => {
       });
     }
   } else {
-    // 如果表單有錯誤
     Swal.fire({
       icon: 'warning',
       title: '請重新檢視表單',
@@ -126,39 +135,29 @@ const forgotPassword = () => {
 </script>
 
 <template>
- 
   <main>
-      <h1>會員登入</h1>
-      <!-- 表格區塊 -->
-      <div class="form">
-        <!-- 信箱錯誤時出現的訊息 -->
-        <span v-if="emailError" class="error">{{ emailError }}</span>
-        <input type="text" placeholder="請輸入您的電子信箱" class="text" 
-        v-model="email"
-        @blur="checkEmail">
+    <h1>會員登入</h1>
+    <div class="form">
+      <span v-if="emailError" class="error">{{ emailError }}</span>
+      <input type="text" placeholder="請輸入您的電子信箱" class="text" v-model="email" @blur="checkEmail">
 
-        <!-- 密碼錯誤時出現的訊息 -->
-        <span v-if="passwordError" class="error">{{ passwordError }}</span>
-        <input type="password" placeholder="請輸入您的密碼" class="text" 
-        v-model="password"
-        @blur="checkPassword">
+      <span v-if="passwordError" class="error">{{ passwordError }}</span>
+      <input type="password" placeholder="請輸入您的密碼" class="text" v-model="password" @blur="checkPassword">
 
-        <div></div>
-        <!--忘記密碼 -->
-        <a href="#" class="forgot" @click="forgotPassword">忘記密碼 ?</a>
-        
-        <button @click="onSubmit" class="login">登入</button>
-        
-        <p>其他登入方式</p>
-        <div class="other">
-          <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
-          <a href=""><img src="../assets/images/icon-google.svg" alt=""></a>
-        </div>
-        <p>還不是會員? 前往註冊</p>
-        <router-link to="/SignUp"><input type="submit" value="註冊" class="signup"></router-link>
+      <a href="#" class="forgot" @click="forgotPassword">忘記密碼 ?</a>
+      <button @click="onSubmit" class="login">登入</button>
+
+      <p>其他登入方式</p>
+      <div class="other">
+        <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a>
+        <a href=""><img src="../assets/images/icon-google.svg" alt=""></a>
       </div>
-    </main>
+      <p>還不是會員? 前往註冊</p>
+      <router-link :to="redirectLink"><input type="submit" value="註冊" class="signup"></router-link>
+    </div>
+  </main>
 </template>
+
 
 
 <style lang="scss" scoped>
