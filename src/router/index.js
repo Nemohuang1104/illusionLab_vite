@@ -601,15 +601,16 @@ const routes = [
   },
 
   {
-    path: '/shop3',
-    name: 'shop3',
-    component: () => import('@/views/ShoppingCar3.vue'),
+    path: '/map_page',
+    name: 'map_page',
+    component: () => import('@/views/map_page.vue'),
     meta: {
-      title: "購物車"
+      title: "門市選擇"
     },
     requiredLogin: true
-
   },
+
+
   {
     path: '/WeiText',
     name: 'WeiText',

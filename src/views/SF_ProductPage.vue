@@ -289,7 +289,9 @@ onMounted(() => {
 }
 
 
-
+.shoopingcar:hover{
+  color: #C1693B;
+}
 
 // RWD
 
@@ -297,8 +299,6 @@ onMounted(() => {
   .producttitle {
     width: 80%;
   }
-
-
 
   .pagebox {
     padding: 0px;

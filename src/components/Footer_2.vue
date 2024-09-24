@@ -37,14 +37,13 @@
 <style lang="scss" scoped>
 // 幻境LOGO
 .outline{
-    // width: 100vw;
     // max-width: 1440px;
     // height: 200px;//footer的高度不能寫死，會有空白跑出來
-    // background-image: url(../assets/images/STBackground.png);
+    width: 100%;
+    max-width: 1440px;
     background: linear-gradient(180deg, #000 26%, #505050 100%);
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
 .content{

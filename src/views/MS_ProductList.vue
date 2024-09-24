@@ -60,8 +60,8 @@ function selectStyle(style) {
         <div class="pboxout">
             <div aria-label="Breadcrumb">
                 <ul class="breadcrumb">
-                    <li><router-link to="/MS_ProductPage">心靈光譜商品頁 </router-link></li>
-                    <li><a href="#">小女孩帆布袋</a></li>
+                    <li><router-link to="/MS_ProductPage">全部商品 </router-link></li>
+                    <li>{{ item.PRODUCT_NAME }}</li>
                 </ul>
             </div>
             <div class="pbox" v-if="item">

@@ -1,7 +1,7 @@
 // src / preview.js
 import { createApp } from 'vue';
 
-import SF_DetailList_test from './views/SF_DetailList_test.vue';
+import map_page from './views/map_page.vue';
 
 
 
@@ -13,7 +13,7 @@ import SF_DetailList_test from './views/SF_DetailList_test.vue';
 
 
 
-const app = createApp(SF_DetailList_test);
+const app = createApp(map_page);
 
 
 app.mount('#preview-app');

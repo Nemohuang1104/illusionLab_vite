@@ -98,13 +98,20 @@ const checked2 = ref(false);
 // 計算屬性，用來檢查兩個 checkbox 是否都被選中
 const isBothChecked = computed(() => checked1.value && checked2.value);
 
+import Swal from 'sweetalert2';
 function validateSelection() {
     if (!checked1.value || !checked2.value) {
-        alert('請確認所有選項都已勾選。');
+        Swal.fire({
+            text: '請確認所有選項都已勾選。',
+            icon: 'warning',
+            confirmButtonText: '確定'
+        });
         return false;
     }
     return true;
 }
+
+
 
 </script>
 
