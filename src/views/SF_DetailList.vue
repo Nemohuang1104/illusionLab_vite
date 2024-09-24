@@ -119,7 +119,7 @@ onMounted(() => {
             <div aria-label="Breadcrumb">
                 <ul class="breadcrumb">
                     <li><router-link to="/SF_ProductPage">全部商品 </router-link></li>
-                    <li><a href="#">{{ item.PRODUCT_NAME }}</a></li>
+                    <li>{{ item.PRODUCT_NAME }}</li>
                 </ul>
             </div>
             <div class="pbox" v-if="item">
@@ -406,10 +406,6 @@ onMounted(() => {
 
 }
 
-.size select:hover {
-    background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
-}
-
 //加入購物車
 .rightdown p {
     width: 200px;
@@ -417,7 +413,7 @@ onMounted(() => {
     border-radius: 40px;
     display: block;
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
     // display: flex;
     // justify-content: center;
     // align-items: center;

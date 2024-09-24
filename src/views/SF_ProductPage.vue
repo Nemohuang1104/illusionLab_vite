@@ -321,17 +321,15 @@ onMounted(() => {
 }
 
 
-
+.shoopingcar:hover{
+  color: #C1693B;
+}
 
 // RWD
 
 @media(max-width: 920px) {
   .producttitle {
     width: 80%;
-  }
-
-  .list {
-    // width: 665PX;
   }
 
   .pagebox {

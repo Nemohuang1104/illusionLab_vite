@@ -44,7 +44,7 @@
 @import "../assets/SASS/basic/color";
 
 .outline{
-    width: 100vw;
+    width: 100%;
     max-width: 1440px;
     height: 200px;
     background: map-get($color_3,header);

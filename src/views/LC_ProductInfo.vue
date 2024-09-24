@@ -72,13 +72,21 @@ onMounted(() => {
             Title2="商品"
             English="PRODUCT">
       </LC_Text2>   
-      <div class="producttitle">
+      <!-- <div class="producttitle">
         <div class="arrowlift">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
           <p >上一頁</p>
         </div>
-        
       </div>
+       -->
+    <div class="pboxout">
+       <div aria-label="Breadcrumb">
+          <ul class="breadcrumb">
+              <li><router-link to="/LC_ProductPage">全部商品 </router-link></li>
+              <li>{{ item.PRODUCT_NAME }}</li>
+          </ul>
+       </div>
+
       <div v-if="item"    class="pagebox">
         <!-- 放置一個商品列的外框 -->
         <img :src="item.PRODUCT_IMG" alt="">
@@ -117,10 +125,11 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    </div>
     
     <div>
-  </div>
-  <CoinFall2 class="coin"></CoinFall2>
+    </div>
+    <CoinFall2 class="coin"></CoinFall2>
 
     <Footer_2></Footer_2>
   </div>
@@ -215,7 +224,34 @@ onMounted(() => {
 }
 
 
+//麵包屑
 
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  padding-left: 20px;
+  margin:30px auto;
+}
+
+.breadcrumb li {
+    margin-right: 8px;
+    color: #FFFFFF;
+}
+
+.breadcrumb li a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.breadcrumb li::after {
+    content: '>';
+    margin-left: 8px;
+}
+
+.breadcrumb li:last-child::after {
+    content: '';
+    /* Remove the last separator */
+}
 
 .producttitle {
   max-width: 700px;

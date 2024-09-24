@@ -17,6 +17,45 @@ const cartItems = ref([
 // //     return total + item.quantity * item.price;
 // //   }, 0);
 // // });
+import { onMounted } from 'vue';
+
+import { useRouter, useRoute } from 'vue-router';
+// 定義 name 和 address 變數
+const name = ref('');
+const address = ref('');
+
+const router = useRouter();
+const route = useRoute();
+
+// 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
+onMounted(() => {
+  if (route.query.storeName && route.query.storeAddress) {
+    name.value = route.query.storeName;
+    address.value = route.query.storeAddress;
+    orderData.value.store = route.query.storeName; // 使用新的變數名
+    orderData.value.address = route.query.storeAddress; 
+  }
+  
+  // 檢查是否有 shippingMethod 參數
+  if (route.query.shippingMethod) {
+    shippingMethod.value = route.query.shippingMethod; // 設定為 7-11取貨
+  }
+});
+
+const goToMap = () => {
+  router.push('/map_page');
+};
+
+const orderData = ref({
+    // name: '',
+    // phone: '',
+    address: '',
+    store: ''
+});
+
+
+
+
 
 const shippingMethod = ref('');
 const shippingFee = computed(() => {
@@ -190,7 +229,13 @@ const highlight = ref({
                                     </label>
                                 </div>
                                 <br>
-                                <label class="store">選擇門市: <input type="text" v-model="formData.store" /></label>
+                                <label class="store">7-11門市:
+                                    <button class="storechoose" @click="goToMap">選擇門市</button>
+                                </label>
+                                <br>
+                                <!-- 顯示選擇的門市和地址 -->
+                                <p class="orderData">門市名稱: {{ orderData.store }}</p>
+                                <p class="orderData">門市地址: {{ orderData.address }}</p>
                                 <br>
                                 <br>
                                 <label>*姓名: <input type="text" v-model="acceptorData.name" /></label>
@@ -244,13 +289,14 @@ const highlight = ref({
                         <div class="item_content">
                             <h3>{{ item.name }}</h3>
                             <div class="time">
-                                <div class="input">
+                                <p>規格:</p>
+                                <p>數量:</p>
+                                <!-- <div class="input">
                                     <select name="" id="">
                                         <option value="0">規格</option>
                                         <option value="1">可愛動物區</option>
                                         <option value="2">內心小女孩</option>
                                         <option value="3">大人釋懷中</option>
-
                                     </select>
                                 </div>
                                 <div class="quantity-input">
@@ -258,10 +304,12 @@ const highlight = ref({
                                         @click="item.quantity > 1 && item.quantity--">-</button>
                                     <input type="text" v-model="item.quantity" min="1" />
                                     <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
-                                </div>
+                                </div> -->
                             </div>
-                            <i class="fa-regular fa-trash-can"></i>
-
+                            <!-- <i class="fa-regular fa-trash-can"></i> -->
+                             <!-- <div class="trash">
+                                 <img class="trash-can" src="../assets/images/trashcan.svg">
+                             </div> -->
                         </div>
                     </div>
 
@@ -746,7 +794,7 @@ const highlight = ref({
     appearance: none;
     /* 隱藏默認的下拉箭頭 */
     background: #FFEDBC;
-
+    cursor: pointer;
 }
 
 .input>select>option {
@@ -797,7 +845,8 @@ const highlight = ref({
     /* 將 line-height 設置為 40px，確保文字垂直居中 */
     background-color: #FFEDBC;
     /* 設置背景色，根據需求調整 */
-    border: 0
+    border: 0;
+    cursor: pointer;
 }
 
 .quantity-input>button:hover {
@@ -955,6 +1004,36 @@ const highlight = ref({
     border-radius: 50px;
     background: var(--Color-3, #FFEDBC);
     cursor: pointer;
+}
+
+.trash{
+    display: flex;
+    justify-content: end;
+}
+
+.trash-can{
+    cursor: pointer;
+    width: 100%;
+    max-width: 20px;
+    margin: 12px 0;
+}
+
+button:hover{
+    opacity: .9;
+}
+
+
+// 門市選擇的字串
+.inner04 .orderData{
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+.storechoose{
+    background: #FFEDBC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 /* ==========RWD斷點============== */
