@@ -20,7 +20,7 @@ const routes = [
     requiredLogin: false
   },
   {
-    path: '/home',
+    path: '/Home',
     component: () => import('@/views/Home.vue'),
     meta: {
       title: "Illusion Lab首頁"
@@ -151,14 +151,6 @@ const routes = [
 
   // ====================後台end=====================
 
-  {
-    path: '/home',
-    component: () => import('@/views/Home.vue'),
-    meta: {
-      title: "Illusion Lab首頁"
-    },
-    requiredLogin: false
-  },
   // ====================人生賭場================//
   {
     path: '/lifecasino',

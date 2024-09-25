@@ -30,7 +30,8 @@ const route = useRoute();
 async function fetchProducts() {
   try {
     const productId = route.params.id;
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/LC_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    // const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/LC_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/LC_GetProductInfo.php?productId=${productId}`);
     const data = await response.json();
     item.value = data;
     item.value = { ...data, quantity: 1 };  // 初始化數量為 1
@@ -51,7 +52,7 @@ onMounted(() => {
 
 // onMounted(async () => {
 //   const productId = route.params.id;
-//   const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/getProductDetail.php?productId=${productId}`);
+//   const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/getProductDetail.php?productId=${productId}`);
 //   product.value = await response.json();
 // });
 

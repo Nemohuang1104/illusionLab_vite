@@ -14,6 +14,7 @@ import "vue-select/dist/vue-select.css";
 import VueSweetalert2 from 'vue-sweetalert2'; 
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'; // 引入插件
 
 // ============fontawsome==================
 //參考網址: https://reurl.cc/4dQ4gD
@@ -34,6 +35,7 @@ import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
 
 
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate); // 將插件加到 Pinia 中
 const app = createApp(App);
 
 app.use(pinia);

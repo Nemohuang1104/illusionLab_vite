@@ -49,7 +49,8 @@ const orders = ref([
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 async function fetchProducts() {
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/FetchAllProducts.php'); // 替換成你實際的 API URL
+    // const response = await fetch('${import.meta.env.VITE_API_URL}/ProductData/FetchAllProducts.php'); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/FetchAllProducts.php`); // 替換成你實際的 API URL
     const data = await response.json();
     orders.value = data;
   } catch (error) {
@@ -88,7 +89,8 @@ const resetSearch = () => {
 // 使用 fetch API 搜尋資料庫中的商品
 const searchItems = async () => {
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/searchProducts.php', {
+    // const response = await fetch('${import.meta.env.VITE_API_URL}/ProductData/searchProducts.php', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/searchProducts.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

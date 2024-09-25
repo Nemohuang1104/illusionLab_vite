@@ -1,149 +1,125 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_customer_info 
-      mode="one"
+      <MS_ticket_reservation 
+      mode="one" 
       activityMode="activity1" 
-      class="customer_info"
-       ref="formRef"
-       @formCompletionStatus="handleFormCompletion"
-      >
+      class="reservation"
+      :eventId="currentEventId"
+      @update:formData="updateFormData"
+      @saveData="saveData">
         
-      </MS_ticket_customer_info>
-      <!-- :step="modeSelect" -->
+      </MS_ticket_reservation>
       <MS_com_buttons
+      @click="saveData"
+      :showNext="showNext"
+         @next="handleNextStep"
         class="actitvyBtn"
         :currentStep="currentStep"
-        :mode="mode"  
-        :activityMode="activityMode"
-        :disabled="!isFormComplete"
-        @form-submitted="handleFormSubmit"
-        
+        :mode="mode" :step="modeSelect" :activityMode="activityMode"
+        :isFormComplete="isFormComplete" 
         ></MS_com_buttons>
+        
       <CoinFall class="coin"/>
   <Footer_1 class="footer"></Footer_1>
+
 </div>
 </template>
 
+<!-- <script setup>
+    import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+    import Footer_1 from '@/components/Footer_1.vue'
+    import Header from '@/components/Header_0.vue';
+    import { ref }from 'vue';
+    import CoinFall from '@/components/CoinFall.vue';
+    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+    
+    import { useTicketStore } from '@/stores/ticketStore';
+
+    const currentMode = ref('two');
+
+    const ticketStore = useTicketStore(); // 初始化 store
+
+    const formData = ref({
+        quantity: '',
+        date: '',
+        time: ''
+    });
+    const isFormComplete = ref(false);
+// 檢查表單是否完整的方法
+  const checkFormCompletion = () => {
+    isFormComplete.value = formData.value.quantity && formData.value.date && formData.value.time;
+  };
+
+
+  const updateFormData = (data) => {
+    formData.value = data;
+    checkFormCompletion(); // 每次更新表單後檢查
+  };
+
+  const saveData = () => {
+  if (isFormComplete.value) {
+    // 將資料保存到 Pinia
+    ticketStore.setGuestNumber(formData.value.quantity);
+    ticketStore.setDate(formData.value.date);
+    ticketStore.setTime(formData.value.time);
+  } else {
+    console.warn("表單未完成，無法保存數據");
+  }
+};
+
+// 下一步按鈕的處理方法
+const handleClick = () => {
+  console.log('isFormComplete:', isFormComplete.value);
+  if (isFormComplete.value) {
+    saveData();
+    // 執行下一步的邏輯
+  } else {
+    alert("請填寫完整表單");
+  }
+};
+</script> -->
 <script>
-import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
+import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
 import Footer_1 from '@/components/Footer_1.vue';
 import Header from '@/components/Header_0.vue';
 import CoinFall from '@/components/CoinFall.vue';
 import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+import { useTicketStore } from '@/stores/ticketStore';
 
 
 export default {
   components: {
-    MS_ticket_customer_info,
+    MS_ticket_reservation,
     Footer_1,
     Header,
     CoinFall,
-    MS_com_buttons,
+    MS_com_buttons
   },
-  props:{
-    // formData: Object,
-  },
+
   data() {
     return {
-      currentMode: 'two', // 当前 mode
-      // formData: {
-      //   name: '',
-      //   phone: '',
-      //   email: '',
-      //   taxID: '',
-      //   companyName: '',
-      //   comments: '',
-      //   agreePrivacyPolicy: true,
-      //   agreeRefundPolicy: true,
-      // },
-   
-      formErrors: {}, // 儲存錯誤訊息的狀態
-      isFormComplete: false,   // 表单完成状态
-      currentStep: 1,         // 当前步骤
-      activityMode: 'activity1', // 初始活动模式
-      mode: 'two1',            // 初始 mode
-      showNext: true,
-      currentEventId: 1,
-    };
-  },
-
-  methods: {
-    handleFormCompletion(status) {
-      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
-    },
-    handleFormSubmit() {
-       // 透過 ref 調用 form 組件內的 validateForm 方法
-       const formIsValid = this.$refs.formRef.validateForm();
-      if (formIsValid) {
-        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
-        
-        this.$router.push(this.nextPage);
-    }
-  
-  },
-}
-}
-</script>
-
-
-<!-- <script setup>
-import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
-import Footer_1 from '@/components/Footer_1.vue';
-import Header from '@/components/Header_0.vue';
-import { ref } from 'vue';
-import CoinFall from '@/components/CoinFall.vue';
-import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
-
-const ticketStore = useTicketStore(); // 初始化 store
-
-const formData = ref({
-  name: '',
-  phone: '',
-  email: '',
-  taxID: '',
-  companyName: '',
-  comments: '',
-  agreePrivacyPolicy: false,
-  agreeRefundPolicy: false
-});
-
-const updateFormData = (data) => {
-  formData.value = data;
-    };
-
-const saveData = () => {
-  ticketStore.setName(formData.value.name);
-  ticketStore.setPhone(formData.value.phone);
-  ticketStore.setEmail(formData.value.email);
-  ticketStore.setTaxID(formData.value.taxID);
-  ticketStore.setCompanyName(formData.value.companyName);
-  ticketStore.setComments(formData.value.comments);
-  ticketStore.setAgreePrivacyPolicy(formData.value.agreePrivacyPolicy);
-  ticketStore.setAgreeRefundPolicy(formData.value.agreeRefundPolicy);
-};
-
-const currentMode = ref('two');
-</script> -->
-<!-- <script>
-export default {
-  data() {
-    return {
-      currentStep: 1, // 当前步骤
-      activityMode: 'activity1', // 初始活动模式
-      mode: 'two1', // 初始 mode
+      currentMode: 'two',
+      ticketStore: useTicketStore(), // 初始化 store
+      formData: {
+        quantity: '',
+        date: '',
+        time: '',
+      },
       isFormComplete: false,
       showNext: true,
-      currentEventId: 1,
+      currentStep: 0, // 当前步骤
+      activityMode: 'activity1', // 初始活动模式
+      mode: 'one1', // 初始 mode
+      currentEventId: 1, // 這裡設定當前活動的 EVENT_ID，例如 1
+    
     isFormComplete: false,
-      
-    };
-  },
-  methods: {
+    
+  }
+},
+methods: {
     checkFormCompletion() {
-      this.isFormComplete = this.formData.name && this.formData.phone && this.formData.email && this.formData.agreePrivacyPolicy && this.formData.agreeRefundPolicy;
+      this.isFormComplete = this.formData.quantity && this.formData.date && this.formData.time;
     },
     updateFormData(data) {
       this.formData = data;
@@ -167,23 +143,24 @@ export default {
     }
   }
 }
-</script> -->
+</script>
 
 <style lang="scss" scoped>
-@import "../assets/style";
+
 .actitvyBtn{
   // border: 2px solid red;
   margin: 0 auto;
   margin-top: -50px;
   margin-bottom: 50px;
+  // height: 120px;
 }
 
+@import "../assets/style";
 .warpper{
   position: relative;
   background-image: url(../assets/images/lifecasino_bg2.png);
   background-repeat: no-repeat;
   background-size: cover;
-  // background-position: center;
   position: relative;
   z-index: 0;
   // border: 2px solid rgb(0, 255, 17);
@@ -232,6 +209,10 @@ export default {
     }
 }
 
+.reservation{
+  // border: 2px solid red;
+
+}
 
 
 
@@ -251,6 +232,7 @@ body{
 
 h1{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
@@ -291,6 +273,13 @@ h6{
 .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
   
+}
+
+h5{
+      color: map-get($map: $colofont_1, $key:gold ) !important;
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+  font-weight: 400 !important;
+
 }
 
 </style>

@@ -205,7 +205,7 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
     const formData = new FormData();
     formData.append('image', blob, 'LC_ticket.png');
 
-    fetch('http://illusionlab.local/public/PDO/TicketOrder/save_custom_ticket.php', {
+    fetch('${import.meta.env.VITE_API_URL}/TicketOrder/save_custom_ticket.php', {
       method: 'POST',
       body: formData,
     })
