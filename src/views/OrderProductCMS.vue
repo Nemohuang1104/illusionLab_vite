@@ -1,7 +1,7 @@
 <script setup>
 import Header_CMS from '@/components/Header_CMS.vue';
 import OrderProductPopCMS from '@/components/OrderProductPopCMS.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 import axios from 'axios'; // 註解掉 axios 的引入
 
@@ -9,208 +9,45 @@ import axios from 'axios'; // 註解掉 axios 的引入
 const searchQuery = ref('');
 
 const orders = ref([
-  {
-    order_id: '1',
-    order_list: 'TO240821161532',
-    account: 'john@example.com',
-    payment_status: 0,
-    order_status: 2,
-    shipping_status: 3,
-    order_date: '2024/08/21',
-    receiver_name: 'John Doe',
-    receiver_phone: '123456789',
-    shipping_address: '123 Main St, Anytown, USA',
-    shipping_type: '宅配',
-    store: 'Store A',
-    payment: '信用卡',
-    shipping_fee: 60,
-    discount_id: 'edr100',
-    discount_price: 10
-  },
-  {
-    order_id: "2",
-    order_list: "TO240821161533",
-    account: "alice@example.com",
-    payment_status: 1,
-    order_status: 1,
-    shipping_status: 2,
-    order_date: "2024/08/21",
-    receiver_name: "Alice Smith",
-    receiver_phone: "987654321",
-    shipping_address: "456 Oak St, Smalltown, USA",
-    shipping_type: "宅配",
-    store: "Store B",
-    payment: "銀行轉帳",
-    shipping_fee: 60,
-    discount_id: "edr101",
-    discount_price: 20
-  },
-  {
-    order_id: "3",
-    order_list: "TO240821161534",
-    account: "bob@example.com",
-    payment_status: 0,
-    order_status: 2,
-    shipping_status: 1,
-    order_date: "2024/08/22",
-    receiver_name: "Bob Johnson",
-    receiver_phone: "234567890",
-    shipping_address: "789 Pine St, Bigtown, USA",
-    shipping_type: "超商取貨",
-    store: "Store C",
-    payment: "信用卡",
-    shipping_fee: 80,
-    discount_id: "edr102",
-    discount_price: 15
-  },
-  {
-    order_id: "4",
-    order_list: "TO240821161535",
-    account: "charlie@example.com",
-    payment_status: 1,
-    order_status: 3,
-    shipping_status: 3,
-    order_date: "2024/08/22",
-    receiver_name: "Charlie Davis",
-    receiver_phone: "345678901",
-    shipping_address: "101 Maple St, Villagetown, USA",
-    shipping_type: "宅配",
-    store: "Store D",
-    payment: "電子支付",
-    shipping_fee: 50,
-    discount_id: "edr103",
-    discount_price: 30
-  },
-  {
-    order_id: "5",
-    order_list: "TO240821161536",
-    account: "david@example.com",
-    payment_status: 0,
-    order_status: 1,
-    shipping_status: 2,
-    order_date: "2024/08/23",
-    receiver_name: "David Evans",
-    receiver_phone: "456789012",
-    shipping_address: "202 Elm St, Bigcity, USA",
-    shipping_type: "宅配",
-    store: "Store E",
-    payment: "信用卡",
-    shipping_fee: 70,
-    discount_id: "edr104",
-    discount_price: 25
-  },
-  {
-    order_id: "6",
-    order_list: "TO240821161537",
-    account: "emma@example.com",
-    payment_status: 1,
-    order_status: 2,
-    shipping_status: 1,
-    order_date: "2024/08/23",
-    receiver_name: "Emma Foster",
-    receiver_phone: "567890123",
-    shipping_address: "303 Cedar St, Middletown, USA",
-    shipping_type: "超商取貨",
-    store: "Store F",
-    payment: "銀行轉帳",
-    shipping_fee: 60,
-    discount_id: "edr105",
-    discount_price: 20
-  },
-  {
-    order_id: "7",
-    order_list: "TO240821161538",
-    account: "frank@example.com",
-    payment_status: 0,
-    order_status: 1,
-    shipping_status: 2,
-    order_date: "2024/08/24",
-    receiver_name: "Frank Green",
-    receiver_phone: "678901234",
-    shipping_address: "404 Birch St, Smallcity, USA",
-    shipping_type: "宅配",
-    store: "Store G",
-    payment: "電子支付",
-    shipping_fee: 65,
-    discount_id: "edr106",
-    discount_price: 10
-  },
-  {
-    order_id: "8",
-    order_list: "TO240821161539",
-    account: "grace@example.com",
-    payment_status: 1,
-    order_status: 3,
-    shipping_status: 3,
-    order_date: "2024/08/24",
-    receiver_name: "Grace Harris",
-    receiver_phone: "789012345",
-    shipping_address: "505 Spruce St, Villagecity, USA",
-    shipping_type: "宅配",
-    store: "Store H",
-    payment: "信用卡",
-    shipping_fee: 55,
-    discount_id: "edr107",
-    discount_price: 15
-  },
-  {
-    order_id: "9",
-    order_list: "TO240821161540",
-    account: "henry@example.com",
-    payment_status: 0,
-    order_status: 2,
-    shipping_status: 1,
-    order_date: "2024/08/25",
-    receiver_name: "Henry Ingram",
-    receiver_phone: "890123456",
-    shipping_address: "606 Willow St, Bigtown, USA",
-    shipping_type: "超商取貨",
-    store: "Store I",
-    payment: "銀行轉帳",
-    shipping_fee: 60,
-    discount_id: "edr108",
-    discount_price: 20
-  },
-  {
-    order_id: "10",
-    order_list: "TO240821161541",
-    account: "irene@example.com",
-    payment_status: 1,
-    order_status: 1,
-    shipping_status: 2,
-    order_date: "2024/08/25",
-    receiver_name: "Irene Johnson",
-    receiver_phone: "901234567",
-    shipping_address: "707 Aspen St, Smalltown, USA",
-    shipping_type: "宅配",
-    store: "Store J",
-    payment: "電子支付",
-    shipping_fee: 70,
-    discount_id: "edr109",
-    discount_price: 25
-  },
-  {
-    order_id: "11",
-    order_list: "TO240821161542",
-    account: "jack@example.com",
-    payment_status: 0,
-    order_status: 2,
-    shipping_status: 3,
-    order_date: "2024/08/26",
-    receiver_name: "Jack King",
-    receiver_phone: "012345678",
-    shipping_address: "808 Chestnut St, Bigcity, USA",
-    shipping_type: "超商取貨",
-    store: "Store K",
-    payment: "信用卡",
-    shipping_fee: 65,
-    discount_id: "edr110",
-    discount_price: 30
-  }
+  // {
+  //   order_id: '1',
+  //   order_list: 'TO240821161532',
+  //   account: 'john@example.com',
+  //   payment_status: 0,
+  //   order_status: 2,
+  //   shipping_status: 3,
+  //   order_date: '2024/08/21',
+  //   receiver_name: 'John Doe',
+  //   receiver_phone: '123456789',
+  //   shipping_address: '123 Main St, Anytown, USA',
+  //   shipping_type: '宅配',
+  //   store: 'Store A',
+  //   payment: '信用卡',
+  //   shipping_fee: 60,
+  //   discount_id: 'edr100',
+  //   discount_price: 10
+  // },
+  
   
   // 更多訂單數據...
 ]);
 
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchProducts() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/FetchAllProductOrder.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    orders.value = data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+onMounted(() => {
+  fetchProducts(); // 當頁面加載時撈取資料
+});
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
 
 const initialItems = ref([...orders.value]); // 保存初始資料的副本
 
@@ -220,59 +57,44 @@ const filteredItems = computed(() => {
     return orders.value;
   }
   return orders.value.filter(item =>
-    item.order_list.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.account.toLowerCase().includes(searchQuery.value.toLowerCase())
+    item.PRODUCT_ORDER_ID.toString().toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.PRODUCT_ORDER_LIST.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
 // 恢復顯示所有資料
 const resetSearch = () => {
   searchQuery.value = '';
-  initialItems.value = [...orders.value]; // 更新 initialItems 以包含最新的訂單資料
-  orders.value = [...initialItems.value];
+  // initialItems.value = [...orders.value]; // 更新 initialItems 以包含最新的訂單資料
+  // orders.value = [...initialItems.value];
+  fetchProducts(); // 恢復撈取全部資料
   currentPage.value = 1;
 };
 
-// 搜尋功能
-const searchItems = () => {
-  // 若使用 axios 進行搜尋，需恢復以下代碼
-  /*
-  axios.post('/api/search-members', {
-    query: searchQuery.value
-  })
-  .then(response => {
-    allItems.value = response.data;
-    currentPage.value = 1;
-  })
-  .catch(error => {
+// 使用 fetch API 搜尋資料庫中的商品
+const searchItems = async () => {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/SearchPO_Data.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query: searchQuery.value }) // 傳送搜尋字串到後端 PHP
+    });
+
+    if (!response.ok) {
+      throw new Error('搜尋請求失敗');
+    }
+
+    const data = await response.json();
+    orders.value = data; // 更新 orders 資料
+    currentPage.value = 1; // 搜尋後重設為第 1 頁
+  } catch (error) {
     console.error('搜尋出錯:', error);
-  });
-  */
-  
-  // 直接使用本地資料進行搜尋
-  currentPage.value = 1; // 搜尋時重設為第1頁
+  }
 };
 
-// 切換會員狀態
-const toggleStatus = (item) => {
-  const newStatus = item.status === '正常' ? '停權' : '正常';
-  item.status = newStatus;
 
-  // 註解掉 AJAX 請求部分
-  /*
-  axios.post('/api/update-status.php', {
-    id: item.id,
-    status: newStatus
-  })
-  .then(response => {
-    console.log('狀態更新成功');
-  })
-  .catch(error => {
-    item.status = item.status === '正常' ? '停權' : '正常';
-    console.error('更新狀態失敗:', error);
-  });
-  */
-};
 
 // 分頁功能
 const itemsPerPage = ref(10);
@@ -336,21 +158,21 @@ const o_ship = ref('')
 const edit = (index) => {
   // 使用 filteredItems 的索引來查找對應的 orders 項目
   const filteredItem = displayedItems.value[index];
-  const originalIndex = orders.value.findIndex(item => item.order_list === filteredItem.order_list);
+  const originalIndex = orders.value.findIndex(item => item.PRODUCT_ORDER_ID === filteredItem.PRODUCT_ORDER_ID);
   
   if (originalIndex !== -1) {
     current_edit.value = originalIndex;
     editOpacity.value = 1;
-    select_number.value = orders.value[originalIndex].order_list;
+    select_number.value = orders.value[originalIndex].PRODUCT_ORDER_ID;
 
-    const tot = order_list.value[originalIndex];
-    total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
+    // const tot = order_list.value[originalIndex];
+    // total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
 
-    order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
+    // order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
 
-    o_pay.value = orders.value[originalIndex].payment_status;
-    o_form.value = orders.value[originalIndex].order_status;
-    o_ship.value = orders.value[originalIndex].shipping_status;
+    // o_pay.value = orders.value[originalIndex].payment_status;
+    // o_form.value = orders.value[originalIndex].order_status;
+    // o_ship.value = orders.value[originalIndex].shipping_status;
   }
 };
 // 2.當子組件 OrderTicketPopCMS 中的 f_close及f_save 被觸發時，會通過 emit 通知父組件，從而更新父組件中的 editOpacity 值，達到控制彈出視窗顯示或隱藏的效果。
@@ -366,6 +188,10 @@ const handleSaveEdit = async (updatedOrder) => {
     orders.value[current_edit.value] = updatedOrder;
     initialItems.value = [...orders.value]; // 編輯後更新 initialItems
   }
+
+  // 重新撈取更新後的資料
+  await fetchProducts();
+  
   editOpacity.value = 0;
   current_edit.value = null;
   }
@@ -424,11 +250,11 @@ const handleSaveEdit = async (updatedOrder) => {
 
                 
                 <div v-for="(item, index) in displayedItems" :key="item.id" class="order-text">
-                <span>{{ item.order_id }}</span>
-                <span>{{ item.order_list }}</span>
-                <span>{{ item.account }}</span>
-                <span>{{ item.order_status }}</span>
-                <span>{{ item.order_date }}</span>
+                <span>{{ item.PRODUCT_ORDER_ID }}</span>
+                <span>{{ item.PRODUCT_ORDER_LIST }}</span>
+                <span>{{ item.EMAIL }}</span>
+                <span>{{ item.ORDER_STATUS }}</span>
+                <span>{{ item.ORDER_DATE.split(' ')[0] }}</span>
                 <span @click="edit(index)">編輯</span>
                 </div>
             </div> 

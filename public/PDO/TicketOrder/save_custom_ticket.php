@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 保存圖片到伺服器
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
             // 將路徑存入資料庫
-            // $imagePath = $targetFilePath;
             $imagePath = "/public/PDO/FileUpload/" . $fileName;
+
             try {
                 // 使用PDO準備SQL語句
                 // SQL 語句已經改成將圖片路徑存入資料表 TID102_G2.TICKET_ORDER 中的 TICKET_IMAGE_PATH 欄位。

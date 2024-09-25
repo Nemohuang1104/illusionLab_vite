@@ -568,9 +568,10 @@ const routes = [
     name: 'shop',
     component: () => import('@/views/ShoppingCar1.vue'),
     meta: {
-      title: "購物車"
+      title: "購物車",
+      requiresAuth: true // 需要认证的路由
     },
-    requiredLogin: true
+    
   },
 
   {
@@ -676,29 +677,18 @@ const router = createRouter({
   },
 });
 
-router.beforeEach((to, from, next) => { // 記得加第三個參數 next
-  //console.log(to);   // 連到目前的網址的物件資料
-  //console.log(from); // 從哪個網址連過來的物件資料
+// 路由守卫，检查需要认证的路由
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const token = sessionStorage.getItem('token')
 
-  if (to.meta.requiredLogin) {
-
-    // ======= 以下要取得使用者目前的登入狀態，會是 bool == //
-    // 取得是否已登入，可能是從 localStorage 抓資料或從後端判斷。
-    let isAuthenticated = true;
-    // ============================================== //
-
-    if (isAuthenticated) {
-      document.title = to.meta.title;
-      next();
-    } else { // 未登入，就直接導回到首頁或其它頁面。
-      next("/");
-    }
+  if (requiresAuth && !token) {
+    next({ path: '/login', query: { redirect: to.fullPath } })
   } else {
-    document.title = to.meta.title;
-    next();
+    next()
   }
+})
 
-});
 
 // 匯出 router
 export default router;

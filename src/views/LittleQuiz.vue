@@ -290,16 +290,16 @@ export default {
 
           if (response.data.status === 'success') {
             this.discountCode = response.data.discountCode;
-            Swal.fire({
-              icon: 'success',
-              title: `您的折扣碼是: ${response.data.discountCode}`,
-              timer: 2500,
-              showConfirmButton: false,
-              backdrop: false,
-              willOpen: () => {
-                document.body.style.paddingRight = '0';
-              }
-            });
+            // Swal.fire({
+            //   icon: 'success',
+            //   title: `您的折扣碼是: ${response.data.discountCode}`,
+            //   timer: 2500,
+            //   showConfirmButton: false,
+            //   backdrop: false,
+            //   willOpen: () => {
+            //     document.body.style.paddingRight = '0';
+            //   }
+            // });
             console.log('即將跳轉到 /LittleQuizResult');
             // 跳轉到結果頁面
               this.$router.push('/LittleQuizResult');
