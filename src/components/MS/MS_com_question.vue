@@ -5,12 +5,13 @@
         v-for="(emoji, index) in emojis" 
         :key="index" 
         class="carousel__item"
+        draggable="false"
         :style="{ animationDelay: `calc(${animationDelayFraction} * ${index})` }"
       >
-        <div class="carousel__item-head">
+        <div class="carousel__item-head" draggable="false">
           <font-awesome-icon :icon="emoji[0].split(' ')" />
         </div>
-        <div class="carousel__item-body">
+        <div class="carousel__item-body" draggable="false">
           <p class="title">{{ emoji[1] }}</p>
           <p class="text">{{ emoji[2] }}</p>
         </div>
@@ -112,6 +113,11 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 50px;
+  user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
 }
 
 .carousel__item-body {
@@ -124,6 +130,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
 
 }
 

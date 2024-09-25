@@ -1,4 +1,5 @@
 <template>
+    <SFHeader_0 :mode="currentMode"></SFHeader_0>
     <div class="indexTop" >
         <div class="Star Star1"></div>
         <div class="Star Star2"></div>
@@ -114,7 +115,7 @@
 
         </div>
         <div class="top4">
-            <div class="top5" >
+            <div class="top5" id="first">
                 <img id="road" src="../../assets/images/ms/road_image.png" alt="">
                 <img id="bookImg" src="../../assets/images/ms/IMG_0141.png" alt="">
                 <img id="girls" class="ListeneMe girls" src="../../assets/images/ms/intro_1_girls.png" alt="">
@@ -127,36 +128,35 @@
                 <img id="myGirl" class="ListeneMe myGirl" src="../../assets/images/ms/myGirl.png" alt="">
             </div>
             <div class="top05">
-                <!-- <img id="bgi2" src="../../assets/images/ms/ms_bgi2.png" alt=""> -->
             </div>
             <div class="bg2">
                 <div class="top05"></div>
-                <div class="top1 ABOUT">
+                <div class="top1 ABOUT" id="second">
 
                     <MS_com_title mode="three"
-                    mainTitle="關於活動" 
-                    subTitle="ABOUT"
+                    mainTitle="體驗內容" 
+                    subTitle="What's Special?"
                     />
                     <div class="specials">
-                        <div class="theSpecial">
+                        <div class="theSpecial theSpecial1 ListeneMe">
                             <div class="spBorder">
                                 <img class="sp" src="../../assets/images/ms/sp1.png" alt="">
                             </div>
                         <h3>TibaMe<br>光影尖端科技</h3> 
                         </div>
-                        <div class="theSpecial">
+                        <div class="theSpecial theSpecial2 ListeneMe">
                             <div class="spBorder">
                                 <img class="sp" src="../../assets/images/ms/sp2.png" alt="">
                             </div>
                             <h3>DoMeDo<br>專屬合作繪本</h3> 
                         </div>
-                        <div class="theSpecial">
+                        <div class="theSpecial theSpecial3 ListeneMe">
                             <div class="spBorder">
                                 <img class="sp" src="../../assets/images/ms/sp3.png" alt="">
                             </div>
                         <h3>Lazy Dessert<br>聯名甜品</h3> 
                         </div>
-                        <div class="theSpecial">
+                        <div class="theSpecial theSpecial4 ListeneMe">
                             <div class="spBorder">
                                 <img class="sp" src="../../assets/images/ms/sp4.png" alt="">
                             </div>
@@ -164,92 +164,196 @@
                         </div>
                     </div>
                 </div>
-                <div class="top1 ABOUT bg2">
+                <div class="top1 ABOUT bg2" id="third">
                     <MS_com_title mode="three"
                     mainTitle="故事介紹" 
                     subTitle="STORYS"
                     />
-                    <div class="books">
-                    </div>
+                    <MS_com_caro/>
                     <img id="foxChan" src="../../assets/images/ms/whatDoesTheFoxSay.png" alt="">
                 </div>
             </div>
-            <div class="top05">
-                <img id="bgi3" src="../../assets/images/ms/ms_bgi3.png" alt="">
-            </div>
-            <div class="top1 ABOUT">
-                <MS_com_title mode="three"
-                mainTitle="周邊商品" 
-                subTitle="PERIPHERAL GOODS"
-                />
-                <MS_com_marquee/>
-            </div> 
-            <div class="top1 ABOUT">
-                <MS_com_title mode="three"
+            <div class="bg3">
+                <div class="top1 ABOUT" id="four">
+                    <div class="top05"></div>
+                    <MS_com_title mode="three"
+                    mainTitle="周邊商品" 
+                    subTitle="PERIPHERAL GOODS"
+                    />
+                    <MS_com_marquee/>
+                </div> 
+                <div class="top1 ABOUT"  id="five">
+                    <MS_com_title mode="three"
                     mainTitle="聯絡我們" 
                     subTitle="CONTACT"
                     />
                     <MS_com_question/>
-            </div> 
-            <div class="top1 ABOUT">
-                <MS_com_title mode="three"
-                mainTitle="合作夥伴" 
-                subTitle="OUR PARTNER"
-                />
-                <MS_com_parnter/>
-            </div> 
-            <div class="top1 ABOUT">
-                <div class="top4 ducksss">
-                    <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
-                    <img class="duckLaiYi" :src="cuteDuckWalking2" alt="">
-                    <img class="duckLaiYi" :src="cuteDuckWalking3" alt="">
-                    <img class="duckLaiYi" :src="cuteDuckWalking4" alt="">
+                </div> 
+                <div class="top1 ABOUT"  id="six">
+                    <MS_com_title mode="three"
+                    mainTitle="合作夥伴" 
+                    subTitle="OUR PARTNER"
+                    />
+                    <MS_com_parnter/>
+                </div> 
+                <div class="top1 ABOUT" id="seven">
+                    <div class="top4 ducksss">
+                        <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
+                        <img class="duckLaiYi" :src="cuteDuckWalking2" alt="">
+                        <img class="duckLaiYi" :src="cuteDuckWalking3" alt="">
+                        <img class="duckLaiYi" :src="cuteDuckWalking4" alt="">
+                    </div>
+                    <Footer/>
                 </div>
-                <Footer/>
             </div>
         </div>
     </div>
+    <div class="Anchors">
+        <div 
+            class="Anchors-Options" 
+            v-for="(option, index) in options" 
+            :key="index"
+            @click="scrollToSection(ids[index])"
+            >
+            <div class="Anchors-Options-Ball">
+                <font-awesome-icon :icon="['fas', 'tree']" />
+            </div>
+            <div class="Anchors-Options-Appellation" >
+                {{ option }}
+            </div>
+        </div>
+    </div>
+    <div class="AnchorsTree original">
+        <font-awesome-icon :icon="['fas', 'tree']" />
+    </div>
+    
 </template>
 
 <script setup>
     import MS_com_title     from '@/components/MS/MS_com_title.vue';
+    import SFHeader_0 from '@/components/SFHeader_0.vue';
     import MS_com_question   from '@/components/MS/MS_com_question.vue';
     import MS_com_parnter   from '@/components/MS/MS_com_parnter.vue';
     import Footer   from '@/components/Footer_03.vue';
     import MS_com_marquee   from '@/components/MS/MS_com_marquee.vue';
+    import MS_com_caro   from '@/components/MS/MS_com_caro.vue';
     import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+    import { faTree } from '@fortawesome/free-solid-svg-icons'
+    import { library } from '@fortawesome/fontawesome-svg-core'
+
+    const currentMode = ref('four');
+    library.add(faTree)
 
     const frameIndex = ref(1);
-    const totalFrames1 = 6; // 假设您的动画有10帧
+    const totalFrames1 = 6;
+    let intervalId = null;
     const cuteDuckWalking = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
     const cuteDuckWalking2 = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
     const cuteDuckWalking3 = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
     const cuteDuckWalking4 = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
-    const body = document.querySelector('body');
+    let style = null;
 
-    let intervalId;
+    const options = [
+    "活動介紹",
+    "體驗內容",
+    "故事介紹",
+    "周邊商品",
+    "聯絡我們",
+    "合作夥伴",
+    "常見問題"
+    ];
 
-    let style;
+    // 定義對應的 ID
+    const ids = ref([
+    'first',
+    'second',
+    'third',
+    'four',
+    'five',
+    'six',
+    'seven'
+    ]);
 
-        onMounted(() => {
-        // 創建樣式
-        window.scrollTo(0, 0);
-        style = document.createElement('style');
-        style.innerHTML = `
-            body::-webkit-scrollbar {
-            display: none;
+    // 滾動到對應的 section
+    const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+        section.scrollIntoView({ behavior: 'auto' });
+    }
+};
+
+    onMounted(() => {
+    // 頁面加載後隱藏滾動條並初始化動畫
+    window.scrollTo(0, 0);
+    style = document.createElement('style');
+    style.innerHTML = `body::-webkit-scrollbar { display: none; }`;
+    document.head.appendChild(style);
+    startWalkingAnimation();
+    
+    window.addEventListener('load', () => {
+    const indexTop = document.querySelector('.indexTop');
+    if (indexTop) {
+        indexTop.style.overflowY = 'hidden';
+    }
+    });
+
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const AnchorsOptions = document.querySelectorAll('.Anchors-Options');
+        const AnchorsTree = document.querySelector('.AnchorsTree');
+        let treeOpen = false;
+
+        // 監聽點擊事件以展開或收起選單
+        AnchorsTree.addEventListener('click', (event) => {
+            event.stopPropagation(); // 防止點擊事件冒泡到 document
+            if (treeOpen) {
+                // 展開的狀態，收起選單
+                AnchorsTree.classList.remove('closed');
+                AnchorsTree.classList.add('Opened');
+                AnchorsOptions.forEach(option => {
+                    option.classList.remove('TreeMove');
+                    option.classList.add('TreeGoBack');
+                });
+                treeOpen = false; // 更新標記狀態
+            } else {
+                // 收起的狀態，展開選單
+                AnchorsTree.classList.remove('Opened');
+                AnchorsTree.classList.add('closed');
+                AnchorsOptions.forEach(option => {
+                    option.classList.remove('TreeGoBack');
+                    option.classList.add('TreeMove');
+                });
+                treeOpen = true; // 更新標記狀態
             }
-
-        `;
-        document.head.appendChild(style);
         });
 
-        onBeforeUnmount(() => {
-        // 組件卸載時移除樣式，避免影響其他地方
-        if (style && document.head.contains(style)) {
-            document.head.removeChild(style);
-        }
+        // 點擊選單外部時收起選單
+        document.addEventListener('click', (event) => {
+            // 如果選單是展開狀態，且點擊不在 AnchorsTree 或 Anchors-Options 內部
+            if (treeOpen && !AnchorsTree.contains(event.target) && !event.target.closest('.Anchors-Options')) {
+                AnchorsTree.classList.remove('closed');
+                AnchorsTree.classList.add('Opened');
+                AnchorsOptions.forEach(option => {
+                    option.classList.remove('TreeMove');
+                    option.classList.add('TreeGoBack');
+                });
+                treeOpen = false; // 更新標記狀態
+            }
         });
+    });
+
+
+
+    });
+
+    onBeforeUnmount(() => {
+    // 組件卸載時清理資源
+    if (style && document.head.contains(style)) {
+        document.head.removeChild(style);
+    }
+    clearInterval(intervalId);
+    });
 
     const startWalkingAnimation = () => {
     intervalId = setInterval(() => {
@@ -264,137 +368,6 @@
     }, 120);
     };
 
-    onMounted(() => {
-    startWalkingAnimation();
-    window.addEventListener('load', () => {
-    const indexTop = document.querySelector('.indexTop')
-    indexTop.style.overflowY = 'hidden' 
-    setTimeout(() => {window.scrollTo(0, 0);}, 0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 0.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 1.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 2.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 3.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 4.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 5.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 6.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 7.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 8.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 9.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 10.9)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.0)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.1)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.2)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.3)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.4)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.5)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.6)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.7)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.8)
-    setTimeout(() => {window.scrollTo(0, 0);}, 11.9)
-    });
-    });
-
-    onBeforeUnmount(() => {
-    clearInterval(intervalId);
-    });
 
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -408,6 +381,7 @@
                 entry.target.classList.remove('visible');
             }
         });
+
     });
 
     ListeneMes.forEach(ListeneMe => {
@@ -420,7 +394,7 @@
     const indexTop = document.querySelector(".indexTop");
     if (indexTop) {
         let screenHeight = window.innerHeight;
-        indexTop.style.height = `calc(${830 * 19.50}px - (${(830 - screenHeight) * 19.60}px))`;
+        indexTop.style.height = `calc(${830 * 18.80}px - (${(830 - screenHeight) * 19.60}px))`;
     } else {
         console.error("Element with class 'indexTop' not found");
     }
@@ -517,6 +491,7 @@
     const page2 = document.querySelector('.page2');
     const page1 = document.querySelector('.page1');
     const front = document.querySelector('.front');
+    const header = document.querySelector('.header-four');
 
 
     // 控制 yinyin 元素顯示/隱藏
@@ -591,9 +566,18 @@
         front.style.transform = `rotateY(-180deg)`;
         page1.style.transform = `rotateY(-180deg)`;
         page2.style.transform = `rotateY(-180deg)`;
+        header.style.display='none'
+
     } else if (scroll >= (3787 - (830 - screenHeight) * 3) && scroll < (4700- (830 - screenHeight) * 3)){
+
+        // 計算進度
         let progress2 = (scroll - (3787 - (830 - screenHeight) * 3)) / 913;
-        book.style.opacity = `${1 - progress2}`;
+
+        // 控制 header 的 translateY
+        header.style.transform = `translateY(${(-100 + progress2 * 100)}%)`;
+        header.style.display='flex'
+        // 控制 book 的 opacity
+        book.style.opacity = `${1 - progress2}`
     } else if (scroll > (4700 - (830 - screenHeight) * 3)) {
         let lightBallScroll = scroll - (4700 - (830 - screenHeight) * 3)
         lightBalls[0].style.top = `calc(830vh - ${lightBallScroll / 1}px)`;
@@ -651,11 +635,14 @@
         book.style.opacity = `0`;
     }
 
+
+
     // 控制 top3 元素的特殊效果
     if (scroll > (3000 - (830 - screenHeight) * 3)) {
         top3.forEach(el => el.classList.add('special'));
         const indexTop = document.querySelector('.indexTop')
         indexTop.style.background = 'none';
+
 
         
     } else {
@@ -673,10 +660,13 @@
     }
 });
 
+    if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
 
-
-    
-
+    onMounted(() => {
+    window.scrollTo(0, 0);
+    });
 </script>
 
 <style lang="scss" scoped>
@@ -718,6 +708,7 @@
         position: relative;
         width: 100vw;
         height: 50vh; 
+        pointer-events: none
     }
 
     .topSpeical{
@@ -739,14 +730,17 @@
         left: calc(50vw - 20vw);
         transition: opacity 0.5s ease-out, filter 0.5s ease-out; /* 添加过渡效果 */
         opacity: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .IntroText.visible {
         animation: blurIn 0.5s ease-out;
         opacity: 1; /* 动画完成后，保持可见状态 */
     }
-
-
 
     @keyframes blurIn {
         0% {
@@ -779,6 +773,11 @@
         width: 132px;
         left: calc(50% - (132px / 2) - 3px);
         top: 57px;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     @keyframes slightRotateBody {
@@ -797,6 +796,11 @@
         animation: slightRotateHead 2s infinite;
         width: 162px;
         left: calc(50% - (162px / 2));
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     @keyframes slightRotateHead {
@@ -816,6 +820,11 @@
         width: 192px;
         top: 5px;
         left: calc(50% - (162px / 2) - 41px);
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     @keyframes slightRotateRightHand {
@@ -835,6 +844,11 @@
         top: 40px;
         left: calc(50% - (245px / 2) - 45px );
         width: 245px;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     @keyframes slightRotateRightFoot {
@@ -854,6 +868,11 @@
         left: calc(50% - (263px / 2) - 10px);
         top: 20px;
         width: 263px;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     @keyframes slightRotateLeftFoot {
@@ -873,6 +892,11 @@
         width: 192px;
         top: 5px;
         left: calc(50% - (162px / 2) + 6px);
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     @keyframes slightRotateLeftHand {
@@ -892,6 +916,11 @@
         width: 388px;
         top: 50px;
         left: calc(50% - (388px / 2) + 50px);
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     @keyframes BookFlying {
@@ -915,12 +944,24 @@
 
     .TEXT{
         width: 70vw;
-        animation: StarY1 2s infinite
+        animation: StarY1 2s infinite;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
 
-    .TextStar{position: absolute;width:3vw;
+    .TextStar{
+        position: absolute;
+        width:3vw;
         filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.7));
+                user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .TextStar1{left:-3vw;bottom:-6vh;   animation: StarY1 2s infinite ,glow 2s infinite;}
@@ -957,6 +998,11 @@
         display: flex;
         background: url('../../assets/images/ms/MyPrince/star99.png') transparent center / contain no-repeat;
         filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.7));
+                user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
        
     .Star1{width: 5vw;height: 5vw;top:82vh;left : 11vw;animation: StarY1 2s infinite,glow 2s infinite; }
@@ -989,7 +1035,14 @@
             filter: drop-shadow(0 0 5px rgb(255, 255, 255, 0.5));
         }
     }
-    .Cloud{position: absolute;}
+    .Cloud{
+        position: absolute;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+    }
     .Cloud1{width: 25vw;left : 0vw;top:  0vh;animation: Cloud1 3s infinite;}
     .Cloud2{width: 15vw;left :15vw;top: 70vh;animation: Cloud2 2s infinite;}
     .Cloud3{width: 18vw;right:15vw;top: 75vh;animation: Cloud1 1s infinite;}
@@ -1020,7 +1073,15 @@
         }
     }
 
-     .yinyin{position: absolute;}
+     .yinyin{
+        position: absolute;        
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+    }
+
     .yinyin1{width:  8vw;top:140vh; left :  11vw;transform:rotate(-30deg)}
     .yinyin2{width:  6vw;top:115vh;right :   3vw;transform:rotate(-40deg)}
     .yinyin3{width: 22vw;top:125vh;right :  14vw;transform:rotate(-25deg)}
@@ -1072,6 +1133,11 @@
         transition: .2s;
         z-index: 999;
         animation: glowWhite 2s infinite;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .moveLikeJagger{
@@ -1131,6 +1197,12 @@
         top:4%;
         z-index: 10;
         left: 15%;
+        opacity: 0;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
     .girls.visible {
         animation: blurIn1 1s ease-out;
@@ -1157,6 +1229,11 @@
         left: -5%;
         z-index: 10;
         overflow: visible;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     #bookImg{
@@ -1165,6 +1242,11 @@
         top:0%;
         z-index: 10;
         right: 15%;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
 
     }
 
@@ -1173,7 +1255,13 @@
         position: absolute;
         z-index: 10;
         top:12% ;
+        opacity: 0;
         right: 15% ;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .text.visible {
@@ -1199,7 +1287,13 @@
         position: absolute;
         top: 35%;
         z-index: 10;
+        opacity: 0;
         left: 15% ;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .text2.visible {
@@ -1212,7 +1306,13 @@
         position: absolute;
         top: 30%;
         right: 10%;
+        opacity: 0;
         z-index: 10;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .bear.visible {
@@ -1238,7 +1338,13 @@
         position: absolute;
         top: 52%;
         z-index: 10;
-        left: 0;
+        opacity: 0;
+        left: 0;        
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .rihno.visible {
@@ -1252,7 +1358,13 @@
         position: absolute;
         top: 57% ;
         z-index: 10;
+        opacity: 0;
         right: 15% ;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .text3.visible {
@@ -1265,7 +1377,13 @@
         position: absolute;
         top:83% ;
         z-index: 10;
+        opacity: 0;
         right: 15% ;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .myGirl.visible {
@@ -1278,18 +1396,30 @@
         position: absolute;
         top:86% ;
         z-index: 10;
+        opacity: 0;
         left: 15% ;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .text4.visible {
         animation: blurIn2 1s ease-out;
         opacity: 1; /* 动画完成后，保持可见状态 */
+        
     }
 
     .lightBall{
         position: absolute;
         z-index: 3;
         animation: bookMove 2s infinite , glow 2s infinite;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .lightBall1  {width: 3vw  ; left:  5vw; top:  830vh;}
@@ -1349,8 +1479,79 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        opacity: 0
     }
 
+    .theSpecial.theSpecial1.visible {
+        animation: blurIn5-1 1s ease-out;
+        opacity: 1; /* 动画完成后，保持可见状态 */
+    }
+    .theSpecial.theSpecial2.visible {
+        animation: blurIn5-2 1s ease-out;
+        opacity: 1; /* 动画完成后，保持可见状态 */
+    }
+    .theSpecial.theSpecial3.visible {
+        animation: blurIn5-3 1s ease-out;
+        opacity: 1; /* 动画完成后，保持可见状态 */
+    }
+    .theSpecial.theSpecial4.visible {
+        animation: blurIn5-4 1s ease-out;
+        opacity: 1; /* 动画完成后，保持可见状态 */
+    }
+
+    @keyframes blurIn5-1 {
+        0% {
+            transform: translateY(-40%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+    @keyframes blurIn5-2 {
+        0% {
+            transform: translateY(-40%);
+            opacity: 0;
+        }
+        20% {
+            transform: translateY(-40%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+    @keyframes blurIn5-3 {
+        0% {
+            transform: translateY(-40%);
+            opacity: 0;
+        }
+        40% {
+            transform: translateY(-40%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+    @keyframes blurIn5-4 {
+        0% {
+            transform: translateY(-40%);
+            opacity: 0;
+        }
+        60% {
+            transform: translateY(-40%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+//----------------------------------------------------------------------------------
     .specials{
         display: flex;
         flex-direction: row;
@@ -1359,8 +1560,15 @@
         margin: 0 auto;
     }
 
+    
+
     .sp{
         width: 10vw;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .spBorder{
@@ -1393,7 +1601,12 @@
         width: 30vw;
         bottom: 5vh;
         left: 1%;
-        z-index: 2;
+        z-index: 3;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     #bgi3{
@@ -1407,7 +1620,11 @@
         margin: 0 auto;
         z-index: 2;
         transition: transform 2s ease;
-
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
     }
 
     .ducksss{
@@ -1429,6 +1646,390 @@
         background-size: cover;
         // background-position: ;
         // background-position: 0 -100%;
+    }
+
+    .bg3{
+        background-size: cover;
+        background-image: url('../../assets/images/ms/ms_bgi3.png');
+        margin-top: -30vh;
+        z-index: 2;
+    }
+
+    .Anchors{
+        // background: #000;
+        top: 0;
+        right: 0;
+        z-index: 3;
+        position: fixed;
+        font-weight: bold;
+        display: flex;
+        justify-content: right;
+        flex-direction: column;
+        font-family: 'Noto Sans TC';
+        align-items: center;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+        // width: 100vw;
+        // height: 100vh;
+        gap: 20px;
+
+        //錨點 按鈕
+        &-Options {
+            
+            cursor:pointer;
+            padding: 5px 10px;
+            // background-color: red;
+            position: absolute;
+            top: 54.5vh;
+            right: -78.5px;
+            transition: transform 0.3s ease-out;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+
+            //錨點按鈕的icon
+            &-Ball {
+                // background-color: red;
+                font-size: 16px;
+                color: green;
+                transition: all 0.3s ease;
+                padding-right: 20px;
+                // color: #AFDD53;
+            }
+
+            //錨點按鈕的文字
+            &-Appellation {
+                text-align: center;
+                width: 70px;
+                font-size: 16px;
+                // color: #AD8662;
+                color: #855F49;
+                transition: all 0.3s ease;
+
+            }
+
+
+        }
+
+        &-Options:hover .Anchors-Options-Ball{
+                color: #c24b0c;
+                padding-right: 10px;
+
+        }
+        &-Options:hover .Anchors-Options-Appellation{
+                width: 100px;
+                color: #c24b0c;
+                padding-right: 10px;
+
+        }
+    }
+    //錨點 樹icon
+    .AnchorsTree{
+        // background-color: yellow;
+        padding: 10px;
+    font-size: 20px;
+    position: fixed;
+    right: 0;
+    top: calc(55vh - 10px);
+    padding-right: 20px;
+    z-index: 10;
+    cursor: pointer;
+    
+    }
+
+    .TreeMove{
+    }
+
+    .TreeMove:nth-child(1){
+        animation: TreeMove-1 1s ease;
+        transform: translateX(-100px) translateY(-450%);
+    }
+    .TreeMove:nth-child(2){
+        animation: TreeMove-2 1s ease;
+        transform: translateX(-100px) translateY(-300%);
+    }
+    .TreeMove:nth-child(3){
+        animation: TreeMove-3 1s ease;
+        transform: translateX(-100px) translateY(-150%);
+    }
+    .TreeMove:nth-child(4){
+        animation: TreeMove-4 1s ease;
+        transform: translateX(-100px) translateY(0%);
+    }
+    .TreeMove:nth-child(5){
+        animation: TreeMove-5 1s ease;
+        transform: translateX(-100px) translateY(150%);
+    }
+    .TreeMove:nth-child(6){
+        animation: TreeMove-6 1s ease;
+        transform: translateX(-100px) translateY(300%);
+    }
+    .TreeMove:nth-child(7){
+        animation: TreeMove-7 1s ease;
+        transform: translateX(-100px) translateY(450%);
+    }
+    .TreeMove:nth-child(8){
+        animation: TreeMove-8 1s ease;
+        transform: translateX(-100px) translateY(600%);
+    }
+    @keyframes TreeMove-1 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(-450%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(-450%);
+        }
+    }
+    @keyframes TreeMove-2 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(-300%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(-300%);
+        }
+    }
+    @keyframes TreeMove-3 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(-150%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(-150%);
+        }
+    }
+    @keyframes TreeMove-4 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(0%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(0%);
+        }
+    }
+    @keyframes TreeMove-5 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(150%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(150%);
+        }
+    }
+    @keyframes TreeMove-6 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(300%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(300%);
+        }
+    }
+    @keyframes TreeMove-7 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(450%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(450%);
+        }
+    }
+    @keyframes TreeMove-8 {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(600%);
+        }
+        100% {
+            transform: translateX(-100px) translateY(600%);
+        }
+    }
+
+    // TreeGoBack
+    
+    .TreeGoBack:nth-child(1){
+        animation: TreeGoBack-1 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    .TreeGoBack:nth-child(2){
+        animation: TreeGoBack-2 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    .TreeGoBack:nth-child(3){
+        animation: TreeGoBack-3 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    .TreeGoBack:nth-child(4){
+        animation: TreeGoBack-4 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    .TreeGoBack:nth-child(5){
+        animation: TreeGoBack-5 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    .TreeGoBack:nth-child(6){
+        animation: TreeGoBack-6 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    .TreeGoBack:nth-child(7){
+        animation: TreeGoBack-7 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    .TreeGoBack:nth-child(8){
+        animation: TreeGoBack-8 1s ease;
+        transform: translateX(0%) translateY(0%);
+    }
+    @keyframes TreeGoBack-1 {
+        0% {
+            transform: translateX(-100px) translateY(-450%);
+        }
+        40%{
+            transform: translateX(0%) translateY(-450%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    @keyframes TreeGoBack-2 {
+        0% {
+            transform: translateX(-100px) translateY(-300%);
+        }
+        40%{
+            transform: translateX(0%) translateY(-300%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    @keyframes TreeGoBack-3 {
+        0% {
+            transform: translateX(-100px) translateY(-150%);
+        }
+        40%{
+            transform: translateX(0%) translateY(-150%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    @keyframes TreeGoBack-4 {
+        0% {
+            transform: translateX(-100px) translateY(0%);
+        }
+        40%{
+            transform: translateX(0%) translateY(0%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    @keyframes TreeGoBack-5 {
+        0% {
+            transform: translateX(-100px) translateY(150%);
+        }
+        40%{
+            transform: translateX(0%) translateY(150%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    @keyframes TreeGoBack-6 {
+        0% {
+            transform: translateX(-100px) translateY(300%);
+        }
+        40%{
+            transform: translateX(0%) translateY(300%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    @keyframes TreeGoBack-7 {
+        0% {
+            transform: translateX(-100px) translateY(450%);
+        }
+        40%{
+            transform: translateX(0%) translateY(450%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    @keyframes TreeGoBack-8 {
+        0% {
+            transform: translateX(-100px) translateY(600%);
+        }
+        40%{
+            transform: translateX(0%) translateY(600%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+
+    .original{
+        display: block;
+        color: green;
+    }
+    .original:hover{
+        color: #c24b0c;
+
+    }
+    .closed{
+        display: none;
+    }
+
+    .Opened{
+        color: green;
+        display: block;
+        animation: OpenedShow 1.5s ease;
+
+    }
+    .Opened:hover{
+        color: #c24b0c;
+
+    }
+    @keyframes OpenedShow {
+        0% {
+            opacity: 0;
+        }
+        40%{
+            opacity: 0;
+        }
+        60%{
+            opacity: 1;
+        }
+        100% {
+            opacity: 1;
+
+        }
+    }
+    .hamburger {
+        // font-size: 24px;
+    }
+    .header-four {
+        display: none;
+        // height: 60px;
     }
 
 </style>

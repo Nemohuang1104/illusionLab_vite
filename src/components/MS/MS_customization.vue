@@ -98,36 +98,36 @@
                 </div>
                 <div class="theChosenArea">
                     <div v-if="selectedArea === 'ticket_bgs'" class="ticket_bgs selector">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_2.png','../src/ms/ticket_barcode_2.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_3.png','../src/ms/ticket_barcode_3.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#96A166','#58838E','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/ms/real_sticker_4.png','../src/ms/ticket_barcode_4.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/ms/real_sticker_5.png','../src/ms/ticket_barcode_5.png')">
-                        <!-- <img class="ticket_bg" src="../../ms/ticket_bg_style_6.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#','#','#','#','#','#')"> -->
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_1.png','../src/assets/images/ms/ticket_barcode_1.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_2.png','../src/assets/images/ms/ticket_barcode_2.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_3.png','../src/assets/images/ms/ticket_barcode_3.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#96A166','#58838E','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/assets/images/ms/real_sticker_4.png','../src/assets/images/ms/ticket_barcode_4.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/assets/images/ms/real_sticker_5.png','../src/assets/images/ms/ticket_barcode_5.png')">
+                        <!-- <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_6.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#','#','#','#','#','#')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_colors'" class="ticket_colors selector" >
-                        <img class="ticket_color" src="../../ms/ticket_colors_1.png" alt="" @click="changeColors('#FB9D3C','#AD8662','#FDC274')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_2.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_3.png" alt="" @click="changeColors('#FFE382','#875E47','#FD6F6C')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_4.png" alt="" @click="changeColors('#FFFFFF','#778585','#4A657F')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_5.png" alt="" @click="changeColors('#FFFFFF','#FFF3C6','#DFDFDF')">
-                        <!-- <img class="ticket_color" src="../../ms/ticket_colors_6.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')"> -->
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_1.png" alt="" @click="changeColors('#FB9D3C','#AD8662','#FDC274')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_2.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_3.png" alt="" @click="changeColors('#FFE382','#875E47','#FD6F6C')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_4.png" alt="" @click="changeColors('#FFFFFF','#778585','#4A657F')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_5.png" alt="" @click="changeColors('#FFFFFF','#FFF3C6','#DFDFDF')">
+                        <!-- <img class="ticket_color" src="../../assets/images/ms/ticket_colors_6.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_stickers'" class="ticket_stickers selector">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_1.png" alt="" @click="changeColors('../src/ms/ticket_stickers_1.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_2.png" alt="" @click="changeColors('../src/ms/ticket_stickers_2.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_3.png" alt="" @click="changeColors('../src/ms/ticket_stickers_3.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_4.png" alt="" @click="changeColors('../src/ms/ticket_stickers_4.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_5.png" alt="" @click="changeColors('../src/ms/ticket_stickers_5.png')">
-                        <!-- <img class="ticket_sticker" src="../../ms/ticket_stickers_6.png" alt="" @click="changeColors('../src/ms/ticket_stickers_6.png')"> -->
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_1.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_1.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_2.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_2.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_3.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_3.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_4.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_4.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_5.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_5.png')">
+                        <!-- <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_6.png')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_morebangs'" class="ticket_morebangs selector">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/ms/ticket_stickers_1.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_2.png','../src/ms/ticket_barcode_2.png','#FB9D3C','#875E47','#FFFAEF','../src/ms/ticket_stickers_2.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_3.png','../src/ms/ticket_barcode_3.png','#FFE382','#875E47','#FD6F6C','../src/ms/ticket_stickers_3.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#96A166','#58838E','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/ms/real_sticker_4.png','../src/ms/ticket_barcode_4.png','#FFFFFF','#778585','#4A657F','../src/ms/ticket_stickers_4.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/ms/real_sticker_5.png','../src/ms/ticket_barcode_5.png','#FFFFFF','#FFF3C6','#DFDFDF','../src/ms/ticket_stickers_5.png')">
-                        <!-- <img class="ticket_morebang" src="../../ms/ticket_morebang_6.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/ms/ticket_stickers_6.png')"> -->
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_1.png','../src/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/assets/images/ms/ticket_stickers_1.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_2.png','../src/assets/images/ms/ticket_barcode_2.png','#FB9D3C','#875E47','#FFFAEF','../src/assets/images/ms/ticket_stickers_2.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_3.png','../src/assets/images/ms/ticket_barcode_3.png','#FFE382','#875E47','#FD6F6C','../src/assets/images/ms/ticket_stickers_3.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#96A166','#58838E','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/assets/images/ms/real_sticker_4.png','../src/assets/images/ms/ticket_barcode_4.png','#FFFFFF','#778585','#4A657F','../src/assets/images/ms/ticket_stickers_4.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/assets/images/ms/real_sticker_5.png','../src/assets/images/ms/ticket_barcode_5.png','#FFFFFF','#FFF3C6','#DFDFDF','../src/assets/images/ms/ticket_stickers_5.png')">
+                        <!-- <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_6.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_1.png','../src/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/assets/images/ms/ticket_stickers_6.png')"> -->
                     </div>
                 </div>
             </div>
@@ -162,9 +162,9 @@ export default {
       RSTTColor: '#FFE382',
       RSTMColor: '#F9F0DB',
       SColor:'#F9F0DB',
-      realStickerRoad:'../src/ms/real_sticker_1.png',
-      bigStickerRoad:'../src/ms/ticket_stickers_1.png',
-      barcode:'../src/ms/ticket_barcode_1.png',
+      realStickerRoad:'../src/assets/images/ms/real_sticker_1.png',
+      bigStickerRoad:'../src/assets/images/ms/ticket_stickers_1.png',
+      barcode:'../src/assets/images/ms/ticket_barcode_1.png',
       gradientCounter: 0  ,
       isChoosenHidden: false,
       IwantToChoose:false,
@@ -306,15 +306,15 @@ export default {
     }
 
     onMounted(() => {
-    loadPathData('./src/ms/SVG_text/svg_custom1.txt', pathData1)
-    loadPathData('./src/ms/SVG_text/svg_custom2.txt', pathData2)
-    loadPathData('./src/ms/SVG_text/svg_custom3.txt', pathData3)
-    loadPathData('./src/ms/SVG_text/pathDataText1.txt', pathDataText1)
-    loadPathData('./src/ms/SVG_text/pathDataText2.txt', pathDataText2)
-    loadPathData('./src/ms/SVG_text/pathDataText3.txt', pathDataText3)
-    loadPathData('./src/ms/SVG_text/pathDataText4.txt', pathDataText4)
-    loadPathData('./src/ms/SVG_text/pathDataText5.txt', pathDataText5)
-    loadPathData('./src/ms/SVG_text/pathDataText6.txt', pathDataText6)
+    loadPathData('../src/assets/images/ms/SVG_text/svg_custom1.txt', pathData1)
+    loadPathData('../src/assets/images/ms/SVG_text/svg_custom2.txt', pathData2)
+    loadPathData('../src/assets/images/ms/SVG_text/svg_custom3.txt', pathData3)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText1.txt', pathDataText1)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText2.txt', pathDataText2)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText3.txt', pathDataText3)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText4.txt', pathDataText4)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText5.txt', pathDataText5)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText6.txt', pathDataText6)
     })
 
 </script>
@@ -322,7 +322,7 @@ export default {
 <style lang="scss" scoped>
   @import "../../assets/SASS/component/ms";
 .template{
-  background-image: url('../src/ms/modeBGI3.jpg');
+  background-image: url('../src/assets/images/ms/modeBGI3.jpg');
 
 }
 
@@ -512,6 +512,7 @@ export default {
     }
 
     .template{
+        height: 100vh;
         font-family:'Noto Sans TC';
         font-weight: bold;
         padding:100px 0px !important;
@@ -562,19 +563,19 @@ export default {
         }
         .finishMyTicket{
             position: relative;
-            margin-top: 50px;
+            margin-top: 30px;
         }
         .customization {
             flex-direction: column; 
         }
         .show{
-            top: 20%;
+            top: 12%;
             right: calc(50% - (455px /2));
         }
         .choosen{
             width: 70vw;
             margin-left: 0;
-            margin-top: 250px;
+            margin-top: 180px;
         }
         .ticket_sticker {
         width: 18vw;
@@ -590,7 +591,13 @@ export default {
         }
     }
     @media screen and (max-width:600px) {
-
+        .finishMyTicket{
+            position: relative;
+            margin-top: 5px;
+        }
+        .show{
+            top: 5%;
+        }
         .ticket{
             transform: scale(0.7);
         }
@@ -598,7 +605,7 @@ export default {
             width: 30vw
         }
         .choosen{
-            margin-top: 230px;
+            margin-top: 130px;
         }
         .sentMyTicket{
         margin-top: 150px;
