@@ -531,7 +531,7 @@ ul {
         margin: 3% auto;
         padding: 10px;
         color: #FFFFFF;
-
+    }
 .count,
 .discount-fee,
 .total-fee {
