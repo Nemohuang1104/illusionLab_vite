@@ -79,7 +79,53 @@ import { useRouter, useRoute } from 'vue-router';
       })
     };
 
-  
+  //===========================google=======================================
+  const handleGoogleLogin = async () => {
+      loginError.value = null;
+      const provider = new GoogleAuthProvider();
+
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // 取得使用者資料
+        const userName = user.displayName;
+        const userEmail = user.email;
+
+        // 登入成功後可將資料發送到後端 API
+        await sendUserDataToBackend(userEmail, userName);
+
+      } catch (error) {
+        loginError.value = "Google 登入失敗，請稍後再試。";
+        console.error("登入錯誤:", error);
+      }
+    };
+
+    // 發送使用者資料到後端 API
+    const sendUserDataToBackend = async (email, name) => {
+      try {
+        const response = await fetch("http://illusionlab.local/public/PDO/Login/GoogleLogin.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ mem_account: email, mem_name: name })
+        });
+
+        const result = await response.json();
+        console.log("後端回應:", result);
+
+        if (result.memInfo.mem_state === 0) {
+          loginError.value = "登入失敗，請聯繫客服人員。";
+        } else {
+          // 處理登入成功邏輯，例如保存 token 或跳轉
+          console.log("登入成功，重定向...");
+        }
+      } catch (error) {
+        console.error("後端 API 錯誤:", error);
+      }
+    };
+//================================================================================
     // 表单是否有效的计算属性
     // const isFormValid = computed(() => {
     //   return !emailError.value && !passwordError.value && email.value && password.value;

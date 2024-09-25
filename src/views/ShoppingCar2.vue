@@ -944,7 +944,6 @@ const highlight = ref({
 }
 
 .discount-fee>h3 {
-
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 25%;

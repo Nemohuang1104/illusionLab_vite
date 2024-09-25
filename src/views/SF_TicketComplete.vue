@@ -1,5 +1,4 @@
 <script setup>
-// import { ref } from 'vue';
 
 import SF_planetButton  from "@/components/SF_planetButton.vue";
 
@@ -198,19 +197,6 @@ const props = defineProps({
 }
 
 
-// @media screen and (max-width: 430px){
-  
-//   .envolope-outside{
-//     max-width: 50%;
-//   }
 
-//   .envelope-image.front{
-//     top: 17vw;
-//   }
-
-//   .finalTicket{
-//     max-width: 380px;
-//   }
-// }
   </style>
   

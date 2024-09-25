@@ -4,6 +4,8 @@ import { ref,computed } from 'vue';
 import StrellarFrontierTitle from '@/components/SFTitle.vue';  // 匯入漸層藍色標題樣式
 
 import SF_planetButton  from "@/components/SF_planetButton.vue";
+import html2canvas from 'html2canvas'; // 使用 html2canvas 來將票券轉成圖片
+
 
 // 頁首頁尾
 import SFHeader_0 from '@/components/Header_0.vue';
@@ -80,6 +82,37 @@ function completeTicket() {
     if (validateSelection()) {
         isComplete.value = true;
     }
+    window.scrollTo({
+    top: 0,  // 頁面的頂部
+    behavior: 'auto'  // 平滑滾動
+  });
+
+
+
+// 1. 使用 html2canvas 將票券區域轉換為圖片
+const ticketPreviewElement = document.querySelector('.ticket');
+
+  //=================依賴後端存取開始(圖片相對路徑)
+  html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+  canvas.toBlob(blob => {
+    const formData = new FormData();
+    formData.append('image', blob, 'SF_ticket.png');
+
+    fetch('http://illusionlab.local/public/PDO/TicketOrder/save_custom_ticket.php', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('圖片路徑儲存成功:', data);
+    })
+    .catch(error => {
+      console.error('圖片儲存失敗:', error);
+    });
+  }, 'image/png');
+});
+  //=================依賴後端存取結束(圖片相對路徑)
+
 }
 
 // 計算最終票券的屬性
@@ -110,8 +143,6 @@ function validateSelection() {
     }
     return true;
 }
-
-
 
 </script>
 

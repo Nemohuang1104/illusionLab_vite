@@ -320,10 +320,11 @@ const highlight = ref({
     border-radius: 50px;
     background: var(--Color-3, #FFEDBC);
     cursor: pointer;
-  
-
 }
 
+.confirm button:hover{
+    opacity: .9;
+}
 
 /* ==========RWD斷點============== */
 
