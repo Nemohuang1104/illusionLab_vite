@@ -13,6 +13,7 @@
 </template>
 
 <script setup>
+const secondPageUrl = import.meta.env.VITE_SECOND_PAGE_URL;
 //背景canvs
 import { onMounted, onBeforeUnmount } from 'vue';
 //myCanvas元素變亮 //ctx 2D 繪圖
@@ -152,7 +153,7 @@ setTimeout(function () {
     // document.getElementById("ufo").style.animation = "tixtGlitch 2s forwards";
     // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
     setTimeout(function () {
-        window.location.href = "/SF_Homepage";// 放置主页面URL
+        window.location.href = secondPageUrl;// 放置主页面URL
     }, 300); // 等待1秒淡出動畫结束
 }, 6400);// 1000毫秒 = 1秒
 

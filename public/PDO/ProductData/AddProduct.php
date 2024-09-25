@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imagePath = null;
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         // 定義圖片存放目錄
+        // $targetDir = $_SERVER["DOCUMENT_ROOT"] . "/public/PDO/FileUpload/";
         $targetDir = $_SERVER["DOCUMENT_ROOT"] . "/public/PDO/FileUpload/";
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true); // 若目錄不存在，則建立目錄
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 移動上傳的圖片檔案
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
             // 如果圖片上傳成功，將相對路徑保存到資料庫
+            // $imagePath = "/public/PDO/FileUpload/" . $fileName;
             $imagePath = "/public/PDO/FileUpload/" . $fileName;
         } else {
             echo json_encode(["status" => "error", "message" => "圖片上傳失敗"]);

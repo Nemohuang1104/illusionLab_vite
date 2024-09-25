@@ -64,8 +64,8 @@ import 'aos/dist/aos.css'
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 async function get_news() {
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/News/get_news.php'); // 替換成你實際的 API URL
-    // const response = await fetch('http://tibamef2e.com/tid102/g2/php/News/get_news.php'); // 替換成你實際的 API URL
+    // const response = await fetch('${import.meta.env.VITE_API_URL}/News/get_news.php'); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/News/get_news.php`); // 替換成你實際的 API URL
     const data = await response.json();
     cards.value = data;
   } catch (error) {

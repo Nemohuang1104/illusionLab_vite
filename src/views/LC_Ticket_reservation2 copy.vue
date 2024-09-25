@@ -6,30 +6,28 @@
       activityMode="activity1" 
       class="reservation"
       :eventId="currentEventId"
-        ref="formRef"
-       @formCompletionStatus="handleFormCompletion"
-      >
+      @update:formData="updateFormData"
+      @saveData="saveData">
         
       </MS_ticket_reservation>
       <MS_com_buttons
-        
+      @click="saveData"
+      :showNext="showNext"
+         @next="handleNextStep"
         class="actitvyBtn"
         :currentStep="currentStep"
-        :mode="mode" 
-        :activityMode="activityMode"
-        :disabled="!isFormComplete"
-        
-        @form-submitted="handleFormSubmit"
+        :mode="mode" :step="modeSelect" :activityMode="activityMode"
+        :isFormComplete="isFormComplete" 
         ></MS_com_buttons>
+        
       <CoinFall class="coin"/>
   <Footer_1 class="footer"></Footer_1>
 
 </div>
 </template>
 
-<<<<<<< HEAD
-<script setup>
-    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
+<!-- <script setup>
+    import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
     import Footer_1 from '@/components/Footer_1.vue'
     import Header from '@/components/Header_0.vue';
     import { ref }from 'vue';
@@ -47,76 +45,114 @@
         date: '',
         time: ''
     });
+    const isFormComplete = ref(false);
+// 檢查表單是否完整的方法
+  const checkFormCompletion = () => {
+    isFormComplete.value = formData.value.quantity && formData.value.date && formData.value.time;
+  };
+
 
   const updateFormData = (data) => {
-  formData.value = data;
-    };
+    formData.value = data;
+    checkFormCompletion(); // 每次更新表單後檢查
+  };
 
-    const saveData = () => {
-        // 將資料保存到 Pinia
-          ticketStore.setGuestNumber(formData.value.quantity)
-          ticketStore.setDate(formData.value.date);
-          ticketStore.setTime(formData.value.time);
-        
-    };
-    
-</script>
-=======
->>>>>>> 17
+  const saveData = () => {
+  if (isFormComplete.value) {
+    // 將資料保存到 Pinia
+    ticketStore.setGuestNumber(formData.value.quantity);
+    ticketStore.setDate(formData.value.date);
+    ticketStore.setTime(formData.value.time);
+  } else {
+    console.warn("表單未完成，無法保存數據");
+  }
+};
+
+// 下一步按鈕的處理方法
+const handleClick = () => {
+  console.log('isFormComplete:', isFormComplete.value);
+  if (isFormComplete.value) {
+    saveData();
+    // 執行下一步的邏輯
+  } else {
+    alert("請填寫完整表單");
+  }
+};
+</script> -->
 <script>
-  import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
-  import Footer_1 from '@/components/Footer_1.vue';
-  import Header from '@/components/Header_0.vue';
-  import CoinFall from '@/components/CoinFall.vue';
-  import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+import Footer_1 from '@/components/Footer_1.vue';
+import Header from '@/components/Header_0.vue';
+import CoinFall from '@/components/CoinFall.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+import { useTicketStore } from '@/stores/ticketStore';
 
-  export default {
-    components: {
-      MS_ticket_reservation,
-      Footer_1,
-      Header,
-      CoinFall,
-      MS_com_buttons
-    },
-    data() {
-      return {
-        currentMode: 'two', // 当前 mode
-        
-        formErrors: {}, // 儲存錯誤訊息的狀態
-        isFormComplete: false, // 表單是否完整的狀態
-        currentStep: 0, // 当前步骤
-        activityMode: 'activity1', // 初始活动模式
-        mode: 'one1', // 初始 mode
-        currentEventId: 1, // 當前活動的 EVENT_ID，例如 1
-      };
-    },
- 
-    methods: {
-      handleFormCompletion(status) {
-      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
-    },
-    handleFormSubmit() {
-      console.log(this.$refs.formRef);
-       // 透過 ref 調用 form 組件內的 validateForm 方法
-       const formIsValid = this.$refs.formRef.validateForm();
-      if (formIsValid) {
-        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
-        
-        this.$router.push(this.nextPage);
-    }
-  
+
+export default {
+  components: {
+    MS_ticket_reservation,
+    Footer_1,
+    Header,
+    CoinFall,
+    MS_com_buttons
   },
+
+  data() {
+    return {
+      currentMode: 'two',
+      ticketStore: useTicketStore(), // 初始化 store
+      formData: {
+        quantity: '',
+        date: '',
+        time: '',
+      },
+      isFormComplete: false,
+      showNext: true,
+      currentStep: 0, // 当前步骤
+      activityMode: 'activity1', // 初始活动模式
+      mode: 'one1', // 初始 mode
+      currentEventId: 1, // 這裡設定當前活動的 EVENT_ID，例如 1
+    
+    isFormComplete: false,
+    
+  }
+},
+methods: {
+    checkFormCompletion() {
+      this.isFormComplete = this.formData.quantity && this.formData.date && this.formData.time;
+    },
+    updateFormData(data) {
+      this.formData = data;
+      this.checkFormCompletion(); // 每次更新表單後檢查
+    },
+    saveData() {
+      if (this.isFormComplete) {
+        // 將資料保存到 Pinia
+        this.ticketStore.setGuestNumber(this.formData.quantity);
+        this.ticketStore.setDate(this.formData.date);
+        this.ticketStore.setTime(this.formData.time);
+      } else {
+        console.warn("表單未完成，無法保存數據");
+      }
+    },
+    handleNextStep() {
+      // 在這裡處理點擊後的邏輯，例如跳轉
+      if (this.isFormComplete) {
+        this.$router.push(this.nextRoute);
+      }
     }
   }
+}
 </script>
 
-
 <style lang="scss" scoped>
+
 .actitvyBtn{
   // border: 2px solid red;
   margin: 0 auto;
   margin-top: -50px;
   margin-bottom: 50px;
+  // height: 120px;
 }
 
 @import "../assets/style";
@@ -181,7 +217,6 @@
 
 
 
-
 </style>
 
 <style lang="scss">
@@ -240,5 +275,11 @@ h6{
   
 }
 
+h5{
+      color: map-get($map: $colofont_1, $key:gold ) !important;
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+  font-weight: 400 !important;
+
+}
 
 </style>

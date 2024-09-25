@@ -12,6 +12,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header('Content-Type: application/json'); // 設置返回的內容類型為 JSON
 
+
 // 如果是 OPTIONS 請求，直接返回 200 OK
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("HTTP/1.1 200 OK");

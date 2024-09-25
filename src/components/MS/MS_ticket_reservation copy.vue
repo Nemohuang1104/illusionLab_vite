@@ -129,7 +129,7 @@ export default {
 
 
     onMounted(() => {
-      fetch('http://illusionlab.local/public/PDO/ProductData/get_events.php')
+      fetch('${import.meta.env.VITE_API_URL}/ProductData/get_events.php')
         .then((response) => response.json())
         .then((data) => {
           events.value = data;

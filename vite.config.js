@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  // base:'/tid102/g2/front/',
+  base:process.env.VITE_BASE_URL,
   server:{
     host: '0.0.0.0',
     //open:true

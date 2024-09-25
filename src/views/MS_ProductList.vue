@@ -21,7 +21,8 @@ const route = useRoute();
 async function fetchProducts() {
   try {
     const productId = route.params.id;
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/MS_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    // const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/MS_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/MS_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
     const data = await response.json();
     item.value = data;
     item.value = { ...data, quantity: 1 };  // 初始化數量為 1

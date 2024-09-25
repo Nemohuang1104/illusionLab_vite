@@ -34,7 +34,8 @@ async function fetchProductDetail() {
         console.log(route.params.id);
 
         const productId = route.params.id; // 從路由獲取商品 ID
-        const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
+        // const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -54,7 +55,7 @@ async function fetchProductDetail() {
             }
         }
 
-        // fetch(`http://illusionlab.local/public/PDO/ProductData/SF_FetchProductDetail.php?productId=${productId}`).then(response => response.json()).then(
+        // fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`).then(response => response.json()).then(
         //     json => console.log(json)
         // )
 

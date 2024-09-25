@@ -4,9 +4,13 @@
       <MS_ticket_customer_info 
       mode="one"
       activityMode="activity1" 
-      class="customer_info"
-       ref="formRef"
-       @formCompletionStatus="handleFormCompletion"
+       class="customer_info"
+      :eventId="currentEventId"
+      @update:formData="updateFormData"
+      @saveData="saveData"
+      :errors="formErrors"
+      @update-errors="updateErrors"
+     
       >
         
       </MS_ticket_customer_info>
@@ -17,7 +21,9 @@
         :mode="mode"  
         :activityMode="activityMode"
         :disabled="!isFormComplete"
-        @form-submitted="handleFormSubmit"
+        :formData="formData"
+        
+        @validate="validateForm"
         
         ></MS_com_buttons>
       <CoinFall class="coin"/>
@@ -32,7 +38,8 @@ import Header from '@/components/Header_0.vue';
 import CoinFall from '@/components/CoinFall.vue';
 import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
 import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 export default {
   components: {
@@ -48,16 +55,16 @@ export default {
   data() {
     return {
       currentMode: 'two', // 当前 mode
-      // formData: {
-      //   name: '',
-      //   phone: '',
-      //   email: '',
-      //   taxID: '',
-      //   companyName: '',
-      //   comments: '',
-      //   agreePrivacyPolicy: true,
-      //   agreeRefundPolicy: true,
-      // },
+      formData: {
+        name: '',
+        phone: '',
+        email: '',
+        taxID: '',
+        companyName: '',
+        comments: '',
+        agreePrivacyPolicy: true,
+        agreeRefundPolicy: true,
+      },
    
       formErrors: {}, // 儲存錯誤訊息的狀態
       isFormComplete: false,   // 表单完成状态
@@ -68,23 +75,96 @@ export default {
       currentEventId: 1,
     };
   },
+  computed: {
+    ticketStore() {
+        return useTicketStore(); // 使用 store
+      },
 
+  },
   methods: {
-    handleFormCompletion(status) {
-      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
+    updateErrors(updatedErrors) {
+      this.formErrors = { ...this.formErrors, ...updatedErrors };
     },
-    handleFormSubmit() {
-       // 透過 ref 調用 form 組件內的 validateForm 方法
-       const formIsValid = this.$refs.formRef.validateForm();
-      if (formIsValid) {
-        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
+    checkFormCompletion() {
+      // console.log(!this.formData.agreeRefundPolicy);
+      
+      // 檢查表單是否填寫完成
+      this.isFormComplete =
+        this.formData.name &&
+        this.formData.phone &&
+        this.formData.email &&
+        !this.formData.agreePrivacyPolicy &&
+        !this.formData.agreeRefundPolicy;
+    },
+    updateFormData(data) {
+      // 更新表單數據並檢查是否完成
+      this.formData = data;
+      this.checkFormCompletion(); // 每次更新表單後檢查
+    },
+    saveData() {
+      if (this.isFormComplete) {
+        // 將資料保存到 Pinia
+        console.log(this.ticketStore);
+        console.log(this.formData);
         
+        this.ticketStore.setName(this.formData.name);
+        this.ticketStore.setPhone(this.formData.phone);
+        this.ticketStore.setEmail(this.formData.email);
+        this.ticketStore.setTaxID(this.formData.taxID);
+        this.ticketStore.setCompanyName(this.formData.companyName);
+        this.ticketStore.setComments(this.formData.comments);
+        // this.ticketStore.setAgreePrivacyPolicy(!this.formData.agreePrivacyPolicy);
+        // this.ticketStore.setAgreeRefundPolicy(!this.formData.agreeRefundPolicy);
+
+        console.log("表單已成功保存到 Pinia");
+      } else {
+        console.warn("表單未完成，無法保存數據");
+      }
+    },
+   
+    validateForm() {
+      const errors = {};
+      console.log(this.formData.agreePrivacyPolicy);
+      if (!this.formData.name) {
+        errors.name = "請填寫姓名";
+      }
+      if (!this.formData.phone) {
+        errors.phone = "請填寫電話";
+      }
+      if (!this.formData.email) {
+        errors.email = "請填寫信箱";
+      }
+      if (this.formData.agreePrivacyPolicy) {
+        errors.agreePrivacyPolicy = "請同意隱私政策";
+      }
+      if (this.formData.agreeRefundPolicy) {
+        errors.agreeRefundPolicy = "請同意退款政策";
+      }
+      
+      // 如果有錯誤，將錯誤消息傳給子組件顯示
+      if (Object.keys(errors).length > 0) {
+        this.formErrors = errors;
+        // alert('尚有欄位未輸入')
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "尚有欄位未輸入",
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return false;
+      } else {
+        
+        console.log(this.formData);
+
+        this.saveData(); // 如果表單正確，保存數據並跳轉
         this.$router.push(this.nextPage);
-    }
+        return true;
+      }
+    },
   
   },
-}
-}
+};
 </script>
 
 
