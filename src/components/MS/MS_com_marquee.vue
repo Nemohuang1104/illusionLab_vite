@@ -1,18 +1,18 @@
 <template>
   <main>
     <div class="marquee">
-      <div class="marquee-content">
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product1.png" alt=""><h4>馬克杯</h4><h5>MUG</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product2.png" alt=""><h4>驚喜盒</h4><h5>MYSTERY BOX</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product3.png" alt=""><h4>吸管水杯</h4><h5>STRAW CUP</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product4.png" alt=""><h4>實體故事書</h4><h5>STORYBOOK</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product5.png" alt=""><h4>大型貼紙</h4><h5>LARGE STICKERS</h5></a></span>
+      <div class="marquee-content" draggable="false">
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product1.png" alt=""><h4>馬克杯</h4><h5>MUG</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product2.png" alt=""><h4>驚喜盒</h4><h5>MYSTERY BOX</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product3.png" alt=""><h4>吸管水杯</h4><h5>STRAW CUP</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product4.png" alt=""><h4>實體故事書</h4><h5>STORYBOOK</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product5.png" alt=""><h4>大型貼紙</h4><h5>LARGE STICKERS</h5></a></span>
 
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product1.png" alt=""><h4>馬克杯</h4><h5>MUG</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product2.png" alt=""><h4>驚喜盒</h4><h5>MYSTERY BOX</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product3.png" alt=""><h4>吸管水杯</h4><h5>STRAW CUP</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product4.png" alt=""><h4>實體故事書</h4><h5>STORYBOOK</h5></a></span>
-        <span><a href=""><img class="productIMG" src="../../assets/images/ms/product5.png" alt=""><h4>大型貼紙</h4><h5>LARGE STICKERS</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product1.png" alt=""><h4>馬克杯</h4><h5>MUG</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product2.png" alt=""><h4>驚喜盒</h4><h5>MYSTERY BOX</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product3.png" alt=""><h4>吸管水杯</h4><h5>STRAW CUP</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product4.png" alt=""><h4>實體故事書</h4><h5>STORYBOOK</h5></a></span>
+        <span><a href=""><img class="productIMG" draggable="false" src="../../assets/images/ms/product5.png" alt=""><h4>大型貼紙</h4><h5>LARGE STICKERS</h5></a></span>
       </div>
     </div>
   </main>
@@ -102,6 +102,11 @@
 
 .productIMG {
   width: 20vw;
+  user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
 }
 
 .marquee {

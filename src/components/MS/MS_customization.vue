@@ -568,6 +568,7 @@ export default {
     }
 
     .template{
+        height: 100vh;
         font-family:'Noto Sans TC';
         font-weight: bold;
         padding:100px 0px !important;
@@ -618,19 +619,19 @@ export default {
         }
         .finishMyTicket{
             position: relative;
-            margin-top: 50px;
+            margin-top: 30px;
         }
         .customization {
             flex-direction: column; 
         }
         .show{
-            top: 20%;
+            top: 12%;
             right: calc(50% - (455px /2));
         }
         .choosen{
             width: 70vw;
             margin-left: 0;
-            margin-top: 250px;
+            margin-top: 180px;
         }
         .ticket_sticker {
         width: 18vw;
@@ -646,7 +647,13 @@ export default {
         }
     }
     @media screen and (max-width:600px) {
-
+        .finishMyTicket{
+            position: relative;
+            margin-top: 5px;
+        }
+        .show{
+            top: 5%;
+        }
         .ticket{
             transform: scale(0.7);
         }
@@ -654,7 +661,7 @@ export default {
             width: 30vw
         }
         .choosen{
-            margin-top: 230px;
+            margin-top: 130px;
         }
         .sentMyTicket{
         margin-top: 150px;
