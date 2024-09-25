@@ -27,42 +27,6 @@
 </div>
 </template>
 
-<<<<<<< HEAD
-<script setup>
-    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
-    import Footer_1 from '@/components/Footer_1.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import CoinFall from '@/components/CoinFall.vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
-    import { useTicketStore } from '@/stores/ticketStore';
-
-    const currentMode = ref('two');
-
-    const ticketStore = useTicketStore(); // 初始化 store
-
-    const formData = ref({
-        quantity: '',
-        date: '',
-        time: ''
-    });
-
-  const updateFormData = (data) => {
-  formData.value = data;
-    };
-
-    const saveData = () => {
-        // 將資料保存到 Pinia
-          ticketStore.setGuestNumber(formData.value.quantity)
-          ticketStore.setDate(formData.value.date);
-          ticketStore.setTime(formData.value.time);
-        
-    };
-    
-</script>
-=======
->>>>>>> 17
 <script>
   import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
   import Footer_1 from '@/components/Footer_1.vue';
