@@ -263,7 +263,7 @@ const routes = [
     name: 'strellarfrontierintro',
     component: () => import('@/views/SFIntro.vue'),
     meta: {
-      title: "星際邊境跳轉頁"
+      title: "星際邊境"
     },
     requiredLogin: false,
   },
@@ -272,7 +272,7 @@ const routes = [
     name: 'SF_Homepage',
     component: () => import('@/views/SF_Homepage.vue'),
     meta: {
-      title: "星際邊境-活動頁"
+      title: "星際邊境"
     },
     requiredLogin: false
   },
@@ -282,7 +282,7 @@ const routes = [
     name: 'SF_BookingChange',
     component: () => import('@/views/SF_BookingChange.vue'),
     meta: {
-      title: "退換票政策"
+      title: "星際邊境｜退換票政策"
     },
     requiredLogin: false
   },
@@ -291,7 +291,7 @@ const routes = [
     name: 'SF_ProductPage',
     component: () => import('@/views/SF_ProductPage.vue'),
     meta: {
-      title: "星際邊境全部商品"
+      title: "星際邊境｜精選商品"
     },
     requiredLogin: false
   },
@@ -300,7 +300,7 @@ const routes = [
     name: 'SF_DetailList',
     component: () => import('@/views/SF_DetailList.vue'),
     meta: {
-      title: "星際邊境商品細項"
+      title: "星際邊境｜商品細項"
     },
     requiredLogin: false,
     props: true // 將路由參數作為 props 傳入組件
@@ -328,7 +328,7 @@ const routes = [
     name: 'SF_TicketDesign',
     component: () => import('@/views/SF_TicketDesign.vue'),
     meta: {
-      title: "星際邊境客製票券"
+      title: "星際邊境｜客製票券"
     },
     requiredLogin: false
   },
@@ -336,7 +336,7 @@ const routes = [
     path: '/SF_Ticket_step0',
     component: () => import('@/views/SF_Ticket_reservation.vue'),
     meta: {
-      title: "星際邊境-購票"
+      title: "星際邊境｜購票"
     },
     requiredLogin: true
   },
@@ -344,7 +344,7 @@ const routes = [
     path: '/SF_Ticket_step1',
     component: () => import('@/views/SF_ticket_customer_info.vue'),
     meta: {
-      title: "星際邊境-購票"
+      title: "星際邊境｜購票"
     },
     requiredLogin: true
   },
@@ -352,18 +352,11 @@ const routes = [
     path: '/SF_Ticket_step2',
     component: () => import('@/views/SF_ticket_confirmation.vue'),
     meta: {
-      title: "星際邊境-購票"
+      title: "星際邊境｜購票"
     },
     requiredLogin: true
   },
-  {
-    path: '/SF_TicketDesign',
-    component: () => import('@/views/SF_TicketDesign.vue'),
-    meta: {
-      title: "星際邊境-客製票卷"
-    },
-    requiredLogin: true
-  },
+
 
   // =================心靈光譜===============//
   {

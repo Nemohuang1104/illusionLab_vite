@@ -85,18 +85,18 @@ import { auth, GoogleAuthProvider, signInWithPopup } from "../firebase";
   const handleGoogleLogin = async () => {
       loginError.value = null;
       const provider = new GoogleAuthProvider();
-      
+
       try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
-        
+
         // 取得使用者資料
         const userName = user.displayName;
         const userEmail = user.email;
-        
+
         // 登入成功後可將資料發送到後端 API
         await sendUserDataToBackend(userEmail, userName);
-        
+
       } catch (error) {
         loginError.value = "Google 登入失敗，請稍後再試。";
         console.error("登入錯誤:", error);
@@ -113,10 +113,10 @@ import { auth, GoogleAuthProvider, signInWithPopup } from "../firebase";
           },
           body: JSON.stringify({ mem_account: email, mem_name: name })
         });
-        
+
         const result = await response.json();
         console.log("後端回應:", result);
-        
+
         if (result.memInfo.mem_state === 0) {
           loginError.value = "登入失敗，請聯繫客服人員。";
         } else {
@@ -128,7 +128,6 @@ import { auth, GoogleAuthProvider, signInWithPopup } from "../firebase";
       }
     };
 //================================================================================
-  
     // 表单是否有效的计算属性
     // const isFormValid = computed(() => {
     //   return !emailError.value && !passwordError.value && email.value && password.value;

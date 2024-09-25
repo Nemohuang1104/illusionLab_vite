@@ -391,6 +391,7 @@ const decrement = () => {
     flex-direction: row;
 }
 
+
 //數量增減
 .but {
     // border: 1px solid red;
@@ -449,34 +450,12 @@ const decrement = () => {
 }
 
 //尺寸下拉式選單
-<<<<<<< HEAD
-.size select {
-    width: 300px;
-    height: 40px;
-    border-radius: 12px;
-    display: block;
-    text-align: center;
-    line-height: 40px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #fff;
-    outline: none;
-    background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    // border: 1px solid ;
-    border: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    cursor: pointer;
-    border: unset;
-}
-
-//將下拉式選單select箭頭刪掉 
-=======
 
 .size {
     position: relative;
     display: inline-block;
 }
 
->>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
 .size select {
     width: 200px;
     text-align: center;
@@ -512,43 +491,21 @@ const decrement = () => {
 }
 
 //加入購物車
-<<<<<<< HEAD
 .rightdown button {
     width: 300px;
     height: 50px;
-=======
-.rightdown p {
-    width: 200px;
-    height: 40px;
->>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
+    background: linear-gradient(180deg, rgba(19, 44, 121, 0.8) 44.5%, rgba(7, 143, 242, 0.7) 100%);
     border-radius: 40px;
-    display: block;
-    text-align: center;
-    line-height: 40px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-
-    cursor: pointer;
-    text-decoration: none;
-    // font-size: 20px;
-    color: #fff;
-    background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-<<<<<<< HEAD
-    cursor: pointer;
     border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 18px;
 }
 
-.rightdown button:hover {
-    background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
-=======
-    margin: 0 auto;
-    
-}
 
-.rightdown p:hover{
+
+.rightdown button:hover{
     background: linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%);
->>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
 }
 
 //小圖換大圖
