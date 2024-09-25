@@ -141,7 +141,13 @@ const onSubmit = async () => {
           title: '歡迎進入幻浸實驗室',
           timer: 1200
         }).then(async () => {
-          if (route.query.showLogin === 'true') {
+          // 檢查是否有 redirect 參數
+          const redirectPath = route.query.redirect;
+
+          if (redirectPath) {
+            // 如果有 redirect，跳轉到該路徑
+            router.push(redirectPath);
+          } else if (route.query.showLogin === 'true') {
             if (token) {
               try {
                 // 先執行 SetQuizCompleted.php
@@ -275,7 +281,7 @@ const onSubmit = async () => {
       <a href=""><img src="../assets/images/icon-google.svg" alt=""></a>
     </div>
     <p>還不是會員? 前往註冊</p>
-    <router-link to="/SignUp"><input type="submit" value="註冊" class="signup"></router-link>
+    <router-link :to="{ path: '/SignUp', query: { redirect: route.query.redirect } }"><input type="submit" value="註冊" class="signup"></router-link>
   </div>
 
 </main>

@@ -2,7 +2,85 @@
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+
+// 從 sessionStorage 或其他地方取出 token
+const token = sessionStorage.getItem('token');
+
+//導入路由設定
+const router = useRouter();
+const route = useRoute();
+
+// 優惠券折扣金額自動填入
+const coupon = ref({
+  discount_code: '',
+  discount_amount:''
+});
+
+// 請求商品優惠券資料
+const getCouponInfo = async () => {
+  try {
+    // 使用 FormData 傳送 token
+    const formData = new FormData();
+    formData.append('token', token);
+
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowDiscount.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.status === 'success') {
+        coupon.value.discount_code = data.data.discount_code;
+      coupon.value.discount_amount = data.data.discount_amount;
+    } else {
+      console.error('Error fetching user info:', data.message);
+    }
+  } catch (error) {
+    console.error('Request failed:', error);
+  }
+};
+
+// 在組件加載時發起請求
+onMounted(() => {
+    getCouponInfo();
+});
+
+// 使用 beforeRouteEnter 钩子函数刷新頁面
+router.beforeEach((to, from, next) => {
+  if (to.name === 'shop1') {
+    window.location.reload();
+  }
+  next();
+});
+
+
+// 點擊返回按鈕，將優惠券重置為未使用
+const handleBack = async () => {
+  try {
+    // 使用 FormData 傳送 token
+    const formData = new FormData();
+    formData.append('token', token);
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/ResetCoupon.php', {
+        method: 'POST',
+        body: formData
+    });
+    const result = await response.json();
+    if (result.status === 'success') {
+      // 重置成功，返回購物車頁面
+      router.push('/shop');
+    } else {
+      console.error(result.message);
+    }
+  } catch (error) {
+    console.error('Error resetting coupon:', error);
+  }
+};
 
 const cartItems = ref([
     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
@@ -36,7 +114,7 @@ const itemsTotal = computed(() => {
 });
 
 const totalAmount = computed(() => {
-  return itemsTotal.value + shippingFee.value;
+  return itemsTotal.value + shippingFee.value - coupon.value.discount_amount;
 });
 
 
@@ -277,7 +355,7 @@ const highlight = ref({
                     </div>
                     <div class="discount-fee">
                         <h3>折扣金額</h3>
-                        <p>$0</p>
+                        <p>{{ coupon.discount_amount ? '$' + coupon.discount_amount : '$0' }}</p>
                     </div>
                     <hr>
                     <div class="total-fee">
@@ -289,7 +367,7 @@ const highlight = ref({
 
         </div>
         <div class="confirm">
-            <RouterLink to="/shop"><button>返回</button></RouterLink>
+            <RouterLink to="/shop"><button @click="handleBack">返回</button></RouterLink>
             <RouterLink to="/shop3"><button>結帳</button></RouterLink>
             
         </div>

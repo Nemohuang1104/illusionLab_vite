@@ -1,11 +1,81 @@
 <script setup>
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 const router = useRouter();
 
-function goToCenterCMS(){
-    router.push('/CenterCMS');
-}
+
+
+// 表单字段
+const email = ref('');
+const password = ref('');
+
+
+// 错误信息
+const emailError = ref('');
+const passwordError = ref('');
+
+
+ // 表單提交
+ const onSubmit = async () => {
+ 
+
+  // 確認沒有錯誤後再發送請求
+  if (!emailError.value && !passwordError.value) {
+    try {
+      // 建立 FormData 物件
+      const formData = new FormData();
+      formData.append('email', email.value);
+      formData.append('password', password.value);
+
+      // 使用 FormData 發送 POST 請求
+      const response = await axios.post('http://illusionlab.local/public/PDO/Login/LoginCMS.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data' // 設定標頭為 FormData
+        }
+      });
+
+      // 成功登入
+      if (response.data.status === 'success') {
+        
+
+        Swal.fire({
+          icon: 'success',
+          title: '歡迎進入幻浸實驗室後台管理中心',
+          timer: 1200
+        })
+        router.push('/CenterCMS');
+
+      } else {
+        // 登入失敗，顯示錯誤訊息
+        Swal.fire({
+          icon: 'error',
+          title: response.data.message, // 後端傳回的訊息
+          timer: 1500
+        });
+      }
+    } catch (error) {
+      // 處理請求錯誤
+      Swal.fire({
+        icon: 'error',
+        title: '登入失敗，請確認是否註冊。',
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
+  } else {
+    // 如果表單有錯誤
+    Swal.fire({
+      icon: 'warning',
+      title: '請重新檢視表單',
+      timer: 1200,
+      showConfirmButton: false,
+    });
+  }
+};
 
 </script>
 
@@ -18,7 +88,7 @@ function goToCenterCMS(){
                 <p>帳號:</p>
                 <div class="code-input">
                     <div class="fill">
-                        <input type="text" />
+                        <input type="text" v-model="email"/>
                     </div>
                 </div>
             </div>
@@ -26,12 +96,12 @@ function goToCenterCMS(){
                 <p>密碼:</p>
                 <div class="code-input">
                     <div class="fill">
-                        <input type="text" />
+                        <input type="password"  v-model="password"/>
                     </div>
                 </div>
             </div>
             <div class="confirm">
-                    <button @click="goToCenterCMS">登入</button>
+                    <button @click="onSubmit">登入</button>
             </div>
         </div>
     </div>
@@ -134,7 +204,7 @@ function goToCenterCMS(){
     font-weight: 600;
     color: #505050;
     width: 240px;
-    height: 28px;
+    height: 32px;
     line-height: 28px;
     border: none;
     background: var(--Color-2, #FCB600);

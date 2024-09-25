@@ -1,10 +1,88 @@
 <script setup>
 
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
     import Header_1 from '@/components/Header_0.vue';
     import ShoppingStep from '@/components/ShoppingStep.vue';
     import Footer from '@/components/Footer_0.vue';
+    import { useRouter, useRoute } from 'vue-router';
 
+//導入路由設定
+const router = useRouter();
+const route = useRoute();
+
+// 商品優惠券自動填入碼
+const coupon = ref({
+  discount_code: '',
+  discount_amount:''
+});
+
+// 從 sessionStorage 或其他地方取出 token
+const token = sessionStorage.getItem('token');
+
+// 點擊結帳按鈕，更新優惠券狀態為已使用
+const handleCheckout = async () => {
+  try {
+
+     // 使用 FormData 傳送 token
+     const formData = new FormData();
+    formData.append('token', token);
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
+        method: 'POST',
+        body: formData
+    });
+    const result = await response.json();
+    if (result.status === 'success') {
+      // 結帳成功，跳轉到下一頁
+      router.push('/shop2');
+    } else {
+      console.error(result.message);
+    }
+  } catch (error) {
+    console.error('Error updating coupon:', error);
+  }
+};
+
+// 請求商品優惠券資料
+const getCouponInfo = async () => {
+  try {
+    // 使用 FormData 傳送 token
+    const formData = new FormData();
+    formData.append('token', token);
+
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.status === 'success') {
+        coupon.value.discount_code = data.data.discount_code;
+      coupon.value.discount_amount = data.data.discount_amount;
+    } else {
+      console.error('Error fetching user info:', data.message);
+    }
+  } catch (error) {
+    console.error('Request failed:', error);
+  }
+};
+
+// 在組件加載時發起請求
+onMounted(() => {
+    getCouponInfo();
+});
+
+
+// 使用 beforeRouteEnter 钩子函数刷新頁面
+router.beforeEach((to, from, next) => {
+  if (to.name === 'shop1') {
+    window.location.reload();
+  }
+  next();
+});
 
     const cartItems = ref([
     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
@@ -75,7 +153,7 @@ const highlight = ref({
             </div>
             <div class="payment">
                 <p>使用折扣碼</p>
-                <input type="text" size="30">
+                <input type="text" v-model="coupon.discount_code" size="30">
                 <div class="total">
                     
                     <div class="count">
@@ -85,7 +163,7 @@ const highlight = ref({
                    
                     <div class="discount-fee">
                         <h3>折扣</h3>
-                        <p>$0</p>
+                        <p>{{ coupon.discount_amount ? '$' + coupon.discount_amount : '$0' }}</p>
                     </div>
                     <hr>
                     <div class="total-fee">
@@ -95,7 +173,7 @@ const highlight = ref({
                 </div>
                 <div class="checkbutton">
                     <RouterLink to="/shop2">
-                        <button class="check">結帳
+                        <button class="check" @click="handleCheckout">結帳
                         </button>
                     </RouterLink>
                 </div>
