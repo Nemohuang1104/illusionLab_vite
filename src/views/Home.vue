@@ -70,10 +70,8 @@
           <img class="slide__main layer1 duck" src="../assets/images/carousel3_1_1.png" alt="">
           <div class="text layer3">
             <img class="logo" src="../assets/images/logo_MindSpectrum.svg" alt="">
-            <p>心靈光譜是為孤獨而痛苦著的你，<br>
-              提供一個療癒的旅程，<br>
-              進入繪本的世界拋開一切煩惱，<br>
-              沉浸在充滿代入感的世界。
+            <p>心靈光譜是為孤獨而痛苦著的你，提供一個療癒的旅程，<br>
+              進入繪本的世界拋開一切煩惱，沉浸在充滿代入感的世界。
             </p>
             <RouterLink to="/MS_Enter">
               <MS_Button class="LC_btn" Button="ENTER"></MS_Button>

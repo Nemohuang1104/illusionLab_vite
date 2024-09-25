@@ -518,7 +518,6 @@ ul {
         padding: 10px;
         color: #FFFFFF;
     }
-
 .count,
 .discount-fee,
 .total-fee {
