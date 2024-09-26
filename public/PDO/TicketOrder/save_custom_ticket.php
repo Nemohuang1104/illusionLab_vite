@@ -8,20 +8,20 @@ header("Access-Control-Allow-Headers: Content-Type");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         // 圖片存儲的目標目錄
-        $targetDir = $_SERVER["DOCUMENT_ROOT"]."/public/PDO/FileUpload/";
+        $targetDir = $SERVER["DOCUMENT_ROOT"]."/public/PDO/FileUpload/";
         // 確保目錄存在
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true);
         }
 
         // 設置圖片的目標路徑
-        $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+        $fileName = uniqid() . '' . basename($_FILES['image']['name']);
         $targetFilePath = $targetDir . $fileName;
 
         // 保存圖片到伺服器
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
             // 將路徑存入資料庫
-            $imagePath = $targetFilePath;
+            $imagePath = "/public/PDO/FileUpload/" . $fileName;
 
             try {
                 // 使用PDO準備SQL語句

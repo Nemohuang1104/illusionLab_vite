@@ -453,22 +453,22 @@ text-decoration: none;
 
 .style-options {
   display: flex;
-  gap: 10px;
+  gap: 4px;
 }
 
 .style-image {
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
   border: 2px solid transparent;
   transition: border 0.3s;
   padding: 2px;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .style-image.selected {
-
-  border: 2px solid #9F7557;
+  border: 2px solid #bfa185;
   border-radius: 5px;
 }
 

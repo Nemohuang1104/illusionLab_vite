@@ -54,7 +54,7 @@ export default {
 }
 
 .warpper{
-  background-image: url('../src/ms/modeBGI3.jpg');
+  background-image: url('../assets/images/ms/modeBGI3.jpg');
   
   
 }

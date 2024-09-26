@@ -1,7 +1,6 @@
 <script setup>
 import Header from '@/components/Header_0.vue';
 import Footer_03 from '@/components/Footer_03.vue';
-import LC_ProductInfo from './LC_ProductInfo.vue';
 import MS_com_title from '@/components/MS/MS_com_title.vue';
 
 
@@ -133,7 +132,7 @@ p{
 
 .warp{
   position: relative;
-  padding: 0 50px;
+  padding: 100px 50px 0;
 }
 
 .center {
