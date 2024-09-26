@@ -80,14 +80,12 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateWidth);
 });
 
-<<<<<<< HEAD
 
 
 //點擊商品時購物車icon會出現增加數字 
 import { inject } from 'vue';
 
 const cart = inject('cart');  // 獲取購物車數據
-=======
 // ========================添加是否登入的狀態判斷=======================
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -112,7 +110,6 @@ const handleAvatarClick = () => {
     router.push('/Login');
   }
 };
->>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
 </script>
 
 <template>
@@ -140,17 +137,6 @@ const handleAvatarClick = () => {
 
     </div>
     <div class="icons">
-<<<<<<< HEAD
-      <div class="header-cart">
-        <!-- 購物車圖示和商品數量 -->
-        <router-link :to="{ name: 'shop' }">
-          <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
-          <span class="cart-count">{{ 0 }}</span>  <!-- 顯示購物車商品數量 -->
-        </router-link>
-      </div>
-      <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-smile"class="peopleicon" /></router-link>
-      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
-=======
       <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
           class="shoppingicon" /></router-link>
       <!-- <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-smile"class="peopleicon" /></router-link>
@@ -163,7 +149,6 @@ const handleAvatarClick = () => {
         @click="handleAvatarClick"
       />
       <!-- ========================================================================= -->
->>>>>>> 7327c4539231fbaee1989028bf0e12ad72d683ea
     </div>
 
     <!-- 半圓形菜單 -->

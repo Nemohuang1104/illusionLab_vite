@@ -210,7 +210,11 @@ const register = () => {
           // timer: 10000
         }).then(() =>  {
           // 根據是否有 redirect 參數決定跳轉路由
-          if (route.query.redirect === 'quiz') {
+          if (route.query.redirect) {
+            // 將 redirect 參數傳遞給登入頁面
+            router.push({ path: '/login', query: { redirect: route.query.redirect } });
+          } // 根據是否有 redirect 參數決定跳轉路由
+          else if (route.query.redirect === 'quiz') {
             // 導回小測驗頁面並添加 showLogin=true
             router.push({ path: '/login', query: { showLogin: 'true' } });
           } else {
@@ -359,6 +363,7 @@ const register = () => {
   </div>
   <Footer_0></Footer_0>
 </template>
+
 
 
 

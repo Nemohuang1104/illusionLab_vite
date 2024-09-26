@@ -1,7 +1,7 @@
 <script setup>
 
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, onMounted, computed, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import Header_0 from '@/components/Header_0.vue';
 const currentMode = ref('one');
 
@@ -9,17 +9,17 @@ import ShoppingStep from '@/components/ShoppingStep.vue';
 import Footer from '@/components/Footer_0.vue';
 
 
-const cartItems = ref([
-    { name: '繪本風格帆布袋', quantity: 1, price: 590 }
-]);
+// const cartItems = ref([
+//     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
+// ]);
 
 
 const productInfo = ref([
-    // { id: '1', cardImage: '../src/assets/images/MS_Product1.svg', productName: '繪本風格悠遊卡卡夾', price: '300' },
-    // { id: '2', cardImage: '../src/assets/images/MS_Product2.svg', productName: '繪本風格筆記本', price: '180' },
-    // { id: '3', cardImage: '../src/assets/images/MS_Product3.svg', productName: '繪本風格帆布袋', price: '590' },
-    // { id: '4', cardImage: '../src/assets/images/MS_Product4.svg', productName: '繪本風格小貼紙', price: '100' },
-    // { id: '5', cardImage: '../src/assets/images/MS_Product5.svg', productName: '繪本風格悠遊抱枕', price: '990' },
+    { id: '1', cardImage: '../src/assets/images/MS_Product1.svg', productName: '繪本風格悠遊卡卡夾', price: '300' },
+    { id: '2', cardImage: '../src/assets/images/MS_Product2.svg', productName: '繪本風格筆記本', price: '180' },
+    { id: '3', cardImage: '../src/assets/images/MS_Product3.svg', productName: '繪本風格帆布袋', price: '590' },
+    { id: '4', cardImage: '../src/assets/images/MS_Product4.svg', productName: '繪本風格小貼紙', price: '100' },
+    { id: '5', cardImage: '../src/assets/images/MS_Product5.svg', productName: '繪本風格悠遊抱枕', price: '990' },
     // { id: '6', cardImage: '../src/assets/images/MS_Product6.svg', productName: '繪本風格防摔手機殼', price: '1280' },
 ])
 
@@ -37,75 +37,202 @@ const highlight = ref({
 
 
 
-
-
-//在商品細項撈取商品資料
+// 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
 const carts = ref([]);
-const route = useRoute();
-const productDetail = ref(null);
-const totalAmount = ref(0);
 
 
-// 根據商品 ID 撈取商品細項資料
-async function fetchShoppingCar1() {
-    try {
-        const productId = route.params.id; // 從路由獲取商品 ID
-        const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/ShoppingCar1.php?productId=${productId}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+// 從 localStorage 撈取購物車資料的函數並存入 carts
+function loadCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    carts.value = cart;
+}
 
-        if (response.ok) {
-            const data = await response.json();
+// 當組件掛載時撈取資料
+onMounted(() => {
+    loadCart();
+});
 
-            console.log(data);
+// 計算購物車總價:是一個 computed 屬性，用來計算購物車中所有商品的總價
+const totalPrice = computed(() => {
+    return carts.value.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+    }, 0);
+});
 
-            carts.value = data;
-            calculateTotal(); // 在獲取商品資料後計算總金額
+// //數量增加的function
+// function addQuantity(index){
+//     carts.value[index].quantity++;
+//     updateLocalStorage(); // 更新 localStorage
+// };
+
+
+//數量增加的function
+function addQuantity(index) {
+    // 創建一個新的對象並更新數量
+    const updatedItem = { ...carts.value[index], quantity: carts.value[index].quantity + 1 };
+
+    // 使用 splice 替換該項目，這樣 Vue 可以檢測到變化
+    carts.value.splice(index, 1, updatedItem);
+
+    // 更新 localStorage 中的購物車數據
+    updateLocalStorage();
+}
+
+
+// //數量減少的function 
+// function minusQuantity(index){
+//    if(carts.value[index].quantity > 0){
+//     carts.value[index].quantity--;
+//     updateLocalStorage(); // 更新 localStorage
+//     }
+// };
+
+//數量減少的function
+function minusQuantity(index) {
+    if (carts.value[index].quantity > 1) {
+        carts.value[index].quantity -= 1;
+        updateLocalStorage(); // 更新 localStorage
+    } else {
+        // 商品數量為1，彈出確認框
+        const confirmRemove = confirm('數量為 1，是否要將此商品從購物車中移除？');
+
+        if (confirmRemove) {
+            removeItem(index); // 移除商品並更新localStorage
         }
-    } catch (error) {
-        console.error('Error fetching product details:', error);
     }
 }
 
-// 計算總金額
-const calculateTotal = () => {
-    totalAmount.value = item.value.reduce((total, item) => {
-        return total + (item.price * item.quantity); // 假設item有price和quantity屬性
-    }, 0);
+
+const checkedItems = ref(carts.value.map(() => false)); // 每個商品是否被選中的狀態
+
+//刪除商品的function
+function removeItem(index) {
+    // 移除指定索引的商品
+    carts.value.splice(index, 1);
+    checkedItems.value.splice(index, 1); // 同時移除該商品的選中狀態
+    updateLocalStorage(); // 更新 localStorage
+}
+
+
+//ICON點擊刪除商品
+function removeCartItem(index) {
+    carts.value.splice(index, 1);
+    updateLocalStorage(); // 更新 localStorage
+}
+
+
+//更新任何東西都會來到這個函式執行
+function updateLocalStorage() {
+    // 將 carts.value 存入 localStorage 中
+    localStorage.setItem('cart', JSON.stringify(carts.value));
+}
+
+
+
+
+// 儲存購物車的商品資料
+const shoppingCart = ref([]);
+
+// 在頁面載入時，從 localStorage 中取得購物車資料
+onMounted(() => {
+    const cart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+    shoppingCart.value = cart;
+});
+
+
+//優惠券開始
+
+//導入路由設定
+const router = useRouter();
+const route = useRoute();
+
+// 商品優惠券自動填入碼
+const coupon = ref({
+    discount_code: '',
+    discount_amount: ''
+});
+
+// 從 sessionStorage 或其他地方取出 token
+const token = sessionStorage.getItem('token');
+
+// 點擊結帳按鈕，更新優惠券狀態為已使用
+const handleCheckout = async () => {
+    try {
+
+        // 使用 FormData 傳送 token
+        const formData = new FormData();
+        formData.append('token', token);
+        const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        if (result.status === 'success') {
+            // 結帳成功，跳轉到下一頁
+            router.push('/shop2');
+        } else {
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error('Error updating coupon:', error);
+    }
 };
 
-// 在mounted時獲取商品資料
-onMounted(() => {
-    fetchShoppingCar1(); // 撈取商品細項資料
+// 請求商品優惠券資料
+const getCouponInfo = async () => {
+    try {
+        // 使用 FormData 傳送 token
+        const formData = new FormData();
+        formData.append('token', token);
+
+        const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.status === 'success') {
+            coupon.value.discount_code = data.data.discount_code;
+            coupon.value.discount_amount = data.data.discount_amount;
+        } else {
+            console.error('Error fetching user info:', data.message);
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+    }
+};
+
+// 計算總金額，商品金額減去折扣金額
+const calculatedTotalPrice = computed(() => {
+  return totalPrice.value - coupon.value.discount_amount;
 });
-// const addToCart = () => {
-//   const userId = currentUser.id;
-//   const productId = item.PRODUCT_ID;
-//   const quantity = item.quantity;
 
-//   console.log('userId:', userId);
-//   console.log('productId:', productId);
-//   console.log('quantity:', quantity); // 確認數據是否正確
+// 監控優惠碼變化，如果優惠碼被清除，重置折扣金額
+watch(() => coupon.value.discount_code, (newVal) => {
+  if (newVal === '') {
+    coupon.value.discount_amount = '0'; // 重置折扣金額為 0
+  }
+});
 
-//   const formData = new FormData();
-//   formData.append('userId', userId);
-//   formData.append('productId', productId);
-//   formData.append('quantity', quantity);
+// 在組件加載時發起請求
+onMounted(() => {
+    getCouponInfo();
+});
 
-//   fetch('ShoppingCar1.php', {
-//     method: 'POST',
-//     body: formData
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//     console.log('加入購物車成功:', data);
-//   })
-//   .catch(error => {
-//     console.error('加入購物車失敗:', error);
-//   });
-// };
+
+// 使用 beforeRouteEnter 钩子函数刷新頁面
+router.beforeEach((to, from, next) => {
+    if (to.name === 'shop1') {
+        window.location.reload();
+    }
+    next();
+});
+
+//優惠券結束
 </script>
 <template>
     <div class="wrapper">
@@ -118,15 +245,16 @@ onMounted(() => {
         <div class="contanier">
             <div class="order">
                 <p class="title">訂單內容</p>
-                <ul v-if="carts.length > 0">
-                    <li class="card" v-for="(item, key) in carts" :key="key">
+                <ul v-if="carts.length">
+                    <!-- v-if="carts.length > 0" 放在 ul 裡面  -->
+                    <li class="card" v-for="(item, index) in carts" :key="index">
                         <div class="product-info">
-                            <input class="checkbox" type="checkbox">
+                            <input class="checkbox" type="checkbox" v-model="checkedItems[index]">
                             <!-- <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image"> -->
-                            <img :src="item.PRODUCT_IMG" alt="商品圖片" class="product-image">
+                            <img :src="item.img" alt="商品圖片" class="product-image">
                             <div class="description">
-                                <span class="product-name">{{ item.PRODUCT_NAME }}</span>
-                                <div class="input">
+                                <div class="product-name">{{ item.name }}</div>
+                                <!-- <div class="input">
                                     <select name="" id="">
                                         <option value="0">規格</option>
                                         <option value="1">可愛動物區</option>
@@ -134,45 +262,53 @@ onMounted(() => {
                                         <option value="3">大人釋懷中</option>
 
                                     </select>
-                                </div>
+                                </div> -->
+                                <div v-if="item.size" class="size-select">尺寸: {{ item.size }}</div>
                             </div>
                             <!-- v-for="(item, index) in cartItems" -->
                             <div class="quantity-input">
-                                <button class="quantity-button" id="minus6"
-                                    @click="item.QUANTITY > 1 && item.QUANTITY--">-</button>
-                                <input type="text" v-model="item.QUANTITY" min="1" />
-                                <button class="quantity-button" id="plus6" @click="item.QUANTITY++">+</button>
+                                <button class="quantity-button" id="minus6" @click="minusQuantity(index)">-</button>
+                                <input type="text" v-model="item.quantity" min="1" />
+                                <button class="quantity-button" id="plus6" @click="addQuantity(index)">+</button>
                             </div>
-                            <span class="des_span">NT$ {{ item.PRODUCT_PRICE * item.QUANTITY }} </span>
-                            <img class="trash-can" src="../assets/images/trashcan.svg">
+                            <span class="des_span">NT$ {{ item.price * item.quantity }} </span>
+                            <img class="trash-can" src="../assets/images/trashcan.svg"
+                                @click="checkedItems[index] ? removeCartItem(index) : null"
+                                :class="{ 'disabled': !checkedItems[index] }" alt="刪除">
                         </div>
 
                     </li>
                 </ul>
+                <p v-else>購物車是空的</p>
             </div>
             <div class="payment">
                 <p>使用折扣碼</p>
-                <input type="text" size="30">
+                <input type="text" v-model="coupon.discount_code" size="30">
                 <div class="total">
 
                     <div class="count">
                         <h3>商品金額</h3>
-                        <p>$590</p>
+                        <p>${{ totalPrice }}</p>
                     </div>
 
                     <div class="discount-fee">
+                        <!-- <h3>折扣</h3>
+                        <p>$0</p> -->
                         <h3>折扣</h3>
-                        <p>$0</p>
+                        <!-- 當有折扣金額時，顯示折扣金額，否則顯示 $0 -->
+                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'"> $ {{ coupon.discount_amount }} </p>
+                        <p v-else>$0</p>
                     </div>
+
                     <hr>
-                    <div class="total-fee">
+                    <div class="total-fee" v-if="carts.length">
                         <h3>總金額</h3>
-                        <p>${{ totalAmount }}</p>
+                        <p>$ {{ calculatedTotalPrice }}</p>
                     </div>
                 </div>
                 <div class="checkbutton">
                     <RouterLink to="/shop2">
-                        <button class="check">結帳
+                        <button class="check" @click="handleCheckout">結帳
                         </button>
                     </RouterLink>
                 </div>
@@ -252,6 +388,15 @@ onMounted(() => {
     width: 95%;
 }
 
+.description {
+    // display: flex;
+    line-height: 1.6;
+}
+
+.title {
+    min-width: 100px;
+}
+
 ul {
     list-style: none;
     margin-top: 10px;
@@ -268,12 +413,19 @@ ul {
     max-width: 20px;
 }
 
+
+.trash-can.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
 // ======================
 
 .product-info {
     width: 100%;
     display: grid;
-    grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr 1fr;
     padding: 10px;
     align-items: center;
     justify-items: center;
@@ -331,7 +483,7 @@ ul {
     display: inline-block;
     text-align: center;
     font-size: 16px;
-    width: 40px;
+    width: 35px;
     height: 16px;
     /* 將高度設置為 40px，與輸入框一致 */
     line-height: 16px;
@@ -350,7 +502,7 @@ ul {
     display: inline-block;
     text-align: center;
     font-size: 16px;
-    width: 50px;
+    width: 35px;
     /* 適當調整寬度，使其與按鈕相匹配 */
     height: 20px;
     /* 將高度設置為 40px，與按鈕一致 */
@@ -364,6 +516,14 @@ ul {
     /* 確保 padding 和 border 不會影響元素的寬度 */
     border: 0;
     // margin-bottom: 80px;
+}
+
+#minus6 {
+    border-radius: 12px 0px 0px 12px;
+}
+
+#plus6 {
+    border-radius: 0px 12px 12px 0px;
 }
 
 
@@ -380,7 +540,7 @@ ul {
     height: 20px;
     line-height: 20px;
     // border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 4px;
     padding: 0 8px;
     font-size: 16px;
     transition: border-color 0.3s ease-in-out;
@@ -424,61 +584,66 @@ ul {
     display: inline-block;
     text-align: center;
     font-size: 1.6rem;
-    width: 40px;
+    width: 35px;
     height: 20px;
     // line-height: 20px; 
     background-color: #FFEDBC;
     border: 0;
 }
 
-    .quantity-input > input {
-        display: inline-block;
-        text-align: center;
-        font-size: 16px;
-        width: 50px; 
-        height: 20px; 
-        line-height: 20px; 
-        background-color: #FFEDBC;
-        margin: 0 2px; 
-        box-sizing: border-box; 
-        border: 0;
-        // margin-bottom: 80px;
-    }
-    .payment{
-        border-radius: 10px;
-        background:#000354;
-        width: 100%;
-        max-width: 400px;
-        padding: 30px;
-        flex-grow: 0;
-        color: #FFFFFF;
-    }
-    .detail{
-        width: 100%;
-        color: #FFFFFF;
-    }
-    .payment hr{
-        width: 100%;
-        max-width: 400px;
-        background-color: #FFFFFF;
-        margin: 20px auto;
-        height: 2px;
-        border: none;
-        border-radius: 2.5px;
-    }
-    
-    .payment input{
-        border-radius: 8px;
-        border: 1px solid #FFFFFF;
-        outline: none;
-        /* 移除默認的黑框 */
-        background: none;
-        color: #ffffff; //文字顏色
-    }
-    // 結帳按鈕
-    .check:hover{
-        opacity: 0.9;
-    }
+.quantity-input>input {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    width: 35px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #FFEDBC;
+    margin: 0 2px;
+    box-sizing: border-box;
+    border: 0;
+    // margin-bottom: 80px;
+}
+
+.payment {
+    border-radius: 10px;
+    background: #000354;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    flex-grow: 0;
+    color: #FFFFFF;
+}
+
+.detail {
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.payment hr {
+    width: 100%;
+    max-width: 400px;
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    height: 2px;
+    border: none;
+    border-radius: 2.5px;
+}
+
+.payment input {
+    border-radius: 8px;
+    border: 1px solid #FFFFFF;
+    outline: none;
+    /* 移除默認的黑框 */
+    background: none;
+    color: #ffffff; //文字顏色
+    padding-left: 10px;
+}
+
+// 結帳按鈕
+.check:hover {
+    opacity: 0.9;
+}
 
 // 商品確認按鈕
 .payment button {
@@ -499,38 +664,9 @@ ul {
     margin: 10px auto;
 }
 
-    .total{
-        margin-top: 20px;
-    }
-    .count, .discount-fee, .total-fee{
-        display: flex;
-        justify-content: space-between;
-    }
-    .count p, .discount-fee p, .total-fee p{
-        flex-basis: 0%;
-    }
-    .wrapper hr{
-        background-color: #FFFFFF;
-        margin: 20px auto;
-        height: 2px;
-        border: none;
-        border-radius: 2.5px;
-        width: 100%;
-        max-width: 1000px;
-    }
-    // 下方加購
-
-    .icon svg{
-        width: 100%;
-        max-width: 20px;
-    }
-
-    .ProductAdd{
-        width: 100%;
-        max-width: 1000px;
-        margin: 3% auto;
-        padding: 10px;
-        color: #FFFFFF;
+.total {
+    margin-top: 20px;
+}
 
 .count,
 .discount-fee,
@@ -543,6 +679,44 @@ ul {
 .discount-fee p,
 .total-fee p {
     flex-basis: 0%;
+}
+
+.wrapper hr {
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    height: 2px;
+    border: none;
+    border-radius: 2.5px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+// 下方加購
+
+.icon svg {
+    width: 100%;
+    max-width: 20px;
+}
+
+.ProductAdd {
+    width: 100%;
+    max-width: 1000px;
+    margin: 3% auto;
+    padding: 10px;
+    color: #FFFFFF;
+}
+
+.count,
+.discount-fee,
+.total-fee {
+    display: flex;
+    justify-content: space-between;
+}
+
+.count p,
+.discount-fee p,
+.total-fee p {
+    flex-basis: 15%;
 }
 
 .wrapper hr {

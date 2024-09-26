@@ -35,7 +35,7 @@ async function fetchProducts() {
 onMounted(() => {
   fetchProducts(); // 當頁面加載時撈取資料
 });
-
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 </script>
 
 <template>

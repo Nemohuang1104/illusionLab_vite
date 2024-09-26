@@ -1,8 +1,8 @@
 <script setup>
 import { computed, defineProps, ref } from 'vue';
 
-import { inject } from 'vue';
-const cartCount = inject('cartCount'); // 接收全局的購物車數量
+// import { inject } from 'vue';
+// const cartCount = inject('cartCount'); // 接收全局的購物車數量
 
 
 const props = defineProps({
@@ -134,7 +134,7 @@ const handleAvatarClick = () => {
         </li>
         <li class="two">
           <router-link :to="{ name: 'login' }">購物車</router-link>
-          <span class="cart-count2">{{ cartItemCount }}</span>  <!-- 顯示購物車商品數量 -->
+          <!-- <span class="cart-count2">{{ cartItemCount }}</span>  顯示購物車商品數量 -->
         </li>
         <li class="three">
           <router-link to="/lifeCasino">人生賭場</router-link>

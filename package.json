@@ -20,11 +20,13 @@
     "body-parser": "^1.20.3",
     "element-plus": "^2.8.1",
     "express": "^4.21.0",
+    "firebase": "^10.13.2",
     "google-auth-library": "^9.14.1",
     "gsap": "^3.12.5",
     "html2canvas": "^1.4.1",
     "jQuery": "npm:jquery@^3.7.1",
     "pinia": "^2.2.2",
+    "pinia-plugin-persistedstate": "^4.0.2",
     "sweetalert2": "^11.14.0",
     "swiper": "^11.1.12",
     "three": "^0.167.1",
@@ -32,7 +34,8 @@
     "vue": "^3.4.29",
     "vue-router": "^4.4.3",
     "vue-select": "^4.0.0-beta.6",
-    "vue-sweetalert2": "^5.0.11"
+    "vue-sweetalert2": "^5.0.11",
+    "vue3-datepicker": "^0.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
