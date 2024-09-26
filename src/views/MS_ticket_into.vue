@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/SASS/component/ms";
   .warpper{
-    background-image: url('@/ms/modeBGI3.jpg');
+    background-image: url('../assets/images/ms/modeBGI3.jpg');
 
   }
 

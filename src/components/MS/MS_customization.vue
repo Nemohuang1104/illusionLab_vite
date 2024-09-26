@@ -364,6 +364,10 @@ export default {
     .then(response => response.json())
     .then(data => {
       console.log('圖片路徑儲存成功:', data);
+
+      setTimeout(()=>{
+        window.location.href = "/mindspectrum";
+      },300);
     })
     .catch(error => {
       console.error('圖片儲存失敗:', error);

@@ -168,9 +168,10 @@
     </div>
     <div ref="sentMyTicketBTN" class="sentMyTicket">
       <button v-if="isChoosenHidden" @click="wantToChoose" class="CTbtn btnColor1" id="RMTbtn">重新製作</button>
-      <router-link >
+      
       <button v-if="isChoosenHidden" class="CTbtn btnColor2" id="CMTbtn" @click="updatepage">確認送出</button>
-      </router-link>
+      
+      
     </div>
   </div>
 </template>
@@ -345,6 +346,7 @@ import { useRoute } from 'vue-router';
 import html2canvas from 'html2canvas'; // 使用 html2canvas 來將票券轉成圖片
 import { ref, onMounted } from 'vue'
 
+
 const pathData1 = ref('')
 const pathData2 = ref('')
 const pathData3 = ref('')
@@ -380,7 +382,6 @@ onMounted(() => {
 
 const updatepage = () => {  //點擊送出按鈕之後顯示第二頁製作完成頁 
   const router = useRoute();
-  router.push('/mindspectrum')
 // 1. 使用 html2canvas 將票券區域轉換為圖片
 const ticketPreviewElement = document.querySelector('.show');
 
@@ -397,11 +398,15 @@ const ticketPreviewElement = document.querySelector('.show');
     .then(response => response.json())
     .then(data => {
       console.log('圖片路徑儲存成功:', data);
+      
+      setTimeout(()=>{
+        window.location.href = "/mindspectrum";
+      },300);
     })
     .catch(error => {
       console.error('圖片儲存失敗:', error);
     });
-  }, 'image/png');
+  }, 'image/png')
 });
 //=================依賴後端存取結束(圖片相對路徑)
 }
