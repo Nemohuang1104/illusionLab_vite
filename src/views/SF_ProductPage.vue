@@ -24,7 +24,8 @@ const productInfo = ref([
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 async function fetchProducts() {
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SF_FetchProducts.php'); // 替換成你實際的 API URL
+    // const response = await fetch('${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProducts.php'); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProducts.php`); // 替換成你實際的 API URL
     const data = await response.json();
     productInfo.value = data;
   } catch (error) {
@@ -289,7 +290,9 @@ onMounted(() => {
 }
 
 
-
+.shoopingcar:hover{
+  color: #C1693B;
+}
 
 // RWD
 
@@ -297,8 +300,6 @@ onMounted(() => {
   .producttitle {
     width: 80%;
   }
-
-
 
   .pagebox {
     padding: 0px;

@@ -9,20 +9,22 @@
           @click="item.level === 0 && handleClick(item, $event)"
           >
             <div class="book" ref="book">
-                <div class="back page" @click="rotatePage('back')"></div> 
-                <div class="page6 r page" @click="rotatePage('page6')"></div>
-                <div class="page5 l page" @click="rotatePage('page5')">
-                  <div class="text"></div>
+                <div class="back page"    :style="{ backgroundImage: `url('../src/assets/images/ms/${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
+                <div class="page6 r page" :style="{ backgroundImage: `url('../src/assets/images/ms/right3_${item.id}.jpg')` }" @click="rotatePage('page6')">
+
                 </div>
-                <div class="page4 r page" @click="rotatePage('page4')"></div>
-                <div class="page3 l page" @click="rotatePage('page3')">
-                  <div class="text"></div>
+                <div class="page5 l page"  @click="rotatePage('page5')">
+                  <div class="text " :style="{ backgroundImage: `url('../src/assets/images/ms/left3_${item.id}.jpg')` }"></div>
                 </div>
-                <div class="page2 r page" @click="rotatePage('page2')"></div>
-                <div class="page1 l page" @click="rotatePage('page1')">
-                  <div class="text"></div>
+                <div class="page4 r page" :style="{ backgroundImage: `url('../src/assets/images/ms/right2_${item.id}.jpg')` }" @click="rotatePage('page4')"></div>
+                <div class="page3 l page"  @click="rotatePage('page3')">
+                  <div class="text " :style="{ backgroundImage: `url('../src/assets/images/ms/left2_${item.id}.jpg')` }"></div>
                 </div>
-                <div class="front page" :style="{ backgroundImage: `url('../src/ms/${item.id}.jpg')` }" @click="rotatePage('front')"></div>
+                <div class="page2 r page" :style="{ backgroundImage: `url('../src/assets/images/ms/right1_${item.id}.jpg')` }" @click="rotatePage('page2')"></div>
+                <div class="page1 l page"  @click="rotatePage('page1')">
+                  <div class="text " :style="{ backgroundImage: `url('../src/assets/images/ms/left1_${item.id}.jpg')` }"></div>
+                </div>
+                <div class="front page" :style="{ backgroundImage: `url('../src/assets/images/ms/${item.id}.jpg')` }" @click="rotatePage('front')"></div>
             </div>
         </div>
       </transition-group>
@@ -30,109 +32,126 @@
     </div>
   </template>
   
-  <script setup>
-  import { ref, computed, onMounted } from 'vue'
-  
+<script setup>
+  import { ref, computed } from 'vue'
+
   const selectedItem = ref(null)
   const items = ref(['paint1', 'paint6', 'paint5', 'paint4', 'paint3', 'paint2'])
   const active = ref(0)
   const direction = ref('')
-  
+
+  // 計算屬性來判斷書是否開啟
+  const isBookOpen = computed(() => selectedItem.value !== null)
+
   const handleClick = (item, event) => {
       if (item.level === 0) {
           selectedItem.value = item.id
       }
       event.stopPropagation()
   }
-  
+
   const resetSelectedItem = (event) => {
-  const element = document.querySelector('.enlarged');
-  event.stopPropagation();
+      const element = document.querySelector('.enlarged')
+      event.stopPropagation()
 
-  if (element && element.classList.contains('enlarged')) {
-    const book = element.querySelector('.book');
+      if (element && element.classList.contains('enlarged')) {
+          const book = element.querySelector('.book')
 
-    book.querySelector('.front').style.transform = 'rotateY(-7deg)';
-    book.querySelector('.page1').style.transform = 'rotateY(-6deg)';
-    book.querySelector('.page2').style.transform = 'rotateY(-5deg)';
-    book.querySelector('.page3').style.transform = 'rotateY(-4deg)';
-    book.querySelector('.page4').style.transform = 'rotateY(-3deg)';
-    book.querySelector('.page5').style.transform = 'rotateY(-2deg)';
-    book.querySelector('.page6').style.transform = 'rotateY(-1deg)';
-    book.querySelector(' .back').style.transform = 'rotateY( 0deg)';
-        book.style.transform = 'translateX(0px)'
+          book.querySelector('.front').style.transform = 'rotateY(-7deg)'
+          book.querySelector('.page1').style.transform = 'rotateY(-6deg)'
+          book.querySelector('.page2').style.transform = 'rotateY(-5deg)'
+          book.querySelector('.page3').style.transform = 'rotateY(-4deg)'
+          book.querySelector('.page4').style.transform = 'rotateY(-3deg)'
+          book.querySelector('.page5').style.transform = 'rotateY(-2deg)'
+          book.querySelector('.page6').style.transform = 'rotateY(-1deg)'
+          book.querySelector('.back').style.transform = 'rotateY(0deg)'
+          book.style.transform = 'translateX(0px)'
 
-
-    selectedItem.value = null;
+          selectedItem.value = null
+      }
   }
-};
 
-  
   const moveLeft = () => {
-    active.value = active.value === 0 ? items.value.length - 1 : active.value - 1
-    direction.value = 'left'
+      if (!isBookOpen.value) {
+          active.value = active.value === 0 ? items.value.length - 1 : active.value - 1
+          direction.value = 'left'
+      }
   }
-  
+
   const moveRight = () => {
-    active.value = (active.value + 1) % items.value.length
-    direction.value = 'right'
+      if (!isBookOpen.value) {
+          active.value = (active.value + 1) % items.value.length
+          direction.value = 'right'
+      }
   }
-  
+
   const generateItems = () => {
-    const result = []
-    for (let i = active.value - 2; i <= active.value + 2; i++) {
-      let index = i
-      if (i < 0) index = items.value.length + i
-      if (i >= items.value.length) index = i % items.value.length
-      result.push({ id: items.value[index], level: active.value - i })
-    }
-    return result
+      const result = []
+      for (let i = active.value - 2; i <= active.value + 2; i++) {
+          let index = i
+          if (i < 0) index = items.value.length + i
+          if (i >= items.value.length) index = i % items.value.length
+          result.push({ id: items.value[index], level: active.value - i })
+      }
+      return result
   }
-  
+
   const rotatePage = (page) => {
-    const book = document.querySelector('.enlarged .book')
-    const pageElement = book.querySelector(`.${page}`)
-  
-    switch (page) {
-      case 'front':
-        pageElement.style.transform = 'rotateY(-180deg)'
-        book.querySelector('.page1').style.transform = 'rotateY(-179deg)'
-        book.style.transform = 'translateX(100px)'
-        break
-      case 'page2':
-        pageElement.style.transform = 'rotateY(-178deg)'
-        book.querySelector('.page3').style.transform = 'rotateY(-177deg)'
-        break
-      case 'page4':
-        pageElement.style.transform = 'rotateY(-176deg)'
-        book.querySelector('.page5').style.transform = 'rotateY(-175deg)'
-        break
-      case 'page6':
-        pageElement.style.transform = 'rotateY(-174deg)'
-        book.querySelector('.back').style.transform = 'rotateY(-173deg)'
-        book.style.transform = 'translateX(200px)'
-        break
-      case 'back':
-        pageElement.style.transform = 'rotateY(0deg)'
-        book.querySelector('.page6').style.transform = 'rotateY(-1deg)'
-        book.style.transform = 'translateX(100px)'
-        break
-      case 'page5':
-        pageElement.style.transform = 'rotateY(-2deg)'
-        book.querySelector('.page4').style.transform = 'rotateY(-3deg)'
-        break
-      case 'page3':
-        pageElement.style.transform = 'rotateY(-4deg)'
-        book.querySelector('.page2').style.transform = 'rotateY(-5deg)'
-        break
-      case 'page1':
-        pageElement.style.transform = 'rotateY(-6deg)'
-        book.querySelector('.front').style.transform = 'rotateY(-7deg)'
-        book.style.transform = 'translateX(0px)'
-        break
-    }
+      const book = document.querySelector('.enlarged .book')
+      const pageElement = book.querySelector(`.${page}`)
+
+      switch (page) {
+          case 'front':
+              pageElement.style.transform = 'rotateY(-180deg)'
+              book.querySelector('.page1').style.transform = 'rotateY(-179deg)'
+              book.style.transform = 'translateX(100px)'
+              break
+          case 'page2':
+              pageElement.style.transform = 'rotateY(-178deg)'
+              book.querySelector('.page3').style.transform = 'rotateY(-177deg)'
+              break
+          case 'page4':
+              pageElement.style.transform = 'rotateY(-176deg)'
+              book.querySelector('.page5').style.transform = 'rotateY(-175deg)'
+              break
+          case 'page6':
+              book.querySelector('.front').style.transform = 'rotateY(-180deg) translateX(100%)'
+              book.querySelector('.page1').style.transform = 'rotateY(-179deg) translateX(100%)'
+              book.querySelector('.page2').style.transform = 'rotateY(-178deg) translateX(100%)'
+              book.querySelector('.page3').style.transform = 'rotateY(-177deg) translateX(100%)'
+              book.querySelector('.page4').style.transform = 'rotateY(-176deg) translateX(100%)'
+              book.querySelector('.page5').style.transform = 'rotateY(-175deg) translateX(100%)'
+              pageElement.style.transform = 'rotateY(-174deg) translateX(100%)'
+              book.querySelector('.back').style.transform = 'rotateY(-173deg) translateX(100%)'
+              book.style.transform = 'translateX(200%)'
+              break
+          case 'back':
+              pageElement.style.transform = 'rotateY(0deg)'
+              book.querySelector('.front').style.transform = 'rotateY(-180deg)'
+              book.querySelector('.page1').style.transform = 'rotateY(-179deg)'
+              book.querySelector('.page2').style.transform = 'rotateY(-178deg)'
+              book.querySelector('.page3').style.transform = 'rotateY(-177deg)'
+              book.querySelector('.page4').style.transform = 'rotateY(-176deg)'
+              book.querySelector('.page5').style.transform = 'rotateY(-175deg)'
+              book.querySelector('.page6').style.transform = 'rotateY(-1deg)'
+              book.style.transform = 'translateX(100px)'
+              break
+          case 'page5':
+              pageElement.style.transform = 'rotateY(-2deg)'
+              book.querySelector('.page4').style.transform = 'rotateY(-3deg)'
+              break
+          case 'page3':
+              pageElement.style.transform = 'rotateY(-4deg)'
+              book.querySelector('.page2').style.transform = 'rotateY(-5deg)'
+              break
+          case 'page1':
+              pageElement.style.transform = 'rotateY(-6deg)'
+              book.querySelector('.front').style.transform = 'rotateY(-7deg)'
+              book.style.transform = 'translateX(0px)'
+              break
+      }
   }
-  </script>
+</script>
   
   
 
@@ -274,7 +293,6 @@ $gap2: 14vw;
 // }
 
 .front{
-    background-size: cover;
     background-color: white;
 
 }
@@ -285,16 +303,19 @@ $gap2: 14vw;
 }
 
 
-.front{ transform: rotateY(-7deg) }
-.page1{ transform: rotateY(-6deg) ;background-color:red($color: #000000);}
-.page2{ transform: rotateY(-5deg) }
-.page3{ transform: rotateY(-4deg) }
-.page4{ transform: rotateY(-3deg) }
-.page5{ transform: rotateY(-2deg) }
-.page6{ transform: rotateY(-1deg) }
- .back{ transform: rotateY( 0deg) }
+.front{ background-size: cover; transform: rotateY(-7deg) }
+.page1{ background-size: cover; transform: rotateY(-6deg) ;background-color:red($color: #000000);}
+.page2{ background-size: cover; transform: rotateY(-5deg) }
+.page3{ background-size: cover; transform: rotateY(-4deg) }
+.page4{ background-size: cover; transform: rotateY(-3deg) }
+.page5{background-size: cover;  transform: rotateY(-2deg) }
+.page6{ background-size: cover; transform: rotateY(-1deg) }
+ .back{ background-size: cover; transform: rotateY( 0deg) }
 
 .text{
+  border-top-left-radius: .5em;
+  border-bottom-left-radius: .5em;
+    background-size: cover;
     transform: scaleX(-1);
     display: flex;
     flex-direction: column;

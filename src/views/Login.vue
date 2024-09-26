@@ -8,6 +8,9 @@ import axios from 'axios';
 
 import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+//===========================================================
+import { auth, GoogleAuthProvider, signInWithPopup } from "../firebase";
+//===============================================================
 
 
 // export default {
@@ -21,7 +24,10 @@ import { useRouter, useRoute } from 'vue-router';
     // 错误信息
     const emailError = ref('');
     const passwordError = ref('');
-    
+
+    //===================================
+    const loginError = ref(null);
+    //=============================
     
 
     // 電子信箱驗證規則 (簡單驗證)
@@ -75,6 +81,53 @@ import { useRouter, useRoute } from 'vue-router';
       })
     };
 
+  //===========================google=======================================
+  const handleGoogleLogin = async () => {
+      loginError.value = null;
+      const provider = new GoogleAuthProvider();
+
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // 取得使用者資料
+        const userName = user.displayName;
+        const userEmail = user.email;
+
+        // 登入成功後可將資料發送到後端 API
+        await sendUserDataToBackend(userEmail, userName);
+
+      } catch (error) {
+        loginError.value = "Google 登入失敗，請稍後再試。";
+        console.error("登入錯誤:", error);
+      }
+    };
+
+    // 發送使用者資料到後端 API
+    const sendUserDataToBackend = async (email, name) => {
+      try {
+        const response = await fetch("http://illusionlab.local/public/PDO/Login/GoogleLogin.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ mem_account: email, mem_name: name })
+        });
+
+        const result = await response.json();
+        console.log("後端回應:", result);
+
+        if (result.memInfo.mem_state === 0) {
+          loginError.value = "登入失敗，請聯繫客服人員。";
+        } else {
+          // 處理登入成功邏輯，例如保存 token 或跳轉
+          console.log("登入成功，重定向...");
+        }
+      } catch (error) {
+        console.error("後端 API 錯誤:", error);
+      }
+    };
+//================================================================================
     // 表单是否有效的计算属性
     // const isFormValid = computed(() => {
     //   return !emailError.value && !passwordError.value && email.value && password.value;
@@ -275,10 +328,13 @@ const onSubmit = async () => {
 
     <button @click="onSubmit" class="login">登入</button>
    
+    <div v-if="loginError" class="error">{{ loginError }}</div>
     <p>其他登入方式</p>
     <div class="other">
-      <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
-      <a href=""><img src="../assets/images/icon-google.svg" alt=""></a>
+      <!-- <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
+      <a href=""><img src="../assets/images/icon-google.svg" alt=""></a> -->
+      <img src="../assets/images/icon-facebook.svg" alt="" >
+      <img src="../assets/images/icon-google.svg" alt="" @click="handleGoogleLogin">
     </div>
     <p>還不是會員? 前往註冊</p>
     <router-link :to="{ path: '/SignUp', query: { redirect: route.query.redirect } }"><input type="submit" value="註冊" class="signup"></router-link>

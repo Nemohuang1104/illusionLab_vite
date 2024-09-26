@@ -21,7 +21,8 @@ const route = useRoute();
 async function fetchProducts() {
   try {
     const productId = route.params.id;
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/MS_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    // const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/MS_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/MS_GetProductInfo.php?productId=${productId}`); // 替換成你實際的 API URL
     const data = await response.json();
     item.value = data;
     item.value = { ...data, quantity: 1 };  // 初始化數量為 1
@@ -60,8 +61,8 @@ function selectStyle(style) {
         <div class="pboxout">
             <div aria-label="Breadcrumb">
                 <ul class="breadcrumb">
-                    <li><router-link to="/MS_ProductPage">心靈光譜商品頁 </router-link></li>
-                    <li><a href="#">小女孩帆布袋</a></li>
+                    <li><router-link to="/MS_ProductPage">全部商品 </router-link></li>
+                    <li>{{ item.PRODUCT_NAME }}</li>
                 </ul>
             </div>
             <div class="pbox" v-if="item">

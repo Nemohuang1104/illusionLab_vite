@@ -52,7 +52,8 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/AddProduct.php', {
+      // const response = await fetch('${import.meta.env.VITE_API_URL}/ProductData/AddProduct.php', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/AddProduct.php`, {
         method: 'POST',
         body: formData,
       });
@@ -89,7 +90,8 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/SaveProductData.php', {
+      // const response = await fetch('${import.meta.env.VITE_API_URL}/ProductData/SaveProductData.php', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SaveProductData.php`, {
         method: 'POST',
         body: formData,
       });

@@ -1,22 +1,94 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_customer_info mode="one" class="customer_info"
-      @update:formData="updateFormData"
-      @saveData="saveData">
+      <MS_ticket_customer_info 
+      mode="one"
+      activityMode="activity1" 
+      class="customer_info"
+       ref="formRef"
+       @formCompletionStatus="handleFormCompletion"
+      >
         
       </MS_ticket_customer_info>
+      <!-- :step="modeSelect" -->
       <MS_com_buttons
-      @click="saveData"
-      class="actitvyBtn"
-      :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
+        class="actitvyBtn"
+        :currentStep="currentStep"
+        :mode="mode"  
+        :activityMode="activityMode"
+        :disabled="!isFormComplete"
+        @form-submitted="handleFormSubmit"
+        
+        ></MS_com_buttons>
       <CoinFall class="coin"/>
   <Footer_1 class="footer"></Footer_1>
 </div>
 </template>
 
-<script setup>
+<script>
+import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
+import Footer_1 from '@/components/Footer_1.vue';
+import Header from '@/components/Header_0.vue';
+import CoinFall from '@/components/CoinFall.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+
+
+export default {
+  components: {
+    MS_ticket_customer_info,
+    Footer_1,
+    Header,
+    CoinFall,
+    MS_com_buttons,
+  },
+  props:{
+    // formData: Object,
+  },
+  data() {
+    return {
+      currentMode: 'two', // 当前 mode
+      // formData: {
+      //   name: '',
+      //   phone: '',
+      //   email: '',
+      //   taxID: '',
+      //   companyName: '',
+      //   comments: '',
+      //   agreePrivacyPolicy: true,
+      //   agreeRefundPolicy: true,
+      // },
+   
+      formErrors: {}, // 儲存錯誤訊息的狀態
+      isFormComplete: false,   // 表单完成状态
+      currentStep: 1,         // 当前步骤
+      activityMode: 'activity1', // 初始活动模式
+      mode: 'two1',            // 初始 mode
+      showNext: true,
+      currentEventId: 1,
+    };
+  },
+
+  methods: {
+    handleFormCompletion(status) {
+      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
+    },
+    handleFormSubmit() {
+       // 透過 ref 調用 form 組件內的 validateForm 方法
+       const formIsValid = this.$refs.formRef.validateForm();
+      if (formIsValid) {
+        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
+        
+        this.$router.push(this.nextPage);
+    }
+  
+  },
+}
+}
+</script>
+
+
+<!-- <script setup>
 import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
 import Footer_1 from '@/components/Footer_1.vue';
 import Header from '@/components/Header_0.vue';
@@ -54,18 +126,48 @@ const saveData = () => {
 };
 
 const currentMode = ref('two');
-</script>
-<script>
+</script> -->
+<!-- <script>
 export default {
   data() {
     return {
       currentStep: 1, // 当前步骤
       activityMode: 'activity1', // 初始活动模式
-      mode: 'two1' // 初始 mode
+      mode: 'two1', // 初始 mode
+      isFormComplete: false,
+      showNext: true,
+      currentEventId: 1,
+    isFormComplete: false,
+      
     };
   },
+  methods: {
+    checkFormCompletion() {
+      this.isFormComplete = this.formData.name && this.formData.phone && this.formData.email && this.formData.agreePrivacyPolicy && this.formData.agreeRefundPolicy;
+    },
+    updateFormData(data) {
+      this.formData = data;
+      this.checkFormCompletion(); // 每次更新表單後檢查
+    },
+    saveData() {
+      if (this.isFormComplete) {
+        // 將資料保存到 Pinia
+        this.ticketStore.setGuestNumber(this.formData.quantity);
+        this.ticketStore.setDate(this.formData.date);
+        this.ticketStore.setTime(this.formData.time);
+      } else {
+        console.warn("表單未完成，無法保存數據");
+      }
+    },
+    handleNextStep() {
+      // 在這裡處理點擊後的邏輯，例如跳轉
+      if (this.isFormComplete) {
+        this.$router.push(this.nextRoute);
+      }
+    }
+  }
 }
-</script>
+</script> -->
 
 <style lang="scss" scoped>
 @import "../assets/style";

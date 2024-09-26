@@ -16,11 +16,11 @@
                     <div class="botSubTit">
                         <div class="DSTT"
                             :style="{color:DSTTColor}">
-                            08.17
+                            {{ monthDay }}
                         </div>
                         <div class="DSTB"
                             :style="{color:DSTBColor}">
-                            2024 <span :style="{color:DSTBRColor}">AUG</span>
+                            {{ year }} <span :style="{color:DSTBRColor}">{{ monthShort }}</span>
                         </div>
                     </div>
                     <div class="rightSubTit">
@@ -30,11 +30,11 @@
                         </div>
                         <div class="RSTM"
                             :style="{color:RSTMColor}">
-                            08.17
+                            {{ monthDay }}
                         </div>
                         <div class="RSTB"
                             :style="{color:RSTMColor}">
-                            2024 AUG
+                            {{ year }}  {{ monthShort }}
                         </div>
                     </div>
                     <img class="realSticker" :src="realStickerRoad" alt="">
@@ -98,36 +98,40 @@
                 </div>
                 <div class="theChosenArea">
                     <div v-if="selectedArea === 'ticket_bgs'" class="ticket_bgs selector">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_2.png','../src/ms/ticket_barcode_2.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_3.png','../src/ms/ticket_barcode_3.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#96A166','#58838E','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/ms/real_sticker_4.png','../src/ms/ticket_barcode_4.png')">
-                        <img class="ticket_bg" src="../../ms/ticket_bg_style_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/ms/real_sticker_5.png','../src/ms/ticket_barcode_5.png')">
-                        <!-- <img class="ticket_bg" src="../../ms/ticket_bg_style_6.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#','#','#','#','#','#')"> -->
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D', '#FFDE59', '#FFA2A0', '#80BD6B', '#FFE382', '#F9F0DB', '#F9F0DB', '../src/assets/images/ms/real_sticker_1.png', '../src/assets/images/ms/ticket_barcode_1.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_2.png','../src/assets/images/ms/ticket_barcode_2.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_3.png','../src/assets/images/ms/ticket_barcode_3.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/assets/images/ms/real_sticker_4.png','../src/assets/images/ms/ticket_barcode_4.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/assets/images/ms/real_sticker_5.png','../src/assets/images/ms/ticket_barcode_5.png')">
+                        <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_6.png" alt="" @click="changeColors('#ECF5D2', '#CCE391', '#CCE391', '#8EB177', '#D45F48', '#875E47', '#BA795F', '#F7FBEA', '#F7FBEA', '../src/assets/images/ms/real_sticker_6.png', '../src/assets/images/ms/ticket_barcode_6.png')">
+                        <!-- <img class="ticket_bg" src="../../assets/images/ms/ticket_bg_style_6.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#','#','#','#','#','#')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_colors'" class="ticket_colors selector" >
-                        <img class="ticket_color" src="../../ms/ticket_colors_1.png" alt="" @click="changeColors('#FB9D3C','#AD8662','#FDC274')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_2.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_3.png" alt="" @click="changeColors('#FFE382','#875E47','#FD6F6C')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_4.png" alt="" @click="changeColors('#FFFFFF','#778585','#4A657F')">
-                        <img class="ticket_color" src="../../ms/ticket_colors_5.png" alt="" @click="changeColors('#FFFFFF','#FFF3C6','#DFDFDF')">
-                        <!-- <img class="ticket_color" src="../../ms/ticket_colors_6.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')"> -->
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_1.png" alt="" @click="changeColors('#FB9D3C','#AD8662','#FDC274')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_2.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_3.png" alt="" @click="changeColors('#FFE382','#875E47','#FD6F6C')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_4.png" alt="" @click="changeColors('#FFFFFF','#778585','#4A657F')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_5.png" alt="" @click="changeColors('#FFFFFF','#FFF3C6','#DFDFDF')">
+                        <img class="ticket_color" src="../../assets/images/ms/ticket_colors_6.png" alt="" @click="changeColors('#BFA485', '#875E47', '#6A9052')">
+                        <!-- <img class="ticket_color" src="../../assets/images/ms/ticket_colors_6.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_stickers'" class="ticket_stickers selector">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_1.png" alt="" @click="changeColors('../src/ms/ticket_stickers_1.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_2.png" alt="" @click="changeColors('../src/ms/ticket_stickers_2.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_3.png" alt="" @click="changeColors('../src/ms/ticket_stickers_3.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_4.png" alt="" @click="changeColors('../src/ms/ticket_stickers_4.png')">
-                        <img class="ticket_sticker" src="../../ms/ticket_stickers_5.png" alt="" @click="changeColors('../src/ms/ticket_stickers_5.png')">
-                        <!-- <img class="ticket_sticker" src="../../ms/ticket_stickers_6.png" alt="" @click="changeColors('../src/ms/ticket_stickers_6.png')"> -->
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_1.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_1.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_2.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_2.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_3.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_3.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_4.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_4.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_5.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_5.png')">
+                        <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_6.png')">
+                        <!-- <img class="ticket_sticker" src="../../assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors('../src/assets/images/ms/ticket_stickers_6.png')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_morebangs'" class="ticket_morebangs selector">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/ms/ticket_stickers_1.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_2.png','../src/ms/ticket_barcode_2.png','#FB9D3C','#875E47','#FFFAEF','../src/ms/ticket_stickers_2.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#DDBA6C','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_3.png','../src/ms/ticket_barcode_3.png','#FFE382','#875E47','#FD6F6C','../src/ms/ticket_stickers_3.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#96A166','#58838E','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/ms/real_sticker_4.png','../src/ms/ticket_barcode_4.png','#FFFFFF','#778585','#4A657F','../src/ms/ticket_stickers_4.png')">
-                        <img class="ticket_morebang" src="../../ms/ticket_morebang_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/ms/real_sticker_5.png','../src/ms/ticket_barcode_5.png','#FFFFFF','#FFF3C6','#DFDFDF','../src/ms/ticket_stickers_5.png')">
-                        <!-- <img class="ticket_morebang" src="../../ms/ticket_morebang_6.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/ms/real_sticker_1.png','../src/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/ms/ticket_stickers_6.png')"> -->
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_1.png','../src/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/assets/images/ms/ticket_stickers_1.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_2.png','../src/assets/images/ms/ticket_barcode_2.png','#FB9D3C','#875E47','#FFFAEF','../src/assets/images/ms/ticket_stickers_2.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_3.png','../src/assets/images/ms/ticket_barcode_3.png','#FFE382','#875E47','#FD6F6C','../src/assets/images/ms/ticket_stickers_3.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED','../src/assets/images/ms/real_sticker_4.png','../src/assets/images/ms/ticket_barcode_4.png','#FFFFFF','#778585','#4A657F','../src/assets/images/ms/ticket_stickers_4.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','../src/assets/images/ms/real_sticker_5.png','../src/assets/images/ms/ticket_barcode_5.png','#FFFFFF','#FFF3C6','#DFDFDF','../src/assets/images/ms/ticket_stickers_5.png')">
+                        <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_6.png" alt="" @click="changeColors('#ECF5D2', '#CCE391', '#CCE391', '#8EB177', '#D45F48', '#875E47', '#BA795F', '#F7FBEA', '#F7FBEA', '../src/assets/images/ms/real_sticker_6.png', '../src/assets/images/ms/ticket_barcode_6.png','#BFA485', '#875E47', '#6A9052', '../src/assets/images/ms/ticket_stickers_6.png')">
+                        <!-- <img class="ticket_morebang" src="../../assets/images/ms/ticket_morebang_6.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','../src/assets/images/ms/real_sticker_1.png','../src/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','../src/assets/images/ms/ticket_stickers_6.png')"> -->
                     </div>
                 </div>
             </div>
@@ -137,9 +141,9 @@
         </div>
         <div ref="sentMyTicketBTN" class="sentMyTicket">
             <button v-if="isChoosenHidden" @click="wantToChoose" class="CTbtn btnColor1" id="RMTbtn">重新製作</button>
-            <router-link to="/mindspectrum">
-             <button v-if="isChoosenHidden" class="CTbtn btnColor2" id="CMTbtn">確認送出</button>
-            </router-link>
+            
+             <button v-if="isChoosenHidden" class="CTbtn btnColor2" id="CMTbtn" @click="updatepage">確認送出</button>
+            
         </div>
     </div>
 </template>
@@ -148,7 +152,10 @@
 <script>
 export default {
   data() {
-    return {                                                              
+    return {             
+      year: '',
+      monthShort: '',
+      day: '',                                                 
       selectedArea: 'ticket_bgs',
       tk_bg_color: '#F9F0DB', 
       tk_stk_color: '#FEDCAA',
@@ -162,13 +169,17 @@ export default {
       RSTTColor: '#FFE382',
       RSTMColor: '#F9F0DB',
       SColor:'#F9F0DB',
-      realStickerRoad:'../src/ms/real_sticker_1.png',
-      bigStickerRoad:'../src/ms/ticket_stickers_1.png',
-      barcode:'../src/ms/ticket_barcode_1.png',
+      realStickerRoad:'../src/assets/images/ms/real_sticker_1.png',
+      bigStickerRoad:'../src/assets/images/ms/ticket_stickers_1.png',
+      barcode:'../src/assets/images/ms/ticket_barcode_1.png',
       gradientCounter: 0  ,
       isChoosenHidden: false,
       IwantToChoose:false,
     };
+  },
+  mounted() {
+    // 在組件掛載時呼叫更新日期的函式
+    this.updateDate();
   },
   methods: {
     hideChoosen() {
@@ -276,13 +287,32 @@ export default {
       } else {
         console.error('Failed to parse gradient colors or stops:', colors, stops);
       }
+    },
+    updateDate() {
+      const now = new Date(); // 抓取當前時間
+
+      // 獲取當前月份並轉換成兩位數字
+      const month = (now.getMonth() + 1).toString().padStart(2, '0'); // getMonth() 返回值範圍是 0-11，所以需要 +1
+      // 獲取當前日並轉換成兩位數字
+      const day = now.getDate().toString().padStart(2, '0');
+
+      // 將月份與日期用 '.' 串接起來
+      this.monthDay = `${month}.${day}`;
+
+      // 獲取年份
+      this.year = now.getFullYear();
+
+      // 獲取月份縮寫 (如 "OCT")
+      const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      this.monthShort = months[now.getMonth()];
     }
   }
 };
 </script>
 
 <script setup>
-
+    
+    import html2canvas from 'html2canvas';
     import { ref, onMounted } from 'vue'
 
     const pathData1 = ref('')
@@ -306,23 +336,49 @@ export default {
     }
 
     onMounted(() => {
-    loadPathData('./src/ms/SVG_text/svg_custom1.txt', pathData1)
-    loadPathData('./src/ms/SVG_text/svg_custom2.txt', pathData2)
-    loadPathData('./src/ms/SVG_text/svg_custom3.txt', pathData3)
-    loadPathData('./src/ms/SVG_text/pathDataText1.txt', pathDataText1)
-    loadPathData('./src/ms/SVG_text/pathDataText2.txt', pathDataText2)
-    loadPathData('./src/ms/SVG_text/pathDataText3.txt', pathDataText3)
-    loadPathData('./src/ms/SVG_text/pathDataText4.txt', pathDataText4)
-    loadPathData('./src/ms/SVG_text/pathDataText5.txt', pathDataText5)
-    loadPathData('./src/ms/SVG_text/pathDataText6.txt', pathDataText6)
+    loadPathData('../src/assets/images/ms/SVG_text/svg_custom1.txt', pathData1)
+    loadPathData('../src/assets/images/ms/SVG_text/svg_custom2.txt', pathData2)
+    loadPathData('../src/assets/images/ms/SVG_text/svg_custom3.txt', pathData3)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText1.txt', pathDataText1)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText2.txt', pathDataText2)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText3.txt', pathDataText3)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText4.txt', pathDataText4)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText5.txt', pathDataText5)
+    loadPathData('../src/assets/images/ms/SVG_text/pathDataText6.txt', pathDataText6)
     })
+
+    const updatepage = () => {  //點擊送出按鈕之後顯示第二頁製作完成頁 
+    // 1. 使用 html2canvas 將票券區域轉換為圖片
+    const ticketPreviewElement = document.querySelector('.show');
+
+ //=================依賴後端存取開始(圖片相對路徑)
+ html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+  canvas.toBlob(blob => {
+    const formData = new FormData();
+    formData.append('image', blob, 'LC_ticket.png');
+
+    fetch('http://illusionlab.local/public/PDO/TicketOrder/save_custom_ticket.php', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('圖片路徑儲存成功:', data);
+    })
+    .catch(error => {
+      console.error('圖片儲存失敗:', error);
+    });
+  }, 'image/png');
+});
+//=================依賴後端存取結束(圖片相對路徑)
+}
 
 </script>
 
 <style lang="scss" scoped>
   @import "../../assets/SASS/component/ms";
 .template{
-  background-image: url('../src/ms/modeBGI3.jpg');
+  background-image: url('../src/assets/images/ms/modeBGI3.jpg');
 
 }
 
@@ -402,7 +458,7 @@ export default {
 .bigSticker{
     position: absolute;
     width: 230px;
-    bottom: 0%;
+    bottom: 1%;
     left: 28.5%;
 }
     .subTit{
@@ -512,6 +568,7 @@ export default {
     }
 
     .template{
+        height: 100vh;
         font-family:'Noto Sans TC';
         font-weight: bold;
         padding:100px 0px !important;
@@ -562,19 +619,19 @@ export default {
         }
         .finishMyTicket{
             position: relative;
-            margin-top: 50px;
+            margin-top: 30px;
         }
         .customization {
             flex-direction: column; 
         }
         .show{
-            top: 20%;
+            top: 12%;
             right: calc(50% - (455px /2));
         }
         .choosen{
             width: 70vw;
             margin-left: 0;
-            margin-top: 250px;
+            margin-top: 180px;
         }
         .ticket_sticker {
         width: 18vw;
@@ -590,7 +647,13 @@ export default {
         }
     }
     @media screen and (max-width:600px) {
-
+        .finishMyTicket{
+            position: relative;
+            margin-top: 5px;
+        }
+        .show{
+            top: 5%;
+        }
         .ticket{
             transform: scale(0.7);
         }
@@ -598,7 +661,7 @@ export default {
             width: 30vw
         }
         .choosen{
-            margin-top: 230px;
+            margin-top: 130px;
         }
         .sentMyTicket{
         margin-top: 150px;

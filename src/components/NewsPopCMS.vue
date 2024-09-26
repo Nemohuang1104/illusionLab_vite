@@ -53,7 +53,7 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch('http://illusionlab.local/public/PDO/News/AddNews.php', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/News/AddNews.php`, {
         method: 'POST',
         body: formData,
       });
@@ -90,7 +90,7 @@ const f_save = async () => {
   }
 
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/NEWS/SaveNewsData.php', {
+    const response = await fetch('${import.meta.env.VITE_API_URL}/NEWS/SaveNewsData.php', {
       method: 'POST',
       body: formData,
     });

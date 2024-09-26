@@ -149,6 +149,7 @@ const handleAvatarClick = () => {
         @click="handleAvatarClick"
       />
       <!-- ========================================================================= -->
+      <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
 
     <!-- 半圓形菜單 -->

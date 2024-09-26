@@ -428,6 +428,7 @@ svg.active {
 
 .icon-xmark {
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 

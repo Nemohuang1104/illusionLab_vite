@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $updateSql = "UPDATE MEMBER SET COUPON_USED = 1 WHERE TOKEN = :token";
                 $updateStmt = $pdo->prepare($updateSql);
                 $updateStmt->bindParam(':token', $token);
-
                 if ($updateStmt->execute()) {
                     echo json_encode(["status" => "success", "message" => "優惠券已使用。"]);
                 } else {

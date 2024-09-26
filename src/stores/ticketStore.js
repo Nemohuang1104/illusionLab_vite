@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 
-export const useTicketStore = defineStore('ticket', {
+
+export const useTicketStore = defineStore('ticketStore', {
   state: () => ({
     // 第一頁的資料
     guestNumber: 0,
@@ -14,8 +15,13 @@ export const useTicketStore = defineStore('ticket', {
     taxID: '',
     companyName: '',
     comments: '',
-    agreePrivacyPolicy: false,
-    agreeRefundPolicy: false
+    // agreePrivacyPolicy: false,
+    // agreeRefundPolicy: false,
+    // 新增 Checkbox 的狀態
+    // isChecked: false // Checkbox 狀態
+    totalAmount: 0,
+    eventId: 0,
+    eventName: '',
   }),
   actions: {
     // 第一頁的 actions
@@ -48,11 +54,31 @@ export const useTicketStore = defineStore('ticket', {
     setComments(comments) {
       this.comments = comments;
     },
-    setAgreePrivacyPolicy(agree) {
-      this.agreePrivacyPolicy = agree;
+    setEventName(eventName) {
+      this.eventName = eventName;
     },
-    setAgreeRefundPolicy(agree) {
-      this.agreeRefundPolicy = agree;
+    setEventId(eventId) {
+      this.eventId = eventId;
     }
-  }
+    // setAgreePrivacyPolicy(agreePrivacyPolicy) {
+    //   this.agreePrivacyPolicy = agreePrivacyPolicy;
+    // },
+    // setAgreeRefundPolicy(agreeRefundPolicy) {
+    //   this.agreeRefundPolicy = agreeRefundPolicy;
+    // },
+
+    // 用來更新 checkbox 狀態的 action
+  //   updateChecked(isChecked) {
+  //     this.isChecked = isChecked;
+  //   }
+  },
+  persist: {
+    enabled: true, // 啟用持久化
+    strategies: [
+      {
+        key: 'ticketStore', // 在 localStorage 中的 key 名稱
+        storage: sessionStorage, // 使用 localStorage，也可以選擇 sessionStorage
+      },
+    ],
+  },
 });

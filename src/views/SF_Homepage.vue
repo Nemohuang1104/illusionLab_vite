@@ -267,7 +267,7 @@ onBeforeUnmount(() => {
                     </div>
                 </div>
                 <div class="right">
-                    <img src="../assets/images/infoPic.svg">
+                    <img src="../assets/images/SF_infoPic.png">
                 </div>
             </div>
         </div>
@@ -360,8 +360,6 @@ onBeforeUnmount(() => {
 .wrapper {
     background: linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0)),
         url(../assets/images/STBackground.png);
-    width: 100vw;
-    // max-width:1440px ;
 
 }
 

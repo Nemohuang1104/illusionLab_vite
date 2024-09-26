@@ -34,7 +34,8 @@ async function fetchProductDetail() {
         console.log(route.params.id);
 
         const productId = route.params.id; // 從路由獲取商品 ID
-        const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
+        // const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -54,7 +55,7 @@ async function fetchProductDetail() {
             }
         }
 
-        // fetch(`http://illusionlab.local/public/PDO/ProductData/SF_FetchProductDetail.php?productId=${productId}`).then(response => response.json()).then(
+        // fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`).then(response => response.json()).then(
         //     json => console.log(json)
         // )
 
@@ -165,7 +166,7 @@ function addToCart() {
             <div aria-label="Breadcrumb">
                 <ul class="breadcrumb">
                     <li><router-link to="/SF_ProductPage">全部商品 </router-link></li>
-                    <li><a href="#">{{ item.PRODUCT_NAME }}</a></li>
+                    <li>{{ item.PRODUCT_NAME }}</li>
                 </ul>
             </div>
             <div class="pbox" v-if="item">
@@ -387,6 +388,7 @@ function addToCart() {
     flex-direction: row;
 }
 
+
 //數量增減
 .but {
     // border: 1px solid red;
@@ -464,6 +466,12 @@ function addToCart() {
 }
 
 //將下拉式選單select箭頭刪掉 
+
+.size {
+    position: relative;
+    display: inline-block;
+}
+
 .size select {
     width: 200px;
     text-align: center;
@@ -501,10 +509,6 @@ function addToCart() {
 .size option {
     color: black;
 
-}
-
-.size select:hover {
-    background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
 }
 
 //加入購物車

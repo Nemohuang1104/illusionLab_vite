@@ -2,7 +2,85 @@
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+
+// 從 sessionStorage 或其他地方取出 token
+const token = sessionStorage.getItem('token');
+
+//導入路由設定
+const router = useRouter();
+const route = useRoute();
+
+// 優惠券折扣金額自動填入
+const coupon = ref({
+  discount_code: '',
+  discount_amount:''
+});
+
+// 請求商品優惠券資料
+const getCouponInfo = async () => {
+  try {
+    // 使用 FormData 傳送 token
+    const formData = new FormData();
+    formData.append('token', token);
+
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowDiscount.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.status === 'success') {
+        coupon.value.discount_code = data.data.discount_code;
+      coupon.value.discount_amount = data.data.discount_amount;
+    } else {
+      console.error('Error fetching user info:', data.message);
+    }
+  } catch (error) {
+    console.error('Request failed:', error);
+  }
+};
+
+// 在組件加載時發起請求
+onMounted(() => {
+    getCouponInfo();
+});
+
+// 使用 beforeRouteEnter 钩子函数刷新頁面
+router.beforeEach((to, from, next) => {
+  if (to.name === 'shop1') {
+    window.location.reload();
+  }
+  next();
+});
+
+
+// 點擊返回按鈕，將優惠券重置為未使用
+const handleBack = async () => {
+  try {
+    // 使用 FormData 傳送 token
+    const formData = new FormData();
+    formData.append('token', token);
+    const response = await fetch('http://illusionlab.local/public/PDO/Login/ResetCoupon.php', {
+        method: 'POST',
+        body: formData
+    });
+    const result = await response.json();
+    if (result.status === 'success') {
+      // 重置成功，返回購物車頁面
+      router.push('/shop');
+    } else {
+      console.error(result.message);
+    }
+  } catch (error) {
+    console.error('Error resetting coupon:', error);
+  }
+};
 
 const cartItems = ref([
     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
@@ -17,6 +95,45 @@ const cartItems = ref([
 // //     return total + item.quantity * item.price;
 // //   }, 0);
 // // });
+import { onMounted } from 'vue';
+
+import { useRouter, useRoute } from 'vue-router';
+// 定義 name 和 address 變數
+const name = ref('');
+const address = ref('');
+
+const router = useRouter();
+const route = useRoute();
+
+// 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
+onMounted(() => {
+  if (route.query.storeName && route.query.storeAddress) {
+    name.value = route.query.storeName;
+    address.value = route.query.storeAddress;
+    orderData.value.store = route.query.storeName; // 使用新的變數名
+    orderData.value.address = route.query.storeAddress; 
+  }
+  
+  // 檢查是否有 shippingMethod 參數
+  if (route.query.shippingMethod) {
+    shippingMethod.value = route.query.shippingMethod; // 設定為 7-11取貨
+  }
+});
+
+const goToMap = () => {
+  router.push('/map_page');
+};
+
+const orderData = ref({
+    // name: '',
+    // phone: '',
+    address: '',
+    store: ''
+});
+
+
+
+
 
 const shippingMethod = ref('');
 const shippingFee = computed(() => {
@@ -36,7 +153,7 @@ const itemsTotal = computed(() => {
 });
 
 const totalAmount = computed(() => {
-  return itemsTotal.value + shippingFee.value;
+  return itemsTotal.value + shippingFee.value - coupon.value.discount_amount;
 });
 
 
@@ -190,7 +307,13 @@ const highlight = ref({
                                     </label>
                                 </div>
                                 <br>
-                                <label class="store">選擇門市: <input type="text" v-model="formData.store" /></label>
+                                <label class="store">7-11門市:
+                                    <button class="storechoose" @click="goToMap">選擇門市</button>
+                                </label>
+                                <br>
+                                <!-- 顯示選擇的門市和地址 -->
+                                <p class="orderData">門市名稱: {{ orderData.store }}</p>
+                                <p class="orderData">門市地址: {{ orderData.address }}</p>
                                 <br>
                                 <br>
                                 <label>*姓名: <input type="text" v-model="acceptorData.name" /></label>
@@ -244,13 +367,14 @@ const highlight = ref({
                         <div class="item_content">
                             <h3>{{ item.name }}</h3>
                             <div class="time">
-                                <div class="input">
+                                <p>規格:</p>
+                                <p>數量:</p>
+                                <!-- <div class="input">
                                     <select name="" id="">
                                         <option value="0">規格</option>
                                         <option value="1">可愛動物區</option>
                                         <option value="2">內心小女孩</option>
                                         <option value="3">大人釋懷中</option>
-
                                     </select>
                                 </div>
                                 <div class="quantity-input">
@@ -258,10 +382,12 @@ const highlight = ref({
                                         @click="item.quantity > 1 && item.quantity--">-</button>
                                     <input type="text" v-model="item.quantity" min="1" />
                                     <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
-                                </div>
+                                </div> -->
                             </div>
-                            <i class="fa-regular fa-trash-can"></i>
-
+                            <!-- <i class="fa-regular fa-trash-can"></i> -->
+                             <!-- <div class="trash">
+                                 <img class="trash-can" src="../assets/images/trashcan.svg">
+                             </div> -->
                         </div>
                     </div>
 
@@ -277,7 +403,7 @@ const highlight = ref({
                     </div>
                     <div class="discount-fee">
                         <h3>折扣金額</h3>
-                        <p>$0</p>
+                        <p>{{ coupon.discount_amount ? '$' + coupon.discount_amount : '$0' }}</p>
                     </div>
                     <hr>
                     <div class="total-fee">
@@ -289,7 +415,7 @@ const highlight = ref({
 
         </div>
         <div class="confirm">
-            <RouterLink to="/shop"><button>返回</button></RouterLink>
+            <RouterLink to="/shop"><button @click="handleBack">返回</button></RouterLink>
             <RouterLink to="/shop3"><button>結帳</button></RouterLink>
             
         </div>
@@ -746,7 +872,7 @@ const highlight = ref({
     appearance: none;
     /* 隱藏默認的下拉箭頭 */
     background: #FFEDBC;
-
+    cursor: pointer;
 }
 
 .input>select>option {
@@ -797,7 +923,8 @@ const highlight = ref({
     /* 將 line-height 設置為 40px，確保文字垂直居中 */
     background-color: #FFEDBC;
     /* 設置背景色，根據需求調整 */
-    border: 0
+    border: 0;
+    cursor: pointer;
 }
 
 .quantity-input>button:hover {
@@ -895,7 +1022,6 @@ const highlight = ref({
 }
 
 .discount-fee>h3 {
-
     font-size: 16px;
     line-height: 1.6rem;
     flex-basis: 25%;
@@ -955,6 +1081,36 @@ const highlight = ref({
     border-radius: 50px;
     background: var(--Color-3, #FFEDBC);
     cursor: pointer;
+}
+
+.trash{
+    display: flex;
+    justify-content: end;
+}
+
+.trash-can{
+    cursor: pointer;
+    width: 100%;
+    max-width: 20px;
+    margin: 12px 0;
+}
+
+button:hover{
+    opacity: .9;
+}
+
+
+// 門市選擇的字串
+.inner04 .orderData{
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+.storechoose{
+    background: #FFEDBC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 /* ==========RWD斷點============== */

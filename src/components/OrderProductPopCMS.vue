@@ -1,11 +1,32 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
-import { defineProps, ref, defineEmits } from 'vue';
+import { defineProps, ref, defineEmits, onMounted } from 'vue';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 
 /*定義 父組件prop 事件的原始夾帶資訊*/
 const props = defineProps({
   order: Object,
+  
+});
+
+// 假設你有一個函數來查詢詳細資料
+const orderDetails = ref();
+
+// onMounted(() => {
+//   fetchOrderDetails(props.productOrderId);
+// });
+
+onMounted(async () => {
+  try {
+    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${props.order.PRODUCT_ORDER_ID}`);
+    const data = await response.json();
+    // 更新組件中的資料，例如：
+    orderDetails.value = data;
+  } catch (error) {
+    console.error('Error fetching order details:', error);
+  }
 });
 
 /*定義 儲存和關閉按鈕emit 事件的夾帶資訊*/
@@ -18,9 +39,78 @@ const f_close = () => {
 };
 
 // 2.處理儲存按鈕emit夾帶的編輯狀態，並傳回父組件
-const f_save = () => {
-  emit('save-edit', localOrder.value); // 將本地編輯的數據傳遞回父組件
-  f_close(); // 儲存後關閉編輯視窗
+/* 儲存修改並發送到後端 */
+const f_save = async () => {
+  const formData = new FormData();
+  if (!localOrder.value.PRODUCT_ORDER_ID) {
+    // 新增產品
+    formData.append('EVENT_ID', localOrder.value.EVENT_ID);
+    formData.append('PRODUCT_NAME', localOrder.value.PRODUCT_NAME);
+    formData.append('PRODUCT_PRICE', localOrder.value.PRODUCT_PRICE);
+    formData.append('PRODUCT_STATUS', localOrder.value.PRODUCT_STATUS);
+    formData.append('MATERIAL', localOrder.value.MATERIAL);
+    formData.append('PRODUCT_SIZE', localOrder.value.PRODUCT_SIZE);
+
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
+    }
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/AddProduct.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('新增產品成功:', result);
+        emit('save-edit', result); // 傳遞結果給父組件
+        Swal.fire({
+          icon: 'success',
+          title: '新增商品成功',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        f_close();
+      } else {
+        console.error('新增產品失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  } else {
+    // 編輯已有產品
+    formData.append('PRODUCT_ORDER_ID', localOrder.value.PRODUCT_ORDER_ID);
+    formData.append('ORDER_STATUS', localOrder.value.ORDER_STATUS);
+    
+
+    if (localOrder.value.imageFile) {
+      formData.append('image', localOrder.value.imageFile);
+    }
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/SavePO_Data.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        emit('save-edit', localOrder.value);
+        Swal.fire({
+          icon: 'success',
+          title: '儲存成功',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        f_close();
+      } else {
+        console.error('儲存失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  }
 };
 
 
@@ -36,42 +126,48 @@ const f_save = () => {
                 <div class="orderinf1">
                     <div class="orderdiv">
                         <p class="ptext">訂購日期 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.order_date">
+                        <input class="inputtext" type="text" v-model="localOrder.ORDER_DATE">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">訂單編號 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.order_list">
+                        <input class="inputtext" type="text" v-model="localOrder.PRODUCT_ORDER_LIST">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">訂單狀態 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.order_status">
+                        <select class="inputtext" v-model="localOrder.ORDER_STATUS">
+                        <option value="待處理">待處理</option>
+                        <option value="已處理">已處理</option>
+                        <option value="已出貨">已出貨</option>
+                        <option value="已送達">已送達</option>
+                        <option value="已取消">已取消</option>
+                    </select>
                     </div>
                 </div>
 
                 <div class="orderinf">
                     <div class="orderdiv">
                         <p class="ptext">會員帳號 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.account">
+                        <input class="inputtext" type="text" v-model="localOrder.USER_CODE">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext"> 收件人姓名 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.receiver_name">
+                        <input class="inputtext" type="text" v-model="localOrder.USER_NAME">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">收件人手機 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.receiver_phone">
+                        <input class="inputtext" type="text" v-model="localOrder.PHONE_NUMBER">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">收件人地址 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.shipping_address">
+                        <input class="inputtext" type="text" v-model="localOrder.ADDRESS">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">付款方式 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.payment">
+                        <input class="inputtext" type="text" v-model="localOrder.PAYMENT_METHOD">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">運送方式 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.shipping_type">
+                        <input class="inputtext" type="text" v-model="localOrder.SHIPMENT">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">門市名稱 : </p>
@@ -87,34 +183,35 @@ const f_save = () => {
                                 <p class="eventname">商品名稱</p>
                                 <p ></p>
                                 <p class="quantity">數量</p>
-                                <p class="price">價格</p>
+                                <p class="price">售價</p>
                             </div>
                         </div>
-                        <div class="textdetail">
-                            <img src="../assets/images/product_orderitem.png" alt="">
+                        <div class="textdetail" v-for="(item, index) in orderDetails" :key="index">
+                            <img :src="item.PRODUCT_IMG" alt="">
                             <div class="detaillist">
-                                <p>繪本風格帆布袋</p>
+                                <p>{{ item.PRODUCT_NAME }}</p>
                             </div>
-                            <p>1</p>
-                            <p> $599</p>
+                            <p>{{ item.QUANTITY }}</p>
+                            <p> ${{ item.PRICE_AT_PURCHASE }}</p>
                         </div>
                     </div>
                     <div class="total">
                         <div class="orderdiv">
                             <p class="ptext1">小計 : </p>
-                            <input class="inputtext1" type="text" value="$599">
+                            <p class="inputtext2">${{ localOrder.TOTAL_PRICE }}</p>
                         </div>
                         <div class="orderdiv">
-                            <p class="ptext1">折扣碼 : </p>
-                            <input class="inputtext1" type="text" v-model="localOrder.discount_price">
+                            <p class="ptext1">折扣金額 : </p>
+                            <p class="inputtext2">${{ localOrder.TOTAL_PRICE }}</p>
                         </div>
                         <div class="orderdiv">
                             <p class="ptext1">運費 : </p>
-                            <input class="inputtext1" type="text" v-model="localOrder.shipping_fee">
+                            <p class="inputtext2">${{ localOrder.TOTAL_PRICE }}</p>
                         </div>
                         <div class="orderdiv">
                             <p class="ptext1">訂單總金額 : </p>
-                            <input class="inputtext1" type="text" value="$17,500">
+                            <p class="inputtext2">${{ localOrder.TOTAL_PRICE }}</p>
+                            
                         </div>
                     </div>
 
@@ -234,6 +331,7 @@ const f_save = () => {
     border-radius: 8px;
     flex-shrink: 0;
     background: #FFEDBC;
+    width: 300px;
 }
 
 .orderinf1 {
@@ -329,6 +427,11 @@ const f_save = () => {
     border: 1px solid #FFFFFF;
     border-radius: 8px;
     flex-shrink: 0;
+    text-align: right;
+}
+
+.inputtext2{
+    width: 20vw;
     text-align: right;
 }
 

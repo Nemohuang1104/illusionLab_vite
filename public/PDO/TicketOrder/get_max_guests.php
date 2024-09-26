@@ -1,19 +1,43 @@
-// get_max_guests.php
+
 <?php
-include 'db_connect.php'; // 資料庫連接
 
-$eventId = $_GET['event_id'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// 查詢該活動的最大人數
-$sql = "SELECT TICKET_SET FROM EVENT WHERE EVENT_ID = '$eventId'";
-$result = $conn->query($sql);
+include_once '../conn.php'; // 確保 conn.php 的路徑正確
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    echo json_encode(['maxGuests' => $row['TICKET_SET']]);
+// CORS 設定
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header('Content-Type: application/json'); // 設置返回的內容類型為 JSON
+
+// 取得事件ID
+$eventId = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
+
+if ($eventId > 0) {
+    try {
+        // 準備 SQL 查詢
+        $query = "SELECT AVAILABLE_TICKETS FROM SCHEDULE WHERE EVENT_ID = :event_id";
+        $stmt = $pdo->prepare($query);
+        // 綁定參數
+        $stmt->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+        // 執行查詢
+        $stmt->execute();
+        // 獲取結果
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo json_encode(['maxGuests' => $result['AVAILABLE_TICKETS']]);
+        } else {
+            echo json_encode(['maxGuests' => 0]);
+        }
+
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 } else {
-    echo json_encode(['error' => '無法找到該活動']);
+    echo "Invalid event ID";
 }
-
-$conn->close();
 ?>

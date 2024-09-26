@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-
 // import MindSpectrum from'./views/MindSpectrum-index.vue';
 // import Login from './views/Login.vue';
 // import SignUp from './views/SignUp.vue';
@@ -19,9 +18,11 @@ import { createApp } from 'vue';
  //import SF_ProudctPage from './views/SF_ProudctPage';
 //import Loginpopup from './components/Loginpopup.vue';
 //import LittleQuizResult from './views/LittleQuizResult.vue';
-import GoogleLogin from './components/GoogleLogin.vue';
+//import GoogleLogin from './components/GoogleLogin.vue';
+import MS_ticket_ting from './components/MS/MS_ticket_ting.vue';
 
 
 
-createApp(GoogleLogin).mount('#preview');
+
+createApp(MS_ticket_ting).mount('#preview');
   

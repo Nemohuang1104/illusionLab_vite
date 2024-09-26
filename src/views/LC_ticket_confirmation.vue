@@ -1,19 +1,57 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_confirmation mode="one" class="customer_info">
+      <MS_ticket_confirmation mode="one" class="customer_info"
+      :eventId="currentEventId">
         
       </MS_ticket_confirmation>
       <MS_com_buttons
-      @click="saveData"
       class="actitvyBtn"
+      :disabled="!isFormComplete"
       :currentStep="currentStep"
+      :isLastStep="isLastStep"
         :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
       <CoinFall class="coin"/>
   <Footer_1 class="footer"></Footer_1>
 </div>
 </template>
 <script>
+import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
+import Footer_1 from '@/components/Footer_1.vue';
+import Header from '@/components/Header_0.vue';
+import CoinFall from '@/components/CoinFall.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
+
+export default {
+  components: {
+    MS_ticket_confirmation,
+    Footer_1,
+    Header,
+    CoinFall,
+    MS_com_buttons,
+  },
+  data() {
+    return {
+      currentMode: 'two', // 当前 mode
+      // 引用的變量移到 data 中
+      currentStep: 2, // 当前步骤
+      activityMode: 'activity1', // 初始活动模式
+      mode: 'three1', // 初始 mode
+      currentEventId: 1,
+      isFormComplete: true,
+    };
+  },
+  methods: {
+
+  },
+  mounted() {
+   
+  },
+};
+</script>
+
+<!-- <script>
 export default {
   data() {
     return {
@@ -49,7 +87,7 @@ export default {
     
 
     
-</script>
+</script> -->
 
 <style lang="scss" scoped>
 @import "../assets/style";
@@ -131,6 +169,7 @@ body{
 };
 
 h1{
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
@@ -142,6 +181,7 @@ h2{
 }
 
 h3{
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: h3) ;
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
 
@@ -178,6 +218,11 @@ p{
 .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
   
+}
+
+.sbmit{
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
 }
 
 </style>

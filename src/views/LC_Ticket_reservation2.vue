@@ -1,66 +1,79 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_reservation mode="one" activityMode="activity1" class="reservation"
-      @update:formData="updateFormData"
-      @saveData="saveData">
+      <MS_ticket_reservation 
+      mode="one" 
+      activityMode="activity1" 
+      class="reservation"
+      :eventId="currentEventId"
+        ref="formRef"
+       @formCompletionStatus="handleFormCompletion"
+      >
         
       </MS_ticket_reservation>
       <MS_com_buttons
-        @click="saveData"
+        
         class="actitvyBtn"
         :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
+        :mode="mode" 
+        :activityMode="activityMode"
+        :disabled="!isFormComplete"
+        
+        @form-submitted="handleFormSubmit"
+        ></MS_com_buttons>
       <CoinFall class="coin"/>
   <Footer_1 class="footer"></Footer_1>
 
 </div>
 </template>
 
-<script setup>
-    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
-    import Footer_1 from '@/components/Footer_1.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import CoinFall from '@/components/CoinFall.vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
-    import { useTicketStore } from '@/stores/ticketStore';
-
-    const currentMode = ref('two');
-
-    const ticketStore = useTicketStore(); // 初始化 store
-
-    const formData = ref({
-        quantity: '',
-        date: '',
-        time: ''
-    });
-
-  const updateFormData = (data) => {
-  formData.value = data;
-    };
-
-    const saveData = () => {
-        // 將資料保存到 Pinia
-          ticketStore.setGuestNumber(formData.value.quantity)
-          ticketStore.setDate(formData.value.date);
-          ticketStore.setTime(formData.value.time);
-        
-    };
-    
-</script>
 <script>
-export default {
-  data() {
-    return {
-      currentStep: 0, // 当前步骤
-      activityMode: 'activity1', // 初始活动模式
-      mode: 'one1' // 初始 mode
-    };
+  import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+  import Footer_1 from '@/components/Footer_1.vue';
+  import Header from '@/components/Header_0.vue';
+  import CoinFall from '@/components/CoinFall.vue';
+  import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
+  export default {
+    components: {
+      MS_ticket_reservation,
+      Footer_1,
+      Header,
+      CoinFall,
+      MS_com_buttons
+    },
+    data() {
+      return {
+        currentMode: 'two', // 当前 mode
+        
+        formErrors: {}, // 儲存錯誤訊息的狀態
+        isFormComplete: false, // 表單是否完整的狀態
+        currentStep: 0, // 当前步骤
+        activityMode: 'activity1', // 初始活动模式
+        mode: 'one1', // 初始 mode
+        currentEventId: 1, // 當前活動的 EVENT_ID，例如 1
+      };
+    },
+ 
+    methods: {
+      handleFormCompletion(status) {
+      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
+    },
+    handleFormSubmit() {
+      console.log(this.$refs.formRef);
+       // 透過 ref 調用 form 組件內的 validateForm 方法
+       const formIsValid = this.$refs.formRef.validateForm();
+      if (formIsValid) {
+        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
+        
+        this.$router.push(this.nextPage);
+    }
+  
   },
-}
+    }
+  }
 </script>
+
 
 <style lang="scss" scoped>
 .actitvyBtn{
@@ -132,6 +145,7 @@ export default {
 
 
 
+
 </style>
 
 <style lang="scss">
@@ -189,5 +203,6 @@ h6{
  background-color:rgba(255, 255, 255, 0.5) !important;
   
 }
+
 
 </style>
