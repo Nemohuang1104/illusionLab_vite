@@ -100,6 +100,7 @@ function addToCart() {
         img: item.value.PRODUCT_IMG,
         quantity: counter.value,
         size: selectedSize.value // 你可以從 select 元素中獲取尺寸
+        
     };
 
     // 從 localStorage 中獲取當前購物車商品
@@ -446,32 +447,9 @@ function addToCart() {
     background-color: #C1693B;
 }
 
-//尺寸下拉式選單
-.size select {
-    width: 300px;
-    height: 40px;
-    border-radius: 12px;
-    display: block;
-    text-align: center;
-    line-height: 40px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #fff;
-    outline: none;
-    background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    // border: 1px solid ;
-    border: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-    cursor: pointer;
-    border: unset;
-}
+
 
 //將下拉式選單select箭頭刪掉 
-
-.size {
-    position: relative;
-    display: inline-block;
-}
-
 .size select {
     width: 200px;
     text-align: center;
@@ -490,6 +468,7 @@ function addToCart() {
     appearance: none;
     font-size: 14px;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
+    border: unset;
 }
 
 .size::after {
@@ -509,6 +488,10 @@ function addToCart() {
 .size option {
     color: black;
 
+}
+
+.size select:hover {
+    background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
 }
 
 //加入購物車

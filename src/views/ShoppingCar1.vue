@@ -7,104 +7,76 @@ const currentMode = ref('one');
 
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import Footer from '@/components/Footer_0.vue';
-import { useRouter, useRoute } from 'vue-router';
-
-//導入路由設定
-const router = useRouter();
-const route = useRoute();
-
-// 商品優惠券自動填入碼
-const coupon = ref({
-  discount_code: '',
-  discount_amount:''
-});
-
-// 從 sessionStorage 或其他地方取出 token
-const token = sessionStorage.getItem('token');
-
-// 點擊結帳按鈕，更新優惠券狀態為已使用
-const handleCheckout = async () => {
-  try {
-
-     // 使用 FormData 傳送 token
-     const formData = new FormData();
-    formData.append('token', token);
-    const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
-        method: 'POST',
-        body: formData
-    });
-    const result = await response.json();
-    if (result.status === 'success') {
-      // 結帳成功，跳轉到下一頁
-      router.push('/shop2');
-    } else {
-      console.error(result.message);
-    }
-  } catch (error) {
-    console.error('Error updating coupon:', error);
-  }
-};
-
-// 請求商品優惠券資料
-const getCouponInfo = async () => {
-  try {
-    // 使用 FormData 傳送 token
-    const formData = new FormData();
-    formData.append('token', token);
-
-    const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
-      method: 'POST',
-      body: formData
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    if (data.status === 'success') {
-        coupon.value.discount_code = data.data.discount_code;
-      coupon.value.discount_amount = data.data.discount_amount;
-    } else {
-      console.error('Error fetching user info:', data.message);
-    }
-  } catch (error) {
-    console.error('Request failed:', error);
-  }
-};
-
-// 在組件加載時發起請求
-onMounted(() => {
-    getCouponInfo();
-});
 
 
-// 使用 beforeRouteEnter 钩子函数刷新頁面
-router.beforeEach((to, from, next) => {
-  if (to.name === 'shop1') {
-    window.location.reload();
-  }
-  next();
-});
 
 // const cartItems = ref([
 //     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
 // ]);
 
 
+
+
+
+// ================在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+
+
 const productInfo = ref([
-    { id: '1', cardImage: '../src/assets/images/MS_Product1.svg', productName: '繪本風格悠遊卡卡夾', price: '300' },
-    { id: '2', cardImage: '../src/assets/images/MS_Product2.svg', productName: '繪本風格筆記本', price: '180' },
-    { id: '3', cardImage: '../src/assets/images/MS_Product3.svg', productName: '繪本風格帆布袋', price: '590' },
-    { id: '4', cardImage: '../src/assets/images/MS_Product4.svg', productName: '繪本風格小貼紙', price: '100' },
-    { id: '5', cardImage: '../src/assets/images/MS_Product5.svg', productName: '繪本風格悠遊抱枕', price: '990' },
+    // { id: '1', cardImage: '../src/assets/images/MS_Product1.svg', productName: '繪本風格悠遊卡卡夾', price: '300' },
+    // { id: '2', cardImage: '../src/assets/images/MS_Product2.svg', productName: '繪本風格筆記本', price: '180' },
+    // { id: '3', cardImage: '../src/assets/images/MS_Product3.svg', productName: '繪本風格帆布袋', price: '590' },
+    // { id: '4', cardImage: '../src/assets/images/MS_Product4.svg', productName: '繪本風格小貼紙', price: '100' },
+    // { id: '5', cardImage: '../src/assets/images/MS_Product5.svg', productName: '繪本風格悠遊抱枕', price: '990' },
     // { id: '6', cardImage: '../src/assets/images/MS_Product6.svg', productName: '繪本風格防摔手機殼', price: '1280' },
 ])
 
 
+async function fetchProducts() {
+    try {
+        // 從三個不同的 PHP 檔案分別撈取兩項商品
+        const response1 = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/LC_FetchProducts.php`);
+        const data1 = await response1.json();
+
+        const response2 = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProducts.php`);
+        const data2 = await response2.json();
+
+        const response3 = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/MS_FetchProducts.php`);
+        const data3 = await response3.json();
+
+        // 將三次 API 返回的商品資料合併在一起
+        productInfo.value = [
+            ...data1.slice(0, 2), // 從第一個 PHP 檔案取前兩個商品
+            ...data2.slice(0, 2), // 從第二個 PHP 檔案取前兩個商品
+            ...data3.slice(0, 1), // 從第三個 PHP 檔案取第一個商品
+        ];
+
+    } catch (error) {
+        console.error('Error fetching products:', error);
+    }
+}
 
 
-// ============ShoppingStep=============//
+function getProductDetailRoute(item) {
+    switch (item.EVENT_ID) {
+        case 1:
+            return { name: 'LC_ProductInfo', params: { id: item.PRODUCT_ID } };
+        case 2:
+            return { name: 'SF_DetailList', params: { id: item.PRODUCT_ID } };
+        case 3:
+            return { name: 'MS_ProductList', params: { id: item.PRODUCT_ID } };
+    
+    }
+}
+
+
+
+onMounted(() => {
+    fetchProducts(); // 當頁面加載時撈取資料
+});
+// ================在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
+
+
+// ============ShoppingStep=====STAR========//
 const highlight = ref({
     1: { background: '#fff', fontcolor: '#22247A' },
     2: { background: 'transparent', fontcolor: '#fff' },
@@ -113,6 +85,9 @@ const highlight = ref({
 }
 );
 
+// ============ShoppingStep======END=======//
+
+// ============儲存從 localStorage=====STAR========//
 
 
 // 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
@@ -217,8 +192,10 @@ onMounted(() => {
     shoppingCart.value = cart;
 });
 
+// ============儲存從 localStorage=====END========//
 
-//優惠券開始
+
+// ============優惠券開始=====STAR========//
 
 //導入路由設定
 const router = useRouter();
@@ -286,14 +263,14 @@ const getCouponInfo = async () => {
 
 // 計算總金額，商品金額減去折扣金額
 const calculatedTotalPrice = computed(() => {
-  return totalPrice.value - coupon.value.discount_amount;
+    return totalPrice.value - coupon.value.discount_amount;
 });
 
 // 監控優惠碼變化，如果優惠碼被清除，重置折扣金額
 watch(() => coupon.value.discount_code, (newVal) => {
-  if (newVal === '') {
-    coupon.value.discount_amount = '0'; // 重置折扣金額為 0
-  }
+    if (newVal === '') {
+        coupon.value.discount_amount = '0'; // 重置折扣金額為 0
+    }
 });
 
 // 在組件加載時發起請求
@@ -310,7 +287,9 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
-//優惠券結束
+// ============優惠券結束=============//
+
+
 </script>
 <template>
     <div class="wrapper">
@@ -374,7 +353,8 @@ router.beforeEach((to, from, next) => {
                         <p>$0</p> -->
                         <h3>折扣</h3>
                         <!-- 當有折扣金額時，顯示折扣金額，否則顯示 $0 -->
-                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'"> $ {{ coupon.discount_amount }} </p>
+                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'"> $ {{
+                            coupon.discount_amount }} </p>
                         <p v-else>$0</p>
                     </div>
 
@@ -393,7 +373,7 @@ router.beforeEach((to, from, next) => {
             </div>
         </div>
         <hr>
-        <div class="ProductAdd">
+        <!-- <div class="ProductAdd">
             <p>商品加購</p>
             <ul class="addProduct_grid">
                 <li class="pro" v-for="(item, index) in productInfo" :key="item.id">
@@ -407,6 +387,25 @@ router.beforeEach((to, from, next) => {
                             <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
                         </div>
                     </div>
+                </li>
+            </ul>
+        </div> -->
+        <div class="ProductAdd">
+            <p>商品加購</p>
+            <ul class="addProduct_grid">
+                <li class="pro" v-for="item in productInfo" :key="item.PRODUCT_ID">
+                    <router-link :to="getProductDetailRoute(item)">
+                        <img :src="item.PRODUCT_IMG" alt="">
+                        <p>{{ item.PRODUCT_NAME }}</p>
+                        <div class="text">
+                            <div class="price">
+                                <span>NT${{ item.PRODUCT_PRICE }}</span>
+                            </div>
+                            <div class="icon">
+                                <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+                            </div>
+                        </div>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -608,17 +607,17 @@ ul {
     border: 0
 }
 
-.input select{
+.input select {
     width: 90%;
     height: 20px;
-    line-height: 20px; 
+    line-height: 20px;
     // border: 1px solid #ccc;
     border-radius: 4px;
     padding: 0 8px;
     font-size: 16px;
     transition: border-color 0.3s ease-in-out;
-    appearance: none; 
-    background: #FFEDBC; 
+    appearance: none;
+    background: #FFEDBC;
     vertical-align: baseline;
     cursor: pointer;
 }
@@ -828,16 +827,19 @@ ul {
 .text {
     display: flex;
     justify-content: space-between;
+    color: #FFFFFF;
 }
 
 .pro {
     cursor: pointer;
+   
 }
 
 .pro p {
     margin: 20px auto;
     font-family: "Noto Sans TC";
     height: 4vh;
+    color: #FFFFFF;
 }
 
 .pro img {
@@ -845,6 +847,9 @@ ul {
     width: 100%;
     max-width: 150px;
 }
+
+
+
 
 
 // =====  RWD  =====
