@@ -43,6 +43,15 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate); // 將插件加到 Pinia 中
 const app = createApp(App);
 
+//動態變更網頁名稱
+router.afterEach((to) => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  } else {
+    document.title = '幻浸實驗室'; // 可以設置一個預設標題
+  }
+});
+
 app.use(pinia);
 app.mount('#app');
 
