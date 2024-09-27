@@ -383,7 +383,7 @@ export default {
   @import "../../assets/SASS/component/ms";
 .template{
   background-image: url('../src/assets/images/ms/modeBGI3.jpg');
-
+  min-height: 100vh;
 }
 
 .finishMyTicket{

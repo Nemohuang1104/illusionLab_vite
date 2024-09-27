@@ -91,9 +91,9 @@
       title: '七、聯絡我們',
       contentTitle: '如果您對本隱私政策有任何疑問或希望行使您的權利，請通過以下方式聯繫我們：',
       content: [
-        { title: '電子郵件：', text: 'service@幻浸實驗室.com.tw' },
+        { title: '電子郵件：', text: 'illusionLab@gmail.com' },
         { title: '電話：', text: '(TID)102-11-8939。' },
-        { title: '地址：', text: '新北市啵啵區嘻嘻路102街11號。' },
+        { title: '地址：', text: '台北市中山區南京東路三段219號' },
       ],
     },
   ];

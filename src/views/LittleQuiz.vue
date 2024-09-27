@@ -598,6 +598,12 @@ export default {
   user-select: none;
   box-sizing: border-box;
   align-content: center;
+  cursor: pointer;
+}
+
+.btn:hover{
+  background:#ffdf88 ;
+  color: #ffffff;
 }
 
 
@@ -733,6 +739,11 @@ element.style{
   border: none;
   margin: 0 auto;
   cursor: pointer;
+}
+
+.finalanswer button:hover{
+  background:#ffdf88 ;
+  color: #ffffff;
 }
 
 // 

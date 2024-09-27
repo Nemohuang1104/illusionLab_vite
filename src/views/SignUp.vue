@@ -205,7 +205,8 @@ const register = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "註冊成功！商品折價券60元已匯入您的帳戶，開始您的幻浸之旅吧!",
+          title: "註冊成功！",
+          html:"商品折價券60元已匯入您的帳戶，<br>開始您的幻浸之旅吧!",
           showConfirmButton: true,
           // timer: 10000
         }).then(() =>  {

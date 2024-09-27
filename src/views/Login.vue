@@ -128,40 +128,7 @@ import { auth, GoogleAuthProvider, signInWithPopup } from "../firebase";
       }
     };
 //================================================================================
-    // 表单是否有效的计算属性
-    // const isFormValid = computed(() => {
-    //   return !emailError.value && !passwordError.value && email.value && password.value;
-    // });
-
-
-  // const onSubmit = () => {
-  //   checkEmail();     // 先验证电子邮件
-  //   checkPassword();  
-
-  // if (!emailError.value  && !passwordError.value ) {
-  //   // 驗證碼正確，顯示註冊成功訊息
-  //   //alert('註冊成功！歡迎加入！');
-  //   Swal.fire({
-  //     position: "center",
-  //     icon: "success",
-  //     title: "歡迎進入幻浸實驗室",
-  //     showConfirmButton: false,
-  //     timer: 1200
-  //   }).then(() => {router.push('/MemberCenter')});
-  //   // 在這裡可以加入其他的註冊邏輯，比如送出表單資料至伺服器
-  // } else {
-  //   // 驗證碼錯誤，彈出錯誤訊息
-  //   //  alert('請重新檢視表單');
-  //   Swal.fire({
-  //     position: "center",
-  //     icon: "warning",
-  //     title: "請重新檢視表單",
-  //     showConfirmButton: false,
-  //     timer: 1200
-  //   });
-  // }
-  // }
-
+    
   //=============================PHP===================================
   // 表單提交
 const onSubmit = async () => {

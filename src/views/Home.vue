@@ -73,7 +73,7 @@
             <p>心靈光譜是為孤獨而痛苦著的你，提供一個療癒的旅程，<br>
               進入繪本的世界拋開一切煩惱，沉浸在充滿代入感的世界。
             </p>
-            <RouterLink to="/MS_Enter">
+            <RouterLink to="/mindspectrum">
               <MS_Button class="LC_btn" Button="ENTER"></MS_Button>
             </RouterLink>
           </div>
