@@ -22,6 +22,10 @@ export const useTicketStore = defineStore('ticketStore', {
     totalAmount: 0,
     eventId: 0,
     eventName: '',
+    discountCode: '',
+    discount: 0,
+    total: 0,
+    orderId: null, // 初始化 orderId 為 null
   }),
   actions: {
     // 第一頁的 actions
@@ -59,7 +63,13 @@ export const useTicketStore = defineStore('ticketStore', {
     },
     setEventId(eventId) {
       this.eventId = eventId;
-    }
+    },
+    setDiscountCode(discountCode) {
+      this.discountCode = discountCode;
+    },
+    setOrderId(orderId) {
+      this.orderId = orderId; // 設置 orderId 的方法
+    },
     // setAgreePrivacyPolicy(agreePrivacyPolicy) {
     //   this.agreePrivacyPolicy = agreePrivacyPolicy;
     // },

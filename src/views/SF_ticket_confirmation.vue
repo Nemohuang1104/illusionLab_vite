@@ -1,42 +1,52 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_confirmation mode="two" class="customer_info">
+      <MS_ticket_confirmation 
+      mode="two" 
+      class="customer_info"
+      :eventId="currentEventId"
+      >
         
       </MS_ticket_confirmation>
       <MS_com_buttons
-      class="actitvyBtn"
-      :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
+        class="actitvyBtn"
+        :disabled="!isFormComplete"
+        :currentStep="currentStep"
+        :isLastStep="isLastStep"
+        :mode="mode" 
+        :step="modeSelect" 
+        :activityMode="activityMode"
+        >
+      </MS_com_buttons>
       
   <Footer_2 class="footer"></Footer_2>
 </div>
 </template>
 <script>
+import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
+import Footer_2 from '@/components/Footer_2.vue';
+import Header from '@/components/Header_0.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
 export default {
+  components: {
+    MS_ticket_confirmation,
+    Footer_2,
+    Header,
+    MS_com_buttons,
+  },
   data() {
     return {
+      currentMode: 'three', // 当前 mode
       currentStep: 2, // 当前步骤
       activityMode: 'activity2', // 初始活动模式
       mode: 'three1',// 初始 mode
-      modeSelect: 'two'
-
+      modeSelect: 'two',
+      currentEventId: 2,
+      isFormComplete: true,
     };
   },
 }
-</script>
-
-<script setup>
-    import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
-    import Footer_2 from '@/components/Footer_2.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import CoinFall from '@/components/CoinFall.vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
-
-    const currentMode = ref('three');
-    
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +54,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
 
 .warpper{
-  background-image: url('../src/ms/modeBGI2.png');
+  background-image: url(@/assets/images/ms/modeBGI2.png);
 
 }
 .actitvyBtn{
@@ -138,6 +148,10 @@ export default {
   
 }
 
+::v-deep .theOriginal[data-v-5a144230]{
+  display: none;
+}
+
 @media (max-width: 500px){
   ::v-deep main{
     width: 90vw;
@@ -168,7 +182,7 @@ export default {
 
 ::v-deep .weNeedAStarlight{
     display: flex;
-    background-image: url(/src/ms/yourAreTheBiggestStar.png);
+    background-image: url(@/assets/images/ms/yourAreTheBiggestStar.png);
     background-size: cover;
     background-position-y: -22px!important;
     width: 150px!important;
@@ -198,7 +212,7 @@ export default {
 
 ::v-deep .weNeedAStarlight{
     display: flex;
-    background-image: url(/src/ms/yourAreTheBiggestStar.png);
+    background-image: url(@/assets/images/ms/yourAreTheBiggestStar.png);
     background-size: cover;
     background-position-y: -22px!important;
     width: 150px!important;

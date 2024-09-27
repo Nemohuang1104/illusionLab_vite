@@ -1,42 +1,76 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_reservation mode="two" class="reservation">
+      <MS_ticket_reservation 
+      mode="two" 
+      activityMode="activity1" 
+      class="reservation"
+      :eventId="currentEventId"
+        ref="formRef"
+       @formCompletionStatus="handleFormCompletion"
+       >
         
       </MS_ticket_reservation>
       <MS_com_buttons
       class="actitvyBtn"
       :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode">
+        :mode="mode" 
+        :activityMode="activityMode"
+        :disabled="!isFormComplete"
+        @form-submitted="handleFormSubmit"
+        :step="modeSelect" 
+
+        >
       </MS_com_buttons>
   <Footer_2 class="footer"></Footer_2>
 </div>
 </template>
 
 <script>
+  import MS_ticket_reservation from '@/components/MS/MS_ticket_reservation.vue';
+  import Footer_2 from '@/components/Footer_2.vue';
+  import Header from '@/components/Header_0.vue';
+  import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
 export default {
+  components: {
+      MS_ticket_reservation,
+      Footer_2,
+      Header,
+      MS_com_buttons
+    },
   data() {
     return {
+      currentMode: 'three', // 当前 mode
+      formErrors: {}, // 儲存錯誤訊息的狀態
+      isFormComplete: false, // 表單是否完整的狀態
       currentStep: 0, // 当前步骤
       activityMode: 'activity2', // 初始活动模式
       mode: 'one1', // 初始 mode
-      modeSelect: 'two'
+      modeSelect: 'two',
+      currentEventId: 2, // 當前活動的 EVENT_ID，例如 1
     };
   },
+
+  methods: {
+      handleFormCompletion(status) {
+      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
+    },
+    handleFormSubmit() {
+      console.log(this.$refs.formRef);
+       // 透過 ref 調用 form 組件內的 validateForm 方法
+       const formIsValid = this.$refs.formRef.validateForm();
+      if (formIsValid) {
+        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
+        
+        this.$router.push(this.nextPage);
+    }
+  
+  },
+    }
 }
 </script>
 
-<script setup>
-    import MS_ticket_reservation from '@/components/MS_ticket_reservation.vue';
-    import Footer_2 from '@/components/Footer_2.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
-
-    const currentMode = ref('three');
-    
-</script>
 
 
 <style lang="scss" scoped>
@@ -48,7 +82,7 @@ export default {
   font-family: "Noto Serif TC"  !important;
  }
   .warpper{
-  background-image: url('../src/ms/modeBGI2.png');
+  background-image: url(@/assets/images/ms/modeBGI2.png);
 
 }
 
