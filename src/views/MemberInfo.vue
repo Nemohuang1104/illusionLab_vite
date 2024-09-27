@@ -1,6 +1,5 @@
 <script setup>
-import Header_0 from '@/components/Header_0.vue';
-import Footer_0 from '@/components/Footer_0.vue';
+
 import { ref, computed, onMounted } from 'vue';
 
 // 用戶資料

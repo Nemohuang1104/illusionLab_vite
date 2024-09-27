@@ -151,7 +151,7 @@ watch(formData, (newValue) => {
     localStorage.setItem('formData', JSON.stringify(newValue));
     const cartItemstest = [
     {
-        PRODUCT_ID: 8,
+        PRODUCTID: 8,
         PRODUCT_NAME: "金牌叉燒飯",
         PRICE_AT_PURCHASE: 599,
         PRODUCT_IMG: "/public/PDO/FileUpload/66e79402d9c55螢幕擷取畫面 2024-06-15 143959.png",
