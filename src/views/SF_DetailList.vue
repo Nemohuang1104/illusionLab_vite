@@ -8,6 +8,9 @@ const currentMode = ref('three');
 
 import Footer_2 from '@/components/Footer_2.vue';
 
+//彈跳視窗
+import Swal from 'sweetalert2'; // 在 script setup 中引入
+import 'sweetalert2/src/sweetalert2.scss';
 
 
 // 匯入漸層藍色標題樣式
@@ -22,7 +25,24 @@ const props = defineProps({
 //在商品細項撈取商品資料
 const item = ref([]);
 const route = useRoute();
-const productDetail = ref(null);
+
+// 定義計數器，使用 ref 來創建響應式變量
+const counter = ref(1);// 商品數量
+
+// 增加數量
+const increment = () => {
+    counter.value++;
+};
+
+// 減少數量 (確保不小於 1)
+const decrement = () => {
+    if (counter.value > 1) {
+        counter.value--;
+    }
+};
+
+
+const selectedSize = ref(""); // 儲存選擇的尺寸
 
 // 根據商品 ID 撈取商品細項資料
 async function fetchProductDetail() {
@@ -72,23 +92,7 @@ onMounted(() => {
     fetchProductDetail(); // 撈取商品細項資料
 });
 
-// 定義計數器，使用 ref 來創建響應式變量
-const counter = ref(1);// 商品數量
 
-// 增加數量
-const increment = () => {
-    counter.value++;
-};
-
-// 減少數量 (確保不小於 1)
-const decrement = () => {
-    if (counter.value > 1) {
-        counter.value--;
-    }
-};
-
-
-const selectedSize = ref(""); // 儲存選擇的尺寸
 
 // 添加到購物車的函數
 function addToCart() {
@@ -99,8 +103,9 @@ function addToCart() {
         price: item.value.PRODUCT_PRICE,
         img: item.value.PRODUCT_IMG,
         quantity: counter.value,
-        size: selectedSize.value // 你可以從 select 元素中獲取尺寸
-        
+        size: selectedSize.value, // 你可以從 select 元素中獲取尺寸
+        style: '',
+        discount_amount: '',
     };
 
     // 從 localStorage 中獲取當前購物車商品
@@ -120,9 +125,17 @@ function addToCart() {
     // 將更新後的購物車數據存回 localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    // 可選：顯示成功提示
-    alert("商品已成功加入購物車！");
+    // 顯示 SweetAlert 提示
+    Swal.fire({
+        title: 'Good job!',
+        text: '商品已成功加入購物車！',
+        icon: 'success',
+        // confirmButtonText: '確定' // 自定義按鈕文本
+        timer: 1200, 
+        showConfirmButton: false // 隱藏確認按鈕
+    });
 
+    // 可選：顯示成功提示
     console.log('Current cart items in localStorage:', localStorage.getItem('cart'));
 }
 
@@ -181,7 +194,9 @@ function addToCart() {
                             src="../assets/images/SF_Pillow.png" /></swiper-slide><swiper-slide><img
                             src="../assets/images/SF_easycard_1.png" /></swiper-slide>
                 </swiper> -->
-                <div class="pimg"><img :src="item.PRODUCT_IMG" alt=""></div>
+                <div class="pimg">
+                    <img :src="item.PRODUCT_IMG" alt="">
+                </div>
                 <div>
                     <div class="textbox">
                         <p>商品編號 :　{{ item.PRODUCT_ID }}</p>
@@ -229,7 +244,7 @@ function addToCart() {
                         </div>
 
                         <!-- <p>加入購物車</p> -->
-                        <button @click="addToCart">加入購物車</button>
+                        <button id="swalert" @click="addToCart">加入購物車</button>
 
                     </div>
                 </div>

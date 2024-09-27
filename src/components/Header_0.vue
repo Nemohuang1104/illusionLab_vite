@@ -111,30 +111,29 @@ const handleAvatarClick = () => {
       <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
     <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'shop' }">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+        <span class="cart-count">{{ 0 }}</span> <!-- 顯示購物車商品數量 -->
+      </router-link>
       <!-- <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" 
         /></router-link> -->
       <!-- ===========================添加是否登入的狀態判斷======================== -->
-      <font-awesome-icon 
-        :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
-        class="peopleicon" 
-        @click="handleAvatarClick"
-      />
+      <font-awesome-icon :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
+        class="peopleicon" @click="handleAvatarClick" />
       <!-- ========================================================================= -->
-      
-          
+
+
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
     <!-- 半圓形菜單 -->
     <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
       <ul class="menu">
         <li class="one">
-          <router-link :to="{ name: 'login' }">會員登入</router-link>
+          <router-link :to="{ name: 'shop' }">會員登入</router-link>
         </li>
         <li class="two">
-          <router-link :to="{ name: 'shop' }">購物車</router-link>
-          <!-- <span class="cart-count2">{{ cartItemCount }}</span>  顯示購物車商品數量 -->
+          <router-link :to="{ name: 'login' }">購物車</router-link>
+          <span class="cart-count2">{{ cartItemCount }}</span> 顯示購物車商品數量
         </li>
         <li class="three">
           <router-link to="/lifeCasino">人生賭場</router-link>
@@ -185,7 +184,7 @@ header {
   display: flex;
 }
 
-.header-cart{
+.header-cart {
   position: relative;
 }
 
@@ -196,7 +195,7 @@ header {
   margin-right: 20px;
 }
 
-.cart-count{
+.cart-count {
   background-color: #FCB600;
   height: 20px;
   width: 20px;
@@ -366,7 +365,7 @@ header {
 
 
 
-.cartCount{
+.cartCount {
   background: #000000;
   color: #ffffff;
   border-radius: 20px;
@@ -404,22 +403,22 @@ header {
     display: block;
   }
 
-  .cart-count{
+  .cart-count {
     display: none;
   }
 
-  .cart-count2{
-   display: block;
-   background-color: #FCB600;
-  height: 20px;
-  width: 20px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 64px;
-  left: 115px;
+  .cart-count2 {
+    display: block;
+    background-color: #FCB600;
+    height: 20px;
+    width: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 64px;
+    left: 115px;
   }
 }
 </style>

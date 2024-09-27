@@ -46,8 +46,8 @@ async function fetchProducts() {
         // 將三次 API 返回的商品資料合併在一起
         productInfo.value = [
             ...data1.slice(0, 2), // 從第一個 PHP 檔案取前兩個商品
-            ...data2.slice(0, 2), // 從第二個 PHP 檔案取前兩個商品
-            ...data3.slice(0, 1), // 從第三個 PHP 檔案取第一個商品
+            ...data2.slice(4, 6), // 從第二個 PHP 檔案取前兩個商品
+            ...data3.slice(0, 2), // 從第三個 PHP 檔案取第一個商品
         ];
 
     } catch (error) {
@@ -100,6 +100,9 @@ function loadCart() {
     carts.value = cart;
 }
 
+
+
+
 // 當組件掛載時撈取資料
 onMounted(() => {
     loadCart();
@@ -140,6 +143,8 @@ function addQuantity(index) {
 //     }
 // };
 
+
+
 //數量減少的function
 function minusQuantity(index) {
     if (carts.value[index].quantity > 1) {
@@ -147,11 +152,27 @@ function minusQuantity(index) {
         updateLocalStorage(); // 更新 localStorage
     } else {
         // 商品數量為1，彈出確認框
-        const confirmRemove = confirm('數量為 1，是否要將此商品從購物車中移除？');
-
-        if (confirmRemove) {
-            removeItem(index); // 移除商品並更新localStorage
-        }
+        Swal.fire({
+            title: '商品數量為 1 ',
+            text: '是否要將此商品從購物車中移除？',
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "確定",
+            cancelButtonText: "我在想想 ! ",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeItem(index); // 移除商品並更新localStorage
+                // 顯示成功提示
+                Swal.fire({
+                    title: "已刪除此商品!",
+                    icon: "success",
+                    timer: 1200, // 自動消失
+                    showConfirmButton: false // 隱藏確認按鈕
+                });
+            }
+        });
     }
 }
 
@@ -171,6 +192,15 @@ function removeItem(index) {
 function removeCartItem(index) {
     carts.value.splice(index, 1);
     updateLocalStorage(); // 更新 localStorage
+     // 顯示 SweetAlert 提示
+     Swal.fire({
+        title: ' QQ 我在商品頁等你 !',
+        text: '已成功刪除商品！',
+        icon: 'success',
+        // confirmButtonText: '確定' // 自定義按鈕文本
+        timer: 1500, 
+        showConfirmButton: false // 隱藏確認按鈕
+    });
 }
 
 
@@ -180,25 +210,14 @@ function updateLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(carts.value));
 }
 
-
-
-
-// 儲存購物車的商品資料
-const shoppingCart = ref([]);
-
-// 在頁面載入時，從 localStorage 中取得購物車資料
-onMounted(() => {
-    const cart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
-    shoppingCart.value = cart;
-});
-
 // ============儲存從 localStorage=====END========//
 
 
 // ============優惠券開始=====STAR========//
 
 //導入路由設定
-
+const router = useRouter();
+const route = useRoute();
 
 // 商品優惠券自動填入碼
 const coupon = ref({
@@ -207,58 +226,58 @@ const coupon = ref({
 });
 
 // 從 sessionStorage 或其他地方取出 token
-// const token = sessionStorage.getItem('token');
+const token = sessionStorage.getItem('token');
 
 // 點擊結帳按鈕，更新優惠券狀態為已使用
-// const handleCheckout = async () => {
-//     try {
+const handleCheckout = async () => {
+    try {
 
-//         // 使用 FormData 傳送 token
-//         const formData = new FormData();
-//         formData.append('token', token);
-//         const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
-//             method: 'POST',
-//             body: formData
-//         });
-//         const result = await response.json();
-//         if (result.status === 'success') {
-//             // 結帳成功，跳轉到下一頁
-//             router.push('/shop2');
-//         } else {
-//             console.error(result.message);
-//         }
-//     } catch (error) {
-//         console.error('Error updating coupon:', error);
-//     }
-// };
+        // 使用 FormData 傳送 token
+        const formData = new FormData();
+        formData.append('token', token);
+        const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        if (result.status === 'success') {
+            // 結帳成功，跳轉到下一頁
+            router.push('/shop2');
+        } else {
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error('Error updating coupon:', error);
+    }
+};
 
 // 請求商品優惠券資料
-// const getCouponInfo = async () => {
-//     try {
-//         // 使用 FormData 傳送 token
-//         const formData = new FormData();
-//         formData.append('token', token);
+const getCouponInfo = async () => {
+    try {
+        // 使用 FormData 傳送 token
+        const formData = new FormData();
+        formData.append('token', token);
 
-//         const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
-//             method: 'POST',
-//             body: formData
-//         });
+        const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
+            method: 'POST',
+            body: formData
+        });
 
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! Status: ${response.status}`);
-//         }
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-//         const data = await response.json();
-//         if (data.status === 'success') {
-//             coupon.value.discount_code = data.data.discount_code;
-//             coupon.value.discount_amount = data.data.discount_amount;
-//         } else {
-//             console.error('Error fetching user info:', data.message);
-//         }
-//     } catch (error) {
-//         console.error('Request failed:', error);
-//     }
-// };
+        const data = await response.json();
+        if (data.status === 'success') {
+            coupon.value.discount_code = data.data.discount_code;
+            coupon.value.discount_amount = data.data.discount_amount;
+        } else {
+            console.error('Error fetching user info:', data.message);
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+    }
+};
 
 // 計算總金額，商品金額減去折扣金額
 const calculatedTotalPrice = computed(() => {
@@ -273,9 +292,9 @@ watch(() => coupon.value.discount_code, (newVal) => {
 });
 
 // 在組件加載時發起請求
-// onMounted(() => {
-//     getCouponInfo();
-// });
+onMounted(() => {
+    getCouponInfo();
+});
 
 
 // 使用 beforeRouteEnter 钩子函数刷新頁面
@@ -286,8 +305,13 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+
+
 // ============優惠券結束=============//
 
+//sweetalert彈跳視窗
+import Swal from 'sweetalert2'; // 在 script setup 中引入
+import 'sweetalert2/src/sweetalert2.scss';
 
 </script>
 <template>
@@ -320,6 +344,7 @@ router.beforeEach((to, from, next) => {
                                     </select>
                                 </div> -->
                                 <div v-if="item.size" class="size-select">尺寸: {{ item.size }}</div>
+                                <div v-if="item.style"  class="selectedStyle" >樣式 : {{  item.style }}</div>
                             </div>
                             <!-- v-for="(item, index) in cartItems" -->
                             <div class="quantity-input">
@@ -456,7 +481,7 @@ router.beforeEach((to, from, next) => {
     font-size: 20px;
     font-style: normal;
     padding: 10px;
-    width: 95%;
+    width: 98%;
 }
 
 .description {
@@ -496,12 +521,13 @@ ul {
 .product-info {
     width: 100%;
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr 2fr 1fr 1fr 1fr;
     padding: 10px;
     align-items: center;
     justify-items: center;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
+    text-align: left;
 }
 
 .product-name {
@@ -680,7 +706,8 @@ ul {
     border-radius: 10px;
     background: #000354;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
+    max-height: 350px;
     padding: 30px;
     flex-grow: 0;
     color: #FFFFFF;
@@ -694,6 +721,7 @@ ul {
 .payment hr {
     width: 100%;
     max-width: 400px;
+    
     background-color: #FFFFFF;
     margin: 20px auto;
     height: 2px;
@@ -787,7 +815,7 @@ ul {
 .count p,
 .discount-fee p,
 .total-fee p {
-    flex-basis: 15%;
+    flex-basis: 20%;
 }
 
 .wrapper hr {
