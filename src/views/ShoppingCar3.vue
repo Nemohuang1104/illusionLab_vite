@@ -2,7 +2,44 @@
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
-import { ref } from 'vue';
+import { ref, onMounted} from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
+
+const mainOrder = ref();
+const orderDetails = ref();
+
+async function fetchMainOrder() {
+  const productOrderId = route.query.productOrderId;
+  try {
+    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/GetNowPO.php?PRODUCT_ORDER_ID=${productOrderId}`);
+    const data = await response.json();
+    mainOrder.value = data;
+    
+  } catch (error) {
+    console.error('Request failed:', error);
+  }
+}
+
+async function fetchOrderDetails() {
+  const productOrderId = route.query.productOrderId;
+  try {
+    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${productOrderId}`);
+    const data = await response.json();
+    orderDetails.value = data;
+  } catch (error) {
+    console.error('Error fetching order details:', error);
+  }
+}
+
+onMounted(() => {
+  fetchOrderDetails();
+  fetchMainOrder();
+});
+
+
+
 
 // ============ShoppingStep=============//
 const highlight = ref({
@@ -19,40 +56,40 @@ const highlight = ref({
         <div><Header_0></Header_0></div>
         <div class="ShoppingStep"><ShoppingStep :styles="highlight"></ShoppingStep></div>
 
-        <div class="content">
+        <div class="content" v-for="(item, index) in mainOrder" :key="index">
             <p class="result">訂單完成!</p>
             <p class="result">謝謝您的訂購，我們會在確認商品後盡速為您安排出貨</p>
-            <p class="orderno">訂單編號:20240603</p>
-            <div class="order_profile">
+            <p class="orderno">訂單編號:{{ item.PRODUCT_ORDER_LIST }}</p>
+            <div class="order_profile" >
                 <p>訂購人資訊</p>
                 <div class="inner01">
                     <p>姓名 :</p>
                     <div class="code-input">
-                        美美
+                        {{ item.BUYER_NAME }}
                     </div>
                 </div>
                 <div class="inner01">
                     <p>手機 :</p>
                     <div class="code-input">
-                        0983031820
+                        {{ item.BUYER_PHONE_NUMBER }}
                     </div>
                 </div>
                 <div class="inner01">
                     <p>地址 :</p>
                     <div class="code-input">
-                        104台北市中山區南京東路三段219號4F
+                        {{ item.BUYER_ADDRESS }}
                     </div>
                 </div>
                 <div class="inner01">
                     <p>運送方式 :</p>
                     <div class="code-input">
-                        門市自取
+                        {{ item.SHIPMENT }}
                     </div>
                 </div>
                 <div class="inner01">
                     <p>付款方式 :</p>
                     <div class="code-input">
-                        信用卡付款
+                        {{ item.PAYMENT_METHOD }}
                     </div>
                 </div>
             </div>
@@ -64,35 +101,35 @@ const highlight = ref({
                     <span>數量</span>
                     <span>價格</span>
                 </div>
-                <div class="order-item">
+                <div class="order-item" v-for="(item, index) in orderDetails" :key="index" >
                     <div class="product-info">
-                        <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image">
-                        <span class="product-name">繪本風格帆布袋</span>
+                        <img :src="item.PRODUCT_IMG" alt="商品圖片" class="product-image">
+                        <span class="product-name">{{ item.PRODUCT_NAME }}</span>
                     </div>
-                    <span class="product-quantity">x1</span>
-                    <span class="product-price">$590</span>
+                    <span class="product-quantity">{{ item.QUANTITY }}</span>
+                    <span class="product-price">${{ item.PRICE_AT_PURCHASE }}</span>
                 </div>
                 <hr>
             </div>
             <div class="payment">
 
-                <div class="total">
+                <div class="total" v-for="(item, index) in mainOrder" :key="index">
                     <div class="count">
                         <h3>商品金額</h3>
-                        <p>$590</p>
+                        <p>${{ item.PRE_TOTAL_PRICE }}</p>
                     </div>
                     <div class="shipping-fee">
                         <h3>運費</h3>
-                        <p>$60</p>
+                        <p>${{ item.SHIPMENT_FEE }}</p>
                     </div>
                     <div class="discount-fee">
                         <h3>折扣金額</h3>
-                        <p>$0</p>
+                        <p>${{ item.DISCOUNT_AMOUNT }}</p>
                     </div>
                     <hr>
                     <div class="total-fee">
                         <h3>總金額</h3>
-                        <p>$650</p>
+                        <p>${{ item.TOTAL_PRICE }}</p>
                     </div>
                 </div>
             </div>
@@ -216,6 +253,11 @@ const highlight = ref({
     font-family: "Noto Sans TC";
 }
 
+.order-item img {
+        width: 50%;
+        object-fit: contain;
+        margin: 12px;
+}
 .product-info {
     display: flex;
     gap: 20px;

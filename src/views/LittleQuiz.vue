@@ -73,7 +73,7 @@ import Loginpopup from '@/components/Loginpopup.vue'
 
             <div class="popup" v-if="showLogin">
             <Loginpopup @login-success="handleLoginSuccess" @close-popup="showLogin = false"
-            redirect="quiz"></Loginpopup>
+            redirect="littlequiz"></Loginpopup>
             </div>
           </div>
 

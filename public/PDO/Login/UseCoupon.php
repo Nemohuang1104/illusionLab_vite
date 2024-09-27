@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($user && $user['COUPON_USED'] == 0) {
                 // 更新 COUPON_USED 為 1
-                $updateSql = "UPDATE MEMBER SET COUPON_USED = 1 WHERE TOKEN = :token";
+                $updateSql = "UPDATE MEMBER SET COUPON_USED = 0 WHERE TOKEN = :token";
                 $updateStmt = $pdo->prepare($updateSql);
                 $updateStmt->bindParam(':token', $token);
                 
