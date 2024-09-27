@@ -46,21 +46,16 @@
           class="options" 
           :style="{ borderColor: MobangColor }"
           @change="updateFormData('time', formData.time)"
-          
+          placeholder="timeMessage"
           >
-          
+          <option disabled selected value="">請選擇時間</option>
           <option v-for="time in availableTimes" :key="time" :value="time.time" :disabled="time.tickets < formData.quantity"
           @input="handleInput">
             {{ time.time }} (剩餘位子: {{ time.tickets }})
           </option>
-          <!-- <option v-for="time in availableTimes" :key="time" :value="time">
-            {{ time }}
-          </option> -->
-          <!-- <option value="time2">15:00 ~ 17:00</option>
-          <option value="time3">19:00 ~ 21:00</option> -->
           </select>
           <h5 class="remind" v-if="errors.time">{{ errors.time }}</h5>
-
+          <h5 v-if="timeMessage" class="remind">{{ timeMessage }}</h5> <!-- 顯示無可用座位時的訊息 -->
       </div>
       </form>
   </main>
@@ -271,17 +266,8 @@ export default {
       // 更新表單資料，確保最後提交的資料正確
       this.updateFormData('quantity', this.formData.quantity);
     },
-    // 儲存表單填寫資料
-    // updateFormData(field, value) {
-    //   this.localFormData[field] = value;
-    //   this.$emit('update:formData', this.localFormData);
-
-    //   if (field === 'time' && value) {
-    //     this.$emit('update-errors', { time: '' });  // 清除時間錯誤訊息
-    //   }
-    // },
     
-    //選擇日期
+    // 選擇日期
     fetchAvailableDates() {
       axios.get(`${import.meta.env.VITE_API_URL}/TicketOrder/get_schedule_dates.php?event_id=${this.eventId}`)
         .then(response => {
@@ -297,6 +283,7 @@ export default {
           console.error('Error fetching available dates:', error);
         });
     },
+
     // 設置可選日期限制 (確保不能選擇資料庫中不存在的日期)
     setDateRestrictions() {
       const dateInput = this.$refs.dateInput;
@@ -312,43 +299,61 @@ export default {
         // 禁用不可選日期
         dateInput.addEventListener('input', () => {
           const selectedDate = dateInput.value;
+
+    // 檢查所選日期是否在可用日期列表中
           if (!this.availableDates.includes(selectedDate)) {
             dateInput.value = ''; // 重置為空值，禁用無效日期
+          } else {
+            // 檢查所選日期的可用票數是否大於所選人數
+            const selectedSchedule = this.availableTimes.find(schedule => schedule.date === selectedDate);
+            if (selectedSchedule && selectedSchedule.tickets < this.formData.quantity) {
+              dateInput.value = ''; // 重置為空值，禁用無法滿足人數的日期
+            }
           }
         });
       }
     },
-    
 
-  handleDateChange() {
-  const selectedDate = this.formData.date;
-  const guests = this.formData.quantity; // 選擇的人數
+          handleDateChange() {
+        const selectedDate = this.formData.date;
+        const guests = this.formData.quantity; // 選擇的人數
 
-  if (selectedDate && guests) {
-    // 發送請求根據 eventId, 賓客數和選擇的日期獲取時間
-    axios.get(`${import.meta.env.VITE_API_URL}/TicketOrder/get_schedule.php?event_id=${this.eventId}&date=${selectedDate}&guests=${guests}`)
-      .then(response => {
-        if (response.data && Array.isArray(response.data)) {
-          // 更新 availableTimes 為後端返回的時間
-          this.availableTimes = response.data.map(item => {
-            return {
-              date: item.SCHEDULE_DATE,
-              time: item.SCHEDULE_TIME,
-              tickets: item.AVAILABLE_TICKETS
-            };
-          });
-        } else {
-          console.error('No available times for selected date:', selectedDate);
+        if (selectedDate && guests) {
+          // 發送請求根據 eventId, 賓客數和選擇的日期獲取時間
+          axios.get(`${import.meta.env.VITE_API_URL}/TicketOrder/get_schedule.php?event_id=${this.eventId}&date=${selectedDate}&guests=${guests}`)
+            .then(response => {
+              if (response.data && Array.isArray(response.data)) {
+                // 更新 availableTimes 為後端返回的時間
+                this.availableTimes = response.data.map(item => {
+                  return {
+                    date: item.SCHEDULE_DATE,
+                    time: item.SCHEDULE_TIME,
+                    tickets: item.AVAILABLE_TICKETS
+                  };
+                });
+
+                // 判斷該日期的所有時間段是否有足夠座位
+                if (this.availableTimes.length === 0) {
+                  this.timeMessage = `該日期無 ${guests} 人位`; // 如果沒有符合條件的時段
+                } else {
+                  this.timeMessage = ''; // 有可用的時段，清除提示訊息
+                }
+              } else {
+                console.error('No available times for selected date:', selectedDate);
+                this.timeMessage = `該日期無 ${guests} 人位`; // 如果後端返回的結果是空的
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching available times:', error);
+              this.timeMessage = `該日期無 ${guests} 人位`; // 如果請求出錯
+            });
         }
-      })
-      .catch(error => {
-        console.error('Error fetching available times:', error);
-      });
-  }
-  if (selectedDate) {
-    this.$emit('update-errors', { date: '' });  // 清除日期錯誤訊息
-  }
-},
+
+        if (selectedDate) {
+          this.$emit('update-errors', { date: '' });  // 清除日期錯誤訊息
+        }
+      },
+
 
   
   // watch: {
@@ -425,27 +430,27 @@ mounted() {
 <style lang="scss" scoped> 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
     .noto-sans-tc-regular {
-    font-family: "Noto Sans TC", sans-serif;
+    // font-family: "Noto Sans TC", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400;
+    // font-weight: 400;
     font-style: normal;
     }
    
-    h1{font-size: 30px;}
-    h2{font-size: 28px;}
-    h3{font-size: 18px;}
-    h4{font-size: 16px;}
-    h5{font-size: 14px;}
-    h6{font-size: 16px;}
-     p{font-size: 14px;}
+    // h1{font-size: 30px;}
+    // h2{font-size: 28px;}
+    // h3{font-size: 18px;}
+    // h4{font-size: 16px;}
+    // h5{font-size: 14px;}
+    // h6{font-size: 16px;}
+    //  p{font-size: 14px;}
 
     a{
         text-decoration: none;
     }
 
     h1,h2,h3,h4,h5,h6,p{
-        font-family:'Noto Sans TC';
-        color: #855F49;
+        // font-family:'Noto Sans TC';
+        // color: #855F49;
         font-weight: bold;
         text-align: center;
         line-height: 150%;
@@ -510,14 +515,15 @@ mounted() {
         background-size:contain;  
     }
     .template_mobangTwo{
-        background-image: url('../src/ms/modeBGI2.png');
+        // background-image: url(@/assets/images/ms/modeBGI2.png);
 
     }
     .template_mobangThree{
-        background-image: url('../src/ms/modeBGI3.jpg');
+        background-image: url(@/assets/images/ms/modeBGI3.jpg);
     }
 
     .remind{
+      font-weight: 600;
       color: red;
     }
 

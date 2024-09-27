@@ -19,10 +19,10 @@ import { createApp } from 'vue';
 //import Loginpopup from './components/Loginpopup.vue';
 //import LittleQuizResult from './views/LittleQuizResult.vue';
 //import GoogleLogin from './components/GoogleLogin.vue';
-import MS_ticket_ting from './components/MS/MS_ticket_ting.vue';
+//import MS_ticket_ting from './components/MS/MS_ticket_ting.vue';
+import MS_views_index from './views/MS_views_index.vue';
 
 
 
-
-createApp(MS_ticket_ting).mount('#preview');
+createApp(MS_views_index).mount('#preview');
   

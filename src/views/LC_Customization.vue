@@ -48,6 +48,12 @@ import lc_custom_icon18 from '../assets/images/lc_custom_icon18.svg';
 
 import LC_Text3 from '@/components/LC_Text3.vue';
 
+import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+
+// 在方法中加入 Pinia 存取
+const ticketStore = useTicketStore(); // 讀取 ticketStore
+
+
 
 const scrollToTOP = () => {
   window.scrollTo({
@@ -200,12 +206,36 @@ const ticketPreviewElement = document.querySelector('.ticket-preview');
   //=================依賴後端存取結束(base64)
 
   //=================依賴後端存取開始(圖片相對路徑)
-  html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+//   html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
+//   canvas.toBlob(blob => {
+//     const formData = new FormData();
+//     formData.append('image', blob, 'LC_ticket.png');
+
+//     fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/save_custom_ticket.php`, {
+//       method: 'POST',
+//       body: formData,
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       console.log('圖片路徑儲存成功:', data);
+//     })
+//     .catch(error => {
+//       console.error('圖片儲存失敗:', error);
+//     });
+//   }, 'image/png');
+// });
+
+html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
   canvas.toBlob(blob => {
     const formData = new FormData();
     formData.append('image', blob, 'LC_ticket.png');
 
-    fetch('${import.meta.env.VITE_API_URL}/TicketOrder/save_custom_ticket.php', {
+    // 從 Pinia 中讀取 orderId，並添加到 formData 中
+    console.log(ticketStore.orderId);
+    
+    formData.append('orderId', ticketStore.orderId);
+
+    fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/save_custom_ticket.php`, {
       method: 'POST',
       body: formData,
     })

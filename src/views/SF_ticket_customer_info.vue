@@ -1,39 +1,73 @@
 <template>
   <div class="warpper">
     <Header class="header" :mode="currentMode" />
-    <MS_ticket_customer_info mode="two" class="customer_info">
-
+    <MS_ticket_customer_info 
+    mode="two" 
+      
+      class="customer_info"
+      ref="formRef"
+      @formCompletionStatus="handleFormCompletion"
+      >
     </MS_ticket_customer_info>
-    <MS_com_buttons class="actitvyBtn" :currentStep="currentStep" :mode="mode" :step="modeSelect"
-      :activityMode="activityMode">
+
+    <MS_com_buttons 
+        class="actitvyBtn"
+        :currentStep="currentStep"
+        :mode="mode"  
+        :activityMode="activityMode"
+        :disabled="!isFormComplete"
+        @form-submitted="handleFormSubmit"
+        :step="modeSelect" 
+
+      >
     </MS_com_buttons>
     <Footer_2 class="footer"></Footer_2>
   </div>
 </template>
 
 <script>
+import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
+import Footer_2 from '@/components/Footer_2.vue';
+import Header from '@/components/Header_0.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
 export default {
+  components: {
+    MS_ticket_customer_info,
+    Footer_2,
+    Header,
+    MS_com_buttons,
+  },
   data() {
     return {
-      currentStep: 1, // 当前步骤
+      currentMode: 'three', // 当前 mode
+      formErrors: {}, // 儲存錯誤訊息的狀態
+      isFormComplete: false,   // 表单完成状态
+      currentStep: 1,         // 当前步骤
       activityMode: 'activity2', // 初始活动模式
-      mode: 'two1', // 初始 mode
+      mode: 'two1',            // 初始 mode
+      showNext: true,
+      currentEventId: 2,
       modeSelect: 'two'
     };
   },
+
+  methods: {
+    handleFormCompletion(status) {
+      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
+    },
+    handleFormSubmit() {
+       // 透過 ref 調用 form 組件內的 validateForm 方法
+       const formIsValid = this.$refs.formRef.validateForm();
+      if (formIsValid) {
+        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
+        
+        this.$router.push(this.nextPage);
+      }
+  
+    },
+  }
 }
-</script>
-<script setup>
-import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
-import Footer_2 from '@/components/Footer_2.vue'
-import Header from '@/components/Header_0.vue';
-import { ref } from 'vue';
-import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-
-
-
-const currentMode = ref('three');
-
 </script>
 
 <style lang="scss" scoped>
@@ -46,7 +80,7 @@ const currentMode = ref('three');
 
 
 ::v-deep.warpper {
-  background-image: url('../src/ms/modeBGI2.png');
+  background-image: url(@/assets/images/ms/modeBGI2.png);
 
 }
 
@@ -92,7 +126,7 @@ const currentMode = ref('three');
 }
 
 ::v-deep body {
-  font-family: map-get($map: $fontStyle, $key: style_2);
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
 }
 
 ;
@@ -100,17 +134,23 @@ const currentMode = ref('three');
 ::v-deep h1 {
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
   // z-index: 1;
 }
 
 ::v-deep h2 {
   font-size: map-get($map: $fontSize , $key: h2);
   font-weight: 800;
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
 }
 
 ::v-deep h3 {
   font-size: map-get($map: $fontSize , $key: h3);
   font-weight: 800;
+  font-family: map-get($map: $fontStyle, $key: style_2) !important;
+
 }
 
 ::v-deep h4 {

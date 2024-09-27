@@ -179,7 +179,7 @@ function addToCart() {
         <div class="pboxout">
             <div aria-label="Breadcrumb">
                 <ul class="breadcrumb">
-                    <li><router-link to="/SF_ProductPage">全部商品 </router-link></li>
+                    <li><router-link to="/SF_ProductPage">全部商品</router-link></li>
                     <li>{{ item.PRODUCT_NAME }}</li>
                 </ul>
             </div>

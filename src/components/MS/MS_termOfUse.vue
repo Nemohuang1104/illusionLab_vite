@@ -60,8 +60,8 @@
             </div>
             <div id="section6" class="section">
                 <h4>六、聯絡我們</h4>
-                <h6>如有任何問題，請隨時通過電子郵件（service@幻浸實驗室.com.tw）或電話(TID)102-11-8939聯絡我們。<br><br>
-                    感謝您選擇 幻浸實驗室 比露，祝您購物愉快！</h6>
+                <h6>如有任何問題，請隨時通過電子郵件（illusionLab@gmail.com）或電話(TID)102-11-8939聯絡我們。<br><br>
+                    感謝您選擇 幻浸實驗室，祝您購物愉快！</h6>
             </div>
         </main>
         <img src="" alt="">
@@ -97,6 +97,7 @@ onMounted(() => {
   @import "../../assets/SASS/component/ms";
   h1,h2,h3,h4,h5,h6,p{
     color: #FFFFFF !important;
+    font-family: "Noto Sans TC";
   }
   
   .top{

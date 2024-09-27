@@ -205,22 +205,23 @@ const register = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "註冊成功！商品折價券60元已匯入您的帳戶，開始您的幻浸之旅吧!",
+          title: "註冊成功！",
+          html:"商品折價券60元已匯入您的帳戶，<br>開始您的幻浸之旅吧!",
           showConfirmButton: true,
           // timer: 10000
         }).then(() =>  {
           // 根據是否有 redirect 參數決定跳轉路由
           if (route.query.redirect) {
             // 將 redirect 參數傳遞給登入頁面
-            router.push({ path: '/login', query: { redirect: route.query.redirect } });
+  
+            router.push({ path: '/login', query: {redirect: route.query.redirect } });
+
           } // 根據是否有 redirect 參數決定跳轉路由
-          else if (route.query.redirect === 'quiz') {
+          else  {
             // 導回小測驗頁面並添加 showLogin=true
             router.push({ path: '/login', query: { showLogin: 'true' } });
-          } else {
-            // 否則跳轉至 /home
-            router.push('/home');
-          }
+          } 
+    
         });
       } else {
         Swal.fire({

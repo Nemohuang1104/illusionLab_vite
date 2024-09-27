@@ -29,23 +29,26 @@
             
         </main>
         <div class="thereAreSoManyShitThatIHaveToCheck">
-            <label for="">
-              <h4 :style="{color: MobangColor }">
-                折扣碼：
-              </h4>
-              <input type="text">
-            </label>
-            <label for="">
-              <h4 :style="{color: MobangColor }">
-                總金額：
-              </h4>
-              <h4 :style="{color: MobangColor } ">
-                NT$
-              </h4>
-              <h3 :style="{color: MobangColor }">
-                {{ totalAmount }}
-              </h3>
-            </label>
+          <label class="coupon" for="">
+            <h4 :style="{ color: MobangColor }">折扣碼：</h4>
+            <input type="text" v-model="this.discountCode" @input="checkDiscount" readonly>
+          </label>
+          <label class="text1" for="">
+            <h4 :style="{ color: MobangColor }">售價：</h4>
+            <h4 :style="{ color: MobangColor }">NT$</h4>
+            <h3 :style="{ color: MobangColor }">{{ totalAmount }}</h3>
+          </label>
+          <label class="text1" for="">
+            <h4 :style="{ color: MobangColor }">折扣：</h4>
+            <h4 :style="{ color: MobangColor }">NT$</h4>
+            <h3 :style="{ color: MobangColor }">{{ discount }}</h3>
+          </label>
+          <div class="line"></div>
+          <label class="text2" for="">
+            <h4 :style="{ color: MobangColor }">總金額：</h4>
+            <h4 :style="{ color: MobangColor }">NT$</h4>
+            <h3 :style="{ color: MobangColor }">{{ total }}</h3>
+          </label>
             
             <!-- <label for="privacy">
               <input type="checkbox" name="" id="privacy">
@@ -79,6 +82,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 
 
+
 export default {
   components: {
     MS_com_title,
@@ -90,7 +94,12 @@ export default {
       totalAmount: 0, // 總金額
       isLastStep: true,
       eventName: '',
-      
+      discountCode: '',
+      discount: 0,
+      total: 0,
+      member: {}, // 用於存儲會員信息
+      isDiscountUsed: false, // 新增，用於判斷是否已使用折扣碼
+      orderId: null
     };
   },
   props: {
@@ -170,7 +179,20 @@ export default {
     },
     eventId() {
       return this.ticketStore.eventId;
-    }
+    },
+    discountCode() {
+      return this.ticketStore.discountCode;
+    },
+    discount() {
+      return this.ticketStore.discount;
+    },
+    total() {
+      return this.ticketStore.total;
+    },
+    orderId() {
+      return this.ticketStore.orderId;
+    },
+    
   },
   data() {
     return {
@@ -194,9 +216,6 @@ export default {
         const data = await response.json();
         console.log(data);
         // 這裡可以處理抓到的活動資訊
-
-       
-
       } catch (error) {
         console.error('Failed to fetch event details:', error);
       }
@@ -253,7 +272,7 @@ export default {
           date: this.ticketStore.date,
           time: this.ticketStore.time,
           guestNumber: this.ticketStore.guestNumber,
-          totalAmount: this.ticketStore.totalAmount,
+          total: this.ticketStore.total,
           comments: this.ticketStore.comments,
           paymentMethod: '信用卡付款', // 固定顯示
           orderStatus: '成立', // 固定顯示
@@ -265,6 +284,8 @@ export default {
         console.log('Response:', response.data); // 打印返回的響應
 
         if (response.data.success) {
+          const orderId = response.data.orderId; // 從後端獲取 orderId
+          this.ticketStore.setOrderId(orderId); // 保存 orderId 到 Pinia
           console.log('訂單提交成功');
           Swal.fire({
           position: "center",
@@ -285,112 +306,140 @@ export default {
             }
           });
           
-        } else {
-          console.error('提交失敗', response.data.message);
+          } else {
+            console.error('提交失敗', response.data.message);
+          }
+        } catch (error) {
+          console.error('提交訂單時發生錯誤:', error);
         }
-      } catch (error) {
-        console.error('提交訂單時發生錯誤:', error);
+      },
+
+
+      fetchMemberData() {
+  const token = sessionStorage.getItem('token'); // 假設 token 存在這個 key 下
+  fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/get_member_discount.php`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` // 添加 Authorization 標頭
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'success') {
+      // 將會員資料存入 ticketStore
+      this.ticketStore.name = data.data.USER_NAME;
+      this.ticketStore.email = data.data.EMAIL;
+      this.ticketStore.phone = data.data.PHONE_NUMBER;
+      // this.ticketStore.total = data.data.TOTAL_PRICE;
+
+      // 檢查 TICKET_CODE_USED 是否為 1
+      if (data.data.TICKET_CODE_USED === 1) {
+        this.ticketStore.discountCode = null; // 禁用折扣碼
+        this.ticketStore.discount = 0;
+        this.ticketStore.total = this.ticketStore.totalAmount; // 沒有折扣時的總金額
+        console.log('折扣碼已使用過，無法再使用');
+
+      } else if (data.data.TICKET_DISCOUNT_CODE) {
+        this.ticketStore.discountCode = data.data.TICKET_DISCOUNT_CODE; // 設置折扣碼
+        // 計算折扣
+        this.calculateDiscount();
+      } else {
+        console.log('沒有折扣碼');
+       
       }
+    } else {
+      console.error(data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching member data:', error);
+  });
+},
+
+// 計算折扣和更新總價
+calculateDiscount() {
+  if (this.ticketStore.discountCode) {
+    this.ticketStore.discount = this.ticketStore.totalAmount * 0.05; // 折扣是 5%
+    this.ticketStore.total = this.ticketStore.totalAmount - this.ticketStore.discount; // 折扣後的總金額
+  } 
+  // else {
+  //   this.ticketStore.discount = null;
+  //   this.ticketStore.total = this.ticketStore.totalAmount;
+  // }
+},
+
+async updateDiscountUsage() {
+  // 如果折扣碼已經使用過，則不進行更新操作
+  if (this.ticketStore.discountCode === null || this.ticketStore.TICKET_CODE_USED === 1) {
+    console.log('折扣碼已經使用過，無需再次更新');
+    return; // 終止函數執行
+  }
+
+  const token = sessionStorage.getItem('token'); // 假設 token 存在這個 key 下
+  // 更新資料庫中折扣碼的使用狀態
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/update_discount_usage.php`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` // 添加 Authorization 標頭
     },
+    body: JSON.stringify({
+      discountCode: this.ticketStore.discountCode
+    })
+  });
+
+  const data = await response.json();
+  if (data.status === 'success') {
+    console.log('折扣碼已使用');
+  } else {
+    console.error('更新折扣碼使用狀態失敗', data.message);
+  }
+},
+
+watch: {
+  // 當 totalAmount 改變時，自動重新計算折扣和總金額
+  'ticketStore.totalAmount'() {
+    this.calculateDiscount();
+  }
+}
+
   },
   mounted() {
     // 可以在此 console.log 檢查 store 是否成功引入
     console.log(this.ticketStore);
     this.fetchEventPrice();
-    
+    this.fetchMemberData()
     this.fetchEventName();
     this.fetchEventDetails(this.eventId);
-    
+    this.updateDiscountUsage();
   },
 };
 </script>
 
-<!-- <script>
-export default {
-
-  props: {
-    mode: {
-      type: String,
-      default: 'one',
-      validator: value => ['one', 'two', 'three'].includes(value),
-    },
-  },
-  computed: {
-    holyShitBGI(){
-        if (this.mode === 'one') {
-        return 'template_mobangOne';
-      } else if (this.mode === 'two') {
-        return 'template_mobangTwo';
-      } else if (this.mode === 'three') {
-        return 'template_mobangThree';
-      }
-      return 'template_mobangOne';
-    },
-    modeSelect() {
-      if (this.mode === 'one') {
-        return 'one';
-      } else if (this.mode === 'two') {
-        return 'two';
-      } else if (this.mode === 'three') {
-        return 'three';
-      }
-      return 'one';
-    },
-    MobangColor() {
-      if (this.mode === 'one' || this.mode === 'two') {
-        return '#FFFFFF';
-      } else if (this.mode === 'three') {
-        return '#855F49';
-      }
-      return '#FFFFFF';
-    },
-  },
-};
-</script>
-<script setup>
-   import { computed } from 'vue';
-    import MS_com_title from '@/components/MS/MS_com_title.vue';
-    import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
-
-    const ticketStore = useTicketStore();
-    console.log(ticketStore);
-    
-
-    const guestNumber = computed(() => ticketStore.guestNumber);
-    const date = computed(() => ticketStore.date);
-    const time = computed(() => ticketStore.time);
-    const name = computed(() => ticketStore.name);
-    const phone = computed(() => ticketStore.phone);
-    const email = computed(() => ticketStore.email);
-    const taxID = computed(() => ticketStore.taxID);
-    const companyName = computed(() => ticketStore.companyName);
-    const comments = computed(() => ticketStore.comments);
-
-   
-</script> -->
 
 <style lang="scss" scoped>
-.noto-sans-tc-regular {
-    font-family: "Noto Sans TC", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    }
-    h1{font-size: 30px;}
-    h2{font-size: 28px;}
-    h3{font-size: 18px;}
-    h4{font-size: 16px;}
-    h5{font-size: 14px;}
-    h6{font-size: 16px;}
-     p{font-size: 14px;}
+// .noto-sans-tc-regular {
+//     font-family: "Noto Sans TC", sans-serif;
+//     font-optical-sizing: auto;
+//     font-weight: 400;
+//     font-style: normal;
+//     }
+//     h1{font-size: 30px;}
+//     h2{font-size: 28px;}
+//     h3{font-size: 18px;}
+//     h4{font-size: 16px;}
+//     h5{font-size: 14px;}
+//     h6{font-size: 16px;}
+//      p{font-size: 14px;}
 
     a{
         text-decoration: none;
     }
 
     h1,h2,h3,h4,h5,h6,p{
-        font-family:'Noto Sans TC';
-        color: #855F49;
+        // font-family:'Noto Sans TC';
+        // color: #855F49;
         font-weight: bold;
         text-align: center;
         line-height: 150%;
@@ -452,11 +501,11 @@ export default {
         background-size:contain;  
     }
     .template_mobangTwo{
-        // background-image: url('../src/ms/modeBGI2.png');
+        // background-image: url(@/assets/images/ms/modeBGI2.png);
 
     }
     .template_mobangThree{
-        background-image: url('../src/ms/modeBGI3.jpg');
+        background-image: url(@/assets/images/modeBGI3.jpg);
     }
 
     .confirmTitle{
@@ -514,24 +563,41 @@ main{
     }
   }
 
-  /* 彈窗樣式 */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  .text1{
+    margin: -5px 0;
 
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-}
+    h4{
+      font-size: 14px ;
+    }
+
+    h3{
+      font-size: 14px ;
+      margin-left: 5px;
+    }
+  }
+
+  .text2{
+    h4{
+      font-size:20px ;
+    }
+    h3{
+      font-size:24px ;
+      margin-left: 5px;
+
+    }
+  }
+
+  .line{
+    border-bottom: 1px solid white;
+  }
+
+  .coupon{
+    margin-bottom: 15px;
+  }
+
+  .confirmTitle{
+    h3{
+      margin-bottom: 10px;
+    }
+  }
 </style>

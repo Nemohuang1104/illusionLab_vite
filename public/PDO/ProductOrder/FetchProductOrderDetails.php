@@ -46,7 +46,12 @@ try {
         por.QUANTITY,
         por.PRICE_AT_PURCHASE,
         p.PRODUCT_NAME,
-        p.PRODUCT_IMG
+        p.PRODUCT_IMG,
+        po.SHIPMENT,
+        po.ACCEPTOR_NAME,
+        po.ACCEPTOR_PHONE_NUMBER,
+        po.ACCEPTOR_ADDRESS,
+        po.PAYMENT_METHOD
         
     FROM 
         PRODUCT_ORDER_RELATED por

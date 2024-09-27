@@ -3,13 +3,12 @@
 
 // 設置 CORS 標頭
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header('Content-Type: application/json');
 
 // 處理預檢請求（OPTIONS）
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    // 預檢請求只需返回標頭，不需進行任何操作
     http_response_code(200);
     exit();
 }
@@ -23,6 +22,9 @@ $token = str_replace('Bearer ', '', $authHeader);
 
 if ($token) {
     try {
+        // 印出 token 值以進行檢查
+        var_dump($token);
+
         // 查詢 Token 是否在資料庫中
         $sql = "SELECT USER_ID, QUIZ_COMPLETED FROM MEMBER WHERE TOKEN = :token";
         $stmt = $pdo->prepare($sql);
@@ -49,4 +51,3 @@ if ($token) {
     echo json_encode(["status" => "error", "message" => "缺少 token"]);
 }
 ?>
-
