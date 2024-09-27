@@ -1,5 +1,5 @@
 <template>
-    <SFHeader_0 :mode="currentMode"></SFHeader_0>
+    <SFHeader_0 mode="four"></SFHeader_0>
     <div class="indexTop" >
         <div class="Star Star1"></div>
         <div class="Star Star2"></div>
@@ -122,10 +122,12 @@
                 <img id="text" class="ListeneMe text" src="../../assets/images/ms/text.png" alt="">
                 <img id="bear" class="ListeneMe bear" src="../../assets/images/ms/bear.png" alt="">
                 <img id="text2" class="ListeneMe text2" src="../../assets/images/ms/text2.png" alt="">
-                <img id="text3" class="ListeneMe text3" src="../../assets/images/ms/text3.png" alt="">
                 <img id="rihno" class="ListeneMe rihno" src="../../assets/images/ms/rihno.png" alt="">
-                <img id="text4" class="ListeneMe text4" src="../../assets/images/ms/text4.png" alt="">
+                <img id="text3" class="ListeneMe text3" src="../../assets/images/ms/text3.png" alt="">
                 <img id="myGirl" class="ListeneMe myGirl" src="../../assets/images/ms/myGirl.png" alt="">
+                <img id="text4" class="ListeneMe text4" src="../../assets/images/ms/text4.png" alt="">
+                <div id="ticketBullet" class="ListeneMe ticketBullet">
+                </div>
             </div>
             <div class="top05">
             </div>
@@ -174,8 +176,8 @@
                 </div>
             </div>
             <div class="bg3">
+                <div class="top05"></div>
                 <div class="top1 ABOUT" id="four">
-                    <div class="top05"></div>
                     <MS_com_title mode="three"
                     mainTitle="周邊商品" 
                     subTitle="PERIPHERAL GOODS"
@@ -198,11 +200,24 @@
                 </div> 
                 <div class="top1 ABOUT" id="seven">
                     <div class="top4 ducksss">
-                        <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
-                        <img class="duckLaiYi" :src="cuteDuckWalking2" alt="">
-                        <img class="duckLaiYi" :src="cuteDuckWalking3" alt="">
-                        <img class="duckLaiYi" :src="cuteDuckWalking4" alt="">
+                        <div class="QUESTION">
+                            <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
+                            <div class="QUESTION_TITLE">- 常見問題 -</div>
+                        </div>
+                        <div class="QUESTION">
+                            <img class="duckLaiYi" :src="cuteDuckWalking2" alt="">
+                            <div class="QUESTION_TITLE">- 退換票政策 -</div>
+                        </div>
+                        <div class="QUESTION">
+                            <img class="duckLaiYi" :src="cuteDuckWalking3" alt="">
+                            <div class="QUESTION_TITLE">- 隱私權政策 -</div>
+                        </div>
+                        <div class="QUESTION">
+                            <img class="duckLaiYi" :src="cuteDuckWalking4" alt="">
+                            <div class="QUESTION_TITLE">- 使用辦法 -</div>                        
+                        </div>
                     </div>
+                    <div class="top05"></div>
                     <Footer/>
                 </div>
             </div>
@@ -242,7 +257,6 @@
     import { faTree } from '@fortawesome/free-solid-svg-icons'
     import { library } from '@fortawesome/fontawesome-svg-core'
 
-    const currentMode = ref('four');
     library.add(faTree)
 
     const frameIndex = ref(1);
@@ -275,40 +289,75 @@
     'seven'
     ]);
 
-    // 滾動到對應的 section
-    const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-        section.scrollIntoView({ behavior: 'auto' });
-    }
-};
-
     onMounted(() => {
-    // 頁面加載後隱藏滾動條並初始化動畫
-    window.scrollTo(0, 0);
-    style = document.createElement('style');
-    style.innerHTML = `body::-webkit-scrollbar { display: none; }`;
-    document.head.appendChild(style);
-    startWalkingAnimation();
-    
-    window.addEventListener('load', () => {
-    const indexTop = document.querySelector('.indexTop');
-    if (indexTop) {
-        indexTop.style.overflowY = 'hidden';
-    }
-    });
 
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        const AnchorsOptions = document.querySelectorAll('.Anchors-Options');
+
+        // 確保頁面滾動到頂部
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+            // 延遲滾動，確保頁面渲染完成
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 0); 
+            console.log('Scroll restoration set to manual');
+        } else {
+            console.warn('Scroll restoration is not supported in this browser');
+        }
+        
+        const indexTop = document.querySelector(".indexTop");
+        if (indexTop) {
+            let screenHeight = window.innerHeight;
+            indexTop.style.height = `calc(${830 * 19.10}px - (${(830 - screenHeight) * 19.00}px))`;
+        } else {
+            console.error("Element with class 'indexTop' not found");
+        }
+        
+        const ListeneMes = document.querySelectorAll('.ListeneMe');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+
+        });
+
+        ListeneMes.forEach(ListeneMe => {
+            observer.observe(ListeneMe);
+        });
+
+        // 隱藏滾動條
+        const style = document.createElement('style');
+        style.innerHTML = `body::-webkit-scrollbar { display: none; }`;
+        document.head.appendChild(style);
+
+
+
+        // 初始化動畫
+        startWalkingAnimation();
+
+        // 在頁面加載時隱藏 `.indexTop` 的垂直滾動
+        window.addEventListener('load', () => {
+            const indexTop = document.querySelector('.indexTop');
+            if (indexTop) {
+                indexTop.style.overflowY = 'hidden';
+            }
+        });
+
+        // DOM 加載後的事件監聽
         const AnchorsTree = document.querySelector('.AnchorsTree');
+        const AnchorsOptions = document.querySelectorAll('.Anchors-Options');
         let treeOpen = false;
 
-        // 監聽點擊事件以展開或收起選單
+
+        // 監聽 AnchorsTree 點擊事件展開或收起選單
         AnchorsTree.addEventListener('click', (event) => {
             event.stopPropagation(); // 防止點擊事件冒泡到 document
             if (treeOpen) {
-                // 展開的狀態，收起選單
+                // 收起選單
                 AnchorsTree.classList.remove('closed');
                 AnchorsTree.classList.add('Opened');
                 AnchorsOptions.forEach(option => {
@@ -317,7 +366,7 @@
                 });
                 treeOpen = false; // 更新標記狀態
             } else {
-                // 收起的狀態，展開選單
+                // 展開選單
                 AnchorsTree.classList.remove('Opened');
                 AnchorsTree.classList.add('closed');
                 AnchorsOptions.forEach(option => {
@@ -326,26 +375,23 @@
                 });
                 treeOpen = true; // 更新標記狀態
             }
+
+            // 點擊選單外部時收起選單
+            document.addEventListener('click', (event) => {
+                if (treeOpen && !AnchorsTree.contains(event.target) && !event.target.closest('.Anchors-Options')) {
+                    AnchorsTree.classList.remove('closed');
+                    AnchorsTree.classList.add('Opened');
+                    AnchorsOptions.forEach(option => {
+                        option.classList.remove('TreeMove');
+                        option.classList.add('TreeGoBack');
+                    });
+                    treeOpen = false; // 更新標記狀態
+                }
+            });
         });
 
-        // 點擊選單外部時收起選單
-        document.addEventListener('click', (event) => {
-            // 如果選單是展開狀態，且點擊不在 AnchorsTree 或 Anchors-Options 內部
-            if (treeOpen && !AnchorsTree.contains(event.target) && !event.target.closest('.Anchors-Options')) {
-                AnchorsTree.classList.remove('closed');
-                AnchorsTree.classList.add('Opened');
-                AnchorsOptions.forEach(option => {
-                    option.classList.remove('TreeMove');
-                    option.classList.add('TreeGoBack');
-                });
-                treeOpen = false; // 更新標記狀態
-            }
-        });
     });
 
-
-
-    });
 
     onBeforeUnmount(() => {
     // 組件卸載時清理資源
@@ -369,40 +415,22 @@
     };
 
 
-
-    document.addEventListener('DOMContentLoaded', function() {
-    const ListeneMes = document.querySelectorAll('.ListeneMe');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            } else {
-                entry.target.classList.remove('visible');
-            }
-        });
-
-    });
-
-    ListeneMes.forEach(ListeneMe => {
-        observer.observe(ListeneMe);
-    });
-});
-
-    document.addEventListener("DOMContentLoaded", function() {
-
-    const indexTop = document.querySelector(".indexTop");
-    if (indexTop) {
-        let screenHeight = window.innerHeight;
-        indexTop.style.height = `calc(${830 * 18.80}px - (${(830 - screenHeight) * 19.60}px))`;
-    } else {
-        console.error("Element with class 'indexTop' not found");
-    }
-});
+    window.addEventListener('touchmove', function(event) {
+    if (event.touches.length > 1 || Math.abs(event.touches[0].pageX - event.touches[0].clientX) > 0) {
+            event.preventDefault(); // 阻止水平滑動
+        }
+    }, { passive: false });
 
     window.addEventListener('scroll', function() {
+
+        if (window.scrollX !== 0) {
+        window.scrollTo(0, window.scrollY);
+        }
+
     let scroll = window.scrollY;
     let screenHeight = window.innerHeight;
+    let screenrWidth = window.innerWidth;
+    console.log(screenrWidth)
 
     // 查找所有需要操作的 DOM 元素
     const TEXTAREA = document.querySelector(".TEXTAREA");
@@ -492,7 +520,9 @@
     const page1 = document.querySelector('.page1');
     const front = document.querySelector('.front');
     const header = document.querySelector('.header-four');
-
+    const Anchors = document.querySelector('.Anchors')
+    const AnchorsTree = document.querySelector('.AnchorsTree')
+    const AnchorsOptions = document.querySelectorAll('.Anchors-Options');
 
     // 控制 yinyin 元素顯示/隱藏
     yinyins.forEach((el, index) => {
@@ -502,7 +532,7 @@
     // 控制雲、星星、TEXTAREA 和 theGoodBoy 的位置
     if (scroll < 600) {
         TEXTAREA.style.top = `calc(20vh - ${scroll / 1}px)`;
-        theGoodBoy.style.bottom = `calc(11vh + ${scroll / 3}px)`;
+        theGoodBoy.style.bottom = `calc(11vh + ${scroll / 1}px)`;
 
         Clouds[0].style.top = `calc( 0vh - ${scroll / 1}px)`;
         Clouds[1].style.top = `calc(70vh - ${scroll / 1}px)`;
@@ -519,9 +549,9 @@
 
     // 控制特定 yinyin 元素的顯示
     yinyins[6].style.display = (scroll > 360) ? 'block' : 'none';
-
     // 控制 yinyin 元素的移動位置
-    if (scroll > 90) {
+    if ( scroll > 90) {
+
         yinyins[0].style.top = `calc(140vh + ${(scroll - 110) / 4}px)`;
         yinyins[1].style.top = `calc(115vh + ${(scroll - 110) / 2}px)`;
         yinyins[2].style.top = `calc(125vh + ${(scroll - 110) / 3}px)`;
@@ -545,9 +575,19 @@
 
     // 控制書本翻頁動畫
     if (scroll < (1728 - (830 - screenHeight) * 3)) {
+
         book.classList.add('moveLikeJagger');
         book.style.transform = `rotate(20deg)`;
     } else if (scroll >= (1728 - (830 - screenHeight) * 3) && scroll < (2128 - (830 - screenHeight) * 3)) {
+        yinyins[0].style.display = 'none'
+        yinyins[1].style.display = 'none'
+        yinyins[2].style.display = 'none'
+        yinyins[3].style.display = 'none'
+        yinyins[4].style.display = 'none'
+        yinyins[5].style.display = 'none'
+        yinyins[6].style.display = 'none'
+        yinyins[7].style.display = 'none'
+        yinyins[8].style.display = 'none'
         let rotation = -20 + ((scroll - (1728 - (830 - screenHeight) * 3)) * (20 / 400));
         book.classList.remove('moveLikeJagger');
         book.style.transform = `rotate(${rotation}deg)`;
@@ -568,17 +608,22 @@
         page2.style.transform = `rotateY(-180deg)`;
         header.style.display='none'
 
+        
+
     } else if (scroll >= (3787 - (830 - screenHeight) * 3) && scroll < (4700- (830 - screenHeight) * 3)){
 
         // 計算進度
         let progress2 = (scroll - (3787 - (830 - screenHeight) * 3)) / 913;
+        header.style.display='flex'
 
         // 控制 header 的 translateY
         header.style.transform = `translateY(${(-100 + progress2 * 100)}%)`;
-        header.style.display='flex'
+
+
         // 控制 book 的 opacity
         book.style.opacity = `${1 - progress2}`
     } else if (scroll > (4700 - (830 - screenHeight) * 3)) {
+        header.style.transform = `translateY(0%)`;
         let lightBallScroll = scroll - (4700 - (830 - screenHeight) * 3)
         lightBalls[0].style.top = `calc(830vh - ${lightBallScroll / 1}px)`;
         lightBalls[1].style.top = `calc(850vh - ${lightBallScroll / 1}px)`;
@@ -658,15 +703,19 @@
         const indexTop = document.querySelector('.indexTop')
         indexTop.style.overflowY = 'visible'
     }
-});
-
-    if ('scrollRestoration' in window.history) {
-        window.history.scrollRestoration = 'manual';
-    }
-
-    onMounted(() => {
-    window.scrollTo(0, 0);
     });
+
+
+
+    const scrollToSection = (id) => {
+        const section = document.getElementById(id);
+        if (section) {
+            section.scrollIntoView({ behavior: 'auto' });
+            const header = document.querySelector('.header-four');
+            header.style.display = `flex`;
+            header.style.transform = `translateY(0%)`;
+        }
+    };
 </script>
 
 <style lang="scss" scoped>
@@ -702,6 +751,7 @@
 
     .indexTop{
         background-image: url('../../assets/images/ms/MyPrince/bluesky.png');
+        width: 100vw;
     }
 
     .top05{
@@ -1043,11 +1093,11 @@
         -ms-user-select: none;
         -webkit-user-drag: none;
     }
-    .Cloud1{width: 25vw;left : 0vw;top:  0vh;animation: Cloud1 3s infinite;}
-    .Cloud2{width: 15vw;left :15vw;top: 70vh;animation: Cloud2 2s infinite;}
-    .Cloud3{width: 18vw;right:15vw;top: 75vh;animation: Cloud1 1s infinite;}
-    .Cloud4{width: 13vw;right:20vw;top:  2vh;animation: Cloud2 3s infinite;}
-    .Cloud5{width: 13vw;right: 6vw;top: 30vh;animation: Cloud1 2s infinite;}
+    .Cloud1{width: 320px;left : 0vw;top:  0vh;animation: Cloud1 3s infinite;}
+    .Cloud2{width: 200px;left :15vw;top: 70vh;animation: Cloud2 2s infinite;}
+    .Cloud3{width: 230px;right:15vw;top: 75vh;animation: Cloud1 1s infinite;}
+    .Cloud4{width: 170px;right:20vw;top:  2vh;animation: Cloud2 3s infinite;}
+    .Cloud5{width: 160px;right: 6vw;top: 30vh;animation: Cloud1 2s infinite;}
 
     @keyframes Cloud1 {
         0% {
@@ -1204,6 +1254,8 @@
         -ms-user-select: none;
         -webkit-user-drag: none;
     }
+
+
     .girls.visible {
         animation: blurIn1 1s ease-out;
         opacity: 1; /* 动画完成后，保持可见状态 */
@@ -1409,6 +1461,33 @@
         animation: blurIn2 1s ease-out;
         opacity: 1; /* 动画完成后，保持可见状态 */
         
+    }
+
+    .ticketBullet{
+        background-image: url("../../assets/images/ms/ticketBullet1.png");
+        background-size: cover;
+        width: 20vw;
+        height: 10vw;
+        position: absolute;
+        top:87% ;
+        z-index: 10;
+        opacity: 0;
+        left: 19% ;
+        user-select: none;  /* 禁用選擇 */
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+        cursor: pointer;
+    }
+    .ticketBullet.visible {
+        animation: blurIn2 1s ease-out, BookFlying 2s infinite;
+        opacity: 1; /* 动画完成后，保持可见状态 */
+        
+    }
+
+    .ticketBullet:hover{
+        background-image: url("../../assets/images/ms/ticketBullet2.png");
     }
 
     .lightBall{
@@ -1630,6 +1709,7 @@
     .ducksss{
         display: flex;;
         flex-direction: row;
+        justify-content: center;
         background-image: none;
     }
 
@@ -1721,15 +1801,16 @@
         }
         &-Options:hover .Anchors-Options-Appellation{
                 width: 100px;
-                color: #c24b0c;
+                color: #FB9D3C;
                 padding-right: 10px;
 
         }
     }
     //錨點 樹icon
     .AnchorsTree{
-        // background-color: yellow;
-        padding: 10px;
+    display: flex;
+    // background-color: yellow;
+    padding: 10px;
     font-size: 20px;
     position: fixed;
     right: 0;
@@ -2029,7 +2110,126 @@
     }
     .header-four {
         display: none;
+        width: 100vw;
         // height: 60px;
     }
+
+    .QUESTION_TITLE{
+        text-align: center;
+        color: #855F49;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .QUESTION{
+        cursor: pointer;
+    }
+
+    .QUESTION:hover {
+        transform: scale(1.2);
+        transition: transform 1s ease;
+    }
+    @media screen and (max-width:800px) {
+        .IntroText{
+            width: 60vw;
+            left: 20vw;
+        }
+        .text ,.text2 ,.text3 ,.text4{
+            width: 35vw;
+        }
+        #bookImg,.girls ,.bear , .myGirl{
+            width: 35vw;
+        }
+        .rihno{
+            width: 80vw;
+        }
+    }
+    @media screen and (max-width:600px) {
+        .text ,.text2 ,.text3 ,.text4{
+            width: 40vw;
+        }
+        #bookImg,.girls ,.bear , .myGirl{
+            width: 38vw;
+        }
+        .rihno{
+            width: 85vw;
+        }
+
+    }
+    @media screen and (max-width:430px) {
+        .TEXT{
+            width: 80vw;
+            margin-left: -20px;
+        }
+        .theGoodBoy{
+            transform: scale(0.7);
+        }
+        .text ,.text2 ,.text3 ,.text4{
+            width: 45vw;
+        }
+        #bookImg,.girls ,.bear , .myGirl{
+            width: 40vw;
+        }
+        .rihno{
+            width: 90vw;
+        }
+    }
+
+    @media screen and (max-width:1024px) {#bookImg{top: 3.2%;}}
+    @media screen and (max-width:820px) {#bookImg{top: 3.4%;}}
+    @media screen and (max-width:780px) {#bookImg{top: 3%;}}
+    @media screen and (max-width:430px) {
+        #bookImg{
+            top: 3%;
+            width: 60vw;
+            right: 6%;
+        }
+        .text{
+            width: 60vw;
+            top: 13%
+        }
+        #road{
+            width: 150vw;
+            top:6.5%;
+            left: -70%;
+        }
+        .girls{
+            width: 60vw;
+            left: 2%;
+        }
+        .bear{
+            top: 28%;
+            width: 70vw;
+            right: 15%;
+        }
+        .text2{
+            width: 60vw;
+            top: 37%;
+            left:20%;
+        }
+        .rihno{
+            width: 95vw;
+        }
+        .text3{
+            left:15%;
+            top: 60%;
+            width: 70vw;
+        }
+        .myGirl{
+            width: 80vw;
+            right: 10%;
+        }
+        .text4{
+            left:15%;
+            top: 93%;
+            width: 70vw;
+        }
+        .ticketBullet{
+            width: 60vw;
+            height: 30vw;
+            top: 95%;
+        }
+    }
+
 
 </style>

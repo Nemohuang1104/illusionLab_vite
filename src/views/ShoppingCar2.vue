@@ -103,7 +103,6 @@ const name = ref('');
 const address = ref('');
 
 
-
 // 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
 onMounted(() => {
   if (route.query.storeName && route.query.storeAddress) {
