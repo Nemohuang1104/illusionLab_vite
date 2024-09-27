@@ -213,15 +213,15 @@ const register = () => {
           // 根據是否有 redirect 參數決定跳轉路由
           if (route.query.redirect) {
             // 將 redirect 參數傳遞給登入頁面
-            router.push({ path: '/login', query: { redirect: route.query.redirect } });
+  
+            router.push({ path: '/login', query: {redirect: route.query.redirect } });
+
           } // 根據是否有 redirect 參數決定跳轉路由
-          else if (route.query.redirect === 'quiz') {
+          else  {
             // 導回小測驗頁面並添加 showLogin=true
             router.push({ path: '/login', query: { showLogin: 'true' } });
-          } else {
-            // 否則跳轉至 /home
-            router.push('/home');
-          }
+          } 
+    
         });
       } else {
         Swal.fire({

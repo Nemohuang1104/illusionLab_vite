@@ -97,7 +97,7 @@ export default {
   font-weight: bold;
 }
 .soFuckingShinningTitleColor {
-background: url("../src/MS/LC_text_bg.png") lightgray 50% / cover no-repeat;
+background: url(@/assets/images/LC_text_bg.png) lightgray 50% / cover no-repeat;
 background-clip: text;
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;

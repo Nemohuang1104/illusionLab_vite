@@ -58,7 +58,8 @@ const filteredItems = computed(() => {
   }
   return orders.value.filter(item =>
     item.PRODUCT_ORDER_ID.toString().toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.PRODUCT_ORDER_LIST.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
+    item.PRODUCT_ORDER_LIST.toString().toLowerCase().includes(searchQuery.value.toLowerCase())||
+    item.EMAIL.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 

@@ -8,15 +8,18 @@
         class="actitvyBtn"
         :currentStep="currentStep"
         :mode="mode" 
-        :step="modeSelect" 
-        :activityMode="activityMode">
+        :activityMode="activityMode"
+        :step="modeSelect"
+        :disabled="!isFormComplete"
+
+        >
       </MS_com_buttons>
       
   <Footer_3 class="footer"></Footer_3>
     </div>
 </template>
 
-<script setup>
+<!-- <script setup>
     import MS_ticket_into from '@/components/MS/MS_ticket_into.vue';
     import Footer_3 from '@/components/Footer_03.vue'
     import Header from '@/components/Header_0.vue';
@@ -26,16 +29,32 @@
     const currentMode = ref('four');
     
 
-</script>
+</script> -->
 
 <script>
+import MS_ticket_into from '@/components/MS/MS_ticket_into.vue';
+import Footer_3 from '@/components/Footer_03.vue'
+import Header from '@/components/Header_0.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
+
 export default {
+  components: {
+      MS_ticket_into,
+      Footer_3,
+      Header,
+      MS_com_buttons
+    },
   data() {
+  
     return {
+      currentMode: 'four', // 当前 mode
       currentStep: 0, // 当前步骤
       activityMode: 'activity3', // 初始活动模式
       mode: 'one1', // 初始 mode
       modeSelect: 'three',
+      isFormComplete: true, // 表單是否完整的狀態
+      
 
     };
   },
@@ -45,7 +64,7 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/SASS/component/ms";
   .warpper{
-    background-image: url('../assets/images/ms/modeBGI3.jpg');
+    background-image: url(@/assets/images/ms/modeBGI3.jpg) !important;
 
   }
 

@@ -164,10 +164,7 @@ const onSubmit = async () => {
           // 檢查是否有 redirect 參數
           const redirectPath = route.query.redirect;
 
-          if (redirectPath) {
-            // 如果有 redirect，跳轉到該路徑
-            router.push(redirectPath);
-          } else if (route.query.showLogin === 'true') {
+          if (route.query.redirect === 'littlequiz' ) {
             if (token) {
               try {
                 // 先執行 SetQuizCompleted.php
@@ -222,7 +219,11 @@ const onSubmit = async () => {
               }
             }
             router.push({ path: '/LittleQuizResult' });
-          } else {
+          } else if (redirectPath) {
+            // 如果有 redirect，跳轉到該路徑
+            router.push(redirectPath);
+          } 
+          else {
             // 否則跳轉至 導向會員中心
             router.push('/MemberCenter');
           }

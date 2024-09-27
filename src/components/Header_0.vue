@@ -130,10 +130,10 @@ const handleAvatarClick = () => {
     <div class="MenuClass" :class="['menu-' + props.mode, { 'menu-open': isMenuOpen }]">
       <ul class="menu">
         <li class="one">
-          <router-link :to="{ name: 'shop' }">會員登入</router-link>
+          <router-link :to="{ name: 'login' }">會員登入</router-link>
         </li>
         <li class="two">
-          <router-link :to="{ name: 'login' }">購物車</router-link>
+          <router-link :to="{ name: 'shop' }">購物車</router-link>
           <!-- <span class="cart-count2">{{ cartItemCount }}</span>  顯示購物車商品數量 -->
         </li>
         <li class="three">

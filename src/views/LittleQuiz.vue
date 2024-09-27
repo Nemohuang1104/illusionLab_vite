@@ -73,7 +73,7 @@ import Loginpopup from '@/components/Loginpopup.vue'
 
             <div class="popup" v-if="showLogin">
             <Loginpopup @login-success="handleLoginSuccess" @close-popup="showLogin = false"
-            redirect="quiz"></Loginpopup>
+            redirect="littlequiz"></Loginpopup>
             </div>
           </div>
 
@@ -235,7 +235,7 @@ export default {
 
       if (token) {
         try {
-          const response = await axios.post('http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php', {}, {
+          const response = await axios.post(`${import.meta.env.VITE_API_URL}/Login/SetQuizCompleted.php`, {}, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -245,16 +245,16 @@ export default {
             sessionStorage.setItem('quizCompleted', 'true');
             console.log('測驗完成標記已更新。');
           } else {
-            Swal.fire({
-              icon: 'error',
-              title: response.data.message,
-              timer: 2500,
-              showConfirmButton: false,
-              backdrop: false,
-              willOpen: () => {
-                document.body.style.paddingRight = '0';
-              }
-            });
+            // Swal.fire({
+            //   icon: 'error',
+            //   title: response.data.message,
+            //   timer: 2500,
+            //   showConfirmButton: false,
+            //   backdrop: false,
+            //   willOpen: () => {
+            //     document.body.style.paddingRight = '0';
+            //   }
+            // });
           }
         } catch (error) {
           console.error(error);
@@ -338,7 +338,7 @@ export default {
 
   if (couponRequested === 'true') {
     sessionStorage.removeItem('couponRequested');
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem(':tcode');
 
     if (token) {
       try {
@@ -348,7 +348,7 @@ export default {
         // 然後獲取折扣碼
         const response = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
           headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${code}`
           }
         });
 

@@ -140,26 +140,27 @@ const f_save = async () => {
                         <option value="已出貨">已出貨</option>
                         <option value="已送達">已送達</option>
                         <option value="已取消">已取消</option>
+                        <option value="已完成">已完成</option>
                     </select>
                     </div>
                 </div>
 
                 <div class="orderinf">
                     <div class="orderdiv">
-                        <p class="ptext">會員帳號 : </p>
+                        <p class="ptext">會員編號 : </p>
                         <input class="inputtext" type="text" v-model="localOrder.USER_CODE">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext"> 收件人姓名 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.USER_NAME">
+                        <input class="inputtext" type="text" v-model="localOrder.BUYER_NAME">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">收件人手機 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.PHONE_NUMBER">
+                        <input class="inputtext" type="text" v-model="localOrder.BUYER_PHONE_NUMBER">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">收件人地址 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.ADDRESS">
+                        <input class="inputtext" type="text" v-model="localOrder.BUYER_ADDRESS">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">付款方式 : </p>
@@ -171,7 +172,7 @@ const f_save = async () => {
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">門市名稱 : </p>
-                        <input class="inputtext" type="text" value="7-11土定富門市">
+                        <input class="inputtext" type="text" v-model="localOrder.STORE_NAME">
                     </div>
                 </div>
 
@@ -198,15 +199,15 @@ const f_save = async () => {
                     <div class="total">
                         <div class="orderdiv">
                             <p class="ptext1">小計 : </p>
-                            <p class="inputtext2">${{ localOrder.TOTAL_PRICE }}</p>
+                            <p class="inputtext2">${{ localOrder.PRE_TOTAL_PRICE }}</p>
                         </div>
                         <div class="orderdiv">
                             <p class="ptext1">折扣金額 : </p>
-                            <p class="inputtext2">${{ localOrder.TOTAL_PRICE }}</p>
+                            <p class="inputtext2">${{ localOrder.DISCOUNT_AMOUNT }}</p>
                         </div>
                         <div class="orderdiv">
                             <p class="ptext1">運費 : </p>
-                            <p class="inputtext2">${{ localOrder.TOTAL_PRICE }}</p>
+                            <p class="inputtext2">${{ localOrder.SHIPMENT_FEE }}</p>
                         </div>
                         <div class="orderdiv">
                             <p class="ptext1">訂單總金額 : </p>

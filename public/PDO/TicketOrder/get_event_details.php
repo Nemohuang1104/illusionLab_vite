@@ -13,7 +13,7 @@ header('Content-Type: application/json'); // 設置返回的內容類型為 JSON
 
 // 根據前端傳來的 EVENT_ID 查詢活動詳細資訊
 $event_id = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0; // 確保 event_id 是整數
-$sql = "SELECT EVENT_NAME, EVENT_PRICE, EVENT_DATE, EVENT_TIME FROM EVENT WHERE EVENT_ID = :event_id";
+$sql = "SELECT EVENT_NAME, EVENT_PRICE FROM EVENT WHERE EVENT_ID = :event_id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['event_id' => $event_id]);
 
