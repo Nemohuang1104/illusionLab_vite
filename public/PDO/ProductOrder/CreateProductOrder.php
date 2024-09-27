@@ -55,6 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'DISCOUNT_AMOUNT' => 0,
             'COUPON_USED' => 1 // 確保 COUPON_USED 設為 1
         ];
+
+        // 同步更新 MEMBER 表中的 DISCOUNT_AMOUNT 欄位為 0
+        $stmt = $pdo->prepare("UPDATE MEMBER SET DISCOUNT_AMOUNT = 0 WHERE USER_ID = ?");
+        $stmt->execute([$userId]);
     }
 
     // 檢查是否有優惠券
