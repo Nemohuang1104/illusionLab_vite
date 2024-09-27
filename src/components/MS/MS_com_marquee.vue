@@ -136,4 +136,11 @@
     transform: translateX(-50%);
   }
 }
+
+@media screen and (max-width: 820px) {
+  .productIMG{
+    width: 60vw;
+  }
+
+}
 </style>
