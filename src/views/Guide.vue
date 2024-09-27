@@ -42,7 +42,10 @@
     <button class="btn back-btn" @click="goToBack">後台</button>
   </div>
 </div>
-    
+  <div class="marquee">
+    <p>本網站為緯育TibaMe【第93期】前端工程師專業技術養成班學員作品，僅供學習、展示之用途。 
+      Copyright &copy; 2024 幻浸實驗室 All rights reserved </p>
+  </div>
 </template>
 
 <script setup>
@@ -88,7 +91,7 @@ function goToBack() {
   position: relative;
   z-index: 1;
   color: white;
-  padding: 20px;
+  padding: 10px;
 }
 
 .smoke{}
@@ -151,7 +154,7 @@ function goToBack() {
 .longcloud_right{
   position: absolute;
   width: 70%;
-  top: 50%;
+  top: 46%;
   right:17%;
   z-index: 5;
   animation: longcloud_right 3s 0.3 linear backwards;
@@ -172,7 +175,7 @@ function goToBack() {
   width: 100%;
   display: block;
   margin: 0 auto;
-  margin-top: 70px;
+  margin-top: 40px;
   animation: logo 8s 0.5 ease-out forwards;
   z-index: 150;
 }
@@ -256,7 +259,6 @@ function goToBack() {
   width: 100%;
   position : relative;
   object-fit: cover;
- 
 }
 
 @keyframes cloud_right {
@@ -289,6 +291,32 @@ function goToBack() {
     max-width: 200px;
     max-height: 100px;
 }
+
+
+.marquee{
+  width: 100%;
+  position: absolute;
+  bottom: 1%;
+  left: 0;
+  overflow: hidden;
+}
+
+.marquee p{
+  color: #fff;
+  animation: marquee 20s linear infinite;
+  font-size: 16px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%); /* 從容器的右邊開始 */
+  }
+  100% {
+    transform: translateX(-100%); /* 到容器的左邊，持續循環 */
+  }
+}
+
+//===================RWD===============================================
 
 @media screen and (max-width: 820px){
   .leftCloud{

@@ -126,8 +126,7 @@
                 <img id="text3" class="ListeneMe text3" src="../../assets/images/ms/text3.png" alt="">
                 <img id="myGirl" class="ListeneMe myGirl" src="../../assets/images/ms/myGirl.png" alt="">
                 <img id="text4" class="ListeneMe text4" src="../../assets/images/ms/text4.png" alt="">
-                <div id="ticketBullet" class="ListeneMe ticketBullet">
-                </div>
+                <router-link to="/MS_Ticket_step1"><div id="ticketBullet" class="ListeneMe ticketBullet"></div></router-link>
             </div>
             <div class="top05">
             </div>
@@ -182,7 +181,7 @@
                     mainTitle="周邊商品" 
                     subTitle="PERIPHERAL GOODS"
                     />
-                    <MS_com_marquee/>
+                    <router-link to="/MS_ProductPage"><MS_com_marquee/></router-link>
                 </div> 
                 <div class="top1 ABOUT"  id="five">
                     <MS_com_title mode="three"
@@ -200,22 +199,30 @@
                 </div> 
                 <div class="top1 ABOUT" id="seven">
                     <div class="top4 ducksss">
+                        <router-link to="/FQA_03">
                         <div class="QUESTION">
                             <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
                             <div class="QUESTION_TITLE">- 常見問題 -</div>
                         </div>
+                        </router-link>
+                        <router-link to="/TicketChange_03">
                         <div class="QUESTION">
                             <img class="duckLaiYi" :src="cuteDuckWalking2" alt="">
                             <div class="QUESTION_TITLE">- 退換票政策 -</div>
                         </div>
+                        </router-link>
+                        <router-link to="/PP_privacy_policy">
                         <div class="QUESTION">
                             <img class="duckLaiYi" :src="cuteDuckWalking3" alt="">
                             <div class="QUESTION_TITLE">- 隱私權政策 -</div>
                         </div>
+                        </router-link>
+                        <router-link to="/PP_termOfUse">
                         <div class="QUESTION">
                             <img class="duckLaiYi" :src="cuteDuckWalking4" alt="">
                             <div class="QUESTION_TITLE">- 使用辦法 -</div>                        
                         </div>
+                        </router-link>
                     </div>
                     <div class="top05"></div>
                     <Footer/>
