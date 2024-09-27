@@ -95,15 +95,10 @@ const cartItems = ref([
 // //     return total + item.quantity * item.price;
 // //   }, 0);
 // // });
-import { onMounted } from 'vue';
-
-import { useRouter, useRoute } from 'vue-router';
 // 定義 name 和 address 變數
 const name = ref('');
 const address = ref('');
 
-const router = useRouter();
-const route = useRoute();
 
 // 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
 onMounted(() => {
