@@ -190,4 +190,17 @@ body {
   left: calc(50vw - (40vw / 2 ));
   font-weight: bold;
 }
+  @media screen and (max-width: 820px) {
+    .carousel__item-body{
+      width: 80vw;
+      height: 15vh;
+    }
+    .wrapper{
+      height: 0vh;
+    }
+    .warning{
+      width: 80vw;
+      left: 10vw;
+    }
+  }
 </style>
