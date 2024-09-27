@@ -8,7 +8,7 @@ const currentMode = ref('one');
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import Footer from '@/components/Footer_0.vue';
 
-
+const router = useRouter();
 
 // const cartItems = ref([
 //     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
