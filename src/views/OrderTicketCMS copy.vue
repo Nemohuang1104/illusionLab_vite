@@ -27,7 +27,188 @@ const orders = ref([
     discount_id: 'edr100',
     discount_price: 10
   },
-
+  {
+    order_id: "2",
+    order_list: "TO240821161533",
+    account: "alice@example.com",
+    payment_status: 1,
+    order_status: 1,
+    shipping_status: 2,
+    order_date: "2024/08/21",
+    receiver_name: "Alice Smith",
+    receiver_phone: "987654321",
+    shipping_address: "456 Oak St, Smalltown, USA",
+    shipping_type: "宅配",
+    store: "Store B",
+    payment: "銀行轉帳",
+    shipping_fee: 60,
+    discount_id: "edr101",
+    discount_price: 20
+  },
+  {
+    order_id: "3",
+    order_list: "TO240821161534",
+    account: "bob@example.com",
+    payment_status: 0,
+    order_status: 2,
+    shipping_status: 1,
+    order_date: "2024/08/22",
+    receiver_name: "Bob Johnson",
+    receiver_phone: "234567890",
+    shipping_address: "789 Pine St, Bigtown, USA",
+    shipping_type: "超商取貨",
+    store: "Store C",
+    payment: "信用卡",
+    shipping_fee: 80,
+    discount_id: "edr102",
+    discount_price: 15
+  },
+  {
+    order_id: "4",
+    order_list: "TO240821161535",
+    account: "charlie@example.com",
+    payment_status: 1,
+    order_status: 3,
+    shipping_status: 3,
+    order_date: "2024/08/22",
+    receiver_name: "Charlie Davis",
+    receiver_phone: "345678901",
+    shipping_address: "101 Maple St, Villagetown, USA",
+    shipping_type: "宅配",
+    store: "Store D",
+    payment: "電子支付",
+    shipping_fee: 50,
+    discount_id: "edr103",
+    discount_price: 30
+  },
+  {
+    order_id: "5",
+    order_list: "TO240821161536",
+    account: "david@example.com",
+    payment_status: 0,
+    order_status: 1,
+    shipping_status: 2,
+    order_date: "2024/08/23",
+    receiver_name: "David Evans",
+    receiver_phone: "456789012",
+    shipping_address: "202 Elm St, Bigcity, USA",
+    shipping_type: "宅配",
+    store: "Store E",
+    payment: "信用卡",
+    shipping_fee: 70,
+    discount_id: "edr104",
+    discount_price: 25
+  },
+  {
+    order_id: "6",
+    order_list: "TO240821161537",
+    account: "emma@example.com",
+    payment_status: 1,
+    order_status: 2,
+    shipping_status: 1,
+    order_date: "2024/08/23",
+    receiver_name: "Emma Foster",
+    receiver_phone: "567890123",
+    shipping_address: "303 Cedar St, Middletown, USA",
+    shipping_type: "超商取貨",
+    store: "Store F",
+    payment: "銀行轉帳",
+    shipping_fee: 60,
+    discount_id: "edr105",
+    discount_price: 20
+  },
+  {
+    order_id: "7",
+    order_list: "TO240821161538",
+    account: "frank@example.com",
+    payment_status: 0,
+    order_status: 1,
+    shipping_status: 2,
+    order_date: "2024/08/24",
+    receiver_name: "Frank Green",
+    receiver_phone: "678901234",
+    shipping_address: "404 Birch St, Smallcity, USA",
+    shipping_type: "宅配",
+    store: "Store G",
+    payment: "電子支付",
+    shipping_fee: 65,
+    discount_id: "edr106",
+    discount_price: 10
+  },
+  {
+    order_id: "8",
+    order_list: "TO240821161539",
+    account: "grace@example.com",
+    payment_status: 1,
+    order_status: 3,
+    shipping_status: 3,
+    order_date: "2024/08/24",
+    receiver_name: "Grace Harris",
+    receiver_phone: "789012345",
+    shipping_address: "505 Spruce St, Villagecity, USA",
+    shipping_type: "宅配",
+    store: "Store H",
+    payment: "信用卡",
+    shipping_fee: 55,
+    discount_id: "edr107",
+    discount_price: 15
+  },
+  {
+    order_id: "9",
+    order_list: "TO240821161540",
+    account: "henry@example.com",
+    payment_status: 0,
+    order_status: 2,
+    shipping_status: 1,
+    order_date: "2024/08/25",
+    receiver_name: "Henry Ingram",
+    receiver_phone: "890123456",
+    shipping_address: "606 Willow St, Bigtown, USA",
+    shipping_type: "超商取貨",
+    store: "Store I",
+    payment: "銀行轉帳",
+    shipping_fee: 60,
+    discount_id: "edr108",
+    discount_price: 20
+  },
+  {
+    order_id: "10",
+    order_list: "TO240821161541",
+    account: "irene@example.com",
+    payment_status: 1,
+    order_status: 1,
+    shipping_status: 2,
+    order_date: "2024/08/25",
+    receiver_name: "Irene Johnson",
+    receiver_phone: "901234567",
+    shipping_address: "707 Aspen St, Smalltown, USA",
+    shipping_type: "宅配",
+    store: "Store J",
+    payment: "電子支付",
+    shipping_fee: 70,
+    discount_id: "edr109",
+    discount_price: 25
+  },
+  {
+    order_id: "11",
+    order_list: "TO240821161542",
+    account: "jack@example.com",
+    payment_status: 0,
+    order_status: 2,
+    shipping_status: 3,
+    order_date: "2024/08/26",
+    receiver_name: "Jack King",
+    receiver_phone: "012345678",
+    shipping_address: "808 Chestnut St, Bigcity, USA",
+    shipping_type: "超商取貨",
+    store: "Store K",
+    payment: "信用卡",
+    shipping_fee: 65,
+    discount_id: "edr110",
+    discount_price: 30
+  }
+  
+  // 更多訂單數據...
 ]);
 
 
@@ -134,7 +315,13 @@ const select_number = ref('');
 
 
 const order_list = ref([
-
+  // 這裡可以填入初始的訂單商品列表
+  // 例如:
+  // [
+  //   { product_name: '商品A', quantity: 2, order_detail_price: 456 },
+  //   { product_name: '商品B', quantity: 3, order_detail_price: 234 },
+  //   { product_name: '商品C', quantity: 4, order_detail_price: 444 }
+  // ]
 ])
 
 const total_cost = ref(0)
@@ -181,7 +368,34 @@ const handleSaveEdit = async (updatedOrder) => {
   editOpacity.value = 0;
   current_edit.value = null;
   }
-  
+  // 小春堂範例開始
+  // if (current_edit.value === null) return
+
+  // const nIndex = current_edit.value
+  // orders.value[nIndex].payment_status = o_pay.value
+  // orders.value[nIndex].order_status = o_form.value
+  // orders.value[nIndex].shipping_status = o_ship.value
+
+  // current_edit.value = null
+  // total_cost.value = 0
+  // order_cost.value = 0
+  // 小春堂範例結束
+
+
+
+// 3.發送 AJAX 請求更新訂單 (帶串接資料庫後再嘗試)
+  // try {
+  //   const response = await axios.post('../php/n-order_update.php', {
+  //     order_list: orders.value[nIndex].order_list,
+  //     payment_status: orders.value[nIndex].payment_status,
+  //     order_status: orders.value[nIndex].order_status,
+  //     shipping_status: orders.value[nIndex].shipping_status,
+  //   })
+  //   alert("儲存成功")
+  // } catch (error) {
+  //   alert("儲存失敗: " + error.response.status)
+  // }
+
 
 </script>
 

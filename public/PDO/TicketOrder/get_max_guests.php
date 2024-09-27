@@ -19,7 +19,7 @@ $eventId = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
 if ($eventId > 0) {
     try {
         // 準備 SQL 查詢
-        $query = "SELECT AVAILABLE_TICKETS FROM SCHEDULE WHERE EVENT_ID = :event_id";
+        $query = "SELECT TICKET_SET FROM EVENT WHERE EVENT_ID = :event_id";
         $stmt = $pdo->prepare($query);
         // 綁定參數
         $stmt->bindParam(':event_id', $eventId, PDO::PARAM_INT);
@@ -29,7 +29,7 @@ if ($eventId > 0) {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            echo json_encode(['maxGuests' => $result['AVAILABLE_TICKETS']]);
+            echo json_encode(['maxGuests' => $result['TICKET_SET']]);
         } else {
             echo json_encode(['maxGuests' => 0]);
         }

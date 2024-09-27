@@ -42,23 +42,9 @@ export default {
     CoinFall,
     MS_com_buttons,
   },
-  props:{
-    // formData: Object,
-  },
   data() {
     return {
       currentMode: 'two', // 当前 mode
-      // formData: {
-      //   name: '',
-      //   phone: '',
-      //   email: '',
-      //   taxID: '',
-      //   companyName: '',
-      //   comments: '',
-      //   agreePrivacyPolicy: true,
-      //   agreeRefundPolicy: true,
-      // },
-   
       formErrors: {}, // 儲存錯誤訊息的狀態
       isFormComplete: false,   // 表单完成状态
       currentStep: 1,         // 当前步骤
@@ -232,49 +218,41 @@ export default {
     }
 }
 
-
-
-
-
-</style>
-
-<style lang="scss">
-@import "../assets/style";
-
-.title{
+::v-deep .title{
   text-align: center;
 }
 
-body{
+::v-deep body{
   font-family: map-get($map: $fontStyle, $key: style_2);
+  
 };
 
-h1{
+::v-deep h1{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
 }
 
-h2{
+::v-deep h2{
   font-size: map-get($map: $fontSize , $key: h2);
   font-weight: 800;
 }
 
-h3{
+::v-deep h3{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
 
   font-size: map-get($map: $fontSize , $key: h3);
   font-weight: 800;
 }
 
-h4{
+::v-deep h4{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
-  font-weight: 400;
+  font-weight: 600 !important;
 }
 
-h6{
+::v-deep h6{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
@@ -288,9 +266,18 @@ h6{
   }
 }
 
-.options{
+::v-deep .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
   
 }
+
+
+
+</style>
+
+<style lang="scss">
+@import "../assets/style";
+
+
 
 </style>

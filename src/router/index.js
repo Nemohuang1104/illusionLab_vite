@@ -217,33 +217,36 @@ const routes = [
     path: '/LC_Ticket_step0',
     component: () => import('@/views/LC_Ticket_reservation2.vue'),
     meta: {
-      title: "人生賭場-購票"
+      title: "人生賭場-購票",
+      requiresAuth: true,
     },
-    requiredLogin: true
   },
   {
     path: '/LC_Ticket_step1',
     component: () => import('@/views/LC_ticket_customer_info.vue'),
     meta: {
-      title: "人生賭場-購票"
+      title: "人生賭場-購票",
+      requiresAuth: true,
     },
-    requiredLogin: true
+    
   },
   {
     path: '/LC_Ticket_step2',
     component: () => import('@/views/LC_ticket_confirmation.vue'),
     meta: {
-      title: "人生賭場-購票"
+      title: "人生賭場-購票",
+      requiresAuth: true,
     },
-    requiredLogin: true
+    
   },
   {
     path: '/LC_Customization',
     component: () => import('@/views/LC_Customization.vue'),
     meta: {
-      title: "人生賭場-客製票卷"
+      title: "人生賭場-客製票卷",
+      requiresAuth: true,
     },
-    requiredLogin: true
+   
   },
 
 
@@ -676,8 +679,12 @@ router.beforeEach((to, from, next) => {
 
   if (requiresAuth && !token) {
     next({ path: '/login', query: { redirect: to.fullPath } })
+    document.title = to.meta.title;
+
   } else {
     next()
+    document.title = to.meta.title;
+
   }
 })
 

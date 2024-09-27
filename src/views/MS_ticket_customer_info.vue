@@ -1,43 +1,70 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_customer_info mode="three" activityMode="activity3" class="reservation">
+      <MS_ticket_customer_info 
+      mode="three" 
+      activityMode="activity3" 
+      class="customer_info"
+       ref="formRef"
+       @formCompletionStatus="handleFormCompletion">
         
       </MS_ticket_customer_info>
       <MS_com_buttons
         class="actitvyBtn"
         :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
+        :mode="mode" :step="modeSelect" :activityMode="activityMode"
+        :disabled="!isFormComplete"
+        @form-submitted="handleFormSubmit"></MS_com_buttons>
       
   <Footer_3 class="footer"></Footer_3>
 
 </div>
 </template>
 
-<script setup>
-    import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
-    import Footer_3 from '@/components/Footer_03.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
-
-    const currentMode = ref('four');
-
-    
-    
-</script>
 <script>
+import MS_ticket_customer_info from '@/components/MS/MS_ticket_customer_info.vue';
+import Footer_3 from '@/components/Footer_03.vue';
+import Header from '@/components/Header_0.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+
 export default {
+  components: {
+    MS_ticket_customer_info,
+    Footer_3,
+    Header,
+    MS_com_buttons,
+  },
   data() {
     return {
+      currentMode: 'four', // 当前 mode
+      formErrors: {}, // 儲存錯誤訊息的狀態
+      isFormComplete: false, // 表單是否完整的狀態
+
       currentStep: 2, // 当前步骤
       activityMode: 'activity3', // 初始活动模式
       mode: 'two1', // 初始 mode
       modeSelect: 'three',
+      currentEventId: 3,
 
     };
   },
+
+  methods: {
+    handleFormCompletion(status) {
+      this.isFormComplete = status; // 接收到來自 Form 組件的完成狀態
+    },
+    handleFormSubmit() {
+       // 透過 ref 調用 form 組件內的 validateForm 方法
+       const formIsValid = this.$refs.formRef.validateForm();
+      if (formIsValid) {
+        // 表單通過驗證，執行下一步邏輯，例如跳轉或其他操作
+        
+        this.$router.push(this.nextPage);
+    }
+  
+  },
+}
 }
 </script>
 
@@ -51,7 +78,7 @@ export default {
 }
 
 .warpper{
-  background-image: url('../src/ms/modeBGI3.jpg');
+  background-image: url(@/assets/images/ms/modeBGI3.jpg);
   
   
 }

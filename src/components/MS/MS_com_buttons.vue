@@ -38,21 +38,7 @@
   </template>
   
 <script>
-  import { computed, ref } from 'vue';
-  import { defineEmits } from 'vue';
 
-  // const emit = defineEmits(['save']);
-//   const handleClick = () => {
-//   emit('save'); // 當按鈕被點擊時，傳遞 'save' 事件
-// };
-
-// const handleClick = () => {
-//   if (!isFormComplete.value) {
-//     emit('alert', "請填寫完整表單");
-//   } else {
-//     emit('save'); // 當按鈕被點擊時，傳遞 'save' 事件
-//   }
-// };
 
 
   
@@ -94,7 +80,7 @@
     },
     computed: {
       isLastStep() {
-      return this.currentStep === 2;
+      return 
     },
 
       buttonColor() {
@@ -241,7 +227,7 @@
 }
 .weNeedAStarlight{
   display: flex;
-  background-image: url("../../assets/images/ms/yourAreTheBiggestStar.png");
+  background-image: url(@/assets/images/ms/yourAreTheBiggestStar.png);
   background-size: cover;
   background-position-y: -50px;
   width: 300px;

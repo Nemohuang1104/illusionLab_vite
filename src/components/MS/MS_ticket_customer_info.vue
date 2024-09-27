@@ -150,7 +150,7 @@ export default {
         agreeRefundPolicy: false,
       },
       errorMessage: '', // 錯誤訊息
-      localFormData: {},
+      // localFormData: {},
       guestError: false, // 顯示錯誤信息的標誌
       
     };
@@ -242,9 +242,40 @@ export default {
     }
   },
   methods: {
-    updateErrors(updatedErrors) {
-      this.errors = { ...this.errors, ...updatedErrors };
-    },
+    
+    fetchMemberData() {
+  // 從 sessionStorage 獲取 Token
+  const token = sessionStorage.getItem('token'); // 假設 token 存在這個 key 下
+  
+  fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/get_member_data.php`, {
+    method: 'GET', // 也可以省略，因為 fetch 預設是 GET
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` // 添加 Authorization 標頭
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    
+    if (data.status === 'success') {
+      
+      // 將資料存入 ticketStore
+      this.ticketStore.name = data.data.USER_NAME;
+      this.ticketStore.email = data.data.EMAIL;
+      this.ticketStore.phone = data.data.PHONE_NUMBER;
+    } else {
+      console.error(data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching member data:', error);
+  });
+},
+
+
+      updateErrors(updatedErrors) {
+        this.errors = { ...this.errors, ...updatedErrors };
+      },
     // checkFormCompletion() {  
     //   this.isFormComplete =
     //     this.formData.name &&
@@ -364,6 +395,10 @@ export default {
      
     // },
  
+  },
+  mounted() {
+    // 請求會員資料
+    this.fetchMemberData();
   },
 };
 </script>
@@ -532,43 +567,43 @@ export default {
 }
 
 .noto-sans-tc-regular {
-  font-family: "Noto Sans TC", sans-serif;
+  // font-family: "Noto Sans TC", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  // font-weight: 400;
   font-style: normal;
 }
 
-h1 {
-  font-size: 30px;
-}
+// h1 {
+//   font-size: 30px;
+// }
 
-h2 {
-  font-size: 28px;
-}
+// h2 {
+//   font-size: 28px;
+// }
 
-h3 {
-  font-size: 18px;
-}
+// h3 {
+//   font-size: 18px;
+// }
 
-h4 {
-  font-size: 16px;
-}
+// h4 {
+//   font-size: 16px;
+// }
 
-h5 {
-  font-size: 14px;
-}
+// h5 {
+//   font-size: 14px;
+// }
 
-h6 {
-  font-size: 16px;
-}
+// h6 {
+//   font-size: 16px;
+// }
 
-p {
-  font-size: 14px;
-}
+// p {
+//   font-size: 14px;
+// }
 
-a {
-  text-decoration: none;
-}
+// a {
+//   text-decoration: none;
+// }
 
 h1,
 h2,
@@ -577,8 +612,8 @@ h4,
 h5,
 h6,
 p {
-  font-family: 'Noto Sans TC';
-  color: #855F49;
+  // font-family: 'Noto Sans TC';
+  // color: #855F49;
   font-weight: bold;
   text-align: center;
   line-height: 150%;
@@ -647,16 +682,17 @@ select {
 }
 
 .template_mobangTwo {
-  background-image: url('../src/ms/modeBGI2.png');
+  background-image: url(@/assets/images/ms/modeBGI2.png);
 
 }
 
 .template_mobangThree {
-  background-image: url('../src/ms/modeBGI3.jpg');
+  background-image: url(@/assets/images/modeBGI3.jpg);
 }
 
 .remind{
       // color: #f47d52;
+      font-weight: 600;
       color: red;
     }
 

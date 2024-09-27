@@ -9,8 +9,8 @@
       class="actitvyBtn"
       :disabled="!isFormComplete"
       :currentStep="currentStep"
-      :isLastStep="isLastStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
+      :mode="mode" 
+      :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
       <CoinFall class="coin"/>
   <Footer_1 class="footer"></Footer_1>
 </div>
@@ -151,36 +151,27 @@ export default {
     }
 }
 
-
-
-
-
-</style>
-
-<style lang="scss">
-@import "../assets/style";
-
-.title{
+::v-deep .title{
   text-align: center;
 }
 
-body{
+::v-deep body{
   font-family: map-get($map: $fontStyle, $key: style_2);
 };
 
-h1{
+::v-deep h1{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
 }
 
-h2{
+::v-deep h2{
   font-size: map-get($map: $fontSize , $key: h2);
   font-weight: 800;
 }
 
-h3{
+::v-deep h3{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: h3) ;
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
@@ -188,20 +179,20 @@ h3{
   font-weight: 800;
 }
 
-h4{
+::v-deep h4{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
-  font-weight: 400;
+  font-weight: 600;
 }
 
-h6{
+::v-deep h6{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
   transition: .3s;
 }
 
-p{
+::v-deep p{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
@@ -215,14 +206,25 @@ p{
   }
 }
 
-.options{
+::v-deep .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
   
 }
 
-.sbmit{
+::v-deep .sbmit{
   font-family: map-get($map: $fontStyle, $key: style_2) !important;
 
 }
+
+::v-deep .theOriginal[data-v-5a144230]{
+  display: none;
+}
+
+</style>
+
+<style lang="scss">
+@import "../assets/style";
+
+
 
 </style>

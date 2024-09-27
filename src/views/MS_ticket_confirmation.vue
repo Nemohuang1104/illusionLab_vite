@@ -1,41 +1,46 @@
 <template>
   <div class="warpper">
       <Header class="header" :mode="currentMode"/> 
-      <MS_ticket_confirmation mode="three" activityMode="activity3" class="reservation">
+      <MS_ticket_confirmation mode="three" activityMode="activity3" class="customer_info"
+      :eventId="currentEventId">
         
       </MS_ticket_confirmation>
       <MS_com_buttons
-        class="actitvyBtn"
-        :currentStep="currentStep"
-        :mode="mode" :step="modeSelect" :activityMode="activityMode"></MS_com_buttons>
+          class="actitvyBtn"
+          :disabled="!isFormComplete"
+          :currentStep="currentStep"
+          :mode="mode" 
+          :step="modeSelect" :activityMode="activityMode"
+        ></MS_com_buttons>
       
   <Footer_3 class="footer"></Footer_3>
 
 </div>
 </template>
 
-<script setup>
-    import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
-    import Footer_3 from '@/components/Footer_03.vue'
-    import Header from '@/components/Header_0.vue';
-    import { ref }from 'vue';
-    import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
-    
-
-    const currentMode = ref('four');
-
-    
-    
-</script>
 <script>
+import MS_ticket_confirmation from '@/components/MS/MS_ticket_confirmation.vue';
+import Footer_3 from '@/components/Footer_03.vue';
+import Header from '@/components/Header_0.vue';
+import MS_com_buttons from '@/components/MS/MS_com_buttons.vue';
+
 export default {
+  components: {
+    MS_ticket_confirmation,
+    Footer_3,
+    Header,
+    MS_com_buttons,
+  },
   data() {
     return {
+      currentMode: 'four', // 当前 mode
+
       currentStep: 3, // 当前步骤
       activityMode: 'activity3', // 初始活动模式
       mode: 'three1', // 初始 mode
       modeSelect: 'three',
-
+      currentEventId: 3,
+      isFormComplete: true,
     };
   },
 }
@@ -51,7 +56,7 @@ export default {
 }
 
 .warpper{
-  background-image: url('../src/ms/modeBGI3.jpg');
+  background-image: url(@/assets/images/ms/modeBGI3.jpg);
   
   
 }
@@ -74,46 +79,43 @@ export default {
     }
 }
 
+::v-deep .theOriginal[data-v-5a144230]{
+  display: none;
+}
 
-
-</style>
-
-<style lang="scss">
-@import "../assets/style";
-
-.title[data-v-3d5d2ec6]{
+::v-deep .title[data-v-3d5d2ec6]{
   text-align: center;
   color: rgb(133, 95, 73);
 
 }
 
-body{
+::v-deep body{
   font-family: map-get($map: $fontStyle, $key: style_1);
 };
 
-h1{
+::v-deep h1{
   font-size: map-get($map: $fontSize , $key: h1);
   font-weight: 800;
   // z-index: 1;
 }
 
-h2{
+::v-deep h2{
   font-size: map-get($map: $fontSize , $key: h2);
   font-weight: 800;
 }
 
-h3{
+::v-deep h3{
   font-size: map-get($map: $fontSize , $key: h3);
   font-weight: 800;
 }
 
-h4{
+::v-deep h4{
   font-family: map-get($map: $fontStyle, $key: style_1) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
-  font-weight: 400;
+  font-weight: 600;
 }
 
-h6{
+::v-deep h6{
   font-family: map-get($map: $fontStyle, $key: style_1) !important;
   font-size: map-get($map: $fontSize , $key: p) ;
   font-weight: 400;
@@ -127,9 +129,19 @@ h6{
   }
 }
 
-.options{
+::v-deep .options{
  background-color:rgba(255, 255, 255, 0.5) !important;
   
 }
+::v-deep .sbmit[data-v-d09fc348]{
+  color: rgb(133, 95, 73);
+  border: 1px solid rgb(133, 95, 73);
 
+  &:hover{
+    background-color: #ffffffac;
+    box-shadow: 1px 3px 12px 0px rgba(109, 109, 109, 0.52);
+      scale: 1.1;
+  }
+}
 </style>
+
