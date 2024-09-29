@@ -355,4 +355,5 @@ $gap2: 14vw;
     transform: scale(2);
     left: calc(50% - 100px);
 }
+
 </style>
