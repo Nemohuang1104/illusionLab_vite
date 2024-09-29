@@ -1,10 +1,10 @@
 <script setup>
 
-function goToPage (){
+function goToPage() {
     window.scrollTo({
-    top: 0,  // 頁面的頂部
-    behavior: 'auto'  // 平滑滾動
-  });
+        top: 0,  // 頁面的頂部
+        behavior: 'auto'  // 平滑滾動
+    });
 } 
 </script>
 
@@ -13,7 +13,9 @@ function goToPage (){
     <!-- 幻境LOGO -->
     <div class="outline">
         <div class="content">
-            <img src="../assets/images/illusionLab_logo.png" alt="">
+            <router-link to="/Home">
+                <img src="../assets/images/illusionLab_logo.png" alt="">
+            </router-link>
             <div class="items">
                 <router-link to="PP_privacy_policy">
                     <span>隱私權政策</span>
@@ -34,14 +36,14 @@ function goToPage (){
         </div>
     </div>
 
-    
+
 </template>
 
 
 
 <style lang="scss" scoped>
 // 幻境LOGO
-.outline{
+.outline {
     // width: 100vw;
     width: 100%;
     max-width: 1440px;
@@ -51,46 +53,58 @@ function goToPage (){
     justify-content: center;
 }
 
-.content{
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.content img{
+.content img {
     margin-top: 12px;
     margin-bottom: 12px;
 }
 
 
-a{
+.outline .content img {
+    border-right: none;
+    /* 確保 logo 不受此樣式影響 */
+}
+
+
+
+a {
     font-size: 20px;
     line-height: 1.6rem;
     flex-basis: 0%;
     color: var(--Color-6, #FFF);
     font-family: "Noto Sans TC";
-    border-right: 1px solid #FFF;
+    // border-right: 1px solid #FFF;
     padding: 0 4px;
     cursor: pointer;
+
 }
 
-a:last-child{
+.outline .content .items a {
+    border-right: 1px solid #FFF;
+}
+
+
+.outline .content .items a:last-child {
     border-right: none;
 }
 
-
-.content p{
+.content p {
     font-size: 10px;
     line-height: 1.6rem;
     flex-basis: 0%;
     color: #FFF;
     font-family: "Noto Sans TC";
-   
+
 }
-@media (max-width: 768px){
-    .content p{
+
+@media (max-width: 768px) {
+    .content p {
         font-size: 8px;
     }
 }
-
 </style>

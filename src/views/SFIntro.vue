@@ -154,8 +154,8 @@ setTimeout(function () {
     // document.getElementById("text").style.animation = "tixtGlitch 2s forwards"; 
     setTimeout(function () {
         window.location.href = secondPageUrl;// 放置主页面URL
-    }, 300); // 等待1秒淡出動畫结束
-}, 6400);// 1000毫秒 = 1秒
+    }, 280); // 等待1秒淡出動畫结束
+}, 3800);// 1000毫秒 = 1秒
 
 </script>
 
@@ -209,7 +209,7 @@ setTimeout(function () {
     display: block;
     justify-content: center;
     margin-left: 35%;
-    animation: balloon_1 3s infinite alternate;
+    animation: balloon_1 4.5s infinite alternate;
 
 
 }
@@ -238,7 +238,7 @@ setTimeout(function () {
     /* 可選：設置容器的寬度和高度，以便適應圖片大小 */
     max-width: 1440px;
     width: 100%;
-    animation: ufoGlitch 6.75s linear;
+    animation: ufoGlitch 4.4s linear;
 
 }
 

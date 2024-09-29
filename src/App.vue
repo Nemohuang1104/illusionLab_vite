@@ -1,30 +1,36 @@
 <script setup>
-import { provide, computed } from 'vue';
-// import { RouterView } from 'vue-router'; // 確保導入 RouterView
-import Header_0 from './components/Header_0.vue';
-// import SFHeader_0 from './components/SFHeader_0.vue';
+import { ref, computed, provide, watch } from 'vue';
 
-// 計算購物車中的商品數量
+
+// 使用 ref 來存放購物車資料
+const cart = ref(JSON.parse(localStorage.getItem("cart")) || []);
+
+// 計算購物車中的唯一商品數量
 const cartItemCount = computed(() => {
-     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-     return cart.reduce((total, item) => total + item.quantity, 0); // 計算商品數量
+     const uniqueItemsMap = new Map();
+     cart.value.forEach(item => {
+          const key = `${item.id}-${item.size}-${item.style}`;
+          uniqueItemsMap.set(key, item);
+     });
+     return uniqueItemsMap.size;
 });
 
-// 提供 cartItemCount 以供注入
+// 提供 cartItemCount 和 cart 以供子組件使用
 provide('cartItemCount', cartItemCount);
+provide('cart', cart);
+
+// 當購物車更新時，將最新的購物車存回 localStorage
+watch(cart, (newCart) => {
+     localStorage.setItem("cart", JSON.stringify(newCart));
+});
 
 
 
 </script>
 
-<template>
-     <div id="app">
-          <Header_0 />
 
-          <RouterView />
-     </div>
+<template>
+     <RouterView />
 </template>
 
-<style lang="scss" scoped>
-/* 在這裡添加樣式 */
-</style>
+<style lang="scss" scoped></style>

@@ -48,32 +48,54 @@ onMounted(() => {
 function selectStyle(style) {
     selectedStyle.value = style.STYLE_VALUE;
     selectedImage.value = style.STYLE_IMG;  // 更新主圖片為所選樣式的圖片
-    
+
 }
 
 // ===================加入購物車至localStorage
 // 添加到購物車的函數
 function addToCart() {
-
-    if (!item.value) return;  // 確保 `item.value` 已載入
     // 構造要儲存的商品資料
     const product = {
         id: item.value.PRODUCT_ID,
         name: item.value.PRODUCT_NAME,
         price: item.value.PRODUCT_PRICE,
-        img: selectedImage.value,
+        img: item.value.PRODUCT_IMG,
         quantity: counter.value,
         size: selectedSize.value, // 你可以從 select 元素中獲取尺寸
-        style:selectedStyle.value,
+        style:item.value.PRODUCT_STYLES ? selectedStyle.value : null,  // 如果有樣式的選擇，也可以在這裡獲取
+        discount_amount: '',
     };
+
+    // 檢查數量、尺寸和樣式是否被選擇
+    if (counter.value < 1) {
+        Swal.fire({
+            title: '數量錯誤',
+            text: '請選擇至少一個商品數量！',
+            icon: 'warning',
+            confirmButtonText: '確定'
+        });
+        return; // 中止執行
+    }
+    // 檢查是否需要尺寸
+    if (item.value.requiresSize && !selectedSize.value) {
+        Swal.fire({
+            title: '尺寸未選擇',
+            text: '請選擇商品尺寸！',
+            icon: 'warning',
+            confirmButtonText: '確定'
+        });
+        return; // 中止執行
+    }
+
+
 
     // 從 localStorage 中獲取當前購物車商品
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     // 檢查此商品是否已經存在於購物車
-    const existingProduct = cart.find(p => p.id === product.id && 
-    p.size === product.size && 
-    p.style === product.style);
+    const existingProduct = cart.find(p => p.id === product.id &&
+        p.size === product.size &&
+        p.style === product.style);
 
     if (existingProduct) {
         // 如果商品已存在，更新數量
@@ -88,14 +110,14 @@ function addToCart() {
 
     // 可選：顯示成功提示
     // alert("商品已成功加入購物車！");
-    
+
     // 顯示 SweetAlert 提示
     Swal.fire({
         title: 'Good job!',
         text: '商品已成功加入購物車！',
         icon: 'success',
         // confirmButtonText: '確定' // 自定義按鈕文本
-        timer: 1200, 
+        timer: 1200,
         showConfirmButton: false // 隱藏確認按鈕
     });
 
@@ -169,16 +191,16 @@ const decrement = () => {
 
                     </div>
 
-                    
+
                     <!-- 數量選擇 -->
 
                     <p class="txt">選擇數量：</p>
-                <div class="quantity-input" id="quantity">
-                  <input class="quantity-button" id="minus6" @click="decrement" type="button" value=" - ">
-                  <div class="counter">{{ counter }}</div>
-                  <input type="button" value=" + " class="quantity-button" id="plus6" @click="increment">
-                </div>
-                <input type="hidden" name="quantity" :value="counter"> <!-- 傳送商品數量 -->
+                    <div class="quantity-input" id="quantity">
+                        <input class="quantity-button" id="minus6" @click="decrement" type="button" value=" - ">
+                        <div class="counter">{{ counter }}</div>
+                        <input type="button" value=" + " class="quantity-button" id="plus6" @click="increment">
+                    </div>
+                    <input type="hidden" name="quantity" :value="counter"> <!-- 傳送商品數量 -->
                     <!-- <p class="txt">選擇數量：</p>
                     <div class="quantity-input" id="quantity">
                         <button class="quantity-button" id="minus6"
@@ -218,10 +240,10 @@ const decrement = () => {
 
 
 <style lang="scss" scoped>
-
-*{
-text-decoration: none;
+* {
+    text-decoration: none;
 }
+
 @import "../assets/style";
 
 
@@ -239,7 +261,7 @@ text-decoration: none;
 
     text-align: center;
     padding-top: 120px;
-    
+
 }
 
 //標題
@@ -255,7 +277,7 @@ text-decoration: none;
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 8px;
-    background:#855F49;
+    background: #855F49;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -265,10 +287,10 @@ text-decoration: none;
 
 
 
-.title > p {
+.title>p {
     font-size: 20px;
     font-weight: 700;
-    background:#855F49;
+    background: #855F49;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -358,7 +380,8 @@ text-decoration: none;
     color: #9F7557;
     font-weight: bold;
 }
-.textbox h4{
+
+.textbox h4 {
     font-size: 20px;
     color: #FB9D3C;
     font-weight: bold;
@@ -433,7 +456,7 @@ text-decoration: none;
     outline: none;
     background: #FCF7EC;
     // border: 1px solid ;
-    border:1px solid #9F7557;
+    border: 1px solid #9F7557;
 
 }
 
@@ -447,11 +470,11 @@ text-decoration: none;
 
 .size option {
     // color: black;
-    
+
 }
 
 // ========選擇數量===========//
-.quantity-input{
+.quantity-input {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -468,6 +491,7 @@ text-decoration: none;
     background: #FCF7EC;
     border: 1px solid #9F7557;
 }
+
 .quantity-button {
     display: inline-block;
     text-align: center;
@@ -486,13 +510,13 @@ text-decoration: none;
 }
 
 .quantity-input>button:last-child:hover {
-    color: map-get($colofont_3 , orange );
+    color: map-get($colofont_3 , orange);
     transition: 0.3s;
-    border-radius:  0 12px 12px 0;
+    border-radius: 0 12px 12px 0;
 }
 
 .quantity-input>button:first-child:hover {
-    color: map-get($colofont_3 , orange );
+    color: map-get($colofont_3 , orange);
     transition: 0.3s;
     border-radius: 12px 0 0 12px;
 }
@@ -516,34 +540,34 @@ text-decoration: none;
     border: 0;
     // margin-bottom: 80px;
     color: #9F7557;
-    
+
 }
 
 // ==============選擇樣式==============//
 .main-product-image {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
 .style-options {
-  display: flex;
-  gap: 4px;
+    display: flex;
+    gap: 4px;
 }
 
 .style-image {
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: border 0.3s;
-  padding: 2px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+    padding: 2px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .style-image.selected {
-  border: 2px solid #bfa185;
-  border-radius: 5px;
+    border: 2px solid #bfa185;
+    border-radius: 5px;
 }
 
 //加入購物車
@@ -562,16 +586,16 @@ text-decoration: none;
     text-decoration: none;
     font-size: 18px;
     color: #9F7557;
-    background:#FEDCAA;
+    background: #FEDCAA;
     margin-bottom: 50px;
     border: none;
 }
 
-.txt{
-  font-size: 16px ;
-  color: #9F7557;
-  text-align: left;
-  margin-bottom: 10px;
+.txt {
+    font-size: 16px;
+    color: #9F7557;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 //小圖換大圖
@@ -602,6 +626,7 @@ text-decoration: none;
     border-radius: 12px;
     margin: 0 auto;
 }
+
 //小圖
 .mySwiper {
     height: 70%;
@@ -611,7 +636,7 @@ text-decoration: none;
     // border-radius: 12px;
     object-fit: cover;
     // border: 5px solid #122A74;
-    
+
 }
 
 
@@ -623,7 +648,7 @@ text-decoration: none;
     opacity: 0.6;
 }
 
-.mySwiper .swiper-slide img{
+.mySwiper .swiper-slide img {
     border: 3px solid #C1693B;
     border-radius: 12px;
     margin-right: 5px;
@@ -645,11 +670,11 @@ text-decoration: none;
 // RWD
 
 @media(max-width: 920px) {
-   .breadcrumb{
+    .breadcrumb {
         justify-content: center;
         margin-bottom: 8px;
     }
-    
+
     .producttitle {
         width: 80%;
     }
@@ -659,7 +684,7 @@ text-decoration: none;
         height: auto;
     }
 
-    .pbox{
+    .pbox {
         flex-direction: column;
     }
 

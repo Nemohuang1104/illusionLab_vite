@@ -8,7 +8,9 @@ const currentMode = ref('one');
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import Footer from '@/components/Footer_0.vue';
 
-
+//sweetalert彈跳視窗
+import Swal from 'sweetalert2'; // 在 script setup 中引入
+import 'sweetalert2/src/sweetalert2.scss';
 
 // const cartItems = ref([
 //     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
@@ -64,7 +66,7 @@ function getProductDetailRoute(item) {
             return { name: 'SF_DetailList', params: { id: item.PRODUCT_ID } };
         case 3:
             return { name: 'MS_ProductList', params: { id: item.PRODUCT_ID } };
-    
+
     }
 }
 
@@ -150,6 +152,7 @@ function minusQuantity(index) {
     if (carts.value[index].quantity > 1) {
         carts.value[index].quantity -= 1;
         updateLocalStorage(); // 更新 localStorage
+
     } else {
         // 商品數量為1，彈出確認框
         Swal.fire({
@@ -166,7 +169,8 @@ function minusQuantity(index) {
                 removeItem(index); // 移除商品並更新localStorage
                 // 顯示成功提示
                 Swal.fire({
-                    title: "已刪除此商品!",
+                    title: ' QQ 我在商品頁等你 !',
+                    text: '已成功刪除商品！',
                     icon: "success",
                     timer: 1200, // 自動消失
                     showConfirmButton: false // 隱藏確認按鈕
@@ -188,18 +192,43 @@ function removeItem(index) {
 }
 
 
+// 全部刪除
+function removeSelectedItems() {
+    // 反向迭代，避免刪除索引錯誤
+    for (let i = carts.value.length - 1; i >= 0; i--) {
+        if (checkedItems.value[i]) {
+            removeItem(i); // 刪除選中的項目
+        }
+    }
+}
+
+
 //ICON點擊刪除商品
 function removeCartItem(index) {
-    carts.value.splice(index, 1);
-    updateLocalStorage(); // 更新 localStorage
-     // 顯示 SweetAlert 提示
-     Swal.fire({
-        title: ' QQ 我在商品頁等你 !',
-        text: '已成功刪除商品！',
-        icon: 'success',
-        // confirmButtonText: '確定' // 自定義按鈕文本
-        timer: 1500, 
-        showConfirmButton: false // 隱藏確認按鈕
+    // 彈出 SweetAlert 提示，確認是否刪除
+    Swal.fire({
+        text: '是否要將此商品從購物車中移除？',
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "確定",
+        cancelButtonText: "我再想想！",
+    }).then((result) => {
+        // 如果使用者確認，執行刪除操作
+        if (result.isConfirmed) {
+            carts.value.splice(index, 1);  // 刪除購物車中的商品
+            updateLocalStorage();  // 更新 localStorage
+
+            // 顯示成功提示
+            Swal.fire({
+                title: 'QQ 我在商品頁等你！',
+                text: '已成功刪除商品！',
+                icon: "success",
+                timer: 1200,  // 自動消失
+                showConfirmButton: false,  // 隱藏確認按鈕
+            });
+        }
     });
 }
 
@@ -227,27 +256,49 @@ const coupon = ref({
 
 // 從 sessionStorage 或其他地方取出 token
 const token = sessionStorage.getItem('token');
-
-// 點擊結帳按鈕，更新優惠券狀態為已使用
 const handleCheckout = async () => {
-    try {
+    // 檢查購物車內是否有商品
+    if (carts.value.length === 0) {
+        await Swal.fire({
+            title: '購物車是空的!',
+            text: '請先選購商品，然後再結帳。',
+            icon: 'warning',
+            confirmButtonText: '去選購商品'
+        });
+        console.error('購物車內沒有商品，無法結帳。');
+        return;  // 中斷操作，不會繼續執行後面的跳轉邏輯
+    }
 
-        // 使用 FormData 傳送 token
+    // 如果購物車內有商品，可以結帳，不論優惠券狀態
+    console.log('購物車內有商品，準備結帳...');
+
+    try {
+        // 如果有商品，開始進行結帳操作
         const formData = new FormData();
         formData.append('token', token);
+        
+        // 發送資料到伺服器，檢查優惠券的狀態
         const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
             method: 'POST',
             body: formData
         });
+
         const result = await response.json();
+        console.log('伺服器回應:', result);
+
         if (result.status === 'success') {
-            // 結帳成功，跳轉到下一頁
+            // 優惠券有效，結帳成功，跳轉到下一頁
+            console.log('優惠券已使用，結帳成功，正在跳轉...');
+            router.push('/shop2');
+        } else if (result.status === 'no_coupon') {
+            // 如果沒有使用優惠券，依然允許結帳
+            console.log('沒有使用優惠券，但仍可結帳，正在跳轉...');
             router.push('/shop2');
         } else {
-            console.error(result.message);
+            console.error('結帳失敗:', result.message);
         }
     } catch (error) {
-        console.error('Error updating coupon:', error);
+        console.error('結帳過程中發生錯誤:', error);
     }
 };
 
@@ -309,9 +360,7 @@ router.beforeEach((to, from, next) => {
 
 // ============優惠券結束=============//
 
-//sweetalert彈跳視窗
-import Swal from 'sweetalert2'; // 在 script setup 中引入
-import 'sweetalert2/src/sweetalert2.scss';
+
 
 </script>
 <template>
@@ -324,7 +373,10 @@ import 'sweetalert2/src/sweetalert2.scss';
         </div>
         <div class="contanier">
             <div class="order">
-                <p class="title">訂單內容</p>
+                <div class="title">
+                    <p>訂單內容</p>
+                    <button class="titlebtn" @click="removeSelectedItems">刪除</button>
+                </div>
                 <ul v-if="carts.length">
                     <!-- v-if="carts.length > 0" 放在 ul 裡面  -->
                     <li class="card" v-for="(item, index) in carts" :key="index">
@@ -344,7 +396,7 @@ import 'sweetalert2/src/sweetalert2.scss';
                                     </select>
                                 </div> -->
                                 <div v-if="item.size" class="size-select">尺寸: {{ item.size }}</div>
-                                <div v-if="item.style"  class="selectedStyle" >樣式 : {{  item.style }}</div>
+                                <div v-if="item.style" class="selectedStyle">樣式 : {{ item.style }}</div>
                             </div>
                             <!-- v-for="(item, index) in cartItems" -->
                             <div class="quantity-input">
@@ -389,10 +441,11 @@ import 'sweetalert2/src/sweetalert2.scss';
                     </div>
                 </div>
                 <div class="checkbutton">
-                    <RouterLink to="/shop2">
-                        <button class="check" @click="handleCheckout">結帳
+                    
+                        <button class="check" @click="handleCheckout" >
+                            結帳
                         </button>
-                    </RouterLink>
+                   
                 </div>
             </div>
         </div>
@@ -471,7 +524,8 @@ import 'sweetalert2/src/sweetalert2.scss';
 }
 
 .contanier p {
-    margin-bottom: 10px;
+    margin: 10px 0px;
+
 }
 
 .order .title {
@@ -481,7 +535,11 @@ import 'sweetalert2/src/sweetalert2.scss';
     font-size: 20px;
     font-style: normal;
     padding: 10px;
-    width: 98%;
+    width: 630px;
+
+    max-width: 98%;
+    // min-width: 100px;
+
 }
 
 .description {
@@ -490,7 +548,26 @@ import 'sweetalert2/src/sweetalert2.scss';
 }
 
 .title {
-    min-width: 100px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.titlebtn {
+    border-radius: 4px;
+    background: #FFEDBC;
+    border: none;
+    color: #58596D;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    width: 90px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.titlebtn:hover {
+    opacity: 0.9
 }
 
 ul {
@@ -501,6 +578,7 @@ ul {
 .card {
     display: flex;
     align-items: center;
+
 }
 
 .trash-can {
@@ -616,11 +694,11 @@ ul {
 }
 
 #minus6 {
-    border-radius: 12px 0px 0px 12px;
+    border-radius: 4px 0px 0px 4px;
 }
 
 #plus6 {
-    border-radius: 0px 12px 12px 0px;
+    border-radius: 0px 4px 4px 0px;
 }
 
 
@@ -721,7 +799,7 @@ ul {
 .payment hr {
     width: 100%;
     max-width: 400px;
-    
+
     background-color: #FFFFFF;
     margin: 20px auto;
     height: 2px;
@@ -737,6 +815,8 @@ ul {
     background: none;
     color: #ffffff; //文字顏色
     padding-left: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 // 結帳按鈕
@@ -746,7 +826,7 @@ ul {
 
 // 商品確認按鈕
 .payment button {
-    border-radius: 5px;
+    border-radius: 4px;
     background: #FFEDBC;
     border: none;
     color: #58596D;
@@ -841,7 +921,7 @@ ul {
 
 .addProduct_grid {
     display: grid;
-    gap: 20px;
+    gap: 10px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
 }
@@ -859,7 +939,7 @@ ul {
 
 .pro {
     cursor: pointer;
-   
+
 }
 
 .pro p {
@@ -885,6 +965,10 @@ ul {
     .contanier {
         width: 80%;
         gap: 20px;
+    }
+
+    .order {
+        width: 499px;
     }
 
     .ProductAdd {
@@ -989,7 +1073,12 @@ ul {
         gap: 5px;
     }
 
-    .order .title {
+    // .order .title {
+    //     width: 100%;
+    // }
+
+    .order {
+        max-width: 560px;
         width: 100%;
     }
 

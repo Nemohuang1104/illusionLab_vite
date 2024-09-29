@@ -20,18 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user && $user['COUPON_USED'] == 0) {
-                // 更新 COUPON_USED 為 1
-                $updateSql = "UPDATE MEMBER SET COUPON_USED = 0 WHERE TOKEN = :token";
-                $updateStmt = $pdo->prepare($updateSql);
-                $updateStmt->bindParam(':token', $token);
-                if ($updateStmt->execute()) {
-                    echo json_encode(["status" => "success", "message" => "優惠券已使用。"]);
+            if ($user) {
+                if ($user['COUPON_USED'] == 0) {
+                    // 更新 COUPON_USED 為 1，表示優惠券已使用
+                    $updateSql = "UPDATE MEMBER SET COUPON_USED = 1 WHERE TOKEN = :token";
+                    $updateStmt = $pdo->prepare($updateSql);
+                    $updateStmt->bindParam(':token', $token);
+                    if ($updateStmt->execute()) {
+                        echo json_encode(["status" => "success", "message" => "優惠券已使用。"]);
+                    } else {
+                        echo json_encode(["status" => "error", "message" => "優惠券使用失敗。"]);
+                    }
                 } else {
-                    echo json_encode(["status" => "error", "message" => "優惠券使用失敗。"]);
+                    // 優惠券已經被使用，但結帳仍然允許進行
+                    echo json_encode(["status" => "no_coupon", "message" => "優惠券已經被使用，但仍可結帳。"]);
                 }
             } else {
-                echo json_encode(["status" => "error", "message" => "優惠券已經被使用。"]);
+                echo json_encode(["status" => "error", "message" => "用戶不存在或無效的 token。"]);
             }
         } catch (PDOException $e) {
             echo json_encode(["status" => "error", "message" => "資料庫錯誤：" . $e->getMessage()]);
