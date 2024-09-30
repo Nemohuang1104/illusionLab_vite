@@ -90,4 +90,19 @@ export default {
   margin-top: -50px;
   margin-bottom: 50px;
 }
+
+::v-deep .template[data-v-560a67a3]{
+        padding: 20% 10% !important;
+    }
+
+
+::v-deep article[data-v-553648f2]{
+  padding: 10% 5% !important;
+}
+
+@media screen and (max-width: 820px) {
+  ::v-deep .ticketIntros[data-v-553648f2]{
+    flex-wrap: wrap;
+    }
+}
 </style>

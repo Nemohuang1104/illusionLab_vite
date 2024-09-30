@@ -118,5 +118,7 @@ export default {
         border-radius: 12px;
         background: rgba(184, 153, 119, 0.20);
     }
+
+    
     
 </style>

@@ -18,7 +18,7 @@
     </swiper-slide>
 
     <swiper-slide class="items">
-          <img src="../assets/images/LC_slide3_p3.svg" alt="" >
+          <img class="small" src="../assets/images/LC_slide3_p3.svg" alt="" >
           <p class="text">享受120分鐘<br>精彩刺激的賭局</p>
     </swiper-slide>
   </swiper>
@@ -63,10 +63,11 @@ export default {
 
       img{
         max-width: 450px;
-        width: 100%;
+        width: 80%;
         padding: 0 20px;
-        
       }
+      
+   
   }
 
 

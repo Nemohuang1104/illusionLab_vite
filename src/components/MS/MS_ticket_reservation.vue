@@ -460,7 +460,7 @@ mounted() {
 
     .template_mobang{
         display: flex;
-        padding: 150px 200px;
+        padding: 20% 10%;
         flex-direction: column;
         align-items: center;
         gap: 50px;
@@ -527,6 +527,16 @@ mounted() {
       color: red;
     }
 
+    @media screen and (max-width: 820px) {
+      .options{
+        width: 60vw;
+      }
+    }
+    @media screen and (max-width: 430px) {
+      .options{
+        width: 80vw;
+      }
+}
 
 </style>
 

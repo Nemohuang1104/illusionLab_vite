@@ -9,26 +9,41 @@ import axios from 'axios'; // 註解掉 axios 的引入
 const searchQuery = ref('');
 
 const orders = ref([
-  {
-    order_id: '1',
-    order_list: 'TO240821161532',
-    account: 'john@example.com',
-    payment_status: 0,
-    order_status: 2,
-    shipping_status: 3,
-    order_date: '2024/08/21',
-    receiver_name: 'John Doe',
-    receiver_phone: '123456789',
-    shipping_address: '123 Main St, Anytown, USA',
-    shipping_type: '宅配',
-    store: 'Store A',
-    payment: '信用卡',
-    shipping_fee: 60,
-    discount_id: 'edr100',
-    discount_price: 10
-  },
+  // {
+  //   order_id: '1',
+  //   order_list: 'TO240821161532',
+  //   account: 'john@example.com',
+  //   payment_status: 0,
+  //   order_status: 2,
+  //   shipping_status: 3,
+  //   order_date: '2024/08/21',
+  //   receiver_name: 'John Doe',
+  //   receiver_phone: '123456789',
+  //   shipping_address: '123 Main St, Anytown, USA',
+  //   shipping_type: '宅配',
+  //   store: 'Store A',
+  //   payment: '信用卡',
+  //   shipping_fee: 60,
+  //   discount_id: 'edr100',
+  //   discount_price: 10
+  // },
 
 ]);
+
+// 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
+async function fetchTickets() {
+  try {
+    const response = await fetch('http://illusionlab.local/public/PDO/TicketOrder/FetchAllTicketOrder.php'); // 替換成你實際的 API URL
+    const data = await response.json();
+    orders.value = data;
+  } catch (error) {
+    console.error('Error fetching ticket:', error);
+  }
+}
+
+onMounted(() => {
+  fetchTickets(); // 當頁面加載時撈取資料
+});
 
 
 const initialItems = ref([...orders.value]); // 保存初始資料的副本
@@ -39,8 +54,9 @@ const filteredItems = computed(() => {
     return orders.value;
   }
   return orders.value.filter(item =>
-    item.order_list.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-    item.account.toLowerCase().includes(searchQuery.value.toLowerCase())
+  item.TICKET_ORDER_ID.toString().toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+    item.TICKET_ORDER_LIST.toString().toLowerCase().includes(searchQuery.value.toLowerCase())||
+    item.EMAIL.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
@@ -148,21 +164,20 @@ const o_ship = ref('')
 const edit = (index) => {
   // 使用 filteredItems 的索引來查找對應的 orders 項目
   const filteredItem = displayedItems.value[index];
-  const originalIndex = orders.value.findIndex(item => item.order_list === filteredItem.order_list);
+  const originalIndex = orders.value.findIndex(item => item.TICKET_ORDER_ID === filteredItem.TICKET_ORDER_ID);
   
   if (originalIndex !== -1) {
     current_edit.value = originalIndex;
     editOpacity.value = 1;
-    select_number.value = orders.value[originalIndex].order_list;
+    select_number.value = orders.value[originalIndex].TICKET_ORDER_ID;
+    // const tot = order_list.value[originalIndex];
+    // total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
 
-    const tot = order_list.value[originalIndex];
-    total_cost.value = tot.reduce((sum, item) => sum + Number(item.order_detail_price), 0);
+    // order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
 
-    order_cost.value = total_cost.value + Number(orders.value[originalIndex].shipping_fee) - Number(orders.value[originalIndex].discount_price);
-
-    o_pay.value = orders.value[originalIndex].payment_status;
-    o_form.value = orders.value[originalIndex].order_status;
-    o_ship.value = orders.value[originalIndex].shipping_status;
+    // o_pay.value = orders.value[originalIndex].payment_status;
+    // o_form.value = orders.value[originalIndex].order_status;
+    // o_ship.value = orders.value[originalIndex].shipping_status;
   }
 };
 // 2.當子組件 OrderTicketPopCMS 中的 f_close及f_save 被觸發時，會通過 emit 通知父組件，從而更新父組件中的 editOpacity 值，達到控制彈出視窗顯示或隱藏的效果。
@@ -178,6 +193,10 @@ const handleSaveEdit = async (updatedOrder) => {
     orders.value[current_edit.value] = updatedOrder;
     initialItems.value = [...orders.value]; // 編輯後更新 initialItems
   }
+
+   // 重新撈取更新後的資料
+   await fetchTickets();
+
   editOpacity.value = 0;
   current_edit.value = null;
   }
@@ -202,6 +221,7 @@ const handleSaveEdit = async (updatedOrder) => {
       <span>編號</span>
       <span>訂單編號</span>
       <span>帳號</span>
+      <span>訂單狀態</span>
       <span>訂購日期</span>
       <span>操作</span>
       </div>
@@ -209,10 +229,11 @@ const handleSaveEdit = async (updatedOrder) => {
 
       
       <div v-for="(item, index) in displayedItems" :key="item.id" class="order-text">
-      <span>{{ item.order_id }}</span>
-      <span>{{ item.order_list }}</span>
-      <span>{{ item.account }}</span>
-      <span>{{ item.order_date }}</span>
+      <span>{{ item.TICKET_ORDER_ID }}</span>
+      <span>{{ item.TICKET_ORDER_LIST }}</span>
+      <span>{{ item.EMAIL }}</span>
+      <span>{{ item.ORDER_STATUS }}</span>
+      <span>{{ item.ORDER_DATE.split(' ')[0] }}</span>
       <span @click="edit(index)">編輯</span>
       </div>
   </div> 
@@ -341,7 +362,7 @@ const handleSaveEdit = async (updatedOrder) => {
 
 .order-header {
     display: grid;
-    grid-template-columns: 1fr 2fr 2.5fr 1.5fr 1fr ;
+    grid-template-columns: 1fr 2fr 2.5fr 1fr 1.5fr 1fr;
     font-weight: bold;
     color: #313131;
     font-size: 18px;
@@ -355,8 +376,8 @@ const handleSaveEdit = async (updatedOrder) => {
 }
 
 .order-text {
-    display: grid;
-    grid-template-columns: 1fr 2fr 2.5fr 1.5fr 1fr ;
+  display: grid;
+    grid-template-columns: 1fr 2fr 2.5fr 1fr 1.5fr 1fr;
     font-weight: normal;
     color: #313131;
     font-size: 18px;

@@ -1,12 +1,49 @@
 <script setup>
 import Header_0 from '@/components/Header_0.vue';
-import { defineProps, ref, defineEmits } from 'vue';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import { defineProps, ref, defineEmits, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
 
 /*定義 父組件prop 事件的原始夾帶資訊*/
 const props = defineProps({
   order: Object,
 });
+
+// 假設你有一個函數來查詢詳細資料
+const orderDetails = ref();
+
+// onMounted(() => {
+//   fetchOrderDetails(props.productOrderId);
+// });
+
+async function fetchTickets() {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/FetchTicketOrderDetails.php?TICKET_ORDER_ID=${props.order.TICKET_ORDER_ID}`);
+    const data = await response.json();
+    orderDetails.value = data; // 將訂單詳細資料設置到本地 state
+  } catch (error) {
+    console.error('Error fetching ticket details:', error);
+  }
+}
+onMounted(() => {
+    fetchTickets(); // 當頁面加載時撈取資料
+});
+
+// onMounted(async () => {
+//   try {
+//     const ticketOrderId = route.params.id;
+
+//     const response = await fetch(`http://illusionlab.local/public/PDO/TicketOrder/FetchTicketOrderDetails.php?TICKET_ORDER_ID=${ticketOrderId}`);
+//     const data = await response.json();
+//     // 更新組件中的資料，例如：
+//     orderDetails.value = data;
+//   } catch (error) {
+//     console.error('Error fetching order details:', error);
+//   }
+// });
 
 /*定義 儲存和關閉按鈕emit 事件的夾帶資訊*/
 const emit = defineEmits(['close-edit', 'save-edit']);
@@ -18,11 +55,56 @@ const f_close = () => {
 };
 
 // 2.處理儲存按鈕emit夾帶的編輯狀態，並傳回父組件
-const f_save = () => {
-  emit('save-edit', localOrder.value); // 將本地編輯的數據傳遞回父組件
-  f_close(); // 儲存後關閉編輯視窗
+/* 儲存修改並發送到後端 */
+const f_save = async () => {
+  const formData = new FormData();
+  formData.append('TICKET_ORDER_ID', localOrder.value.TICKET_ORDER_ID);
+  formData.append('ORDER_STATUS', localOrder.value.ORDER_STATUS);
+
+    try {
+      const response = await fetch('http://illusionlab.local/public/PDO/TicketOrder/SaveTO_Data.php', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        emit('save-edit', localOrder.value);
+        Swal.fire({
+          icon: 'success',
+          title: '儲存成功',
+          showConfirmButton: false,
+          timer: 1200,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
+        })
+        f_close();
+      } else {
+        console.error('儲存失敗:', result.message);
+      }
+    } catch (error) {
+      console.error('發送儲存請求時發生錯誤:', error);
+    }
+  };
+
+// =============彈窗=================//
+
+// 彈窗狀態和所選卡片
+const modalVisible = ref(false);
+const selectedCard = ref({});
+
+// 打開彈窗
+const openModal = (orderDetails) => {
+  selectedCard.value = orderDetails;
+  modalVisible.value = true;
 };
 
+// 關閉彈窗
+const closeModal = () => {
+  modalVisible.value = false;
+};
 
 </script>
 <template>
@@ -36,42 +118,51 @@ const f_save = () => {
                 <div class="orderinf1">
                     <div class="orderdiv">
                         <p class="ptext">訂購日期 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.order_date">
+                        <input class="inputtext" type="text" v-model="localOrder.ORDER_DATE">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">訂單編號 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.order_list">
+                        <input class="inputtext" type="text" v-model="localOrder.TICKET_ORDER_LIST">
+                    </div>
+                    <div class="orderdiv">
+                        <p class="ptext">訂單狀態 : </p>
+                        <select class="inputtext" v-model="localOrder.ORDER_STATUS">
+                        <option value="待處理">待處理</option>
+                        <option value="已處理">已處理</option>
+                        <option value="已取消">已取消</option>
+                        <option value="已完成">已完成</option>
+                    </select>
                     </div>
                 </div>
 
                 <div class="orderinf">
                     <div class="orderdiv">
-                        <p class="ptext">會員帳號 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.account">
+                        <p class="ptext">會員編號 : </p>
+                        <input class="inputtext" type="text" v-model="localOrder.USER_CODE">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext"> 收件人姓名 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.receiver_name">
+                        <input class="inputtext" type="text" v-model="localOrder.NAME">
                     </div>
-                    <div class="orderdiv">
+                    <!-- <div class="orderdiv">
                         <p class="ptext">收件人手機 : </p>
                         <input class="inputtext" type="text" v-model="localOrder.receiver_phone">
-                    </div>
-                    <div class="orderdiv">
+                    </div> -->
+                    <!-- <div class="orderdiv">
                         <p class="ptext">收件人地址 : </p>
                         <input class="inputtext" type="text" v-model="localOrder.shipping_address">
-                    </div>
+                    </div> -->
                     <div class="orderdiv">
                         <p class="ptext">付款方式 : </p>
-                        <input class="inputtext" type="text" v-model="localOrder.payment">
+                        <input class="inputtext" type="text" v-model="localOrder.PAYMENT_METHOD">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">公司抬頭 : </p>
-                        <input class="inputtext" type="text" value="緯育股份有限公司">
+                        <input class="inputtext" type="text" v-model="localOrder.COMPANY">
                     </div>
                     <div class="orderdiv">
                         <p class="ptext">統一編號 : </p>
-                        <input class="inputtext" type="text" value="22552211">
+                        <input class="inputtext" type="text" v-model="localOrder.TAX_ID">
                     </div>
                 </div>
 
@@ -80,13 +171,14 @@ const f_save = () => {
                         <div class="textdown">
                             <p>訂單場次明細</p>
                             <div class="titlename">
-                                <p class="eventname">場次名稱</p>
-                                <p ></p>
+                                <p class="ticket">票卷樣式</p>
+                                <p class="eventname">場次</p>
+                                
                                 <p class="quantity">訂票數量</p>
                                 <p class="price">價格</p>
                             </div>
                         </div>
-                        <div class="textdetail">
+                        <!-- <div class="textdetail">
                             <img src="../assets/images/lifecasino.png" alt="">
                             <div class="detaillist">
                                 <p>人生賭場</p>
@@ -95,20 +187,21 @@ const f_save = () => {
                             </div>
                             <p>8</p>
                             <p> $17,600</p>
+                        </div> -->
+                        <div class="textdetail" v-if="orderDetails">
+                        <div class="img_warp" @click="openModal(orderDetails)" >
+                            <img :src="orderDetails.TICKET_IMAGE_PATH" class="ticket" alt="" >
+                            <div class="font_warp">
+                                <font-awesome-icon icon="up-right-and-down-left-from-center" class="roll" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="total">
-                        <div class="orderdiv">
-                            <p class="ptext1">小計 : </p>
-                            <input class="inputtext1" type="text" value="$17,600">
-                        </div>
-                        <div class="orderdiv">
-                            <p class="ptext1">折扣碼 : </p>
-                            <input class="inputtext1" type="text" value="$100">
-                        </div>
-                        <div class="orderdiv">
-                            <p class="ptext1">訂單總金額 : </p>
-                            <input class="inputtext1" type="text" value="$17,500">
+                            <div class="detaillist">
+                                <p>{{ orderDetails.EVENT_NAME }}</p>
+                                <p>{{ orderDetails.DATE }}</p>
+                                <p> {{ orderDetails.TIME }}</p>
+                            </div>
+                            <p> {{ orderDetails.QUANTITY }}</p>
+                            <p> ${{ orderDetails.TOTAL_PRICE }}</p>
                         </div>
                     </div>
 
@@ -127,11 +220,20 @@ const f_save = () => {
                     <span>編輯</span>
                 </div> -->
             </div>
-
         </div>
-
-
     </div>
+    <!-- 彈窗 -->
+    <transition name="zoom">
+  <div v-if="modalVisible" 
+      class="modal"  
+      @click="closeModal"
+      >
+      <span class="close" @click="closeModal">&times;</span>
+      <div class="modal-content" @click.stop>
+        <img :src="selectedCard.TICKET_IMAGE_PATH"  class="modal-image" />
+      </div>
+    </div>
+</transition>
 </template>
 
 
@@ -139,6 +241,8 @@ const f_save = () => {
 <style lang="scss" scoped>
 //popup的外框樣式
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+@import "../assets/style";
+
 
 .wrapper {
     font-family: Noto Sans TC;
@@ -309,11 +413,14 @@ const f_save = () => {
     align-items: center;
     flex-direction: row;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px 10px 10px 25px;
+
+ 
  
 }
 
 .eventname{
-    margin: 0 20px;
+    // margin: 0 20px;
 }
 
 
@@ -336,13 +443,39 @@ const f_save = () => {
     height: 180px;
     font-weight: bold;
     margin-bottom: 20px;
+    padding: 10px 10px 10px 25px;
+}
 
+.img_warp{
+    position: relative;
+    cursor: pointer;
+
+    .font_warp{
+        background-color: map-get($map: $color_0, $key:btn_purple);
+        position: absolute;
+        bottom: 30px;
+        right: 40px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height:14px ;
+
+        .roll{
+            color: white;
+            font-size: 12px;
+            
+            
+        }
+    }
 }
 
 .textdetail img{
     width: 120px;
     height: 120px;
-    margin: 10px 20px;
+    // margin: 10px 20px;
+    object-fit: contain;
+    // scale: 1.8;
+    // margin: 0 auto;
 }
 
 
@@ -392,5 +525,103 @@ const f_save = () => {
     cursor: pointer;
 }
 
+// ==================圖片彈窗=================//
+.modal {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  left: calc(50% - (600px/2));
+  bottom: calc(10% - (400px/2));;
+  width: 600px;
+  height: 350px;
+  background-color:rgba(255, 255, 255, 0.922);
+  border-radius: 20px;
+  transition: opacity 0.3s ease;
+  border:2px solid #7976BB
+}
+
+.modal-content {
+    position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.modal-image {
+//   max-width:500px;
+  width: 100%;
+//   max-height: 260px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  
+
+}
+
+/* Zoom animation with bounce effect */
+@keyframes zoomBounce {
+  0% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.zoom-enter-active {
+  animation: zoomBounce 0.3s ease;
+}
+
+.zoom-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.zoom-leave-to {
+  transform: scale(0);
+}
+
+.modal-enter-active {
+  opacity: 1;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+
+
+// .modal-enter-active {
+//   opacity: 1;
+// }
+
+// .modal-leave-active {
+//   opacity: 0;
+// }
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 25px;
+  height:25px;
+  border: 1px solid white;
+  background-color: #FCB600;
+  text-align: center;
+  line-height: 25px;
+}
 
 </style>
