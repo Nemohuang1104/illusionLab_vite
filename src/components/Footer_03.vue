@@ -42,7 +42,8 @@ function goToPage() {
 .outline {
     width: 100%;
     // max-width: 1440px;
-    height: 200px;
+    // height: 200px;
+    padding-bottom: 20px;
     background: map-get($color_3, header);
     display: flex;
     justify-content: center;
@@ -61,7 +62,8 @@ function goToPage() {
 }
 
 .outline .content img {
-    border-right: none; /* 確保 logo 不受此樣式影響 */
+    border-right: none;
+    /* 確保 logo 不受此樣式影響 */
 }
 
 
@@ -79,7 +81,7 @@ a {
 }
 
 .outline .content .items a {
-    border-right: 1px solid #FFF; 
+    border-right: 1px solid #FFF;
 }
 
 
