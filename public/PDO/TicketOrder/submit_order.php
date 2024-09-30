@@ -12,6 +12,7 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header('Content-Type: application/json'); // 設置返回的內容類型為 JSON
 
+$token = $data['token'];
 $userId = $_POST['USER_ID'];
 $company = $_POST['COMPANY'];
 $eventId = $_POST['EVENT_ID'];
@@ -19,6 +20,8 @@ $quantity = $_POST['QUANTITY'];
 $totalPrice = $_POST['TOTAL_PRICE'];
 $scheduleDate = $_POST['SCHEDULE_DATE'];
 $scheduleTime = $_POST['SCHEDULE_TIME'];
+
+
 
 // 插入資料到 ticket_order 表
 $sql = "INSERT INTO ticket_order (USER_ID, COMPANY, EVENT_ID, QUANTITY, TOTAL_PRICE, ORDER_STATUS)

@@ -126,8 +126,10 @@
                 <img id="text3" class="ListeneMe text3" src="../../assets/images/ms/text3.png" alt="">
                 <img id="myGirl" class="ListeneMe myGirl" src="../../assets/images/ms/myGirl.png" alt="">
                 <img id="text4" class="ListeneMe text4" src="../../assets/images/ms/text4.png" alt="">
+                <router-link to="/MS_Ticket_step0">
                 <div id="ticketBullet" class="ListeneMe ticketBullet">
                 </div>
+                </router-link>
             </div>
             <div class="top05">
             </div>

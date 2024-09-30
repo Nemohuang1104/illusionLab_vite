@@ -152,6 +152,14 @@ const routes = [
     },
     requiredLogin: false
   },
+  {
+    path: '/lifecasino_demo',
+    component: () => import('@/views/lifecaisno_demo.vue'),
+    meta: {
+      title: "人生賭場"
+    },
+    requiredLogin: false
+  },
 
   // -----商品區------//
   {
@@ -315,33 +323,33 @@ const routes = [
     name: 'SF_TicketDesign',
     component: () => import('@/views/SF_TicketDesign.vue'),
     meta: {
-      title: "星際邊境｜客製票券"
-    },
-    requiredLogin: false
+      title: "星際邊境｜客製票券",
+      requiresAuth: true,
+    }
   },
   {
     path: '/SF_Ticket_step0',
     component: () => import('@/views/SF_Ticket_reservation.vue'),
     meta: {
-      title: "星際邊境｜購票"
-    },
-    requiredLogin: true
+      title: "星際邊境｜購票",
+      requiresAuth: true,
+    }
   },
   {
     path: '/SF_Ticket_step1',
     component: () => import('@/views/SF_ticket_customer_info.vue'),
     meta: {
-      title: "星際邊境｜購票"
-    },
-    requiredLogin: true
+      title: "星際邊境｜購票",
+      requiresAuth: true,
+    }
   },
   {
     path: '/SF_Ticket_step2',
     component: () => import('@/views/SF_ticket_confirmation.vue'),
     meta: {
-      title: "星際邊境｜購票"
-    },
-    requiredLogin: true
+      title: "星際邊境｜購票",
+      requiresAuth: true,
+    }
   },
 
 
@@ -369,41 +377,41 @@ const routes = [
     path: '/MS_Ticket_step0',
     component: () => import('@/views/MS_ticket_into.vue'),
     meta: {
-      title: "心靈光譜-購票"
-    },
-    requiredLogin: true
+      title: "心靈光譜-購票",
+      requiresAuth: true,
+    }
   },
   {
     path: '/MS_Ticket_step1',
     component: () => import('@/views/MS_Ticket_reservation.vue'),
     meta: {
-      title: "心靈光譜-購票"
-    },
-    requiredLogin: true
+      title: "心靈光譜-購票",
+      requiresAuth: true,
+    }
   },
   {
     path: '/MS_Ticket_step2',
     component: () => import('@/views/MS_ticket_customer_info.vue'),
     meta: {
-      title: "心靈光譜-購票"
-    },
-    requiredLogin: true
+      title: "心靈光譜-購票",
+      requiresAuth: true,
+    }
   },
   {
     path: '/MS_Ticket_step3',
     component: () => import('@/views/MS_ticket_confirmation.vue'),
     meta: {
-      title: "心靈光譜-購票"
-    },
-    requiredLogin: true
+      title: "心靈光譜-購票",
+      requiresAuth: true,
+    }
   },
   {
     path: '/MS_customization',
     component: () => import('@/components/MS/MS_customization.vue'),
     meta: {
-      title: "心靈光譜-客製票卷"
-    },
-    requiredLogin: true
+      title: "心靈光譜-客製票卷",
+      requiresAuth: true,
+    }
   },
   {
     path: '/FQA_03',

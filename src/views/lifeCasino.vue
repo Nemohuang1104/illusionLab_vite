@@ -129,10 +129,17 @@
                 <LC_text Title="幸運之手"></LC_text>
                 <p>扳動拉霸機，來試試您的手氣吧!</p>
             </div>
+            <router-link 
+                class="demo"
+                :to="'/lifecasino_demo'" 
+                tag="a" 
+                target="_blank" 
+                rel="noopener noreferrer">
+                000
+            </router-link>
             <SlotMachine_RWD2 v-if="isMobile3"/>
             <SlotMachine_RWD v-else-if="isMobile" />
             <SlotMachine v-else ></SlotMachine>
-         
         </section>
     </swiper-slide>
     <!-- :icon="faTicket" -->
@@ -205,7 +212,7 @@
             </li>
             <li>
                 <img class="crown" src="../assets/images/LC_icon4.svg" alt="">
-                <img src="../assets/images//LC_Product2.png" alt="">
+                <img src="../assets/images/LC_Product2.png" alt="">
                 <div class="te">
                     <h4>賭聖帽T</h4>
                     <p>穿上這件，你就是賭場焦點 ! </p>
@@ -684,27 +691,27 @@ p{
     // border: 2px solid green;
 
     position: absolute;
-    top: 0;
+    top:  0;
     left: 0;
     // position: relative;
     width: 100%;
     height: 100%;
     // background-image: url('../assets/images/lifecasino_bg1.png');
-    background-image: url('../assets/images/lifecasino_bg3.jpg');
+    background-image: url(@/assets/images/lifecasino_bg2.png);
     // background: linear-gradient(180deg, #110338 0%, #30099E 100%);
     background-size: cover;
     // background-position: center;
     z-index: -10;
     //   mask-image: linear-gradient(to bottom, black 70%, transparent 100%)
 
-    > img{
-        // border: 2px solid red;
-        object-fit: cover;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
+    // > img{
+    //     // border: 2px solid red;
+    //     object-fit: cover;
+    //     width: 100%;
+    //     position: absolute;
+    //     left: 0;
+    //     top: 0;
+    // }
     
 }
 
@@ -869,7 +876,7 @@ p{
     &__h2{
       margin: 0 auto;
       text-align: center;
-      margin-top: 100px;
+      margin-top: 20vh;
     }
 
     &__items{
@@ -894,7 +901,7 @@ p{
         }
 
     }
-
+  
    
 }
 
@@ -938,6 +945,15 @@ p{
     }
 
 }
+
+.demo{
+    
+    width: 15px;
+    height: 15px;
+color: #000;
+}
+
+
 #SlotMachine {
 // border: 2px solid red;
 margin: 0 auto;
@@ -1163,6 +1179,10 @@ margin: 0 auto;
     .span2{
         margin-top: 10px;
     }
+
+    .line{
+        margin-top: 100px   ;
+    }
 }
 
 .slide10{
@@ -1252,7 +1272,7 @@ margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    margin: 5% 5%;
+    margin: 1% 5%;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -1279,6 +1299,8 @@ margin: 0 auto;
     right: 0;
     bottom: 0;
     }
+
+    
 }
 
 .slide{
@@ -1310,6 +1332,10 @@ margin: 0 auto;
 
 @media screen and (max-width: 820px) {
 
+.slide{
+    height: calc(100vh - 80px);
+}
+
 .slide1{
     &::before{
     z-index: 0;
@@ -1323,6 +1349,9 @@ margin: 0 auto;
     mask: linear-gradient(0deg, rgba(0, 0, 0, 0.00) 1.5%, #000 20.67%, #000 20.68%, rgba(102, 102, 102, 0.00) 100%);
 
     }
+
+    
+
 }
 .slide1__contain .logo[data-v-5fa87e5d]{
     margin-top: 260px;
@@ -1336,9 +1365,42 @@ margin: 0 auto;
 
             }   
     }
-
-    
 }
+
+.line[data-v-0cd65ac8] {
+        // margin-top: 50px;
+    }
+
+.demo{
+    display: none
+}
+}
+
+.slide9,.slide10,.slide11,.slide12{
+    .line{
+        margin-top: 25vh;
+    }
+
+    .footer{
+        // position: fixed;
+        // bottom: 0;
+        // right: 0;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .slide{
+        height: calc(100vh - 80px);
+    }
+    .line[data-v-0cd65ac8] {
+        // margin-top: 150px;
+    }
+
+    .footer{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
 }
 
 

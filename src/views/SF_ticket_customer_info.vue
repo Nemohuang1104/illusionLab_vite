@@ -238,7 +238,7 @@ export default {
 
   ::v-deep .weNeedAStarlight {
     display: flex;
-    background-image: url(/src/ms/yourAreTheBiggestStar.png);
+    background-image: url(@/assets/images/ms/yourAreTheBiggestStar.png);
     background-size: cover;
     background-position-y: -22px !important;
     width: 150px !important;
