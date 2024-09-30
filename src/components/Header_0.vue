@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineProps, ref, onMounted, onUnmounted,inject  } from 'vue';
+import { computed, defineProps, ref, onMounted, onUnmounted, inject } from 'vue';
 import { useRouter } from 'vue-router';
 
 
@@ -111,7 +111,7 @@ const cartItemCount = inject('cartItemCount');
 const isClicked = ref(false);
 
 function handleClick() {
-    isClicked.value = !isClicked.value; // 切換點擊狀態
+  isClicked.value = !isClicked.value; // 切換點擊狀態
 }
 </script>
 
@@ -120,10 +120,10 @@ function handleClick() {
     <div class="logo">
       <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
-    <div class="icons" >
-      <router-link :to="{ name: 'shop' }"  @click="handleClick">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon"  />
-        <span class="cart-count" :class="{ clicked: isClicked }" >{{ cartItemCount }}</span> <!-- 顯示購物車商品數量 -->
+    <div class="icons">
+      <router-link :to="{ name: 'shop' }" @click="handleClick">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+        <span class="cart-count" :class="{ clicked: isClicked }">{{ cartItemCount }}</span> <!-- 顯示購物車商品數量 -->
       </router-link>
       <!-- <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" 
         /></router-link> -->
@@ -164,7 +164,6 @@ function handleClick() {
 
 
 <style lang="scss" scoped>
-
 header {
   display: flex;
   justify-content: space-between;
@@ -219,12 +218,14 @@ header {
 }
 
 .cart-count.clicked {
-    color: black; /* 點擊後的顏色 */
+  color: black;
+  /* 點擊後的顏色 */
 }
 
 .cart-count:active,
 .cart-count:focus {
-    color: black; /* 確保點擊時顏色不變 */
+  color: black;
+  /* 確保點擊時顏色不變 */
 }
 
 
@@ -245,7 +246,7 @@ header {
   background: linear-gradient(180deg, #15104A 26.17%, rgba(42, 36, 106, 0) 99.67%);
   height: 80px;
   /* 添加高度 */
-  cursor: pointer;
+  // cursor: pointer;
   font-family: "Noto sans TC";
 }
 
@@ -439,13 +440,15 @@ header {
   }
 
   .cart-count2.clicked {
-    color: black; /* 點擊後的顏色 */
-}
+    color: black;
+    /* 點擊後的顏色 */
+  }
 
-.cart-count2:active,
-.cart-count2:focus {
-    color: black; /* 確保點擊時顏色不變 */
-}
+  .cart-count2:active,
+  .cart-count2:focus {
+    color: black;
+    /* 確保點擊時顏色不變 */
+  }
 
 }
 </style>
