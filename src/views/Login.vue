@@ -156,14 +156,15 @@ const onSubmit = async () => {
         // sessionStorage.setItem('authToken', token);  // 將 token 儲存在 sessionStorage
         sessionStorage.setItem('token', response.data.token);
 
+
         Swal.fire({
           icon: 'success',
           title: '歡迎進入幻浸實驗室',
           timer: 1200
         }).then(async () => {
           // 檢查是否有 redirect 參數
-          const redirectPath = route.query.redirect;
 
+          
           if (route.query.redirect === 'littlequiz' ) {
             if (token) {
               try {

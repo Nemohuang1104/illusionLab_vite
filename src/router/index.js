@@ -41,11 +41,10 @@ const routes = [
     name: 'login',
     component: () => import('@/views/Login.vue'),
     meta: {
-      title: "會員登入"
-    },
-    requiredLogin: true
+      title: "會員登入",
+
+    },requiredLogin: true,
   },
-  
   {
     path: '/SFHeader_0',
     name: 'SFHeader_0',
@@ -644,6 +643,27 @@ const routes = [
     },
     requiredLogin: false
   },
+
+  //=================================================
+  {
+    path: '/ting_cmstest_login',
+    name: 'ting_cmstest_login',
+    component: () => import('@/views/ting_test_login.vue'),
+    meta: {
+      title: "隱私權政策"
+    },
+    requiredLogin: false
+  },
+  {
+    path: '/ting_membercenter',
+    name: 'ting_membercenter',
+    component: () => import('@/views/ting_test.vue'),
+    meta: {
+      title: "隱私權政策"
+    },
+    requiredLogin: false
+  },
+
 
 ];
 

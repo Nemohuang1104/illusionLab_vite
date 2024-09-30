@@ -39,7 +39,7 @@
 
 .outline{
     width: 100%;
-    max-width: 1440px;
+    // max-width: 1440px;
     height: 200px;
     background: map-get($color_3,header);
     display: flex;
