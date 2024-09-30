@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user) {
                 if ($user['COUPON_USED'] == 0) {
                     // 更新 COUPON_USED 為 1，表示優惠券已使用
-                    $updateSql = "UPDATE MEMBER SET COUPON_USED = 1 WHERE TOKEN = :token";
+                    $updateSql = "UPDATE MEMBER SET COUPON_USED = 0 WHERE TOKEN = :token";
                     $updateStmt = $pdo->prepare($updateSql);
                     $updateStmt->bindParam(':token', $token);
                     if ($updateStmt->execute()) {

@@ -100,8 +100,8 @@ async function prefillMemberInfo(event) {
 // 使用訂購人資料來填充收件人資訊
 function prefillOrdererInfo(event) {
     if (event.target.checked) {
-        acceptorData.value.name = formData.value.name;
-        acceptorData.value.phone = formData.value.phone;
+        acceptorData.value.name = formData.value.user_name;
+        acceptorData.value.phone = formData.value.phone_number;
         acceptorData.value.address = formData.value.address;
     } else {
         acceptorData.value.name = '';
@@ -301,7 +301,49 @@ const highlight = ref({
 // const totalAmount = computed(() => {
 //     return totalPrice.value + shippingFee.value;
 // });
+// ===============優惠券折扣金額處理=======================
 
+// 從 sessionStorage 或其他地方取出 token
+
+const token = sessionStorage.getItem('token');
+// 商品優惠券自動填入碼
+const coupon = ref({
+    discount_code: '',
+    discount_amount: ''
+});
+
+// 請求商品優惠券資料
+const getCouponInfo = async () => {
+    try {
+        // 使用 FormData 傳送 token
+        const formData = new FormData();
+        formData.append('token', token);
+
+        const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.status === 'success') {
+            coupon.value.discount_code = data.data.discount_code;
+            coupon.value.discount_amount = data.data.discount_amount;
+        } else {
+            console.error('Error fetching user info:', data.message);
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+    }
+};
+
+// 在組件加載時發起請求
+onMounted(() => {
+    getCouponInfo();
+});
 
 // ============儲存從 localStorage=====STAR========//
 
@@ -337,7 +379,7 @@ const totalPrice = computed(() => {
 
 // 計算總金額，包含商品金額、運費及折扣
 const calculatedTotalPrice = computed(() => {
-    return totalPrice.value + shippingFee.value;
+    return totalPrice.value + shippingFee.value - coupon.value.discount_amount;
 });
 
 </script>
@@ -500,25 +542,28 @@ const calculatedTotalPrice = computed(() => {
                     </div>
                     <div class="discount-fee">
                         <h3>折扣</h3>
-                        <!-- <p v-if="coupon.value.discount_amount !== 0">${{ coupon.value.discount_amount }}</p>
-                        <p v-else>$0</p> -->
+                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'">
+                            ${{ coupon.discount_amount }} </p>
+                        <p v-else>$0</p>
                     </div>
+
                     <hr>
                     <div class="total-fee" v-if="carts.length">
                         <h3>總金額</h3>
                         <p>${{ calculatedTotalPrice }}</p>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
         <div class="confirm">
             <RouterLink to="/shop"><button>返回</button></RouterLink>
             <button @click="submitOrder">結帳</button>
-
         </div>
         <Footer_0></Footer_0>
     </div>
+
+
 </template>
 
 
