@@ -44,7 +44,7 @@ const props = defineProps({
   align-content: center;
   border-bottom: 1px solid white;
   padding-bottom: 30px;
-  margin-top: 90px;
+  margin-top: 15vh;
 }
 
 .text2{
@@ -89,7 +89,7 @@ h4{
 }
 @media screen and (max-width: 820px) {
   .line{
-    margin-top: 150px;
+    // margin-top: 150px;
   }
 }
 

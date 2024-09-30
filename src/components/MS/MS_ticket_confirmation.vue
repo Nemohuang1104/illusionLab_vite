@@ -248,6 +248,7 @@ export default {
     async fetchEventName(eventId) {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/TicketOrder/get_event_price.php?event_id=${this.eventId}`, {
+        
           params: {
             event_id: eventId,
           },
@@ -262,6 +263,14 @@ export default {
     },
     async submitOrder() {
       try {
+        
+
+        const token = sessionStorage.getItem('token'); // 如果是 localStorage，改用 localStorage.getItem('token')
+
+        if (!token) {
+      console.error('Token 不存在，請重新登入');
+      return;
+    }
         // 組裝資料
         const orderData = {
           name: this.ticketStore.name,
@@ -274,44 +283,53 @@ export default {
           guestNumber: this.ticketStore.guestNumber,
           total: this.ticketStore.total,
           comments: this.ticketStore.comments,
-          paymentMethod: '信用卡付款', // 固定顯示
-          orderStatus: '成立', // 固定顯示
+          paymentMethod: '信用卡', // 固定顯示
+          orderStatus: '已完成', // 固定顯示
         };
+    
 
-        // 發送 POST 請求到 PHP
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/TicketOrder/ticket_submit_order.php`, orderData);
+    // 發送 POST 請求到 PHP，並附帶 Authorization header
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/TicketOrder/ticket_submit_order.php`, orderData, {
+      headers: {
+        'Authorization': `Bearer ${token}`, // 使用 Bearer Token 格式
+        'Content-Type': 'application/json'
+      }
+    });
 
-        console.log('Response:', response.data); // 打印返回的響應
+    console.log('Response:', response.data); // 打印返回的響應
 
-        if (response.data.success) {
-          const orderId = response.data.orderId; // 從後端獲取 orderId
-          this.ticketStore.setOrderId(orderId); // 保存 orderId 到 Pinia
-          console.log('訂單提交成功');
-          Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "付款成功! ",
-          html: '訂單已完成，已存到會員中心<br>即將前往客製化票卷頁面，製作屬於您的專屬票卷',  // 這是內文
-          showConfirmButton: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-              // 根據 eventId 來決定跳轉的路由
-              if (this.eventId === 1) {
-                this.$router.push('/LC_Customization'); // 活動 1 的路徑
-              } else if (this.eventId === 2) {
-                this.$router.push('/SF_TicketDesign'); // 活動 2 的路徑
-              } else if (this.eventId === 3) {
-                this.$router.push('/MS_customization'); // 活動 3 的路徑
-              }
-            }
-          });
-          
-          } else {
-            console.error('提交失敗', response.data.message);
+    if (response.data.success) {
+      const orderId = response.data.orderId; // 從後端獲取 orderId
+      this.ticketStore.setOrderId(orderId); // 保存 orderId 到 Pinia
+      console.log('訂單提交成功');
+
+      // 顯示成功訊息並跳轉頁面
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "付款成功! ",
+        html: '訂單已完成，已存到會員中心<br>即將前往客製化票卷頁面，製作屬於您的專屬票卷',
+        showConfirmButton: true,
+        timer: 5000 // 自動關閉的時間
+      }).then((result) => {
+        if (result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+          // 根據 eventId 來決定跳轉的路由
+          if (this.eventId === 1) {
+            this.$router.push('/LC_Customization'); // 活動 1 的路徑
+          } else if (this.eventId === 2) {
+            this.$router.push('/SF_TicketDesign'); // 活動 2 的路徑
+          } else if (this.eventId === 3) {
+            this.$router.push('/MS_customization'); // 活動 3 的路徑
           }
-        } catch (error) {
-          console.error('提交訂單時發生錯誤:', error);
         }
+      });
+
+    } else {
+      console.error('提交失敗', response.data.message);
+    }
+  } catch (error) {
+    console.error('提交訂單時發生錯誤:', error);
+  }
       },
 
 
@@ -334,7 +352,7 @@ export default {
       // this.ticketStore.total = data.data.TOTAL_PRICE;
 
       // 檢查 TICKET_CODE_USED 是否為 1
-      if (data.data.TICKET_CODE_USED === 1) {
+      if (data.data.TICKET_CODE_USED === 1 || data.data.TICKET_DISCOUNT_CODE == null) {
         this.ticketStore.discountCode = null; // 禁用折扣碼
         this.ticketStore.discount = 0;
         this.ticketStore.total = this.ticketStore.totalAmount; // 沒有折扣時的總金額
@@ -447,7 +465,7 @@ watch: {
 
     .template_mobang{
         display: flex;
-        padding: 150px 200px;
+        padding: 20% 10%;
         flex-direction: column;
         align-items: center;
         gap: 50px;
@@ -600,4 +618,16 @@ main{
       margin-bottom: 10px;
     }
   }
+
+  @media screen and (max-width: 820px) {
+      main{
+        width: 80vw;
+      }
+    }
+
+    @media screen and (max-width: 430px) {
+      .eventInfo[data-v-d09fc348], .memberInfo[data-v-d09fc348]{
+        padding: 0;
+      }
+    }
 </style>

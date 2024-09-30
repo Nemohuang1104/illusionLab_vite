@@ -324,7 +324,7 @@ onMounted(() => {
     });
 
     // 隱藏滾動條
-    const style = document.createElement('style');
+    style = document.createElement('style');
     style.innerHTML = `body::-webkit-scrollbar { display: none; }`;
     document.head.appendChild(style);
 
