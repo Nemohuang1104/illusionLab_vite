@@ -61,34 +61,6 @@ onMounted(() => {
     getCouponInfo();
 });
 
-// ============儲存localStorage資料進入carts  =============//
-
-
-// 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
-const carts = ref([]);
-
-
-
-// 從 localStorage 撈取購物車資料的函數並存入 carts
-function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    carts.value = cart;
-}
-
-// 當組件掛載時撈取資料
-onMounted(() => {
-    loadCart();
-    console.log(carts.value); // 確認 carts 已成功加載
-});
-
-watch(carts, (newVal) => {
-  console.log('carts updated:', newVal);
-});
-
-
-
-
-
 // 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
 onMounted(() => {
 
@@ -377,6 +349,9 @@ const highlight = ref({
 
 // ============儲存從 localStorage=====STAR========//
 
+// 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
+const carts = ref([]);
+
 // 從 localStorage 撈取購物車資料的函數並存入 carts
 function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -405,7 +380,6 @@ const totalPrice = computed(() => {
 const calculatedTotalPrice = computed(() => {
     return totalPrice.value + shippingFee.value - coupon.value.discount_amount;
 });
-
 
 
 </script>
