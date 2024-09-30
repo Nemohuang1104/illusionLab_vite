@@ -15,122 +15,122 @@ import { auth, GoogleAuthProvider, signInWithPopup } from "../firebase";
 
 // export default {
 //   setup() {
-    const router = useRouter();
-    const route = useRoute();
-    // 表单字段
-    const email = ref('');
-    const password = ref('');
+const router = useRouter();
+const route = useRoute();
+// 表单字段
+const email = ref('');
+const password = ref('');
 
-    // 错误信息
-    const emailError = ref('');
-    const passwordError = ref('');
+// 错误信息
+const emailError = ref('');
+const passwordError = ref('');
 
-    //===================================
-    const loginError = ref(null);
-    //=============================
-    
+//===================================
+const loginError = ref(null);
+//=============================
 
-    // 電子信箱驗證規則 (簡單驗證)
-    const checkEmail = () => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email.value) {
-        emailError.value = '請輸入電子郵件';
-      } else if (!emailRegex.test(email.value)) {
-        emailError.value = '請輸入有效的電子郵件';
-      } else {
-        emailError.value = '';
-      }
-    };
 
-    // 密碼驗證規則 (至少 8 個字符)
-    const checkPassword = () => {
-      const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
-      if (!password.value) {
-        passwordError.value = '請輸入密碼';
-      } else if (password.value.length < 8) {
-        passwordError.value = '密碼須為(數字+英文8-16位，開頭字母必須是英文字母)';
-      } else if (!passwordRegex.test(password.value)) {
-        passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字母必須是英文字母)';
-      } else {
-        passwordError.value = '';
-      }
-    };
+// 電子信箱驗證規則 (簡單驗證)
+const checkEmail = () => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.value) {
+    emailError.value = '請輸入電子郵件';
+  } else if (!emailRegex.test(email.value)) {
+    emailError.value = '請輸入有效的電子郵件';
+  } else {
+    emailError.value = '';
+  }
+};
 
-    //忘記密碼
-    const forgotPassword = () => {
-      // Swal.fire({
-      //   title: "請輸入電子信箱",
-      //   input: "text",
-      //   inputAttributes: {
-      //     autocapitalize: "off"}
-      // })
-      const { value: email } = Swal.fire({
-        title: "請輸入電子信箱",
-        input: "email",
-        inputLabel: "Your email address",
-        inputPlaceholder: "請輸入電子信箱"
+// 密碼驗證規則 (至少 8 個字符)
+const checkPassword = () => {
+  const passwordRegex = /^[a-zA-Z][a-zA-Z0-9_]{7,16}$/;
+  if (!password.value) {
+    passwordError.value = '請輸入密碼';
+  } else if (password.value.length < 8) {
+    passwordError.value = '密碼須為(數字+英文8-16位，開頭字母必須是英文字母)';
+  } else if (!passwordRegex.test(password.value)) {
+    passwordError.value = '請輸入有效的密碼(數字+英文8-16位，開頭字母必須是英文字母)';
+  } else {
+    passwordError.value = '';
+  }
+};
+
+//忘記密碼
+const forgotPassword = () => {
+  // Swal.fire({
+  //   title: "請輸入電子信箱",
+  //   input: "text",
+  //   inputAttributes: {
+  //     autocapitalize: "off"}
+  // })
+  const { value: email } = Swal.fire({
+    title: "請輸入電子信箱",
+    input: "email",
+    inputLabel: "Your email address",
+    inputPlaceholder: "請輸入電子信箱"
+  })
+    .then(() => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "已寄送信件至您的電子信箱中",
+        showConfirmButton: false,
+        timer: 1500
       })
-      .then(() => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "已寄送信件至您的電子信箱中",
-          showConfirmButton: false,
-          timer: 1500
-        })
-      })
-    };
+    })
+};
 
-  //===========================google=======================================
-  const handleGoogleLogin = async () => {
-      loginError.value = null;
-      const provider = new GoogleAuthProvider();
+//===========================google=======================================
+const handleGoogleLogin = async () => {
+  loginError.value = null;
+  const provider = new GoogleAuthProvider();
 
-      try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
 
-        // 取得使用者資料
-        const userName = user.displayName;
-        const userEmail = user.email;
+    // 取得使用者資料
+    const userName = user.displayName;
+    const userEmail = user.email;
 
-        // 登入成功後可將資料發送到後端 API
-        await sendUserDataToBackend(userEmail, userName);
+    // 登入成功後可將資料發送到後端 API
+    await sendUserDataToBackend(userEmail, userName);
 
-      } catch (error) {
-        loginError.value = "Google 登入失敗，請稍後再試。";
-        console.error("登入錯誤:", error);
-      }
-    };
+  } catch (error) {
+    loginError.value = "Google 登入失敗，請稍後再試。";
+    console.error("登入錯誤:", error);
+  }
+};
 
-    // 發送使用者資料到後端 API
-    const sendUserDataToBackend = async (email, name) => {
-      try {
-        const response = await fetch("http://illusionlab.local/public/PDO/Login/GoogleLogin.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ mem_account: email, mem_name: name })
-        });
+// 發送使用者資料到後端 API
+const sendUserDataToBackend = async (email, name) => {
+  try {
+    const response = await fetch("http://illusionlab.local/public/PDO/Login/GoogleLogin.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ mem_account: email, mem_name: name })
+    });
 
-        const result = await response.json();
-        console.log("後端回應:", result);
+    const result = await response.json();
+    console.log("後端回應:", result);
 
-        if (result.memInfo.mem_state === 0) {
-          loginError.value = "登入失敗，請聯繫客服人員。";
-        } else {
-          // 處理登入成功邏輯，例如保存 token 或跳轉
-          console.log("登入成功，重定向...");
-        }
-      } catch (error) {
-        console.error("後端 API 錯誤:", error);
-      }
-    };
+    if (result.memInfo.mem_state === 0) {
+      loginError.value = "登入失敗，請聯繫客服人員。";
+    } else {
+      // 處理登入成功邏輯，例如保存 token 或跳轉
+      console.log("登入成功，重定向...");
+    }
+  } catch (error) {
+    console.error("後端 API 錯誤:", error);
+  }
+};
 //================================================================================
-    
-  //=============================PHP===================================
-  // 表單提交
+
+//=============================PHP===================================
+// 表單提交
 const onSubmit = async () => {
   checkEmail();     // 驗證電子郵件
   checkPassword();  // 驗證密碼
@@ -164,8 +164,9 @@ const onSubmit = async () => {
         }).then(async () => {
           // 檢查是否有 redirect 參數
 
-          
-          if (route.query.redirect === 'littlequiz' ) {
+          const redirectPath = route.query.redirect;
+
+          if (route.query.redirect === 'littlequiz') {
             if (token) {
               try {
                 // 先執行 SetQuizCompleted.php
@@ -182,7 +183,7 @@ const onSubmit = async () => {
                   // 再執行 GetTicketCoupon.php
                   const couponResponse = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
                     headers: {
-                      'Authorization':` Bearer ${token}`
+                      'Authorization': ` Bearer ${token}`
                     }
                   });
 
@@ -223,16 +224,16 @@ const onSubmit = async () => {
           } else if (redirectPath) {
             // 如果有 redirect，跳轉到該路徑
             router.push(redirectPath);
-          } 
+          }
           else {
             // 否則跳轉至 導向會員中心
             router.push('/MemberCenter');
           }
-          
-          
+
+
         }
-      
-      );
+
+        );
       } else {
         // 登入失敗，顯示錯誤訊息
         Swal.fire({
@@ -260,58 +261,53 @@ const onSubmit = async () => {
     });
   }
 };
-  
+
 </script>
 
 
 <template>
   <div class="wrapper">
     <!-- 頁首 -->
-  <Header_0 :mode="currentMode" class="header"></Header_0>
+    <Header_0 :mode="currentMode" class="header"></Header_0>
 
-<!-- 中間會員登入區塊 -->
-<main>
+    <!-- 中間會員登入區塊 -->
+    <main>
 
-  <h1>會員登入</h1>
-  <!-- 表格區塊 -->
-  <div class="form">
-    <!-- 信箱錯誤時出現的訊息 -->
-    <span v-if="emailError" class="error">{{ emailError }}</span>
+      <h1>會員登入</h1>
+      <!-- 表格區塊 -->
+      <div class="form">
+        <!-- 信箱錯誤時出現的訊息 -->
+        <span v-if="emailError" class="error">{{ emailError }}</span>
 
-    <input type="text" placeholder="請輸入您的電子信箱" 
-    class="text" 
-    v-model="email"
-    @blur="checkEmail" >
-    
-    <!-- 密碼錯誤時出現的訊息 -->
-    <span v-if="passwordError" class="error">{{ passwordError }}</span>
+        <input type="text" placeholder="請輸入您的電子信箱" class="text" v-model="email" @blur="checkEmail">
 
-    <input type="password" placeholder="請輸入您的密碼" 
-    class="text" 
-    v-model="password"
-    @blur="checkPassword">
-    
-    <div></div>
-    <!--忘記密碼 -->
-    <a href="#" class="forgot" @click="forgotPassword">忘記密碼 ?</a>
+        <!-- 密碼錯誤時出現的訊息 -->
+        <span v-if="passwordError" class="error">{{ passwordError }}</span>
 
-    <button @click="onSubmit" class="login">登入</button>
-   
-    <div v-if="loginError" class="error">{{ loginError }}</div>
-    <p>其他登入方式</p>
-    <div class="other">
-      <!-- <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
+        <input type="password" placeholder="請輸入您的密碼" class="text" v-model="password" @blur="checkPassword">
+
+        <div></div>
+        <!--忘記密碼 -->
+        <a href="#" class="forgot" @click="forgotPassword">忘記密碼 ?</a>
+
+        <button @click="onSubmit" class="login">登入</button>
+
+        <div v-if="loginError" class="error">{{ loginError }}</div>
+        <p>其他登入方式</p>
+        <div class="other">
+          <!-- <a href=""><img src="../assets/images/icon-facebook.svg" alt=""></a> 
       <a href=""><img src="../assets/images/icon-google.svg" alt=""></a> -->
-      <img src="../assets/images/icon-facebook.svg" alt="" >
-      <img src="../assets/images/icon-google.svg" alt="" @click="handleGoogleLogin">
-    </div>
-    <p>還不是會員? 前往註冊</p>
-    <router-link :to="{ path: '/SignUp', query: { redirect: route.query.redirect } }"><input type="submit" value="註冊" class="signup"></router-link>
-  </div>
+          <img src="../assets/images/icon-facebook.svg" alt="">
+          <img src="../assets/images/icon-google.svg" alt="" @click="handleGoogleLogin">
+        </div>
+        <p>還不是會員? 前往註冊</p>
+        <router-link :to="{ path: '/SignUp', query: { redirect: route.query.redirect } }"><input type="submit"
+            value="註冊" class="signup"></router-link>
+      </div>
 
-</main>
+    </main>
 
-<!-- 頁尾 -->
+    <!-- 頁尾 -->
 
   </div>
   <Footer_0></Footer_0>
@@ -321,29 +317,29 @@ const onSubmit = async () => {
 <style lang="scss" scoped>
 @import "../assets/SASS/basic/color";
 
-.wrapper{
-  background: map-get($color_0,bgc_blue);
+.wrapper {
+  background: map-get($color_0, bgc_blue);
   background-repeat: no-repeat;
   width: 100%;
   min-height: 100vh;
   height: auto;
-  font-family:"Noto Sans TC";
+  font-family: "Noto Sans TC";
   padding-top: 80px;
   padding-bottom: 30px;
 }
 
-.header{
+.header {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 20;
 }
 
-main{
+main {
   width: 520px;
   border-radius: 20px;
-  border: 1px solid  map-get($colorfont_0,white);
-  background: map-get($color_0,bgc_white);
+  border: 1px solid map-get($colorfont_0, white);
+  background: map-get($color_0, bgc_white);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12.5px);
   margin: 0 auto;
@@ -351,7 +347,7 @@ main{
   margin-bottom: 20px;
 }
 
-h1{
+h1 {
   color: #FFF;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: "Noto Sans TC";
@@ -361,13 +357,13 @@ h1{
   margin-top: 20px;
 }
 
-.form{
+.form {
   width: 360px;
   margin: 0 auto;
   margin-top: 20px;
 }
 
-.form .text{
+.form .text {
   width: 340px;
   height: 36px;
   font-size: 16px;
@@ -381,17 +377,17 @@ h1{
   margin-top: 4px;
 }
 
-.error{
+.error {
   font-size: 12px;
   color: #000354;
   padding-left: 10px;
 }
 
-.form .text:focus{
+.form .text:focus {
   border: 1px solid #7976BB;
 }
 
-.form .forgot{
+.form .forgot {
   display: block;
   text-align: right;
   margin-bottom: 16px;
@@ -400,19 +396,19 @@ h1{
   color: #505050;
 }
 
-.form p{
+.form p {
   font-size: 16px;
   color: #505050;
   text-align: center;
   margin-bottom: 16px;
 }
 
-button{
+button {
   width: 360px;
   height: 36px;
   border-radius: 80px;
   border: 1px solid #FFF;
-  background:rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.70);
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.10);
   font-size: 16px;
   color: #505050;
@@ -420,22 +416,22 @@ button{
   cursor: pointer;
 }
 
-.form .login:hover{
+.form .login:hover {
   color: #505050;
   background-color: #fff;
 }
 
-.form .other{
+.form .other {
   text-align: center;
   cursor: pointer;
 }
 
-.form img{
+.form img {
   margin: 0px 12px 12px;
 }
 
 
-.form .signup{
+.form .signup {
   width: 360px;
   height: 36px;
   border-radius: 80px;
@@ -448,26 +444,29 @@ button{
   margin-bottom: 50px;
 }
 
-.form .signup:hover{
+.form .signup:hover {
   color: #505050;
-  background-color:#fff;
+  background-color: #fff;
 }
+
 //==========================RWD=========================
-@media screen and (max-width:1000px){
-  .form{
+@media screen and (max-width:1000px) {
+  .form {
     width: 270px;
   }
-  .form .text{
+
+  .form .text {
     width: 250px;
   }
 
- .form .login,.form .signup{
+  .form .login,
+  .form .signup {
     width: 270px;
   }
 }
 
-@media screen and (max-width:800px){
-  main{
+@media screen and (max-width:800px) {
+  main {
     width: 350px;
   }
 }
