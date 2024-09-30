@@ -3048,7 +3048,7 @@ p {
     }
 
     .rihno {
-        top: 50;
+        top: 50%;
         width: 95vw;
     }
 
