@@ -3130,6 +3130,12 @@ p {
         gap: 0;
         justify-content: end;
     }
+    .Anchors {
+        display: none;
 
+    }
+    .AnchorsTree{
+        display: none;
+    }
 }
 </style>

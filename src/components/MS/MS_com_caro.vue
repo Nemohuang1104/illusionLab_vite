@@ -96,7 +96,7 @@
           case 'front':
               pageElement.style.transform = 'rotateY(-180deg)'
               book.querySelector('.page1').style.transform = 'rotateY(-179deg)'
-              book.style.transform = 'translateX(100px)'
+              book.style.transform = 'translateX(50%)'
               break
           case 'page2':
               pageElement.style.transform = 'rotateY(-178deg)'
@@ -126,7 +126,7 @@
               book.querySelector('.page4').style.transform = 'rotateY(-176deg)'
               book.querySelector('.page5').style.transform = 'rotateY(-175deg)'
               book.querySelector('.page6').style.transform = 'rotateY(-1deg)'
-              book.style.transform = 'translateX(100px)'
+              book.style.transform = 'translateX(50%)'
               break
           case 'page5':
               pageElement.style.transform = 'rotateY(-2deg)'
@@ -355,5 +355,39 @@ $gap2: 14vw;
     transform: scale(2);
     left: calc(50% - 100px);
 }
+@media screen and (max-width:430px) {
 
+    .book{
+        width: 100px;
+    }
+
+    .level0 {
+        width: 100px;
+        height: 125px;
+    margin-top: -100px;
+
+    }
+
+    .level1,.level-1 {
+        width: 80px;
+        height: 100px;
+    }
+
+    .level2,.level-2 {
+        width: 60px;
+        height: 75px;
+    }
+
+    .arrow-left     {left : calc(        $edge - (  30px / 2 ));}
+    .level-2        {left : calc( 50vw - $gap1 - ( 60px / 2 ));}
+    .level-1        {left : calc( 50vw - $gap2 - ( 80px / 2 ));}
+    .level0         {left : calc( 50vw         - ( 100px / 2 ));}
+    .level1         {left : calc( 50vw + $gap2 - ( 80px / 2 ));}
+    .level2         {left : calc( 50vw + $gap1 - ( 60px / 2 ));}
+    .arrow-right    {right: calc(        $edge - (  30px / 2 ));}
+    .enlarged {
+    // top: 0%;
+        left: calc(50% - 50px);
+    }
+}
 </style>
