@@ -402,19 +402,20 @@ html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
     @import "../assets/style";
 
     header{
-      position: unset
+      // position: unset
     }
     .template{
       background-image: url(../assets/images/lifecasino_bg2.png);
 
         padding-bottom: 80px;
-        
+        // overflow: hidden;
         // height: 180vh;
     }
 
     .line[data-v-231aa63d]{
-      margin-top: 20px;
+      margin-top: unset;
       margin-bottom: 30px;
+      padding-top: 80px;
     }
 
     a{
