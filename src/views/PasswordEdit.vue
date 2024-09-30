@@ -33,7 +33,7 @@ const savePassword = async () => {
 
   // 發送 API 請求，將新密碼送至後端更新
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/Login/UpdatePassword.php', {
+    const response = await fetch(`http://illusionlab.local/public/PDO/Login/UpdatePassword.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

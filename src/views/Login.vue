@@ -103,16 +103,16 @@ const handleGoogleLogin = async () => {
   }
 };
 
-// 發送使用者資料到後端 API
-const sendUserDataToBackend = async (email, name) => {
-  try {
-    const response = await fetch("http://illusionlab.local/public/PDO/Login/GoogleLogin.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ mem_account: email, mem_name: name })
-    });
+    // 發送使用者資料到後端 API
+    const sendUserDataToBackend = async (email, name) => {
+      try {
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/GoogleLogin.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ mem_account: email, mem_name: name })
+        });
 
     const result = await response.json();
     console.log("後端回應:", result);
@@ -144,7 +144,7 @@ const onSubmit = async () => {
       formData.append('password', password.value);
 
       // 使用 FormData 發送 POST 請求
-      const response = await axios.post('http://illusionlab.local/public/PDO/Login/login.php', formData, {
+      const response = await axios.post(`http://illusionlab.local/public/PDO/Login/login.php`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data' // 設定標頭為 FormData
         }
@@ -165,12 +165,11 @@ const onSubmit = async () => {
           // 檢查是否有 redirect 參數
 
           const redirectPath = route.query.redirect;
-
-          if (route.query.redirect === 'littlequiz') {
+          if (route.query.redirect === 'littlequiz' ) {
             if (token) {
               try {
                 // 先執行 SetQuizCompleted.php
-                const setQuizResponse = await axios.post('http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php', {}, {
+                const setQuizResponse = await axios.post(`http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php`, {}, {
                   headers: {
                     'Authorization': `Bearer ${token}`
                   }
@@ -181,7 +180,7 @@ const onSubmit = async () => {
                   console.log('測驗完成標記已更新。');
 
                   // 再執行 GetTicketCoupon.php
-                  const couponResponse = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+                  const couponResponse = await axios.post(`http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php`, {}, {
                     headers: {
                       'Authorization': ` Bearer ${token}`
                     }
