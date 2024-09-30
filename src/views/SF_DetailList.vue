@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watchEffect } from 'vue';
+import { ref, onMounted, watchEffect, watch, provide } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 // 頁首頁尾
@@ -54,6 +54,7 @@ async function fetchProductDetail() {
         console.log(route.params.id);
 
         const productId = route.params.id; // 從路由獲取商品 ID
+
         // const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
             headers: {
@@ -93,6 +94,11 @@ onMounted(() => {
 });
 
 
+import { inject } from 'vue';
+
+// 注入購物車
+const cart = inject('cart');
+const cartItemCount = inject('cartItemCount');
 
 // 添加到購物車的函數
 function addToCart() {
@@ -104,9 +110,31 @@ function addToCart() {
         img: item.value.PRODUCT_IMG,
         quantity: counter.value,
         size: selectedSize.value, // 你可以從 select 元素中獲取尺寸
-        style: '',
+        style: '',  // 如果有樣式的選擇，也可以在這裡獲取
         discount_amount: '',
     };
+
+    // 檢查數量、尺寸和樣式是否被選擇
+    if (counter.value < 1) {
+        Swal.fire({
+            title: '數量錯誤',
+            text: '請選擇至少一個商品數量！',
+            icon: 'warning',
+            confirmButtonText: '確定'
+        });
+        return; // 中止執行
+    }
+    // 檢查是否需要尺寸並且選擇的尺寸是否有效
+    if (item.value.PRODUCT_ID === 12 && (!selectedSize.value || selectedSize.value === '')) {
+        Swal.fire({
+            title: '尺寸未選擇',
+            text: '請選擇有效的商品尺寸！',
+            icon: 'warning',
+            confirmButtonText: '確定'
+        });
+        return; // 中止執行
+    }
+
 
     // 從 localStorage 中獲取當前購物車商品
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -125,19 +153,33 @@ function addToCart() {
     // 將更新後的購物車數據存回 localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
+    // 當購物車更新時，將最新的購物車存回 localStorage
+    watch(cart, (newCart) => {
+        localStorage.setItem("cart", JSON.stringify(newCart));
+    });
+
+
+
     // 顯示 SweetAlert 提示
     Swal.fire({
         title: 'Good job!',
         text: '商品已成功加入購物車！',
         icon: 'success',
         // confirmButtonText: '確定' // 自定義按鈕文本
-        timer: 1200, 
+        timer: 1200,
         showConfirmButton: false // 隱藏確認按鈕
+
     });
 
     // 可選：顯示成功提示
     console.log('Current cart items in localStorage:', localStorage.getItem('cart'));
+
+    cartItemCount.value = cart.length; // 更新購物車的數量
+
+
 }
+
+
 
 // 輪播圖
 // Import Swiper and modules
@@ -505,9 +547,9 @@ function addToCart() {
 
 }
 
-.size select:hover {
-    background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
-}
+// .size select:hover {
+//     background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+// }
 
 //加入購物車
 // .rightdown p {

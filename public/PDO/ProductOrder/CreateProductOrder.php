@@ -5,6 +5,8 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
+date_default_timezone_set('Asia/Taipei'); // 設定時區為台北
+
 $response = ['success' => false];  // 初始化回應數組
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,10 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $token = $data['token'];
     $products = $data['products'];
-    $orderDate = $data['orderDate'];
-    $paymentDate = $data['paymentDate'];
+    // $orderDate = $data['orderDate']; 
+    // $paymentDate = $data['paymentDate'];
     $formData = $data['formData'];
     $shippingMethod = $data['shippingMethod'];  // 新增從前端獲取的運送方式
+
+    $orderDate = date('Y-m-d H:i:s'); // 設定訂單日期 這是wei 更改的
+    $paymentDate = date('Y-m-d H:i:s'); // 設定付款日期 這是wei 更改的
 
     // 驗證 token，查找對應的 userId
     $stmt = $pdo->prepare("SELECT USER_ID FROM MEMBER WHERE token = ?");
@@ -35,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 計算訂單總價
     $totalPrice = 0;
     foreach ($products as $product) {
-        $totalPrice += $product['QUANTITY'] * $product['PRICE_AT_PURCHASE'];
+        $totalPrice += $product['quantity'] * $product['price'];
     }
 
     // 查詢會員是否有可用優惠券
@@ -56,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'COUPON_USED' => 1 // 確保 COUPON_USED 設為 1
         ];
 
-        // 同步更新 MEMBER 表中的 DISCOUNT_AMOUNT 欄位為 0
-        $stmt = $pdo->prepare("UPDATE MEMBER SET DISCOUNT_AMOUNT = 0 WHERE USER_ID = ?");
-        $stmt->execute([$userId]);
+        // // 同步更新 MEMBER 表中的 DISCOUNT_AMOUNT 欄位為 0
+        // $stmt = $pdo->prepare("UPDATE MEMBER SET DISCOUNT_AMOUNT = 0 WHERE USER_ID = ?");
+        // $stmt->execute([$userId]);
     }
 
     // 檢查是否有優惠券
@@ -102,6 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         INSERT INTO PRODUCT_ORDER (USER_ID, ORDER_DATE, PRODUCT_QUANTITY, TOTAL_PRICE, DISCOUNT_CODE, DISCOUNT_AMOUNT, SHIPMENT_STATUS, SHIPMENT,  ORDER_STATUS, PAYMENT_METHOD, PAYMENT_DATE, PRE_TOTAL_PRICE, SHIPMENT_FEE, STORE_NAME, STORE_ADDRESS, ACCEPTOR_NAME, ACCEPTOR_PHONE_NUMBER, ACCEPTOR_ADDRESS, BUYER_NAME, BUYER_PHONE_NUMBER, BUYER_ADDRESS) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
+
+    
     $stmt->execute([
         $userId, $orderDate, count($products), $finalTotalPrice, $discountCode, 
         $discountAmount, 'pending', $shipment, '已完成', '信用卡', $paymentDate, 
@@ -110,14 +117,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $acceptorData['name'] ?? null, $acceptorData['phone'] ?? null, $acceptorData['address'] ?? null, $formData['user_name'] ?? null, $formData['phone_number'] ?? null, $formData['address'] ?? null
     ]);
 
+
     // 獲取插入的訂單ID
     $orderId = $pdo->lastInsertId();
 
     // 將購物車中的每個商品插入到 PRODUCT_ORDER_RELATED 表
     foreach ($products as $product) {
-        $productId = $product['PRODUCT_ID'];
-        $quantity = $product['QUANTITY'];
-        $priceAtPurchase = $product['PRICE_AT_PURCHASE'];
+        $productId = $product['id'];
+        $quantity = $product['quantity'];
+        $priceAtPurchase = $product['price'];
         $status = 'pending';  // 預設狀態
 
         // 插入產品資訊到 PRODUCT_ORDER_RELATED 表
