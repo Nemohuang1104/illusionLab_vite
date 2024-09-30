@@ -73,7 +73,11 @@ onMounted(() => {
             title: '數量錯誤',
             text: '請選擇至少一個商品數量！',
             icon: 'warning',
-            confirmButtonText: '確定'
+            confirmButtonText: '確定',
+            backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         });
         return; // 中止執行
     }
@@ -83,7 +87,11 @@ onMounted(() => {
             title: '尺寸未選擇',
             text: '請選擇商品尺寸！',
             icon: 'warning',
-            confirmButtonText: '確定'
+            confirmButtonText: '確定',
+            backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         });
         return; // 中止執行
     }
@@ -114,7 +122,11 @@ onMounted(() => {
     icon: 'success',
     // confirmButtonText: '確定' // 自定義按鈕文本
     timer: 1200,
-    showConfirmButton: false // 隱藏確認按鈕
+    showConfirmButton: false, // 隱藏確認按鈕
+    backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
   });
 
   // 可選：顯示成功提示

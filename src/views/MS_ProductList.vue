@@ -62,7 +62,7 @@ function addToCart() {
         img: item.value.PRODUCT_IMG,
         quantity: counter.value,
         size: selectedSize.value, // 你可以從 select 元素中獲取尺寸
-        style:item.value.PRODUCT_STYLES ? selectedStyle.value : null,  // 如果有樣式的選擇，也可以在這裡獲取
+        style: item.value.PRODUCT_STYLES ? selectedStyle.value : null,  // 如果有樣式的選擇，也可以在這裡獲取
         discount_amount: '',
     };
 

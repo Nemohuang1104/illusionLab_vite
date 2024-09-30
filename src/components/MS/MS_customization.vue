@@ -600,7 +600,7 @@ html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
     }
 
     .template{
-        height: 100vh;
+        // height: 100vh;
         font-family:'Noto Sans TC';
         font-weight: bold;
         padding:100px 0px !important;

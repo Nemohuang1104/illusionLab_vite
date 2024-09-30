@@ -167,8 +167,11 @@ function addToCart() {
         icon: 'success',
         // confirmButtonText: '確定' // 自定義按鈕文本
         timer: 1200,
-        showConfirmButton: false // 隱藏確認按鈕
-
+        showConfirmButton: false, // 隱藏確認按鈕
+        backdrop: false,
+        willOpen: () => {
+            document.body.style.paddingRight = '0';
+        }
     });
 
     // 可選：顯示成功提示

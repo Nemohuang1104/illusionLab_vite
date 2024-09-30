@@ -155,7 +155,7 @@ function minusQuantity(index) {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "確定",
-            cancelButtonText: "我在想想 ! ",
+            cancelButtonText: "我再想想 ! ",
         }).then((result) => {
             if (result.isConfirmed) {
                 removeItem(index); // 移除商品並更新localStorage
@@ -268,9 +268,9 @@ const handleCheckout = async () => {
         // 如果有商品，開始進行結帳操作
         const formData = new FormData();
         formData.append('token', token);
-        
+
         // 發送資料到伺服器，檢查優惠券的狀態
-        const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/UseCoupon.php`, {
             method: 'POST',
             body: formData
         });
@@ -301,7 +301,7 @@ const getCouponInfo = async () => {
         const formData = new FormData();
         formData.append('token', token);
 
-        const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
             method: 'POST',
             body: formData
         });
@@ -433,11 +433,11 @@ router.beforeEach((to, from, next) => {
                     </div>
                 </div>
                 <div class="checkbutton">
-                    
-                        <button class="check" @click="handleCheckout" >
-                            結帳
-                        </button>
-                   
+
+                    <button class="check" @click="handleCheckout">
+                        結帳
+                    </button>
+
                 </div>
             </div>
         </div>
