@@ -28,7 +28,7 @@ const fetchOrders = async () => {
     const formData = new FormData();
     formData.append('token', token);
 
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/GetUserPO.php', {
+    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/GetUserPO.php`, {
       method: 'POST',
       body: formData
     });
@@ -66,7 +66,7 @@ const fetchOrderDetails = async (productOrderId) => {
   formData.append('PRODUCT_ORDER_ID', productOrderId);
 
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/GetOrderDetails.php', {
+    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/GetOrderDetails.php`, {
       method: 'POST',
       body: formData
     });
@@ -92,6 +92,18 @@ onMounted(() => {
 
 <template>
     <div class="detail">
+        <div v-if="orders.length === 0" class="no-orders">
+            <div  class="order-grid">
+                <span class="order_header grid1">訂單編號</span>
+                <span class="order_header grid2">日期</span>
+                <span class="order_header grid3">金額</span>
+                <span class="order_header grid4">付款方式</span>
+                <span class="order_header grid5">訂單狀態</span>
+                <span class="order_header grid6">運送方式</span>
+            </div>
+        </div>
+        <!-- 如果有訂單，顯示訂單列表 -->
+        <div v-else>
         <div v-for="order in orders" :key="order.PRODUCT_ORDER_ID" class="order-summary">
             <div  class="order-grid">
                 <span class="order_header grid1">訂單編號</span>
@@ -135,6 +147,7 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
 </template>
@@ -149,6 +162,20 @@ onMounted(() => {
     margin-bottom: 32px;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.no-orders {
+    
+    color: #ff6347;  // 例如紅色文字提示
+    font-size: 18px;
+    padding: 0px 0 10vh 0;
+    font-weight: bold;
+
+}
+
+.OrderDetail{
+    margin-bottom: 50px;
+    border-bottom: 1.5px solid #FCB600;
 }
 
 .detail img{

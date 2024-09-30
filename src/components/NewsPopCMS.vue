@@ -66,7 +66,11 @@ const f_save = async () => {
           icon: 'success',
           title: '新增消息成功',
           showConfirmButton: false,
-          timer: 1200
+          timer: 1200,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         })
         f_close();
       } else {
@@ -90,7 +94,7 @@ const f_save = async () => {
   }
 
   try {
-    const response = await fetch('${import.meta.env.VITE_API_URL}/NEWS/SaveNewsData.php', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/NEWS/SaveNewsData.php`, {
       method: 'POST',
       body: formData,
     });
@@ -102,7 +106,11 @@ const f_save = async () => {
           icon: 'success',
           title: '儲存成功',
           showConfirmButton: false,
-          timer: 1200
+          timer: 1200,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         })
       f_close(); // 儲存後關閉彈出視窗
     } else {

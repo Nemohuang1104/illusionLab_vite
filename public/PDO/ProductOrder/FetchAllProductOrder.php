@@ -25,9 +25,13 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // 從資料庫撈取商品資料
-    $sql = "SELECT po.*, m.* 
-        FROM PRODUCT_ORDER po 
-        JOIN MEMBER m ON po.USER_ID = m.USER_ID"; 
+    $sql = "SELECT 
+                po.*, 
+                m.*, 
+                po.DISCOUNT_AMOUNT AS po_discount_amount, 
+                m.DISCOUNT_AMOUNT AS m_discount_amount
+            FROM PRODUCT_ORDER po 
+            JOIN MEMBER m ON po.USER_ID = m.USER_ID"; 
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     

@@ -134,7 +134,7 @@
                 <img id="text3" class="ListeneMe text3" src="../../assets/images/ms/text3.png" alt="">
                 <img id="myGirl" class="ListeneMe myGirl" src="../../assets/images/ms/myGirl.png" alt="">
                 <img id="text4" class="ListeneMe text4" src="../../assets/images/ms/text4.png" alt="">
-                <router-link to="/MS_Ticket_step1"><div id="ticketBullet" class="ListeneMe ticketBullet"></div></router-link>
+                <router-link to="/MS_Ticket_step0"><div id="ticketBullet" class="ListeneMe ticketBullet"></div></router-link>
             </div>
             <div class="top05">
             </div>
@@ -3043,7 +3043,7 @@ p {
 
     .text2 {
         width: 60vw;
-        top: 38%;
+        top: 40%;
         left: 20%;
     }
 
@@ -3066,14 +3066,14 @@ p {
 
     .text4 {
         left: 15%;
-        top: 90%;
+        top: 92%;
         width: 70vw;
     }
 
     .ticketBullet {
         width: 60vw;
         height: 30vw;
-        top: 93%;
+        top: 95%;
     }
 
     .specials {
@@ -3130,6 +3130,12 @@ p {
         gap: 0;
         justify-content: end;
     }
+    .Anchors {
+        display: none;
 
+    }
+    .AnchorsTree{
+        display: none;
+    }
 }
 </style>
