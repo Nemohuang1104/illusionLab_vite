@@ -416,6 +416,7 @@ a, a:hover {
         //box-shadow: 0 6px 26px 6px rgba(0,0,0,0.25);
 
         .news-date,.news__title,.news__txt {
+          font-weight: bold;
           opacity: 1;
           transition-delay: .1s;
         }
@@ -557,5 +558,10 @@ a, a:hover {
 .news__title, .news__txt{
   text-align: center;
 }
+@media screen and (max-width:820px) {
+    .item-bg.active{
+            display: none;
+        }
+    }
 </style>
   

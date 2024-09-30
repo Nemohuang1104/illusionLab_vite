@@ -2,42 +2,35 @@
 import Header_0 from '@/components/Header_0.vue';
 import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
-const cartItems = ref([
-    { name: '繪本風格帆布袋', quantity: 1, price: 590 }
-]);
-
-// const totalAmount = computed(() => {
-//     return cartItems.value.reduce((total, item) => {
-//         return total + item.quantity * item.price;
-//     }, 0);
-// // const totalAmount = computed(() => {
-// //   return cartItems.value.reduce((total, item) => {
-// //     return total + item.quantity * item.price;
-// //   }, 0);
-// // });
 import { onMounted } from 'vue';
 
 import { useRouter, useRoute } from 'vue-router';
+
+//sweetalert彈跳視窗
+import Swal from 'sweetalert2'; // 在 script setup 中引入
+import 'sweetalert2/src/sweetalert2.scss';
+
+
 
 const router = useRouter();
 const route = useRoute();
 
 // 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
 onMounted(() => {
-    
+
     if (route.query.storeName && route.query.storeAddress) {
         name.value = route.query.storeName;
-    address.value = route.query.storeAddress;
-    orderData.value.store = route.query.storeName; // 使用新的變數名
-    orderData.value.address = route.query.storeAddress; 
-}
+        address.value = route.query.storeAddress;
+        orderData.value.store = route.query.storeName; // 使用新的變數名
+        orderData.value.address = route.query.storeAddress;
+    }
 
-// 檢查是否有 shippingMethod 參數
-if (route.query.shippingMethod) {
-    shippingMethod.value = route.query.shippingMethod; // 設定為 7-11取貨
-}
+    // 檢查是否有 shippingMethod 參數
+    if (route.query.shippingMethod) {
+        shippingMethod.value = route.query.shippingMethod; // 設定為 7-11取貨
+    }
 
 
 });
@@ -67,13 +60,12 @@ const acceptorData = ref({
     phone: '',
     address: ''
 });
-
 async function prefillMemberInfo(event) {
     if (event.target.checked) {
 
         try {
             const token = sessionStorage.getItem('token');
-                // 使用 FormData 傳送 token
+            // 使用 FormData 傳送 token
             const keyformData = new FormData();
             keyformData.append('token', token);
 
@@ -103,11 +95,13 @@ async function prefillMemberInfo(event) {
 }
 
 
+
+
 // 使用訂購人資料來填充收件人資訊
 function prefillOrdererInfo(event) {
     if (event.target.checked) {
-        acceptorData.value.name = formData.value.user_name;
-        acceptorData.value.phone = formData.value.phone_number;
+        acceptorData.value.name = formData.value.name;
+        acceptorData.value.phone = formData.value.phone;
         acceptorData.value.address = formData.value.address;
     } else {
         acceptorData.value.name = '';
@@ -123,63 +117,33 @@ const paymentMethod = ref('');
 
 const shippingMethod = ref('');
 const shippingFee = computed(() => {
-  if (shippingMethod.value === '7-11取貨') {
-    return 60;
-  } else if (shippingMethod.value === '宅配到府') {
-    return 100;
-  } else {
-    return 0;
-  }
+    if (shippingMethod.value === '7-11取貨') {
+        return 60;
+    } else if (shippingMethod.value === '宅配到府') {
+        return 100;
+    } else {
+        return 0;
+    }
 });
 
+
+
 const itemsTotal = computed(() => {
-  return cartItems.value.reduce((total, item) => {
-    return total + item.quantity * item.price;
-  }, 0);
+    return cartItems.value.reduce((total, item) => {
+        return total + item.quantity * item.price;
+    }, 0);
 });
 
 const totalAmount = computed(() => {
-  return itemsTotal.value + shippingFee.value;
+    return itemsTotal.value + shippingFee.value;
 });
 
 
 
 // 將 v-model 欄位(表單資訊)儲存到 localStorage==========================
-import { watch } from 'vue';
-
 watch(formData, (newValue) => {
     localStorage.setItem('formData', JSON.stringify(newValue));
-    const cartItemstest = [
-    {
-        PRODUCTID: 8,
-        PRODUCT_NAME: "金牌叉燒飯",
-        PRICE_AT_PURCHASE: 599,
-        PRODUCT_IMG: "/public/PDO/FileUpload/66e79402d9c55螢幕擷取畫面 2024-06-15 143959.png",
-        QUANTITY: 5,
-        size: ""
-    },
-    {
-        PRODUCT_ID: 12,
-        PRODUCT_NAME: "限定T-shirt",
-        PRICE_AT_PURCHASE: 800,
-        PRODUCT_IMG: "/public/PDO/FileUpload/66f10f55d77cd_66e7a5e8b02d9_SF_Tshirt.png",
-        QUANTITY: 1,
-        size: ""
-    },
-    {
-        PRODUCT_ID: 16,
-        PRODUCT_NAME: "繪本風格筆記本",
-        PRICE_AT_PURCHASE: 180,
-        PRODUCT_IMG: "/public/PDO/FileUpload/66e7fce5522d9_MS_bearnotebook.png",
-        QUANTITY: 2,
-        size: ""
-    }
-];
 
-// 將購物車明細存入 localStorage
-localStorage.setItem('cart', JSON.stringify(cartItemstest));
-
-console.log('購物車資料已儲存到 localStorage');
 }, { deep: true });
 
 // 將宅配收件人資料acceptorData存入 localStorage
@@ -205,18 +169,80 @@ watch(paymentMethod, (newValue) => {
 
 
 
+
 // 創建訂單==================================
 const submitOrder = async () => {
-    const formData = JSON.parse(localStorage.getItem('formData')); // 從 localStorage 獲取表單資料
-    const cart = JSON.parse(localStorage.getItem('cart')) || []; // 從 localStorage 獲取購物車資料
+    // 確保從 localStorage 取出的 formData 不為 null，如果是 null，則設置為空物件
+    const formData = JSON.parse(localStorage.getItem('formData')) || {
+        user_name: '',
+        phone_number: '',
+        address: ''
+    };
 
-    // 從 sessionStorage 或其他地方取出 token
-    const token = sessionStorage.getItem('token'); 
-    const orderDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // 格式化為 'YYYY-MM-DD HH:MM:SS'
-    const paymentDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // 格式化為 'YYYY-MM-DD HH:MM:SS'
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || []; // 從 localStorage 獲取購物車資料
+    const token = sessionStorage.getItem('token'); // 從 sessionStorage 或其他地方取出 token
+    const orderDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // 訂單日期
+    const paymentDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // 付款日期
+
+
+    // 資料完整性檢查
+    // 訂購人資料完整性檢查
+    if (!formData.user_name || !formData.phone_number || !formData.address) {
+        Swal.fire({
+            title: '訂購人資料不完整',
+            text: '請確保訂購人的姓名、手機、地址已填寫完成。',
+            icon: 'warning',
+            confirmButtonText: '確認'
+        });
+        return; // 結束函數
+    }
+
+    // 收件人資訊檢查（依據運送方式）
+    if (shippingMethod.value === '宅配到府' && (!acceptorData.value.name || !acceptorData.value.phone || !acceptorData.value.address)) {
+        Swal.fire({
+            title: '收件人資訊不完整',
+            text: '請確保收件人的姓名、手機和地址已填寫完成。',
+            icon: 'warning',
+            confirmButtonText: '確認'
+        });
+        return; // 結束函數
+    }
+
+    // 門市取貨資訊檢查（7-11 取貨）
+    if (shippingMethod.value === '7-11取貨' && (!orderData.value.store || !orderData.value.address)) {
+        Swal.fire({
+            title: '門市資訊不完整',
+            text: '請選擇 7-11 取貨的門市和門市地址。',
+            icon: 'warning',
+            confirmButtonText: '確認'
+        });
+        return; // 結束函數
+    }
+
+    // 運送方式檢查
+    if (!shippingMethod.value) {
+        Swal.fire({
+            title: '運送方式不完整',
+            text: '請選擇運送方式。',
+            icon: 'warning',
+            confirmButtonText: '確認'
+        });
+        return; // 結束函數
+    }
+
+    // 付款方式檢查
+    if (!paymentMethod.value) {
+        Swal.fire({
+            title: '付款方式不完整',
+            text: '請選擇付款方式。',
+            icon: 'warning',
+            confirmButtonText: '確認'
+        });
+        return; // 結束函數
+    }
 
     try {
-        // 將 token 和其他訂單資料一起發送到後端
         const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/CreateProductOrder.php', {
             method: 'POST',
             headers: {
@@ -238,13 +264,13 @@ const submitOrder = async () => {
         const result = await response.json();
         if (result.success) {
             const productOrderId = result.orderId;
-
             console.log('Order created successfully:', result.orderId);
+
             // 清空購物車和表單資料
             localStorage.removeItem('cart');
             localStorage.removeItem('formData');
-            // 跳轉到下一個頁面
-            // 跳轉至 ShoppingCar3 並傳遞 productOrderId
+
+            // 跳轉到下一個頁面，並傳遞 productOrderId
             router.push({ path: '/shop3', query: { productOrderId } });
         } else {
             console.error('Error creating order:', result.message);
@@ -254,21 +280,73 @@ const submitOrder = async () => {
     }
 };
 
-
 // ============ShoppingStep=============//
 const highlight = ref({
-    1:{  background : 'transparent', fontcolor : '#fff', fontsize : '12px'  },
-    2:{  background : '#fff', fontcolor : '#22247A', fontsize : '12px' },
-    3:{  background : 'transparent', fontcolor : '#fff', fontsize : '12px' }
+    1: { background: 'transparent', fontcolor: '#fff', fontsize: '12px' },
+    2: { background: '#fff', fontcolor: '#22247A', fontsize: '12px' },
+    3: { background: 'transparent', fontcolor: '#fff', fontsize: '12px' }
 
-    }
-  );
+}
+);
+
+
+// const totalPrice = computed(() => {
+//     return carts.value.reduce((total, item) => {
+//         return total + item.quantity * item.price;
+//     }, 0);
+// });
+
+
+
+// const totalAmount = computed(() => {
+//     return totalPrice.value + shippingFee.value;
+// });
+
+
+// ============儲存從 localStorage=====STAR========//
+
+
+// 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
+const carts = ref([]);
+
+
+
+// 從 localStorage 撈取購物車資料的函數並存入 carts
+function loadCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    carts.value = cart;
+}
+
+// 當組件掛載時撈取資料
+onMounted(() => {
+    loadCart();
+    console.log(carts.value); // 確認 carts 已成功加載
+});
+
+watch(carts, (newVal) => {
+    console.log('carts updated:', newVal);
+});
+
+
+// 計算購物車總價:是一個 computed 屬性，用來計算購物車中所有商品的總價
+const totalPrice = computed(() => {
+    return carts.value.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+    }, 0);
+});
+
+// 計算總金額，包含商品金額、運費及折扣
+const calculatedTotalPrice = computed(() => {
+    return totalPrice.value + shippingFee.value;
+});
 
 </script>
 
 <template>
     <div class="wrapper">
-        <div class="header"><Header_0></Header_0></div>
+        <div class="header">
+            <Header_0></Header_0>
+        </div>
 
         <!--購物車流程數字圖示_組件模板開始線-->
         <div class="ShoppingStep">
@@ -372,7 +450,7 @@ const highlight = ref({
                         <p>*付款方式:</p>
                         <div class="form-check">
                             <label class="custom-checkbox">
-                                <input type="radio" name="pay" v-model="paymentMethod"  value="信用卡"/>
+                                <input type="radio" name="pay" v-model="paymentMethod" value="信用卡" />
                                 <span class="checkmark"></span>
                                 <span class="text">信用卡/金融卡</span>
                             </label>
@@ -399,53 +477,36 @@ const highlight = ref({
                 <div class="total">
                     <h2>商品明細</h2>
                     <hr>
-                    <div class="item" v-for="(item, index) in cartItems" :key="index">
-                        <img src="../assets/images/product_ex.jpg" alt="">
+                    <div class="item" v-for="(item, index) in carts" :key="index">
+                        <img :src="item.img" alt="商品圖片">
                         <div class="item_content">
                             <h3>{{ item.name }}</h3>
                             <div class="time">
-                                <p>規格:</p>
-                                <p>數量:</p>
-                                <!-- <div class="input">
-                                    <select name="" id="">
-                                        <option value="0">規格</option>
-                                        <option value="1">可愛動物區</option>
-                                        <option value="2">內心小女孩</option>
-                                        <option value="3">大人釋懷中</option>
-                                    </select>
-                                </div>
-                                <div class="quantity-input">
-                                    <button class="quantity-button" id="minus6"
-                                        @click="item.quantity > 1 && item.quantity--">-</button>
-                                    <input type="text" v-model="item.quantity" min="1" />
-                                    <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
-                                </div> -->
+                                <div v-if="item.size" class="size-select">尺寸: {{ item.size }}</div>
+                                <div v-if="item.style" class="selectedStyle">樣式 : {{ item.style }}</div>
+                                <div>數量: {{ item.quantity }}</div>
                             </div>
-                            <!-- <i class="fa-regular fa-trash-can"></i> -->
-                             <!-- <div class="trash">
-                                 <img class="trash-can" src="../assets/images/trashcan.svg">
-                             </div> -->
                         </div>
                     </div>
-
-
                     <hr>
                     <div class="count">
                         <h3>商品金額</h3>
-                        <p>${{ itemsTotal }}</p>
+                        <!-- <p>${{ itemsTotal }}</p> -->
+                        <p>${{ totalPrice }}</p>
                     </div>
                     <div class="shipping-fee">
                         <h3>運費</h3>
                         <p>${{ shippingFee }}</p>
                     </div>
                     <div class="discount-fee">
-                        <h3>折扣金額</h3>
-                        <p>$0</p>
+                        <h3>折扣</h3>
+                        <!-- <p v-if="coupon.value.discount_amount !== 0">${{ coupon.value.discount_amount }}</p>
+                        <p v-else>$0</p> -->
                     </div>
                     <hr>
-                    <div class="total-fee">
+                    <div class="total-fee" v-if="carts.length">
                         <h3>總金額</h3>
-                        <p>${{ totalAmount }}</p>
+                        <p>${{ calculatedTotalPrice }}</p>
                     </div>
                 </div>
             </div>
@@ -454,7 +515,7 @@ const highlight = ref({
         <div class="confirm">
             <RouterLink to="/shop"><button>返回</button></RouterLink>
             <button @click="submitOrder">結帳</button>
-            
+
         </div>
         <Footer_0></Footer_0>
     </div>
@@ -471,7 +532,7 @@ const highlight = ref({
 
 
 
-.step{
+.step {
     padding-top: 100px;
 }
 
@@ -505,7 +566,7 @@ const highlight = ref({
     width: 100%;
     max-width: 600px;
     padding: 40px 0;
-    margin: 0 auto ;
+    margin: 0 auto;
     /* display: flex; */
     // border: 1px solid white;
 
@@ -835,9 +896,10 @@ const highlight = ref({
 
 
 /*  disabled 的樣式 */
-.custom-checkbox input[type="radio"]:disabled + .checkmark + .text {
-    color:  #FFF; /* 保持文字顏色一致 */
-    opacity: .7; 
+.custom-checkbox input[type="radio"]:disabled+.checkmark+.text {
+    color: #FFF;
+    /* 保持文字顏色一致 */
+    opacity: .7;
 }
 
 .payment {
@@ -1125,29 +1187,30 @@ const highlight = ref({
     cursor: pointer;
 }
 
-.trash{
+.trash {
     display: flex;
     justify-content: end;
 }
 
-.trash-can{
+.trash-can {
     cursor: pointer;
     width: 100%;
     max-width: 20px;
     margin: 12px 0;
 }
 
-button:hover{
+button:hover {
     opacity: .9;
 }
 
 
 // 門市選擇的字串
-.inner04 .orderData{
+.inner04 .orderData {
     margin-bottom: 0;
     margin-top: 20px;
 }
-.storechoose{
+
+.storechoose {
     background: #FFEDBC;
     border: none;
     border-radius: 5px;
@@ -1157,41 +1220,41 @@ button:hover{
 
 /* ==========RWD斷點============== */
 
-@media screen and (max-width: 1040px) { 
-.content {
-    margin: 0 auto;
-    margin-top: 5%;
-    width: 80%;
-    max-width: 1000px;
-    display: flex;
-    justify-content: space-between;
-    // border: 1px solid white;
-    gap: 4%;
-}
+@media screen and (max-width: 1040px) {
+    .content {
+        margin: 0 auto;
+        margin-top: 5%;
+        width: 80%;
+        max-width: 1000px;
+        display: flex;
+        justify-content: space-between;
+        // border: 1px solid white;
+        gap: 4%;
+    }
 
-.inner0 > p {
-    font-size: 16px;
-    line-height: 16px;
-    flex-basis: 48%;
-    color: var(--Color-6, #FFF);
-    font-family: "Noto Sans TC";
-}
+    .inner0>p {
+        font-size: 16px;
+        line-height: 16px;
+        flex-basis: 48%;
+        color: var(--Color-6, #FFF);
+        font-family: "Noto Sans TC";
+    }
 
-.inner04 > p {
-    font-size: 16px;
-    line-height: 16px;
-    flex-basis: 32%;
-    color: var(--Color-6, #FFF);
-    font-family: "Noto Sans TC";
-}
+    .inner04>p {
+        font-size: 16px;
+        line-height: 16px;
+        flex-basis: 32%;
+        color: var(--Color-6, #FFF);
+        font-family: "Noto Sans TC";
+    }
 
-.inner05 > p {
-    font-size: 16px;
-    line-height: 16px;
-    flex-basis: 32%;
-    color: var(--Color-6, #FFF);
-    font-family: "Noto Sans TC";
-}
+    .inner05>p {
+        font-size: 16px;
+        line-height: 16px;
+        flex-basis: 32%;
+        color: var(--Color-6, #FFF);
+        font-family: "Noto Sans TC";
+    }
 
 }
 
@@ -1200,14 +1263,14 @@ button:hover{
 
 
 
-.content {
-    margin: 0 auto;
-    margin-top: 5%;
-    width: 88%;
-    max-width: 624px;
-    display: flex;
-    flex-direction: column;
-    gap: 4%;
+    .content {
+        margin: 0 auto;
+        margin-top: 5%;
+        width: 88%;
+        max-width: 624px;
+        display: flex;
+        flex-direction: column;
+        gap: 4%;
     }
 }
 
@@ -1216,12 +1279,13 @@ button:hover{
     max-width: 624px;
 }
 
-.fill > input {
+.fill>input {
     /* border: 1px solid red; */
     width: 92%;
 }
 
-.delivery-form input, .pickup-form input {
+.delivery-form input,
+.pickup-form input {
     width: 65%;
 }
 
@@ -1234,7 +1298,8 @@ button:hover{
     margin-bottom: 24px;
 }
 
-.inner04 p, .inner05 p{
+.inner04 p,
+.inner05 p {
     margin-bottom: 24px;
 }
 
@@ -1260,11 +1325,11 @@ button:hover{
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    
+
 }
 
-.item img{
-    width:40%;
+.item img {
+    width: 40%;
     object-fit: contain;
     margin: 12px;
 }
@@ -1272,11 +1337,10 @@ button:hover{
 .confirm {
     width: 90vw;
 }
-.confirm button{
+
+.confirm button {
     font-size: 16px;
     max-width: 120px;
     width: 90vw;
 }
-
-
 </style>

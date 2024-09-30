@@ -13,6 +13,11 @@ const props = defineProps({
   productInfo: Object
 })
 
+
+//彈跳視窗
+import Swal from 'sweetalert2'; // 在 script setup 中引入
+import 'sweetalert2/src/sweetalert2.scss';
+
 const item = ref([
   // {id:'1',productList:'20240904001', cardImage: '../src/assets/images/LC_Product_item1.svg',productName:'奢華金杯',price:599,material:'銅鍍合金',size:'直徑6.5cm，高6cm',quantity: 1},
 ])
@@ -33,8 +38,8 @@ async function fetchProducts() {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/LC_GetProductInfo.php?productId=${productId}`);
     const data = await response.json();
     item.value = data;
-    // item.value = { ...data, quantity: 1 };  // 初始化數量為 1
-    // selectedSize.value = item.value.PRODUCT_SIZE[0];  // 預設選中第一個尺寸
+    item.value = { ...data, quantity: 1 };  // 初始化數量為 1
+    selectedSize.value = item.value.PRODUCT_SIZE[0];  // 預設選中第一個尺寸
     // selectedStyle.value = item.value.PRODUCT_STYLE[0]; // 預設選中第一個樣式
 
   } catch (error) {
@@ -49,18 +54,40 @@ onMounted(() => {
 
 // ===================加入購物車至localStorage
 // 添加到購物車的函數
-function addToCart() {
+  function addToCart() {
+    // 構造要儲存的商品資料
+    const product = {
+        id: item.value.PRODUCT_ID,
+        name: item.value.PRODUCT_NAME,
+        price: item.value.PRODUCT_PRICE,
+        img: item.value.PRODUCT_IMG,
+        quantity: counter.value,
+        size: selectedSize.value, // 你可以從 select 元素中獲取尺寸
+        style: '',  // 如果有樣式的選擇，也可以在這裡獲取
+        discount_amount: '',
+    };
 
-  if (!item.value) return;  // 確保 `item.value` 已載入
-  // 構造要儲存的商品資料
-  const product = {
-    id: item.value.PRODUCT_ID,
-    name: item.value.PRODUCT_NAME,
-    price: item.value.PRODUCT_PRICE,
-    img: item.value.PRODUCT_IMG,
-    quantity: counter.value,
-    size: selectedSize.value // 你可以從 select 元素中獲取尺寸
-  };
+    // 檢查數量、尺寸和樣式是否被選擇
+    if (counter.value < 1) {
+        Swal.fire({
+            title: '數量錯誤',
+            text: '請選擇至少一個商品數量！',
+            icon: 'warning',
+            confirmButtonText: '確定'
+        });
+        return; // 中止執行
+    }
+    // 檢查是否需要尺寸
+    if (item.value.requiresSize && !selectedSize.value) {
+        Swal.fire({
+            title: '尺寸未選擇',
+            text: '請選擇商品尺寸！',
+            icon: 'warning',
+            confirmButtonText: '確定'
+        });
+        return; // 中止執行
+    }
+
 
   // 從 localStorage 中獲取當前購物車商品
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -79,8 +106,19 @@ function addToCart() {
   // 將更新後的購物車數據存回 localStorage
   localStorage.setItem("cart", JSON.stringify(cart));
 
+
+  // 顯示 SweetAlert 提示
+  Swal.fire({
+    title: 'Good job!',
+    text: '商品已成功加入購物車！',
+    icon: 'success',
+    // confirmButtonText: '確定' // 自定義按鈕文本
+    timer: 1200,
+    showConfirmButton: false // 隱藏確認按鈕
+  });
+
   // 可選：顯示成功提示
-  alert("商品已成功加入購物車！");
+  // alert("商品已成功加入購物車！");
 
   console.log('Current cart items in localStorage:', localStorage.getItem('cart'));
 }
@@ -161,8 +199,8 @@ const decrement = () => {
                     </option>
                   </select>
                 </div>
-               
-               
+
+
 
                 <!-- 數量選擇 -->
                 <!-- <p class="txt">選擇數量：</p>
@@ -559,7 +597,6 @@ const decrement = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: px;
   width: 100%;
   border: 1px solid #fff;
   border-radius: 8px;

@@ -1,5 +1,7 @@
 <script setup>
-import { computed, defineProps, ref } from 'vue';
+import { computed, defineProps, ref,onMounted, onUnmounted,inject } from 'vue';
+import { useRouter } from 'vue-router';
+
 
 
 //宣告每一個連結都有專屬要連結出去的網址
@@ -35,7 +37,7 @@ const handleClick = (mode) => {
 
 
 // 控制菜單顯示狀態
-import { onMounted, onUnmounted } from 'vue';
+
 
 const isMenuOpen = ref(false);
 
@@ -83,11 +85,14 @@ onUnmounted(() => {
 
 
 //點擊商品時購物車icon會出現增加數字 
-import { inject } from 'vue';
+const cartItemCount = inject('cartItemCount');
 
-const cart = inject('cart');  // 獲取購物車數據
+const isClicked = ref(false);
+
+
+
 // ========================添加是否登入的狀態判斷=======================
-import { useRouter } from 'vue-router';
+
 const router = useRouter();
 
 // 檢查用戶是否已登入
@@ -137,17 +142,16 @@ const handleAvatarClick = () => {
 
     </div>
     <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
+      <router-link :to="{ name: 'shop' }">
+      <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon" />
+      <span class="cart-count" :class="{ clicked: isClicked }" >{{ cartItemCount }}</span>
+      </router-link>
       <!-- <router-link :to="{ name: 'login' }"> <font-awesome-icon icon="fa-regular fa-face-smile"class="peopleicon" /></router-link>
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" /> -->
 
-       <!-- ===========================添加是否登入的狀態判斷======================== -->
-       <font-awesome-icon 
-        :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
-        class="peopleicon" 
-        @click="handleAvatarClick"
-      />
+      <!-- ===========================添加是否登入的狀態判斷======================== -->
+      <font-awesome-icon :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
+        class="peopleicon" @click="handleAvatarClick" />
       <!-- ========================================================================= -->
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
@@ -159,6 +163,7 @@ const handleAvatarClick = () => {
         </li>
         <li class="two">
           <router-link :to="{ name: 'shop' }">購物車</router-link>
+          <span class="cart-count2"  :class="{ clicked: isClicked }" >{{ cartItemCount }}</span> <!-- 顯示購物車商品數量 -->
         </li>
         <li class="three">
           <router-link to="/lifeCasino">人生賭場</router-link>
@@ -280,7 +285,7 @@ img {
   display: flex;
 }
 
-.header-cart{
+.header-cart {
   position: relative;
 }
 
@@ -291,7 +296,7 @@ img {
   margin-right: 20px;
 }
 
-.cart-count{
+.cart-count {
   background-color: #FCB600;
   height: 20px;
   width: 20px;
@@ -300,8 +305,8 @@ img {
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  right: 70px;
+  bottom: 42px;
 }
 
 .peopleicon {
@@ -464,8 +469,24 @@ img {
   .hamburger {
     display: block;
   }
+  .cart-count {
+    display: none;
+  }
 
-  
+  .cart-count2 {
+    display: block;
+    background-color: #FCB600;
+    height: 20px;
+    width: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 64px;
+    left: 115px;
+  }
+
 
 }
 </style>

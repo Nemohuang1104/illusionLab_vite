@@ -12,7 +12,7 @@ import router from "./router";
 import "@/assets/css/reset.css";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
-import VueSweetalert2 from 'vue-sweetalert2'; 
+import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'; // 引入插件
@@ -58,8 +58,7 @@ app.mount('#app');
 
 
 // ---libary也要加---//
-library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark,faAddressCard,faCircleUser)
+library.add(faChevronDown, faFaceSmile, faCartShopping, faArrowRightLong, faArrowLeftLong, faFaceMeh, faCartArrowDown, faBars, faCircleXmark, faAddressCard, faCircleUser)
 
 
-createApp(App).component('font-awesome-icon', FontAwesomeIcon,"v-select", vSelect).use(router,VueSweetalert2).mount("#app");
-
+createApp(App).component('font-awesome-icon', FontAwesomeIcon, "v-select", vSelect).use(router, VueSweetalert2).mount("#app");

@@ -1,8 +1,11 @@
 <script setup>
-import { computed, defineProps, ref } from 'vue';
+import { computed, defineProps, ref, onMounted, onUnmounted,inject  } from 'vue';
+import { useRouter } from 'vue-router';
+
 
 // import { inject } from 'vue';
 // const cartCount = inject('cartCount'); // 接收全局的購物車數量
+
 
 
 const props = defineProps({
@@ -49,9 +52,6 @@ const logoLink = computed(() => {
 
 
 // 控制菜單顯示狀態
-
-import { onMounted, onUnmounted } from 'vue';
-
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
@@ -76,7 +76,7 @@ onUnmounted(() => {
 });
 
 // ========================添加是否登入的狀態判斷=======================
-import { useRouter } from 'vue-router';
+
 const router = useRouter();
 
 // 檢查用戶是否已登入
@@ -103,6 +103,16 @@ const handleAvatarClick = () => {
 
 
 
+
+// 注入 cartItemCount
+const cartItemCount = inject('cartItemCount');
+
+
+const isClicked = ref(false);
+
+function handleClick() {
+    isClicked.value = !isClicked.value; // 切換點擊狀態
+}
 </script>
 
 <template>
@@ -110,20 +120,19 @@ const handleAvatarClick = () => {
     <div class="logo">
       <router-link :to="logoLink"><img :src="logoSrc" alt="Logo" class="logo" /></router-link>
     </div>
-    <div class="icons">
-      <router-link :to="{ name: 'shop' }"><font-awesome-icon icon="fa-solid fa-cart-shopping"
-          class="shoppingicon" /></router-link>
+    <div class="icons" >
+      <router-link :to="{ name: 'shop' }"  @click="handleClick">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" class="shoppingicon"  />
+        <span class="cart-count" :class="{ clicked: isClicked }" >{{ cartItemCount }}</span> <!-- 顯示購物車商品數量 -->
+      </router-link>
       <!-- <router-link :to="{ name: 'login' }"><font-awesome-icon icon="fa-regular fa-face-smile" class="peopleicon" 
         /></router-link> -->
       <!-- ===========================添加是否登入的狀態判斷======================== -->
-      <font-awesome-icon 
-        :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
-        class="peopleicon" 
-        @click="handleAvatarClick"
-      />
+      <font-awesome-icon :icon="isLoggedIn ? 'fa-regular fa-address-card' : 'fa-regular fa-circle-user'"
+        class="peopleicon" @click="handleAvatarClick" />
       <!-- ========================================================================= -->
-      
-          
+
+
       <font-awesome-icon icon="fa-solid fa-bars" class="hamburger" @click="toggleMenu" />
     </div>
     <!-- 半圓形菜單 -->
@@ -134,7 +143,7 @@ const handleAvatarClick = () => {
         </li>
         <li class="two">
           <router-link :to="{ name: 'shop' }">購物車</router-link>
-          <!-- <span class="cart-count2">{{ cartItemCount }}</span>  顯示購物車商品數量 -->
+          <span class="cart-count2" :class="{ clicked: isClicked }">{{ cartItemCount }}</span> <!-- 顯示購物車商品數量 -->
         </li>
         <li class="three">
           <router-link to="/lifeCasino">人生賭場</router-link>
@@ -155,6 +164,7 @@ const handleAvatarClick = () => {
 
 
 <style lang="scss" scoped>
+
 header {
   display: flex;
   justify-content: space-between;
@@ -166,7 +176,6 @@ header {
 
   z-index: 1000;
 }
-
 
 
 .logo img {
@@ -185,7 +194,7 @@ header {
   display: flex;
 }
 
-.header-cart{
+.header-cart {
   position: relative;
 }
 
@@ -196,7 +205,7 @@ header {
   margin-right: 20px;
 }
 
-.cart-count{
+.cart-count {
   background-color: #FCB600;
   height: 20px;
   width: 20px;
@@ -205,9 +214,19 @@ header {
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  right: 70px;
+  bottom: 42px;
 }
+
+.cart-count.clicked {
+    color: black; /* 點擊後的顏色 */
+}
+
+.cart-count:active,
+.cart-count:focus {
+    color: black; /* 確保點擊時顏色不變 */
+}
+
 
 .peopleicon {
   width: 35px;
@@ -297,9 +316,6 @@ header {
 
 
 /* 半圓形菜單樣式 */
-
-
-
 .MenuClass {
   position: fixed;
   top: 80px;
@@ -366,7 +382,7 @@ header {
 
 
 
-.cartCount{
+.cartCount {
   background: #000000;
   color: #ffffff;
   border-radius: 20px;
@@ -404,23 +420,33 @@ header {
     display: block;
   }
 
-  .cart-count{
+  .cart-count {
     display: none;
   }
 
-  .cart-count2{
-   display: block;
-   background-color: #FCB600;
-  height: 20px;
-  width: 20px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 64px;
-  left: 115px;
+  .cart-count2 {
+    display: block;
+    background-color: #FCB600;
+    height: 20px;
+    width: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 64px;
+    left: 115px;
   }
+
+  .cart-count2.clicked {
+    color: black; /* 點擊後的顏色 */
+}
+
+.cart-count2:active,
+.cart-count2:focus {
+    color: black; /* 確保點擊時顏色不變 */
+}
+
 }
 </style>
 
