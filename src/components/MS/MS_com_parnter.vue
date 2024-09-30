@@ -28,11 +28,13 @@
   <script setup>
   import { onMounted, ref } from 'vue';
   import Swiper from 'swiper';
+  import logo1 from '@/assets/images/ms/logo_of_parnter6.png'
   
   const itemBg = ref(null);
   const prevButton = ref(null);
   const nextButton = ref(null);
   const pagination = ref(null);
+
   
   const newsItems = ref([
   {
@@ -40,7 +42,7 @@
       month: 'May',
       title: 'CORE',
       text: "熱愛蜆精的中性服飾品牌。",
-      image: '../src/assets/images/ms/logo_of_parnter6.png',
+      image: logo1,
     },
     {
       date: ' https://ting-yuuuu.github.io/La-Vin-En-Rose/',

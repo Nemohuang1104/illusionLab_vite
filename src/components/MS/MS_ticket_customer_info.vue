@@ -687,7 +687,7 @@ select {
 }
 
 .template_mobangThree {
-  background-image: url(@/assets/images/modeBGI3.jpg);
+  background-image: url(@/assets/images/ms/modeBGI3.jpg);
 }
 
 .remind{
@@ -702,6 +702,7 @@ select {
 
 .check_warp{
   display: flex;
+  flex-direction: column;
   align-content: flex-start;
   justify-content: flex-start;
 }

@@ -163,6 +163,8 @@ const decrement = () => {
 //   product.value = await response.json();
 // });
 
+const base_url = process.env.VITE_IMAGE_URL === '/' ? '' : process.env.VITE_IMAGE_URL
+
 </script>
 
 <template>
@@ -193,7 +195,7 @@ const decrement = () => {
 
           <div v-if="item" class="pagebox">
             <!-- 放置一個商品列的外框 -->
-            <img :src="item.PRODUCT_IMG" alt="">
+            <img :src="base_url + item.PRODUCT_IMG" alt="">
             <div class="list">
               <div class="pro">
                 <p>商品編號 : {{ item.PRODUCT_ID }}</p>

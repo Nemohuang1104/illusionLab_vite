@@ -35,7 +35,7 @@ const getCouponInfo = async () => {
         const formData = new FormData();
         formData.append('token', token);
 
-        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/Login/ShowCoupon.php`, {
             method: 'POST',
             body: formData
         });
@@ -113,7 +113,7 @@ async function prefillMemberInfo(event) {
             const keyformData = new FormData();
             keyformData.append('token', token);
 
-            const response = await fetch(`http://illusionlab.local/public/PDO/Login/GetUserInfo.php`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/Login/GetUserInfo.php`, {
                 method: 'POST',
                 body: keyformData
             });
@@ -287,7 +287,7 @@ const submitOrder = async () => {
 
     try {
         // 將 token 和其他訂單資料一起發送到後端
-        const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/CreateProductOrder.php`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/CreateProductOrder.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -33,7 +33,7 @@ const orders = ref([
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 async function fetchTickets() {
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/TicketOrder/FetchAllTicketOrder.php'); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/FetchAllTicketOrder.php`); // 替換成你實際的 API URL
     const data = await response.json();
     orders.value = data;
   } catch (error) {

@@ -20,7 +20,7 @@ const orderDetails = ref();
 
 onMounted(async () => {
   try {
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${props.order.PRODUCT_ORDER_ID}`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${props.order.PRODUCT_ORDER_ID}`);
     const data = await response.json();
     // 更新組件中的資料，例如：
     orderDetails.value = data;
@@ -56,7 +56,7 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/AddProduct.php`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/AddProduct.php`, {
         method: 'POST',
         body: formData,
       });
@@ -93,7 +93,7 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/SavePO_Data.php`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/SavePO_Data.php`, {
         method: 'POST',
         body: formData,
       });

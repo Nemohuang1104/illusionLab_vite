@@ -36,7 +36,7 @@ onMounted(() => {
 //   try {
 //     const ticketOrderId = route.params.id;
 
-//     const response = await fetch(`http://illusionlab.local/public/PDO/TicketOrder/FetchTicketOrderDetails.php?TICKET_ORDER_ID=${ticketOrderId}`);
+//     const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/FetchTicketOrderDetails.php?TICKET_ORDER_ID=${ticketOrderId}`);
 //     const data = await response.json();
 //     // 更新組件中的資料，例如：
 //     orderDetails.value = data;
@@ -62,7 +62,7 @@ const f_save = async () => {
   formData.append('ORDER_STATUS', localOrder.value.ORDER_STATUS);
 
     try {
-      const response = await fetch('http://illusionlab.local/public/PDO/TicketOrder/SaveTO_Data.php', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/SaveTO_Data.php`, {
         method: 'POST',
         body: formData,
       });

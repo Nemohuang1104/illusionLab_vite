@@ -91,7 +91,7 @@ const routes = [
     component: () => import('@/views/CenterCMS.vue'),
     meta: {
       title: "後台中心",
-      requiresAuthCMS:true
+      // requiresAuthCMS:true
     },
     requiredLogin: true,
     redirect: '/MemberCMS',

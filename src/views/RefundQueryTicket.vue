@@ -29,7 +29,7 @@ const fetchOrders = async () => {
     const formData = new FormData();
     formData.append('token', token);
 
-    const response = await fetch(`http://illusionlab.local/public/PDO/TicketOrder/GetUserRefundTO.php`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/GetUserRefundTO.php`, {
       method: 'POST',
       body: formData
     });
@@ -67,7 +67,7 @@ const fetchOrderDetails = async (ticketOrderId) => {
   formData.append('TICKET_ORDER_ID', ticketOrderId);
 
   try {
-    const response = await fetch(`http://illusionlab.local/public/PDO/TicketOrder/GetTicketOrderDetails.php`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/GetTicketOrderDetails.php`, {
       method: 'POST',
       body: formData
     });

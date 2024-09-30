@@ -14,7 +14,7 @@ const fetchOrders = async () => {
     const formData = new FormData();
     formData.append('token', token);
 
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/GetUserRefundPO.php`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/GetUserRefundPO.php`, {
       method: 'POST',
       body: formData
     });
@@ -52,7 +52,7 @@ const fetchOrderDetails = async (productOrderId) => {
   formData.append('PRODUCT_ORDER_ID', productOrderId);
 
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/GetOrderDetails.php', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/GetOrderDetails.php`, {
       method: 'POST',
       body: formData
     });
