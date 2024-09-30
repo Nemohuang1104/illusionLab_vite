@@ -436,7 +436,7 @@ export default {
   font-family: "Noto Sans TC";
   position: relative;
   padding-top: 100px;
-  overflow: hidden;
+  overflow-y: hidden !important;
 }
 
 .enter_title,

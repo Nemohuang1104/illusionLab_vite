@@ -90,7 +90,8 @@ const routes = [
     path: '/CenterCMS',
     component: () => import('@/views/CenterCMS.vue'),
     meta: {
-      title: "後台中心"
+      title: "後台中心",
+      requiresAuthCMS:true
     },
     requiredLogin: true,
     redirect: '/MemberCMS',
@@ -494,7 +495,8 @@ const routes = [
     name: 'MemberCenter',
     component: () => import('@/views/MemberCenter.vue'),
     meta: {
-      title: "會員中心"
+      title: "會員中心",
+      requiresAuth: true // 需要認證的路由
     },
     requiredLogin: true,
     redirect: '/Member',
@@ -687,13 +689,29 @@ const router = createRouter({
 
 // });
 
-// 路由守卫，检查需要认证的路由
+// 路由守卫，检查需要认证的路由(前台)
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const token = sessionStorage.getItem('token')
 
   if (requiresAuth && !token) {
     next({ path: '/login', query: { redirect: to.fullPath } })
+    document.title = to.meta.title;
+
+  } else {
+    next()
+    document.title = to.meta.title;
+
+  }
+})
+
+// 路由守卫，检查需要认证的路由(後台)
+router.beforeEach((to, from, next) => {
+  const requiresAuthCMS = to.matched.some(record => record.meta.requiresAuthCMS)
+  const token = sessionStorage.getItem('token')
+
+  if (requiresAuthCMS && !token) {
+    next({ path: '/logincms', query: { redirect: to.fullPath } })
     document.title = to.meta.title;
 
   } else {

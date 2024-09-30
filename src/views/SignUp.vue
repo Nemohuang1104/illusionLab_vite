@@ -195,7 +195,7 @@ const register = () => {
     formData.append('district', selectedDistrict.value);
 
     // 發送 POST 請求到後端
-    fetch('http://illusionlab.local/public/PDO/Login/Register.php', {
+    fetch(`ttp://illusionlab.local/public/PDO/Login/Register.php`, {
       method: 'POST',
       body: formData,
     })
@@ -208,6 +208,9 @@ const register = () => {
           title: "註冊成功！",
           html:"商品折價券60元已匯入您的帳戶，<br>開始您的幻浸之旅吧!",
           showConfirmButton: true,
+          willOpen: () => {
+              document.body.style.paddingRight = '0';
+            }
           // timer: 10000
         }).then(() =>  {
           // 根據是否有 redirect 參數決定跳轉路由
@@ -229,7 +232,10 @@ const register = () => {
           icon: "error",
           title: data.message,
           showConfirmButton: false,
-          timer: 1200
+          timer: 1200,
+          willOpen: () => {
+              document.body.style.paddingRight = '0';
+            }
         });
       }
     })
@@ -242,7 +248,10 @@ const register = () => {
       icon: "warning",
       title: "請重新檢視表單",
       showConfirmButton: false,
-      timer: 1200
+      timer: 1200,
+      willOpen: () => {
+        document.body.style.paddingRight = '0';
+      }
     });
   }
 };
