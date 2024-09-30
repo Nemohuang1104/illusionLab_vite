@@ -103,16 +103,16 @@ const handleGoogleLogin = async () => {
   }
 };
 
-// 發送使用者資料到後端 API
-const sendUserDataToBackend = async (email, name) => {
-  try {
-    const response = await fetch("http://illusionlab.local/public/PDO/Login/GoogleLogin.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ mem_account: email, mem_name: name })
-    });
+    // 發送使用者資料到後端 API
+    const sendUserDataToBackend = async (email, name) => {
+      try {
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/GoogleLogin.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ mem_account: email, mem_name: name })
+        });
 
     const result = await response.json();
     console.log("後端回應:", result);
@@ -144,7 +144,7 @@ const onSubmit = async () => {
       formData.append('password', password.value);
 
       // 使用 FormData 發送 POST 請求
-      const response = await axios.post('http://illusionlab.local/public/PDO/Login/login.php', formData, {
+      const response = await axios.post(`http://illusionlab.local/public/PDO/Login/login.php`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data' // 設定標頭為 FormData
         }
@@ -155,22 +155,26 @@ const onSubmit = async () => {
         const token = response.data.token;  // 從後端獲取 token
         // sessionStorage.setItem('authToken', token);  // 將 token 儲存在 sessionStorage
         sessionStorage.setItem('token', response.data.token);
-
+       
 
         Swal.fire({
           icon: 'success',
           title: '歡迎進入幻浸實驗室',
-          timer: 1200
+          timer: 1200,
+          backdrop: false,
+          showConfirmButton: false,
+          willOpen: () => {
+              document.body.style.paddingRight = '0';
+            }
         }).then(async () => {
           // 檢查是否有 redirect 參數
 
           const redirectPath = route.query.redirect;
-
-          if (route.query.redirect === 'littlequiz') {
+          if (route.query.redirect === 'littlequiz' ) {
             if (token) {
               try {
                 // 先執行 SetQuizCompleted.php
-                const setQuizResponse = await axios.post('http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php', {}, {
+                const setQuizResponse = await axios.post(`http://illusionlab.local/public/PDO/Login/SetQuizCompleted.php`, {}, {
                   headers: {
                     'Authorization': `Bearer ${token}`
                   }
@@ -181,7 +185,7 @@ const onSubmit = async () => {
                   console.log('測驗完成標記已更新。');
 
                   // 再執行 GetTicketCoupon.php
-                  const couponResponse = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+                  const couponResponse = await axios.post(`http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php`, {}, {
                     headers: {
                       'Authorization': ` Bearer ${token}`
                     }
@@ -200,6 +204,10 @@ const onSubmit = async () => {
                       title: couponResponse.data.message,
                       timer: 2500,
                       showConfirmButton: false,
+                      backdrop: false,
+                        willOpen: () => {
+                        document.body.style.paddingRight = '0';
+              }
                     });
                   }
                 } else {
@@ -208,6 +216,10 @@ const onSubmit = async () => {
                     title: setQuizResponse.data.message,
                     timer: 2500,
                     showConfirmButton: false,
+                    backdrop: false,
+                      willOpen: () => {
+                      document.body.style.paddingRight = '0';
+              }
                   });
                 }
               } catch (error) {
@@ -217,6 +229,10 @@ const onSubmit = async () => {
                   title: '操作失敗，請稍後再試。',
                   timer: 2500,
                   showConfirmButton: false,
+                  backdrop: false,
+                      willOpen: () => {
+                      document.body.style.paddingRight = '0';
+              }
                 });
               }
             }
@@ -239,7 +255,11 @@ const onSubmit = async () => {
         Swal.fire({
           icon: 'error',
           title: response.data.message, // 後端傳回的訊息
-          timer: 1500
+          timer: 1500,
+          backdrop: false,
+            willOpen: () => {
+            document.body.style.paddingRight = '0';
+          }
         });
       }
     } catch (error) {
@@ -249,6 +269,10 @@ const onSubmit = async () => {
         title: '登入失敗，請確認是否註冊。',
         timer: 1500,
         showConfirmButton: false,
+        backdrop: false,
+            willOpen: () => {
+            document.body.style.paddingRight = '0';
+          }
       });
     }
   } else {
@@ -258,6 +282,10 @@ const onSubmit = async () => {
       title: '請重新檢視表單',
       timer: 1200,
       showConfirmButton: false,
+      backdrop: false,
+            willOpen: () => {
+            document.body.style.paddingRight = '0';
+          }
     });
   }
 };
