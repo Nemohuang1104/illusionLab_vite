@@ -270,7 +270,7 @@ const handleCheckout = async () => {
         formData.append('token', token);
 
         // 發送資料到伺服器，檢查優惠券的狀態
-        const response = await fetch('http://illusionlab.local/public/PDO/Login/UseCoupon.php', {
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/UseCoupon.php`, {
             method: 'POST',
             body: formData
         });
@@ -301,7 +301,7 @@ const getCouponInfo = async () => {
         const formData = new FormData();
         formData.append('token', token);
 
-        const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
             method: 'POST',
             body: formData
         });

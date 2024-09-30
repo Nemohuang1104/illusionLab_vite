@@ -69,7 +69,7 @@ async function prefillMemberInfo(event) {
             const keyformData = new FormData();
             keyformData.append('token', token);
 
-            const response = await fetch('http://illusionlab.local/public/PDO/Login/GetUserInfo.php', {
+            const response = await fetch(`http://illusionlab.local/public/PDO/Login/GetUserInfo.php`, {
                 method: 'POST',
                 body: keyformData
             });
@@ -243,7 +243,7 @@ const submitOrder = async () => {
     }
 
     try {
-        const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/CreateProductOrder.php', {
+        const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/CreateProductOrder.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -319,7 +319,7 @@ const getCouponInfo = async () => {
         const formData = new FormData();
         formData.append('token', token);
 
-        const response = await fetch('http://illusionlab.local/public/PDO/Login/ShowCoupon.php', {
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
             method: 'POST',
             body: formData
         });

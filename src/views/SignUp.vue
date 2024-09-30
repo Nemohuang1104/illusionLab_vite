@@ -195,7 +195,7 @@ const register = () => {
     formData.append('district', selectedDistrict.value);
 
     // 發送 POST 請求到後端
-    fetch('http://illusionlab.local/public/PDO/Login/Register.php', {
+    fetch(`http://illusionlab.local/public/PDO/Login/Register.php`, {
       method: 'POST',
       body: formData,
     })
