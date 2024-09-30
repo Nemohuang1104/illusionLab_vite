@@ -20,9 +20,12 @@ import { createApp } from 'vue';
 //import LittleQuizResult from './views/LittleQuizResult.vue';
 //import GoogleLogin from './components/GoogleLogin.vue';
 //import MS_ticket_ting from './components/MS/MS_ticket_ting.vue';
-import MS_views_index from './views/MS_views_index.vue';
+// import MS_views_index from './views/MS_views_index.vue';
+// import ting_test_login from './views/ting_test_login.vue';
+import ting_test from './views/ting_test.vue';
 
 
 
-createApp(MS_views_index).mount('#preview');
+
+createApp(ting_test).mount('#preview');
   

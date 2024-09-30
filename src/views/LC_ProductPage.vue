@@ -180,14 +180,14 @@ function goToLoginCMS(){
 
 .warp{
   position: relative;
-  padding: 0 50px;
+  padding: 100px 50px 0;
 }
 
 .center {
    color: map-get($colorfont_0, white);
   font-weight: 500;
   font-family: map-get($fontStyle, style_2);
-  max-width: 1440px;
+  // max-width: 1440px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -254,7 +254,7 @@ function goToLoginCMS(){
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding: 50px ;
+  padding: 3vw ;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   // border: 1px solid #fff;
@@ -267,7 +267,7 @@ function goToLoginCMS(){
   grid-template-columns: 1fr 1fr 1fr 1fr;
   // justify-content: center;
   
-  gap: 18px;
+  gap: 3vw;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
 
@@ -301,7 +301,7 @@ function goToLoginCMS(){
   width: 100%;
   max-width: 150px;
   height: 100%;
-  max-height: 160px; /* 限制圖片高度 */
+  max-height: 150px; /* 限制圖片高度 */
   object-fit: cover; /* 保持圖片比例 */
   margin-bottom: 10px;
   border-radius: 10px;
@@ -353,7 +353,31 @@ function goToLoginCMS(){
   font-family: map-get($fontStyle, style_2);
 }
 
-@media screen and (max-width: 430px){
+//=========================RWD===============================
+
+@media screen and (max-width: 760px){
+  .pagebox{
+    padding: 20px;
+  }
+
+  .pro p{
+    font-size: 16px;
+  }
+
+  .price{
+    margin-bottom: 2vw;
+  }
+}
+
+@media screen and (max-width: 760px){
+  .price span{
+    font-size: 14px;
+  }
+}
+
+
+
+@media screen and (max-width: 675px){
 
 .list{
   grid-template-rows: 1fr 1fr;
@@ -363,6 +387,14 @@ function goToLoginCMS(){
   padding: 10px;
   
 }
+}
+
+@media screen and (max-width: 430px){
+  .producttitle{
+    width: 80%;
+    margin: 40px auto 30px;
+  }
+
 }
 
 </style>

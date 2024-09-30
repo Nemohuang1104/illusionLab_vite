@@ -196,13 +196,13 @@ header {
 
 .title h1 {
   font-size: 36px;
-  color: #462C14;
+  color: #855F49;
   font-weight: bold;
 }
 
 .title p {
   font-size: 20px;
-  color: #462C14;
+  color: #855F49;
   font-weight: bold;
   font-family:Arial, Helvetica, sans-serif;
   padding-top: 8px;

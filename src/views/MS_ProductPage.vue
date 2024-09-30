@@ -140,7 +140,7 @@ p{
   background: linear-gradient(147deg, rgba(255, 255, 255, 0.40) 3.26%, rgba(255, 255, 255, 0.20) 97.45%);
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   font-weight: 500;
-  max-width: 1440px;
+  // max-width: 1440px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -199,7 +199,7 @@ p{
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding: 50px ;
+  padding: 3vw ;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   // border: 1px solid #fff;
@@ -213,7 +213,7 @@ p{
   grid-template-columns: 1fr 1fr 1fr 1fr;
   // justify-content: center;
   
-  gap: 18px;
+  gap: 2vw;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
   
@@ -252,7 +252,6 @@ p{
   object-fit: contain; /* 保持圖片比例 */
   margin-bottom: 10px;
   cursor: pointer;
-
 }
 
 
@@ -300,7 +299,25 @@ p{
   }
 }
 
-@media screen and (max-width: 430px){
+//=======================RWD==============================
+@media screen and (max-width: 760px){
+  .pagebox{
+    padding: 20px;
+  }
+
+  .list{
+    gap: 0px;
+  }
+
+  .pro p{
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 570px){
+.warp{
+  padding: 100px 20px 0 ;
+}
 
 .list{
   grid-template-rows: 1fr 1fr;

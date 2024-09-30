@@ -41,11 +41,10 @@ const routes = [
     name: 'login',
     component: () => import('@/views/Login.vue'),
     meta: {
-      title: "會員登入"
-    },
-    requiredLogin: true
+      title: "會員登入",
+
+    },requiredLogin: true,
   },
-  
   {
     path: '/SFHeader_0',
     name: 'SFHeader_0',
