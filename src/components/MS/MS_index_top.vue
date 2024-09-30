@@ -134,7 +134,9 @@
                 <img id="text3" class="ListeneMe text3" src="../../assets/images/ms/text3.png" alt="">
                 <img id="myGirl" class="ListeneMe myGirl" src="../../assets/images/ms/myGirl.png" alt="">
                 <img id="text4" class="ListeneMe text4" src="../../assets/images/ms/text4.png" alt="">
-                <router-link to="/MS_Ticket_step0"><div id="ticketBullet" class="ListeneMe ticketBullet"></div></router-link>
+                <router-link to="/MS_Ticket_step0">
+                    <div id="ticketBullet" class="ListeneMe ticketBullet"></div>
+                </router-link>
             </div>
             <div class="top05">
             </div>
@@ -179,51 +181,44 @@
             <div class="bg3">
                 <div class="top05 hehe"></div>
                 <div class="top1 ABOUT hey" id="four">
-                    <MS_com_title mode="three"
-                    mainTitle="周邊商品" 
-                    subTitle="PERIPHERAL GOODS"
-                    />
-                    <router-link to="/MS_ProductPage"><MS_com_marquee/></router-link>
-                </div> 
-                <div class="top1 ABOUT no"  id="five">
-                    <MS_com_title mode="three"
-                    mainTitle="聯絡我們" 
-                    subTitle="CONTACT"
-                    />
-                    <MS_com_question/>
-                </div> 
-                <div class="top1 ABOUT cry"  id="six">
-                    <MS_com_title mode="three"
-                    mainTitle="合作夥伴" 
-                    subTitle="OUR PARTNER"
-                    />
-                    <MS_com_parnter/>
-                </div> 
+                    <MS_com_title mode="three" mainTitle="周邊商品" subTitle="PERIPHERAL GOODS" />
+                    <router-link to="/MS_ProductPage">
+                        <MS_com_marquee />
+                    </router-link>
+                </div>
+                <div class="top1 ABOUT no" id="five">
+                    <MS_com_title mode="three" mainTitle="聯絡我們" subTitle="CONTACT" />
+                    <MS_com_question />
+                </div>
+                <div class="top1 ABOUT cry" id="six">
+                    <MS_com_title mode="three" mainTitle="合作夥伴" subTitle="OUR PARTNER" />
+                    <MS_com_parnter />
+                </div>
                 <div class="top1 ABOUT" id="seven">
                     <div class="top4 ducksss">
                         <router-link to="/FQA_03">
-                        <div class="QUESTION">
-                            <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
-                            <div class="QUESTION_TITLE">- 常見問題 -</div>
-                        </div>
+                            <div class="QUESTION">
+                                <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
+                                <div class="QUESTION_TITLE">- 常見問題 -</div>
+                            </div>
                         </router-link>
                         <router-link to="/TicketChange_03">
-                        <div class="QUESTION">
-                            <img class="duckLaiYi" :src="cuteDuckWalking2" alt="">
-                            <div class="QUESTION_TITLE">- 退換票政策 -</div>
-                        </div>
+                            <div class="QUESTION">
+                                <img class="duckLaiYi" :src="cuteDuckWalking2" alt="">
+                                <div class="QUESTION_TITLE">- 退換票政策 -</div>
+                            </div>
                         </router-link>
                         <router-link to="/PP_privacy_policy">
-                        <div class="QUESTION">
-                            <img class="duckLaiYi" :src="cuteDuckWalking3" alt="">
-                            <div class="QUESTION_TITLE">- 隱私權政策 -</div>
-                        </div>
+                            <div class="QUESTION">
+                                <img class="duckLaiYi" :src="cuteDuckWalking3" alt="">
+                                <div class="QUESTION_TITLE">- 隱私權政策 -</div>
+                            </div>
                         </router-link>
                         <router-link to="/PP_termOfUse">
-                        <div class="QUESTION">
-                            <img class="duckLaiYi" :src="cuteDuckWalking4" alt="">
-                            <div class="QUESTION_TITLE">- 使用辦法 -</div>
-                        </div>
+                            <div class="QUESTION">
+                                <img class="duckLaiYi" :src="cuteDuckWalking4" alt="">
+                                <div class="QUESTION_TITLE">- 使用辦法 -</div>
+                            </div>
                         </router-link>
                     </div>
                     <div class="top00"></div>
@@ -2318,8 +2313,8 @@ p {
 }
 
 .outline {
-    position: fixed;
-    bottom: 0;
+    // position: fixed;
+    // bottom: 0;
 }
 
 .bg2 {
@@ -2891,33 +2886,42 @@ p {
 }
 
 @media screen and (max-width:820px) {
-    .IntroText{
+    .IntroText {
         width: 60vw;
         left: 20%;
     }
-   .top05.hehe{display: none;}
-   .topSpeical {
+
+    .top05.hehe {
+        display: none;
+    }
+
+    .topSpeical {
         height: 220vh;
     }
+
     #bookImg {
         width: 50vw;
         right: 8%;
         top: 2%;
     }
+
     .girls {
         width: 45vw;
         left: 1%;
     }
+
     #road {
         width: 140vw;
         top: 8%;
         left: -65%;
     }
+
     .text {
         width: 50vw;
         top: 16%;
         right: 6%;
     }
+
     .bear {
         top: 40%;
         width: 40vw;
@@ -2959,17 +2963,21 @@ p {
         top: 107%;
         left: 16%;
     }
+
     .specials {
         flex-wrap: wrap;
         gap: 30px 60px;
 
     }
-    .top5{
-        height:200vh;
+
+    .top5 {
+        height: 200vh;
     }
-    .sp{
+
+    .sp {
         width: 30vw;
     }
+
     #carousel {
         padding: 0;
     }
@@ -3081,7 +3089,8 @@ p {
         gap: 30px 60px;
 
     }
-    .sp{
+
+    .sp {
         width: 20vw;
     }
 
@@ -3130,11 +3139,13 @@ p {
         gap: 0;
         justify-content: end;
     }
+
     .Anchors {
         display: none;
 
     }
-    .AnchorsTree{
+
+    .AnchorsTree {
         display: none;
     }
 }
