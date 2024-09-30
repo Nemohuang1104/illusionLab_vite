@@ -3043,7 +3043,7 @@ p {
 
     .text2 {
         width: 60vw;
-        top: 38%;
+        top: 40%;
         left: 20%;
     }
 
@@ -3066,14 +3066,14 @@ p {
 
     .text4 {
         left: 15%;
-        top: 90%;
+        top: 92%;
         width: 70vw;
     }
 
     .ticketBullet {
         width: 60vw;
         height: 30vw;
-        top: 93%;
+        top: 95%;
     }
 
     .specials {
