@@ -102,7 +102,11 @@ const toggleStatus = async (item) => {
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: '確定',
-      cancelButtonText: '取消'
+      cancelButtonText: '取消',
+      backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
     });
 
     // 如果使用者點擊取消，則終止操作

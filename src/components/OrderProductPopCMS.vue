@@ -56,7 +56,7 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch('http://illusionlab.local/public/PDO/ProductData/AddProduct.php', {
+      const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/AddProduct.php`, {
         method: 'POST',
         body: formData,
       });
@@ -69,7 +69,11 @@ const f_save = async () => {
           icon: 'success',
           title: '新增商品成功',
           showConfirmButton: false,
-          timer: 1200
+          timer: 1200,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         })
         f_close();
       } else {
@@ -89,7 +93,7 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/SavePO_Data.php', {
+      const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/SavePO_Data.php`, {
         method: 'POST',
         body: formData,
       });
@@ -101,7 +105,11 @@ const f_save = async () => {
           icon: 'success',
           title: '儲存成功',
           showConfirmButton: false,
-          timer: 1200
+          timer: 1200,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         })
         f_close();
       } else {
@@ -203,7 +211,7 @@ const f_save = async () => {
                         </div>
                         <div class="orderdiv">
                             <p class="ptext1">折扣金額 : </p>
-                            <p class="inputtext2">${{ localOrder.DISCOUNT_AMOUNT }}</p>
+                            <p class="inputtext2">${{ localOrder.po_discount_amount }}</p>
                         </div>
                         <div class="orderdiv">
                             <p class="ptext1">運費 : </p>

@@ -31,6 +31,10 @@ const logout = () => {
         title: '您已成功登出',
         timer: 1200,
         showConfirmButton: false,
+        backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
     }).then(() => {
         router.push('/home'); // 成功後導向主頁
     });

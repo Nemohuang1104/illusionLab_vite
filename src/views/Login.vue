@@ -76,7 +76,10 @@ const forgotPassword = () => {
         icon: "success",
         title: "已寄送信件至您的電子信箱中",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+          willOpen: () => {
+              document.body.style.paddingRight = '0';
+            }
       })
     })
 };

@@ -54,7 +54,11 @@ const savePassword = async () => {
         position: "center",
         icon: "success",
         title: "密碼已成功修改！",
-        showConfirmButton: true
+        showConfirmButton: true,
+        backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
       }).then(() => {
         // 清除輸入欄位的資料
         oldPassword.value = '';
@@ -70,7 +74,11 @@ const savePassword = async () => {
         icon: "error",
         title: result.message,
         showConfirmButton: false,
-        timer: 1200
+        timer: 1200,
+        backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
       }).then(() => {
         // 清除輸入欄位的資料
         oldPassword.value = '';
@@ -87,7 +95,11 @@ const savePassword = async () => {
       icon: "error",
       title: '發生錯誤，請稍後再試',
       showConfirmButton: false,
-      timer: 1200
+      timer: 1200,
+      backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
     });
   }
 };

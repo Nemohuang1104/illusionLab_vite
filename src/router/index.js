@@ -498,7 +498,7 @@ const routes = [
       title: "會員中心",
       requiresAuth: true // 需要認證的路由
     },
-    requiredLogin: true,
+    requiresAuth: true, // 需要認證的路由
     redirect: '/Member',
 
     children: [

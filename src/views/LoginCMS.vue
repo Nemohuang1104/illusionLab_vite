@@ -45,7 +45,11 @@ const passwordError = ref('');
         Swal.fire({
           icon: 'success',
           title: '歡迎進入幻浸實驗室後台管理中心',
-          timer: 1200
+          timer: 1200,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         })
         router.push('/CenterCMS');
 
@@ -54,7 +58,11 @@ const passwordError = ref('');
         Swal.fire({
           icon: 'error',
           title: response.data.message, // 後端傳回的訊息
-          timer: 1500
+          timer: 1500,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         });
       }
     } catch (error) {
@@ -64,6 +72,10 @@ const passwordError = ref('');
         title: '登入失敗，請確認是否註冊。',
         timer: 1500,
         showConfirmButton: false,
+        backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
       });
     }
   } else {
@@ -73,6 +85,10 @@ const passwordError = ref('');
       title: '請重新檢視表單',
       timer: 1200,
       showConfirmButton: false,
+      backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
     });
   }
 };

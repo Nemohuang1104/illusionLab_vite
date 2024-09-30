@@ -17,6 +17,78 @@ import 'sweetalert2/src/sweetalert2.scss';
 const router = useRouter();
 const route = useRoute();
 
+// ===============優惠券折扣金額處理=======================
+
+// 從 sessionStorage 或其他地方取出 token
+const token = sessionStorage.getItem('token');
+
+// 商品優惠券自動填入碼
+const coupon = ref({
+    discount_code: '',
+    discount_amount: ''
+});
+
+// 請求商品優惠券資料
+const getCouponInfo = async () => {
+    try {
+        // 使用 FormData 傳送 token
+        const formData = new FormData();
+        formData.append('token', token);
+
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.status === 'success') {
+            coupon.value.discount_code = data.data.discount_code;
+            coupon.value.discount_amount = data.data.discount_amount;
+        } else {
+            console.error('Error fetching user info:', data.message);
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+    }
+};
+
+// 在組件加載時發起請求
+onMounted(() => {
+    getCouponInfo();
+});
+
+// ============儲存localStorage資料進入carts  =============//
+
+
+// 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
+const carts = ref([]);
+
+
+
+// 從 localStorage 撈取購物車資料的函數並存入 carts
+function loadCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    carts.value = cart;
+}
+
+// 當組件掛載時撈取資料
+onMounted(() => {
+    loadCart();
+    console.log(carts.value); // 確認 carts 已成功加載
+});
+
+watch(carts, (newVal) => {
+  console.log('carts updated:', newVal);
+});
+
+
+
+
+
 // 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
 onMounted(() => {
 
@@ -143,7 +215,6 @@ const totalAmount = computed(() => {
 // 將 v-model 欄位(表單資訊)儲存到 localStorage==========================
 watch(formData, (newValue) => {
     localStorage.setItem('formData', JSON.stringify(newValue));
-
 }, { deep: true });
 
 // 將宅配收件人資料acceptorData存入 localStorage
@@ -243,6 +314,7 @@ const submitOrder = async () => {
     }
 
     try {
+        // 將 token 和其他訂單資料一起發送到後端
         const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/CreateProductOrder.php`, {
             method: 'POST',
             headers: {
@@ -301,57 +373,9 @@ const highlight = ref({
 // const totalAmount = computed(() => {
 //     return totalPrice.value + shippingFee.value;
 // });
-// ===============優惠券折扣金額處理=======================
 
-// 從 sessionStorage 或其他地方取出 token
-
-const token = sessionStorage.getItem('token');
-// 商品優惠券自動填入碼
-const coupon = ref({
-    discount_code: '',
-    discount_amount: ''
-});
-
-// 請求商品優惠券資料
-const getCouponInfo = async () => {
-    try {
-        // 使用 FormData 傳送 token
-        const formData = new FormData();
-        formData.append('token', token);
-
-        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        if (data.status === 'success') {
-            coupon.value.discount_code = data.data.discount_code;
-            coupon.value.discount_amount = data.data.discount_amount;
-        } else {
-            console.error('Error fetching user info:', data.message);
-        }
-    } catch (error) {
-        console.error('Request failed:', error);
-    }
-};
-
-// 在組件加載時發起請求
-onMounted(() => {
-    getCouponInfo();
-});
 
 // ============儲存從 localStorage=====STAR========//
-
-
-// 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
-const carts = ref([]);
-
-
 
 // 從 localStorage 撈取購物車資料的函數並存入 carts
 function loadCart() {
@@ -381,6 +405,8 @@ const totalPrice = computed(() => {
 const calculatedTotalPrice = computed(() => {
     return totalPrice.value + shippingFee.value - coupon.value.discount_amount;
 });
+
+
 
 </script>
 

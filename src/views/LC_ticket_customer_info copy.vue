@@ -150,7 +150,11 @@ export default {
           icon: "warning",
           title: "尚有欄位未輸入",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         })
         return false;
       } else {

@@ -145,6 +145,7 @@ function minusQuantity(index) {
         carts.value[index].quantity -= 1;
         updateLocalStorage(); // 更新 localStorage
 
+     
     } else {
         // 商品數量為1，彈出確認框
         Swal.fire({
@@ -421,7 +422,7 @@ router.beforeEach((to, from, next) => {
                         <p>$0</p> -->
                         <h3>折扣</h3>
                         <!-- 當有折扣金額時，顯示折扣金額，否則顯示 $0 -->
-                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'"> $ {{
+                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'"> ${{
                             coupon.discount_amount }} </p>
                         <p v-else>$0</p>
                     </div>
@@ -429,7 +430,7 @@ router.beforeEach((to, from, next) => {
                     <hr>
                     <div class="total-fee" v-if="carts.length">
                         <h3>總金額</h3>
-                        <p>$ {{ calculatedTotalPrice }}</p>
+                        <p>${{ calculatedTotalPrice }}</p>
                     </div>
                 </div>
                 <div class="checkbutton">
@@ -529,7 +530,7 @@ router.beforeEach((to, from, next) => {
 
 }
 
-.titlebtn {
+.titlebtn{
     border-radius: 4px;
     background: #FFEDBC;
     border: none;
@@ -542,8 +543,8 @@ router.beforeEach((to, from, next) => {
     padding: 5px;
 }
 
-.titlebtn:hover {
-    opacity: 0.9
+.titlebtn:hover{
+opacity: 0.9
 }
 
 ul {
@@ -554,7 +555,7 @@ ul {
 .card {
     display: flex;
     align-items: center;
-
+    
 }
 
 .trash-can {
@@ -943,7 +944,7 @@ ul {
         gap: 20px;
     }
 
-    .order {
+    .order{
         width: 499px;
     }
 
@@ -1053,7 +1054,7 @@ ul {
     //     width: 100%;
     // }
 
-    .order {
+    .order{
         max-width: 560px;
         width: 100%;
     }
