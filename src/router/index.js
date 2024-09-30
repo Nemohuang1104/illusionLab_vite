@@ -342,6 +342,14 @@ const routes = [
     },
     requiredLogin: true
   },
+  {
+    path: '/SF_Stone',
+    component: () => import('@/components/SF_Stone.vue'),
+    meta: {
+      title: "隕石"
+    },
+    requiredLogin: true
+  },
 
 
   // =================心靈光譜===============//

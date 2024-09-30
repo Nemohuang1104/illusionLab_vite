@@ -390,6 +390,7 @@ onBeforeUnmount(() => {
     //大標題
     text-align: center;
     box-sizing: border-box;
+
 }
 
 // 打字機
@@ -831,6 +832,14 @@ onBeforeUnmount(() => {
     }
 }
 
+@media screen and (max-width: 500px) {
+
+    .accordion-question{
+        width: auto;
+        height: auto;
+    }
+
+}
 
 @media screen and (max-width: 430px) {
     .intro video{

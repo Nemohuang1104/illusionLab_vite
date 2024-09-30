@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="forhight">
         <div class="theRock">
             <svg id="ball1" :class="{ 'active': activePopup === 5 }" xmlns="http://www.w3.org/2000/svg" width="883"
                 height="899" viewBox="0 0 883 899" fill="none">
@@ -207,48 +207,53 @@ onBeforeUnmount(() => {
 
 
 <style lang="scss" scoped>
-
-
+.forhight {
+    height: 500px;
+}
 
 // svg {
 //   transition: transform 0.3s ease, filter 0.3s ease;
-  
+
 // }
 
 
 
 /* 定義閃爍動畫 */
 @keyframes flicker {
-  0% {
-    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
-  }
-  50% {
-    filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 1));
-  }
-  100% {
-    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
-  }
+    0% {
+        filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+    }
+
+    50% {
+        filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 1));
+    }
+
+    100% {
+        filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+    }
 }
 
 /* 為隕石設置閃爍效果 */
 svg {
-  transition: transform 0.3s ease;
-  animation: flicker 1.5s infinite; /* 持續閃爍 */
-  cursor: pointer; /* 提示可以互動 */
+    transition: transform 0.3s ease;
+    animation: flicker 1.5s infinite;
+    /* 持續閃爍 */
+    cursor: pointer;
+    /* 提示可以互動 */
 }
 
 /* 點擊隕石時放大並保持亮度 */
 svg.active {
-  transform: scale(1.2);
-  filter: drop-shadow(0px 0px 15px rgba(204, 219, 232, 0.8));
-//   animation: none; /* 點擊後停止閃爍效果，保持亮度 */
+    transform: scale(1.2);
+    filter: drop-shadow(0px 0px 15px rgba(204, 219, 232, 0.8));
+    //   animation: none; /* 點擊後停止閃爍效果，保持亮度 */
 }
 
 
 
 .ohMyGod {
     width: 100%;
-    max-width: 1440px;
+    // max-width: 1440px;
     height: 70vh;
 
 
@@ -282,7 +287,7 @@ svg.active {
     cursor: pointer;
     width: 320px !important;
     height: 400px !important;
-
+    margin-top: 20px;
 
     &.active {
         // width: 400px !important;
@@ -329,19 +334,9 @@ svg.active {
 #ball_all {
     pointer-events: auto;
     opacity: 0;
-    // opacity: 0.4;
+
 }
 
-// #ball_all path {
-//     &:hover {
-//         // fill: #eee;
-//     }
-// }
-
-// .popup {
-//     opacity: 0.2;
-//     pointer-events: none;
-// }
 
 
 //我的文字介紹框
@@ -440,14 +435,14 @@ svg.active {
 /* 控制位置的 */
 .popupone {
     position: fixed;
-    top: 2130%;
+    top: 1990%;
     left: 400%;
     transform: translate(-170%, -150%);
 }
 
 .popuptwo {
     position: fixed;
-    top: 1800%;
+    top: 1880%;
     left: 135%;
     transform: translate(-155%, -25%);
 }
@@ -469,7 +464,7 @@ svg.active {
 
 .popupfive {
     position: fixed;
-    top: 1900%;
+    top: 2080%;
     left: -145%;
     transform: translate(65%, 5%);
 }
@@ -514,6 +509,11 @@ svg.active {
 }
 
 @media (max-width: 768px) {
+
+    .forhight {
+        margin-top: 40px;
+        height: 400px;
+    }
 
     #ball_all,
     #ball1,
@@ -610,6 +610,29 @@ svg.active {
         left: 1095%;
         transform: translate(-170%, -150%);
     }
+
+}
+
+@media (max-width: 768px) {
+
+    .forhight {
+        margin-top: 0px;
+        
+        height: 400px;
+    }
+
+    #ball_all,
+    #ball1,
+    #ball2,
+    #ball3,
+    #ball4,
+    #ball5 {
+        width: 250px !important;
+        height: 380px !important;
+    }
+
+
+
 
 }
 </style>
