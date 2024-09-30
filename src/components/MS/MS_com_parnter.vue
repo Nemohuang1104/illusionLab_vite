@@ -294,6 +294,7 @@ a, a:hover {
     &__item {
       width: 400px;
       flex-shrink: 0;
+      // cursor: alias;
       //padding: 15px;
 
       @media screen and (max-width: 992px) {
@@ -334,7 +335,7 @@ a, a:hover {
       position: absolute;
       top: 50%;
       z-index: 12;
-      cursor: pointer;
+      cursor:move;
       outline: none!important;
 
       &:focus {
@@ -394,6 +395,7 @@ a, a:hover {
 
   &__item {
     box-sizing: border-box;
+    cursor:ew-resize;
     padding: 20px 40px;
     color: #CFBCA2;
     border-radius: 10px;
