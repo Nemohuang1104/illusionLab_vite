@@ -1376,7 +1376,7 @@ margin: 0 auto;
 }
 }
 
-.slide9,.slide10,.slide11,.slide12{
+.slide9,.slide10,.slide11{
     .line{
         margin-top: 25vh;
     }
