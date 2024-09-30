@@ -485,9 +485,8 @@ const calculatedTotalPrice = computed(() => {
                             </label>
 
                         </div>
-
-
                     </div>
+                    
                     <div class="inner05">
                         <p>*付款方式:</p>
                         <div class="form-check">
