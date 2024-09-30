@@ -490,9 +490,9 @@ function addToCart() {
 
 }
 
-.size select:hover {
-    background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
-}
+// .size select:hover {
+//     background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+// }
 
 //加入購物車
 // .rightdown p {

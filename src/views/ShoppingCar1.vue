@@ -10,14 +10,6 @@ import Footer from '@/components/Footer_0.vue';
 
 const router = useRouter();
 
-// const cartItems = ref([
-//     { name: '繪本風格帆布袋', quantity: 1, price: 590 }
-// ]);
-
-
-
-
-
 // ================在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 
 
@@ -372,23 +364,7 @@ router.beforeEach((to, from, next) => {
             </div>
         </div>
         <hr>
-        <!-- <div class="ProductAdd">
-            <p>商品加購</p>
-            <ul class="addProduct_grid">
-                <li class="pro" v-for="(item, index) in productInfo" :key="item.id">
-                    <img :src="item.cardImage" alt="">
-                    <p>{{ item.productName }}</p>
-                    <div class="text">
-                        <div class="price">
-                            <span>NT${{ item.price }}</span>
-                        </div>
-                        <div class="icon">
-                            <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div> -->
+      
         <div class="ProductAdd">
             <p>商品加購</p>
             <ul class="addProduct_grid">
@@ -709,6 +685,8 @@ ul {
     background: none;
     color: #ffffff; //文字顏色
     padding-left: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 // 結帳按鈕
