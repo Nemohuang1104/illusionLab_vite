@@ -94,7 +94,7 @@ function completeTicket() {
 
 
 // 1. 使用 html2canvas 將票券區域轉換為圖片
-const ticketPreviewElement = document.querySelector('.ticket');
+const ticketPreviewElement = document.querySelector('.finalTicket');
 
   //=================依賴後端存取開始(圖片相對路徑)
 //   html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {

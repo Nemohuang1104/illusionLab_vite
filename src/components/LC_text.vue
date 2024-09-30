@@ -24,6 +24,7 @@
 .h1_line{
   width: 400px;
   border-bottom: 1px solid white;
+  margin-top: 15vh;
 }
 
 h1{

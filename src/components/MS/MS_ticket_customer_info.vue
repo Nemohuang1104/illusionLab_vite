@@ -621,7 +621,7 @@ p {
 
 .template_mobang {
   display: flex;
-  padding: 150px 200px;
+  padding: 20% 10%;
   flex-direction: column;
   align-items: center;
   gap: 50px;
@@ -699,5 +699,22 @@ select {
 .remind_agree{
   text-align: left;
 }
+
+.check_warp{
+  display: flex;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+#check2{
+  align-self: flex-start;
+    margin-top: 6px;
+}
+
+@media screen and (max-width: 820px) {
+      .options{
+        width: 60vw;
+      }
+    }
 
 </style>

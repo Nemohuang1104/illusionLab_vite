@@ -32,8 +32,15 @@
         <div class="result" v-for="(result, index) in resultList" :key="index">{{ `Round${index + 1}: ${result}` }}</div>
       </div>
     </div>
-
-
+    <!-- 動態設置模態框的背景和內容 -->
+  <transition name="zoom">
+    <div v-if="showModal" :class="['modal', modalStyle]">
+      <div class="modal-content">
+        <span class="close" @click="showModal = false">&times;</span>
+        <!-- <p>{{ modalContent }}</p> -->
+      </div>
+    </div>
+  </transition>
   </div>
 </template>
 
@@ -50,10 +57,22 @@ export default {
       trigger: null,
       active: false,
       disabled: false,
+      showModal: false,  // 控制模態框的顯示
+      modalContent: '',  // 動態設置模態框的內容
+      modalStyle: '',    // 動態設置模態框的樣式（如不同背景圖）
       configs: [
         {
           style: 'gift-style',
-          gifts: Array.from(new Array(10), (val, index) => { return { type: 'text', name: index } }),
+          gifts:  [
+          { type: 'image', name: 'seven', path: 'src/assets/images/fruits/4.png' },
+          { type: 'image', name: 'persimmon', path: 'src/assets/images/fruits/1.png' },
+          { type: 'image', name: 'cherry', path: 'src/assets/images/fruits/2.png' },
+          { type: 'image', name: 'banana', path: 'src/assets/images/fruits/3.png' },
+          { type: 'image', name: 'money', path: 'src/assets/images/fruits/5.png' },
+          { type: 'image', name: 'plant', path: 'src/assets/images/fruits/6.png' },
+          { type: 'image', name: 'goust', path: 'src/assets/images/fruits/7.png' },
+          { type: 'image', name: 'dark', path: 'src/assets/images/fruits/8.png' },
+        ],
           duration: 4000,
           fontSize: 150,
           height: 200,
@@ -61,7 +80,16 @@ export default {
         },
         {
           style: 'gift-style',
-          gifts: Array.from(new Array(10), (val, index) => { return { type: 'text', name: index } }),
+          gifts:   [
+          { type: 'image', name: 'seven', path: 'src/assets/images/fruits/4.png' },
+          { type: 'image', name: 'persimmon', path: 'src/assets/images/fruits/1.png' },
+          { type: 'image', name: 'cherry', path: 'src/assets/images/fruits/2.png' },
+          { type: 'image', name: 'banana', path: 'src/assets/images/fruits/3.png' },
+          { type: 'image', name: 'money', path: 'src/assets/images/fruits/5.png' },
+          { type: 'image', name: 'plant', path: 'src/assets/images/fruits/6.png' },
+          { type: 'image', name: 'goust', path: 'src/assets/images/fruits/7.png' },
+          { type: 'image', name: 'dark', path: 'src/assets/images/fruits/8.png' },
+        ],
           duration: 5000,
           fontSize: 150,
           height: 200,
@@ -69,7 +97,16 @@ export default {
         },
         {
           style: 'gift-style',
-          gifts: Array.from(new Array(10), (val, index) => { return { type: 'text', name: index } }),
+          gifts:  [
+          { type: 'image', name: 'seven', path: 'src/assets/images/fruits/4.png' },
+          { type: 'image', name: 'persimmon', path: 'src/assets/images/fruits/1.png' },
+          { type: 'image', name: 'cherry', path: 'src/assets/images/fruits/2.png' },
+          { type: 'image', name: 'banana', path: 'src/assets/images/fruits/3.png' },
+          { type: 'image', name: 'money', path: 'src/assets/images/fruits/5.png' },
+          { type: 'image', name: 'plant', path: 'src/assets/images/fruits/6.png' },
+          { type: 'image', name: 'goust', path: 'src/assets/images/fruits/7.png' },
+          { type: 'image', name: 'dark', path: 'src/assets/images/fruits/8.png' },
+        ],
           duration: 6000,
           fontSize: 150,
           height: 200,
@@ -90,15 +127,60 @@ export default {
       this.disabled = true
       this.trigger = new Date()
     },
-    isFinished (val) {
+    isFinished(val) {
       const autoTurnList = this.$el.querySelectorAll('.autoTurn')
-      this.result.push(val)
+      this.result.push(val)  // 將每次轉動的結果存入結果陣列
       if (autoTurnList.length === 1) {
         this.disabled = false
         this.resultList.push(this.result)
-        this.result = []
-      }
+        
+        // 檢查所有結果是否相同
+        const allSame = this.result.every((item) => item === this.result[0])
+        if (allSame) {
+          this.showPopup(this.result[0])  // 傳遞相同的水果名稱
+        }
+        
+        this.result = []  // 重置結果
     }
+  },
+  showPopup(fruitName) {
+    // 根據不同的水果顯示不同的內容
+    switch(fruitName) {
+      case 'seven':
+        // this.modalContent = '恭喜！你轉到了三個蘋果！'
+        this.modalStyle = 'seven-bg' // 你可以設置不同背景圖樣式
+        break
+      case 'persimmon':
+        // this.modalContent = '恭喜！你轉到了三個香蕉！'
+        this.modalStyle = 'persimmon-bg'
+        break
+      case 'cherry':
+        // this.modalContent = '恭喜！你轉到了三個櫻桃！'
+        this.modalStyle = 'cherry-bg'
+        break
+      case 'banana':
+      // this.modalContent = '恭喜！你轉到了三個櫻桃！'
+      this.modalStyle = 'banana-bg'
+      break
+      case 'money':
+      // this.modalContent = '恭喜！你轉到了三個櫻桃！'
+      this.modalStyle = 'money-bg'
+      break
+      case 'plant':
+      // this.modalContent = '恭喜！你轉到了三個櫻桃！'
+      this.modalStyle = 'plant-bg'
+      break
+      case 'goust':
+      // this.modalContent = '恭喜！你轉到了三個櫻桃！'
+      this.modalStyle = 'goust-bg'
+      break
+      case 'dark':
+      // this.modalContent = '恭喜！你轉到了三個櫻桃！'
+      this.modalStyle = 'dark-bg'
+      break
+    }
+    this.showModal = true  // 顯示模態框
+  }
   }
 }
 </script>
@@ -114,6 +196,19 @@ export default {
   // object-fit: cover;
   margin-top: 60px;
   
+}
+
+::v-deep .gift-style img{
+        transform: rotate(270deg);
+        width: 80%;
+        object-fit: contain;
+
+      }
+
+::v-deep .handler[data-v-fa9d504e] {
+    top: -11% !important;
+    right: 334px !important;
+    transform: rotate(270deg);
 }
 
 #SlotMachine {
@@ -175,6 +270,8 @@ export default {
       }
     }
   }
+
+  
   .body {
     
     position: absolute;
@@ -387,5 +484,136 @@ export default {
       box-shadow: 0px 0px 30px $white;
     }
   }
+}
+
+// ==========================
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 1000;
+  left: calc(50% - 100px);
+  bottom: calc(50% - 200px);
+  width: 100%;
+  height: 100%;
+  max-width: 360px;
+  max-height: 600px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 25px;
+  transition: opacity 0.3s ease;
+  transform: rotate(270deg);
+  scale: 1.6;
+}
+
+.modal-content {
+  transition: transform 0.3s ease;
+
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #907500;
+}
+
+/* 不同水果的背景樣式 */
+.seven-bg {
+  background-image: url('src/assets/images/fruits/bg4_1.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.persimmon-bg {
+  background-image: url('src/assets/images/fruits/bg1_1.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.cherry-bg {
+  background-image: url('src/assets/images/fruits/bg2_1.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.banana-bg {
+  background-image: url('src/assets/images/fruits/bg3_1.jpg');
+   background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.money-bg {
+  background-image: url('src/assets/images/fruits/bg5_1.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.plant-bg {
+  background-image: url('src/assets/images/fruits/bg6_1.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.goust-bg {
+  background-image: url('src/assets/images/fruits/bg7_1.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.dark-bg {
+  background-image: url('src/assets/images/fruits/bg8_1.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+// .default-bg {
+//   background-color: #f0f0f0;  /* 可以是默認的背景顏色 */
+// }
+
+/* Zoom animation with bounce effect */
+@keyframes zoomBounce {
+  0% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.zoom-enter-active {
+  animation: zoomBounce 0.6s ease;
+}
+
+.zoom-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.zoom-leave-to {
+  transform: scale(0);
+}
+
+.modal-enter-active {
+  opacity: 1;
+}
+
+.modal-leave-active {
+  opacity: 0;
 }
 </style>

@@ -35,6 +35,8 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
 import { faFaceSmile } from '@fortawesome/free-regular-svg-icons'
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
+import { faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -58,7 +60,7 @@ app.mount('#app');
 
 
 // ---libary也要加---//
-library.add(faChevronDown, faFaceSmile, faCartShopping, faArrowRightLong, faArrowLeftLong, faFaceMeh, faCartArrowDown, faBars, faCircleXmark, faAddressCard, faCircleUser)
+library.add(faChevronDown,faFaceSmile,faCartShopping,faArrowRightLong,faArrowLeftLong,faFaceMeh,faCartArrowDown,faBars,faCircleXmark,faAddressCard,faCircleUser,faUpRightAndDownLeftFromCenter)
 
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon, "v-select", vSelect).use(router, VueSweetalert2).mount("#app");
