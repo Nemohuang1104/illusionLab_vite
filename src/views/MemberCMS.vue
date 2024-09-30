@@ -66,7 +66,7 @@ const resetSearch = () => {
 // 使用 fetch API 搜尋資料庫中的會員資料
 const searchItems = async () => {
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/Login/searchMembers.php', {
+    const response = await fetch(`http://illusionlab.local/public/PDO/Login/searchMembers.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -102,7 +102,11 @@ const toggleStatus = async (item) => {
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: '確定',
-      cancelButtonText: '取消'
+      cancelButtonText: '取消',
+      backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
     });
 
     // 如果使用者點擊取消，則終止操作
@@ -117,7 +121,7 @@ const toggleStatus = async (item) => {
  
 
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/Login/UpdateStatus.php', {
+    const response = await fetch(`http://illusionlab.local/public/PDO/Login/UpdateStatus.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

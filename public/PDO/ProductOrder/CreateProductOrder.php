@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 計算訂單總價
     $totalPrice = 0;
     foreach ($products as $product) {
-        $totalPrice += $product['QUANTITY'] * $product['PRICE_AT_PURCHASE'];
+        $totalPrice += $product['quantity'] * $product['price'];
     }
 
     // 查詢會員是否有可用優惠券
@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'COUPON_USED' => 1 // 確保 COUPON_USED 設為 1
         ];
 
-        // 同步更新 MEMBER 表中的 DISCOUNT_AMOUNT 欄位為 0
-        $stmt = $pdo->prepare("UPDATE MEMBER SET DISCOUNT_AMOUNT = 0 WHERE USER_ID = ?");
-        $stmt->execute([$userId]);
+        // // 同步更新 MEMBER 表中的 DISCOUNT_AMOUNT 欄位為 0
+        // $stmt = $pdo->prepare("UPDATE MEMBER SET DISCOUNT_AMOUNT = 0 WHERE USER_ID = ?");
+        // $stmt->execute([$userId]);
     }
 
     // 檢查是否有優惠券
@@ -115,9 +115,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 將購物車中的每個商品插入到 PRODUCT_ORDER_RELATED 表
     foreach ($products as $product) {
-        $productId = $product['PRODUCT_ID'];
-        $quantity = $product['QUANTITY'];
-        $priceAtPurchase = $product['PRICE_AT_PURCHASE'];
+        $productId = $product['id'];
+        $quantity = $product['quantity'];
+        $priceAtPurchase = $product['price'];
         $status = 'pending';  // 預設狀態
 
         // 插入產品資訊到 PRODUCT_ORDER_RELATED 表

@@ -24,7 +24,7 @@ const getUserInfo = async () => {
     const formData = new FormData();
     formData.append('token', token);
 
-    const response = await fetch('http://illusionlab.local/public/PDO/Login/GetUserInfo.php', {
+    const response = await fetch(`http://illusionlab.local/public/PDO/Login/GetUserInfo.php`, {
       method: 'POST',
       body: formData
     });

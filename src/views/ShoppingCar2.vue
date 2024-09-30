@@ -4,25 +4,96 @@ import Footer_0 from '@/components/Footer_0.vue';
 import ShoppingStep from '@/components/ShoppingStep.vue';
 import { ref, computed } from 'vue';
 
-const cartItems = ref([
-    { name: '繪本風格帆布袋', quantity: 1, price: 590 }
-]);
-
-// const totalAmount = computed(() => {
-//     return cartItems.value.reduce((total, item) => {
-//         return total + item.quantity * item.price;
-//     }, 0);
-// // const totalAmount = computed(() => {
-// //   return cartItems.value.reduce((total, item) => {
-// //     return total + item.quantity * item.price;
-// //   }, 0);
-// // });
 import { onMounted } from 'vue';
 
 import { useRouter, useRoute } from 'vue-router';
 
+
+
 const router = useRouter();
 const route = useRoute();
+
+// ===============優惠券折扣金額處理=======================
+
+// 從 sessionStorage 或其他地方取出 token
+const token = sessionStorage.getItem('token');
+
+// 商品優惠券自動填入碼
+const coupon = ref({
+    discount_code: '',
+    discount_amount: ''
+});
+
+// 請求商品優惠券資料
+const getCouponInfo = async () => {
+    try {
+        // 使用 FormData 傳送 token
+        const formData = new FormData();
+        formData.append('token', token);
+
+        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.status === 'success') {
+            coupon.value.discount_code = data.data.discount_code;
+            coupon.value.discount_amount = data.data.discount_amount;
+        } else {
+            console.error('Error fetching user info:', data.message);
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+    }
+};
+
+// 在組件加載時發起請求
+onMounted(() => {
+    getCouponInfo();
+});
+
+
+// ============儲存localStorage資料進入carts  =============//
+
+
+// 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
+const carts = ref([]);
+
+
+
+// 從 localStorage 撈取購物車資料的函數並存入 carts
+function loadCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    carts.value = cart;
+}
+
+// 當組件掛載時撈取資料
+onMounted(() => {
+    loadCart();
+    console.log(carts.value); // 確認 carts 已成功加載
+});
+
+watch(carts, (newVal) => {
+  console.log('carts updated:', newVal);
+});
+
+
+// 計算購物車總價:是一個 computed 屬性，用來計算購物車中所有商品的總價
+const totalPrice = computed(() => {
+    return carts.value.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+    }, 0);
+});
+
+// 計算總金額，包含商品金額、運費及折扣
+const calculatedTotalPrice = computed(() => {
+    return totalPrice.value + shippingFee.value - coupon.value.discount_amount;
+});
 
 // 在頁面載入時，如果 URL 中有傳遞的 storeName 和 storeAddress，則更新變數
 onMounted(() => {
@@ -77,7 +148,7 @@ async function prefillMemberInfo(event) {
             const keyformData = new FormData();
             keyformData.append('token', token);
 
-            const response = await fetch('http://illusionlab.local/public/PDO/Login/GetUserInfo.php', {
+            const response = await fetch(`http://illusionlab.local/public/PDO/Login/GetUserInfo.php`, {
                 method: 'POST',
                 body: keyformData
             });
@@ -149,37 +220,38 @@ import { watch } from 'vue';
 
 watch(formData, (newValue) => {
     localStorage.setItem('formData', JSON.stringify(newValue));
-    const cartItemstest = [
-    {
-        PRODUCT_ID: 8,
-        PRODUCT_NAME: "金牌叉燒飯",
-        PRICE_AT_PURCHASE: 599,
-        PRODUCT_IMG: "/public/PDO/FileUpload/66e79402d9c55螢幕擷取畫面 2024-06-15 143959.png",
-        QUANTITY: 5,
-        size: ""
-    },
-    {
-        PRODUCT_ID: 12,
-        PRODUCT_NAME: "限定T-shirt",
-        PRICE_AT_PURCHASE: 800,
-        PRODUCT_IMG: "/public/PDO/FileUpload/66f10f55d77cd_66e7a5e8b02d9_SF_Tshirt.png",
-        QUANTITY: 1,
-        size: ""
-    },
-    {
-        PRODUCT_ID: 16,
-        PRODUCT_NAME: "繪本風格筆記本",
-        PRICE_AT_PURCHASE: 180,
-        PRODUCT_IMG: "/public/PDO/FileUpload/66e7fce5522d9_MS_bearnotebook.png",
-        QUANTITY: 2,
-        size: ""
-    }
-];
+//     const cartItemstest = [
+//     {
+//         id:21,
+//         name:"繪本風格馬克杯",
+//         price:250,
+//         img:"/public/PDO/FileUpload/MS_productcup_6.jpg",
+//         quantity:3,
+//         style:"小蜥蜴款"
+//     },
+//     {
+//         id:22,
+//         name:"童趣造型長袖大學",
+//         price:580,
+//         img:"/public/PDO/FileUpload/MS_product_tshirt_4.jpg",
+//         quantity:1,
+//         style:"小女孩款"
+//     },
+//     {
+//         id:12,
+//         name:"限定T-shirt",
+//         price:800,
+//         img:"/public/PDO/FileUpload/66f10f55d77cd_66e7a5e8b02d9_SF_Tshirt.png",
+//         quantity:1,
+//         style:""
+//     }
+// ];
 
-// 將購物車明細存入 localStorage
-localStorage.setItem('cart', JSON.stringify(cartItemstest));
+// // 將購物車明細存入 localStorage
+// localStorage.setItem('cart', JSON.stringify(cartItemstest));
 
-console.log('購物車資料已儲存到 localStorage');
+// console.log('購物車資料已儲存到 localStorage');
+
 }, { deep: true });
 
 // 將宅配收件人資料acceptorData存入 localStorage
@@ -217,7 +289,7 @@ const submitOrder = async () => {
 
     try {
         // 將 token 和其他訂單資料一起發送到後端
-        const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/CreateProductOrder.php', {
+        const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/CreateProductOrder.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -399,53 +471,37 @@ const highlight = ref({
                 <div class="total">
                     <h2>商品明細</h2>
                     <hr>
-                    <div class="item" v-for="(item, index) in cartItems" :key="index">
-                        <img src="../assets/images/product_ex.jpg" alt="">
+                    <div class="item" v-for="(item, index) in carts" :key="index">
+                        <img :src="item.img" alt="商品圖片">
                         <div class="item_content">
                             <h3>{{ item.name }}</h3>
                             <div class="time">
-                                <p>規格:</p>
-                                <p>數量:</p>
-                                <!-- <div class="input">
-                                    <select name="" id="">
-                                        <option value="0">規格</option>
-                                        <option value="1">可愛動物區</option>
-                                        <option value="2">內心小女孩</option>
-                                        <option value="3">大人釋懷中</option>
-                                    </select>
-                                </div>
-                                <div class="quantity-input">
-                                    <button class="quantity-button" id="minus6"
-                                        @click="item.quantity > 1 && item.quantity--">-</button>
-                                    <input type="text" v-model="item.quantity" min="1" />
-                                    <button class="quantity-button" id="plus6" @click="item.quantity++">+</button>
-                                </div> -->
+                                <div v-if="item.size" class="size-select">尺寸: {{ item.size }}</div>
+                                <div v-if="item.style" class="selectedStyle">樣式 : {{ item.style }}</div>
+                                <div>數量: {{ item.quantity }}</div>
                             </div>
-                            <!-- <i class="fa-regular fa-trash-can"></i> -->
-                             <!-- <div class="trash">
-                                 <img class="trash-can" src="../assets/images/trashcan.svg">
-                             </div> -->
                         </div>
                     </div>
-
-
                     <hr>
                     <div class="count">
                         <h3>商品金額</h3>
-                        <p>${{ itemsTotal }}</p>
+                        <!-- <p>${{ itemsTotal }}</p> -->
+                        <p>${{ totalPrice }}</p>
                     </div>
                     <div class="shipping-fee">
                         <h3>運費</h3>
                         <p>${{ shippingFee }}</p>
                     </div>
                     <div class="discount-fee">
-                        <h3>折扣金額</h3>
-                        <p>$0</p>
+                        <h3>折扣</h3>
+                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'">${{
+                            coupon.discount_amount }} </p>
+                        <p v-else>$0</p>
                     </div>
                     <hr>
-                    <div class="total-fee">
+                    <div class="total-fee" v-if="carts.length">
                         <h3>總金額</h3>
-                        <p>${{ totalAmount }}</p>
+                        <p>${{ calculatedTotalPrice }}</p>
                     </div>
                 </div>
             </div>

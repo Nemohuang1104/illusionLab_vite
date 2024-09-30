@@ -282,7 +282,7 @@ export default {
       } else {
         // 呼叫後端 API 取得折扣碼
         try {
-          const response = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+          const response = await axios.post(`http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php`, {}, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -346,7 +346,7 @@ export default {
         await this.markQuizCompleted();
 
         // 然後獲取折扣碼
-        const response = await axios.post('http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php', {}, {
+        const response = await axios.post(`http://illusionlab.local/public/PDO/Login/GetTicketCoupon.php`, {}, {
           headers: {
             'Authorization': `Bearer ${code}`
           }

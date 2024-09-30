@@ -63,7 +63,11 @@ const forgotPassword = () => {
     title: "請輸入電子信箱",
     input: "email",
     inputLabel: "Your email address",
-    inputPlaceholder: "請輸入電子信箱"
+    inputPlaceholder: "請輸入電子信箱",
+    backdrop: false,
+        willOpen: () => {
+            document.body.style.paddingRight = '0';
+          }
   }).then((result) => {
     if (result.isConfirmed) {
       // 處理忘記密碼邏輯
@@ -72,7 +76,11 @@ const forgotPassword = () => {
         icon: "success",
         title: "已寄送信件至您的電子信箱中",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
       });
     }
   });
@@ -89,7 +97,7 @@ const onSubmit = async () => {
       formData.append('email', email.value);
       formData.append('password', password.value);
 
-      const response = await axios.post('http://illusionlab.local/public/PDO/Login/Login.php', formData, {
+      const response = await axios.post(`http://illusionlab.local/public/PDO/Login/Login.php`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
@@ -102,6 +110,10 @@ const onSubmit = async () => {
           title: '歡迎進入幻浸實驗室',
           timer: 1200,
           showConfirmButton: false,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         }).then(() => {
           emit('login-success'); // 發出登入成功事件
           emit('close-popup'); // 關閉彈窗
@@ -113,6 +125,10 @@ const onSubmit = async () => {
           title: response.data.message,
           timer: 1500,
           showConfirmButton: false,
+          backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
         });
       }
     } catch (error) {
@@ -121,6 +137,10 @@ const onSubmit = async () => {
         title: '登入失敗，請確認是否註冊。',
         timer: 1500,
         showConfirmButton: false,
+        backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
       });
     }
   } else {
@@ -129,6 +149,10 @@ const onSubmit = async () => {
       title: '請重新檢視表單',
       timer: 1200,
       showConfirmButton: false,
+      backdrop: false,
+            willOpen: () => {
+                document.body.style.paddingRight = '0';
+              }
     });
   }
 };
