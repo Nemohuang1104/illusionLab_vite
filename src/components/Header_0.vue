@@ -259,7 +259,7 @@ header {
   /* 透明度為100% */
   height: 80px;
   /* 添加高度 */
-  cursor: pointer;
+  // cursor: pointer;
   font-family: "Noto Serif TC";
 
 }
@@ -277,7 +277,7 @@ header {
   background: linear-gradient(360deg, #000 26%, #505050 100%);
   height: 80px;
   /* 添加高度 */
-  cursor: pointer;
+  // cursor: pointer;
   font-family: "Noto Serif TC";
 }
 
@@ -291,7 +291,7 @@ header {
   background-color: #B89977;
   height: 80px;
   /* 添加高度 */
-  cursor: pointer;
+  // cursor: pointer;
   font-family: "Noto sans TC";
 }
 
