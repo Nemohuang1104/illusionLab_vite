@@ -267,6 +267,7 @@ import Btn2_Lifecasino from "@/components/Btn2_Lifecasino.vue";
     margin: 0 auto;
     margin-bottom: 2%;
     padding: 0 20px;
+    padding-top: 120px;
     }
 
   @media (max-width: 430px) {

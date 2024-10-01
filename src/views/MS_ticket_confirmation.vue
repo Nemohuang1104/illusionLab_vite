@@ -79,8 +79,9 @@ export default {
     }
 }
 
-::v-deep .theOriginal[data-v-5a144230]{
-  display: none;
+::v-deep .theOriginal{
+  display: none !important;
+  opacity: 0;
 }
 
 ::v-deep .title[data-v-3d5d2ec6]{
@@ -133,15 +134,30 @@ export default {
  background-color:rgba(255, 255, 255, 0.5) !important;
   
 }
-::v-deep .sbmit[data-v-d09fc348]{
-  color: rgb(133, 95, 73);
-  border: 1px solid rgb(133, 95, 73);
+// ::v-deep .sbmit{
+//   color: rgb(133, 95, 73);
+//   border: 1px solid rgb(133, 95, 73);
+
+//   &:hover{
+//     background-color: #ffffffac;
+//     box-shadow: 1px 3px 12px 0px rgba(109, 109, 109, 0.52);
+//       scale: 1.1;
+//   }
+// }
+</style>
+
+<style lang="scss">
+
+.sbmit{
+  color: rgb(133, 95, 73) !important;
+  border: 1px solid rgb(133, 95, 73) !important;
 
   &:hover{
-    background-color: #ffffffac;
-    box-shadow: 1px 3px 12px 0px rgba(109, 109, 109, 0.52);
+    background-color: #ffffffac !important;
+    box-shadow: 1px 3px 12px 0px rgba(109, 109, 109, 0.52) !important;
       scale: 1.1;
   }
 }
+
 </style>
 

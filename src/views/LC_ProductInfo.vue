@@ -163,7 +163,12 @@ const decrement = () => {
 //   product.value = await response.json();
 // });
 
-const base_url = process.env.VITE_IMAGE_URL === '/' ? '' : process.env.VITE_IMAGE_URL
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 
 </script>
 
@@ -195,7 +200,7 @@ const base_url = process.env.VITE_IMAGE_URL === '/' ? '' : process.env.VITE_IMAG
 
           <div v-if="item" class="pagebox">
             <!-- 放置一個商品列的外框 -->
-            <img :src="base_url + item.PRODUCT_IMG" alt="">
+            <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
             <div class="list">
               <div class="pro">
                 <p>商品編號 : {{ item.PRODUCT_ID }}</p>
@@ -205,7 +210,7 @@ const base_url = process.env.VITE_IMAGE_URL === '/' ? '' : process.env.VITE_IMAG
                 <p>規格 : {{ item.PRODUCT_SIZE }}</p>
 
                 <!-- 尺寸選擇 -->
-                <div class="input" v-if="item.PRODUCT_ID === 2">
+                <div class="input" v-if="item.PRODUCT_ID == 2">
                   <p class="txt">選擇尺寸：</p>
                   <select v-model="selectedSize" id="size">
                     <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size">

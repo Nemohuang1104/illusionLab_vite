@@ -49,9 +49,9 @@ function goToLoginCMS(){
 const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
 
 
-    const getImageUrl = (imgPath) => {
-      return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
-    };
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 // 
     // return {
     //   getImageUrl

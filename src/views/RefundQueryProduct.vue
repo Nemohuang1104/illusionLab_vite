@@ -75,6 +75,13 @@ onMounted(() => {
   fetchOrders();
 });
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
+
 </script>
 
 <template>
@@ -120,7 +127,7 @@ onMounted(() => {
                 </div>
                 <div v-for="item in orderDetails[order.PRODUCT_ORDER_ID]" :key="item.PRODUCT_ORDER_ID" class="order-item">
                     <div class="product-info">
-                        <img :src="item.PRODUCT_IMG" alt="商品圖片" class="product-image">
+                        <img :src="getImageUrl(item.PRODUCT_IMG)" alt="商品圖片" class="product-image">
                         <div class="item-text">
                             <p>{{ item.PRODUCT_NAME }}</p>
                             

@@ -49,6 +49,13 @@ const highlight = ref({
 
     }
   ); 
+
+  const baseUrl = import.meta.env.VITE_IMAGE_URL || import.meta.env.BASE_URL;
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 </script>
 
 <template>
@@ -103,7 +110,7 @@ const highlight = ref({
                 </div>
                 <div class="order-item" v-for="(item, index) in orderDetails" :key="index" >
                     <div class="product-info">
-                        <img :src="item.PRODUCT_IMG" alt="商品圖片" class="product-image">
+                        <img :src="getImageUrl(item.PRODUCT_IMG)" alt="商品圖片" class="product-image">
                         <span class="product-name">{{ item.PRODUCT_NAME }}</span>
                     </div>
                     <span class="product-quantity">{{ item.QUANTITY }}</span>
@@ -254,8 +261,10 @@ const highlight = ref({
 }
 
 .order-item img {
-        width: 50%;
-        object-fit: contain;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 12px;
         margin: 12px;
 }
 .product-info {

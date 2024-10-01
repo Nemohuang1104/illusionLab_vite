@@ -207,7 +207,12 @@ function addToCart() {
 // Swiper modules used
 // const modules = [FreeMode, Navigation, Thumbs];
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
 
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 
 </script>
 
@@ -240,7 +245,7 @@ function addToCart() {
                             src="../assets/images/SF_easycard_1.png" /></swiper-slide>
                 </swiper> -->
                 <div class="pimg">
-                    <img :src="item.PRODUCT_IMG" alt="">
+                    <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
                 </div>
                 <div>
                     <div class="textbox">
@@ -278,7 +283,7 @@ function addToCart() {
                         <input type="hidden" name="quantity" :value="counter"> <!-- 傳送商品數量 -->
 
 
-                        <div class="size" v-if="item.PRODUCT_ID === 12">
+                        <div class="size" v-if="item.PRODUCT_ID == 12">
                             <select name="size-select" id="size-select" v-model="selectedSize">
                                 <option disabled value="">商品規格</option>
                                 <option value="S">S</option>
@@ -358,7 +363,7 @@ function addToCart() {
     max-width: 800px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around   ;
     align-items: center;
     margin-bottom: 50px;
     box-sizing: border-box;
@@ -395,8 +400,8 @@ function addToCart() {
 
 //左側商品照片
 .pimg img {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     border-radius: 12px;
 }
 

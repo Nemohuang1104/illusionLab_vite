@@ -353,7 +353,11 @@ router.beforeEach((to, from, next) => {
 
 // ============優惠券結束=============//
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL
 
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 
 </script>
 <template>
@@ -376,7 +380,7 @@ router.beforeEach((to, from, next) => {
                         <div class="product-info">
                             <input class="checkbox" type="checkbox" v-model="checkedItems[index]">
                             <!-- <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image"> -->
-                            <img :src="item.img" alt="商品圖片" class="product-image">
+                            <img :src="getImageUrl(item.img)" alt="商品圖片" class="product-image">
                             <div class="description">
                                 <div class="product-name">{{ item.name }}</div>
                                 <!-- <div class="input">
@@ -449,7 +453,7 @@ router.beforeEach((to, from, next) => {
             <ul class="addProduct_grid">
                 <li class="pro" v-for="item in productInfo" :key="item.PRODUCT_ID">
                     <router-link :to="getProductDetailRoute(item)">
-                        <img :src="item.PRODUCT_IMG" alt="">
+                        <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
                         <p>{{ item.PRODUCT_NAME }}</p>
                         <div class="text">
                             <div class="price">
@@ -620,8 +624,10 @@ ul {
 // ========================
 .product-image {
     border-radius: 10px;
-    // width: 100%;
-    max-width: 120px;
+    object-fit: cover;
+   
+   width: 120px;
+    height: 120px;
 }
 
 .quantity-input {

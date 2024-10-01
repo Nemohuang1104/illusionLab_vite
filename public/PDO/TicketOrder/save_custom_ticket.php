@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $orderId = $_POST['orderId'];
 
             // 圖片存儲的目標目錄
-            $targetDir = $_SERVER["DOCUMENT_ROOT"] . '/public/PDO/FileUpload/';
+            $targetDir = $_SERVER["DOCUMENT_ROOT"] . '/tid102/g2/public/PDO/FileUpload/';
             // 確保目錄存在
             if (!is_dir($targetDir)) {
                 mkdir($targetDir, 0777, true);
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 try {
                     // 更新 TICKET_IMAGE_PATH 欄位，而不是插入一條新紀錄
-                    $stmt = $pdo->prepare("UPDATE TID102_G2.TICKET_ORDER SET TICKET_IMAGE_PATH = :imagePath WHERE TICKET_ORDER_ID = :orderId");
+                    $stmt = $pdo->prepare("UPDATE ticket_order SET TICKET_IMAGE_PATH = :imagePath WHERE TICKET_ORDER_ID = :orderId");
 
                     // 綁定參數
                     $stmt->bindParam(':imagePath', $imagePath, PDO::PARAM_STR);

@@ -412,8 +412,8 @@ html2canvas(ticketPreviewElement, { backgroundColor: null }).then(canvas => {
         // height: 180vh;
     }
 
-    .line[data-v-231aa63d]{
-      margin-top: unset;
+    .line{
+      margin-top: 0;
       margin-bottom: 30px;
       padding-top: 80px;
     }

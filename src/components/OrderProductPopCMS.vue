@@ -121,7 +121,12 @@ const f_save = async () => {
   }
 };
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
 
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 </script>
 <template>
     <div class="wrapper">
@@ -196,7 +201,7 @@ const f_save = async () => {
                             </div>
                         </div>
                         <div class="textdetail" v-for="(item, index) in orderDetails" :key="index">
-                            <img :src="item.PRODUCT_IMG" alt="">
+                            <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
                             <div class="detaillist">
                                 <p>{{ item.PRODUCT_NAME }}</p>
                             </div>

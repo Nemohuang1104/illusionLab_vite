@@ -91,7 +91,7 @@ const currentButton = ref('btn1');
 }
 
 header{
-  position: unset;
+  // position: unset;
 }
 
 a{

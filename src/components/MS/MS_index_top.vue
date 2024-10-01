@@ -256,6 +256,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faTree } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import background from '@/assets/images/ms/MyPrince/bluesky.jpg'
 
 library.add(faTree)
 
@@ -782,7 +783,7 @@ window.addEventListener('scroll', function () {
     } else {
         top3.forEach(el => el.classList.remove('special'));
         const indexTop = document.querySelector('.indexTop')
-        indexTop.style.background = "url('../src/assets/images/ms/MyPrince/bluesky.png')";
+        indexTop.style.background = background;
     }
 
 });
