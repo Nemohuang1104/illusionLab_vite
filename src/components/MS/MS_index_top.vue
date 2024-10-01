@@ -262,11 +262,12 @@ library.add(faTree)
 const frameIndex = ref(1);
 const totalFrames1 = 6;
 let intervalId = null;
-const cuteDuckWalking = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
-const cuteDuckWalking2 = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
-const cuteDuckWalking3 = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
-const cuteDuckWalking4 = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
+const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
+const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
+const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
+const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
 let style = null;
+
 
 const options = [
     "活動介紹",
@@ -290,7 +291,6 @@ const ids = ref([
 ]);
 
 onMounted(() => {
-
 
     // 確保頁面滾動到頂部
     if ('scrollRestoration' in window.history) {
@@ -402,10 +402,10 @@ const startWalkingAnimation = () => {
         if (frameIndex.value > totalFrames1) {
             frameIndex.value = 1;
         }
-        cuteDuckWalking.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-        cuteDuckWalking2.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-        cuteDuckWalking3.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-        cuteDuckWalking4.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
+        cuteDuckWalking.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
+        cuteDuckWalking2.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
+        cuteDuckWalking3.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
+        cuteDuckWalking4.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
     }, 120);
 };
 
@@ -863,7 +863,7 @@ p {
 
 
 .indexTop {
-    background-image: url('@/assets/images/ms/MyPrince/bluesky.png');
+    background-image: url('@/assets/images/ms/MyPrince/bluesky.jpg');
     width: 100vw;
     clip-path: inset(0 0 0 0)
 }
@@ -3148,5 +3148,11 @@ p {
     .AnchorsTree {
         display: none;
     }
+}
+
+#seven{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 </style>

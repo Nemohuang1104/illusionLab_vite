@@ -9,15 +9,17 @@
           @click="item.level === 0 && handleClick(item, $event)"
           >
             <div class="book" ref="book">
-                <div class="back page"    :style="{ backgroundImage: `url('@/src/assets/images/ms/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
-                <div class="page6 r page" :style="{ backgroundImage: `url('@/src/assets/images/ms/right3_${item.id}.jpg')` }" @click="rotatePage('page6')"></div>
-                <div class="page5 l page" :style="{ backgroundImage: `url('@/src/assets/images/ms/left3_${item.id}.jpg')` }" @click="rotatePage('page5')"></div>
-                <div class="page4 r page" :style="{ backgroundImage: `url('@/src/assets/images/ms/right2_${item.id}.jpg')` }" @click="rotatePage('page4')"></div>
-                <div class="page3 l page" :style="{ backgroundImage: `url('@/src/assets/images/ms/left2_${item.id}.jpg')` }" @click="rotatePage('page3')"></div>
-                <div class="page2 r page" :style="{ backgroundImage: `url('@/src/assets/images/ms/right1_${item.id}.jpg')` }" @click="rotatePage('page2')"></div>
-                <div class="page1 l page" :style="{ backgroundImage: `url('@/src/assets/images/ms/left1_${item.id}.jpg')` }" @click="rotatePage('page1')"></div>
-                <div class="front page" :style="{ backgroundImage: `url('@/src/assets/images/ms/${item.id}.jpg')` }" @click="rotatePage('front')"></div>
+                <div class="back page"    :style="{ backgroundImage: `url('../../../public/PDO/MS/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
+                <div class="page6 r page" :style="{ backgroundImage: `url('../../../public/PDO/MS/right3_${item.id}.jpg')` }" @click="rotatePage('page6')"></div>
+                <div class="page5 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left3_${item.id}.jpg')` }" @click="rotatePage('page5')"></div>
+                <div class="page4 r page" :style="{ backgroundImage: `url('../../../public/PDO/MS/right2_${item.id}.jpg')` }" @click="rotatePage('page4')"></div>
+                <div class="page3 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left2_${item.id}.jpg')` }" @click="rotatePage('page3')"></div>
+                <div class="page2 r page" :style="{ backgroundImage: `url('../../../public/PDO/MS/right1_${item.id}.jpg')` }" @click="rotatePage('page2')"></div>
+                <div class="page1 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left1_${item.id}.jpg')` }" @click="rotatePage('page1')"></div>
+                <div class="front page" :style="{ backgroundImage: `url('../../../public/PDO/MS/${item.id}.jpg')` }" @click="rotatePage('front')"></div>
             </div>
+           
+
         </div>
       </transition-group>
       <div class="arrow arrow-right" @click="moveLeft">→</div>
@@ -142,6 +144,7 @@
               book.style.transform = 'translateX(0px)'
               break
       }
+
   }
 </script>
   

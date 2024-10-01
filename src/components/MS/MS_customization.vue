@@ -98,12 +98,12 @@
                 </div>
                 <div class="theChosenArea">
                     <div v-if="selectedArea === 'ticket_bgs'" class="ticket_bgs selector">
-                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D', '#FFDE59', '#FFA2A0', '#80BD6B', '#FFE382', '#F9F0DB', '#F9F0DB', '@/assets/images/ms/real_sticker_1.png', '@/assets/images/ms/ticket_barcode_1.png')">
-                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_2.png','@/assets/images/ms/ticket_barcode_2.png')">
-                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_3.png','@/assets/images/ms/ticket_barcode_3.png')">
-                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED','@/assets/images/ms/real_sticker_4.png','@/assets/images/ms/ticket_barcode_4.png')">
-                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','@/assets/images/ms/real_sticker_5.png','@/assets/images/ms/ticket_barcode_5.png')">
-                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_6.png" alt="" @click="changeColors('#ECF5D2', '#CCE391', '#CCE391', '#8EB177', '#D45F48', '#875E47', '#BA795F', '#F7FBEA', '#F7FBEA', '@/assets/images/ms/real_sticker_6.png', '@/assets/images/ms/ticket_barcode_6.png')">
+                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D', '#FFDE59', '#FFA2A0', '#80BD6B', '#FFE382', '#F9F0DB', '#F9F0DB', real_sticker_1, ticket_barcode_1)">
+                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB',real_sticker_2,ticket_barcode_2)">
+                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB',real_sticker_3,ticket_barcode_3)">
+                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED',real_sticker_4,ticket_barcode_4)">
+                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050',real_sticker_5,ticket_barcode_5)">
+                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_6.png" alt="" @click="changeColors('#ECF5D2', '#CCE391', '#CCE391', '#8EB177', '#D45F48', '#875E47', '#BA795F', '#F7FBEA', '#F7FBEA', real_sticker_6, ticket_barcode_6)">
                         <!-- <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_6.png" alt="" @click="changeColors('#F9F0DB'                                                               , '#FEDCAA', '#ADD89D','#','#','#','#','#','#')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_colors'" class="ticket_colors selector" >
@@ -116,22 +116,22 @@
                         <!-- <img class="ticket_color" src="@/assets/images/ms/ticket_colors_6.png" alt="" @click="changeColors('#FB9D3C','#875E47','#FFFAEF')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_stickers'" class="ticket_stickers selector">
-                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_1.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_1.png')">
-                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_2.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_2.png')">
-                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_3.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_3.png')">
-                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_4.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_4.png')">
-                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_5.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_5.png')">
-                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_6.png')">
-                        <!-- <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_6.png')"> -->
+                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_1.png" alt="" @click="changeColors(ticket_stickers_1)">
+                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_2.png" alt="" @click="changeColors(ticket_stickers_2)">
+                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_3.png" alt="" @click="changeColors(ticket_stickers_3)">
+                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_4.png" alt="" @click="changeColors(ticket_stickers_4)">
+                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_5.png" alt="" @click="changeColors(ticket_stickers_5)">
+                        <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors(ticket_stickers_6)">
+                        <!-- <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors(real_sticker_6)"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_morebangs'" class="ticket_morebangs selector">
-                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_1.png','@/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','@/assets/images/ms/ticket_stickers_1.png')">
-                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_2.png','@/assets/images/ms/ticket_barcode_2.png','#FB9D3C','#875E47','#FFFAEF','@/assets/images/ms/ticket_stickers_2.png')">
-                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_3.png','@/assets/images/ms/ticket_barcode_3.png','#FFE382','#875E47','#FD6F6C','@/assets/images/ms/ticket_stickers_3.png')">
-                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED','@/assets/images/ms/real_sticker_4.png','@/assets/images/ms/ticket_barcode_4.png','#FFFFFF','#778585','#4A657F','@/assets/images/ms/ticket_stickers_4.png')">
-                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050','@/assets/images/ms/real_sticker_5.png','@/assets/images/ms/ticket_barcode_5.png','#FFFFFF','#FFF3C6','#DFDFDF','@/assets/images/ms/ticket_stickers_5.png')">
-                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_6.png" alt="" @click="changeColors('#ECF5D2', '#CCE391', '#CCE391', '#8EB177', '#D45F48', '#875E47', '#BA795F', '#F7FBEA', '#F7FBEA', '@/assets/images/ms/real_sticker_6.png', '@/assets/images/ms/ticket_barcode_6.png','#BFA485', '#875E47', '#6A9052', '@/assets/images/ms/ticket_stickers_6.png')">
-                        <!-- <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_6.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_1.png','@/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','@/assets/images/ms/ticket_stickers_6.png')"> -->
+                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB',real_sticker_1,ticket_barcode_1,'#FB9D3C','#AD8662','#FDC274',ticket_stickers_1)">
+                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB',real_sticker_2,ticket_barcode_2,'#FB9D3C','#875E47','#FFFAEF',ticket_stickers_2)">
+                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB',real_sticker_3,ticket_barcode_3,'#FFE382','#875E47','#FD6F6C',ticket_stickers_3)">
+                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED',real_sticker_4,ticket_barcode_4,'#FFFFFF','#778585','#4A657F',ticket_stickers_4)">
+                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_5.png" alt="" @click="changeColors('linear-gradient(103deg, #7B7B7B 2.67%, #7C7C7C 31.27%, #DFDFDF 85.27%)', '#C8C8C8', '#999999','#505050','#FFF3C6','#DFDFDF','#FFE382','#DFDFDF','#505050',real_sticker_5,ticket_barcode_5,'#FFFFFF','#FFF3C6','#DFDFDF',ticket_stickers_5)">
+                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_6.png" alt="" @click="changeColors('#ECF5D2', '#CCE391', '#CCE391', '#8EB177', '#D45F48', '#875E47', '#BA795F', '#F7FBEA', '#F7FBEA', real_sticker_6, ticket_barcode_6,'#BFA485', '#875E47', '#6A9052', ticket_stickers_6)">
+                        <!-- <img class="ticket_morebang" src=ticket_morebang_6 alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_1.png',ticket_barcode_1,'#FB9D3C','#AD8662','#FDC274',real_sticker_6)"> -->
                     </div>
                 </div>
             </div>
@@ -151,6 +151,28 @@
 
 <script>
 import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+import real_sticker_1 from '@/assets/images/ms/real_sticker_1.png';
+import real_sticker_2 from '@/assets/images/ms/real_sticker_2.png';
+import real_sticker_3 from '@/assets/images/ms/real_sticker_3.png';
+import real_sticker_4 from '@/assets/images/ms/real_sticker_4.png';
+import real_sticker_5 from '@/assets/images/ms/real_sticker_5.png';
+import real_sticker_6 from '@/assets/images/ms/real_sticker_6.png';
+
+import ticket_stickers_1 from '@/assets/images/ms/ticket_stickers_1.png';
+import ticket_stickers_2 from '@/assets/images/ms/ticket_stickers_2.png';
+import ticket_stickers_3 from '@/assets/images/ms/ticket_stickers_3.png';
+import ticket_stickers_4 from '@/assets/images/ms/ticket_stickers_4.png';
+import ticket_stickers_5 from '@/assets/images/ms/ticket_stickers_5.png';
+import ticket_stickers_6 from '@/assets/images/ms/ticket_stickers_6.png';
+
+
+import ticket_barcode_1 from '@/assets/images/ms/ticket_barcode_1.png';
+import ticket_barcode_2 from '@/assets/images/ms/ticket_barcode_2.png';
+import ticket_barcode_3 from '@/assets/images/ms/ticket_barcode_3.png';
+import ticket_barcode_4 from '@/assets/images/ms/ticket_barcode_4.png';
+import ticket_barcode_5 from '@/assets/images/ms/ticket_barcode_5.png';
+import ticket_barcode_6 from '@/assets/images/ms/ticket_barcode_6.png';
+
 
 // 在方法中加入 Pinia 存取
 const ticketStore = useTicketStore(); // 讀取 ticketStore
@@ -174,9 +196,9 @@ export default {
       RSTTColor: '#FFE382',
       RSTMColor: '#F9F0DB',
       SColor:'#F9F0DB',
-      realStickerRoad:'@/assets/images/ms/real_sticker_1.png',
-      bigStickerRoad:'@/assets/images/ms/ticket_stickers_1.png',
-      barcode:'@/assets/images/ms/ticket_barcode_1.png',
+      realStickerRoad:real_sticker_1,
+      bigStickerRoad:ticket_stickers_1,
+      barcode:ticket_barcode_1,
       gradientCounter: 0  ,
       isChoosenHidden: false,
       IwantToChoose:false,
