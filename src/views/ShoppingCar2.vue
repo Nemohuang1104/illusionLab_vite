@@ -381,7 +381,12 @@ const calculatedTotalPrice = computed(() => {
     return totalPrice.value + shippingFee.value - coupon.value.discount_amount;
 });
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL || import.meta.env.BASE_URL;
 
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 </script>
 
 <template>
@@ -519,7 +524,7 @@ const calculatedTotalPrice = computed(() => {
                     <h2>商品明細</h2>
                     <hr>
                     <div class="item" v-for="(item, index) in carts" :key="index">
-                        <img :src="item.img" alt="商品圖片">
+                        <img :src="getImageUrl(item.img)" alt="商品圖片">
                         <div class="item_content">
                             <h3>{{ item.name }}</h3>
                             <div class="time">
@@ -1373,9 +1378,11 @@ button:hover {
 }
 
 .item img {
-    width: 40%;
-    object-fit: contain;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
     margin: 12px;
+    border-radius: 12px;
 }
 
 .confirm {

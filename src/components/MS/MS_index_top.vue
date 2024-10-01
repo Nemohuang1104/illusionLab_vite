@@ -256,13 +256,18 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faTree } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import background from '@/assets/images/ms/MyPrince/bluesky.jpg'
 
 library.add(faTree)
 
 const frameIndex = ref(1);
 const totalFrames1 = 6;
 let intervalId = null;
-const cuteDuckWalking = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
+
+const images = import.meta.glob('@/assets/images/ms/superFuckingCuteDuck_DoMeDo/*.png');
+
+// const cuteDuckWalking = new URL(`../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`, import.meta.url).href
+const cuteDuckWalking = ref(`../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
 const cuteDuckWalking2 = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
 const cuteDuckWalking3 = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
 const cuteDuckWalking4 = ref(`@/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
@@ -402,10 +407,10 @@ const startWalkingAnimation = () => {
         if (frameIndex.value > totalFrames1) {
             frameIndex.value = 1;
         }
-        cuteDuckWalking.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-        cuteDuckWalking2.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-        cuteDuckWalking3.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-        cuteDuckWalking4.value = `@/src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
+        cuteDuckWalking.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
+        cuteDuckWalking2.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
+        cuteDuckWalking3.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
+        cuteDuckWalking4.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
     }, 120);
 };
 
@@ -782,7 +787,7 @@ window.addEventListener('scroll', function () {
     } else {
         top3.forEach(el => el.classList.remove('special'));
         const indexTop = document.querySelector('.indexTop')
-        indexTop.style.background = "url('../src/assets/images/ms/MyPrince/bluesky.png')";
+        indexTop.style.background = background;
     }
 
 });
@@ -863,7 +868,7 @@ p {
 
 
 .indexTop {
-    background-image: url('@/assets/images/ms/MyPrince/bluesky.png');
+    background-image: url('@/assets/images/ms/MyPrince/bluesky.jpg');
     width: 100vw;
     clip-path: inset(0 0 0 0)
 }

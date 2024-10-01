@@ -98,7 +98,7 @@
                 </div>
                 <div class="theChosenArea">
                     <div v-if="selectedArea === 'ticket_bgs'" class="ticket_bgs selector">
-                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D', '#FFDE59', '#FFA2A0', '#80BD6B', '#FFE382', '#F9F0DB', '#F9F0DB', '@/assets/images/ms/real_sticker_1.png', '@/assets/images/ms/ticket_barcode_1.png')">
+                        <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D', '#FFDE59', '#FFA2A0', '#80BD6B', '#FFE382', '#F9F0DB', '#F9F0DB', real_sticker_1, '@/assets/images/ms/ticket_barcode_1.png')">
                         <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_2.png','@/assets/images/ms/ticket_barcode_2.png')">
                         <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_3.png','@/assets/images/ms/ticket_barcode_3.png')">
                         <img class="ticket_bg" src="@/assets/images/ms/ticket_bg_style_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED','@/assets/images/ms/real_sticker_4.png','@/assets/images/ms/ticket_barcode_4.png')">
@@ -125,7 +125,7 @@
                         <!-- <img class="ticket_sticker" src="@/assets/images/ms/ticket_stickers_6.png" alt="" @click="changeColors('@/assets/images/ms/ticket_stickers_6.png')"> -->
                     </div>
                     <div v-if="selectedArea === 'ticket_morebangs'" class="ticket_morebangs selector">
-                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_1.png','@/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','@/assets/images/ms/ticket_stickers_1.png')">
+                        <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_1.png" alt="" @click="changeColors('#F9F0DB', '#FEDCAA', '#ADD89D','#FFDE59','#FFA2A0','#80BD6B','#FFE382','#F9F0DB','#F9F0DB',real_sticker_1,'@/assets/images/ms/ticket_barcode_1.png','#FB9D3C','#AD8662','#FDC274','@/assets/images/ms/ticket_stickers_1.png')">
                         <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_2.png" alt="" @click="changeColors('#E5D3C3', '#C29475', '#B57A5A','#9B5B44','#EA650C','#178852','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_2.png','@/assets/images/ms/ticket_barcode_2.png','#FB9D3C','#875E47','#FFFAEF','@/assets/images/ms/ticket_stickers_2.png')">
                         <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_3.png" alt="" @click="changeColors('linear-gradient(75deg, #FFE2E1 3.93%, #FFFCF5 48.61%)', '#FD6F6C', '#FFA2A0','#E6C58B','#FFA2A0','#FFD14A','#FFE382','#F9F0DB','#F9F0DB','@/assets/images/ms/real_sticker_3.png','@/assets/images/ms/ticket_barcode_3.png','#FFE382','#875E47','#FD6F6C','@/assets/images/ms/ticket_stickers_3.png')">
                         <img class="ticket_morebang" src="@/assets/images/ms/ticket_morebang_4.png" alt="" @click="changeColors('#D2DBE5', '#ABBECE', '#7E9AB2','#618AA3','#375367','#778585','#FFE382','#F9F0DB','#E0E9ED','@/assets/images/ms/real_sticker_4.png','@/assets/images/ms/ticket_barcode_4.png','#FFFFFF','#778585','#4A657F','@/assets/images/ms/ticket_stickers_4.png')">
@@ -151,9 +151,14 @@
 
 <script>
 import { useTicketStore } from '@/stores/ticketStore'; // 引入 Pinia store
+// import ticket_bg_style_1
 
 // 在方法中加入 Pinia 存取
 const ticketStore = useTicketStore(); // 讀取 ticketStore
+import real_sticker_1 from '@/assets/images/ms/real_sticker_1.png'
+import ticket_stickers_1 from '@/assets/images/ms/ticket_stickers_1.png'
+import ticket_barcode_1 from '@/assets/images/ms/ticket_barcode_1.png'
+
 
 export default {
   data() {
@@ -174,9 +179,9 @@ export default {
       RSTTColor: '#FFE382',
       RSTMColor: '#F9F0DB',
       SColor:'#F9F0DB',
-      realStickerRoad:'@/assets/images/ms/real_sticker_1.png',
-      bigStickerRoad:'@/assets/images/ms/ticket_stickers_1.png',
-      barcode:'@/assets/images/ms/ticket_barcode_1.png',
+      realStickerRoad:real_sticker_1,
+      bigStickerRoad:ticket_stickers_1,
+      barcode:ticket_barcode_1,
       gradientCounter: 0  ,
       isChoosenHidden: false,
       IwantToChoose:false,

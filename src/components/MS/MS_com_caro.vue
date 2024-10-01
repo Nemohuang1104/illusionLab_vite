@@ -9,7 +9,7 @@
           @click="item.level === 0 && handleClick(item, $event)"
           >
             <div class="book" ref="book">
-                <div class="back page"    :style="{ backgroundImage: `url('@/src/assets/images/ms/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
+                <div class="back page"    :style="{ backgroundImage: `url('@/assets/images/ms/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
                 <div class="page6 r page" :style="{ backgroundImage: `url('@/src/assets/images/ms/right3_${item.id}.jpg')` }" @click="rotatePage('page6')"></div>
                 <div class="page5 l page" :style="{ backgroundImage: `url('@/src/assets/images/ms/left3_${item.id}.jpg')` }" @click="rotatePage('page5')"></div>
                 <div class="page4 r page" :style="{ backgroundImage: `url('@/src/assets/images/ms/right2_${item.id}.jpg')` }" @click="rotatePage('page4')"></div>

@@ -279,10 +279,7 @@ const handleSaveEdit = async (updatedOrder) => {
   top: -17.5%;
 }
 
-.detail[data-v-a5f04cf0] {
-    width: 100%;
-    height: 470px;
-}
+
 
 .code-input{
     display: flex;
@@ -343,8 +340,8 @@ const handleSaveEdit = async (updatedOrder) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95.5%;
-    height: 440px;
+    width: 100%;
+    height: 470px;
     border-radius: 0 10px 10px 10px;
     padding: 16px;
     padding-left: 20px;

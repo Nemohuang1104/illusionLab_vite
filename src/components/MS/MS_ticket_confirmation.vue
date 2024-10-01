@@ -465,7 +465,7 @@ watch: {
 
     .template_mobang{
         display: flex;
-        padding: 20% 10%;
+        padding: 10% 10%;
         flex-direction: column;
         align-items: center;
         gap: 50px;

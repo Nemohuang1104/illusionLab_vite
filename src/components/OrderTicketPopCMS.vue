@@ -106,6 +106,13 @@ const closeModal = () => {
   modalVisible.value = false;
 };
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
+
 </script>
 <template>
     <div class="wrapper">
@@ -190,7 +197,7 @@ const closeModal = () => {
                         </div> -->
                         <div class="textdetail" v-if="orderDetails">
                         <div class="img_warp" @click="openModal(orderDetails)" >
-                            <img :src="orderDetails.TICKET_IMAGE_PATH" class="ticket" alt="" >
+                            <img :src="getImageUrl(orderDetails.TICKET_IMAGE_PATH)" class="ticket" alt="" >
                             <div class="font_warp">
                                 <font-awesome-icon icon="up-right-and-down-left-from-center" class="roll" />
                             </div>
@@ -230,7 +237,7 @@ const closeModal = () => {
       >
       <span class="close" @click="closeModal">&times;</span>
       <div class="modal-content" @click.stop>
-        <img :src="selectedCard.TICKET_IMAGE_PATH"  class="modal-image" />
+        <img :src="getImageUrl(selectedCard.TICKET_IMAGE_PATH)"  class="modal-image" />
       </div>
     </div>
 </transition>

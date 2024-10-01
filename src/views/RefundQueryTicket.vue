@@ -102,6 +102,13 @@ const closeModal = () => {
   isImageModalOpen.value = false;
 };
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
+
 </script>
 
 
@@ -147,7 +154,7 @@ const closeModal = () => {
                 </div>
                 <div v-if=orderDetails[order.TICKET_ORDER_ID]  class="order-item">
                     <div class="product-info" @click="openImageModal(orderDetails[order.TICKET_ORDER_ID].TICKET_IMAGE_PATH)">
-                        <img :src="orderDetails[order.TICKET_ORDER_ID].TICKET_IMAGE_PATH" alt="票卷樣式" class="product-image">
+                        <img :src="getImageUrl(orderDetails[order.TICKET_ORDER_ID]).TICKET_IMAGE_PATH" alt="票卷樣式" class="product-image">
                         <div class="font_warp">
                                 <font-awesome-icon icon="up-right-and-down-left-from-center" class="roll" />
                             </div>
@@ -176,7 +183,7 @@ const closeModal = () => {
                 >
                 <span class="close" @click="closeModal">&times;</span>
                 <div class="modal-content" @click.stop>
-                    <img :src="selectedImage"  class="modal-image" />
+                    <img :src="getImageUrl(selectedImage)"  class="modal-image" />
                 </div>
                 </div>
         </transition>
