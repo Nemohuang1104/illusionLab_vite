@@ -335,6 +335,7 @@ const getImageUrl = (imgPath) => {
 
 .warp {
   position: relative;
+  padding: 100px 50px 0;
   // height: 100vh;
   //  border: 2px solid red;
 }

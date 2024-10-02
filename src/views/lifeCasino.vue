@@ -568,7 +568,7 @@ transition: .5s ;
 /* 切換分頁器顯示狀態的按鈕 */
 .toggle-pagination {
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 0;
   background-color:map-get($map: $color_1, $key: btn_gold);
   color: white;
