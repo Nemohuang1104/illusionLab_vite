@@ -214,16 +214,16 @@ const onSubmit = async () => {
                     });
                   }
                 } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: setQuizResponse.data.message,
-                    timer: 2500,
-                    showConfirmButton: false,
-                    backdrop: false,
-                      willOpen: () => {
-                      document.body.style.paddingRight = '0';
-              }
-                  });
+              //     Swal.fire({
+              //       icon: 'error',
+              //       title: setQuizResponse.data.message,
+              //       timer: 2500,
+              //       showConfirmButton: false,
+              //       backdrop: false,
+              //         willOpen: () => {
+              //         document.body.style.paddingRight = '0';
+              // }
+              //     });
                 }
               } catch (error) {
                 console.error(error);
