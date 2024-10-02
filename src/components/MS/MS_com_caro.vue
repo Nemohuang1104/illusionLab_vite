@@ -19,7 +19,7 @@
                 <div class="page1 l page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/left1_${item.id}.jpg')` }" @click="rotatePage('page1')"></div>
                 <div class="front page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/${item.id}.jpg')` }" @click="rotatePage('front')"></div> -->
 
-                <!-- 本地端 -->
+                <!-- 本地端  -->
                 <div class="back page"    :style="{ backgroundImage: `url('../../../public/PDO/MS/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
                 <div class="page6 r page" :style="{ backgroundImage: `url('../../../public/PDO/MS/right3_${item.id}.jpg')` }" @click="rotatePage('page6')"></div>
                 <div class="page5 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left3_${item.id}.jpg')` }" @click="rotatePage('page5')"></div>

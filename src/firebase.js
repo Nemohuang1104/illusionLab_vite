@@ -13,12 +13,6 @@ const firebaseConfig = {
   measurementId: "G-QB83RYDW89"
 };
 
-// 初始化 Firebase 並加上錯誤處理
-try {
-  firebase.initializeApp(firebaseConfig);
-} catch (error) {
-  console.error("Firebase initialization error", error);
-}
 
 // 初始化 Firebase
 const app = initializeApp(firebaseConfig);
