@@ -20,7 +20,12 @@ const productInfo = ref([
   // {id:'7',cardImage: '../src/assets/images/LC_Product_item7.svg',productName:'賭勝yoyo卡',price:'250'},
 
 ])
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
 
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 async function fetchProducts() {
   try {
@@ -87,7 +92,7 @@ function goToLoginCMS(){
           <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
             <router-link :to="{ name:'LC_ProductInfo', params: { id: item.PRODUCT_ID } }">
            
-              <img :src="item.PRODUCT_IMG" alt="">
+              <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
               <p>{{ item.PRODUCT_NAME }}</p>
               <div class="text">
                 <div class="price">
