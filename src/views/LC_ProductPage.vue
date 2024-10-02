@@ -41,10 +41,10 @@ onMounted(() => {
 
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
 
-function goToLoginCMS(){
-  router.push('/LoginCMS');
+// function goToLoginCMS(){
+//   router.push('/LoginCMS');
 
-}
+// }
 
 const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
 
@@ -73,18 +73,18 @@ const getImageUrl = (imgPath) => {
     
     <div class="center">
       <div class="warp">
-      <LC_Text2 class="title"
+         <LC_Text2 class="title"
             Title1="精選"
             :icon= "icon3"
             Title2="商品"
             English="PRODUCT">
-      </LC_Text2>   
-      <div class="producttitle">
+          </LC_Text2>   
+       <div class="producttitle">
         <div class="arrowlift">
           <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
           <router-link to="/SF_ProductPage">
-          <P @click="goToLoginCMS" class="link">星際邊境</P>
-        </router-link>
+          <P class="link">星際邊境</P>
+          </router-link>
         </div>
         <div class="arrowright">
           <router-link to="/MS_ProductPage">
@@ -92,8 +92,8 @@ const getImageUrl = (imgPath) => {
         </router-link>
           <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
         </div>
-      </div>
-      <div class="pagebox">
+        </div>
+        <div class="pagebox">
         <!-- 放置一個商品列的外框 -->
         <div class="list">
           <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >

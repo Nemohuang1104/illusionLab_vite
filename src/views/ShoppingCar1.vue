@@ -178,8 +178,7 @@ function minusQuantity(index) {
                 removeItem(index); // 移除商品並更新localStorage
                 // 顯示成功提示
                 Swal.fire({
-                    title: ' QQ 我在商品頁等你 !',
-                    text: '已成功刪除商品！',
+                    title: '已成功刪除商品！',
                     icon: "success",
                     timer: 1200, // 自動消失
                     showConfirmButton: false // 隱藏確認按鈕
@@ -224,8 +223,7 @@ function removeSelectedItems() {
 
             // 顯示成功提示
             Swal.fire({
-                title: 'QQ 我在商品頁等你！',
-                text: '已成功刪除商品！',
+                title: '已成功刪除商品！',
                 icon: "success",
                 timer: 1200,  // 自動消失
                 showConfirmButton: false,  // 隱藏確認按鈕
@@ -257,8 +255,7 @@ function removeCartItem(index) {
 
             // 顯示成功提示
             Swal.fire({
-                title: 'QQ 我在商品頁等你！',
-                text: '已成功刪除商品！',
+                title: '已成功刪除商品！',
                 icon: "success",
                 timer: 1200,  // 自動消失
                 showConfirmButton: false,  // 隱藏確認按鈕
@@ -970,7 +967,7 @@ ul {
 }
 
 .price>span{
-    margin-right: 60px;
+    margin-right: 35px;
 }
 
 

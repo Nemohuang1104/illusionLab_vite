@@ -46,59 +46,60 @@ const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get ba
 
 
 const getImageUrl = (imgPath) => {
-  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+  return `${baseUrl === '/' ? '' : baseUrl}${imgPath}`;
 };
 
 </script>
 
 <template>
-  
-  
+
+
   <div class="warpper">
     <div>
-      <Header :mode="currentMode"/> 
+      <Header :mode="currentMode" />
     </div>
-    
+
     <div class="center">
       <div class="warp">
-      <div class="title">
-        <MS_com_title 
-            mode="three"  
-            mainTitle="精選商品" 
-            subTitle="PRODUCT"/>
-      </div>   
-      <div class="producttitle">
-        <div class="arrowlift">
-          <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
-          <router-link to="/SF_ProductPage"><P class="link">星際邊境</P></router-link>
+        <div class="title">
+          <MS_com_title mode="three" mainTitle="精選商品" subTitle="PRODUCT" />
         </div>
-        <div class="arrowright">
-          <router-link to="/LC_ProductPage"><P class="link">人生賭場</P></router-link>
-          <font-awesome-icon icon="fa-solid fa-arrow-right-long" class="arrow"/>
-        </div>
-      </div>
-      <div class="pagebox">
-       
-        <div class="list">
-          <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
-            <router-link :to="{ name:'MS_ProductList', params: { id: item.PRODUCT_ID } }">
-           
-              <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
-              <p>{{ item.PRODUCT_NAME }}</p>
-              <div class="text">
-                <div class="price">
-                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
-                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-                </div>
-                <div class="icon"></div>
-              </div>
+        <div class="producttitle">
+          <div class="arrowlift">
+            <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
+            <router-link to="/SF_ProductPage">
+              <P class="link">星際邊境</P>
             </router-link>
           </div>
+          <div class="arrowright">
+            <router-link to="/LC_ProductPage">
+              <P class="link">人生賭場</P>
+            </router-link>
+            <font-awesome-icon icon="fa-solid fa-arrow-right-long" class="arrow" />
+          </div>
         </div>
-      
+        <div class="pagebox">
+
+          <div class="list">
+            <div v-for="item in productInfo" class="pro" :key="item.PRODUCT_ID">
+              <router-link :to="{ name: 'MS_ProductList', params: { id: item.PRODUCT_ID } }">
+
+                <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
+                <p>{{ item.PRODUCT_NAME }}</p>
+                <div class="text">
+                  <div class="price">
+                    <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                    <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+                  </div>
+                  <div class="icon"></div>
+                </div>
+              </router-link>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
 
     <Footer_03></Footer_03>
   </div>
@@ -109,12 +110,13 @@ const getImageUrl = (imgPath) => {
 <style lang="scss" scoped>
 @import "../assets/style";
 
-p{
+p {
   color: #FB9D3C;
 
 
 }
-.title{
+
+.title {
   margin-top: 10px;
   margin: 0 auto;
 }
@@ -128,8 +130,8 @@ p{
   // border: 1px solid red;
   // background-image: url(../assets/images/SFbg.png);
   // background-color: #1E1E2F;
-  background:url(../assets/images/MS_paperbg.jpg);
-        // height: 180vh;
+  background: url(../assets/images/MS_paperbg.jpg);
+  // height: 180vh;
   background-size: cover;
   position: relative;
   overflow: hidden;
@@ -138,7 +140,7 @@ p{
 }
 
 
-.warp{
+.warp {
   position: relative;
   padding: 100px 50px 0;
 }
@@ -155,7 +157,7 @@ p{
   text-align: center;
   padding-top: 20px;
   // position: relative;
-  z-index:0;
+  z-index: 0;
 }
 
 .producttitle {
@@ -206,24 +208,24 @@ p{
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding: 3vw ;
+  padding: 3vw;
   margin-bottom: 50px;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   // border: 1px solid #fff;
-  
+
 }
 
 .list {
   width: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr ;
+  grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   // justify-content: center;
-  
+
   gap: 2vw;
   /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
   /* 商品換行 */
-  
+
 
 }
 
@@ -255,8 +257,10 @@ p{
 
 .pro img {
   max-width: 100%;
-  max-height: 150px; /* 限制圖片高度 */
-  object-fit: contain; /* 保持圖片比例 */
+  max-height: 150px;
+  /* 限制圖片高度 */
+  object-fit: contain;
+  /* 保持圖片比例 */
   margin-bottom: 10px;
   cursor: pointer;
 }
@@ -287,53 +291,54 @@ p{
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.price{
+
+.price {
   display: flex;
   flex-direction: column;
 }
 
-.shoopingcar{
+.shoopingcar {
   color: #855F49;
   display: block;
   align-self: flex-end;
   transition: .3s;
 
-  &:hover{
+  &:hover {
     color: map-get($map: $colofont_3, $key: orange);
 
   }
 }
 
 //=======================RWD==============================
-@media screen and (max-width: 760px){
-  .pagebox{
+@media screen and (max-width: 760px) {
+  .pagebox {
     padding: 20px;
   }
 
-  .list{
+  .list {
     gap: 0px;
   }
 
-  .pro p{
+  .pro p {
     font-size: 16px;
   }
 }
 
-@media screen and (max-width: 570px){
-.warp{
-  padding: 100px 20px 0 ;
-}
+@media screen and (max-width: 570px) {
+  .warp {
+    padding: 100px 20px 0;
+  }
 
-.list{
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr  ;
-}
-.pagebox{
-  padding: 10px;
-  
-}
-}
+  .list {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
 
+  .pagebox {
+    padding: 10px;
+
+  }
+}
 </style>

@@ -35,52 +35,50 @@ const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get ba
 
 
 const getImageUrl = (imgPath) => {
-  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+  return `${baseUrl === '/' ? '' : baseUrl}${imgPath}`;
 };
 </script>
 
 <template>
-  <div>
-    <Header_0 :mode="currentMode"></Header_0>
-  </div>
-
-
   <div class="warpper">
+    <Header_0 :mode="currentMode"></Header_0>
 
     <div class="center">
-      <StrellarFrontierTitle h1="精選商品" p="PRODUCTS"></StrellarFrontierTitle>
+      <div class="warp">
+        <StrellarFrontierTitle h1="精選商品" p="PRODUCTS"></StrellarFrontierTitle>
 
-      <div class="producttitle">
-        <div class="arrowleft">
-          <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
-          <router-link to="/LC_ProductPage">
-            <P>人生賭場</P>
-          </router-link>
-        </div>
-        <div class="arrowright">
-          <router-link to="/MS_ProductPage">
-            <P>心靈光譜</P>
-          </router-link>
-          <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
-        </div>
-      </div>
-      <!-- 放置一個商品列的外框 -->
-      <div class="pagebox">
-        <div class="list">
-          <div class="pro" v-for="item in productInfo" :key="item.PRODUCT_ID">
-            <router-link :to="{ name: 'SF_DetailList', params: { id: item.PRODUCT_ID } }">
-              <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
-        
-              <div>
-                <p>{{ item.PRODUCT_NAME }}</p>
-                <div class="price">
-                  <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
-                  <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
-                </div>
-              </div>
+        <div class="producttitle">
+          <div class="arrowleft">
+            <font-awesome-icon icon="fa-solid fa-arrow-left-long" />
+            <router-link to="/LC_ProductPage">
+              <P>人生賭場</P>
             </router-link>
           </div>
-     
+          <div class="arrowright">
+            <router-link to="/MS_ProductPage">
+              <P>心靈光譜</P>
+            </router-link>
+            <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
+          </div>
+        </div>
+        <!-- 放置一個商品列的外框 -->
+        <div class="pagebox">
+          <div class="list">
+            <div  v-for="item in productInfo" class="pro" :key="item.PRODUCT_ID">
+              <router-link :to="{ name: 'SF_DetailList', params: { id: item.PRODUCT_ID } }">
+                <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
+                <div>
+                  <p>{{ item.PRODUCT_NAME }}</p>
+                  <div class="text">
+                  <div class="price">
+                    <span>NT$ {{ item.PRODUCT_PRICE }}元</span>
+                    <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
+                  </div>
+                </div>
+                </div>
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -106,17 +104,19 @@ const getImageUrl = (imgPath) => {
   // max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 80px;
-  // border: 1px solid red;
-  // background:linear-gradient(rgba(5, 5, 5, 0.847), rgba(164, 164, 164, 0));
-
   background-image: url(../assets/images/STBackground.png);
-
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background-repeat: no-repeat;
 }
 
+
+.warp {
+  position: relative;
+  padding: 100px 50px 0;
+}
 
 
 .center {
@@ -127,35 +127,16 @@ const getImageUrl = (imgPath) => {
   align-items: center;
   text-align: center;
   padding-top: 20px;
+  z-index:0;
 
 }
-
-// .center h1 {
-//   font-size: 38px;
-//   font-weight: 700;
-//   margin-bottom: 5px;
-//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-//   background-clip: text;
-//   -webkit-background-clip: text;
-//   color: transparent;
-
-// }
-
-
-// .center p {
-//   font-size: 20px;
-//   font-weight: 700;
-//   background: -webkit-linear-gradient(90deg, #078FF2 2.12%, #0FF 50.65%, #5BCAE8 93.64%);
-//   background-clip: text;
-//   -webkit-background-clip: text;
-//   color: transparent;
-// }
 
 
 
 .producttitle {
-  max-width: 700px;
+  // max-width: 700px;
   width: 100%;
+  font-family: "Noto Sans TC";
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -185,7 +166,7 @@ const getImageUrl = (imgPath) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 
 }
 
@@ -194,29 +175,21 @@ const getImageUrl = (imgPath) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 //商品外框
 .pagebox {
-  max-width: 800px;
-  width: 90%;
-  height: auto;
-  // height: 750px;
-  overflow: hidden;
-  // background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
+  
+  border: 2px solid #e8e8e8;
   border-radius: 20px;
+  width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  // padding: 70px 80px 100px 80px;
-  padding: 3%;
-  margin-bottom: 50px;
-  // box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
-  border: 1px solid #e8e8e8;
-  // box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  padding: 3vw;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-
-
+  margin-bottom: 50px;
 }
 
 
@@ -228,50 +201,51 @@ const getImageUrl = (imgPath) => {
 }
 
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 26px;
-
-
-  // display: grid;
-  // align-items: start;
-  // max-width: 100%;
-  // gap: 4%;
-  // flex-wrap: wrap;
-  // margin-bottom: 20px;
-  // padding: 1%;
-  // grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  /* 使用 gap 代替 margin-right，確保元素之間的間隔一置 */
-  /* 商品換行 */
-
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  // justify-content: center;
+  gap: 3vw;
 }
 
 .pro {
-  width: calc(25% - 26px); // 使用百分比設置寬度，讓元素在縮小時能換行
-  min-width: 160px; // 設置最小寬度，避免過度縮小
-  height: 220px;
-  margin-bottom: 20px;
+  // width: calc(25% - 26px); // 使用百分比設置寬度，讓元素在縮小時能換行
+  // min-width: 160px; // 設置最小寬度，避免過度縮小
+  // height: 220px;
+  // margin-bottom: 20px;
   padding: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 
 .pro:hover {
-  transform: scale(1.1, 1.1);
-  /* 往上是負，輕微浮起 */
-  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
-  /* 明顯的阴影效果 */
-  border-color: rgba(255, 255, 255, 0.5);
-  /* 懸停時增加邊框颜色 */
+    transform: translateY(-5px);
+    /* 往上是負，輕微浮起 */
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+    /* 明顯的阴影效果 */
+    border-color: rgba(255, 255, 255, 0.5);
+    /* 懸停時增加邊框颜色 */
 
+  }
+
+.pro img {
+  width: 100%;
+  max-width: 150px;
+  height: 100%;
+  max-height: 150px; /* 限制圖片高度 */
+  object-fit: cover; /* 保持圖片比例 */
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
+
 
 
 
 
 .pro p {
-  font-weight: normal;
+  // font-weight: normal;
   font-size: 18px;
   // color: #fff;
   text-align: left;
@@ -290,20 +264,34 @@ const getImageUrl = (imgPath) => {
 }
 
 
-.shoopingcar:hover{
-  color: #C1693B;
-}
+
+
+// .shoopingcar:hover {
+//   color: #C1693B;
+// }
 
 // RWD
 
 @media(max-width: 920px) {
-  .producttitle {
-    width: 80%;
-  }
+  // .producttitle {
+  //   width: 80%;
+  // }
 
   .pagebox {
     padding: 0px;
     height: auto;
+  }
+
+  .list {
+    gap: 0px;
+  }
+
+}
+
+@media(max-width: 570px) {
+  .list {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
 }
