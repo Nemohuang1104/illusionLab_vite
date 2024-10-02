@@ -48,13 +48,9 @@ const selectedSize = ref(""); // 儲存選擇的尺寸
 async function fetchProductDetail() {
     try {
         // console.log(router);
-
         console.log(route.params);
-
         console.log(route.params.id);
-
         const productId = route.params.id; // 從路由獲取商品 ID
-
         // const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProductDetail.php?productId=${productId}`, {
             headers: {
@@ -553,6 +549,8 @@ const getImageUrl = (imgPath) => {
     font-size: 14px;
     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
     border: unset;
+    cursor: pointer;
+    
 }
 
 .size::after {
@@ -574,30 +572,6 @@ const getImageUrl = (imgPath) => {
 
 }
 
-// .size select:hover {
-//     background: var(--2, linear-gradient(180deg, rgba(38, 104, 200, 0.40) 0%, rgba(211, 224, 244, 0.40) 79.64%, rgba(255, 255, 255, 0.40) 100%));
-// }
-
-//加入購物車
-// .rightdown p {
-//     width: 200px;
-//     height: 40px;
-//     border-radius: 40px;
-//     display: block;
-//     text-align: center;
-//     line-height: 50px;
-//     // display: flex;
-//     // justify-content: center;
-//     // align-items: center;
-
-//     cursor: pointer;
-//     text-decoration: none;
-//     // font-size: 20px;
-//     color: #fff;
-//     background: linear-gradient(180deg, rgba(19, 44, 121, 0.80) 44.5%, rgba(7, 143, 242, 0.70) 100%);
-//     cursor: pointer;
-//     border: none;
-// }
 
 .rightdown button {
     width: 200px;

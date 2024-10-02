@@ -30,12 +30,17 @@ async function fetchProducts() {
         // 從三個不同的 PHP 檔案分別撈取兩項商品
         const response1 = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/LC_FetchProducts.php`);
         const data1 = await response1.json();
+        console.log('LC Products:', data1);  // 檢查第一個 API 返回的數據
 
         const response2 = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/SF_FetchProducts.php`);
         const data2 = await response2.json();
+        console.log('SF Products:', data2);  // 檢查第二個 API 返回的數據
+
 
         const response3 = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/MS_FetchProducts.php`);
         const data3 = await response3.json();
+        console.log('MS Products:', data3);  // 檢查第三個 API 返回的數據  
+
 
         // 將三次 API 返回的商品資料合併在一起
         productInfo.value = [
@@ -50,7 +55,9 @@ async function fetchProducts() {
 }
 
 
+
 function getProductDetailRoute(item) {
+  console.log(item);  // 檢查 item 的內容
   switch (item.EVENT_ID) {
     case 1:
       router.push({ name: 'LC_ProductInfo', params: { id: item.PRODUCT_ID } });
@@ -63,6 +70,7 @@ function getProductDetailRoute(item) {
       break;
   }
 }
+
 
 
 
