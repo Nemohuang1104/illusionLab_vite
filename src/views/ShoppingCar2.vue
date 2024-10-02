@@ -49,6 +49,20 @@ const formData = ref({
     phone_number: '',
     address: '',
 });
+const isSameAsMember = ref(false);
+// 當組件掛載時，檢查 localStorage 是否有會員資訊
+onMounted(() => {
+  const storedMemberInfo = sessionStorage.getItem('memberInfo');
+  if (storedMemberInfo) {
+    const memberInfo = JSON.parse(storedMemberInfo);
+    // 將會員資訊填入 formData
+    formData.value.user_name = memberInfo.user_name || '';
+    formData.value.phone_number = memberInfo.phone_number || '';
+    formData.value.address = memberInfo.address || '';
+    isSameAsMember.value = true; // 自動勾選
+  }
+});
+
 
 const orderData = ref({
     address: '',
@@ -94,21 +108,36 @@ async function prefillMemberInfo(event) {
     }
 }
 
-
+// 將會員資訊存到 localStorage
+function saveMemberInfoTosessionStorage() {
+  const memberInfo = {
+    user_name: formData.value.user_name,
+    phone_number: formData.value.phone_number,
+    address: formData.value.address
+  };
+  sessionStorage.setItem('memberInfo', JSON.stringify(memberInfo));
+}
 
 
 // 使用訂購人資料來填充收件人資訊
 function prefillOrdererInfo(event) {
-    if (event.target.checked) {
-        acceptorData.value.name = formData.value.user_name;
-        acceptorData.value.phone = formData.value.phone_number;
-        acceptorData.value.address = formData.value.address;
-    } else {
-        acceptorData.value.name = '';
-        acceptorData.value.phone = '';
-        acceptorData.value.address = '';
-    }
+  if (event.target.checked) {
+    // 使用會員資訊填充收件人資訊
+    acceptorData.value.name = formData.value.user_name;
+    acceptorData.value.phone = formData.value.phone_number;
+    acceptorData.value.address = formData.value.address;
+
+     // 存儲會員資訊到 localStorage
+     saveMemberInfoTosessionStorage();
+  } else {
+    // 清除收件人資訊
+    acceptorData.value.name = '';
+    acceptorData.value.phone = '';
+    acceptorData.value.address = '';
+  }
 }
+
+
 
 // ----------同會員資料/ 同訂購人資訊 end---------
 
@@ -136,6 +165,27 @@ const itemsTotal = computed(() => {
 
 const totalAmount = computed(() => {
     return itemsTotal.value + shippingFee.value;
+});
+
+
+// 選取711門市 原先勾選的同會員資料不會消失 ===========
+// 檢查 localStorage 來恢復資料
+onMounted(() => {
+  const storedFormData = localStorage.getItem('formData');
+  const storedIsSameAsMember = localStorage.getItem('isSameAsMember');
+
+  if (storedFormData) {
+    Object.assign(formData.value, JSON.parse(storedFormData));
+  }
+  
+  // 設置 checkbox 狀態
+  isSameAsMember.value = storedIsSameAsMember === 'true';
+});
+
+
+// 追蹤 同會員資料 checkbox 狀態
+watch(isSameAsMember, (newValue) => {
+  localStorage.setItem('isSameAsMember', newValue);
 });
 
 
@@ -405,7 +455,7 @@ const calculatedTotalPrice = computed(() => {
                     <div class="inner0">
                         <p>訂購人資訊</p>
                         <label class="custom-checkbox">
-                            <input type="checkbox" @change="prefillMemberInfo" />
+                            <input type="checkbox" v-model="isSameAsMember" @change="prefillMemberInfo" />
                             <span class="checkmark"></span>
                             <span class="text">同會員資料</span>
                         </label>

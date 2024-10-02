@@ -836,15 +836,6 @@ ul {
     flex-basis: 0%;
 }
 
-.wrapper hr {
-    background-color: #FFFFFF;
-    margin: 20px auto;
-    height: 2px;
-    border: none;
-    border-radius: 2.5px;
-    width: 100%;
-    max-width: 1000px;
-}
 
 // 下方加購
 
@@ -853,13 +844,6 @@ ul {
     max-width: 20px;
 }
 
-.ProductAdd {
-    width: 100%;
-    max-width: 1000px;
-    margin: 3% auto;
-    padding: 10px;
-    color: #FFFFFF;
-}
 
 .count,
 .discount-fee,
@@ -915,7 +899,7 @@ ul {
 
 .pro {
     cursor: pointer;
-
+    padding: 20px;
 }
 
 .pro p {
