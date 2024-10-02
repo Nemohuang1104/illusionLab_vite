@@ -20,9 +20,9 @@ import Loginpopup from '@/components/Loginpopup.vue'
       <transition name="fade">
         <div v-if="activeIndex === 0 && key === 0" :key="key" class="enter_title">
           <div class="smoke">
-            <img src="../assets/images/quiz_middlebluesmoke.png" alt="" class="pic1">
-            <img src="../assets/images/quiz-enter_hand.png" alt="" class="pic2">
-            <img src="../assets/images/quiz_longsmoke.png" alt="" class="pic3">
+            <img src="@/assets/images/quiz_middlebluesmoke.png" alt="" class="pic1">
+            <img src="@/assets/images/quiz-enter_hand.png" alt="" class="pic2">
+            <img src="@/assets/images/quiz_longsmoke.png" alt="" class="pic3">
           </div>
           <p>準備好踏入奇幻世界，探索最適合你的沉浸式體驗活動嗎？<br>
             透過這個簡單的小測驗，我們將引導你找到最適合你的沉浸式體驗，<br>
@@ -54,12 +54,12 @@ import Loginpopup from '@/components/Loginpopup.vue'
 
         <div v-if="activeIndex === key && key === data.length - 1 && final_answer" :key="key" class="result">
           <div v-if="start_animation === true" class="start_animation">
-            <img src="../assets/images/quiz_middlebluesmoke.png" alt="" class="middlebluesmoke">
-            <img src="../assets/images/Quizfinalcircleshine.png" alt="" class="finalcircleshine">
-            <img src="../assets/images/Quizfinalhand.png" alt="" class="finalhand">
-            <img src="../assets/images/Quizfinallongcloud.png" alt="" class="finallongcloud">
-            <img src="../assets/images/Quizlittleshine.png" alt="" class="littleshine1">
-            <img src="../assets/images/Quizlittleshine.png" alt="" class="littleshine2">
+            <img src="@/assets/images/quiz_middlebluesmoke.png" alt="" class="middlebluesmoke">
+            <img src="@/assets/images/Quizfinalcircleshine.png" alt="" class="finalcircleshine">
+            <img src="@/assets/images/Quizfinalhand.png" alt="" class="finalhand">
+            <img src="@/assets/images/Quizfinallongcloud.png" alt="" class="finallongcloud">
+            <img src="@/assets/images/Quizlittleshine.png" alt="" class="littleshine1">
+            <img src="@/assets/images/Quizlittleshine.png" alt="" class="littleshine2">
             <p>結果計算中...</p>
 
           </div>
@@ -112,7 +112,7 @@ export default {
       data: [
         {},
         {
-          image: new URL('../assets/images/quizpic.jpg', import.meta.url).href,
+          image: new URL('@/assets/images/quizpic.jpg', import.meta.url).href,
           label: '1.你認為哪種生活哲學最適合你？',
           value: '',
           values: [
@@ -122,7 +122,7 @@ export default {
           ]
         },
         {
-          image: new URL('../assets/images/Quizch2.png', import.meta.url).href,
+          image: new URL('@/assets/images/Quizch2.png', import.meta.url).href,
           label: '2.你更喜歡哪種類型的環境？',
           value: '',
           values: [
@@ -132,7 +132,7 @@ export default {
           ]
         },
         {
-          image: new URL('../assets/images/Quizch3.png', import.meta.url).href,
+          image: new URL('@/assets/images/Quizch3.png', import.meta.url).href,
           label: '3. 當你面對一個未知的挑戰時，你會選擇怎麼做？',
           value: '',
           values: [
@@ -142,7 +142,7 @@ export default {
           ]
         },
         {
-          image: new URL('../assets/images/Quizch4.png', import.meta.url).href,
+          image: new URL('@/assets/images/Quizch4.png', import.meta.url).href,
           label: '4.當你想到一次難忘的體驗時，你最記得的是什麼？',
           value: '',
           values: [
@@ -152,7 +152,7 @@ export default {
           ]
         },
         {
-          image: new URL('../assets/images/Quizch5.png', import.meta.url).href,
+          image: new URL('@/assets/images/Quizch5.png', import.meta.url).href,
           label: '5.如果你能擁有一種超能力，你會選擇哪種？',
           value: '',
           values: [
@@ -165,15 +165,15 @@ export default {
       ],
       result: {
         1: {
-          image: new URL('../assets/images/Quiz_LCresult.png', import.meta.url).href,
+          image: new URL('@/assets/images/Quiz_LCresult.png', import.meta.url).href,
           text: '你適合參加刺激的人生賭場<br>這是一個充滿挑戰和策略的活動<br>讓你感受到生活中的刺激和選擇的重要性。'
         },
         2: {
-          image: new URL('../assets/images/Quiz_SFresult.png', import.meta.url).href,
+          image: new URL('@/assets/images/Quiz_SFresult.png', import.meta.url).href,
           text: '你適合參加新奇的星際邊際<br>這是一場太空探險<br>適合喜愛探索未知和挑戰自我的人'
         },
         3: {
-          image: new URL('../assets/images/Quiz_MSresult.png', import.meta.url).href,
+          image: new URL('@/assets/images/Quiz_MSresult.png', import.meta.url).href,
           text: '你適合參加療癒的心靈光譜<br>這個活動專注於心靈療癒和自我反思<br>幫助你找到內心的平靜和力量'
         }
       }
@@ -503,19 +503,19 @@ export default {
   animation: smoke1 3s linear infinite;
 }
 
-// @keyframes smoke1 {
-//   0% {
-//     transform: scale(1);
-//   }
+ @keyframes smoke1 {
+   0% {
+     transform: scale(1);
+   }
 
-//   50% {
-//     transform: scale(1.1);
-//   }
+   50% {
+     transform: scale(1.1);
+  }
 
-//   100% {
-//     transform: scale(1);
-//   }
-// }
+   100% {
+     transform: scale(1);
+  }
+}
 
 .smoke .pic2 {
   display: inline-block;
