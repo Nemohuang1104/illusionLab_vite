@@ -200,7 +200,7 @@ onBeforeUnmount(() => {
                 }" class="mySwiper">
 
                     <swiper-slide>
-                        <router-link to="./SF_DetailList/15">
+                        <router-link to="./SF_DetailList/12">
                             <div class="carousel">
                                 <div class="carousel-item">
                                     <img id="tshirt" src="../assets/images/SF_Tshirt.png">
@@ -228,7 +228,7 @@ onBeforeUnmount(() => {
                         </router-link>
                     </swiper-slide>
                     <swiper-slide>
-                        <router-link to="./SF_DetailList/12">
+                        <router-link to="./SF_DetailList/9">
                             <div class="carousel">
                                 <div class="carousel-item">
                                     <img src="../assets/images/SF_cup.png">
