@@ -3,9 +3,6 @@ import { computed, defineProps, ref, onMounted, onUnmounted, inject } from 'vue'
 import { useRouter } from 'vue-router';
 
 
-// import { inject } from 'vue';
-// const cartCount = inject('cartCount'); // 接收全局的購物車數量
-
 
 
 const props = defineProps({

@@ -50,7 +50,9 @@ function selectStyle(style) {
     selectedImage.value = style.STYLE_IMG;  // 更新主圖片為所選樣式的圖片
 
 }
-
+// 注入購物車
+import { inject } from 'vue';
+const cart_data = inject('cart');
 // ===================加入購物車至localStorage
 // 添加到購物車的函數
 function addToCart() {
@@ -59,7 +61,7 @@ function addToCart() {
         id: item.value.PRODUCT_ID,
         name: item.value.PRODUCT_NAME,
         price: item.value.PRODUCT_PRICE,
-        img: item.value.PRODUCT_IMG,
+        img: selectedImage.value,
         quantity: counter.value,
         size: selectedSize.value, // 你可以從 select 元素中獲取尺寸
         style: item.value.PRODUCT_STYLES ? selectedStyle.value : null,  // 如果有樣式的選擇，也可以在這裡獲取
@@ -74,7 +76,7 @@ function addToCart() {
             icon: 'warning',
             confirmButtonText: '確定',
             willOpen: () => {
-              document.body.style.paddingRight = '0';
+                document.body.style.paddingRight = '0';
             }
         });
         return; // 中止執行
@@ -87,7 +89,7 @@ function addToCart() {
             icon: 'warning',
             confirmButtonText: '確定',
             willOpen: () => {
-              document.body.style.paddingRight = '0';
+                document.body.style.paddingRight = '0';
             }
         });
         return; // 中止執行
@@ -124,14 +126,16 @@ function addToCart() {
         icon: 'success',
         // confirmButtonText: '確定' // 自定義按鈕文本
         timer: 1200,
-        showConfirmButton: false ,// 隱藏確認按鈕
+        showConfirmButton: false,// 隱藏確認按鈕
         willOpen: () => {
-              document.body.style.paddingRight = '0';
-            }
+            document.body.style.paddingRight = '0';
+        }
     });
 
 
     console.log('Current cart items in localStorage:', localStorage.getItem('cart'));
+    //增加數量
+    cart_data.value = cart
 }
 
 
@@ -598,6 +602,7 @@ const decrement = () => {
     background: #FEDCAA;
     margin-bottom: 50px;
     border: none;
+    cursor: pointer;
 }
 
 .txt {

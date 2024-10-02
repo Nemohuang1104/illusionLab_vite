@@ -118,7 +118,7 @@ function goToLoginCMS(){
 @import "../assets/style";
 
 .header{
-  position: unset;
+  // position: unset;
 }
 .title{
   margin-top: 10px;

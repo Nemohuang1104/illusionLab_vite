@@ -53,6 +53,9 @@ onMounted(() => {
 
 
 // ===================加入購物車至localStorage
+// 注入購物車
+import { inject } from 'vue';
+const cart_data = inject('cart');
 // 添加到購物車的函數
   function addToCart() {
     // 構造要儲存的商品資料
@@ -133,6 +136,8 @@ onMounted(() => {
   // alert("商品已成功加入購物車！");
 
   console.log('Current cart items in localStorage:', localStorage.getItem('cart'));
+//增加數量
+  cart_data.value = cart
 }
 
 

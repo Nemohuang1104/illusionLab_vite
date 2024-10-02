@@ -56,6 +56,7 @@ const currentButton = ref('btn1');
         overflow: hidden;
         z-index: 0;
         background-repeat: no-repeat;
+        
 
         &::before{
           z-index: -1;
@@ -91,7 +92,7 @@ const currentButton = ref('btn1');
 }
 
 header{
-  position: unset;
+  // position: unset;
 }
 
 a{
@@ -154,9 +155,11 @@ a{
     gap: 28px;
     justify-content: center;
     margin-bottom: 2%;
+    padding-top: 50px;
+    margin-top: 50px;
     }
 
     
-    
+ 
 </style>
   

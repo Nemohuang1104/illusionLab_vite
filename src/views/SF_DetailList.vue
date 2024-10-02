@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted, watchEffect, watch, provide } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
 // 頁首頁尾
 import Header_0 from '@/components/Header_0.vue';
@@ -95,10 +95,9 @@ onMounted(() => {
 
 
 import { inject } from 'vue';
-
 // 注入購物車
-const cart = inject('cart');
-const cartItemCount = inject('cartItemCount');
+const cart_data = inject('cart');
+
 
 // 添加到購物車的函數
 function addToCart() {
@@ -153,10 +152,13 @@ function addToCart() {
     // 將更新後的購物車數據存回 localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
+
+
+
     // 當購物車更新時，將最新的購物車存回 localStorage
-    watch(cart, (newCart) => {
-        localStorage.setItem("cart", JSON.stringify(newCart));
-    });
+    // watch(cart, (newCart) => {
+    //     localStorage.setItem("cart", JSON.stringify(newCart));
+    // });
 
 
 
@@ -172,12 +174,29 @@ function addToCart() {
         willOpen: () => {
             document.body.style.paddingRight = '0';
         }
+
     });
 
     // 可選：顯示成功提示
     console.log('Current cart items in localStorage:', localStorage.getItem('cart'));
 
-    cartItemCount.value = cart.length; // 更新購物車的數量
+    // const newCart = JSON.stringify(localStorage.getItem('cart'))
+
+    // provide('cartItemCount', newCart.length);
+    // provide('cart', newCart);
+
+    // // console.log(newCart, 'test');
+
+    // cartItemCount.value = newCart.length
+    // console.log(newCart.length, 'cart count');
+
+    // cartItemCount.value = cart.length; // 更新購物車的數量
+
+
+    // 提供 cartItemCount 和 cart 以供子組件使用
+
+    //增加數量
+    cart_data.value = cart;
 
 
 }

@@ -83,7 +83,9 @@ const highlight = ref({
 
 // ============儲存從 localStorage=====STAR========//
 
-
+// 注入購物車
+import { inject } from 'vue';
+const cart_data = inject('cart');
 // 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
 const carts = ref([]);
 
@@ -92,10 +94,10 @@ const carts = ref([]);
 function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     carts.value = cart;
+
+    // 初始化 checkedItems 的布爾值為 false
+    checkedItems.value = carts.value.map(() => false);
 }
-
-
-
 
 // 當組件掛載時撈取資料
 onMounted(() => {
@@ -145,7 +147,7 @@ function minusQuantity(index) {
         carts.value[index].quantity -= 1;
         updateLocalStorage(); // 更新 localStorage
 
-     
+
     } else {
         // 商品數量為1，彈出確認框
         Swal.fire({
@@ -182,17 +184,40 @@ function removeItem(index) {
     carts.value.splice(index, 1);
     checkedItems.value.splice(index, 1); // 同時移除該商品的選中狀態
     updateLocalStorage(); // 更新 localStorage
-}
 
+}
 
 // 全部刪除
 function removeSelectedItems() {
-    // 反向迭代，避免刪除索引錯誤
-    for (let i = carts.value.length - 1; i >= 0; i--) {
-        if (checkedItems.value[i]) {
-            removeItem(i); // 刪除選中的項目
+    // 彈出 SweetAlert 提示，確認是否刪除
+    Swal.fire({
+        text: '是否要將此商品從購物車中移除？',
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "確定",
+        cancelButtonText: "我再想想！",
+    }).then((result) => {
+        // 如果使用者確認，執行刪除操作
+        if (result.isConfirmed) {
+            // 反向迭代，避免刪除索引錯誤
+            for (let i = carts.value.length - 1; i >= 0; i--) {
+                if (checkedItems.value[i]) {
+                    removeItem(i); // 刪除選中的項目
+                }
+            }
+
+            // 顯示成功提示
+            Swal.fire({
+                title: 'QQ 我在商品頁等你！',
+                text: '已成功刪除商品！',
+                icon: "success",
+                timer: 1200,  // 自動消失
+                showConfirmButton: false,  // 隱藏確認按鈕
+            });
         }
-    }
+    });
 }
 
 
@@ -211,7 +236,10 @@ function removeCartItem(index) {
         // 如果使用者確認，執行刪除操作
         if (result.isConfirmed) {
             carts.value.splice(index, 1);  // 刪除購物車中的商品
+            checkedItems.value.splice(index, 1);
             updateLocalStorage();  // 更新 localStorage
+
+            console.log(cart_data.value);
 
             // 顯示成功提示
             Swal.fire({
@@ -230,6 +258,9 @@ function removeCartItem(index) {
 function updateLocalStorage() {
     // 將 carts.value 存入 localStorage 中
     localStorage.setItem('cart', JSON.stringify(carts.value));
+
+    // 更新注入的 cart_data
+    cart_data.value = carts.value;
 }
 
 // ============儲存從 localStorage=====END========//
@@ -352,9 +383,6 @@ router.beforeEach((to, from, next) => {
 
 
 // ============優惠券結束=============//
-
-
-
 </script>
 <template>
     <div class="wrapper">
@@ -422,7 +450,7 @@ router.beforeEach((to, from, next) => {
                         <p>$0</p> -->
                         <h3>折扣</h3>
                         <!-- 當有折扣金額時，顯示折扣金額，否則顯示 $0 -->
-                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'"> ${{
+                        <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'"> -${{
                             coupon.discount_amount }} </p>
                         <p v-else>$0</p>
                     </div>
@@ -443,7 +471,7 @@ router.beforeEach((to, from, next) => {
             </div>
         </div>
         <hr>
-      
+
         <div class="ProductAdd">
             <p>商品加購</p>
             <ul class="addProduct_grid">
@@ -530,7 +558,7 @@ router.beforeEach((to, from, next) => {
 
 }
 
-.titlebtn{
+.titlebtn {
     border-radius: 4px;
     background: #FFEDBC;
     border: none;
@@ -543,8 +571,8 @@ router.beforeEach((to, from, next) => {
     padding: 5px;
 }
 
-.titlebtn:hover{
-opacity: 0.9
+.titlebtn:hover {
+    opacity: 0.9
 }
 
 ul {
@@ -555,7 +583,7 @@ ul {
 .card {
     display: flex;
     align-items: center;
-    
+
 }
 
 .trash-can {
@@ -910,8 +938,10 @@ ul {
 // 價格&icon
 .text {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-around;
     color: #FFFFFF;
+    // text-align: left;
+    
 }
 
 .pro {
@@ -932,8 +962,9 @@ ul {
     max-width: 150px;
 }
 
-
-
+.price>span{
+    margin-right: 60px;
+}
 
 
 // =====  RWD  =====
@@ -944,7 +975,7 @@ ul {
         gap: 20px;
     }
 
-    .order{
+    .order {
         width: 499px;
     }
 
@@ -1054,7 +1085,7 @@ ul {
     //     width: 100%;
     // }
 
-    .order{
+    .order {
         max-width: 560px;
         width: 100%;
     }

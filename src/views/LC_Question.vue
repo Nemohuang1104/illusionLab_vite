@@ -286,6 +286,7 @@ const getInfoStyle = (question) => {
     margin: 0 auto;
     margin-bottom: 2%;
     padding: 0 20px;
+    padding-top: 120px;
     }
 
   @media (max-width: 430px) {

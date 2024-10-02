@@ -12,7 +12,8 @@ import { useRouter, useRoute } from 'vue-router';
 import Swal from 'sweetalert2'; // 在 script setup 中引入
 import 'sweetalert2/src/sweetalert2.scss';
 
-
+import { inject } from 'vue';
+const cart_data = inject('cart');
 
 const router = useRouter();
 const route = useRoute();
@@ -214,6 +215,7 @@ watch(paymentMethod, (newValue) => {
 
 
 // 創建訂單==================================
+
 const submitOrder = async () => {
     // 確保從 localStorage 取出的 formData 不為 null，如果是 null，則設置為空物件
     const formData = JSON.parse(localStorage.getItem('formData')) || {
@@ -313,6 +315,10 @@ const submitOrder = async () => {
             // 清空購物車和表單資料
             localStorage.removeItem('cart');
             localStorage.removeItem('formData');
+            cart_data.value = []
+            console.log('reset');
+
+
 
             // 跳轉到下一個頁面，並傳遞 productOrderId
             router.push({ path: '/shop3', query: { productOrderId } });
@@ -322,6 +328,7 @@ const submitOrder = async () => {
     } catch (error) {
         console.error('Error creating order:', error);
     }
+
 };
 
 // ============ShoppingStep=============//
@@ -348,6 +355,7 @@ const highlight = ref({
 
 
 // ============儲存從 localStorage=====STAR========//
+// 注入購物車
 
 // 購物車商品列表 : cartItems是一個 ref，用來儲存從 localStorage 中撈取的購物車資料。
 const carts = ref([]);
@@ -356,6 +364,7 @@ const carts = ref([]);
 function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     carts.value = cart;
+
 }
 
 // 當組件掛載時撈取資料
@@ -366,6 +375,9 @@ onMounted(() => {
 
 watch(carts, (newVal) => {
     console.log('carts updated:', newVal);
+    console.log(newVal);
+
+    // cart_data.value = newVal;
 });
 
 
@@ -486,7 +498,7 @@ const calculatedTotalPrice = computed(() => {
 
                         </div>
                     </div>
-                    
+
                     <div class="inner05">
                         <p>*付款方式:</p>
                         <div class="form-check">
@@ -542,7 +554,7 @@ const calculatedTotalPrice = computed(() => {
                     <div class="discount-fee">
                         <h3>折扣</h3>
                         <p v-if="coupon.discount_amount !== '' && coupon.discount_amount !== '0'">
-                            ${{ coupon.discount_amount }} </p>
+                            -${{ coupon.discount_amount }} </p>
                         <p v-else>$0</p>
                     </div>
 
