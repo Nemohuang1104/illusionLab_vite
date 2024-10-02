@@ -155,6 +155,13 @@ const decrement = () => {
         counter.value--;
     }
 };
+
+const baseUrl = import.meta.env.VITE_IMAGE_URL || import.meta.env.BASE_URL;
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 </script>
 
 <template>
@@ -177,7 +184,7 @@ const decrement = () => {
             </div>
             <div class="pbox" v-if="item">
                 <div class="pimg">
-                    <img :src="selectedImage" alt="product image" class="main-product-image">
+                    <img :src="getImageUrl(selectedImage)" alt="product image" class="main-product-image">
                 </div>
                 <div>
                     <div class="textbox">
@@ -191,12 +198,12 @@ const decrement = () => {
                         <p>材質：{{ item.MATERIAL }}</p>
                         <p>商品規格 : {{ item.PRODUCT_SIZE }}</p>
                     </div>
-                    <!-- 樣式選擇圖片，只有在活動三顯示 -->
-                    <div v-if="item.EVENT_ID === 3" class="style-selection">
+                    
+                    <div v-if="item.EVENT_ID = 3" class="style-selection">
                         <p class="txt">選擇樣式：{{ selectedStyle }}</p>
 
                         <div class="style-options">
-                            <img v-for="style in item.PRODUCT_STYLES" :key="style.STYLE_VALUE" :src="style.STYLE_IMG"
+                            <img v-for="style in item.PRODUCT_STYLES" :key="style.STYLE_VALUE" :src="getImageUrl(style.STYLE_IMG)"
                                 :alt="style.STYLE_VALUE" :class="{ 'selected': style.STYLE_VALUE === selectedStyle }"
                                 @click="selectStyle(style)" class="style-image">
 
@@ -205,7 +212,7 @@ const decrement = () => {
                     </div>
 
 
-                    <!-- 數量選擇 -->
+                    
 
                     <p class="txt">選擇數量：</p>
                     <div class="quantity-input" id="quantity">
@@ -230,7 +237,7 @@ const decrement = () => {
                         </div> -->
 
                     <!-- 尺寸選擇 -->
-                    <div class="size" v-if="item.PRODUCT_ID === 22">
+                    <div class="size" v-if="item.PRODUCT_ID == 22">
                         <p class="txt">選擇尺寸：</p>
                         <select v-model="selectedSize" id="size">
                             <option v-for="size in item.PRODUCT_SIZES" :key="size" :value="size">
@@ -585,6 +592,7 @@ const decrement = () => {
 
 //加入購物車
 .shop {
+    cursor: pointer;
     width: 300px;
     height: 40px;
     border-radius: 12px;

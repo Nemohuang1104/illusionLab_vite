@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
+
+            // 拼接地址、區和城市成一個完整的地址字串
+            $fullAddress = $user['city'] . ' ' . $user['district'] . ' ' . $user['ADDRESS'];
             // 返回會員資料
             echo json_encode([
                 "status" => "success",
@@ -37,9 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     "gender" => $user['GENDER'],
                     "email" => $user['EMAIL'],
                     "phone_number" => $user['PHONE_NUMBER'],
-                    "address" => $user['ADDRESS'],
-                    "city" => $user['city'],
-                    "district" => $user['district']
+                    "address" => $fullAddress,  // 返回完整地址
                 ]
             ]);
         } else {

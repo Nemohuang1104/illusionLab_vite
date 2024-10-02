@@ -230,6 +230,7 @@ header {
   width: 35px;
   height: 25px;
   color: #fff;
+  cursor: pointer;
 }
 
 

@@ -42,6 +42,13 @@ onMounted(() => {
   fetchProducts(); // 當頁面加載時撈取資料
 });
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
+
 </script>
 
 <template>
@@ -76,7 +83,7 @@ onMounted(() => {
           <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
             <router-link :to="{ name:'MS_ProductList', params: { id: item.PRODUCT_ID } }">
            
-              <img :src="item.PRODUCT_IMG" alt="">
+              <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
               <p>{{ item.PRODUCT_NAME }}</p>
               <div class="text">
                 <div class="price">

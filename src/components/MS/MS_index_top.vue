@@ -6,104 +6,104 @@
         <div class="Star Star3"></div>
         <div class="Star Star4"></div>
         <div class="Star Star5"></div>
-        <img class="Cloud Cloud1" src="../../assets/images/ms/MyPrince/cloud9.png" alt="">
-        <img class="Cloud Cloud2" src="../../assets/images/ms/MyPrince/cloud9.png" alt="">
-        <img class="Cloud Cloud3" src="../../assets/images/ms/MyPrince/cloud9.png" alt="">
-        <img class="Cloud Cloud4" src="../../assets/images/ms/MyPrince/cloud9.png" alt="">
-        <img class="Cloud Cloud5" src="../../assets/images/ms/MyPrince/cloud9.png" alt="">
+        <img class="Cloud Cloud1" src="@/assets/images/ms/MyPrince/cloud9.png" alt="">
+        <img class="Cloud Cloud2" src="@/assets/images/ms/MyPrince/cloud9.png" alt="">
+        <img class="Cloud Cloud3" src="@/assets/images/ms/MyPrince/cloud9.png" alt="">
+        <img class="Cloud Cloud4" src="@/assets/images/ms/MyPrince/cloud9.png" alt="">
+        <img class="Cloud Cloud5" src="@/assets/images/ms/MyPrince/cloud9.png" alt="">
         <div style="overflow: hidden;">
-            <img class="yinyin yinyin1" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin2" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin3" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin4" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin5" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin6" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin7" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin8" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
-            <img class="yinyin yinyin9" src="../../assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin1" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin2" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin3" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin4" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin5" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin6" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin7" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin8" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
+            <img class="yinyin yinyin9" src="@/assets/images/ms/MyPrince/yinyin.png" alt="">
         </div>
 
 
 
-        <img class="lightBall lightBall1" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall2" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall3" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall4" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall5" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall6" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall7" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall8" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall9" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall10" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall11" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall12" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall13" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall14" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall15" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall16" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall17" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall18" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall19" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall20" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall21" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall22" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall23" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall24" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall25" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall26" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall27" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall28" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall29" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall30" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall31" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall32" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall33" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall34" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall35" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall36" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall37" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall38" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall39" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall40" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall41" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall42" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall43" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall44" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall45" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall46" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall47" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall48" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall49" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall50" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall51" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
-        <img class="lightBall lightBall52" src="../../assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall1" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall2" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall3" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall4" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall5" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall6" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall7" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall8" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall9" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall10" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall11" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall12" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall13" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall14" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall15" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall16" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall17" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall18" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall19" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall20" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall21" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall22" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall23" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall24" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall25" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall26" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall27" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall28" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall29" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall30" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall31" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall32" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall33" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall34" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall35" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall36" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall37" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall38" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall39" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall40" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall41" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall42" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall43" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall44" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall45" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall46" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall47" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall48" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall49" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall50" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall51" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
+        <img class="lightBall lightBall52" src="@/assets/images/ms/MyPrince/lightBall.png" alt="">
 
 
         <div class="top1">
             <div class="TEXTAREA">
-                <img class="TextStar TextStar1" src="../../assets/images/ms/MyPrince/star9.png" alt="">
-                <img class="TextStar TextStar2" src="../../assets/images/ms/MyPrince/star9.png" alt="">
-                <img class="TextStar TextStar3" src="../../assets/images/ms/MyPrince/star9.png" alt="">
-                <img class="TextStar TextStar4" src="../../assets/images/ms/MyPrince/star9.png" alt="">
-                <img class="TEXT" src="../../assets/images/ms/MyPrince/floatingText.png" alt="">
+                <img class="TextStar TextStar1" src="@/assets/images/ms/MyPrince/star9.png" alt="">
+                <img class="TextStar TextStar2" src="@/assets/images/ms/MyPrince/star9.png" alt="">
+                <img class="TextStar TextStar3" src="@/assets/images/ms/MyPrince/star9.png" alt="">
+                <img class="TextStar TextStar4" src="@/assets/images/ms/MyPrince/star9.png" alt="">
+                <img class="TEXT" src="@/assets/images/ms/MyPrince/floatingText.png" alt="">
             </div>
 
             <div class="theGoodBoy">
-                <img class="theBoy Book" src="../../assets/images/ms/MyPrince/flying_book.png" alt="">
-                <img class="theBoy LeftHand" src="../../assets/images/ms/MyPrince/boy_left_hand.png" alt="">
-                <img class="theBoy LeftFoot" src="../../assets/images/ms/MyPrince/boy_left_foot.png" alt="">
-                <img class="theBoy RightFoot" src="../../assets/images/ms/MyPrince/boy_right_foot.png" alt="">
-                <img class="theBoy Body" src="../../assets/images/ms/MyPrince/boy_body.png" alt="">
-                <img class="theBoy RightHand" src="../../assets/images/ms/MyPrince/boy_right_hand.png" alt="">
-                <img class="theBoy Head" src="../../assets/images/ms/MyPrince/boy_head.png" alt="">
+                <img class="theBoy Book" src="@/assets/images/ms/MyPrince/flying_book.png" alt="">
+                <img class="theBoy LeftHand" src="@/assets/images/ms/MyPrince/boy_left_hand.png" alt="">
+                <img class="theBoy LeftFoot" src="@/assets/images/ms/MyPrince/boy_left_foot.png" alt="">
+                <img class="theBoy RightFoot" src="@/assets/images/ms/MyPrince/boy_right_foot.png" alt="">
+                <img class="theBoy Body" src="@/assets/images/ms/MyPrince/boy_body.png" alt="">
+                <img class="theBoy RightHand" src="@/assets/images/ms/MyPrince/boy_right_hand.png" alt="">
+                <img class="theBoy Head" src="@/assets/images/ms/MyPrince/boy_head.png" alt="">
             </div>
         </div>
         <div class="top1">
-            <img class="IntroText ListeneMe" src="../../assets/images/ms/MyPrince/IntroText.png" alt="">
+            <img class="IntroText ListeneMe" src="@/assets/images/ms/MyPrince/IntroText.png" alt="">
         </div>
         <div class="topblank"></div>
-        <div style="position: relative">
-            <div class="top3">
+        <div style="position: relative ;z-index: 999">
+            <div class="top3" style="z-index: 999">
                 <div class="book moveLikeJagger">
                     <div class="back page"></div>
                     <div class="page4 r page"></div>
@@ -119,21 +119,21 @@
                     </div>
                 </div>
             </div>
-            <div class="topSpeical"></div>
+            <div class="topSpeical" ></div>
         </div>
 
         <div class="top4">
             <div class="top5" id="first">
-                <img id="road" src="../../assets/images/ms/road_image.png" alt="">
-                <img id="bookImg" src="../../assets/images/ms/IMG_0141.png" alt="">
-                <img id="girls" class="ListeneMe girls" src="../../assets/images/ms/intro_1_girls.png" alt="">
-                <img id="text" class="ListeneMe text" src="../../assets/images/ms/text.png" alt="">
-                <img id="bear" class="ListeneMe bear" src="../../assets/images/ms/bear.png" alt="">
-                <img id="text2" class="ListeneMe text2" src="../../assets/images/ms/text2.png" alt="">
-                <img id="rihno" class="ListeneMe rihno" src="../../assets/images/ms/rihno.png" alt="">
-                <img id="text3" class="ListeneMe text3" src="../../assets/images/ms/text3.png" alt="">
-                <img id="myGirl" class="ListeneMe myGirl" src="../../assets/images/ms/myGirl.png" alt="">
-                <img id="text4" class="ListeneMe text4" src="../../assets/images/ms/text4.png" alt="">
+                <img id="road" src="@/assets/images/ms/road_image.png" alt="">
+                <img id="bookImg" src="@/assets/images/ms/IMG_0141.png" alt="">
+                <img id="girls" class="ListeneMe girls" src="@/assets/images/ms/intro_1_girls.png" alt="">
+                <img id="text" class="ListeneMe text" src="@/assets/images/ms/text.png" alt="">
+                <img id="bear" class="ListeneMe bear" src="@/assets/images/ms/bear.png" alt="">
+                <img id="text2" class="ListeneMe text2" src="@/assets/images/ms/text2.png" alt="">
+                <img id="rihno" class="ListeneMe rihno" src="@/assets/images/ms/rihno.png" alt="">
+                <img id="text3" class="ListeneMe text3" src="@/assets/images/ms/text3.png" alt="">
+                <img id="myGirl" class="ListeneMe myGirl" src="@/assets/images/ms/myGirl.png" alt="">
+                <img id="text4" class="ListeneMe text4" src="@/assets/images/ms/text4.png" alt="">
                 <router-link to="/MS_Ticket_step0">
                     <div id="ticketBullet" class="ListeneMe ticketBullet"></div>
                 </router-link>
@@ -148,25 +148,25 @@
                     <div class="specials">
                         <div class="theSpecial theSpecial1 ListeneMe">
                             <div class="spBorder">
-                                <img class="sp" src="../../assets/images/ms/sp1.png" alt="">
+                                <img class="sp" src="@/assets/images/ms/sp1.png" alt="">
                             </div>
                             <h3>TibaMe<br>光影尖端科技</h3>
                         </div>
                         <div class="theSpecial theSpecial2 ListeneMe">
                             <div class="spBorder">
-                                <img class="sp" src="../../assets/images/ms/sp2.png" alt="">
+                                <img class="sp" src="@/assets/images/ms/sp2.png" alt="">
                             </div>
                             <h3>DoMeDo<br>專屬合作繪本</h3>
                         </div>
                         <div class="theSpecial theSpecial3 ListeneMe">
                             <div class="spBorder">
-                                <img class="sp" src="../../assets/images/ms/sp3.png" alt="">
+                                <img class="sp" src="@/assets/images/ms/sp3.png" alt="">
                             </div>
                             <h3>Lazy Dessert<br>聯名甜品</h3>
                         </div>
                         <div class="theSpecial theSpecial4 ListeneMe">
                             <div class="spBorder">
-                                <img class="sp" src="../../assets/images/ms/sp4.png" alt="">
+                                <img class="sp" src="@/assets/images/ms/sp4.png" alt="">
                             </div>
                             <h3>Illusion Lab<br>沉浸式活動</h3>
                         </div>
@@ -175,7 +175,7 @@
                 <div class="top1 ABOUT bg2" id="third">
                     <MS_com_title mode="three" mainTitle="故事介紹" subTitle="STORYS" />
                     <MS_com_caro />
-                    <img id="foxChan" src="../../assets/images/ms/whatDoesTheFoxSay.png" alt="">
+                    <img id="foxChan" src="@/assets/images/ms/whatDoesTheFoxSay.png" alt="">
                 </div>
             </div>
             <div class="bg3">
@@ -256,17 +256,29 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faTree } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import background from '@/assets/images/ms/MyPrince/bluesky.jpg'
+import background1 from '@/assets/images/ms/ms_bgi.jpg'
+'"/path/to/your/background.jpg")'
+
 
 library.add(faTree)
 
 const frameIndex = ref(1);
 const totalFrames1 = 6;
 let intervalId = null;
-const cuteDuckWalking = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
-const cuteDuckWalking2 = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
-const cuteDuckWalking3 = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
-const cuteDuckWalking4 = ref(`../assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
+// 上線版
+// const cuteDuckWalking = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
+// const cuteDuckWalking2 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
+// const cuteDuckWalking3 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
+// const cuteDuckWalking4 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
+
+// 本地端
+const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
+const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
+const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
+const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
 let style = null;
+
 
 const options = [
     "活動介紹",
@@ -291,7 +303,6 @@ const ids = ref([
 
 onMounted(() => {
 
-
     // 確保頁面滾動到頂部
     if ('scrollRestoration' in window.history) {
         window.history.scrollRestoration = 'manual';
@@ -303,6 +314,7 @@ onMounted(() => {
     } else {
         console.warn('Scroll restoration is not supported in this browser');
     }
+
 
 
 
@@ -385,6 +397,20 @@ onMounted(() => {
         });
     });
 
+    const book = document.querySelector('.book');
+
+    book.style.transform = `rotate(0deg) translateX(0%) scale(0)`;
+    book.style.opacity = `1`
+
+    // 檢查 sessionStorage 中是否有 "hasRefreshed" 標記
+    if (!sessionStorage.getItem('hasRefreshed')) {
+        // 如果沒有標記，設置標記並刷新頁面
+        sessionStorage.setItem('hasRefreshed', 'true');
+        location.reload(); // 刷新頁面
+    } else {
+        // 如果已經刷新過一次，移除標記，防止無限刷新
+        sessionStorage.removeItem('hasRefreshed');
+    }
 });
 
 
@@ -402,10 +428,17 @@ const startWalkingAnimation = () => {
         if (frameIndex.value > totalFrames1) {
             frameIndex.value = 1;
         }
-        cuteDuckWalking.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-        cuteDuckWalking2.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-        cuteDuckWalking3.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-        cuteDuckWalking4.value = `../src/assets/images/ms/superFuckingCuteDuck_DoMeDo/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
+        // 上線版
+        // cuteDuckWalking.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
+        // cuteDuckWalking2.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
+        // cuteDuckWalking3.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
+        // cuteDuckWalking4.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
+
+        // 本地端
+        cuteDuckWalking.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
+        cuteDuckWalking2.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
+        cuteDuckWalking3.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
+        cuteDuckWalking4.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
     }, 120);
 };
 
@@ -524,6 +557,7 @@ window.addEventListener('scroll', function () {
 
     // 控制雲、星星、TEXTAREA 和 theGoodBoy 的位置
     if (scroll < 600) {
+
         TEXTAREA.style.top = `calc(20vh - ${scroll / 1}px)`;
         theGoodBoy.style.bottom = `calc(11vh + ${scroll / 1}px)`;
 
@@ -777,12 +811,14 @@ window.addEventListener('scroll', function () {
     // 控制 top3 元素的特殊效果
     if (scroll > (3000 - (830 - screenHeight) * 3)) {
         top3.forEach(el => el.classList.add('special'));
-        const indexTop = document.querySelector('.indexTop')
-        indexTop.style.background = 'none';
+        const indexTop = document.querySelector('.indexTop');
+        console.log('該換了')
+        indexTop.style.backgroundImage =`url(${background1})`;
     } else {
         top3.forEach(el => el.classList.remove('special'));
-        const indexTop = document.querySelector('.indexTop')
-        indexTop.style.background = "url('../src/assets/images/ms/MyPrince/bluesky.png')";
+        const indexTop = document.querySelector('.indexTop');
+        console.log('得是原本的')
+        indexTop.style.backgroundImage = `url(${background})`; // 確保背景圖片正確顯示
     }
 
 });
@@ -863,7 +899,7 @@ p {
 
 
 .indexTop {
-    background-image: url('../../assets/images/ms/MyPrince/bluesky.png');
+    background-image: url('@/assets/images/ms/MyPrince/bluesky.jpg');
     width: 100vw;
     clip-path: inset(0 0 0 0)
 }
@@ -1201,7 +1237,7 @@ p {
 .Star {
     position: absolute;
     display: flex;
-    background: url('../../assets/images/ms/MyPrince/star99.png') transparent center / contain no-repeat;
+    background: url('@/assets/images/ms/MyPrince/star99.png') transparent center / contain no-repeat;
     filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.7));
     user-select: none;
     -webkit-user-select: none;
@@ -1441,7 +1477,7 @@ p {
     display: flex;
     flex-direction: column;
     perspective: 1200px;
-    background-image: url('../../assets/images/ms/ms_bgi.jpg');
+    background-image: url('@/assets/images/ms/ms_bgi.jpg');
 }
 
 .top5 {
@@ -1526,7 +1562,7 @@ p {
 }
 
 .special {
-    background-image: url('../../assets/images/ms/MyPrince/ms_bgi.jpg');
+    background-image: url('@/assets/images/ms/MyPrince/ms_bgi.jpg');
 }
 
 .top1 {
@@ -1777,7 +1813,7 @@ p {
 }
 
 .ticketBullet {
-    background-image: url("../../assets/images/ms/ticketBullet1.png");
+    background-image: url("@/assets/images/ms/ticketBullet1.png");
     background-size: cover;
     width: 20vw;
     height: 10vw;
@@ -1803,7 +1839,7 @@ p {
 }
 
 .ticketBullet:hover {
-    background-image: url("../../assets/images/ms/ticketBullet2.png");
+    background-image: url("@/assets/images/ms/ticketBullet2.png");
 }
 
 .lightBall {
@@ -2318,7 +2354,7 @@ p {
 }
 
 .bg2 {
-    background-image: url('../../assets/images/ms/ms_bgi2.png');
+    background-image: url('@/assets/images/ms/ms_bgi2.png');
     background-size: cover;
     // background-position: ;
     // background-position: 0 -100%;
@@ -2326,7 +2362,7 @@ p {
 
 .bg3 {
     background-size: cover;
-    background-image: url('../../assets/images/ms/ms_bgi3.png');
+    background-image: url('@/assets/images/ms/ms_bgi3.png');
     margin-top: -30vh;
     z-index: 2;
 }
@@ -3148,5 +3184,11 @@ p {
     .AnchorsTree {
         display: none;
     }
+}
+
+#seven{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 </style>

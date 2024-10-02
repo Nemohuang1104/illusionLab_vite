@@ -1,10 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /tid102/g2
-    RewriteRule ^tid102/g2/front/index\.html$ - [L]
+    RewriteRule ^tid102/g2/index\.html$ - [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /tid102/g2/front/index.html [L]
+    RewriteRule . /tid102/g2/index.html [L]
 
     
 </IfModule>

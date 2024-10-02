@@ -14,7 +14,7 @@ const fetchOrders = async () => {
     const formData = new FormData();
     formData.append('token', token);
 
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/GetUserRefundPO.php`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/GetUserRefundPO.php`, {
       method: 'POST',
       body: formData
     });
@@ -52,7 +52,7 @@ const fetchOrderDetails = async (productOrderId) => {
   formData.append('PRODUCT_ORDER_ID', productOrderId);
 
   try {
-    const response = await fetch('http://illusionlab.local/public/PDO/ProductOrder/GetOrderDetails.php', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/GetOrderDetails.php`, {
       method: 'POST',
       body: formData
     });
@@ -74,6 +74,13 @@ const fetchOrderDetails = async (productOrderId) => {
 onMounted(() => {
   fetchOrders();
 });
+
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 
 </script>
 
@@ -120,7 +127,7 @@ onMounted(() => {
                 </div>
                 <div v-for="item in orderDetails[order.PRODUCT_ORDER_ID]" :key="item.PRODUCT_ORDER_ID" class="order-item">
                     <div class="product-info">
-                        <img :src="item.PRODUCT_IMG" alt="商品圖片" class="product-image">
+                        <img :src="getImageUrl(item.PRODUCT_IMG)" alt="商品圖片" class="product-image">
                         <div class="item-text">
                             <p>{{ item.PRODUCT_NAME }}</p>
                             

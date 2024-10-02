@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         // 定義圖片存放目錄
         // $targetDir = $_SERVER["DOCUMENT_ROOT"] . "/public/PDO/FileUpload/";
-        $targetDir = $_SERVER["DOCUMENT_ROOT"] . "/public/PDO/FileUpload/";
+        $targetDir = $_SERVER["DOCUMENT_ROOT"] . "/tid102/g2/public/PDO/FileUpload/";
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true); // 若目錄不存在，則建立目錄
         }

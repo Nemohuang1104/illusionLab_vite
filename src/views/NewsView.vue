@@ -11,7 +11,7 @@
           data-aos="fade-up"
           :key="card.NEWS_ID"
           >
-        <img :src="card.NEWS_IMG" alt="" class="card_image">
+        <img :src="getImageUrl(card.NEWS_IMG)" alt="" class="card_image">
         <div class="contain">
           <h2>{{ card.NEWS_TITLE }}</h2>
           <p class="description">{{ card.NEWS_CONTENT }}</p>
@@ -41,7 +41,7 @@
       >
       <div class="modal-content" @click.stop>
         <h2 class="modal-title">{{ selectedCard.NEWS_TITLE }}</h2>
-        <img :src="selectedCard.NEWS_IMG" :alt="selectedCard.NEWS_TITLE" class="modal-image" />
+        <img :src="getImageUrl(selectedCard.NEWS_IMG)" :alt="selectedCard.NEWS_TITLE" class="modal-image" />
         <p class="modal-description">{{ selectedCard.NEWS_CONTENT }}</p>
         <button class="modal-close" @click="closeModal">關閉</button>
       </div>
@@ -190,6 +190,13 @@ const openModal = (card) => {
 const closeModal = () => {
   modalVisible.value = false;
   document.body.style.overflow=''; //關閉彈窗背景恢復滾動
+};
+
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
 };
 </script>
 
@@ -420,4 +427,6 @@ const closeModal = () => {
       font-size: 12px;
       color: map-get($map:$color_0, $key: btn_page);
     }
+
+    
 </style>

@@ -28,11 +28,23 @@
   <script setup>
   import { onMounted, ref } from 'vue';
   import Swiper from 'swiper';
+  import logo1 from '@/assets/images/ms/logo_of_parnter6.png'
+  import logo2 from '@/assets/images/ms/logo_of_parnter1.png'
+  import logo3 from '@/assets/images/ms/logo_of_parnter2.png'
+  import logo4 from '@/assets/images/ms/logo_of_parnter3.png'
+  import logo5 from '@/assets/images/ms/logo_of_parnter4.png'
+  import logo6 from '@/assets/images/ms/logo_of_parnter5.png'
+  import logo7 from '@/assets/images/ms/logo_of_parnter7.png'
+  import logo8 from '@/assets/images/ms/logo_of_parnter8.png'
+  import logo9 from '@/assets/images/ms/logo_of_parnter10.png'
+  import logo10 from '@/assets/images/ms/logo_of_parnter11.png'
+  import logo11 from '@/assets/images/ms/logo_of_parnter9.png'
   
   const itemBg = ref(null);
   const prevButton = ref(null);
   const nextButton = ref(null);
   const pagination = ref(null);
+
   
   const newsItems = ref([
   {
@@ -40,14 +52,14 @@
       month: 'May',
       title: 'CORE',
       text: "熱愛蜆精的中性服飾品牌。",
-      image: '../src/assets/images/ms/logo_of_parnter6.png',
+      image: logo1,
     },
     {
       date: ' https://ting-yuuuu.github.io/La-Vin-En-Rose/',
       month: 'May',
       title: 'La Vie En Rose',
       text: "打Code打到滿手瘀青的網路花店。",
-      image: '../src/assets/images/ms/logo_of_parnter1.png',
+      image: logo2,
     },
 
     {
@@ -55,28 +67,28 @@
       month: 'May',
       title: '宅‧抒室',
       text: "熱愛海卻沒賣有關海的香氛蠟燭。",
-      image: '../src/assets/images/ms/logo_of_parnter2.png',
+      image: logo3,
     },
     {
       date: 'https://ping355168.github.io/belleu/',
       month: 'May',
       title: 'BELLEU.',
       text: "聽說加顆鼻屎會看起來比較高級的服飾品牌。",
-      image: '../src/assets/images/ms/logo_of_parnter3.png',
+      image: logo4,
     },
     {
       date: 'https://isnina47.github.io/nina_project/index.html',
       month: 'May',
       title: '屋裡',
       text: "想吃麥當勞但是怕胖的老屋網站。",
-      image: '../src/assets/images/ms/logo_of_parnter4.png',
+      image: logo5,
     },
     {
       date: 'https://17-ching.github.io/cyanLightStudio/',
       month: 'May',
       title: '青芒影像工作室',
       text: "好想吃脆皮烤鴨沾白糖的影像工作室。",
-      image: '../src/assets/images/ms/logo_of_parnter5.png',
+      image: logo6,
     },
 
     {
@@ -84,7 +96,7 @@
       month: 'May',
       title: 'GAME HEX',
       text: "工程師可能都不睡覺的獨立遊戲平台。",
-      image: '../src/assets/images/ms/logo_of_parnter7.png',
+      image: logo7,
     },
 
     {
@@ -92,7 +104,7 @@
       month: 'May',
       title: 'LitteEnJoys',
       text: "甜點行銷大師的飲料品牌。",
-      image: '../src/assets/images/ms/logo_of_parnter8.png',
+      image: logo8,
     },
 
     
@@ -101,21 +113,21 @@
       month: 'May',
       title: '貓奴養成日記',
       text: "喵。",
-      image: '../src/assets/images/ms/logo_of_parnter10.png',
+      image: logo9,
     },
     {
       date: 'https://atlaskuo.github.io/Atlas-Travel/',
       month: 'May',
       title: 'Atlas Travel',
       text: "PM兼工程師兼DBA大哥的旅遊網站。",
-      image: '../src/assets/images/ms/logo_of_parnter11.png',
+      image: logo10,
     },
     {
       date: 'https://yunyylin.github.io/lazydessert/index.html',
       month: 'May',
       title: 'Lazy Dessert',
       text: "製作人全糖的甜點品牌。",
-      image: '../src/assets/images/ms/logo_of_parnter9.png',
+      image: logo11,
     },
   ]);
   

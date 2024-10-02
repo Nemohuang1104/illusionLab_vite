@@ -13,7 +13,7 @@ const orderDetails = ref();
 async function fetchMainOrder() {
   const productOrderId = route.query.productOrderId;
   try {
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/GetNowPO.php?PRODUCT_ORDER_ID=${productOrderId}`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/GetNowPO.php?PRODUCT_ORDER_ID=${productOrderId}`);
     const data = await response.json();
     mainOrder.value = data;
     
@@ -25,7 +25,7 @@ async function fetchMainOrder() {
 async function fetchOrderDetails() {
   const productOrderId = route.query.productOrderId;
   try {
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${productOrderId}`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${productOrderId}`);
     const data = await response.json();
     orderDetails.value = data;
   } catch (error) {
@@ -49,6 +49,13 @@ const highlight = ref({
 
     }
   ); 
+
+  const baseUrl = import.meta.env.VITE_IMAGE_URL || import.meta.env.BASE_URL;
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 </script>
 
 <template>
@@ -103,7 +110,7 @@ const highlight = ref({
                 </div>
                 <div class="order-item" v-for="(item, index) in orderDetails" :key="index" >
                     <div class="product-info">
-                        <img :src="item.PRODUCT_IMG" alt="商品圖片" class="product-image">
+                        <img :src="getImageUrl(item.PRODUCT_IMG)" alt="商品圖片" class="product-image">
                         <span class="product-name">{{ item.PRODUCT_NAME }}</span>
                     </div>
                     <span class="product-quantity">{{ item.QUANTITY }}</span>
@@ -254,8 +261,10 @@ const highlight = ref({
 }
 
 .order-item img {
-        width: 50%;
-        object-fit: contain;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 12px;
         margin: 12px;
 }
 .product-info {

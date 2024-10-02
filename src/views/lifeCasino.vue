@@ -200,7 +200,7 @@
             Title2="商品"
             English="PRODUCT"></LC_Text2>        
         </div>
-        <LC_ProductSwiper v-if="isMobile"/>
+        <LC_ProductSwiper v-if="isMobile" class="slide7_RWD2"/>
         <ul v-else>
             <li>
                 <img class="crown" src="../assets/images/LC_icon4.svg" alt="">
@@ -1376,7 +1376,7 @@ margin: 0 auto;
 }
 }
 
-.slide9,.slide10,.slide11,.slide12{
+.slide9,.slide10,.slide11{
     .line{
         margin-top: 25vh;
     }
@@ -1401,6 +1401,61 @@ margin: 0 auto;
         bottom: 0;
         right: 0;
     }
+
+    .slide2{
+        .slide2__title{
+            .h1_line[data-v-62ba1fc1]{
+                width: 0;
+                margin-top: 5vh ;
+            }
+
+            margin: 50px 10% 40px;
+        }
+    }
+
+    .slide5{
+        .line{
+            margin-top: 8vh;
+        }
+    }
+
+    .slide6{
+        .line{
+            margin-top: 6vh;
+
+        }
+    }
+
+    .slide7{
+        .slide7__title{
+            .line{
+                margin-top: 8vh;
+            }
+        }
+    }
+
+    .slide9{
+        .line{
+            margin-top: 12vh;
+        }
+    }
+
+    .slide10{
+        .line{
+            margin-top: 12vh;
+        }
+    }
+
+    .slide7_RWD2{
+        width: 60%;
+        height: 60%;
+
+    }
+    .mySwiper4 .swiper-slide{
+        height: 80%;
+    }
+
+
 }
 
 

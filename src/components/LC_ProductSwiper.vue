@@ -137,14 +137,14 @@ p{
 .mySwiper4 {
 
   // border: 2px solid green;
-  width: 100%;
+  width:60%;
   height: 60%;
 }
 
 .mySwiper4 .swiper-slide {
   
   // border: 2px solid rgb(128, 0, 0);
-  height: 100%;
+  height: 90%;
   text-align: center;
   font-size: 18px;
   display: flex;
@@ -165,7 +165,7 @@ p{
 .mySwiper4 .swiper-pagination-current,
 .swiper-pagination-total,
 .swiper-pagination-fraction {
-    display: none;
+    display: none !important;
 }
 
 .mySwiper4 .swiper-button-next, .mySwiper4 .swiper-button-prev{

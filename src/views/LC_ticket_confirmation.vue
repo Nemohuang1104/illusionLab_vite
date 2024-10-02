@@ -216,8 +216,9 @@ export default {
 
 }
 
-::v-deep .theOriginal[data-v-5a144230]{
-  display: none;
+::v-deep .theOriginal{
+  display: none !important;
+  opacity: 0;
 }
 
 </style>

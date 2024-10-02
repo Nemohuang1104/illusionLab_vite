@@ -20,7 +20,7 @@ const orderDetails = ref();
 
 onMounted(async () => {
   try {
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${props.order.PRODUCT_ORDER_ID}`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/FetchProductOrderDetails.php?PRODUCT_ORDER_ID=${props.order.PRODUCT_ORDER_ID}`);
     const data = await response.json();
     // 更新組件中的資料，例如：
     orderDetails.value = data;
@@ -56,7 +56,7 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch(`http://illusionlab.local/public/PDO/ProductData/AddProduct.php`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductData/AddProduct.php`, {
         method: 'POST',
         body: formData,
       });
@@ -93,7 +93,7 @@ const f_save = async () => {
     }
 
     try {
-      const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/SavePO_Data.php`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/SavePO_Data.php`, {
         method: 'POST',
         body: formData,
       });
@@ -121,7 +121,12 @@ const f_save = async () => {
   }
 };
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
 
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
 </script>
 <template>
     <div class="wrapper">
@@ -196,7 +201,7 @@ const f_save = async () => {
                             </div>
                         </div>
                         <div class="textdetail" v-for="(item, index) in orderDetails" :key="index">
-                            <img :src="item.PRODUCT_IMG" alt="">
+                            <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
                             <div class="detaillist">
                                 <p>{{ item.PRODUCT_NAME }}</p>
                             </div>

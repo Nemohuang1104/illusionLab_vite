@@ -97,7 +97,7 @@ const onSubmit = async () => {
       formData.append('email', email.value);
       formData.append('password', password.value);
 
-      const response = await axios.post(`http://illusionlab.local/public/PDO/Login/Login.php`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/Login/Login.php`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 

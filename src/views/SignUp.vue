@@ -195,7 +195,7 @@ const register = () => {
     formData.append('district', selectedDistrict.value);
 
     // 發送 POST 請求到後端
-    fetch(`http://illusionlab.local/public/PDO/Login/Register.php`, {
+    fetch(`${import.meta.env.VITE_API_URL}/Login/Register.php`, {
       method: 'POST',
       body: formData,
     })
@@ -214,7 +214,7 @@ const register = () => {
           // timer: 10000
         }).then(() =>  {
           // 根據是否有 redirect 參數決定跳轉路由
-          if (route.query.redirect) {
+          if (route && route.query && route.query.redirect) {
             // 將 redirect 參數傳遞給登入頁面
   
             router.push({ path: '/login', query: {redirect: route.query.redirect } });
@@ -360,9 +360,9 @@ const register = () => {
             <img @click="refreshCaptcha" :class="{ rotating: isRotating }" src="../assets/images/icon-change.svg"
               alt="">
           </div>
-          <router-link >
+         
           <button class="button" @click="register">註冊</button>
-          </router-link>
+          
           <!-- <input type="submit" value="註冊" class="button" @click="register"> -->
         </div>
       </div>

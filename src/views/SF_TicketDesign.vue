@@ -21,6 +21,8 @@ import ticket2 from '../assets/images/SFticketDesign_02.svg';
 import ticket3 from '../assets/images/SFticketDesign_03.svg';
 import ticket4 from '../assets/images/SFticketDesign_04.svg';
 import ticket5 from '../assets/images/SFticketDesign_05.svg';
+import ticket6 from '../assets/images/SFticketDesign_06.svg';
+
 
 //飛航小物
 import sticker1 from '../assets/images/STicon-space.svg';
@@ -54,7 +56,7 @@ const selectedSticker = ref(selectedTemplate.value.sticker); // 預設為公版�
 const clickItem = ref('');
 
 // 票券樣式
-const styles = ref([ticket1, ticket2, ticket3, ticket4, ticket5]);
+const styles = ref([ticket1, ticket2, ticket3, ticket4, ticket5, ticket6]);
 
 //飛航小物
 const stickers = ref([sticker1, sticker2, sticker3,sticker4,sticker5,sticker6,sticker7,sticker8,sticker9]);
@@ -102,7 +104,7 @@ const ticketPreviewElement = document.querySelector('.finalTicket');
 //     const formData = new FormData();
 //     formData.append('image', blob, 'SF_ticket.png');
 
-//     fetch('http://illusionlab.local/public/PDO/TicketOrder/save_custom_ticket.php', {
+//     fetch('${import.meta.env.VITE_API_URL}/TicketOrder/save_custom_ticket.php', {
 //       method: 'POST',
 //       body: formData,
 //     })

@@ -113,6 +113,7 @@ const logout = () => {
     border: 1px solid #fff;
     margin-left: 8px;
     vertical-align:top;
+    cursor: pointer;
 }
 
 .logout:hover{

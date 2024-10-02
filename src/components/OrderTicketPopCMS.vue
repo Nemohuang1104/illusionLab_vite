@@ -36,7 +36,7 @@ onMounted(() => {
 //   try {
 //     const ticketOrderId = route.params.id;
 
-//     const response = await fetch(`http://illusionlab.local/public/PDO/TicketOrder/FetchTicketOrderDetails.php?TICKET_ORDER_ID=${ticketOrderId}`);
+//     const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/FetchTicketOrderDetails.php?TICKET_ORDER_ID=${ticketOrderId}`);
 //     const data = await response.json();
 //     // 更新組件中的資料，例如：
 //     orderDetails.value = data;
@@ -62,7 +62,7 @@ const f_save = async () => {
   formData.append('ORDER_STATUS', localOrder.value.ORDER_STATUS);
 
     try {
-      const response = await fetch('http://illusionlab.local/public/PDO/TicketOrder/SaveTO_Data.php', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/TicketOrder/SaveTO_Data.php`, {
         method: 'POST',
         body: formData,
       });
@@ -104,6 +104,13 @@ const openModal = (orderDetails) => {
 // 關閉彈窗
 const closeModal = () => {
   modalVisible.value = false;
+};
+
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
 };
 
 </script>
@@ -190,7 +197,7 @@ const closeModal = () => {
                         </div> -->
                         <div class="textdetail" v-if="orderDetails">
                         <div class="img_warp" @click="openModal(orderDetails)" >
-                            <img :src="orderDetails.TICKET_IMAGE_PATH" class="ticket" alt="" >
+                            <img :src="getImageUrl(orderDetails.TICKET_IMAGE_PATH)" class="ticket" alt="" >
                             <div class="font_warp">
                                 <font-awesome-icon icon="up-right-and-down-left-from-center" class="roll" />
                             </div>
@@ -230,7 +237,7 @@ const closeModal = () => {
       >
       <span class="close" @click="closeModal">&times;</span>
       <div class="modal-content" @click.stop>
-        <img :src="selectedCard.TICKET_IMAGE_PATH"  class="modal-image" />
+        <img :src="getImageUrl(selectedCard.TICKET_IMAGE_PATH)"  class="modal-image" />
       </div>
     </div>
 </transition>

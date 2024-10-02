@@ -35,7 +35,7 @@ const orders = ref([
 // 在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(開始)
 async function fetchProducts() {
   try {
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/FetchAllProductOrder.php`); // 替換成你實際的 API URL
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/FetchAllProductOrder.php`); // 替換成你實際的 API URL
     const data = await response.json();
     orders.value = data;
   } catch (error) {
@@ -75,7 +75,7 @@ const resetSearch = () => {
 // 使用 fetch API 搜尋資料庫中的商品
 const searchItems = async () => {
   try {
-    const response = await fetch(`http://illusionlab.local/public/PDO/ProductOrder/SearchPO_Data.php`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/ProductOrder/SearchPO_Data.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -300,10 +300,6 @@ const handleSaveEdit = async (updatedOrder) => {
   top: -17.5%;
 }
 
-.detail[data-v-18691004] {
-    width: 100%;
-    height: 470px;
-}
 
 .code-input{
     display: flex;
@@ -364,8 +360,8 @@ const handleSaveEdit = async (updatedOrder) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 95.5%;
-    height: 440px;
+    width: 100%;
+    height: 470px;
     border-radius: 0 10px 10px 10px;
     padding: 16px;
     padding-left: 20px;

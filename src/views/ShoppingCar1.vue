@@ -51,21 +51,24 @@ async function fetchProducts() {
 
 
 function getProductDetailRoute(item) {
-    switch (item.EVENT_ID) {
-        case 1:
-            return { name: 'LC_ProductInfo', params: { id: item.PRODUCT_ID } };
-        case 2:
-            return { name: 'SF_DetailList', params: { id: item.PRODUCT_ID } };
-        case 3:
-            return { name: 'MS_ProductList', params: { id: item.PRODUCT_ID } };
-
-    }
+  switch (item.EVENT_ID) {
+    case 1:
+      router.push({ name: 'LC_ProductInfo', params: { id: item.PRODUCT_ID } });
+      break;
+    case 2:
+      router.push({ name: 'SF_DetailList', params: { id: item.PRODUCT_ID } });
+      break;
+    case 3:
+      router.push({ name: 'MS_ProductList', params: { id: item.PRODUCT_ID } });
+      break;
+  }
 }
 
 
 
 onMounted(() => {
     fetchProducts(); // 當頁面加載時撈取資料
+    // getProductDetailRoute();
 });
 // ================在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
 
@@ -302,7 +305,7 @@ const handleCheckout = async () => {
         formData.append('token', token);
 
         // 發送資料到伺服器，檢查優惠券的狀態
-        const response = await fetch(`http://illusionlab.local/public/PDO/Login/UseCoupon.php`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/Login/UseCoupon.php`, {
             method: 'POST',
             body: formData
         });
@@ -333,7 +336,7 @@ const getCouponInfo = async () => {
         const formData = new FormData();
         formData.append('token', token);
 
-        const response = await fetch(`http://illusionlab.local/public/PDO/Login/ShowCoupon.php`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/Login/ShowCoupon.php`, {
             method: 'POST',
             body: formData
         });
@@ -383,6 +386,13 @@ router.beforeEach((to, from, next) => {
 
 
 // ============優惠券結束=============//
+
+const baseUrl = import.meta.env.VITE_IMAGE_URL
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
+
 </script>
 <template>
     <div class="wrapper">
@@ -404,7 +414,7 @@ router.beforeEach((to, from, next) => {
                         <div class="product-info">
                             <input class="checkbox" type="checkbox" v-model="checkedItems[index]">
                             <!-- <img src="../assets/images/product_ex.jpg" alt="商品圖片" class="product-image"> -->
-                            <img :src="item.img" alt="商品圖片" class="product-image">
+                            <img :src="getImageUrl(item.img)" alt="商品圖片" class="product-image">
                             <div class="description">
                                 <div class="product-name">{{ item.name }}</div>
                                 <!-- <div class="input">
@@ -475,9 +485,9 @@ router.beforeEach((to, from, next) => {
         <div class="ProductAdd">
             <p>商品加購</p>
             <ul class="addProduct_grid">
-                <li class="pro" v-for="item in productInfo" :key="item.PRODUCT_ID">
-                    <router-link :to="getProductDetailRoute(item)">
-                        <img :src="item.PRODUCT_IMG" alt="">
+                <li class="pro" @click="getProductDetailRoute(item)" v-for="item in productInfo" :key="item.PRODUCT_ID">
+                    
+                        <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
                         <p>{{ item.PRODUCT_NAME }}</p>
                         <div class="text">
                             <div class="price">
@@ -487,7 +497,7 @@ router.beforeEach((to, from, next) => {
                                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
                             </div>
                         </div>
-                    </router-link>
+                  
                 </li>
             </ul>
         </div>
@@ -648,8 +658,10 @@ ul {
 // ========================
 .product-image {
     border-radius: 10px;
-    // width: 100%;
-    max-width: 120px;
+    object-fit: cover;
+   
+   width: 120px;
+    height: 120px;
 }
 
 .quantity-input {
@@ -865,15 +877,6 @@ ul {
     flex-basis: 0%;
 }
 
-.wrapper hr {
-    background-color: #FFFFFF;
-    margin: 20px auto;
-    height: 2px;
-    border: none;
-    border-radius: 2.5px;
-    width: 100%;
-    max-width: 1000px;
-}
 
 // 下方加購
 
@@ -882,13 +885,6 @@ ul {
     max-width: 20px;
 }
 
-.ProductAdd {
-    width: 100%;
-    max-width: 1000px;
-    margin: 3% auto;
-    padding: 10px;
-    color: #FFFFFF;
-}
 
 .count,
 .discount-fee,
@@ -946,7 +942,7 @@ ul {
 
 .pro {
     cursor: pointer;
-
+    padding: 20px;
 }
 
 .pro p {

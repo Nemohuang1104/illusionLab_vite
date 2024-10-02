@@ -23,7 +23,7 @@ const getUserInfo = async () => {
     const formData = new FormData();
     formData.append('token', token);
 
-    const response = await fetch(`http://illusionlab.local/public/PDO/Login/GetUserInfo.php`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/Login/GetUserInfo.php`, {
       method: 'POST',
       body: formData
     });
@@ -115,14 +115,6 @@ onMounted(() => {
                     <div class="inner05">
                         <p>地址:</p>
                         <div class="code-input">
-                            <div class="address-1">
-                                <div class="fill">
-                                    <input type="text" v-model="userInfo.city" disabled />
-                                </div>
-                                <div class="fill">
-                                    <input type="text" v-model="userInfo.district" disabled />
-                                </div>
-                            </div>
                             
                             <div class="address-2">
                                 <div class="fill">

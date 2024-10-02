@@ -46,8 +46,19 @@ function goToLoginCMS(){
 
 }
 
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
 
 
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
+};
+// 
+    // return {
+    //   getImageUrl
+    // };
+  
+
+// const base_url = process.env.VITE_IMAGE_URL
 
 </script>
 
@@ -57,6 +68,7 @@ function goToLoginCMS(){
   <div class="warpper">
     <div>
       <Header :mode="currentMode" class="header"/> 
+
     </div>
     
     <div class="center">
@@ -86,8 +98,8 @@ function goToLoginCMS(){
         <div class="list">
           <div  v-for="item in productInfo" class="pro"  :key="item.PRODUCT_ID" >
             <router-link :to="{ name:'LC_ProductInfo', params: { id: item.PRODUCT_ID } }">
-           
-              <img :src="item.PRODUCT_IMG" alt="">
+          
+              <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
               <p>{{ item.PRODUCT_NAME }}</p>
               <div class="text">
                 <div class="price">

@@ -46,6 +46,15 @@
 
 <script>
 import Gift from '../components/Gift_demo.vue'
+import seven from '@/assets/images/fruits/4.png'
+import persimmon from '@/assets/images/fruits/1.png'
+import cherry from '@/assets/images/fruits/2.png'
+import banana from '@/assets/images/fruits/3.png'
+import money from '@/assets/images/fruits/5.png'
+import plant from '@/assets/images/fruits/6.png'
+import goust from '@/assets/images/fruits/7.png'
+import dark from '@/assets/images/fruits/8.png'
+
 export default {
   name: 'SlotMachine',
   components: {
@@ -64,14 +73,14 @@ export default {
         {
           style: 'gift-style',
           gifts:  [
-          { type: 'image', name: 'seven', path: 'src/assets/images/fruits/4.png' },
-          { type: 'image', name: 'persimmon', path: 'src/assets/images/fruits/1.png' },
-          { type: 'image', name: 'cherry', path: 'src/assets/images/fruits/2.png' },
-          { type: 'image', name: 'banana', path: 'src/assets/images/fruits/3.png' },
-          { type: 'image', name: 'money', path: 'src/assets/images/fruits/5.png' },
-          { type: 'image', name: 'plant', path: 'src/assets/images/fruits/6.png' },
-          { type: 'image', name: 'goust', path: 'src/assets/images/fruits/7.png' },
-          { type: 'image', name: 'dark', path: 'src/assets/images/fruits/8.png' },
+          { type: 'image', name: 'seven', path: seven },
+          { type: 'image', name: 'persimmon', path: persimmon },
+          { type: 'image', name: 'cherry', path: cherry },
+          { type: 'image', name: 'banana', path: banana },
+          { type: 'image', name: 'money', path: money },
+          { type: 'image', name: 'plant', path: plant },
+          { type: 'image', name: 'goust', path: goust },
+          { type: 'image', name: 'dark', path: dark },
         ],
           duration: 4000,
           fontSize: 150,
@@ -81,14 +90,14 @@ export default {
         {
           style: 'gift-style',
           gifts:   [
-          { type: 'image', name: 'seven', path: 'src/assets/images/fruits/4.png' },
-          { type: 'image', name: 'persimmon', path: 'src/assets/images/fruits/1.png' },
-          { type: 'image', name: 'cherry', path: 'src/assets/images/fruits/2.png' },
-          { type: 'image', name: 'banana', path: 'src/assets/images/fruits/3.png' },
-          { type: 'image', name: 'money', path: 'src/assets/images/fruits/5.png' },
-          { type: 'image', name: 'plant', path: 'src/assets/images/fruits/6.png' },
-          { type: 'image', name: 'goust', path: 'src/assets/images/fruits/7.png' },
-          { type: 'image', name: 'dark', path: 'src/assets/images/fruits/8.png' },
+          { type: 'image', name: 'seven', path: seven },
+          { type: 'image', name: 'persimmon', path: persimmon },
+          { type: 'image', name: 'cherry', path: cherry },
+          { type: 'image', name: 'banana', path: banana },
+          { type: 'image', name: 'money', path: money },
+          { type: 'image', name: 'plant', path: plant },
+          { type: 'image', name: 'goust', path: goust },
+          { type: 'image', name: 'dark', path: dark },
         ],
           duration: 5000,
           fontSize: 150,
@@ -98,14 +107,14 @@ export default {
         {
           style: 'gift-style',
           gifts:  [
-          { type: 'image', name: 'seven', path: 'src/assets/images/fruits/4.png' },
-          { type: 'image', name: 'persimmon', path: 'src/assets/images/fruits/1.png' },
-          { type: 'image', name: 'cherry', path: 'src/assets/images/fruits/2.png' },
-          { type: 'image', name: 'banana', path: 'src/assets/images/fruits/3.png' },
-          { type: 'image', name: 'money', path: 'src/assets/images/fruits/5.png' },
-          { type: 'image', name: 'plant', path: 'src/assets/images/fruits/6.png' },
-          { type: 'image', name: 'goust', path: 'src/assets/images/fruits/7.png' },
-          { type: 'image', name: 'dark', path: 'src/assets/images/fruits/8.png' },
+          { type: 'image', name: 'seven', path: seven },
+          { type: 'image', name: 'persimmon', path: persimmon },
+          { type: 'image', name: 'cherry', path: cherry },
+          { type: 'image', name: 'banana', path: banana },
+          { type: 'image', name: 'money', path: money },
+          { type: 'image', name: 'plant', path: plant },
+          { type: 'image', name: 'goust', path: goust },
+          { type: 'image', name: 'dark', path: dark },
         ],
           duration: 6000,
           fontSize: 150,
@@ -486,7 +495,7 @@ export default {
   height: 100%;
   max-width: 720px;
   max-height: 405px;
-  background-color: rgba(0, 0, 0, 0.5);
+  // background-color: rgba(0, 0, 0, 0.5);
   border-radius: 25px;
   transition: opacity 0.3s ease;
 
@@ -508,56 +517,56 @@ export default {
 
 /* 不同水果的背景樣式 */
 .seven-bg {
-  background-image: url('src/assets/images/fruits/bg4.jpg');
+  background-image: url(@/assets/images/fruits/bg4.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .persimmon-bg {
-  background-image: url('src/assets/images/fruits/bg1.jpg');
+  background-image: url(@/assets/images/fruits/bg1.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .cherry-bg {
-  background-image: url('src/assets/images/fruits/bg2.jpg');
+  background-image: url(@/assets/images/fruits/bg2.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .banana-bg {
-  background-image: url('src/assets/images/fruits/bg3.jpg');
+  background-image: url(@/assets/images/fruits/bg3.jpg);
    background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .money-bg {
-  background-image: url('src/assets/images/fruits/bg5.jpg');
+  background-image: url(@/assets/images/fruits/bg5.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .plant-bg {
-  background-image: url('src/assets/images/fruits/bg6.jpg');
+  background-image: url(@/assets/images/fruits/bg6.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .goust-bg {
-  background-image: url('src/assets/images/fruits/bg7.jpg');
+  background-image: url(@/assets/images/fruits/bg7.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 .dark-bg {
-  background-image: url('src/assets/images/fruits/bg8.jpg');
+  background-image: url(@/assets/images/fruits/bg8.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
