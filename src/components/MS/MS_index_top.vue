@@ -279,10 +279,17 @@ let intervalId = null;
 // const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
 // let style = null;
 
-const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_11.gif`);
-const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_22.gif`);
-const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_44.gif`);
-const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_33.gif`);
+//上線版
+const cuteDuckWalking = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_11.gif`);
+const cuteDuckWalking2 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_22.gif`);
+const cuteDuckWalking3 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_44.gif`);
+const cuteDuckWalking4 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_33.gif`);
+
+// 本地端
+// const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_11.gif`);
+// const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_22.gif`);
+// const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_44.gif`);
+// const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_33.gif`);
 let style = null;
 
 const options = [

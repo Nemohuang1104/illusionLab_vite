@@ -1,7 +1,7 @@
 <template>
     <div class="holo" >
-        <img class="swimmingpool" src="../../assets/images/ms/superFuckingCuteDuck_DoMeDo/swimmingPool.png" alt="">
-        <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
+        <!-- <img class="swimmingpool" src="../../assets/images/ms/superFuckingCuteDuck_DoMeDo/swimmingPool.png" alt=""> -->
+        <!-- <img class="duckLaiYi" :src="cuteDuckWalking" alt="">
         <img class="IWillFireYou" src="../../assets/images/ms/superFuckingCuteDuck_DoMeDo/IWillFireYou.gif" alt="">
         <img class="yourDuckIsSoHot" src="../../assets/images/ms/superFuckingCuteDuck_DoMeDo/yourDuckIsSoHot.gif" alt="">
         <h4 class="loadingText">LOADING</h4>
@@ -31,7 +31,7 @@
                 <img class="duckTool"  src='../../assets/images/ms/superFuckingCuteDuck_DoMeDo/duckTool_NeedSomeEggs.png' alt="">
                 <h3>蛋</h3>
             </div>
-        </div>    
+        </div>     -->
     </div>
 </template>
 

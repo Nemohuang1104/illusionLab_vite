@@ -10,24 +10,24 @@
           >
             <div class="book" ref="book">
                 <!-- 上線版 -->
-                <!-- <div class="back page"    :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
+                <div class="back page"    :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
                 <div class="page6 r page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/right3_${item.id}.jpg')` }" @click="rotatePage('page6')"></div>
                 <div class="page5 l page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/left3_${item.id}.jpg')` }" @click="rotatePage('page5')"></div>
                 <div class="page4 r page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/right2_${item.id}.jpg')` }" @click="rotatePage('page4')"></div>
                 <div class="page3 l page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/left2_${item.id}.jpg')` }" @click="rotatePage('page3')"></div>
                 <div class="page2 r page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/right1_${item.id}.jpg')` }" @click="rotatePage('page2')"></div>
                 <div class="page1 l page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/left1_${item.id}.jpg')` }" @click="rotatePage('page1')"></div>
-                <div class="front page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/${item.id}.jpg')` }" @click="rotatePage('front')"></div> -->
+                <div class="front page" :style="{ backgroundImage: `url('/tid102/g2/public/PDO/MS/${item.id}.jpg')` }" @click="rotatePage('front')"></div>
 
                 <!-- 本地端 -->
-                <div class="back page"    :style="{ backgroundImage: `url('../../../public/PDO/MS/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
+                <!-- <div class="back page"    :style="{ backgroundImage: `url('../../../public/PDO/MS/back_${item.id}.jpg')` }" @click="rotatePage('back')"></div> 
                 <div class="page6 r page" :style="{ backgroundImage: `url('../../../public/PDO/MS/right3_${item.id}.jpg')` }" @click="rotatePage('page6')"></div>
                 <div class="page5 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left3_${item.id}.jpg')` }" @click="rotatePage('page5')"></div>
                 <div class="page4 r page" :style="{ backgroundImage: `url('../../../public/PDO/MS/right2_${item.id}.jpg')` }" @click="rotatePage('page4')"></div>
                 <div class="page3 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left2_${item.id}.jpg')` }" @click="rotatePage('page3')"></div>
                 <div class="page2 r page" :style="{ backgroundImage: `url('../../../public/PDO/MS/right1_${item.id}.jpg')` }" @click="rotatePage('page2')"></div>
                 <div class="page1 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left1_${item.id}.jpg')` }" @click="rotatePage('page1')"></div>
-                <div class="front page" :style="{ backgroundImage: `url('../../../public/PDO/MS/${item.id}.jpg')` }" @click="rotatePage('front')"></div>
+                <div class="front page" :style="{ backgroundImage: `url('../../../public/PDO/MS/${item.id}.jpg')` }" @click="rotatePage('front')"></div> -->
             </div>
 
         </div>
