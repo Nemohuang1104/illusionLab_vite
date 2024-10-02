@@ -273,9 +273,9 @@ const getImageUrl = (imgPath) => {
       font-size: map-get($map: $fontSize, $key: h2);
       font-family: map-get($map: $fontStyle, $key: style_1);
       font-weight: 700;
-      max-width: 480px;
+      max-width: 560px;
       line-height: 1.4;
-      padding-top: 50px;
+      // padding-top: 50px;
     }
     .description{
       padding-top: 10px;
