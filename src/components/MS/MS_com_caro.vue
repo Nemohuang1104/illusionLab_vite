@@ -29,7 +29,6 @@
                 <div class="page1 l page" :style="{ backgroundImage: `url('../../../public/PDO/MS/left1_${item.id}.jpg')` }" @click="rotatePage('page1')"></div>
                 <div class="front page" :style="{ backgroundImage: `url('../../../public/PDO/MS/${item.id}.jpg')` }" @click="rotatePage('front')"></div>
             </div>
-           
 
         </div>
       </transition-group>
