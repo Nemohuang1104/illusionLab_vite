@@ -147,7 +147,7 @@ const onSubmit = async () => {
       formData.append('password', password.value);
 
       // 使用 FormData 發送 POST 請求
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/Login/login.php`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/Login/Login.php`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data' // 設定標頭為 FormData
         }

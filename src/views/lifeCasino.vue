@@ -581,6 +581,10 @@ transition: .5s ;
   border-radius: 30px;
 }
 
+::v-deep .swiper-vertical > .swiper-pagination-bullets, .swiper-pagination-vertical.swiper-pagination-bullets{
+    top: 45% !important;
+}
+
 @keyframes nav{
     0%{
         transform: translate(0 ,0);

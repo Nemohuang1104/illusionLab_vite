@@ -51,7 +51,9 @@ async function fetchProducts() {
 
 
 function getProductDetailRoute(item) {
-  switch (item.EVENT_ID) {
+    console.log('item.EVENT_ID:', typeof item.EVENT_ID, item.EVENT_ID);
+
+  switch (Number(item.EVENT_ID)) {
     case 1:
       router.push({ name: 'LC_ProductInfo', params: { id: item.PRODUCT_ID } });
       break;
@@ -61,6 +63,8 @@ function getProductDetailRoute(item) {
     case 3:
       router.push({ name: 'MS_ProductList', params: { id: item.PRODUCT_ID } });
       break;
+    default:
+    console.warn('Unknown EVENT_ID:', item.EVENT_ID);
   }
 }
 
