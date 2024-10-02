@@ -354,11 +354,6 @@ export default {
     const pathData2 = ref('')
     const pathData3 = ref('')
     const pathDataText1 = ref('')
-    const pathDataText2 = ref('')
-    const pathDataText3 = ref('')
-    const pathDataText4 = ref('')
-    const pathDataText5 = ref('')
-    const pathDataText6 = ref('')
 
     const nextPageUrl = import.meta.env.VITE_MS_URL;
 
