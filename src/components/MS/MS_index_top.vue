@@ -273,12 +273,17 @@ let intervalId = null;
 // const cuteDuckWalking4 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
 
 // 本地端
-const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
-const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
-const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
-const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
-let style = null;
+// const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
+// const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
+// const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
+// const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
+// let style = null;
 
+const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_11.gif`);
+const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_22.gif`);
+const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_44.gif`);
+const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_33.gif`);
+let style = null;
 
 const options = [
     "活動介紹",
@@ -423,23 +428,23 @@ onBeforeUnmount(() => {
 });
 
 const startWalkingAnimation = () => {
-    intervalId = setInterval(() => {
-        frameIndex.value++;
-        if (frameIndex.value > totalFrames1) {
-            frameIndex.value = 1;
-        }
-        // 上線版
-        // cuteDuckWalking.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-        // cuteDuckWalking2.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-        // cuteDuckWalking3.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-        // cuteDuckWalking4.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
+    // intervalId = setInterval(() => {
+    //     frameIndex.value++;
+    //     if (frameIndex.value > totalFrames1) {
+    //         frameIndex.value = 1;
+    //     }
+    //     // 上線版
+    //     // cuteDuckWalking.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
+    //     // cuteDuckWalking2.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
+    //     // cuteDuckWalking3.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
+    //     // cuteDuckWalking4.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
 
-        // 本地端
-        cuteDuckWalking.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-        cuteDuckWalking2.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-        cuteDuckWalking3.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-        cuteDuckWalking4.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
-    }, 120);
+    //     // 本地端
+    //     cuteDuckWalking.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
+    //     cuteDuckWalking2.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
+    //     cuteDuckWalking3.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
+    //     cuteDuckWalking4.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
+    // }, 120);
 };
 
 
