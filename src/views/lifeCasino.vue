@@ -568,7 +568,7 @@ transition: .5s ;
 /* 切換分頁器顯示狀態的按鈕 */
 .toggle-pagination {
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 0;
   background-color:map-get($map: $color_1, $key: btn_gold);
   color: white;
@@ -579,6 +579,10 @@ transition: .5s ;
   z-index: 1000;
   animation: nav 1s linear infinite;
   border-radius: 30px;
+}
+
+::v-deep .swiper-vertical > .swiper-pagination-bullets, .swiper-pagination-vertical.swiper-pagination-bullets{
+    top: 45% !important;
 }
 
 @keyframes nav{

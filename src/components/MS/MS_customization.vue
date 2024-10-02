@@ -349,11 +349,6 @@ export default {
     import svg_custom2 from '@/assets/images/ms/SVG_text/svg_custom2.txt'
     import svg_custom3 from '@/assets/images/ms/SVG_text/svg_custom3.txt'
     import pathDataText1_1 from '@/assets/images/ms/SVG_text/svg_custom_text1.txt'
-    import pathDataText2_1 from '@/assets/images/ms/SVG_text/svg_custom_text2.txt'
-    import pathDataText3_1 from '@/assets/images/ms/SVG_text/svg_custom_text3.txt'
-    import pathDataText4_1 from '@/assets/images/ms/SVG_text/svg_custom_text4.txt'
-    import pathDataText5_1 from '@/assets/images/ms/SVG_text/svg_custom_text5.txt'
-    import pathDataText6_1 from '@/assets/images/ms/SVG_text/svg_custom_text6.txt'
 
     const pathData1 = ref('')
     const pathData2 = ref('')
@@ -382,11 +377,6 @@ export default {
     loadPathData(svg_custom2, pathData2)
     loadPathData(svg_custom3, pathData3)
     loadPathData(pathDataText1_1, pathDataText1)
-    loadPathData(pathDataText2_1, pathDataText2)
-    loadPathData(pathDataText3_1, pathDataText3)
-    loadPathData(pathDataText4_1, pathDataText4)
-    loadPathData(pathDataText5_1, pathDataText5)
-    loadPathData(pathDataText6_1, pathDataText6)
     })
 
     const updatepage = () => {  //點擊送出按鈕之後顯示第二頁製作完成頁 

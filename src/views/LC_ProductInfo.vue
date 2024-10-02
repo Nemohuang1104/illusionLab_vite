@@ -335,6 +335,7 @@ const getImageUrl = (imgPath) => {
 
 .warp {
   position: relative;
+  padding: 100px 50px 0;
   // height: 100vh;
   //  border: 2px solid red;
 }
@@ -439,7 +440,7 @@ const getImageUrl = (imgPath) => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  padding: 70px 80px 100px 80px;
+  padding: 10% 0% 15% 5%;
   box-shadow: 0px 4px 25px -1px rgba(0, 0, 0, 0.25);
   // border: 1px solid #fff;
   justify-content: space-between;

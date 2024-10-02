@@ -13,6 +13,7 @@ const firebaseConfig = {
   measurementId: "G-QB83RYDW89"
 };
 
+
 // 初始化 Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
