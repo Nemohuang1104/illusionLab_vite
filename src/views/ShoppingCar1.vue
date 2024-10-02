@@ -51,21 +51,24 @@ async function fetchProducts() {
 
 
 function getProductDetailRoute(item) {
-    switch (item.EVENT_ID) {
-        case 1:
-            return { name: 'LC_ProductInfo', params: { id: item.PRODUCT_ID } };
-        case 2:
-            return { name: 'SF_DetailList', params: { id: item.PRODUCT_ID } };
-        case 3:
-            return { name: 'MS_ProductList', params: { id: item.PRODUCT_ID } };
-
-    }
+  switch (item.EVENT_ID) {
+    case 1:
+      router.push({ name: 'LC_ProductInfo', params: { id: item.PRODUCT_ID } });
+      break;
+    case 2:
+      router.push({ name: 'SF_DetailList', params: { id: item.PRODUCT_ID } });
+      break;
+    case 3:
+      router.push({ name: 'MS_ProductList', params: { id: item.PRODUCT_ID } });
+      break;
+  }
 }
 
 
 
 onMounted(() => {
     fetchProducts(); // 當頁面加載時撈取資料
+    // getProductDetailRoute();
 });
 // ================在你的 Vue.js 商品總覽頁中，透過 fetch API 撈取資料庫資料，並將其顯示在頁面上================(結束)
 
@@ -451,8 +454,8 @@ const getImageUrl = (imgPath) => {
         <div class="ProductAdd">
             <p>商品加購</p>
             <ul class="addProduct_grid">
-                <li class="pro" v-for="item in productInfo" :key="item.PRODUCT_ID">
-                    <router-link :to="getProductDetailRoute(item)">
+                <li class="pro" @click="getProductDetailRoute(item)" v-for="item in productInfo" :key="item.PRODUCT_ID">
+                    
                         <img :src="getImageUrl(item.PRODUCT_IMG)" alt="">
                         <p>{{ item.PRODUCT_NAME }}</p>
                         <div class="text">
@@ -463,7 +466,7 @@ const getImageUrl = (imgPath) => {
                                 <font-awesome-icon icon="fa-solid fa-cart-arrow-down" class="shoopingcar" />
                             </div>
                         </div>
-                    </router-link>
+                  
                 </li>
             </ul>
         </div>

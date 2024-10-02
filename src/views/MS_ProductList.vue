@@ -588,6 +588,7 @@ const getImageUrl = (imgPath) => {
 
 //加入購物車
 .shop {
+    cursor: pointer;
     width: 300px;
     height: 40px;
     border-radius: 12px;

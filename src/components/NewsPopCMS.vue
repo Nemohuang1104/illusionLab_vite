@@ -94,7 +94,7 @@ const f_save = async () => {
   }
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/NEWS/SaveNewsData.php`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/News/SaveNewsData.php`, {
       method: 'POST',
       body: formData,
     });
@@ -121,6 +121,13 @@ const f_save = async () => {
   }
 
 }
+};
+
+const baseUrl = import.meta.env.VITE_IMAGE_URL; // or any other method to get baseUrl
+
+
+const getImageUrl = (imgPath) => {
+  return `${baseUrl === '/' ? '' : baseUrl }${imgPath}`;
 };
 
 </script>
@@ -161,7 +168,7 @@ const f_save = async () => {
                         <input class="n-customizedCard" type="file" @change="upload_img">
                         <p class="upload">請選擇圖片上傳</p>
                         <div class="n-customized_img">
-                            <img v-if="localOrder.NEWS_IMG" :src="localOrder.NEWS_IMG" alt="預覽圖片" class="preview-img">
+                            <img v-if="getImageUrl(localOrder.NEWS_IMG)" :src="getImageUrl(localOrder.NEWS_IMG)" alt="預覽圖片" class="preview-img">
                         </div>
                         
                     </div>

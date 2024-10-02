@@ -263,10 +263,10 @@ library.add(faTree)
 const frameIndex = ref(1);
 const totalFrames1 = 6;
 let intervalId = null;
-const cuteDuckWalking = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
-const cuteDuckWalking2 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
-const cuteDuckWalking3 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
-const cuteDuckWalking4 = ref(`../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
+const cuteDuckWalking = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`);
+const cuteDuckWalking2 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`);
+const cuteDuckWalking3 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`);
+const cuteDuckWalking4 = ref(`/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`);
 let style = null;
 
 
@@ -403,10 +403,10 @@ const startWalkingAnimation = () => {
         if (frameIndex.value > totalFrames1) {
             frameIndex.value = 1;
         }
-        cuteDuckWalking.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-        cuteDuckWalking2.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-        cuteDuckWalking3.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-        cuteDuckWalking4.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
+        cuteDuckWalking.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
+        cuteDuckWalking2.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
+        cuteDuckWalking3.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
+        cuteDuckWalking4.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
     }, 120);
 };
 
