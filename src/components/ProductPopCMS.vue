@@ -5,6 +5,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 
 
+
+
 /* 文件上傳方法(實現上傳圖片預覽功能) */
 // 處理圖片上傳的方法
 const upload_img = (event) => {
@@ -173,7 +175,9 @@ const getImageUrl = (imgPath) => {
             <input class="n-customizedCard" type="file" @change="upload_img" />
             <p class="upload">請選擇圖片上傳</p>
             <div class="n-customized_img">
-              <img v-if="getImageUrl(localOrder.PRODUCT_IMG)" :src="getImageUrl(localOrder.PRODUCT_IMG)" alt="預覽圖片" class="preview-img" />
+              <!-- <img v-if="localOrder.PRODUCT_IMG" :src="localOrder.PRODUCT_IMG" alt="預覽圖片" class="preview-img" /> -->
+              <img v-if="getImageUrl(localOrder.PRODUCT_IMG)" :src="getImageUrl(localOrder.PRODUCT_IMG)" alt="" class="preview-img">
+
             </div>
           </div>
         </div>
