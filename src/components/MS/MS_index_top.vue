@@ -102,8 +102,8 @@
             <img class="IntroText ListeneMe" src="@/assets/images/ms/MyPrince/IntroText.png" alt="">
         </div>
         <div class="topblank"></div>
-        <div style="position: relative">
-            <div class="top3">
+        <div style="position: relative ;z-index: 999">
+            <div class="top3" style="z-index: 999">
                 <div class="book moveLikeJagger">
                     <div class="back page"></div>
                     <div class="page4 r page"></div>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <div class="topSpeical"></div>
+            <div class="topSpeical" ></div>
         </div>
 
         <div class="top4">
@@ -257,6 +257,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faTree } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import background from '@/assets/images/ms/MyPrince/bluesky.jpg'
+import background1 from '@/assets/images/ms/ms_bgi.jpg'
+'"/path/to/your/background.jpg")'
+
 
 library.add(faTree)
 
@@ -304,6 +307,7 @@ onMounted(() => {
     } else {
         console.warn('Scroll restoration is not supported in this browser');
     }
+
 
 
 
@@ -386,6 +390,20 @@ onMounted(() => {
         });
     });
 
+    const book = document.querySelector('.book');
+
+    book.style.transform = `rotate(0deg) translateX(0%) scale(0)`;
+    book.style.opacity = `1`
+
+    // 檢查 sessionStorage 中是否有 "hasRefreshed" 標記
+    if (!sessionStorage.getItem('hasRefreshed')) {
+        // 如果沒有標記，設置標記並刷新頁面
+        sessionStorage.setItem('hasRefreshed', 'true');
+        location.reload(); // 刷新頁面
+    } else {
+        // 如果已經刷新過一次，移除標記，防止無限刷新
+        sessionStorage.removeItem('hasRefreshed');
+    }
 });
 
 
@@ -525,6 +543,7 @@ window.addEventListener('scroll', function () {
 
     // 控制雲、星星、TEXTAREA 和 theGoodBoy 的位置
     if (scroll < 600) {
+
         TEXTAREA.style.top = `calc(20vh - ${scroll / 1}px)`;
         theGoodBoy.style.bottom = `calc(11vh + ${scroll / 1}px)`;
 
@@ -778,12 +797,14 @@ window.addEventListener('scroll', function () {
     // 控制 top3 元素的特殊效果
     if (scroll > (3000 - (830 - screenHeight) * 3)) {
         top3.forEach(el => el.classList.add('special'));
-        const indexTop = document.querySelector('.indexTop')
-        indexTop.style.background = 'none';
+        const indexTop = document.querySelector('.indexTop');
+        console.log('該換了')
+        indexTop.style.backgroundImage =`url(${background1})`;
     } else {
         top3.forEach(el => el.classList.remove('special'));
-        const indexTop = document.querySelector('.indexTop')
-        indexTop.style.background = background;
+        const indexTop = document.querySelector('.indexTop');
+        console.log('得是原本的')
+        indexTop.style.backgroundImage = `url(${background})`; // 確保背景圖片正確顯示
     }
 
 });
