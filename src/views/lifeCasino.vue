@@ -1408,14 +1408,19 @@ margin: 0 auto;
 
     .slide2{
         .slide2__title{
-            .h1_line[data-v-62ba1fc1]{
-                width: 0;
-                margin-top: 5vh ;
+            .h1_line{
+                
             }
 
             margin: 50px 10% 40px;
         }
     }
+
+    ::v-deep .slide2__title > .h1_line{
+        width: 90%;
+        margin-top: 5vh ;
+    }
+
 
     .slide5{
         .line{
