@@ -258,7 +258,6 @@ import { faTree } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import background from '@/assets/images/ms/MyPrince/bluesky.jpg'
 import background1 from '@/assets/images/ms/ms_bgi.jpg'
-'"/path/to/your/background.jpg")'
 
 
 library.add(faTree)
@@ -335,8 +334,6 @@ onMounted(() => {
     }
 
 
-
-
     const ListeneMes = document.querySelectorAll('.ListeneMe');
 
     const observer = new IntersectionObserver((entries) => {
@@ -362,16 +359,6 @@ onMounted(() => {
     // document.body.style.overflowX = 'hidden';
     // document.documentElement.style.overflowX = 'hidden';
 
-    // 初始化動畫
-    startWalkingAnimation();
-
-    // 在頁面加載時隱藏 `.indexTop` 的垂直滾動
-    window.addEventListener('load', () => {
-        const indexTop = document.querySelector('.indexTop');
-        if (indexTop) {
-            indexTop.style.overflowY = 'hidden';
-        }
-    });
 
     // DOM 加載後的事件監聽
     const AnchorsTree = document.querySelector('.AnchorsTree');
@@ -440,29 +427,6 @@ onBeforeUnmount(() => {
     }
     clearInterval(intervalId);
 });
-
-const startWalkingAnimation = () => {
-    // intervalId = setInterval(() => {
-    //     frameIndex.value++;
-    //     if (frameIndex.value > totalFrames1) {
-    //         frameIndex.value = 1;
-    //     }
-    //     // 上線版
-    //     // cuteDuckWalking.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-    //     // cuteDuckWalking2.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-    //     // cuteDuckWalking3.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-    //     // cuteDuckWalking4.value = `/tid102/g2/public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
-
-    //     // 本地端
-    //     cuteDuckWalking.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_${frameIndex.value}.png`;
-    //     cuteDuckWalking2.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_a${frameIndex.value}.png`;
-    //     cuteDuckWalking3.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_b${frameIndex.value}.png`;
-    //     cuteDuckWalking4.value = `../../../public/PDO/MS/superFuckingCuteDuckWalking_c${frameIndex.value}.png`;
-    // }, 120);
-};
-
-
-
 
 window.addEventListener('scroll', function () {
 
@@ -831,12 +795,10 @@ window.addEventListener('scroll', function () {
     if (scroll > (3000 - (830 - screenHeight) * 3)) {
         top3.forEach(el => el.classList.add('special'));
         const indexTop = document.querySelector('.indexTop');
-        console.log('該換了')
         indexTop.style.backgroundImage =`url(${background1})`;
     } else {
         top3.forEach(el => el.classList.remove('special'));
         const indexTop = document.querySelector('.indexTop');
-        console.log('得是原本的')
         indexTop.style.backgroundImage = `url(${background})`; // 確保背景圖片正確顯示
     }
 
