@@ -638,6 +638,8 @@ p{
     overflow: hidden;
     // border: 2px solid blue;
     padding-top:0 ;
+    background-image: url(@/assets/images/lifecasino_bg2.png);
+
 
 }
 .header{
@@ -696,26 +698,30 @@ p{
 
     position: absolute;
     top:  0;
-    left: 0;
+    // left: calc( 50vw - (100% / 2));
     // position: relative;
     width: 100%;
     height: 100%;
     // background-image: url('../assets/images/lifecasino_bg1.png');
-    background-image: url(@/assets/images/lifecasino_bg2.png);
+    background-image: url(@/assets/images/lifecasino_bg2.png); 
     // background: linear-gradient(180deg, #110338 0%, #30099E 100%);
     background-size: cover;
-    // background-position: center;
+    background-position: center;
     z-index: -10;
-    //   mask-image: linear-gradient(to bottom, black 70%, transparent 100%)
 
-    // > img{
-    //     // border: 2px solid red;
-    //     object-fit: cover;
-    //     width: 100%;
-    //     position: absolute;
-    //     left: 0;
-    //     top: 0;
-    // }
+
+    > img{
+        // border: 2px solid red;
+        object-fit: cover;
+        width: 100%;
+       
+        // position: absolute;
+        // left: 0;
+        // top: 0;
+        position: absolute;
+        top:  calc( 50vh - (930px / 2));
+        
+    }
     
 }
 
@@ -761,9 +767,10 @@ p{
         // background-position:center;
         
         position: absolute;
-        left: calc(50vw - (1490px/2));
-        
-        bottom: calc(50vh - (1490px/2));
+        // left: calc(50vw - (1490px/2));
+        height: 100%;
+        width: 100%;
+        bottom: -45%;
         z-index: -1;
         // mask: linear-gradient(180deg, transparent, #fff);
         // mask-image: linear-gradient(to bottom, black 70%, transparent 100%)
@@ -834,7 +841,7 @@ p{
         display: flex;
         flex-wrap: wrap;
         margin: 0 auto;
-        max-width: 1200px;
+        max-width: 1400px;
         justify-content: space-around;
         padding: 0 50px 50px;
 
@@ -1336,6 +1343,10 @@ margin: 0 auto;
 
 @media screen and (max-width: 820px) {
 
+.parallax-bg > img{
+    // width: 0%;
+}
+
 .slide{
     height: calc(100vh - 80px);
 }
@@ -1404,6 +1415,30 @@ margin: 0 auto;
         position: fixed;
         bottom: 0;
         right: 0;
+    }
+
+    .slide1{
+    &::before{
+    z-index: 0;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom:-40%;
+    width: 100%;
+    height: 60vh;
+    background-color: black;
+    mask: linear-gradient(0deg, rgba(0, 0, 0, 0.00) 1.5%, #000 20.67%, #000 20.68%, rgba(102, 102, 102, 0.00) 100%);
+
+    }
+}
+
+.slide1__img{
+    bottom: -25%;
+}
+
+.slide1__contain .logo[data-v-5fa87e5d][data-v-5fa87e5d] {
+        margin-top: 160px;
+        width: 80%;
     }
 
     .slide2{

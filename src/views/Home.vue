@@ -18,7 +18,7 @@
 
     :modules="modules"
     
-    :autoplay="{delay: 4000, disableOnInteraction: false}"
+
     class="mySwiper"
     >
     <!-- :autoplay="{delay: 4000, disableOnInteraction: false}" -->
@@ -260,7 +260,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
     }
   .woman{
-    max-width: 1440px;
+    // max-width: 1440px;
     width: 100%;
     left: 0;
     bottom: 95px;

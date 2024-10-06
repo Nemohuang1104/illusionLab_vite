@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper2">
 
  
 <swiper
@@ -106,9 +106,7 @@ p{
   color: white;
 }
 
-.wrapper{
-  // --swiper-navigation-size: 0;
-}
+
 
 section{
   display: flex;
