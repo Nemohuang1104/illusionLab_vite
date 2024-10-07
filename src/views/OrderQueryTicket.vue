@@ -1,19 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 
-// import { ref, computed } from 'vue';
 
-// // 控制訂單明細顯示與否
-// const toggle_OrderDetail = ref(false)
-// // 切換訂單明細的顯示狀態
-// const update_toggle_OrderDetail = ()=> {
-//     toggle_OrderDetail.value = !toggle_OrderDetail.value
-// }
-
-// // 動態計算按鈕顯示的文字
-// const buttonText = computed(() => 
-//   toggle_OrderDetail.value ? '收合明細' : '查看明細'
-// )
 
 // 撈取後端返回的訂單資料並顯示在頁面
 const orders = ref([]);
